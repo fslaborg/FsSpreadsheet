@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Library.fs" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <Authors>Heinrich Lukas Weil, Oliver Maus, Kevin Schneider, Timo Mühlhaus</Authors>
+    <Description>Spreadsheet creation and manipulation in FSharp</Description>
+    <Summary>Spreadsheet creation and manipulation in FSharp</Summary>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIconUrl>https://fslab.org/docs-template/img/logo.png</PackageIconUrl>
+    <PackageTags>F# FSharp spreadsheet Excel datascience</PackageTags>
+    <RepositoryUrl>https://github.com/CSBiology/FsSpreadsheet</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+
+  </PropertyGroup>
+
+</Project>
