@@ -5,7 +5,25 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="Library.fs" />
+    <Compile Include="SharedStringTable.fs" />
+    <Compile Include="Cell.fs" />
+    <Compile Include="CellData.fs" />
+    <Compile Include="Row.fs" />
+    <Compile Include="SheetData.fs" />
+    <Compile Include="Sheet.fs" />
+    <Compile Include="Table.fs" />
+    <Compile Include="WorkSheet.fs" />
+    <Compile Include="Workbook.fs" />
+    <Compile Include="Spreadsheet.fs" />
+    <Compile Include="FsExtensions.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DocumentFormat.OpenXml" Version="2.12.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FsSpreadsheet\FsSpreadsheet.fsproj" />
   </ItemGroup>
 
 </Project>
