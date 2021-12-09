@@ -5,7 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="Library.fs" />
+    <Compile Include="FsAddress.fs" />
+    <Compile Include="FsCell.fs" />
+    <Compile Include="FsRow.fs" />
+    <Compile Include="FsWorksheet.fs" />
+    <Compile Include="FsWorkbook.fs" />
   </ItemGroup>
 
   <PropertyGroup>
@@ -17,7 +21,6 @@
     <PackageTags>F# FSharp spreadsheet Excel datascience</PackageTags>
     <RepositoryUrl>https://github.com/CSBiology/FsSpreadsheet</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-
   </PropertyGroup>
 
 </Project>
