@@ -94,7 +94,7 @@ module SheetBuilder =
                             if headerCell.GetValue() = "" then 
                                 false, field.Hash 
                             else true, headerCell.GetValue()
-                        printfn "%b,%s" hasHeader headerString
+
                         match Dictionary.tryGetValue (headerString) headers with
                         | Some int -> int
                         | None ->
