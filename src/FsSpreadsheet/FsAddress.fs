@@ -94,3 +94,4 @@ type FsAddress(address : string) =
     member self.RowIndex
         with get() = CellReference.toRowIndex _address |> int
         and set(rowI) = _address <- CellReference.setRowIndex (uint32 rowI) _address
+
