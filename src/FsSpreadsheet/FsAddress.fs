@@ -73,25 +73,48 @@ module CellReference =
         |> fun (c,r) -> c, (int64 r) + (int64 amount) |> uint32
         ||> ofIndices
 
-type FsAddress(address : string) =
+type FsAddress(rowNumber : int, columnNumber : int, fixedRow : bool, fixedColumn : bool) =
 
-    let mutable _address = address
+    let mutable _fixedRow     = fixedRow
+    let mutable _fixedColumn  = fixedColumn
+    let mutable _rowNumber    = rowNumber
+    let mutable _columnNumber = columnNumber
 
-    new (colI,rowI) = FsAddress(CellReference.ofIndices (uint32 colI) (uint32 rowI))
+    let mutable _trimmedAddress = ""
+
+    new (rowNumber : int, columnLetter : string, fixedRow : bool, fixedColumn : bool) =
+        FsAddress(rowNumber,CellReference.colAdressToIndex columnLetter |> int,fixedRow,fixedColumn)
+
+    new (rowNumber : int, columnNumber : int) =
+        FsAddress(rowNumber,columnNumber,false,false)
+
+    new (cellAddressString : string) =
+        let colIndex,rowIndex = CellReference.toIndices cellAddressString
+        FsAddress(int rowIndex,int colIndex)
+
+    member this.LOL () = 1
+    //let mutable _address = address
 
     member self.Address 
-        with get() = _address
-        and set(address) = _address <- address
+        with get() = CellReference.ofIndices (uint32 _columnNumber) (uint32 _rowNumber)
+        and set(address) = 
+            let column,row = CellReference.toIndices address
+            _rowNumber <- int row
+            _columnNumber <- int column
 
-    member self.OfIndices(colIndex,rowIndex) = _address <- CellReference.ofIndices colIndex rowIndex
+    member self.OfIndices(rowIndex,colIndex) = 
+        _columnNumber <- colIndex
+        _rowNumber <- rowIndex
 
-    member self.ToIndices() = _address |> CellReference.toIndices |> fun (c,r) -> int c, int r
+    member self.ToIndices() = _rowNumber,_columnNumber
 
-    member self.ColumnIndex 
-        with get() = CellReference.toColIndex _address |> int
-        and set(colI) = _address <- CellReference.setColIndex (uint32 colI) _address
+    member self.ColumnNumber
+        with get() = _columnNumber
+        and set(colI) = _columnNumber <- colI
 
-    member self.RowIndex
-        with get() = CellReference.toRowIndex _address |> int
-        and set(rowI) = _address <- CellReference.setRowIndex (uint32 rowI) _address
+    member self.RowNumber
+        with get() = _rowNumber
+        and set(rowI) = _rowNumber <- rowI
 
+    member self.FixedRow = false
+    member self.FixedColumn = false

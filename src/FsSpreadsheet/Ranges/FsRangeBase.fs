@@ -1,8 +1,9 @@
-﻿namespace rec FsSpreadsheet
+﻿namespace FsSpreadsheet
 
-[<AbstractClass>]
-type internal XLRangeBase (rangeAddress : FsRangeAddress, styleValue) = 
+[<AbstractClass>][<AllowNullLiteral>]
+type FsRangeBase (rangeAddress : FsRangeAddress, styleValue) = 
     //: XLStylizedBase, IXLRangeBase, IXLStylized
+
 
     let mutable _sortRows    = null
     let mutable _sortColumns = null
@@ -15,11 +16,13 @@ type internal XLRangeBase (rangeAddress : FsRangeAddress, styleValue) =
         IdCounter <- IdCounter + 1
         IdCounter
 
-    abstract member OnRangeAddressChanged : FsRangeAddress*FsRangeAddress -> unit 
+    new (rangeAddress) = FsRangeBase(rangeAddress,null)
+
+    //abstract member OnRangeAddressChanged : FsRangeAddress*FsRangeAddress -> unit 
     
-    default self.OnRangeAddressChanged (oldAddress, newAddress) =
+    //default self.OnRangeAddressChanged (oldAddress, newAddress) =
     
-        Worksheet.RellocateRange(RangeType, oldAddress, newAddress);
+    //    Worksheet.RellocateRange(RangeType, oldAddress, newAddress);
 
     member self.RangeAddress
         with get () = _rangeAddress
@@ -29,7 +32,45 @@ type internal XLRangeBase (rangeAddress : FsRangeAddress, styleValue) =
                 _rangeAddress <- rangeAdress
                 //OnRangeAddressChanged(oldAddress, _rangeAddress);
 
+    member self.Cell(cellAddressInRange : FsAddress,cells : FsCellsCollection) = 
 
+        let absRow = cellAddressInRange.RowNumber + self.RangeAddress.FirstAddress.RowNumber - 1;
+        let absColumn = cellAddressInRange.ColumnNumber + self.RangeAddress.FirstAddress.ColumnNumber - 1;
+
+        if (absRow <= 0 || absRow > cells.MaxRowNumber) then
+            failwithf "Row number must be between 1 and %i" cells.MaxRowNumber
+
+        if (absColumn <= 0 || absColumn > cells.MaxColumnNumber) then
+            failwithf "Column number must be between 1 and %i" cells.MaxColumnNumber
+
+        let cell = cells.TryGetCell(absRow,absColumn);
+        
+        match cell with
+        | Some cell -> 
+            cell
+        | None -> 
+
+            //var styleValue = this.StyleValue;
+
+            //if (styleValue == Worksheet.StyleValue)
+            //{
+            //    if (Worksheet.Internals.RowsCollection.TryGetValue(absRow, out XLRow row)
+            //        && row.StyleValue != Worksheet.StyleValue)
+            //        styleValue = row.StyleValue;
+            //    else if (Worksheet.Internals.ColumnsCollection.TryGetValue(absColumn, out XLColumn column)
+            //        && column.StyleValue != Worksheet.StyleValue)
+            //        styleValue = column.StyleValue;
+            //}
+            let absoluteAddress = new FsAddress(absRow,absColumn,cellAddressInRange.FixedRow,cellAddressInRange.FixedColumn);
+
+            // If the default style for this range base is empty, but the worksheet
+            // has a default style, use the worksheet's default style
+            let newCell = new FsCell(absoluteAddress);
+
+            cells.Add(absRow, absColumn, newCell);
+            newCell
+   
+                
 //    public XLWorksheet Worksheet
 //    {
 //        get { return RangeAddress.Worksheet; }
@@ -750,57 +791,6 @@ type internal XLRangeBase (rangeAddress : FsRangeAddress, styleValue) =
 //        return Cell(cellAddressInRange.RowNumber, cellAddressInRange.ColumnNumber);
 //    }
 
-//    public XLCell Cell(in XLAddress cellAddressInRange)
-//    {
-//        Int32 absRow = cellAddressInRange.RowNumber + RangeAddress.FirstAddress.RowNumber - 1;
-//        Int32 absColumn = cellAddressInRange.ColumnNumber + RangeAddress.FirstAddress.ColumnNumber - 1;
-
-//        if (absRow <= 0 || absRow > XLHelper.MaxRowNumber)
-//        {
-//            throw new ArgumentOutOfRangeException(
-//                nameof(cellAddressInRange),
-//                String.Format("Row number must be between 1 and {0}", XLHelper.MaxRowNumber)
-//            );
-//        }
-
-//        if (absColumn <= 0 || absColumn > XLHelper.MaxColumnNumber)
-//        {
-//            throw new ArgumentOutOfRangeException(
-//                nameof(cellAddressInRange),
-//                String.Format("Column number must be between 1 and {0}", XLHelper.MaxColumnNumber)
-//            );
-//        }
-
-//        var cell = Worksheet.Internals.CellsCollection.GetCell(absRow,
-//                                                               absColumn);
-
-//        if (cell != null)
-//            return cell;
-
-//        var styleValue = this.StyleValue;
-
-//        if (styleValue == Worksheet.StyleValue)
-//        {
-//            if (Worksheet.Internals.RowsCollection.TryGetValue(absRow, out XLRow row)
-//                && row.StyleValue != Worksheet.StyleValue)
-//                styleValue = row.StyleValue;
-//            else if (Worksheet.Internals.ColumnsCollection.TryGetValue(absColumn, out XLColumn column)
-//                && column.StyleValue != Worksheet.StyleValue)
-//                styleValue = column.StyleValue;
-//        }
-//        var absoluteAddress = new XLAddress(this.Worksheet,
-//                             absRow,
-//                             absColumn,
-//                             cellAddressInRange.FixedRow,
-//                             cellAddressInRange.FixedColumn);
-
-//        // If the default style for this range base is empty, but the worksheet
-//        // has a default style, use the worksheet's default style
-//        XLCell newCell = new XLCell(Worksheet, absoluteAddress, styleValue);
-
-//        Worksheet.Internals.CellsCollection.Add(absRow, absColumn, newCell);
-//        return newCell;
-//    }
 
 //    public Int32 RowCount()
 //    {

@@ -29,7 +29,7 @@ type DataType =
         | _ ->  DataType.String,value.ToString()
 
 // Type based on the type XLCell used in ClosedXml
-type FsCell (value : string, dataType : DataType)=
+type FsCell (value : string, dataType : DataType, address : FsAddress)=
     
     let mutable _cellValue = value
     let mutable _dataType = dataType
@@ -39,13 +39,16 @@ type FsCell (value : string, dataType : DataType)=
     let mutable _formulaA1 = ""
     let mutable _formulaR1C1 = ""
 
-    let mutable _rowIndex : int = 0
-    let mutable _columnIndex : int = 0
+    let mutable _rowIndex : int = address.RowNumber
+    let mutable _columnIndex : int = address.ColumnNumber
 
-    new () = FsCell ("", DataType.Empty)
-    new (value : string) = FsCell (value, DataType.String)
-    new (value : int) = FsCell (string value, DataType.Number)
-    new (value : float) = FsCell (string value, DataType.Number)
+    new () = FsCell ("", DataType.Empty, FsAddress(0,0))
+    new (value : string) = FsCell (value, DataType.String, FsAddress(0,0))
+    new (value : int) = FsCell (string value, DataType.Number, FsAddress(0,0))
+    new (value : float) = FsCell (string value, DataType.Number, FsAddress(0,0))
+
+    new (address : FsAddress) =
+        FsCell ("", DataType.Empty, address)
 
     member internal self.SharedStringId = raise (System.NotImplementedException())
 
@@ -55,9 +58,9 @@ type FsCell (value : string, dataType : DataType)=
     /// <value>The cell's address.</value>
     member self.Address 
         with get() = FsAddress(_columnIndex,_rowIndex)
-        and internal set(adress : FsAddress) =
-            _rowIndex <- adress.RowIndex
-            _columnIndex <- adress.ColumnIndex
+        and internal set(address : FsAddress) =
+            _rowIndex <- address.RowNumber
+            _columnIndex <- address.ColumnNumber
 
     /// <summary>
     /// Calculated value of cell formula. Is used for decreasing number of computations perfromed.
