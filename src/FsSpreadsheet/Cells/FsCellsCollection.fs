@@ -173,6 +173,9 @@ type FsCellsCollection() =
                 | None -> ()
             }
 
+    member this.GetCells(startAddress : FsAddress, lastAddress : FsAddress) =
+        this.GetCells(startAddress.RowNumber,startAddress.ColumnNumber,lastAddress.RowNumber,lastAddress.ColumnNumber)
+
     member this.MaxRowNumber = _maxRowUsed
 
     member this.MaxColumnNumber = _maxColumnUsed

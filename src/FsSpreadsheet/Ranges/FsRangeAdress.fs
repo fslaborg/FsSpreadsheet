@@ -126,6 +126,19 @@ type FsRangeAddress(firstAddress : FsAddress, lastAddress : FsAddress) =
         let firstAdress,lastAddress = Range.toBoundaries rangeAddress
         FsRangeAddress(FsAddress(firstAdress),FsAddress(lastAddress))
 
+    member self.Extend (address : FsAddress) =
+        if address.RowNumber < _firstAddress.RowNumber then
+            _firstAddress.RowNumber <- address.RowNumber
+
+        if address.RowNumber > _lastAddress.RowNumber then
+            _lastAddress.RowNumber <- address.RowNumber
+
+        if address.ColumnNumber < _firstAddress.ColumnNumber then
+            _firstAddress.ColumnNumber <- address.ColumnNumber
+
+        if address.ColumnNumber > _lastAddress.ColumnNumber then
+            _lastAddress.ColumnNumber <- address.ColumnNumber
+
     member self.Normalize () =
 
         let firstRow,lastRow = 

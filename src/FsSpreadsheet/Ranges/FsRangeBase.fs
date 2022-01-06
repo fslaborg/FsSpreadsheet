@@ -24,6 +24,8 @@ type FsRangeBase (rangeAddress : FsRangeAddress, styleValue) =
     
     //    Worksheet.RellocateRange(RangeType, oldAddress, newAddress);
 
+    member self.Extend(address : FsAddress) = _rangeAddress.Extend(address)
+
     member self.RangeAddress
         with get () = _rangeAddress
         and set (rangeAdress) =
@@ -37,10 +39,10 @@ type FsRangeBase (rangeAddress : FsRangeAddress, styleValue) =
         let absRow = cellAddressInRange.RowNumber + self.RangeAddress.FirstAddress.RowNumber - 1;
         let absColumn = cellAddressInRange.ColumnNumber + self.RangeAddress.FirstAddress.ColumnNumber - 1;
 
-        if (absRow <= 0 || absRow > cells.MaxRowNumber) then
+        if (absRow <= 0 || absRow > 1048576) then
             failwithf "Row number must be between 1 and %i" cells.MaxRowNumber
 
-        if (absColumn <= 0 || absColumn > cells.MaxColumnNumber) then
+        if (absColumn <= 0 || absColumn > 16384) then
             failwithf "Column number must be between 1 and %i" cells.MaxColumnNumber
 
         let cell = cells.TryGetCell(absRow,absColumn);
@@ -67,10 +69,14 @@ type FsRangeBase (rangeAddress : FsRangeAddress, styleValue) =
             // has a default style, use the worksheet's default style
             let newCell = new FsCell(absoluteAddress);
 
+            self.Extend(absoluteAddress)
+
             cells.Add(absRow, absColumn, newCell);
             newCell
    
-                
+    member self.Cells(cells : FsCellsCollection) = 
+        cells.GetCells(self.RangeAddress.FirstAddress,self.RangeAddress.LastAddress)
+       
 //    public XLWorksheet Worksheet
 //    {
 //        get { return RangeAddress.Worksheet; }
