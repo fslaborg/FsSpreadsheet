@@ -77,6 +77,12 @@ type FsRangeBase (rangeAddress : FsRangeAddress, styleValue) =
     member self.Cells(cells : FsCellsCollection) = 
         cells.GetCells(self.RangeAddress.FirstAddress,self.RangeAddress.LastAddress)
        
+    member self.Cells(cells : FsCellsCollection, predicate : FsCell -> bool) = 
+        cells.GetCells(self.RangeAddress.FirstAddress,self.RangeAddress.LastAddress, predicate)
+     
+     member self.ColumnCount() =
+        _rangeAddress.LastAddress.ColumnNumber - _rangeAddress.FirstAddress.ColumnNumber + 1;
+
 //    public XLWorksheet Worksheet
 //    {
 //        get { return RangeAddress.Worksheet; }

@@ -167,3 +167,8 @@ type FsRangeAddress(firstAddress : FsAddress, lastAddress : FsAddress) =
     member self.FirstAddress = _firstAddress
 
     member self.LastAddress = _lastAddress
+
+    member self.Union(rangeAddress : FsRangeAddress) =
+        self.Extend(rangeAddress.FirstAddress)
+        self.Extend(rangeAddress.LastAddress)
+        self
