@@ -7,7 +7,7 @@ type FsRow (rangeAddress : FsRangeAddress, styleValue)=
 
     new () = FsRow (FsRangeAddress(FsAddress(0,0),FsAddress(0,0)),null)
 
-    new (index) = FsRow (FsRangeAddress(FsAddress(index,0),FsAddress(index,0)),null)
+    new (index) = FsRow (FsRangeAddress(FsAddress(index,1),FsAddress(index,1)),null)
 
     member self.Cell(columnIndex,cells) = base.Cell(FsAddress(1,columnIndex),cells)
         

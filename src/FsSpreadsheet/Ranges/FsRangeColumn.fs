@@ -11,7 +11,7 @@ type FsRangeColumn(rangeAddress) =
     
     new (index) = FsRangeColumn (FsRangeAddress(FsAddress(0,index),FsAddress(0,index)))
 
-    member self.Cell(columnIndex,cells) = base.Cell(FsAddress(1,columnIndex),cells)
+    member self.Cell(rowIndex,cells) = base.Cell(FsAddress(rowIndex,1),cells)
     
     member self.FirstCell(cells : FsCellsCollection) = 
         cells.TryGetCell(base.RangeAddress.FirstAddress.RowNumber,base.RangeAddress.LastAddress.ColumnNumber)

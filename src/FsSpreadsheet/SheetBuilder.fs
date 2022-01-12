@@ -67,7 +67,66 @@ module SheetBuilder =
                 | Some text -> cell.SetValue(text)
             )
 
-    
+    type FsTable with 
+
+        member self.Populate(cells : FsCellsCollection, data : seq<'T>, fields: FieldMap<'T> list) =
+            let headerTransformerGroups = fields |> List.map (fun field -> field.HeaderTransformers)
+            let noHeadersAvailable =
+                headerTransformerGroups
+                |> List.concat
+                |> List.isEmpty
+
+            let headersAvailable = not noHeadersAvailable
+       
+            if headersAvailable && (self.ShowHeaderRow = false) then self.ShowHeaderRow <- headersAvailable
+            
+            let startAddress = self.RangeAddress.FirstAddress
+
+            let startRowIndex = if headersAvailable then startAddress.RowNumber + 1 else startAddress.RowNumber
+            
+            for (rowIndex, row) in Seq.indexed data do
+                let activeRowIndex = rowIndex + startRowIndex
+                for field in fields do
+
+                    let headerCell = FsCell()
+                    for header in field.HeaderTransformers do ignore (header row headerCell)
+                
+                     
+                    let headerString = 
+                        if headerCell.GetValue() = "" then 
+                            field.Hash 
+                        else headerCell.GetValue()
+
+                    let tableField = self.Field(headerString)                
+
+                    let activeCell = tableField.Column.Cell(activeRowIndex,cells) // .Cell(index,self.CellCollection)
+                    for transformer in field.CellTransformers do
+                        ignore (transformer row activeCell)
+
+                    //if field.AdjustToContents then
+                    //    let currentColumn = activeCell.WorksheetColumn()
+                    //    currentColumn.AdjustToContents() |> ignore
+                    //    activeRow.AdjustToContents() |> ignore
+
+                    //match field.ColumnWidth with
+                    //| Some givenWidth ->
+                    //    let currentColumn = activeCell.WorksheetColumn()
+                    //    currentColumn.Width <- givenWidth
+                    //| None -> ()
+
+                    //match field.RowHeight with
+                    //| Some givenHeightFn ->
+                    //    match givenHeightFn row with
+                    //    | Some givenHeight ->
+                    //        activeRow.Height <- givenHeight
+                    //    | None ->
+                    //        ()
+                    //| None ->
+                    //    ()
+
+        static member populate<'T>(table : FsTable, cells : FsCellsCollection, data : seq<'T>, fields: FieldMap<'T> list) : unit =
+            table.Populate(cells,data,fields)
+
     type FsWorksheet with
         
         member self.Populate(data : seq<'T>, fields: FieldMap<'T> list) =
@@ -102,10 +161,10 @@ module SheetBuilder =
                             let i = headers.Count + 1
                             headers.Add(v,i)
                             if hasHeader then
-                                self.Row(1).Cell(i).CopyFrom(headerCell) |> ignore
+                                self.Row(1).Cell(i,self.CellCollection).CopyFrom(headerCell) |> ignore
                             i
 
-                    let activeCell = activeRow.Cell(index)
+                    let activeCell = activeRow.Cell(index,self.CellCollection)
                     for transformer in field.CellTransformers do
                         ignore (transformer row activeCell)
 
@@ -143,6 +202,23 @@ module SheetBuilder =
         static member createFrom(data: seq<'T>, fields: FieldMap<'T> list) (*: byte[]*) =
             FsWorksheet.createFrom("Sheet1", data, fields)
             
+        member self.PopulateTable(tableName : string, startAddress : FsAddress, data : seq<'T>, fields: FieldMap<'T> list) =
+            let headerTransformerGroups = fields |> List.map (fun field -> field.HeaderTransformers)
+            let noHeadersAvailable =
+                headerTransformerGroups
+                |> List.concat
+                |> List.isEmpty
+
+            let headersAvailable = not noHeadersAvailable
+
+            let table = self.Table(tableName,FsRangeAddress(startAddress,startAddress),headersAvailable)
+            
+            table.Populate(self.CellCollection,data,fields)
+
+            self.SortRows()
+
+
+
     type FsWorkbook with
 
         member self.Populate<'T>(name : string, data: seq<'T>, fields: FieldMap<'T> list) : unit =

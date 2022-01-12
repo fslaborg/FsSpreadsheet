@@ -9,6 +9,8 @@ type FsWorksheet (name) =
 
     let mutable _tables : FsTable list = []
 
+    let mutable _cells = FsCellsCollection()
+
     new () = FsWorksheet("")
 
     member self.Name
@@ -26,15 +28,24 @@ type FsWorksheet (name) =
         
     member self.GetRows() = _rows
 
-    member self.Table(tableName,rangeAddress) = 
+    member self.Table(tableName,rangeAddress,showHeaderRow) = 
         match _tables |> List.tryFind (fun table -> table.Name = name) with
         | Some table ->
             table
         | None -> 
-            let table = FsTable(tableName,rangeAddress)
+            let table = FsTable(tableName,rangeAddress,showHeaderRow)
             _tables <- List.append _tables [table]
             table
-        
+      
+    member self.Table(tableName,rangeAddress) = 
+        self.Table(tableName,rangeAddress,true)
+
+    member self.RescanRows() =
+        ()
+
+    member self.CellCollection
+        with get () = _cells
+
     member self.GetTables() = _tables
 
     member self.SortRows() = _rows <- _rows |> List.sortBy (fun r -> r.Index)

@@ -15,6 +15,8 @@ type FsTable (name : string, rangeAddress, showTotalsRow, showHeaderRow) =
     let mutable _fieldNames : Dictionary<string,FsTableField> = Dictionary()
     let _uniqueNames : HashSet<string> = HashSet()
 
+    new (name, rangeAddress, showHeaderRow) = FsTable (name, rangeAddress, false, showHeaderRow)
+
     new (name, rangeAddress) = FsTable (name, rangeAddress, false, true)
 
     member self.Name 

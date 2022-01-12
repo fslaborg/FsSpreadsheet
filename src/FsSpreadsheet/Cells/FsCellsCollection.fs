@@ -138,6 +138,12 @@ type FsCellsCollection() =
         | None -> 
             ()
 
+    member this.GetCells() = 
+    
+        _rowsCollection.Values
+        |> Seq.collect (fun columnsCollection -> columnsCollection.Values)
+
+
 
     member this.GetCells(rowStart : int32, columnStart : int32, rowEnd : int32, columnEnd : int32, predicate : FsCell -> bool) = 
 

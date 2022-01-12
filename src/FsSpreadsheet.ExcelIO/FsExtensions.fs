@@ -19,13 +19,13 @@ module FsExtensions =
                     worksheet.SortRows()
                     worksheet.GetRows()
                     |> List.iter (fun row -> 
-                        row.SortCells()
+                        let cells = row.Cells(worksheet.CellCollection) |> Seq.toList
                         let min,max =                        
-                            row.GetCells() 
+                            cells
                             |> List.map (fun cell -> uint32 cell.WorksheetColumn) 
                             |> fun l -> List.min l, List.max l
                         let cells = 
-                            row.GetCells()
+                            cells
                             |> List.map (fun cell ->
                                 Cell.fromValue None (uint32 cell.WorksheetColumn) (uint32 cell.WorksheetRow) (cell.Value)
                             )
