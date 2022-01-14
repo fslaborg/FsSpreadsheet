@@ -53,7 +53,10 @@ module Sheet =
                 |> init
                 |> get        
 
-
+        let tryGetSheetByName (name : string) (sheets : Sheets) =
+            sheets
+            |> getSheets
+            |> Seq.tryFind (fun sheet -> sheet.Name.Value = name)
     
     /// Creates an empty Sheet.
     let empty () = Sheet()

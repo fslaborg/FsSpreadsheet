@@ -100,6 +100,54 @@ module WorkbookPart =
         |> Worksheet.get
         |> Worksheet.getSheetData
 
+    /// Appends a worksheet to the SpreadsheetDocument.
+    // to-do: guard if sheet of name already exists
+    let getOrInitWorksheetPartByName (sheetName : string) (workbookPart : WorkbookPart) =
+
+        let workbook = Workbook.getOrInit  workbookPart
+                      
+        let sheets = Sheet.Sheets.getOrInit workbook
+
+        match Sheet.Sheets.tryGetSheetByName sheetName sheets with
+        | Some sheet -> 
+            getWorksheetPartById (Sheet.getID sheet) workbookPart
+        | None -> 
+            let worksheetPart = initWorksheetPart workbookPart
+            let id = getWorksheetPartID worksheetPart workbookPart
+            let sheetID = 
+                sheets |> Sheet.Sheets.getSheets |> Seq.map Sheet.getSheetID
+                |> fun s -> 
+                    if Seq.length s = 0 then 1u
+                    else s |> Seq.max |> (+) 1ul
+        
+            let sheet = Sheet.create id sheetName sheetID
+        
+            sheets.AppendChild(sheet) |> ignore
+            worksheetPart
+
+    /// Appends a worksheet to the SpreadsheetDocument.
+    // to-do: guard if sheet of name already exists
+    let appendWorksheet (sheetName : string) (worksheet : Worksheet) (workbookPart : WorkbookPart) =
+
+        let workbook = Workbook.getOrInit  workbookPart
+        
+        let worksheetPart = 
+            initWorksheetPart workbookPart
+            |> Worksheet.setWorksheet worksheet
+                
+        let sheets = Sheet.Sheets.getOrInit workbook
+        let id = getWorksheetPartID worksheetPart workbookPart
+        let sheetID = 
+            sheets |> Sheet.Sheets.getSheets |> Seq.map Sheet.getSheetID
+            |> fun s -> 
+                if Seq.length s = 0 then 1u
+                else s |> Seq.max |> (+) 1ul
+        
+        let sheet = Sheet.create id sheetName sheetID
+        
+        sheets.AppendChild(sheet) |> ignore
+        workbookPart
+
     /// Appends a new sheet with the given SheetData to the SpreadsheetDocument.
     // to-do: guard if sheet of name already exists
     let appendSheet (sheetName : string) (data : SheetData) (workbookPart : WorkbookPart) =
