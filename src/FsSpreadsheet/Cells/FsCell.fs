@@ -293,7 +293,7 @@ type FsCell (value : string, dataType : DataType, address : FsAddress)=
     /// <summary>
     /// Gets the cell's value converted to a String.
     /// </summary>
-    member self.GetString() = raise (System.NotImplementedException())
+    member self.GetString() = value
     
     /// <summary>
     /// Gets the cell's value converted to TimeSpan.

@@ -29,7 +29,7 @@ type FsTable (name : string, rangeAddress, showTotalsRow, showHeaderRow) =
             else 
                 _lastRangeAddress <- self.RangeAddress
 
-                self.RescanFieldNames(cells)
+                //self.RescanFieldNames(cells)
                 
                 _fieldNames;
 
@@ -53,8 +53,10 @@ type FsTable (name : string, rangeAddress, showTotalsRow, showHeaderRow) =
 
 
     member private self.RescanFieldNames (cells : FsCellsCollection) =
+        printfn "Start RescanFieldNames"
+        _fieldNames
+        |> Seq.iter (fun kv -> printfn "Key: %s, index: %i, name: %s" kv.Key kv.Value.Index kv.Value.Name)
         if self.ShowHeaderRow then
-
             let oldFieldNames =  _fieldNames
             _fieldNames <- new Dictionary<string, FsTableField>()
             let headersRow = self.HeadersRow(false);
@@ -91,6 +93,11 @@ type FsTable (name : string, rangeAddress, showTotalsRow, showHeaderRow) =
 
                     _fieldNames.Add(name, new FsTableField(name, i - 1));
 
+        printfn "Finished RescanFWieldNames"
+        _fieldNames
+        |> Seq.iter (fun kv -> printfn "Key: %s, index: %i, name: %s" kv.Key kv.Value.Index kv.Value.Name)
+
+
     member self.RescanRange () =
         let rangeAddress = 
             _fieldNames.Values
@@ -120,18 +127,26 @@ type FsTable (name : string, rangeAddress, showTotalsRow, showHeaderRow) =
     //    {
     //        _fieldNames.Add(name, new XLTableField(this, name) { Index = cellPos++ });
     //    }
-    member self.Field(name) = 
+
+    member self.Field(name,cells : FsCellsCollection) = 
         match Dictionary.tryGet name _fieldNames with
         | Some field -> 
             field
         | None -> 
-            let maxIndex = _fieldNames.Values |> Seq.map (fun v -> v.Index) |> Seq.max
+            let maxIndex = 
+                _fieldNames.Values 
+                |> Seq.map (fun v -> v.Index) 
+                |> fun s -> 
+                    if Seq.length s = 0 then 0 else Seq.max s
             let range = 
-                let firstAddress = FsAddress(self.RangeAddress.FirstAddress.RowNumber,self.RangeAddress.FirstAddress.ColumnNumber + 1)
-                let lastAddress = FsAddress(self.RangeAddress.LastAddress.RowNumber,self.RangeAddress.LastAddress.ColumnNumber + 1)
+                let offset = _fieldNames.Count
+                let firstAddress = FsAddress(self.RangeAddress.FirstAddress.RowNumber,self.RangeAddress.FirstAddress.ColumnNumber + offset)
+                let lastAddress = FsAddress(self.RangeAddress.LastAddress.RowNumber,self.RangeAddress.FirstAddress.ColumnNumber + offset)
                 FsRangeAddress(firstAddress,lastAddress)
             let column = FsRangeColumn(range)
             let newField = FsTableField(name,maxIndex + 1,column,null,null)
+            if self.ShowHeaderRow then
+                newField.HeaderCell(cells,true).SetValue name |> ignore
             _fieldNames.Add(name,newField)
             self.RescanRange()
             newField

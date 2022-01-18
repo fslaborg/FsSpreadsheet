@@ -11,7 +11,7 @@ type FsRangeRow(rangeAddress) =
     
     new (index) = FsRangeRow (FsRangeAddress(FsAddress(index,0),FsAddress(index,0)))
    
-    member self.Cell(columnIndex,cells) = base.Cell(FsAddress(1,columnIndex),cells)
+    member self.Cell(columnIndex,cells) = base.Cell(FsAddress(1,columnIndex - base.RangeAddress.FirstAddress.ColumnNumber + 1),cells)
 
     member self.Cells(cells) = base.Cells(cells)
 

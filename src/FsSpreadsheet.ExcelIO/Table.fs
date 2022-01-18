@@ -252,10 +252,11 @@ module Table =
             | None ->
                 let tableParts = new TableParts()
                 tableParts.Count <- UInt32Value.FromUInt32 0u
-                worksheetPart.Worksheet.Append(tableParts)
+                worksheetPart.Worksheet.AppendChild(tableParts) |> ignore
                 tableParts
 
         tableParts.Count <- tableParts.Count.Value |> (+) 1u |> UInt32Value.FromUInt32     
+        //tableParts.AppendChild(tablePart) |> ignore
         tableParts.AppendChild(tablePart) |> ignore
 
         printfn "TableID: %i" id

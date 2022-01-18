@@ -20,6 +20,7 @@ module FsExtensions =
     type FsWorksheet with
 
         member self.ToExcelWorksheet() =
+            self.RescanRows()
             let sheet = Worksheet.empty()
             let sheetData =                 
                 let sd = SheetData.empty()

@@ -97,7 +97,7 @@ module SheetBuilder =
                             field.Hash 
                         else headerCell.GetValue()
 
-                    let tableField = self.Field(headerString)                
+                    let tableField = self.Field(headerString,cells)                
 
                     let activeCell = tableField.Column.Cell(activeRowIndex,cells) // .Cell(index,self.CellCollection)
                     for transformer in field.CellTransformers do
@@ -216,6 +216,11 @@ module SheetBuilder =
             table.Populate(self.CellCollection,data,fields)
 
             self.SortRows()
+
+        static member createTableFrom(name: string, tableName : string, data: seq<'T>, fields: FieldMap<'T> list) (*: byte[]*) =          
+            let sheet = FsWorksheet(name)
+            sheet.PopulateTable(tableName, FsAddress (1,1), data, fields)
+            sheet
 
 
 

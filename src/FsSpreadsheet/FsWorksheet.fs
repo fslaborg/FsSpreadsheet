@@ -25,6 +25,11 @@ type FsWorksheet (name) =
             let row = FsRow(rowIndex) 
             _rows <- List.append _rows [row]
             row
+
+    member self.Row(rangeAddress : FsRangeAddress) = 
+        if rangeAddress.FirstAddress.RowNumber <> rangeAddress.LastAddress.RowNumber then
+            failwithf "Row may not have a range address spanning over different row indices"
+        self.Row(rangeAddress.FirstAddress.RowNumber).RangeAddress <- rangeAddress
         
     member self.GetRows() = _rows
 
@@ -41,7 +46,23 @@ type FsWorksheet (name) =
         self.Table(tableName,rangeAddress,true)
 
     member self.RescanRows() =
-        ()
+        let rows = _rows |> Seq.map (fun r -> r.Index,r) |> Map.ofSeq
+        _cells.GetCells()
+        |> Seq.groupBy (fun c -> c.WorksheetRow)
+        |> Seq.iter (fun (rowIndex,cells) -> 
+            let newRange = 
+                cells
+                |> Seq.sortBy (fun c -> c.WorksheetColumn)
+                |> fun cells ->
+                    FsAddress(rowIndex,Seq.head cells |> fun c -> c.WorksheetColumn),
+                    FsAddress(rowIndex,Seq.last cells |> fun c -> c.WorksheetColumn)
+                |> FsRangeAddress
+            match Map.tryFind rowIndex rows with
+            | Some row -> 
+                row.RangeAddress <- newRange
+            | None ->
+                self.Row(newRange)
+        )
 
     member self.CellCollection
         with get () = _cells
