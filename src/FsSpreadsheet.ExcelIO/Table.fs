@@ -238,7 +238,7 @@ module Table =
         table.Id <- (UInt32Value.FromUInt32(uint id))
         table.Name <- StringValue(sprintf "Table%i" id)
         if table.TableStyleInfo = null then
-            table.TableStyleInfo <- TableStyleInfo(Name = StringValue("TableStyleMedium2"), ShowFirstColumn = BooleanValue(false), ShowLastColumn = BooleanValue(false), ShowRowStripes = BooleanValue(true), ShowColumnStripes = BooleanValue(false) )
+            table.TableStyleInfo <- TableStyleInfo(Name = StringValue("TableStyleMedium7"), ShowFirstColumn = BooleanValue(false), ShowLastColumn = BooleanValue(false), ShowRowStripes = BooleanValue(true), ShowColumnStripes = BooleanValue(false) )
         tableDefinitionPart.Table <- table
 
         let tablePart = TablePart(Id = (StringValue (sprintf "rId%i" id)))
