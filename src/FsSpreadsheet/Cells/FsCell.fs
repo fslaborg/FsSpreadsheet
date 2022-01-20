@@ -25,7 +25,7 @@ type DataType =
         | :? single as i -> DataType.Number,i.ToString()
         | :? float as i -> DataType.Number,i.ToString()
         | :? decimal as i -> DataType.Number,i.ToString()
-        | :? System.DateTime as d -> DataType.Date,d.Date.ToString()
+        | :? System.DateTime as d -> DataType.Date,d.ToString()
         | _ ->  DataType.String,value.ToString()
 
 // Type based on the type XLCell used in ClosedXml

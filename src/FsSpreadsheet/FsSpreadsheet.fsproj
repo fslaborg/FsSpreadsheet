@@ -20,6 +20,7 @@
     <Compile Include="FsWorksheet.fs" />
     <Compile Include="FsWorkbook.fs" />
     <Compile Include="SheetBuilder.fs" />
+    <Compile Include="DSL.fs" />
   </ItemGroup>
 
   <PropertyGroup>
