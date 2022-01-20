@@ -1,5 +1,8 @@
+#if FAKE
+
 #r "paket:
 nuget BlackFox.Fake.BuildTask
+nuget Fake.Extensions.Release
 nuget Fake.Core.Target
 nuget Fake.Core.Process
 nuget Fake.Core.ReleaseNotes
@@ -15,7 +18,26 @@ nuget Fake.Api.Github
 nuget Fake.DotNet.Testing.Expecto 
 nuget Fake.Tools.Git //"
 
+#endif
+
 #if !FAKE
+
+#r "nuget: BlackFox.Fake.BuildTask"
+#r "nuget: Fake.Extensions.Release"
+#r "nuget: Fake.Core.Target"
+#r "nuget: Fake.Core.Process"
+#r "nuget: Fake.Core.ReleaseNotes"
+#r "nuget: Fake.IO.FileSystem"
+#r "nuget: Fake.DotNet.Cli"
+#r "nuget: Fake.DotNet.MSBuild"
+#r "nuget: Fake.DotNet.AssemblyInfoFile"
+#r "nuget: Fake.DotNet.Paket"
+#r "nuget: Fake.DotNet.FSFormatting"
+#r "nuget: Fake.DotNet.Fsi"
+#r "nuget: Fake.DotNet.NuGet"
+#r "nuget: Fake.Api.Github"
+#r "nuget: Fake.DotNet.Testing.Expecto"
+#r "nuget: Fake.Tools.Git"
 #load "./.fake/build.fsx/intellisense.fsx"
 #r "netstandard" // Temp fix for https://github.com/dotnet/fsharp/issues/5216
 #endif
@@ -153,6 +175,12 @@ module PackageTasks =
     open BasicTasks
     open TestTasks
 
+    open System.Text.RegularExpressions
+
+    let commitLinkPattern = @"\[\[#[a-z0-9]*\]\(.*\)\] "
+    
+    let replaceCommitLink input= Regex.Replace(input,commitLinkPattern,"")
+
     let pack = BuildTask.create "Pack" [clean; build; runTests; copyBinaries] {
         if promptYesNo (sprintf "creating stable package with version %s OK?" stableVersionTag ) 
             then
@@ -162,7 +190,7 @@ module PackageTasks =
                         {p.MSBuildParams with 
                             Properties = ([
                                 "Version",stableVersionTag
-                                "PackageReleaseNotes",  (release.Notes |> String.concat "\r\n")
+                                "PackageReleaseNotes",  (release.Notes |> List.map replaceCommitLink |> String.concat "\r\n")
                             ] @ p.MSBuildParams.Properties)
                         }
                     {
@@ -184,7 +212,7 @@ module PackageTasks =
                                 {p.MSBuildParams with 
                                     Properties = ([
                                         "Version", prereleaseTag
-                                        "PackageReleaseNotes",  (release.Notes |> String.toLines )
+                                        "PackageReleaseNotes",  (release.Notes |> List.map replaceCommitLink |> String.toLines )
                                     ] @ p.MSBuildParams.Properties)
                                 }
                             {
@@ -250,6 +278,34 @@ module ReleaseTasks =
                 if not result.OK then failwith "failed to push packages"
         else failwith "aborted"
     }
+
+
+module ReleaseNoteTasks =
+
+    open Fake.Extensions.Release
+
+    let createAssemblyVersion = BuildTask.create "createvfs" [] {
+        AssemblyVersion.create ProjectInfo.gitName
+    }
+
+    let updateReleaseNotes = BuildTask.createFn "ReleaseNotes" [] (fun config ->
+        Release.exists()
+
+        Release.update(ProjectInfo.gitOwner, ProjectInfo.gitName, config)
+    )
+
+    let githubDraft = BuildTask.createFn "GithubDraft" [] (fun config ->
+
+        let body = "We are ready to go for the first release!"
+
+        Github.draft(
+            ProjectInfo.gitOwner,
+            ProjectInfo.gitName,
+            (Some body),
+            None,
+            config
+        )
+    )
 
 open BasicTasks
 open TestTasks
