@@ -6,21 +6,6 @@ open Expression
 
 [<AutoOpen>]
 type DSL =
-
-    /// Create an xml element with given name
-    static member inline row = RowBuilder()
-    
-    /// Create an xml element with given name
-    static member inline sheet name = SheetBuilder(name)
-
-    /// Create an xml element with given name
-    static member inline workbook = WorkbookBuilder()
-
-    ///// Create an xml attriubte with given name and value
-    //static member inline attr name value : Attr = 
-    //    ok (fun tb ->
-    //        tb.WriteAttributeString(name, string value)
-    //    )
     
     /// Create an xml value from the given value
     static member inline cell (s : string) : CellElement =
@@ -38,6 +23,17 @@ type DSL =
         with
         | err -> MissingRequired([err.Message])
 
+    /// Create an xml element with given name
+    static member inline row = RowBuilder()
+    
+    /// Create an xml element with given name
+    static member inline column = ColumnBuilder()
+
+    /// Create an xml element with given name
+    static member inline sheet name = SheetBuilder(name)
+
+    /// Create an xml element with given name
+    static member inline workbook = WorkbookBuilder()
 
     /// Transforms any given xml element to an ok.
     static member opt (elem : Missing<'T list>) = 

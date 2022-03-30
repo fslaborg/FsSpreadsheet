@@ -36,6 +36,9 @@ type SheetBuilder(name : string) =
     member inline _.Yield(cs: RowElement list) =
         Missing.ok [SheetElement.UnindexedRow cs]
 
+    member inline _.Yield(cs: RowBuilder) =
+        Missing.ok [SheetElement.UnindexedRow []]
+
     member inline _.Yield(c: Missing<ColumnElement list>) =
         match c with 
         | Ok ((re),messages) -> 
@@ -47,6 +50,9 @@ type SheetBuilder(name : string) =
 
     member inline _.Yield(cs: ColumnElement list) =
         Missing.ok [SheetElement.UnindexedColumn cs]
+
+    member inline _.Yield(cs: ColumnBuilder) =
+        Missing.ok [SheetElement.UnindexedColumn []]
 
     member inline this.YieldFrom(ns: (RowElement list) seq) =   
         ns
