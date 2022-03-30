@@ -10,6 +10,12 @@ type DSL =
     /// Create an xml element with given name
     static member inline row = RowBuilder()
     
+    /// Create an xml element with given name
+    static member inline sheet name = SheetBuilder(name)
+
+    /// Create an xml element with given name
+    static member inline workbook = WorkbookBuilder()
+
     ///// Create an xml attriubte with given name and value
     //static member inline attr name value : Attr = 
     //    ok (fun tb ->

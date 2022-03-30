@@ -13,6 +13,10 @@ type Missing<'T> =
 
     static member ok (v : 'T) : Missing<'T> = Missing.Ok (v,[])
 
+    member this.Value =
+        match this with 
+        | Ok (f,errs) -> f
+
     /// Get messages
     member this.Messages =
 

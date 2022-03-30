@@ -23,10 +23,12 @@
     <Compile Include="DSL\Expression.fs" />
     <Compile Include="DSL\Types.fs" />
     <Compile Include="DSL\RowBuilder.fs" />
+    <Compile Include="DSL\ColumnBuilder.fs" />
+    <Compile Include="DSL\SheetBuilder.fs" />
+    <Compile Include="DSL\WorkbookBuilder.fs" />
     <Compile Include="DSL\DSL.fs" />
     <Compile Include="DSL\Operators.fs" />
     <Compile Include="DSL\Transform.fs" />
-    <Compile Include="DSL.fs" />
   </ItemGroup>
 
   <PropertyGroup>
