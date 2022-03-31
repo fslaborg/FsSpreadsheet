@@ -1,3 +1,9 @@
+### 0.1.1+aae6edd (Released 2022-3-31)
+* Additions:
+    * latest commit #aae6edd
+* Bugfixes:
+    * [[#aae6edd](https://github.com/CSBiology/FsSpreadsheet/commit/aae6edd8981cad33fc5ad374c824f065c8adb288)] fix row functions failing when reading empty cells
+
 ### 0.1.0+268b900 (Released 2022-3-31)
 * Additions:
     * latest commit #268b900

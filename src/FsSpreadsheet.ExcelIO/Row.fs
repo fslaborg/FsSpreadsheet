@@ -260,13 +260,15 @@ module Row =
     let getIndexedValues (sst : SharedStringTable Option) (row : Row) =
         row
         |> toCellSeq
-        |> Seq.map (fun cell -> 
-            cell 
-            |> Cell.getReference 
-            |> CellReference.toIndices 
-            |> fst,
-
-            Cell.getValue sst cell
+        |> Seq.choose (fun cell -> 
+            Cell.tryGetValue sst cell
+            |> Option.map (fun v -> 
+                cell 
+                |> Cell.getReference 
+                |> CellReference.toIndices 
+                |> fst,
+                v
+            )            
         )
 
 
@@ -274,7 +276,7 @@ module Row =
     let getRowValues (sst : SharedStringTable Option) (row : Row)  =
         row
         |> toCellSeq
-        |> Seq.map (Cell.getValue sst)
+        |> Seq.choose (Cell.tryGetValue sst)
 
     /// Maps each cell of the given row to each respective value strings if it exists, else returns None.
     let tryGetRowValues (sst : SharedStringTable option) (row : Row) =

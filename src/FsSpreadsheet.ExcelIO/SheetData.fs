@@ -123,32 +123,19 @@ module SheetData =
     let tryGetRowValuesAt (sst : SharedStringTable Option) rowIndex (sheet : SheetData) =
         sheet 
         |> tryGetRowAt rowIndex
-        |> Option.map (
-            Row.toCellSeq
-            >> Seq.map (Cell.getValue sst)
-        )
+        |> Option.map (Row.getRowValues sst)       
 
     /// Gets the string values of the row at the given 1-based rowIndex.
     let getRowValuesAt (sst : SharedStringTable Option) rowIndex (sheet : SheetData) =
         sheet
         |> getRowAt rowIndex
-        |> Row.toCellSeq
-        |> Seq.map (Cell.getValue sst)
+        |> Row.getRowValues sst
 
     /// Maps the cells of the given row to tuples of 1-based column indices and the value strings using a sharedStringTable, if it exists, else returns None.
     let tryGetIndexedRowValuesAt (sst : SharedStringTable Option) rowIndex (sheet : SheetData) =
         sheet
         |> tryGetRowAt rowIndex
-        |> Option.map (
-            Row.toCellSeq
-            >> Seq.map (fun cell -> 
-                cell
-                |> Cell.getReference  
-                |> CellReference.toIndices 
-                |> fst,
-
-                cell |> Cell.getValue sst)
-        )
+        |> Option.map (Row.getIndexedValues sst)
 
     
     /// Adds values as a row to the sheet at the given rowIndex with the given horizontal offset.
