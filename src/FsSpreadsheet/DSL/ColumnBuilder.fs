@@ -24,6 +24,9 @@ type ColumnBuilder() =
     member inline _.Yield(cs: ColumnElement list) =
         Missing.ok cs
 
+    member inline _.Yield(cs: Missing<ColumnElement list>) =
+        cs
+
     member inline _.Yield(c: Missing<CellElement>) =
         match c with 
         | Ok ((v,Some i),messages) -> 
@@ -60,15 +63,15 @@ type ColumnBuilder() =
         Missing.ok [ColumnElement.UnindexedCell v]
 
 
-    member inline this.YieldFrom(ns: Missing<CellElement> seq) =   
+    member inline this.YieldFrom(ns: Missing<ColumnElement list> seq) =   
         ns
         |> Seq.fold (fun state we ->
-            this.Combine(state,this.Yield(we))
+            this.Combine(state,we)
 
         ) ColumnBuilder.Empty
 
 
-    member inline this.For(vs : seq<'T>, f : 'T -> Missing<CellElement>) =
+    member inline this.For(vs : seq<'T>, f : 'T -> Missing<ColumnElement list>) =
         vs
         |> Seq.map f
         |> this.YieldFrom

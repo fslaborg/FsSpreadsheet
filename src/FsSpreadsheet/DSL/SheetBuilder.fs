@@ -23,6 +23,9 @@ type SheetBuilder(name : string) =
 
     member inline _.Yield(cs: SheetElement list) =
         Missing.ok cs
+   
+    member inline _.Yield(cs: Missing<SheetElement list>) =
+        cs
 
     member inline _.Yield(c: Missing<RowElement list>) =
         match c with 
@@ -54,50 +57,15 @@ type SheetBuilder(name : string) =
     member inline _.Yield(cs: ColumnBuilder) =
         Missing.ok [SheetElement.UnindexedColumn []]
 
-    member inline this.YieldFrom(ns: (RowElement list) seq) =   
+
+    member inline this.YieldFrom(ns: Missing<SheetElement list> seq) =   
         ns
         |> Seq.fold (fun state we ->
-            this.Combine(state,this.Yield(we))
+            this.Combine(state,we)
 
         ) SheetBuilder.Empty
 
-    member inline this.YieldFrom(ns: Missing<RowElement list> seq) =   
-        ns
-        |> Seq.fold (fun state we ->
-            this.Combine(state,this.Yield(we))
-
-        ) SheetBuilder.Empty
-
-    member inline this.YieldFrom(ns: (ColumnElement list) seq) =   
-        ns
-        |> Seq.fold (fun state we ->
-            this.Combine(state,this.Yield(we))
-
-        ) SheetBuilder.Empty
-
-    member inline this.YieldFrom(ns: Missing<ColumnElement list> seq) =   
-        ns
-        |> Seq.fold (fun state we ->
-            this.Combine(state,this.Yield(we))
-
-        ) SheetBuilder.Empty
-
-    member inline this.For(vs : seq<'T>, f : 'T -> Missing<RowElement list>) =
-        vs
-        |> Seq.map f
-        |> this.YieldFrom
-
-    member inline this.For(vs : seq<'T>, f : 'T -> RowElement list) =
-        vs
-        |> Seq.map f
-        |> this.YieldFrom
-
-    member inline this.For(vs : seq<'T>, f : 'T -> Missing<ColumnElement list>) =
-        vs
-        |> Seq.map f
-        |> this.YieldFrom
-
-    member inline this.For(vs : seq<'T>, f : 'T -> ColumnElement list) =
+    member inline this.For(vs : seq<'T>, f : 'T -> Missing<SheetElement list>) =
         vs
         |> Seq.map f
         |> this.YieldFrom
