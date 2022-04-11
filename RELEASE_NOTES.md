@@ -1,3 +1,9 @@
+### 0.1.2+c854ed6 (Released 2022-4-11)
+* Additions:
+    * latest commit #c854ed6
+* Bugfixes:
+    * [[#9f2903d](https://github.com/CSBiology/FsSpreadsheet/commit/9f2903dde2675de6b7755713248e5106f9651048)] fix for loops in dsl
+
 ### 0.1.1+aae6edd (Released 2022-3-31)
 * Additions:
     * latest commit #aae6edd
