@@ -23,7 +23,9 @@ type WorkbookBuilder() =
 
     member inline _.Yield(cs: WorkbookElement list) =
         Missing.ok cs
-
+    
+    member inline _.Yield(cs: Missing<WorkbookElement list> ) =
+        cs
 
     member inline _.Yield(c: Missing<SheetElement list>) =
         match c with 
@@ -49,38 +51,20 @@ type WorkbookBuilder() =
     member inline _.Yield(cs: string * SheetElement list) =
         Missing.ok [WorkbookElement.NamedSheet (cs)]
 
-    //member inline this.Yield(n: 'a when 'a :> System.IFormattable) = 
-    //    let v = DataType.InferCellValue n
-    //    Missing.ok [RowElement.UnindexedCell v]
 
-    //member inline _.Yield(s : string) = 
-    //    let v = DataType.InferCellValue s
-    //    Missing.ok [RowElement.UnindexedCell v]
-
-    member inline this.YieldFrom(ns: (SheetElement list) seq) =   
+    member inline this.YieldFrom(ns: Missing<WorkbookElement list> seq) =   
         ns
         |> Seq.fold (fun state we ->
-            this.Combine(state,this.Yield(we))
-
-        ) WorkbookBuilder.Empty
-
-    member inline this.YieldFrom(ns: Missing<SheetElement list> seq) =   
-        ns
-        |> Seq.fold (fun state we ->
-            this.Combine(state,this.Yield(we))
+            this.Combine(state,we)
 
         ) WorkbookBuilder.Empty
 
 
-    member inline this.For(vs : seq<'T>, f : 'T -> Missing<SheetElement list>) =
+    member inline this.For(vs : seq<'T>, f : 'T -> Missing<WorkbookElement list>) =
         vs
         |> Seq.map f
         |> this.YieldFrom
 
-    member inline this.For(vs : seq<'T>, f : 'T -> SheetElement list) =
-        vs
-        |> Seq.map f
-        |> this.YieldFrom
 
     member inline this.Run(children: Missing<WorkbookElement list>) =
         match children with 

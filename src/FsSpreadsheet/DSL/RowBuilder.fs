@@ -24,6 +24,9 @@ type RowBuilder() =
     member inline _.Yield(cs: RowElement list) =
         Missing.ok cs
 
+    member inline _.Yield(cs: Missing<RowElement list>) =
+        cs
+
     member inline _.Yield(c: Missing<CellElement>) =
         match c with 
         | Ok ((v,Some i),messages) -> 
@@ -60,15 +63,15 @@ type RowBuilder() =
         Missing.ok [RowElement.UnindexedCell v]
 
 
-    member inline this.YieldFrom(ns: Missing<CellElement> seq) =   
+    member inline this.YieldFrom(ns: Missing<RowElement list> seq) =   
         ns
         |> Seq.fold (fun state we ->
-            this.Combine(state,this.Yield(we))
+            this.Combine(state,we)
 
         ) RowBuilder.Empty
 
 
-    member inline this.For(vs : seq<'T>, f : 'T -> Missing<CellElement>) =
+    member inline this.For(vs : seq<'T>, f : 'T -> Missing<RowElement list>) =
         vs
         |> Seq.map f
         |> this.YieldFrom
