@@ -51,4 +51,18 @@ type DSL =
         | err -> 
             Ok([],[err.Message])
 
+    /// Drops the cell with the given message
+    static member dropCell message : Missing<Value> = MissingRequired [message]
+
+    /// Drops the row with the given message
+    static member dropRow message : Missing<RowElement> = MissingRequired [message]
+
+    /// Drops the column with the given message
+    static member dropColumn message : Missing<ColumnElement> = MissingRequired [message]
+
+    /// Drops the sheet with the given message
+    static member dropSheet message : Missing<SheetElement> = MissingRequired [message]
+
+    /// Drops the workbook with the given message
+    static member dropWorkbook message : Missing<WorkbookElement> = MissingRequired [message]
 

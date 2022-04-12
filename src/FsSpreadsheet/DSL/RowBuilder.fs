@@ -24,6 +24,15 @@ type RowBuilder() =
     member inline _.Yield(cs: RowElement list) =
         Missing.ok cs
 
+    member inline _.Yield(c: Missing<RowElement>) =
+        match c with 
+        | Ok (re,messages) -> 
+            Missing.Ok ([re], messages)
+        | MissingOptional messages -> 
+            MissingOptional messages
+        | MissingRequired messages -> 
+            MissingRequired messages
+
     member inline _.Yield(cs: Missing<RowElement list>) =
         cs
 
