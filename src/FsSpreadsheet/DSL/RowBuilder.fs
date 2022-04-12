@@ -54,14 +54,18 @@ type RowBuilder() =
             | v, None -> RowElement.UnindexedCell v
         Missing.ok [re]
 
-    member inline _.Yield(cs: CellElement list) =
-        let res = 
-            cs 
-            |> List.map (function
-                | v, Some i -> RowElement.IndexedCell (Col i, v)
-                | v, None -> RowElement.UnindexedCell v
-            )
-        Missing.ok res
+
+    member inline _.Yield(c: Missing<Value>) =
+        match c with 
+        | Ok ((v),messages) -> 
+            Missing.Ok ([RowElement.UnindexedCell v], messages)
+        | MissingOptional messages -> 
+            MissingOptional messages
+        | MissingRequired messages -> 
+            MissingRequired messages
+
+    member inline _.Yield(c: Value) =
+        Missing.ok [RowElement.UnindexedCell c]
 
     member inline this.Yield(n: 'a when 'a :> System.IFormattable) = 
         let v = DataType.InferCellValue n

@@ -22,6 +22,7 @@
     <Compile Include="SheetBuilder.fs" />
     <Compile Include="DSL\Expression.fs" />
     <Compile Include="DSL\Types.fs" />
+    <Compile Include="DSL\CellBuilder.fs" />
     <Compile Include="DSL\RowBuilder.fs" />
     <Compile Include="DSL\ColumnBuilder.fs" />
     <Compile Include="DSL\SheetBuilder.fs" />
