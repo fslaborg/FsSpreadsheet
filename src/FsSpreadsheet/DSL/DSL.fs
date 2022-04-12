@@ -8,20 +8,7 @@ open Expression
 type DSL =
     
     /// Create an xml value from the given value
-    static member inline cell (s : string) : CellElement =
-        DataType.InferCellValue s, None
-
-    /// Create an xml value from the given value
-    static member inline cell<'T when 'T :> System.IFormattable> (v : 'T) : CellElement =
-        DataType.InferCellValue v, None
-
-    /// Create an ok xml value from the given value expression if it succedes. Else returns a missing required.
-    static member inline cell (s : Quotations.Expr<string>) : Missing<CellElement> =
-        try 
-            let value = eval<string> s |> DataType.InferCellValue
-            Missing.ok (value,None)          
-        with
-        | err -> MissingRequired([err.Message])
+    static member inline cell = CellBuilder()
 
     /// Create an xml element with given name
     static member inline row = RowBuilder()
@@ -51,4 +38,18 @@ type DSL =
         | err -> 
             Ok([],[err.Message])
 
+    /// Drops the cell with the given message
+    static member dropCell message : Missing<Value> = MissingRequired [message]
+
+    /// Drops the row with the given message
+    static member dropRow message : Missing<RowElement> = MissingRequired [message]
+
+    /// Drops the column with the given message
+    static member dropColumn message : Missing<ColumnElement> = MissingRequired [message]
+
+    /// Drops the sheet with the given message
+    static member dropSheet message : Missing<SheetElement> = MissingRequired [message]
+
+    /// Drops the workbook with the given message
+    static member dropWorkbook message : Missing<WorkbookElement> = MissingRequired [message]
 

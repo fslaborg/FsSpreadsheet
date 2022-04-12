@@ -18,14 +18,23 @@ type SheetBuilder(name : string) =
         messages
         |> List.map (sprintf "In Sheet %s: %s" name)
 
-    member inline _.Yield(c: SheetElement) =
-        Missing.ok [c]
+    member inline _.Yield(se: SheetElement) =
+        Missing.ok [se]
 
     member inline _.Yield(cs: SheetElement list) =
         Missing.ok cs
    
     member inline _.Yield(cs: Missing<SheetElement list>) =
         cs
+
+    member inline _.Yield(se: Missing<SheetElement>) =
+        match se with 
+        | Ok (s,messages) -> 
+            Missing.Ok ([s], messages)
+        | MissingOptional messages -> 
+            MissingOptional messages
+        | MissingRequired messages -> 
+            MissingRequired messages
 
     member inline _.Yield(c: Missing<RowElement list>) =
         match c with 

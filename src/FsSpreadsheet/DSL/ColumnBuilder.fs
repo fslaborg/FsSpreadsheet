@@ -24,6 +24,15 @@ type ColumnBuilder() =
     member inline _.Yield(cs: ColumnElement list) =
         Missing.ok cs
 
+    member inline _.Yield(c: Missing<ColumnElement>) =
+        match c with 
+        | Ok (c,messages) -> 
+            Missing.Ok ([c], messages)
+        | MissingOptional messages -> 
+            MissingOptional messages
+        | MissingRequired messages -> 
+            MissingRequired messages
+
     member inline _.Yield(cs: Missing<ColumnElement list>) =
         cs
 

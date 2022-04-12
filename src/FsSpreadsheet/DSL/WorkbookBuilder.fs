@@ -21,6 +21,15 @@ type WorkbookBuilder() =
     member inline _.Yield(c: WorkbookElement) =
         Missing.ok [c]
 
+    member inline _.Yield(w: Missing<WorkbookElement>) =
+        match w with 
+        | Ok (w, messages) -> 
+            Missing.Ok ([w], messages)
+        | MissingOptional messages -> 
+            MissingOptional messages
+        | MissingRequired messages -> 
+            MissingRequired messages
+
     member inline _.Yield(cs: WorkbookElement list) =
         Missing.ok cs
     
