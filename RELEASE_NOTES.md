@@ -1,3 +1,10 @@
+### 0.1.3+a18c48b (Released 2022-4-12)
+* Additions:
+    * latest commit #a18c48b
+    * [[#5bf131f](https://github.com/CSBiology/FsSpreadsheet/commit/5bf131f2812d57f4bc4e0a91e030b8d6c573e555)] add convenience functions for dropping dsl items
+    * [[#52b95e0](https://github.com/CSBiology/FsSpreadsheet/commit/52b95e038bac177aa31d7e86e7dd7e4f5e1aa8ee)] add cellbuilder
+    * [[#705edd9](https://github.com/CSBiology/FsSpreadsheet/commit/705edd9e773fb6e7684105075b30f8930ba732d5)] rework dsl operators
+
 ### 0.1.2+c854ed6 (Released 2022-4-11)
 * Additions:
     * latest commit #c854ed6
