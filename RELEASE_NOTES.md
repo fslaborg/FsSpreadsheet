@@ -1,3 +1,8 @@
+### 0.1.4+4f2bb3b (Released 2022-5-9)
+* Additions:
+    * latest commit #4f2bb3b
+    * [[#4f2bb3b](https://github.com/CSBiology/FsSpreadsheet/commit/4f2bb3bac5b84bc04f8ddf99accc34eccb877870)] allow ColumnBuilder to yield Missing values
+
 ### 0.1.3+a18c48b (Released 2022-4-12)
 * Additions:
     * latest commit #a18c48b
