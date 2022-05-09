@@ -54,6 +54,15 @@ type ColumnBuilder() =
             | v, None -> ColumnElement.UnindexedCell v
         Missing.ok [re]
 
+    member inline _.Yield(c: Missing<Value>) =
+        match c with 
+        | Ok ((v),messages) -> 
+            Missing.Ok ([ColumnElement.UnindexedCell v], messages)
+        | MissingOptional messages -> 
+            MissingOptional messages
+        | MissingRequired messages -> 
+            MissingRequired messages
+
     member inline _.Yield(cs: CellElement list) =
         let res = 
             cs 
