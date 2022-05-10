@@ -1,3 +1,11 @@
+### 0.1.5+7250efd (Released 2022-5-10)
+* Additions:
+    * latest commit #7250efd
+* Bugfixes:
+    * [[#7250efd](https://github.com/CSBiology/FsSpreadsheet/commit/7250efdd8dbc8fc95fb43050ea3aeb3070dabae2)] fix dataType of cells always being text
+    * [[#6d12edf](https://github.com/CSBiology/FsSpreadsheet/commit/6d12edfa6520349f29e74f4be2d1d043049cc93d)] fix bug where empty rows made Excel writer crash
+    * [[#b70044a](https://github.com/CSBiology/FsSpreadsheet/commit/b70044a45e5296597c032f09bf106b91d1139c16)] fix dsl section order
+
 ### 0.1.4+4f2bb3b (Released 2022-5-9)
 * Additions:
     * latest commit #4f2bb3b
