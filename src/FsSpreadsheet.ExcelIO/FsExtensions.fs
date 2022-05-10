@@ -28,17 +28,18 @@ module FsExtensions =
                 self.GetRows()
                 |> List.iter (fun row -> 
                     let cells = row.Cells(self.CellCollection) |> Seq.toList
-                    let min,max =                        
-                        cells
-                        |> List.map (fun cell -> uint32 cell.WorksheetColumn) 
-                        |> fun l -> List.min l, List.max l
-                    let cells = 
-                        cells
-                        |> List.map (fun cell ->
-                            Cell.fromValue None (uint32 cell.WorksheetColumn) (uint32 cell.WorksheetRow) (cell.Value)
-                        )
-                    let row = Row.create (uint32 row.Index) (Row.Spans.fromBoundaries min max) cells
-                    SheetData.appendRow row sd |> ignore
+                    if not cells.IsEmpty then
+                        let min,max =                        
+                            cells
+                            |> List.map (fun cell -> uint32 cell.WorksheetColumn) 
+                            |> fun l -> List.min l, List.max l
+                        let cells = 
+                            cells
+                            |> List.map (fun cell ->
+                                Cell.fromValue None (uint32 cell.WorksheetColumn) (uint32 cell.WorksheetRow) (cell.Value)
+                            )
+                        let row = Row.create (uint32 row.Index) (Row.Spans.fromBoundaries min max) cells
+                        SheetData.appendRow row sd |> ignore
                 ) 
                 sd
             Worksheet.setSheetData sheetData sheet
