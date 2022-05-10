@@ -36,7 +36,7 @@ module FsExtensions =
                         let cells = 
                             cells
                             |> List.map (fun cell ->
-                                Cell.fromValue None (uint32 cell.WorksheetColumn) (uint32 cell.WorksheetRow) (cell.Value)
+                                Cell.fromValueWithDataType None (uint32 cell.WorksheetColumn) (uint32 cell.WorksheetRow) (cell.Value) (cell.DataType)
                             )
                         let row = Row.create (uint32 row.Index) (Row.Spans.fromBoundaries min max) cells
                         SheetData.appendRow row sd |> ignore
