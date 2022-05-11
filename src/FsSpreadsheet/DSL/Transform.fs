@@ -27,6 +27,7 @@ module Transform =
             | IndexedRow (i,r) :: tail                      -> loop true false [IndexedRow (i,r)] tail agg
            
         loop false false [] els []
+        |> List.rev
 
     type Workbook with
      

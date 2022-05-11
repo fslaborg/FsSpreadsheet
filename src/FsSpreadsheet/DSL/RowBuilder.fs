@@ -54,7 +54,6 @@ type RowBuilder() =
             | v, None -> RowElement.UnindexedCell v
         Missing.ok [re]
 
-
     member inline _.Yield(c: Missing<Value>) =
         match c with 
         | Ok ((v),messages) -> 

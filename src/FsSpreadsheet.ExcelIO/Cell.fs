@@ -24,6 +24,13 @@ module Cell =
         /// Sets the value inside the CellValue.
         let setValue (value : string) (cellValue : CellValue) =  cellValue.Text <- value
 
+    let cellValuesFromDataType (dataType : DataType) =
+        match dataType with
+        | String    -> CellValues.String
+        | Boolean   -> CellValues.Boolean
+        | Number    -> CellValues.Number
+        | Date      -> CellValues.Date
+        | Empty     -> CellValues.Error
 
     /// Creates an empty cell.
     let empty () = Cell()
@@ -79,6 +86,33 @@ module Cell =
                 |> create CellValues.SharedString reference 
         | _  -> 
            let valType,value = inferCellValue value
+           let reference = CellReference.ofIndices columnIndex (rowIndex)
+           create valType reference (CellValue.create value)
+
+    /// Create a cell using a shared string table, also returns the updated shared string table.
+    let fromValueWithDataType (sharedStringTable : SharedStringTable Option) columnIndex rowIndex (value : string) (dataType : DataType) = 
+        match dataType with
+        | DataType.String when sharedStringTable.IsSome-> 
+            let sharedStringTable = sharedStringTable.Value
+            let reference = CellReference.ofIndices columnIndex (rowIndex)
+            match SharedStringTable.tryGetIndexByString value sharedStringTable with
+            | Some i -> 
+                i
+                |> string
+                |> CellValue.create
+                |> create CellValues.SharedString reference
+            | None ->
+                let updatedSharedStringTable = 
+                    sharedStringTable
+                    |> SharedStringTable.SharedStringItem.add (SharedStringTable.SharedStringItem.create value) 
+
+                updatedSharedStringTable
+                |> SharedStringTable.count
+                |> string
+                |> CellValue.create
+                |> create CellValues.SharedString reference 
+        | _  -> 
+           let valType = cellValuesFromDataType dataType
            let reference = CellReference.ofIndices columnIndex (rowIndex)
            create valType reference (CellValue.create value)
 
