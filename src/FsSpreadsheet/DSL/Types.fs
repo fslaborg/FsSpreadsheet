@@ -49,7 +49,12 @@ type RowElement =
     | IndexedCell of ColumnIndex * Value
     | UnindexedCell of Value
 
+type TableElement = 
+    | UnindexedRow of RowElement list
+    | UnindexedColumn of ColumnElement list
+
 type SheetElement = 
+    | Table of string * TableElement
     | IndexedRow of RowIndex * RowElement list
     | UnindexedRow of RowElement list
     | IndexedColumn of ColumnIndex * ColumnElement list

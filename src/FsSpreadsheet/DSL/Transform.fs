@@ -9,8 +9,9 @@ module Transform =
         let rec loop inRows inColumns current (remaining : SheetElement list) agg =
             match remaining with
 
-            | [] when inRows ->      ("Rows",current|> List.rev) :: agg
+            | [] when inRows    ->  ("Rows",current|> List.rev) :: agg
             | [] when inColumns ->  ("Columns",current|> List.rev) :: agg
+            | []                ->  ("Columns",current|> List.rev) :: agg
 
             | UnindexedColumn c :: tail when inColumns      -> loop false true (UnindexedColumn c :: current) tail agg
             | IndexedColumn (i,c) :: tail when inColumns    -> loop false true (IndexedColumn (i,c) :: current) tail agg
@@ -25,12 +26,20 @@ module Transform =
             | IndexedRow (i,r) :: tail when inColumns       -> loop true false [IndexedRow (i,r)] tail (("Columns",current|> List.rev) :: agg)
             | UnindexedRow r :: tail                        -> loop true false [UnindexedRow r] tail agg
             | IndexedRow (i,r) :: tail                      -> loop true false [IndexedRow (i,r)] tail agg
-           
+            
+            | Table (t,n) :: tail when inRows               -> loop false false [] tail (("Table",[Table (t,n)]) :: ("Rows",current|> List.rev) :: agg)
+            | Table (t,n) :: tail when inColumns            -> loop false false [] tail (("Table",[Table (t,n)]) :: ("Columns",current|> List.rev) :: agg)
+            | Table (t,n) :: tail                           -> loop false false [] tail (("Table",[Table (t,n)]) :: agg)
+
+
         loop false false [] els []
         |> List.rev
 
-    type Workbook with
-     
+    type Workbook with    
+
+        static member internal parseTable (cellCollection : FsCellsCollection) (table : FsTable) (els : TableElement list) =
+            table.
+
         static member internal parseRow (cellCollection : FsCellsCollection) (row : FsRow) (els : RowElement list) =
             let mutable cellIndexSet = 
                 els 
