@@ -1,3 +1,10 @@
+### 0.1.6+807ec9b (Released 2022-6-21)
+* Additions:
+    * latest commit #807ec9b
+    * [[#d097bd3](https://github.com/CSBiology/FsSpreadsheet/commit/d097bd37bf2b742af0465a428abeea2b4000a49a)] add table to dsl
+    * [[#cfc60cc](https://github.com/CSBiology/FsSpreadsheet/commit/cfc60cca3eaf9235b34202f5deb2230e2edc8553)] start working on TableBuilder for DSL
+    * [[#a85093f](https://github.com/CSBiology/FsSpreadsheet/commit/a85093f23613c11fb8131e0adbee6124ff744b9a)] Add basic coding examples to ReadMe.md
+
 ### 0.1.5+7250efd (Released 2022-5-10)
 * Additions:
     * latest commit #7250efd
