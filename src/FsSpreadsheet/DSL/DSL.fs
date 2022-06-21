@@ -7,36 +7,39 @@ open Expression
 [<AutoOpen>]
 type DSL =
     
-    /// Create an xml value from the given value
+    /// Create a cell from a value
     static member inline cell = CellBuilder()
 
-    /// Create an xml element with given name
+    /// Create a row from cells
     static member inline row = RowBuilder()
     
-    /// Create an xml element with given name
+    /// Create a column from cells
     static member inline column = ColumnBuilder()
 
-    /// Create an xml element with given name
+    /// Create a table from either exclusively rows or exclusively columns. 
+    static member inline table name = TableBuilder(name)
+
+    /// Create a sheet from rows, tables and columns
     static member inline sheet name = SheetBuilder(name)
 
-    /// Create an xml element with given name
+    /// Create a workbook from sheets
     static member inline workbook = WorkbookBuilder()
 
-    /// Transforms any given xml element to an ok.
+    /// Transforms any given missing element to an optional.
     static member opt (elem : Missing<'T list>) = 
         match elem with
         | Ok (f,messages) -> elem
-        | MissingOptional (messages) -> Ok([],messages)
-        | MissingRequired (messages) -> Ok([],messages)
+        | MissingOptional (messages) -> MissingOptional(messages)
+        | MissingRequired (messages) -> MissingOptional(messages)
 
-    /// Transforms any given xml element expression to an ok.
+    /// Transforms any given missing element expression to an optional.
     static member opt (elem : Expr<Missing<'T list>>) = 
         try 
             let elem = eval<Missing<'T list>> elem
             DSL.opt elem
         with
         | err -> 
-            Ok([],[err.Message])
+            MissingOptional([err.Message])
 
     /// Drops the cell with the given message
     static member dropCell message : Missing<Value> = MissingRequired [message]

@@ -51,6 +51,21 @@ type SheetBuilder(name : string) =
     member inline _.Yield(cs: RowBuilder) =
         Missing.ok [SheetElement.UnindexedRow []]
 
+    member inline _.Yield(t: Missing<string * (TableElement list)>) =
+        match t with 
+        | Ok (te,messages) -> 
+            Missing.Ok ([SheetElement.Table te], messages)
+        | MissingOptional messages -> 
+            MissingOptional messages
+        | MissingRequired messages -> 
+            MissingRequired messages
+
+    member inline _.Yield(te: string * (TableElement list)) =
+        Missing.ok [SheetElement.Table te]
+
+    member inline _.Yield(tb: TableBuilder) =
+        Missing.ok [SheetElement.Table (tb.Name,[])]
+
     member inline _.Yield(c: Missing<ColumnElement list>) =
         match c with 
         | Ok ((re),messages) -> 

@@ -53,8 +53,18 @@ type TableElement =
     | UnindexedRow of RowElement list
     | UnindexedColumn of ColumnElement list
 
+    member this.IsRow =
+        match this with 
+        | UnindexedRow _ -> true
+        | _ -> false
+
+    member this.IsColumn =
+        match this with 
+        | UnindexedColumn _ -> true
+        | _ -> false
+
 type SheetElement = 
-    | Table of string * TableElement
+    | Table of string * TableElement list
     | IndexedRow of RowIndex * RowElement list
     | UnindexedRow of RowElement list
     | IndexedColumn of ColumnIndex * ColumnElement list

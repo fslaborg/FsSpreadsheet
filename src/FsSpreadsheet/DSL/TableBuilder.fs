@@ -14,6 +14,8 @@ type TableBuilder(name : string) =
 
     member inline this.Zero() : Missing<TableElement list> = Missing.ok []
 
+    member this.Name = name
+
     member this.SignMessages (messages : Message list) : Message list =
         messages
         |> List.map (sprintf "In Sheet %s: %s" name)

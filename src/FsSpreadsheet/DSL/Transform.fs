@@ -11,7 +11,7 @@ module Transform =
 
             | [] when inRows    ->  ("Rows",current|> List.rev) :: agg
             | [] when inColumns ->  ("Columns",current|> List.rev) :: agg
-            | []                ->  ("Columns",current|> List.rev) :: agg
+            | []                ->  agg
 
             | UnindexedColumn c :: tail when inColumns      -> loop false true (UnindexedColumn c :: current) tail agg
             | IndexedColumn (i,c) :: tail when inColumns    -> loop false true (IndexedColumn (i,c) :: current) tail agg
@@ -38,7 +38,44 @@ module Transform =
     type Workbook with    
 
         static member internal parseTable (cellCollection : FsCellsCollection) (table : FsTable) (els : TableElement list) =
-            table.
+            let cols = 
+                if els.Head.IsColumn then
+                    els
+                    |> List.map (fun col ->
+                        match col with
+                        | TableElement.UnindexedColumn col -> 
+                            col
+                            |> List.map (fun cell ->
+                                match cell with 
+                                | ColumnElement.UnindexedCell cell -> cell                                
+                            )
+                    )
+                else 
+                    els
+                    |> List.map (fun row ->
+                        match row with
+                        | TableElement.UnindexedRow row -> 
+                            row
+                            |> List.map (fun cell ->
+                                match cell with 
+                                | RowElement.UnindexedCell cell -> cell                                
+                            )
+                    )
+                    |> List.transpose
+            cols
+            |> List.iter (fun col ->
+                let header :: fields = col
+                let field = table.Field(snd header, cellCollection)
+                fields
+                |> List.iteri (fun i (dataType,value) ->
+                    let cell = field.Column.Cell(i + 2,cellCollection)
+                    cell.DataType <- dataType
+                    cell.Value <- value
+                )
+                
+            )
+
+            
 
         static member internal parseRow (cellCollection : FsCellsCollection) (row : FsRow) (els : RowElement list) =
             let mutable cellIndexSet = 
@@ -144,6 +181,11 @@ module Transform =
             |> splitRowsAndColumns
             |> List.iter (function
                 | "Columns", l -> parseColumns l
+                | "Table", [SheetElement.Table (name,tableElements)] -> 
+                    let maxRow = sheet.CellCollection.MaxRowNumber + 1
+                    let range = FsRangeAddress(FsAddress(maxRow,1),FsAddress(maxRow,1))
+                    let table = sheet.Table(name,range)
+                    Workbook.parseTable sheet.CellCollection table tableElements
                 | "Rows", l ->
                     l
                     |> List.iter (function
