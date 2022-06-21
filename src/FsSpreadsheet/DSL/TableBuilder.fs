@@ -6,28 +6,30 @@ open FsSpreadsheet.DSL
 open Microsoft.FSharp.Quotations
 open Expression
 
-type SheetBuilder(name : string) =
+type TableBuilder(name : string) =
 
-    static member Empty : Missing<SheetElement list> = Missing.ok []
+    static member Empty : Missing<TableElement list> = Missing.ok []
 
     // -- Computation Expression methods --> 
 
-    member inline this.Zero() : Missing<SheetElement list> = Missing.ok []
+    member inline this.Zero() : Missing<TableElement list> = Missing.ok []
+
+    member this.Name = name
 
     member this.SignMessages (messages : Message list) : Message list =
         messages
         |> List.map (sprintf "In Sheet %s: %s" name)
 
-    member inline _.Yield(se: SheetElement) =
+    member inline _.Yield(se: TableElement) =
         Missing.ok [se]
 
-    member inline _.Yield(cs: SheetElement list) =
+    member inline _.Yield(cs: TableElement list) =
         Missing.ok cs
    
-    member inline _.Yield(cs: Missing<SheetElement list>) =
+    member inline _.Yield(cs: Missing<TableElement list>) =
         cs
 
-    member inline _.Yield(se: Missing<SheetElement>) =
+    member inline _.Yield(se: Missing<TableElement>) =
         match se with 
         | Ok (s,messages) -> 
             Missing.Ok ([s], messages)
@@ -39,62 +41,47 @@ type SheetBuilder(name : string) =
     member inline _.Yield(c: Missing<RowElement list>) =
         match c with 
         | Ok ((re),messages) -> 
-            Missing.Ok ([SheetElement.UnindexedRow re], messages)
+            Missing.Ok ([TableElement.UnindexedRow re], messages)
         | MissingOptional messages -> 
             MissingOptional messages
         | MissingRequired messages -> 
             MissingRequired messages
 
     member inline _.Yield(cs: RowElement list) =
-        Missing.ok [SheetElement.UnindexedRow cs]
+        Missing.ok [TableElement.UnindexedRow cs]
 
     member inline _.Yield(cs: RowBuilder) =
-        Missing.ok [SheetElement.UnindexedRow []]
-
-    member inline _.Yield(t: Missing<string * (TableElement list)>) =
-        match t with 
-        | Ok (te,messages) -> 
-            Missing.Ok ([SheetElement.Table te], messages)
-        | MissingOptional messages -> 
-            MissingOptional messages
-        | MissingRequired messages -> 
-            MissingRequired messages
-
-    member inline _.Yield(te: string * (TableElement list)) =
-        Missing.ok [SheetElement.Table te]
-
-    member inline _.Yield(tb: TableBuilder) =
-        Missing.ok [SheetElement.Table (tb.Name,[])]
+        Missing.ok [TableElement.UnindexedRow []]
 
     member inline _.Yield(c: Missing<ColumnElement list>) =
         match c with 
         | Ok ((re),messages) -> 
-            Missing.Ok ([SheetElement.UnindexedColumn re], messages)
+            Missing.Ok ([TableElement.UnindexedColumn re], messages)
         | MissingOptional messages -> 
             MissingOptional messages
         | MissingRequired messages -> 
             MissingRequired messages
 
     member inline _.Yield(cs: ColumnElement list) =
-        Missing.ok [SheetElement.UnindexedColumn cs]
+        Missing.ok [TableElement.UnindexedColumn cs]
 
     member inline _.Yield(cs: ColumnBuilder) =
-        Missing.ok [SheetElement.UnindexedColumn []]
+        Missing.ok [TableElement.UnindexedColumn []]
 
 
-    member inline this.YieldFrom(ns: Missing<SheetElement list> seq) =   
+    member inline this.YieldFrom(ns: Missing<TableElement list> seq) =   
         ns
         |> Seq.fold (fun state we ->
             this.Combine(state,we)
 
-        ) SheetBuilder.Empty
+        ) TableBuilder.Empty
 
-    member inline this.For(vs : seq<'T>, f : 'T -> Missing<SheetElement list>) =
+    member inline this.For(vs : seq<'T>, f : 'T -> Missing<TableElement list>) =
         vs
         |> Seq.map f
         |> this.YieldFrom
 
-    member this.Run(children: Missing<SheetElement list>) =
+    member this.Run(children: Missing<TableElement list>) =
         match children with 
         | Ok (se,messages) -> 
             Missing.Ok ((name,se), messages)
@@ -104,7 +91,7 @@ type SheetBuilder(name : string) =
             MissingRequired messages
 
 
-    member this.Combine(wx1: Missing<SheetElement list>, wx2: Missing<SheetElement list>) : Missing<SheetElement list>=
+    member this.Combine(wx1: Missing<TableElement list>, wx2: Missing<TableElement list>) : Missing<TableElement list>=
         match wx1,wx2 with
         // If both contain content, combine the content
         | Ok (l1,messages1), Ok (l2,messages2) ->
@@ -131,4 +118,4 @@ type SheetBuilder(name : string) =
         | MissingOptional messages1, MissingOptional messages2 ->
             MissingOptional (List.append messages1 messages2)
         
-    member inline _.Delay(n: unit -> Missing<SheetElement list>) = n()
+    member inline _.Delay(n: unit -> Missing<TableElement list>) = n()

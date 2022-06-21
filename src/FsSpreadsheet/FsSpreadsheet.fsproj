@@ -25,6 +25,7 @@
     <Compile Include="DSL\CellBuilder.fs" />
     <Compile Include="DSL\RowBuilder.fs" />
     <Compile Include="DSL\ColumnBuilder.fs" />
+    <Compile Include="DSL\TableBuilder.fs" />
     <Compile Include="DSL\SheetBuilder.fs" />
     <Compile Include="DSL\WorkbookBuilder.fs" />
     <Compile Include="DSL\DSL.fs" />
