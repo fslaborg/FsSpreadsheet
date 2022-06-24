@@ -1,3 +1,9 @@
+### 0.1.7+a227766 (Released 2022-6-24)
+* Additions:
+    * latest commit #a227766
+* Bugfixes:
+    * [[#a227766](https://github.com/CSBiology/FsSpreadsheet/commit/a2277668b273ebb3f6d556de148cd7b176d61dbd)] fix table id determination
+
 ### 0.1.6+807ec9b (Released 2022-6-21)
 * Additions:
     * latest commit #807ec9b
