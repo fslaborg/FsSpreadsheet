@@ -230,10 +230,9 @@ module Table =
         t
 
     /// Adds a table to the worksheetPart.
-    let addTable (worksheetPart : WorksheetPart) (table : Table) =
+    let addTable (workbookPart : WorkbookPart) (worksheetPart : WorksheetPart) (table : Table) =
         // https://stackoverflow.com/questions/53440352/openxml-table-creation-how-do-i-create-tables-without-requiring-excel-to-repa
-        printfn "Start addTable."
-        let id = worksheetPart.TableDefinitionParts |> Seq.length |> (+) 1
+        let id = workbookPart.WorksheetParts |> Seq.sumBy (fun wsp -> wsp.TableDefinitionParts |> Seq.length) |> (+) 1
         let tableDefinitionPart = worksheetPart.AddNewPart<TableDefinitionPart>(sprintf "rId%i" id);
         table.Id <- (UInt32Value.FromUInt32(uint id))
         table.Name <- StringValue(sprintf "Table%i" id)
@@ -259,7 +258,7 @@ module Table =
         //tableParts.AppendChild(tablePart) |> ignore
         tableParts.AppendChild(tablePart) |> ignore
 
-        printfn "TableID: %i" id
+        //printfn "TableID: %i" id
         worksheetPart
 
     /// Create a table object by an area. If the first row of this area contains values in the given sheet, these are chosen as headers for the table and a table is returned.

@@ -45,11 +45,11 @@ module FsExtensions =
             Worksheet.setSheetData sheetData sheet
 
 
-        member self.AppendTablesToWorksheetPart(worksheetPart : DocumentFormat.OpenXml.Packaging.WorksheetPart) =
+        member self.AppendTablesToWorksheetPart(workbookPart : DocumentFormat.OpenXml.Packaging.WorkbookPart,worksheetPart : DocumentFormat.OpenXml.Packaging.WorksheetPart) =
             self.GetTables()
             |> Seq.iter (fun t ->
                 let table = t.ToExcelTable(self.CellCollection)
-                Table.addTable worksheetPart table |> ignore
+                Table.addTable workbookPart worksheetPart table |> ignore
             )
 
 
@@ -67,7 +67,7 @@ module FsExtensions =
                     WorkbookPart.appendWorksheet worksheet.Name (worksheet.ToExcelWorksheet()) workbookPart
                     |> WorkbookPart.getOrInitWorksheetPartByName worksheet.Name
                
-                worksheet.AppendTablesToWorksheetPart(worksheetPart)
+                worksheet.AppendTablesToWorksheetPart(workbookPart,worksheetPart)
                 //Worksheet.setSheetData sheetData sheet |> ignore
                 //WorkbookPart.appendWorksheet worksheet.Name sheet workbookPart |> ignore
             )
