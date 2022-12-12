@@ -132,6 +132,10 @@ module Cell =
            let valType = cellValuesFromDataType dataType
            let reference = CellReference.ofIndices columnIndex (rowIndex)
            create valType reference (CellValue.create value)
+           |> fun c ->
+                if value.EndsWith " " then
+                    setSpacePreserveAttribute c
+                else c
 
     /// Gets "A1"-style cell reference.
     let getReference (cell : Cell) = cell.CellReference.Value
