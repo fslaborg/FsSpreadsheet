@@ -59,7 +59,10 @@ module Cell =
     /// Creates a cell from a CellValues type case, a "A1" style reference, and a CellValue containing the value string.
     let create (dataType : CellValues) (reference : string) (value : CellValue) = 
         Cell(CellReference = StringValue.FromString reference, DataType = EnumValue(dataType), CellValue = value)
-
+        
+    let setSpacePreserveAttribute (c : Cell) =
+        c.SetAttribute(OpenXmlAttribute("xml:space","","preserve"))
+        c
 
     /// Create a cell using a shared string table, also returns the updated shared string table.
     let fromValue (sharedStringTable : SharedStringTable Option) columnIndex rowIndex (value : 'T) = 
@@ -84,10 +87,19 @@ module Cell =
                 |> string
                 |> CellValue.create
                 |> create CellValues.SharedString reference 
+            |> fun c -> 
+                if s.EndsWith " " then
+                    setSpacePreserveAttribute c
+                else c
+
         | _  -> 
-           let valType,value = inferCellValue value
-           let reference = CellReference.ofIndices columnIndex (rowIndex)
-           create valType reference (CellValue.create value)
+            let valType,value = inferCellValue value
+            let reference = CellReference.ofIndices columnIndex (rowIndex)
+            create valType reference (CellValue.create value)
+            |> fun c ->
+                if value.EndsWith " " then
+                    setSpacePreserveAttribute c
+                else c
 
     /// Create a cell using a shared string table, also returns the updated shared string table.
     let fromValueWithDataType (sharedStringTable : SharedStringTable Option) columnIndex rowIndex (value : string) (dataType : DataType) = 
@@ -111,6 +123,11 @@ module Cell =
                 |> string
                 |> CellValue.create
                 |> create CellValues.SharedString reference 
+            |> fun c -> 
+                if value.EndsWith " " then
+                    setSpacePreserveAttribute c
+                else c
+
         | _  -> 
            let valType = cellValuesFromDataType dataType
            let reference = CellReference.ofIndices columnIndex (rowIndex)
