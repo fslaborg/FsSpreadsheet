@@ -1,3 +1,14 @@
+### 0.2.1+927f365 (Released 2022-12-12)
+* Additions:
+    * latest commit #927f365
+* Bugfixes:
+    * [[#927f365](https://github.com/CSBiology/FsSpreadsheet/commit/927f3652a8d2b71ad7930f87c486ce606cb2d80e)] fix spacepreservation
+
+### 0.2.0+8084a32 (Released 2022-12-12)
+* Additions:
+    * latest commit #8084a32
+    * [[#8084a32](https://github.com/CSBiology/FsSpreadsheet/commit/8084a32ef40e54a0f38c6bac67246d5f8deb9458)] allow for trailing spaces to be preserved when writing strings
+
 ### 0.1.7+a227766 (Released 2022-6-24)
 * Additions:
     * latest commit #a227766
