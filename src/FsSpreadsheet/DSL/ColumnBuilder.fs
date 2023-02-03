@@ -72,6 +72,11 @@ type ColumnBuilder() =
             )
         Missing.ok res
 
+    member inline this.Yield(cs: seq<Missing<CellElement>>) : Missing<ColumnElement list>=
+        cs
+        |> Seq.map this.Yield
+        |> Seq.reduce (fun a b -> this.Combine(a,b))
+
     member inline this.Yield(n: 'a when 'a :> System.IFormattable) = 
         let v = DataType.InferCellValue n
         Missing.ok [ColumnElement.UnindexedCell v]

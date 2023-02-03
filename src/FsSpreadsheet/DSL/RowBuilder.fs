@@ -63,6 +63,11 @@ type RowBuilder() =
         | MissingRequired messages -> 
             MissingRequired messages
 
+    member inline this.Yield(cs: seq<Missing<CellElement>>) : Missing<RowElement list>=
+        cs
+        |> Seq.map this.Yield
+        |> Seq.reduce (fun a b -> this.Combine(a,b))
+
     member inline _.Yield(c: Value) =
         Missing.ok [RowElement.UnindexedCell c]
 
