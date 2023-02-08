@@ -7,28 +7,28 @@ open Expression
 [<AutoOpen>]
 module Operators = 
  
-    let inline parseExpression (def : string -> Missing<Value>) (s : Expr<'a>) : Missing<Value> =
+    let inline parseExpression (def : string -> SheetEntity<Value>) (s : Expr<'a>) : SheetEntity<Value> =
         try 
             let value = eval<'a> s |> DataType.InferCellValue
-            Missing.ok value         
+            SheetEntity.ok value         
         with
         | err -> def err.Message
 
-    let inline parseOption (def : string -> Missing<Value>) (s : Option<'a>) : Missing<Value> =
+    let inline parseOption (def : string -> SheetEntity<Value>) (s : Option<'a>) : SheetEntity<Value> =
         match s with
-        | Some value ->
+        | Option.Some value ->
             DataType.InferCellValue value
-            |> Missing.ok  
+            |> SheetEntity.ok  
         | None -> def "Value was missing"
     
-    let inline parseResult (def : string -> Missing<Value>) (s : Result<'a,exn>) : Missing<Value> =
+    let inline parseResult (def : string -> SheetEntity<Value>) (s : Result<'a,exn>) : SheetEntity<Value> =
         match s with
         | Result.Ok value ->
             DataType.InferCellValue value
-            |> Missing.ok  
+            |> SheetEntity.ok  
         | Result.Error exn -> def exn.Message
 
-    let inline parseAny (f : string -> Missing<Value>) (v: 'T) : Missing<Value> =
+    let inline parseAny (f : string -> SheetEntity<Value>) (v: 'T) : SheetEntity<Value> =
         match box v with
         | :? Expr<string> as e ->           parseExpression f e
         | :? Expr<int> as e ->              parseExpression f e
@@ -56,13 +56,13 @@ module Operators =
     /// Required value operator
     ///
     /// If expression does fail, returns a missing required value
-    let inline (!!) (v : 'T) : Missing<Value> =
-        let f = fun s -> MissingRequired([s])
+    let inline (!!) (v : 'T) : SheetEntity<Value> =
+        let f = fun s -> NoneRequired([s])
         parseAny f v
 
     /// Optional value operator
     ///
     /// If expression does fail, returns a missing optional value
-    let inline (!?) (v : 'T) : Missing<Value> =
-        let f = fun s -> MissingOptional([s])
+    let inline (!?) (v : 'T) : SheetEntity<Value> =
+        let f = fun s -> NoneOptional([s])
         parseAny f v 

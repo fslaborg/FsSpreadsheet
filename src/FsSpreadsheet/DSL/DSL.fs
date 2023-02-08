@@ -26,33 +26,33 @@ type DSL =
     static member inline workbook = WorkbookBuilder()
 
     /// Transforms any given missing element to an optional.
-    static member opt (elem : Missing<'T list>) = 
+    static member opt (elem : SheetEntity<'T list>) = 
         match elem with
-        | Ok (f,messages) -> elem
-        | MissingOptional (messages) -> MissingOptional(messages)
-        | MissingRequired (messages) -> MissingOptional(messages)
+        | Some (f,messages) -> elem
+        | NoneOptional (messages) -> NoneOptional(messages)
+        | NoneRequired (messages) -> NoneOptional(messages)
 
     /// Transforms any given missing element expression to an optional.
-    static member opt (elem : Expr<Missing<'T list>>) = 
+    static member opt (elem : Expr<SheetEntity<'T list>>) = 
         try 
-            let elem = eval<Missing<'T list>> elem
+            let elem = eval<SheetEntity<'T list>> elem
             DSL.opt elem
         with
         | err -> 
-            MissingOptional([err.Message])
+            NoneOptional([err.Message])
 
     /// Drops the cell with the given message
-    static member dropCell message : Missing<Value> = MissingRequired [message]
+    static member dropCell message : SheetEntity<Value> = NoneRequired [message]
 
     /// Drops the row with the given message
-    static member dropRow message : Missing<RowElement> = MissingRequired [message]
+    static member dropRow message : SheetEntity<RowElement> = NoneRequired [message]
 
     /// Drops the column with the given message
-    static member dropColumn message : Missing<ColumnElement> = MissingRequired [message]
+    static member dropColumn message : SheetEntity<ColumnElement> = NoneRequired [message]
 
     /// Drops the sheet with the given message
-    static member dropSheet message : Missing<SheetElement> = MissingRequired [message]
+    static member dropSheet message : SheetEntity<SheetElement> = NoneRequired [message]
 
     /// Drops the workbook with the given message
-    static member dropWorkbook message : Missing<WorkbookElement> = MissingRequired [message]
+    static member dropWorkbook message : SheetEntity<WorkbookElement> = NoneRequired [message]
 

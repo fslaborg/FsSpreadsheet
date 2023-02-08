@@ -5,25 +5,25 @@ open FsSpreadsheet
 type Message = string
 
 [<AutoOpen>]
-type Missing<'T> =
+type SheetEntity<'T> =
 
-    | Ok of 'T * Message list
-    | MissingOptional of Message list
-    | MissingRequired of Message list
+    | Some of 'T * Message list
+    | NoneOptional of Message list
+    | NoneRequired of Message list
 
-    static member ok (v : 'T) : Missing<'T> = Missing.Ok (v,[])
+    static member ok (v : 'T) : SheetEntity<'T> = SheetEntity.Some (v,[])
 
     member this.Value =
         match this with 
-        | Ok (f,errs) -> f
+        | Some (f,errs) -> f
 
     /// Get messages
     member this.Messages =
 
         match this with 
-        | Ok (f,errs) -> errs
-        | MissingOptional errs -> errs
-        | MissingRequired errs -> errs
+        | Some (f,errs) -> errs
+        | NoneOptional errs -> errs
+        | NoneRequired errs -> errs
 
 type Value = DataType * string
 

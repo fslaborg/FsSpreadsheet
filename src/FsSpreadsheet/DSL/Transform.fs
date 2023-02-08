@@ -80,7 +80,7 @@ module Transform =
         static member internal parseRow (cellCollection : FsCellsCollection) (row : FsRow) (els : RowElement list) =
             let mutable cellIndexSet = 
                 els 
-                |> List.choose (fun el -> match el with | RowElement.IndexedCell(i,_) -> Some i.Index | _ -> None)
+                |> List.choose (fun el -> match el with | RowElement.IndexedCell(i,_) -> Option.Some i.Index | _ -> None)
                 |> set
             let getNextIndex () = 
                 let mutable i = 1 
@@ -105,7 +105,7 @@ module Transform =
         static member internal parseSheet (sheet : FsWorksheet) (els : SheetElement list) =
             let mutable rowIndexSet = 
                 els 
-                |> List.choose (fun el -> match el with | IndexedRow(i,_) -> Some i.Index | _ -> None)
+                |> List.choose (fun el -> match el with | IndexedRow(i,_) -> Option.Some i.Index | _ -> None)
                 |> set
                 |> Set.add 0 
 
@@ -127,7 +127,7 @@ module Transform =
 
                 let mutable columnIndexSet = 
                     columns 
-                    |> List.choose (fun col -> match col with | IndexedColumn(i,_) -> Some i.Index | _ -> None)
+                    |> List.choose (fun col -> match col with | IndexedColumn(i,_) -> Option.Some i.Index | _ -> None)
                     |> set
     
                 let getNextColumnIndex () = 
@@ -147,7 +147,7 @@ module Transform =
                             getNextColumnIndex(),colElements
                     let mutable cellIndexSet = 
                         elements 
-                        |> List.choose (fun el -> match el with | ColumnElement.IndexedCell(i,_) -> Some i.Index | _ -> None)
+                        |> List.choose (fun el -> match el with | ColumnElement.IndexedCell(i,_) -> Option.Some i.Index | _ -> None)
                         |> set
                     let getNextIndex () = 
                         let mutable i = 1 
