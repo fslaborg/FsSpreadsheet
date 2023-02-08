@@ -1,3 +1,8 @@
+### 0.2.2+b86ecfd (Released 2023-2-3)
+* Additions:
+    * latest commit #b86ecfd
+    * [[#b86ecfd](https://github.com/CSBiology/FsSpreadsheet/commit/b86ecfda1831d8793df9d49060787901916fcca6)] add additional yield method to DSL
+
 ### 0.2.1+927f365 (Released 2022-12-12)
 * Additions:
     * latest commit #927f365
