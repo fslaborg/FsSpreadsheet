@@ -83,19 +83,20 @@ type ColumnBuilder() =
         |> Seq.map this.Yield
         |> Seq.reduce (fun a b -> this.Combine(a,b))
 
-    member inline this.Yield(n: 'a when 'a :> System.IFormattable) = 
-        let v = DataType.InferCellValue n
-        SheetEntity.ok [ColumnElement.UnindexedCell v]       
 
     member inline _.Yield(s : string) = 
         let v = DataType.InferCellValue s
         SheetEntity.ok [ColumnElement.UnindexedCell v]
 
-    member inline this.Yield(n: RequiredSource<'T>) = 
+    member inline this.Yield(n: RequiredSource<unit>) = 
         n
 
-    member inline this.Yield(n: OptionalSource<'T>) = 
+    member inline this.Yield(n: OptionalSource<unit>) = 
         n
+
+    member inline this.Yield(n: 'a when 'a :> System.IFormattable) = 
+        let v = DataType.InferCellValue n
+        SheetEntity.ok [ColumnElement.UnindexedCell v]       
 
     member inline this.YieldFrom(ns: SheetEntity<ColumnElement list> seq) =   
         ns
@@ -110,20 +111,6 @@ type ColumnBuilder() =
         |> Seq.map f
         |> this.YieldFrom
 
-    /// Returns the columnelements in SheetEntity container. If the expression does not evaluate, return them es Missing and Optional.
-    [<CustomOperation("optional")>] 
-    member this.Optional () : SheetEntity<ColumnElement list> =
-        //OptionalSource()
-        SheetEntity.NoneOptional []
-
-    /// Returns the columnelements in SheetEntity container. If the expression does not evaluate, return them es Missing and Required.
-    [<CustomOperation("required"(*,AllowIntoPattern = true*))>] 
-    member this.Required (source) (*: SheetEntity<ColumnElement list>*) = 
-        RequiredSource(source)
-        //SheetEntity.NoneRequired []
-
-    member inline this.Run(children: Expr<SheetEntity<ColumnElement list>>) =
-        eval<SheetEntity<ColumnElement list>> children
 
     member this.Combine(wx1: SheetEntity<ColumnElement list>, wx2: SheetEntity<ColumnElement list>) : SheetEntity<ColumnElement list>=
         match wx1,wx2 with
@@ -180,54 +167,23 @@ type ColumnBuilder() =
         this.Combine(wx1,wx2.Source) 
         |> OptionalSource
 
-    member inline _.Delay(n: unit -> SheetEntity<ColumnElement list>) = n()
+    member inline _.Delay(n: unit -> 'T) = n()
 
+    member inline this.Run(children: Expr<OptionalSource<SheetEntity<ColumnElement list>>>) =
+        try 
+            match (eval<OptionalSource<SheetEntity<ColumnElement list>>> children).Source with
+            | NoneRequired m -> NoneOptional m
+            | se -> se
+        with
+        | err -> NoneOptional [err.Message]
 
-[<AutoOpen>]
-module ColumnExtensions =
-    type ColumnBuilder with
-        [<CompiledName("RunQueryAsColumn")>]
-        member this.Run (q: Quotations.Expr<SheetEntity<ColumnElement list>>) = 
-            (eval<SheetEntity<ColumnElement list>> q).Value
+    member inline this.Run(children: Expr<RequiredSource<SheetEntity<ColumnElement list>>>) =
+        try 
+            match (eval<RequiredSource<SheetEntity<ColumnElement list>>> children).Source with
+            | NoneOptional m -> NoneRequired m
+            | se -> se
+        with
+        | err -> NoneOptional [err.Message]
 
-[<AutoOpen>]
-module OptionColumnExtensions =
-    type ColumnBuilder with
-        [<CompiledName("RunQueryAsOptionalColumn")>]
-        member this.Run (q: Quotations.Expr<OptionalSource<SheetEntity<ColumnElement list>>>) = 
-            let subExpr = 
-                match q with
-                | Call(exprOpt, methodInfo, [subExpr]) -> Result.Ok subExpr
-                | Call(exprOpt, methodInfo, [ValueWithName(a,b,c);subExpr]) -> Result.Ok subExpr    
-                | x ->                     
-                    Result.Error $"could not parse option expression as it was not a call: {x}"
-            match subExpr with
-            | Result.Ok subExpr -> 
-                try 
-                    match eval<SheetEntity<ColumnElement list>> subExpr with
-                    | NoneRequired m -> NoneOptional m
-                    | se -> se
-                with 
-                | err -> NoneOptional([err.Message])  
-            | Result.Error err -> NoneOptional([err]) 
-
-[<AutoOpen>]
-module RequiredColumnExtensions =
-    type ColumnBuilder with
-        [<CompiledName("RunQueryAsRequiredColumn")>]
-        member this.Run (q: Quotations.Expr<RequiredSource<SheetEntity<ColumnElement list>>>) = 
-            let subExpr = 
-                match q with
-                | Call(exprOpt, methodInfo, [subExpr]) -> Result.Ok subExpr
-                | Call(exprOpt, methodInfo, [ValueWithName(a,b,c);subExpr]) -> Result.Ok subExpr    
-                | x ->                     
-                    Result.Error $"could not parse option expression as it was not a call: {x}"
-            match subExpr with
-            | Result.Ok subExpr -> 
-                try 
-                    match eval<SheetEntity<ColumnElement list>> subExpr with
-                    | NoneOptional m -> NoneRequired m
-                    | se -> se
-                with 
-                | err -> NoneRequired([err.Message])  
-            | Result.Error err -> NoneRequired([err]) 
+    member inline this.Run(children: Expr<SheetEntity<ColumnElement list>>) =
+        (eval<SheetEntity<ColumnElement list>> children).Value

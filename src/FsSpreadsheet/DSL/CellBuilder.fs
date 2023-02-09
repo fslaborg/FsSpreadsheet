@@ -25,11 +25,20 @@ type CellBuilder() =
 
     // -- Computation Expression methods --> 
 
+    member _.Quote  (quotation: Quotations.Expr<'T>) =
+        quotation
+
     member inline this.Zero() : SheetEntity<Value list> = SheetEntity.NoneOptional []
 
     member this.SignMessages (messages : Message list) : Message list =
         messages
         |> List.map (sprintf "In Cell: %s")
+
+    member inline this.Yield(n: RequiredSource<unit>) = 
+        n
+
+    member inline this.Yield(n: OptionalSource<unit>) = 
+        n
 
     member this.Yield(ro : ReduceOperation) : SheetEntity<Value list> =
         reducer <- ro
@@ -64,10 +73,9 @@ type CellBuilder() =
         | Option.Some s -> this.Yield s
         | None -> NoneRequired ["Value is missing"]
 
-
     member inline this.YieldFrom(ns: SheetEntity<Value list> seq) =   
         ns
-        |> Seq.fold (fun state we ->
+        |> Seq.fold (fun (state : SheetEntity<Value list>) we ->
             this.Combine(state,we)
 
         ) CellBuilder.Empty
@@ -76,14 +84,6 @@ type CellBuilder() =
         vs
         |> Seq.map f
         |> this.YieldFrom
-
-    member this.Run(children: SheetEntity<Value list>) : SheetEntity<CellElement> =
-        match children with
-        | Some (vals,messages) ->
-            let cellElement = reducer.Reduce (vals), None
-            SheetEntity.Some(cellElement, messages)
-        | NoneRequired messages -> NoneRequired messages
-        | NoneOptional messages -> NoneOptional messages
 
     member this.Combine(wx1: SheetEntity<Value list>, wx2: SheetEntity<Value list>) : SheetEntity<Value list>=
         match wx1,wx2 with
@@ -112,4 +112,60 @@ type CellBuilder() =
         | NoneOptional messages1, NoneOptional messages2 ->
             NoneOptional (List.append messages1 messages2)
         
-    member inline _.Delay(n: unit -> SheetEntity<Value list>) = n()
+    member this.Combine(wx1: RequiredSource<unit>, wx2: SheetEntity<Value list>) =
+        RequiredSource (wx2)
+        
+    member this.Combine(wx1: SheetEntity<Value list>, wx2: RequiredSource<unit>) =
+        RequiredSource (wx1)
+
+    member this.Combine(wx1: OptionalSource<unit>, wx2: SheetEntity<Value list>) =
+        OptionalSource wx2
+
+    member this.Combine(wx1: SheetEntity<Value list>, wx2: OptionalSource<unit>) =
+        OptionalSource wx1
+
+    member this.Combine(wx1: RequiredSource<SheetEntity<Value list>>, wx2: SheetEntity<Value list>) =
+        this.Combine(wx1.Source,wx2) 
+        |> RequiredSource
+
+    member this.Combine(wx1: SheetEntity<Value list>, wx2: RequiredSource<SheetEntity<Value list>>) =
+        this.Combine(wx1,wx2.Source) 
+        |> RequiredSource
+
+    member this.Combine(wx1: OptionalSource<SheetEntity<Value list>>, wx2: SheetEntity<Value list>) =
+        this.Combine(wx1.Source,wx2) 
+        |> OptionalSource
+
+    member this.Combine(wx1: SheetEntity<Value list>, wx2: OptionalSource<SheetEntity<Value list>>) =
+        this.Combine(wx1,wx2.Source) 
+        |> OptionalSource
+
+    member this.AsCellElement(children: SheetEntity<Value list>) : SheetEntity<CellElement> =
+        match children with
+        | Some (vals,messages) ->
+            let cellElement = reducer.Reduce (vals), None
+            SheetEntity.Some(cellElement, messages)
+        | NoneRequired messages -> NoneRequired messages
+        | NoneOptional messages -> NoneOptional messages
+
+    member inline this.Run(children: Expr<OptionalSource<SheetEntity<Value list>>>) =
+        try 
+            match this.AsCellElement ((eval<OptionalSource<SheetEntity<Value list>>> children).Source) with
+            | NoneRequired m -> NoneOptional m
+            | se -> se
+        with
+        | err -> NoneOptional [err.Message]
+
+    member inline this.Run(children: Expr<RequiredSource<SheetEntity<Value list>>>) =
+        try 
+            match this.AsCellElement ((eval<RequiredSource<SheetEntity<Value list>>> children).Source) with
+            | NoneOptional m -> NoneRequired m
+            | se -> se
+        with
+        | err -> NoneOptional [err.Message]
+
+    member inline this.Run(children: Expr<SheetEntity<Value list>>) =
+        this.AsCellElement (eval<SheetEntity<Value list>> children)
+        |> fun v -> v.Value
+
+    member inline _.Delay(n: unit -> 'T) = n()

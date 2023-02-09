@@ -66,3 +66,9 @@ module Operators =
     let inline (!?) (v : 'T) : SheetEntity<Value> =
         let f = fun s -> NoneOptional([s])
         parseAny f v 
+
+    /// Optional operators for cell, row, column and sheet expressions
+    let optional = OptionalSource()
+
+    /// Required operators for cell, row, column and sheet expressions
+    let required = RequiredSource()

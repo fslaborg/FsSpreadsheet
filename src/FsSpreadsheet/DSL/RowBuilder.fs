@@ -12,11 +12,20 @@ type RowBuilder() =
 
     // -- Computation Expression methods --> 
 
+    member _.Quote  (quotation: Quotations.Expr<'T>) =
+        quotation
+
     member inline this.Zero() : SheetEntity<RowElement list> = SheetEntity.ok []
 
     member this.SignMessages (messages : Message list) : Message list =
         messages
         |> List.map (sprintf "In Row: %s")
+
+    member inline this.Yield(n: RequiredSource<unit>) = 
+        n
+
+    member inline this.Yield(n: OptionalSource<unit>) = 
+        n
 
     member inline _.Yield(c: RowElement) =
         SheetEntity.ok [c]
@@ -79,23 +88,17 @@ type RowBuilder() =
         let v = DataType.InferCellValue s
         SheetEntity.ok [RowElement.UnindexedCell v]
 
-
     member inline this.YieldFrom(ns: SheetEntity<RowElement list> seq) =   
         ns
-        |> Seq.fold (fun state we ->
+        |> Seq.fold (fun (state : SheetEntity<RowElement list>) we ->
             this.Combine(state,we)
 
         ) RowBuilder.Empty
-
 
     member inline this.For(vs : seq<'T>, f : 'T -> SheetEntity<RowElement list>) =
         vs
         |> Seq.map f
         |> this.YieldFrom
-
-
-    member inline this.Run(children: SheetEntity<RowElement list>) =
-        children
 
     member this.Combine(wx1: SheetEntity<RowElement list>, wx2: SheetEntity<RowElement list>) : SheetEntity<RowElement list>=
         match wx1,wx2 with
@@ -124,4 +127,51 @@ type RowBuilder() =
         | NoneOptional messages1, NoneOptional messages2 ->
             NoneOptional (List.append messages1 messages2)
         
-    member inline _.Delay(n: unit -> SheetEntity<RowElement list>) = n()
+    member this.Combine(wx1: RequiredSource<unit>, wx2: SheetEntity<RowElement list>) =
+        RequiredSource (wx2)
+        
+    member this.Combine(wx1: SheetEntity<RowElement list>, wx2: RequiredSource<unit>) =
+        RequiredSource (wx1)
+
+    member this.Combine(wx1: OptionalSource<unit>, wx2: SheetEntity<RowElement list>) =
+        OptionalSource wx2
+
+    member this.Combine(wx1: SheetEntity<RowElement list>, wx2: OptionalSource<unit>) =
+        OptionalSource wx1
+
+    member this.Combine(wx1: RequiredSource<SheetEntity<RowElement list>>, wx2: SheetEntity<RowElement list>) =
+        this.Combine(wx1.Source,wx2) 
+        |> RequiredSource
+
+    member this.Combine(wx1: SheetEntity<RowElement list>, wx2: RequiredSource<SheetEntity<RowElement list>>) =
+        this.Combine(wx1,wx2.Source) 
+        |> RequiredSource
+
+    member this.Combine(wx1: OptionalSource<SheetEntity<RowElement list>>, wx2: SheetEntity<RowElement list>) =
+        this.Combine(wx1.Source,wx2) 
+        |> OptionalSource
+
+    member this.Combine(wx1: SheetEntity<RowElement list>, wx2: OptionalSource<SheetEntity<RowElement list>>) =
+        this.Combine(wx1,wx2.Source) 
+        |> OptionalSource
+
+    member inline _.Delay(n: unit -> 'T) = n()
+
+    member inline this.Run(children: Expr<OptionalSource<SheetEntity<RowElement list>>>) =
+        try 
+            match (eval<OptionalSource<SheetEntity<RowElement list>>> children).Source with
+            | NoneRequired m -> NoneOptional m
+            | se -> se
+        with
+        | err -> NoneOptional [err.Message]
+
+    member inline this.Run(children: Expr<RequiredSource<SheetEntity<RowElement list>>>) =
+        try 
+            match (eval<RequiredSource<SheetEntity<RowElement list>>> children).Source with
+            | NoneOptional m -> NoneRequired m
+            | se -> se
+        with
+        | err -> NoneOptional [err.Message]
+
+    member inline this.Run(children: Expr<SheetEntity<RowElement list>>) =
+        (eval<SheetEntity<RowElement list>> children).Value

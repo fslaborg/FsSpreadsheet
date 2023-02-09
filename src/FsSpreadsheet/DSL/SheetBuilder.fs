@@ -45,6 +45,11 @@ type SheetBuilder(name : string) =
         | NoneRequired messages -> 
             NoneRequired messages
 
+    member inline this.Yield(c : seq<SheetEntity<RowElement list>>) =
+        c
+        |> Seq.map this.Yield
+        |> Seq.reduce (fun a b -> this.Combine(a,b))
+
     member inline _.Yield(cs: RowElement list) =
         SheetEntity.ok [SheetElement.UnindexedRow cs]
 
