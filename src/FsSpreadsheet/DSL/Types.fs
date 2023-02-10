@@ -5,25 +5,33 @@ open FsSpreadsheet
 type Message = string
 
 [<AutoOpen>]
-type Missing<'T> =
+type SheetEntity<'T> =
 
-    | Ok of 'T * Message list
-    | MissingOptional of Message list
-    | MissingRequired of Message list
+    | Some of 'T * Message list
+    | NoneOptional of Message list
+    | NoneRequired of Message list
 
-    static member ok (v : 'T) : Missing<'T> = Missing.Ok (v,[])
-
-    member this.Value =
-        match this with 
-        | Ok (f,errs) -> f
+    static member ok (v : 'T) : SheetEntity<'T> = SheetEntity.Some (v,[])
 
     /// Get messages
     member this.Messages =
 
         match this with 
-        | Ok (f,errs) -> errs
-        | MissingOptional errs -> errs
-        | MissingRequired errs -> errs
+        | Some (f,errs) -> errs
+        | NoneOptional errs -> errs
+        | NoneRequired errs -> errs
+
+[<AutoOpen>]
+module SheetEntityExtensions =
+    type SheetEntity<'T> with
+        member this.Value =
+            match this with 
+            | Some (f,errs) -> f
+            | NoneOptional ms | NoneRequired ms when ms = [] -> 
+                failwith $"SheetEntity of type {typeof<'T>.Name} does not contain Value."
+            | NoneOptional ms | NoneRequired ms -> 
+                let appendedMessages = ms |> List.reduce (fun a b -> a + "\n\t" + b)
+                failwith $"SheetEntity of type {typeof<'T>.Name} does not contain Value: \n\t{appendedMessages}"
 
 type Value = DataType * string
 

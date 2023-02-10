@@ -21,96 +21,151 @@ type CellBuilder() =
 
     let mutable reducer = Concat ','
 
-    static member Empty : Missing<Value list> = Missing.MissingOptional []
+    static member Empty : SheetEntity<Value list> = SheetEntity.NoneOptional []
 
     // -- Computation Expression methods --> 
 
-    member inline this.Zero() : Missing<Value list> = Missing.MissingOptional []
+    member _.Quote  (quotation: Quotations.Expr<'T>) =
+        quotation
+
+    member inline this.Zero() : SheetEntity<Value list> = SheetEntity.NoneOptional []
 
     member this.SignMessages (messages : Message list) : Message list =
         messages
         |> List.map (sprintf "In Cell: %s")
 
-    member this.Yield(ro : ReduceOperation) : Missing<Value list> =
+    member inline this.Yield(n: RequiredSource<unit>) = 
+        n
+
+    member inline this.Yield(n: OptionalSource<unit>) = 
+        n
+
+    member this.Yield(ro : ReduceOperation) : SheetEntity<Value list> =
         reducer <- ro
-        Missing.MissingOptional []
+        SheetEntity.NoneOptional []
 
-    member inline this.Yield(s : string) : Missing<Value list> =
-        Missing.ok [DataType.String,s]
+    member inline this.Yield(s : string) : SheetEntity<Value list> =
+        SheetEntity.ok [DataType.String,s]
 
-    member inline this.Yield(value: Value) : Missing<Value list> =
-        Missing.ok [value]
+    member inline this.Yield(value: Value) : SheetEntity<Value list> =
+        SheetEntity.ok [value]
 
-    member inline this.Yield(value: Missing<Value>) : Missing<Value list> =
+    member inline this.Yield(value: SheetEntity<Value>) : SheetEntity<Value list> =
         match value with 
-        | Ok (v,messages) -> 
-            Missing.Ok ([v], messages)
-        | MissingOptional messages -> 
-            MissingOptional messages
-        | MissingRequired messages -> 
-            MissingRequired messages
+        | Some (v,messages) -> 
+            SheetEntity.Some ([v], messages)
+        | NoneOptional messages -> 
+            NoneOptional messages
+        | NoneRequired messages -> 
+            NoneRequired messages
 
     member inline this.Yield(n: 'a when 'a :> System.IFormattable) = 
         let v = DataType.InferCellValue n
-        Missing.ok [v]
+        SheetEntity.ok [v]
 
-    member inline this.Yield(s : string option) : Missing<Value list> =
+    member inline this.Yield(s : string option) : SheetEntity<Value list> =
         match s with
-        | Some s -> this.Yield s
-        | None -> MissingRequired ["Value is missing"]
-
+        | Option.Some s -> this.Yield s
+        | None -> NoneRequired ["Value is missing"]
 
     member inline this.Yield(n: 'a option when 'a :> System.IFormattable) = 
         match n with
-        | Some s -> this.Yield s
-        | None -> MissingRequired ["Value is missing"]
+        | Option.Some s -> this.Yield s
+        | None -> NoneRequired ["Value is missing"]
 
-
-    member inline this.YieldFrom(ns: Missing<Value list> seq) =   
+    member inline this.YieldFrom(ns: SheetEntity<Value list> seq) =   
         ns
-        |> Seq.fold (fun state we ->
+        |> Seq.fold (fun (state : SheetEntity<Value list>) we ->
             this.Combine(state,we)
 
         ) CellBuilder.Empty
 
-    member inline this.For(vs : seq<'T>, f : 'T -> Missing<Value list>) =
+    member inline this.For(vs : seq<'T>, f : 'T -> SheetEntity<Value list>) =
         vs
         |> Seq.map f
         |> this.YieldFrom
 
-    member this.Run(children: Missing<Value list>) : Missing<CellElement> =
-        match children with
-        | Ok (vals,messages) ->
-            let cellElement = reducer.Reduce (vals), None
-            Missing.Ok(cellElement, messages)
-        | MissingRequired messages -> MissingRequired messages
-        | MissingOptional messages -> MissingOptional messages
-
-    member this.Combine(wx1: Missing<Value list>, wx2: Missing<Value list>) : Missing<Value list>=
+    member this.Combine(wx1: SheetEntity<Value list>, wx2: SheetEntity<Value list>) : SheetEntity<Value list>=
         match wx1,wx2 with
         // If both contain content, combine the content
-        | Ok (l1,messages1), Ok (l2,messages2) ->
-            Ok (List.append l1 l2
+        | Some (l1,messages1), Some (l2,messages2) ->
+            Some (List.append l1 l2
             ,List.append messages1 messages2)
 
         // If any of the two is missing and was required, return a missing required
-        | _, MissingRequired messages2 ->
-            MissingRequired (List.append wx1.Messages messages2)
+        | _, NoneRequired messages2 ->
+            NoneRequired (List.append wx1.Messages messages2)
 
-        | MissingRequired messages1, _ ->
-            MissingRequired (List.append messages1 wx2.Messages)
+        | NoneRequired messages1, _ ->
+            NoneRequired (List.append messages1 wx2.Messages)
 
         // If only one of the two is missing and was optional, take the content of the functioning one
-        | Ok (f1,messages1), MissingOptional messages2 ->
-            Ok (f1
+        | Some (f1,messages1), NoneOptional messages2 ->
+            Some (f1
             ,List.append messages1 messages2)
 
-        | MissingOptional messages1, Ok (f2,messages2) ->
-            Ok (f2
+        | NoneOptional messages1, Some (f2,messages2) ->
+            Some (f2
             ,List.append messages1 messages2)
 
         // If both are missing and were optional, return a missing optional
-        | MissingOptional messages1, MissingOptional messages2 ->
-            MissingOptional (List.append messages1 messages2)
+        | NoneOptional messages1, NoneOptional messages2 ->
+            NoneOptional (List.append messages1 messages2)
         
-    member inline _.Delay(n: unit -> Missing<Value list>) = n()
+    member this.Combine(wx1: RequiredSource<unit>, wx2: SheetEntity<Value list>) =
+        RequiredSource (wx2)
+        
+    member this.Combine(wx1: SheetEntity<Value list>, wx2: RequiredSource<unit>) =
+        RequiredSource (wx1)
+
+    member this.Combine(wx1: OptionalSource<unit>, wx2: SheetEntity<Value list>) =
+        OptionalSource wx2
+
+    member this.Combine(wx1: SheetEntity<Value list>, wx2: OptionalSource<unit>) =
+        OptionalSource wx1
+
+    member this.Combine(wx1: RequiredSource<SheetEntity<Value list>>, wx2: SheetEntity<Value list>) =
+        this.Combine(wx1.Source,wx2) 
+        |> RequiredSource
+
+    member this.Combine(wx1: SheetEntity<Value list>, wx2: RequiredSource<SheetEntity<Value list>>) =
+        this.Combine(wx1,wx2.Source) 
+        |> RequiredSource
+
+    member this.Combine(wx1: OptionalSource<SheetEntity<Value list>>, wx2: SheetEntity<Value list>) =
+        this.Combine(wx1.Source,wx2) 
+        |> OptionalSource
+
+    member this.Combine(wx1: SheetEntity<Value list>, wx2: OptionalSource<SheetEntity<Value list>>) =
+        this.Combine(wx1,wx2.Source) 
+        |> OptionalSource
+
+    member this.AsCellElement(children: SheetEntity<Value list>) : SheetEntity<CellElement> =
+        match children with
+        | Some (vals,messages) ->
+            let cellElement = reducer.Reduce (vals), None
+            SheetEntity.Some(cellElement, messages)
+        | NoneRequired messages -> NoneRequired messages
+        | NoneOptional messages -> NoneOptional messages
+
+    member inline this.Run(children: Expr<OptionalSource<SheetEntity<Value list>>>) =
+        try 
+            match this.AsCellElement ((eval<OptionalSource<SheetEntity<Value list>>> children).Source) with
+            | NoneRequired m -> NoneOptional m
+            | se -> se
+        with
+        | err -> NoneOptional [err.Message]
+
+    member inline this.Run(children: Expr<RequiredSource<SheetEntity<Value list>>>) =
+        try 
+            match this.AsCellElement ((eval<RequiredSource<SheetEntity<Value list>>> children).Source) with
+            | NoneOptional m -> NoneRequired m
+            | se -> se
+        with
+        | err -> NoneOptional [err.Message]
+
+    member inline this.Run(children: Expr<SheetEntity<Value list>>) =
+        this.AsCellElement (eval<SheetEntity<Value list>> children)
+        |> fun v -> v.Value
+
+    member inline _.Delay(n: unit -> 'T) = n()
