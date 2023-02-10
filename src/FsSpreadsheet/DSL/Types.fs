@@ -13,10 +13,6 @@ type SheetEntity<'T> =
 
     static member ok (v : 'T) : SheetEntity<'T> = SheetEntity.Some (v,[])
 
-    member this.Value =
-        match this with 
-        | Some (f,errs) -> f
-
     /// Get messages
     member this.Messages =
 
@@ -24,6 +20,18 @@ type SheetEntity<'T> =
         | Some (f,errs) -> errs
         | NoneOptional errs -> errs
         | NoneRequired errs -> errs
+
+[<AutoOpen>]
+module SheetEntityExtensions =
+    type SheetEntity<'T> with
+        member this.Value =
+            match this with 
+            | Some (f,errs) -> f
+            | NoneOptional ms | NoneRequired ms when ms = [] -> 
+                failwith $"SheetEntity of type {typeof<'T>.Name} does not contain Value."
+            | NoneOptional ms | NoneRequired ms -> 
+                let appendedMessages = ms |> List.reduce (fun a b -> a + "\n\t" + b)
+                failwith $"SheetEntity of type {typeof<'T>.Name} does not contain Value: \n\t{appendedMessages}"
 
 type Value = DataType * string
 
