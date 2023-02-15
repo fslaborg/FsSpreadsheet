@@ -19,7 +19,7 @@ type RowBuilder() =
 
     member this.SignMessages (messages : Message list) : Message list =
         messages
-        |> List.map (sprintf "In Row: %s")
+        |> List.map (fun m -> m.MapText (sprintf "In Row: %s"))
 
     member inline this.Yield(n: RequiredSource<unit>) = 
         n
@@ -163,7 +163,7 @@ type RowBuilder() =
             | NoneRequired m -> NoneOptional m
             | se -> se
         with
-        | err -> NoneOptional [err.Message]
+        | err -> NoneOptional [message err.Message]
 
     member inline this.Run(children: Expr<RequiredSource<SheetEntity<RowElement list>>>) =
         try 
@@ -171,7 +171,7 @@ type RowBuilder() =
             | NoneOptional m -> NoneRequired m
             | se -> se
         with
-        | err -> NoneOptional [err.Message]
+        | err -> NoneOptional [message err.Message]
 
     member inline this.Run(children: Expr<SheetEntity<RowElement list>>) =
         (eval<SheetEntity<RowElement list>> children).Value

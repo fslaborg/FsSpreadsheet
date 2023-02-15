@@ -22,7 +22,7 @@ type ColumnBuilder() =
 
     member this.SignMessages (messages : Message list) : Message list =
         messages
-        |> List.map (sprintf "In Column: %s")
+        |> List.map (fun m -> m.MapText (sprintf "In Column: %s"))
 
     member inline _.Yield(c: ColumnElement) =
         SheetEntity.ok [c]
@@ -175,7 +175,7 @@ type ColumnBuilder() =
             | NoneRequired m -> NoneOptional m
             | se -> se
         with
-        | err -> NoneOptional [err.Message]
+        | err -> NoneOptional [message err.Message]
 
     member inline this.Run(children: Expr<RequiredSource<SheetEntity<ColumnElement list>>>) =
         try 
@@ -183,7 +183,7 @@ type ColumnBuilder() =
             | NoneOptional m -> NoneRequired m
             | se -> se
         with
-        | err -> NoneOptional [err.Message]
+        | err -> NoneOptional [message err.Message]
 
     member inline this.Run(children: Expr<SheetEntity<ColumnElement list>>) =
         (eval<SheetEntity<ColumnElement list>> children).Value

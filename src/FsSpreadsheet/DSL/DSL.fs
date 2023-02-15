@@ -39,7 +39,7 @@ type DSL =
             DSL.opt elem
         with
         | err -> 
-            NoneOptional([err.Message])
+            NoneOptional([message err.Message])
 
     /// Drops the cell with the given message
     static member dropCell message : SheetEntity<Value> = NoneRequired [message]

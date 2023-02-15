@@ -57,14 +57,14 @@ module Operators =
     ///
     /// If expression does fail, returns a missing required value
     let inline (!!) (v : 'T) : SheetEntity<Value> =
-        let f = fun s -> NoneRequired([s])
+        let f = fun s -> NoneRequired([message s])
         parseAny f v
 
     /// Optional value operator
     ///
     /// If expression does fail, returns a missing optional value
     let inline (!?) (v : 'T) : SheetEntity<Value> =
-        let f = fun s -> NoneOptional([s])
+        let f = fun s -> NoneOptional([message s])
         parseAny f v 
 
     /// Optional operators for cell, row, column and sheet expressions

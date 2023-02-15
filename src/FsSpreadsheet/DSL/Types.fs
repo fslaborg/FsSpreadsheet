@@ -2,7 +2,61 @@
 
 open FsSpreadsheet
 
-type Message = string
+[<AutoOpen>]
+type Message = 
+    | Text of string
+    | Exception of exn
+
+    static member message (s : string) = Text s
+
+    static member message (e : #exn) = Exception e
+
+    member this.MapText(m : string -> string) =
+        match this with
+        | Text s -> Text (m s)
+        | Exception e -> this
+
+    member this.AsString() = 
+        match this with
+        | Text s -> s
+        | Exception e -> e.Message
+
+    member this.TryText() = 
+        match this with
+        | Text s -> Some s
+        | _ -> None
+
+    member this.TryException() = 
+        match this with
+        | Exception e -> Some e
+        | _ -> None
+
+    member this.IsTxt = 
+        match this with
+        | Text s -> true
+        | _ -> false
+
+    member this.IsExc = 
+        match this with
+        | Text s -> true
+        | _ -> false
+
+
+module Messages =
+    
+    let format (ms : Message list) =
+        ms
+        |> List.map (fun m -> m.AsString())
+        |> List.reduce (fun a b -> a + ";" + b)
+
+    let fail (ms : Message list) =
+        let s = format ms
+        if ms |> List.exists (fun m -> m.IsExc) then
+            printfn "s"
+            raise (ms |> List.pick (fun m -> m.TryException()))
+        else
+            failwith s
+
 
 [<AutoOpen>]
 type SheetEntity<'T> =
@@ -30,7 +84,7 @@ module SheetEntityExtensions =
             | NoneOptional ms | NoneRequired ms when ms = [] -> 
                 failwith $"SheetEntity of type {typeof<'T>.Name} does not contain Value."
             | NoneOptional ms | NoneRequired ms -> 
-                let appendedMessages = ms |> List.reduce (fun a b -> a + "\n\t" + b)
+                let appendedMessages = Messages.format ms
                 failwith $"SheetEntity of type {typeof<'T>.Name} does not contain Value: \n\t{appendedMessages}"
 
 type Value = DataType * string
