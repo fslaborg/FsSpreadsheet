@@ -32,7 +32,7 @@ type CellBuilder() =
 
     member this.SignMessages (messages : Message list) : Message list =
         messages
-        |> List.map (sprintf "In Cell: %s")
+        |> List.map (fun m -> m.MapText (sprintf "In Cell: %s"))
 
     member inline this.Yield(n: RequiredSource<unit>) = 
         n
@@ -66,12 +66,12 @@ type CellBuilder() =
     member inline this.Yield(s : string option) : SheetEntity<Value list> =
         match s with
         | Option.Some s -> this.Yield s
-        | None -> NoneRequired ["Value is missing"]
+        | None -> NoneRequired [message "Value is missing"]
 
     member inline this.Yield(n: 'a option when 'a :> System.IFormattable) = 
         match n with
         | Option.Some s -> this.Yield s
-        | None -> NoneRequired ["Value is missing"]
+        | None -> NoneRequired [message "Value is missing"]
 
     member inline this.YieldFrom(ns: SheetEntity<Value list> seq) =   
         ns
@@ -154,7 +154,7 @@ type CellBuilder() =
             | NoneRequired m -> NoneOptional m
             | se -> se
         with
-        | err -> NoneOptional [err.Message]
+        | err -> NoneOptional [message err.Message]
 
     member inline this.Run(children: Expr<RequiredSource<SheetEntity<Value list>>>) =
         try 
@@ -162,7 +162,7 @@ type CellBuilder() =
             | NoneOptional m -> NoneRequired m
             | se -> se
         with
-        | err -> NoneOptional [err.Message]
+        | err -> NoneOptional [message err.Message]
 
     member inline this.Run(children: Expr<SheetEntity<Value list>>) =
         this.AsCellElement (eval<SheetEntity<Value list>> children)

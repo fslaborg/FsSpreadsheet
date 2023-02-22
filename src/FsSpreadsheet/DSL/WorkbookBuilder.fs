@@ -16,7 +16,7 @@ type WorkbookBuilder() =
 
     member this.SignMessages (messages : Message list) : Message list =
         messages
-        |> List.map (sprintf "In Workbook: %s")
+        |> List.map (fun m -> m.MapText (sprintf "In Workbook: %s"))
 
     member inline _.Yield(c: WorkbookElement) =
         SheetEntity.ok [c]

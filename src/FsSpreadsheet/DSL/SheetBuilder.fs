@@ -16,7 +16,7 @@ type SheetBuilder(name : string) =
 
     member this.SignMessages (messages : Message list) : Message list =
         messages
-        |> List.map (sprintf "In Sheet %s: %s" name)
+        |> List.map (fun m -> m.MapText (sprintf "In Sheet %s: %s" name))
 
     member inline _.Yield(se: SheetElement) =
         SheetEntity.ok [se]
