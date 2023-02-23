@@ -91,3 +91,14 @@ module FsExtensions =
 
         static member toFile(path,workbook: FsWorkbook) =
             workbook.ToFile(path)
+
+type Writer =
+    
+    static member toStream(stream : System.IO.MemoryStream,workbook : FsWorkbook) =
+        workbook.ToStream(stream)
+
+    static member toBytes(workbook: FsWorkbook) =
+        workbook.ToBytes()
+
+    static member toFile(path,workbook: FsWorkbook) =
+        workbook.ToFile(path)
