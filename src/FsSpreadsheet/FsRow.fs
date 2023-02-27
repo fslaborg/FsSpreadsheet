@@ -30,3 +30,6 @@ type FsRow (rangeAddress : FsRangeAddress, styleValue)=
             self.RangeAddress.LastAddress.RowNumber <- i
 
     //member self.SortCells() = _cells <- _cells |> List.sortBy (fun c -> c.WorksheetColumn)
+
+    static member getIndex (row : FsRow) = 
+        row.Index

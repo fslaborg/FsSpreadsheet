@@ -45,6 +45,8 @@ type FsWorksheet (name) =
     member self.Table(tableName,rangeAddress) = 
         self.Table(tableName,rangeAddress,true)
 
+
+    /// Checks the cell collection and recreate the whole set of rows, so that all cells are placed in a row
     member self.RescanRows() =
         let rows = _rows |> Seq.map (fun r -> r.Index,r) |> Map.ofSeq
         _cells.GetCells()
@@ -70,3 +72,16 @@ type FsWorksheet (name) =
     member self.GetTables() = _tables
 
     member self.SortRows() = _rows <- _rows |> List.sortBy (fun r -> r.Index)
+
+    static member getRows (sheet : FsWorksheet) = 
+        sheet.GetRows()
+
+    static member getRowAt index sheet =
+        FsWorksheet.getRows sheet
+        // to do: getIndex
+        |> Seq.find (FsRow.getIndex >> (=) index)
+
+        
+
+    //static member removeValueAt rowIndex column sheet =
+    //    let row = self.
