@@ -56,21 +56,21 @@ module Operators =
     /// Required value operator
     ///
     /// If expression does fail, returns a missing required value
-    let inline (!) (v : 'T) : SheetEntity<Value> =
+    let inline (~+.) (v : 'T) : SheetEntity<Value> =
         let f = fun s -> NoneRequired([message s])
         parseAny f v
 
     /// Optional value operator
     ///
     /// If expression does fail, returns a missing optional value
-    let inline (?) (v : 'T) : SheetEntity<Value> =
+    let inline (~-.) (v : 'T) : SheetEntity<Value> =
         let f = fun s -> NoneOptional([message s])
         parseAny f v 
 
     /// Required value operator
     ///
     /// If expression does fail, returns a missing required value
-    let inline (>!) (f : 'T -> 'U) (v : 'T) : SheetEntity<Value> =
+    let inline (+.) (f : 'T -> 'U) (v : 'T) : SheetEntity<Value> =
         try 
             f v 
             |> DataType.InferCellValue
@@ -81,19 +81,13 @@ module Operators =
     /// Optional value operator
     ///
     /// If expression does fail, returns a missing optional value
-    let inline (>?) (f : 'T -> 'U) (v : 'T) : SheetEntity<Value> =
+    let inline (-.) (f : 'T -> 'U) (v : 'T) : SheetEntity<Value> =
         try 
             f v 
             |> DataType.InferCellValue
             |> SheetEntity.some
         with 
         | err -> NoneOptional([Exception err])
-
-    let inline (!<) (v : 'T) (f : 'T -> 'U) = 
-        f >! v
-
-    let inline (?<) (v : 'T) (f : 'T -> 'U) = 
-        f >? v
 
     /// Optional operators for cell, row, column and sheet expressions
     let optional = OptionalSource()
