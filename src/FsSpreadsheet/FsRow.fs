@@ -23,8 +23,13 @@ type FsRow (rangeAddress : FsRangeAddress, cells : FsCellsCollection, styleValue
         //    _cells <- List.append _cells [cell]
         //    cell
 
+    member this.InsertValueAt(colIndex, (value : 'a)) =
+        let cell = FsCell(value)
+        cells.Add(int32 this.Index, int32 colIndex, cell)
+
     member self.Cells = base.Cells(cells)
 
+    /// The index of the FsRow.
     member self.Index 
         with get() = self.RangeAddress.FirstAddress.RowNumber
         and set(i) = 
@@ -33,5 +38,13 @@ type FsRow (rangeAddress : FsRangeAddress, cells : FsCellsCollection, styleValue
 
     //member self.SortCells() = _cells <- _cells |> List.sortBy (fun c -> c.WorksheetColumn)
 
+    /// Returns the index of the given FsRow.
     static member getIndex (row : FsRow) = 
         row.Index
+
+    /// Add a value at the given row- and columnindex to FsRow using.
+    ///
+    /// If a cell exists in the given position, shoves it to the right.
+    static member insertValueAt colIndex value (row : FsRow) =
+        row.InsertValueAt(colIndex, value)
+        row

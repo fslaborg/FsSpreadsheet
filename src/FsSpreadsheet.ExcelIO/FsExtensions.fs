@@ -46,7 +46,7 @@ module FsExtensions =
 
 
         member self.AppendTablesToWorksheetPart(workbookPart : DocumentFormat.OpenXml.Packaging.WorkbookPart,worksheetPart : DocumentFormat.OpenXml.Packaging.WorksheetPart) =
-            self.GetTables()
+            self.Tables
             |> Seq.iter (fun t ->
                 let table = t.ToExcelTable(self.CellCollection)
                 Table.addTable workbookPart worksheetPart table |> ignore
