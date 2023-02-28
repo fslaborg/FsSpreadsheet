@@ -11,24 +11,24 @@ open Expression
 
 type ColumnBuilder() =
 
-    static member Empty : SheetEntity<ColumnElement list> = SheetEntity.ok []
+    static member Empty : SheetEntity<ColumnElement list> = SheetEntity.some []
 
     // -- Computation Expression methods --> 
 
     member _.Quote  (quotation: Quotations.Expr<'T>) =
         quotation
 
-    member inline this.Zero() : SheetEntity<ColumnElement list> = SheetEntity.ok []
+    member inline this.Zero() : SheetEntity<ColumnElement list> = SheetEntity.some []
 
     member this.SignMessages (messages : Message list) : Message list =
         messages
         |> List.map (fun m -> m.MapText (sprintf "In Column: %s"))
 
     member inline _.Yield(c: ColumnElement) =
-        SheetEntity.ok [c]
+        SheetEntity.some [c]
 
     member inline _.Yield(cs: ColumnElement list) =
-        SheetEntity.ok cs
+        SheetEntity.some cs
 
     member inline _.Yield(c: SheetEntity<ColumnElement>) =
         match c with 
@@ -58,7 +58,7 @@ type ColumnBuilder() =
             match c with
             | v, Option.Some i -> ColumnElement.IndexedCell (Row i, v)
             | v, None -> ColumnElement.UnindexedCell v
-        SheetEntity.ok [re]
+        SheetEntity.some [re]
 
     member inline _.Yield(c: SheetEntity<Value>) =
         match c with 
@@ -76,7 +76,7 @@ type ColumnBuilder() =
                 | v, Option.Some i -> ColumnElement.IndexedCell (Row i, v)
                 | v, None -> ColumnElement.UnindexedCell v
             )
-        SheetEntity.ok res
+        SheetEntity.some res
 
     member inline this.Yield(cs: seq<SheetEntity<CellElement>>) : SheetEntity<ColumnElement list>=
         cs
@@ -86,7 +86,7 @@ type ColumnBuilder() =
 
     member inline _.Yield(s : string) = 
         let v = DataType.InferCellValue s
-        SheetEntity.ok [ColumnElement.UnindexedCell v]
+        SheetEntity.some [ColumnElement.UnindexedCell v]
 
     member inline this.Yield(n: RequiredSource<unit>) = 
         n
@@ -96,7 +96,7 @@ type ColumnBuilder() =
 
     member inline this.Yield(n: 'a when 'a :> System.IFormattable) = 
         let v = DataType.InferCellValue n
-        SheetEntity.ok [ColumnElement.UnindexedCell v]       
+        SheetEntity.some [ColumnElement.UnindexedCell v]       
 
     member inline this.YieldFrom(ns: SheetEntity<ColumnElement list> seq) =   
         ns

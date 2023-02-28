@@ -8,18 +8,18 @@ open Expression
 
 type WorkbookBuilder() =
 
-    static member Empty : SheetEntity<WorkbookElement list> = SheetEntity.ok []
+    static member Empty : SheetEntity<WorkbookElement list> = SheetEntity.some []
 
     // -- Computation Expression methods --> 
 
-    member inline this.Zero() : SheetEntity<WorkbookElement list> = SheetEntity.ok []
+    member inline this.Zero() : SheetEntity<WorkbookElement list> = SheetEntity.some []
 
     member this.SignMessages (messages : Message list) : Message list =
         messages
         |> List.map (fun m -> m.MapText (sprintf "In Workbook: %s"))
 
     member inline _.Yield(c: WorkbookElement) =
-        SheetEntity.ok [c]
+        SheetEntity.some [c]
 
     member inline _.Yield(w: SheetEntity<WorkbookElement>) =
         match w with 
@@ -31,7 +31,7 @@ type WorkbookBuilder() =
             NoneRequired messages
 
     member inline _.Yield(cs: WorkbookElement list) =
-        SheetEntity.ok cs
+        SheetEntity.some cs
     
     member inline _.Yield(cs: SheetEntity<WorkbookElement list> ) =
         cs
@@ -46,7 +46,7 @@ type WorkbookBuilder() =
             NoneRequired messages
 
     member inline _.Yield(cs: SheetElement list) =
-        SheetEntity.ok [WorkbookElement.UnnamedSheet cs]
+        SheetEntity.some [WorkbookElement.UnnamedSheet cs]
 
     member inline _.Yield(c: SheetEntity<string * SheetElement list>) =
         match c with 
@@ -58,7 +58,7 @@ type WorkbookBuilder() =
             NoneRequired messages
 
     member inline _.Yield(cs: string * SheetElement list) =
-        SheetEntity.ok [WorkbookElement.NamedSheet (cs)]
+        SheetEntity.some [WorkbookElement.NamedSheet (cs)]
 
 
     member inline this.YieldFrom(ns: SheetEntity<WorkbookElement list> seq) =   

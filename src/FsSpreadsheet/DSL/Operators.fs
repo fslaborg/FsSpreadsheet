@@ -10,7 +10,7 @@ module Operators =
     let inline parseExpression (def : string -> SheetEntity<Value>) (s : Expr<'a>) : SheetEntity<Value> =
         try 
             let value = eval<'a> s |> DataType.InferCellValue
-            SheetEntity.ok value         
+            SheetEntity.some value         
         with
         | err -> def err.Message
 
@@ -18,14 +18,14 @@ module Operators =
         match s with
         | Option.Some value ->
             DataType.InferCellValue value
-            |> SheetEntity.ok  
+            |> SheetEntity.some  
         | None -> def "Value was missing"
     
     let inline parseResult (def : string -> SheetEntity<Value>) (s : Result<'a,exn>) : SheetEntity<Value> =
         match s with
         | Result.Ok value ->
             DataType.InferCellValue value
-            |> SheetEntity.ok  
+            |> SheetEntity.some  
         | Result.Error exn -> def exn.Message
 
     let inline parseAny (f : string -> SheetEntity<Value>) (v: 'T) : SheetEntity<Value> =
@@ -56,16 +56,44 @@ module Operators =
     /// Required value operator
     ///
     /// If expression does fail, returns a missing required value
-    let inline (!!) (v : 'T) : SheetEntity<Value> =
+    let inline (!) (v : 'T) : SheetEntity<Value> =
         let f = fun s -> NoneRequired([message s])
         parseAny f v
 
     /// Optional value operator
     ///
     /// If expression does fail, returns a missing optional value
-    let inline (!?) (v : 'T) : SheetEntity<Value> =
+    let inline (?) (v : 'T) : SheetEntity<Value> =
         let f = fun s -> NoneOptional([message s])
         parseAny f v 
+
+    /// Required value operator
+    ///
+    /// If expression does fail, returns a missing required value
+    let inline (>!) (f : 'T -> 'U) (v : 'T) : SheetEntity<Value> =
+        try 
+            f v 
+            |> DataType.InferCellValue
+            |> SheetEntity.some
+        with 
+        | err -> NoneRequired([Exception err])
+
+    /// Optional value operator
+    ///
+    /// If expression does fail, returns a missing optional value
+    let inline (>?) (f : 'T -> 'U) (v : 'T) : SheetEntity<Value> =
+        try 
+            f v 
+            |> DataType.InferCellValue
+            |> SheetEntity.some
+        with 
+        | err -> NoneOptional([Exception err])
+
+    let inline (!<) (v : 'T) (f : 'T -> 'U) = 
+        f >! v
+
+    let inline (?<) (v : 'T) (f : 'T -> 'U) = 
+        f >? v
 
     /// Optional operators for cell, row, column and sheet expressions
     let optional = OptionalSource()

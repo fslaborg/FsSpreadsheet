@@ -45,10 +45,10 @@ type CellBuilder() =
         SheetEntity.NoneOptional []
 
     member inline this.Yield(s : string) : SheetEntity<Value list> =
-        SheetEntity.ok [DataType.String,s]
+        SheetEntity.some [DataType.String,s]
 
     member inline this.Yield(value: Value) : SheetEntity<Value list> =
-        SheetEntity.ok [value]
+        SheetEntity.some [value]
 
     member inline this.Yield(value: SheetEntity<Value>) : SheetEntity<Value list> =
         match value with 
@@ -61,7 +61,7 @@ type CellBuilder() =
 
     member inline this.Yield(n: 'a when 'a :> System.IFormattable) = 
         let v = DataType.InferCellValue n
-        SheetEntity.ok [v]
+        SheetEntity.some [v]
 
     member inline this.Yield(s : string option) : SheetEntity<Value list> =
         match s with

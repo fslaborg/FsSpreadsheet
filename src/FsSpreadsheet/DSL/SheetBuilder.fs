@@ -8,21 +8,21 @@ open Expression
 
 type SheetBuilder(name : string) =
 
-    static member Empty : SheetEntity<SheetElement list> = SheetEntity.ok []
+    static member Empty : SheetEntity<SheetElement list> = SheetEntity.some []
 
     // -- Computation Expression methods --> 
 
-    member inline this.Zero() : SheetEntity<SheetElement list> = SheetEntity.ok []
+    member inline this.Zero() : SheetEntity<SheetElement list> = SheetEntity.some []
 
     member this.SignMessages (messages : Message list) : Message list =
         messages
         |> List.map (fun m -> m.MapText (sprintf "In Sheet %s: %s" name))
 
     member inline _.Yield(se: SheetElement) =
-        SheetEntity.ok [se]
+        SheetEntity.some [se]
 
     member inline _.Yield(cs: SheetElement list) =
-        SheetEntity.ok cs
+        SheetEntity.some cs
    
     member inline _.Yield(cs: SheetEntity<SheetElement list>) =
         cs
@@ -51,10 +51,10 @@ type SheetBuilder(name : string) =
         |> Seq.reduce (fun a b -> this.Combine(a,b))
 
     member inline _.Yield(cs: RowElement list) =
-        SheetEntity.ok [SheetElement.UnindexedRow cs]
+        SheetEntity.some [SheetElement.UnindexedRow cs]
 
     member inline _.Yield(cs: RowBuilder) =
-        SheetEntity.ok [SheetElement.UnindexedRow []]
+        SheetEntity.some [SheetElement.UnindexedRow []]
 
     member inline _.Yield(t: SheetEntity<string * (TableElement list)>) =
         match t with 
@@ -66,10 +66,10 @@ type SheetBuilder(name : string) =
             NoneRequired messages
 
     member inline _.Yield(te: string * (TableElement list)) =
-        SheetEntity.ok [SheetElement.Table te]
+        SheetEntity.some [SheetElement.Table te]
 
     member inline _.Yield(tb: TableBuilder) =
-        SheetEntity.ok [SheetElement.Table (tb.Name,[])]
+        SheetEntity.some [SheetElement.Table (tb.Name,[])]
 
     member inline _.Yield(c: SheetEntity<ColumnElement list>) =
         match c with 
@@ -81,10 +81,10 @@ type SheetBuilder(name : string) =
             NoneRequired messages
 
     member inline _.Yield(cs: ColumnElement list) =
-        SheetEntity.ok [SheetElement.UnindexedColumn cs]
+        SheetEntity.some [SheetElement.UnindexedColumn cs]
 
     member inline _.Yield(cs: ColumnBuilder) =
-        SheetEntity.ok [SheetElement.UnindexedColumn []]
+        SheetEntity.some [SheetElement.UnindexedColumn []]
 
 
     member inline this.YieldFrom(ns: SheetEntity<SheetElement list> seq) =   
