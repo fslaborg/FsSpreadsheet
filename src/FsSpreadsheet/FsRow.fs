@@ -1,15 +1,17 @@
 ﻿namespace FsSpreadsheet
 
 // Type based on the type XLRow used in ClosedXml
-type FsRow (rangeAddress : FsRangeAddress, styleValue)= 
+type FsRow (rangeAddress : FsRangeAddress, cells : FsCellsCollection, styleValue)= 
 
     inherit FsRangeBase(rangeAddress,styleValue)
 
-    new () = FsRow (FsRangeAddress(FsAddress(0,0),FsAddress(0,0)),null)
+    let cells = cells
 
-    new (index) = FsRow (FsRangeAddress(FsAddress(index,1),FsAddress(index,1)),null)
+    new () = FsRow (FsRangeAddress(FsAddress(0,0),FsAddress(0,0)),FsCellsCollection(),null)
 
-    member self.Cell(columnIndex,cells) = base.Cell(FsAddress(1,columnIndex),cells)
+    new (index,cells) = FsRow (FsRangeAddress(FsAddress(index,1),FsAddress(index,1)),cells,null)
+
+    member self.Cell(columnIndex) = base.Cell(FsAddress(1,columnIndex),cells)
         
         //match _cells |> List.tryFind (fun cell -> cell.WorksheetColumn = columnIndex) with
         //| Some cell ->
@@ -21,7 +23,7 @@ type FsRow (rangeAddress : FsRangeAddress, styleValue)=
         //    _cells <- List.append _cells [cell]
         //    cell
 
-    member self.Cells(cells) = base.Cells(cells)
+    member self.Cells = base.Cells(cells)
 
     member self.Index 
         with get() = self.RangeAddress.FirstAddress.RowNumber

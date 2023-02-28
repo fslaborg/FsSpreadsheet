@@ -27,7 +27,7 @@ module FsExtensions =
                 self.SortRows()
                 self.GetRows()
                 |> List.iter (fun row -> 
-                    let cells = row.Cells(self.CellCollection) |> Seq.toList
+                    let cells = row.Cells |> Seq.toList
                     if not cells.IsEmpty then
                         let min,max =                        
                             cells

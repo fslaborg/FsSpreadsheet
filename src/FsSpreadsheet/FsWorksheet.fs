@@ -22,7 +22,7 @@ type FsWorksheet (name) =
         | Some row ->
             row
         | None -> 
-            let row = FsRow(rowIndex) 
+            let row = FsRow(rowIndex,self.CellCollection) 
             _rows <- List.append _rows [row]
             row
 

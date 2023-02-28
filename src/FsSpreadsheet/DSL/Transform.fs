@@ -92,11 +92,11 @@ module Transform =
             |> List.iter (fun el ->
                 match el with 
                 | RowElement.IndexedCell(i,(datatype,value)) -> 
-                    let cell = row.Cell(i.Index,cellCollection)
+                    let cell = row.Cell(i.Index)
                     cell.DataType <- datatype
                     cell.Value <- value
                 | RowElement.UnindexedCell(datatype,value) -> 
-                    let cell = row.Cell(getNextIndex(),cellCollection)
+                    let cell = row.Cell(getNextIndex())
                     cell.DataType <- datatype
                     cell.Value <- value
             )
@@ -163,13 +163,13 @@ module Transform =
                         | ColumnElement.IndexedCell(i,(datatype,value)) -> 
                             let row = sheet.Row(i.Index + baseRowIndex - 1)
                             rowIndexSet <- Set.add (i.Index) rowIndexSet
-                            let cell = row.Cell(colI,sheet.CellCollection)
+                            let cell = row.Cell(colI)
                             cell.DataType <- datatype
                             cell.Value <- value
                         | ColumnElement.UnindexedCell(datatype,value) -> 
                             let row = sheet.Row(getNextIndex () + baseRowIndex - 1)
                             rowIndexSet <- Set.add row.Index rowIndexSet
-                            let cell = row.Cell(colI,sheet.CellCollection)
+                            let cell = row.Cell(colI)
                             cell.DataType <- datatype
                             cell.Value <- value
                     )

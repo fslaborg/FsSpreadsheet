@@ -10,7 +10,7 @@ module FsExtensions =
         member self.ToSparseRow(cellCollection : FsCellsCollection) : seq<string option> =
 
             let maxColIndex = self.RangeAddress.LastAddress.ColumnNumber
-            let cells = self.Cells(cellCollection)
+            let cells = self.Cells
             seq {
                 for i = 1 to maxColIndex do
                     cells 
