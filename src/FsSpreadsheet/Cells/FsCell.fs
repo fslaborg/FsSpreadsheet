@@ -29,7 +29,8 @@ type DataType =
         | _ ->  DataType.String,value.ToString()
 
 // Type based on the type XLCell used in ClosedXml
-type FsCell (value : string, dataType : DataType, address : FsAddress)=
+/// Creates an FsCell of `DataType` dataType, with value of type `string`, and `FsAddress` address.
+type FsCell (value : string, dataType : DataType, address : FsAddress) =
     
     let mutable _cellValue = value
     let mutable _dataType = dataType
@@ -42,20 +43,37 @@ type FsCell (value : string, dataType : DataType, address : FsAddress)=
     let mutable _rowIndex : int = address.RowNumber
     let mutable _columnIndex : int = address.ColumnNumber
 
-    new () = FsCell ("", DataType.Empty, FsAddress(0,0))
-    new (value : string) = FsCell (value, DataType.String, FsAddress(0,0))
-    new (value : int) = FsCell (string value, DataType.Number, FsAddress(0,0))
-    new (value : float) = FsCell (string value, DataType.Number, FsAddress(0,0))
 
+    // ------------------------
+    // ALTERNATIVE CONSTRUCTORS
+    // ------------------------
+
+    /// Creates an empty FsCell, set at row 1, column 1 (1-based).
+    new () = FsCell ("", DataType.Empty, FsAddress(0,0))
+    /// Creates an FsCell of `DataType` `String`, with the given value, set at row 1, column 1 (1-based).
+    new (value : string) = FsCell (value, DataType.String, FsAddress(0,0))
+    /// Creates an FsCell of `DataType` `Number`, with the given value, set at row 1, column 1 (1-based).
+    new (value : int) = FsCell (string value, DataType.Number, FsAddress(0,0))
+    /// Creates an FsCell of `DataType` `Number`, with the given value, set at row 1, column 1 (1-based).
+    new (value : float) = FsCell (string value, DataType.Number, FsAddress(0,0))
+    /// Creates an empty FsCell, set at `FsAddress` address.
     new (address : FsAddress) =
         FsCell ("", DataType.Empty, address)
+    /// Creates an empty FsCell, set at row rowIndex and column colIndex.
+    new (rowIndex, colIndex) =
+        FsCell("", DataType.Empty, FsAddress(rowIndex, colIndex))
+
+
+    // ----------
+    // PROPERTIES
+    // ----------
 
     member internal self.SharedStringId = raise (System.NotImplementedException())
 
     member self.Active = raise (System.NotImplementedException())
     
-    /// <summary>Gets this cell's address, relative to the worksheet.</summary>
-    /// <value>The cell's address.</value>
+    /// <summary>Gets this FsCell's address, relative to the FsWorksheet.</summary>
+    /// <value>The FsCell's address.</value>
     member self.Address 
         with get() = FsAddress(_columnIndex,_rowIndex)
         and internal set(address : FsAddress) =
@@ -77,12 +95,12 @@ type FsCell (value : string, dataType : DataType, address : FsAddress)=
     member self.CurrentRegion = raise (System.NotImplementedException())
     
     /// <summary>
-    /// Gets or sets the type of this cell's data.
-    /// <para>Changing the data type will cause ClosedXML to covert the current value to the new data type.</para>
-    /// <para>An exception will be thrown if the current value cannot be converted to the new data type.</para>
+    /// Gets or sets the DataType of this FsCell's data.
+    /// <para>Changing the data type will cause FsSpreadsheet to convert the current value to the new DataType. </para>
+    /// <para>An exception will be thrown if the current value cannot be converted to the new DataType.</para>
     /// </summary>
     /// <value>
-    /// The type of the cell's data.
+    /// The type of the FsCell's data.
     /// </value>
     /// <exception cref="ArgumentException"></exception>
     member self.DataType 
@@ -118,7 +136,7 @@ type FsCell (value : string, dataType : DataType, address : FsAddress)=
     member self.HasSparkline = raise (System.NotImplementedException())
     
     /// <summary>
-    /// Flag indicating that previously calculated cell value may be not valid anymore and has to be re-evaluated.
+    /// Flag indicating that previously calculated FsCell value may be not valid anymore and has to be re-evaluated.
     /// </summary>
     member self.NeedsRecalculation = raise (System.NotImplementedException())
     
@@ -133,17 +151,12 @@ type FsCell (value : string, dataType : DataType, address : FsAddress)=
     member self.Sparkline = raise (System.NotImplementedException())
     
     /// <summary>
-    /// Gets or sets the cell's style.
+    /// Gets or sets the FsCell's style.
     /// </summary>
     member self.Style = raise (System.NotImplementedException())
     
     /// <summary>
     /// Gets or sets the cell's value. To get or set a strongly typed value, use the GetValue&lt;T&gt; and SetValue methods.
-    /// <para>ClosedXML will try to detect the data type through parsing. If it can't then the value will be left as a string.</para>
-    /// <para>If the object is an IEnumerable, ClosedXML will copy the collection's data into a table starting from this cell.</para>
-    /// <para>If the object is a range, ClosedXML will copy the range starting from this cell.</para>
-    /// <para>Setting the value to an object (not IEnumerable/range) will call the object's ToString() method.</para>
-    /// <para>If the value starts with a single quote, ClosedXML will assume the value is a text variable and will prefix the value with a single quote in Excel too.</para>
     /// </summary>
     /// <value>
     /// The object containing the value(s) to set.
@@ -152,7 +165,23 @@ type FsCell (value : string, dataType : DataType, address : FsAddress)=
         with get() = _cellValue
         and set(value) = _cellValue <- value
     
+    /// Gets or sets the FsCell's associated FsWorksheet.
     member self.Worksheet = raise (System.NotImplementedException())
+
+    /// Gets or sets the columnIndex of the FsCell.
+    member self.WorksheetColumn
+        with get() = _columnIndex
+        and set(colI) = _columnIndex <- colI
+    
+    /// Gets or sets the rowIndex of the FsCell.
+    member self.WorksheetRow
+        with get() = _rowIndex
+        and set(rowI) = _rowIndex <- rowI
+
+
+    // ------------------
+    // NON-STATIC METHODS
+    // ------------------
     
     member self.AddConditionalFormat()  = raise (System.NotImplementedException())
     
@@ -202,21 +231,26 @@ type FsCell (value : string, dataType : DataType, address : FsAddress)=
     
     member self.CellRight(step) = raise (System.NotImplementedException())
     
+    // see https://github.com/ClosedXML/ClosedXML/blob/develop/ClosedXML/Excel/Cells/XLCell.cs#L860
     /// <summary>
-    /// Clears the contents of this cell.
+    /// Clears the contents of this FsCell.
     /// </summary>
     /// <param name="clearOptions">Specify what you want to clear.</param>
     member self.Clear(clearOptions(* = XLClearOptions.All*)) = raise (System.NotImplementedException())
     
     //member self.CopyFrom(member self.otherCell);
     
+    /// Copies and replaces DataType and Value from a given FsCell into this one.
     member self.CopyFrom(otherCell : FsCell) = 
         self.DataType <- otherCell.DataType
         self.Value <- otherCell.Value
     
     //member self.CopyTo(member self.target);
     
-    member self.CopyTo(target) = raise (System.NotImplementedException())
+    /// Copies DataType and Value from this FsCell to a given one and replaces theirs.
+    member self.CopyTo(target : FsCell) = 
+        target.DataType <- self.DataType
+        target.Value <- self.Value
     
     /// <summary>
     /// Creates a new comment for the cell, replacing the existing one.
@@ -269,11 +303,13 @@ type FsCell (value : string, dataType : DataType, address : FsAddress)=
     member self.GetDateTime() = raise (System.NotImplementedException())
     
     /// <summary>
-    /// Gets the cell's value converted to Double.
-    /// <para>ClosedXML will try to covert the current value to Double.</para>
+    /// Gets the cell's value converted to Double (64-bit float).
+    /// <para>FsSpreadsheet will try to convert the current value to Double.</para>
     /// <para>An exception will be thrown if the current value cannot be converted to Double.</para>
     /// </summary>
-    member self.GetDouble() = raise (System.NotImplementedException())
+    member self.GetDouble() = 
+        try float self.Value
+        with _ -> failwith $"FsCell with DataType {self.DataType} cannot be converted to Double."
     
     /// <summary>
     /// Gets the cell's value formatted depending on the cell's data type and style.
@@ -304,13 +340,18 @@ type FsCell (value : string, dataType : DataType, address : FsAddress)=
     
     /// <summary>
     /// Gets the cell's value converted to the T type.
-    /// <para>ClosedXML will try to covert the current value to the T type.</para>
+    /// <para>FsSpreadsheet will try to convert the current value to type 'T.</para>
     /// <para>An exception will be thrown if the current value cannot be converted to the T type.</para>
     /// </summary>
     /// <typeparam name="T">The return type.</typeparam>
     /// <exception cref="ArgumentException"></exception>
-    member self.GetValue<'T>() = raise (System.NotImplementedException())
-    
+    member self.GetValue<'T>() = 
+        raise <| System.NotImplementedException()
+        // does not work in most cases, maybe pattern matching with typeof<'T> and then conversion?
+        //try box value |> unbox<'T>
+        //with :? System.ArgumentException -> failwith $"Cannot convert FsCell of DataType {self.DataType} to type {typeof<'T>}"
+
+    /// Returns the FsCells value.
     member self.GetValue() = _cellValue
 
     member self.InsertCellsAbove(numberOfRows) = raise (System.NotImplementedException())
@@ -436,13 +477,14 @@ type FsCell (value : string, dataType : DataType, address : FsAddress)=
     member self.SetActive(value(* = true*)) = raise (System.NotImplementedException())
     
     /// <summary>
-    /// Sets the type of this cell's data.
-    /// <para>Changing the data type will cause ClosedXML to covert the current value to the new data type.</para>
-    /// <para>An exception will be thrown if the current value cannot be converted to the new data type.</para>
+    /// Sets the type of this FsCell's data.
+    /// <para>Changing the data type will cause FsSpreadsheet to convert the current value to the new DataType.</para>
+    /// <para>An exception will be thrown if the current value cannot be converted to the new DataType.</para>
     /// </summary>
     /// <param name="dataType">Type of the data.</param>
     /// <returns></returns>
-    member self.SetDataType(dataType) = raise (System.NotImplementedException())
+    member self.SetDataType(dataType) = 
+        self.DataType <- dataType
     
     [<System.Obsolete("Use GetDataValidation to access the existing rule, or CreateDataValidation() to create a new one.")>]
     member self.SetDataValidation() = raise (System.NotImplementedException())
@@ -454,14 +496,11 @@ type FsCell (value : string, dataType : DataType, address : FsAddress)=
     member self.SetHyperlink(hyperlink) = raise (System.NotImplementedException())
     
     /// <summary>
-    /// Sets the cell's value.
-    /// <para>If the object is an IEnumerable ClosedXML will copy the collection's data into a table starting from this cell.</para>
-    /// <para>If the object is a range ClosedXML will copy the range starting from this cell.</para>
-    /// <para>Setting the value to an object (not IEnumerable/range) will call the object's ToString() method.</para>
-    /// <para>ClosedXML will try to translate it to the corresponding type, if it can't then the value will be left as a string.</para>
+    /// Sets the FsCell's value.
+    /// <para>FsSpreadsheet will try to translate it to the corresponding type, if it cannot, the value will be left as a string.</para>
     /// </summary>
     /// <value>
-    /// The object containing the value(s) to set.
+    /// The object containing the value to set.
     /// </value>
     member self.SetValue<'T>(value) = 
         let t,v = DataType.InferCellValue value
@@ -471,19 +510,28 @@ type FsCell (value : string, dataType : DataType, address : FsAddress)=
 
     member self.TableCellType() = raise (System.NotImplementedException())
     
+    //how 2:
+    //return (format.ToUpper()) switch
+            //{
+            //    "A" => this.Address.ToString(),
+            //    "F" => HasFormula ? this.FormulaA1 : string.Empty,
+            //    "NF" => Style.NumberFormat.Format,
+            //    "FG" => Style.Font.FontColor.ToString(),
+            //    "BG" => Style.Fill.BackgroundColor.ToString(),
+            //    "V" => GetFormattedString(),
+            //    _ => throw new FormatException($"Format {format} was not recognised."),
+            //};
     /// <summary>
-    /// Returns a string that represents the current state of the cell according to the format.
+    /// Returns a string that represents the current state of the FsCell according to the format.
     /// </summary>
     /// <param name="format">A: address, F: formula, NF: number format, BG: background color, FG: foreground color, V: formatted value</param>
     /// <returns></returns>
     member self.ToString(format) = raise (System.NotImplementedException())
     
+    // same problem like with .GetValue<'T>
     member self.TryGetValue<'T>(value) = raise (System.NotImplementedException())
-    
-    member self.WorksheetColumn
-        with get() = _columnIndex
-        and set(colI) = _columnIndex <- colI
-    
-    member self.WorksheetRow
-        with get() = _rowIndex
-        and set(rowI) = _rowIndex <- rowI
+
+    // --------------
+    // STATIC METHODS
+    // --------------
+
