@@ -25,7 +25,7 @@ module FsExtensions =
             let sheetData =                 
                 let sd = SheetData.empty()
                 self.SortRows()
-                self.GetRows()
+                self.Rows
                 |> List.iter (fun row -> 
                     let cells = row.Cells |> Seq.toList
                     if not cells.IsEmpty then
