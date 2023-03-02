@@ -11,7 +11,14 @@ type FsRow (rangeAddress : FsRangeAddress, cells : FsCellsCollection, styleValue
 
     new (index,cells) = FsRow (FsRangeAddress(FsAddress(index,1),FsAddress(index,1)),cells,null)
 
-    member self.Cell(columnIndex) = base.Cell(FsAddress(1,columnIndex),cells)
+
+    // ------------------
+    // NON-STATIC METHODS
+    // ------------------
+
+    /// Returns the FsCell at columnIndex.
+    member self.Cell(columnIndex) = 
+        base.Cell(FsAddress(1,columnIndex),cells)
         
         //match _cells |> List.tryFind (fun cell -> cell.WorksheetColumn = columnIndex) with
         //| Some cell ->
@@ -23,11 +30,14 @@ type FsRow (rangeAddress : FsRangeAddress, cells : FsCellsCollection, styleValue
         //    _cells <- List.append _cells [cell]
         //    cell
 
+    /// Inserts the value at columnIndex as an FsCell. If there is an FsCell at the position, this FsCells and all the ones right to it are shifted to the right.
     member this.InsertValueAt(colIndex, (value : 'a)) =
         let cell = FsCell(value)
         cells.Add(int32 this.Index, int32 colIndex, cell)
 
-    member self.Cells = base.Cells(cells)
+    /// Returns all FsCells.
+    member self.Cells = 
+        base.Cells(cells)
 
     /// The index of the FsRow.
     member self.Index 
@@ -38,11 +48,16 @@ type FsRow (rangeAddress : FsRangeAddress, cells : FsCellsCollection, styleValue
 
     //member self.SortCells() = _cells <- _cells |> List.sortBy (fun c -> c.WorksheetColumn)
 
+
+    // --------------
+    // STATIC METHODS
+    // --------------
+
     /// Returns the index of the given FsRow.
     static member getIndex (row : FsRow) = 
         row.Index
 
-    /// Add a value at the given row- and columnindex to FsRow using.
+    /// Adds a value at the given row- and columnIndex to FsRow using.
     ///
     /// If a cell exists in the given position, shoves it to the right.
     static member insertValueAt colIndex value (row : FsRow) =
