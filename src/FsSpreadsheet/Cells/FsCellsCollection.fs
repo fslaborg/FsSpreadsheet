@@ -15,6 +15,10 @@ module Dictionary =
 
 type FsCellsCollection() =
 
+    // ---------
+    // VARIABLES
+    // ---------
+
     let mutable _columnsUsed : Dictionary<int32, int32> = new Dictionary<int, int>()
     let mutable _deleted : Dictionary<int32, HashSet<int32>> = new Dictionary<int, HashSet<int>>()
     let mutable _rowsCollection : Dictionary<int, Dictionary<int, FsCell>> = new Dictionary<int, Dictionary<int, FsCell>>()
@@ -25,10 +29,25 @@ type FsCellsCollection() =
 
     let mutable _count = 0
 
+
+    // ----------
+    // PROPERTIES
+    // ----------
+
     member this.Count 
         with get () = _count
         and private set(count) = _count <- count
 
+    member this.MaxRowNumber = _maxRowUsed
+
+    member this.MaxColumnNumber = _maxColumnUsed
+
+
+    // ------------------
+    // NON-STATIC METHODS
+    // ------------------
+
+    /// Empties the whole FsCellsCollection.
     member this.Clear() =
 
         _count <- 0;
@@ -39,35 +58,12 @@ type FsCellsCollection() =
         _maxRowUsed <- 0;
         _maxColumnUsed <- 0
 
-    static member private IncrementUsage(dictionary : Dictionary<int, int>, key : int32) =
-
-        match Dictionary.tryGet key dictionary with
-        | Some count -> 
-            dictionary.[key] <- count + 1
-        | None -> 
-            dictionary.Add(key, 1)
-
-    ///// <summary/>
-    ///// <returns>True if the number was lowered to zero so MaxColumnUsed or MaxRowUsed may require
-    ///// recomputation.</returns>
-    static member private DecrementUsage(dictionary : Dictionary<int, int>, key : int32) =
-
-        match Dictionary.tryGet key dictionary with
-        | Some count when count > 1 -> 
-            dictionary.[key] <- count - 1
-            false
-        | Some _ -> 
-            dictionary.Remove(key) |> ignore
-            true
-        | None -> 
-            false
-
-
     //public void Add(XLSheetPoint sheetPoint, XLCell cell)
     //{
     //    Add(sheetPoint.Row, sheetPoint.Column, cell);
     //}
 
+    /// Adds an FsCell of given rowIndex and columnIndex to the FsCellsCollection.
     member this.Add(row : int32, column : int32, cell : FsCell) = 
 
         _count <- _count + 1
@@ -100,6 +96,7 @@ type FsCellsCollection() =
     //    Remove(sheetPoint.Row, sheetPoint.Column);
     //}
 
+    /// Removes an FsCell of given rowIndex and columnIndex from the FsCellsCollection.
     member this.Remove(row : int32, column : int32) = 
 
         _count <- _count - 1
@@ -138,13 +135,14 @@ type FsCellsCollection() =
         | None -> 
             ()
 
+    /// Returns all FsCells of the FsCellsCollection.
     member this.GetCells() = 
     
         _rowsCollection.Values
         |> Seq.collect (fun columnsCollection -> columnsCollection.Values)
 
 
-
+    /// Returns the FsCells from given rowStart to rowEnd and columnStart to columnEnd and fulfilling the predicate.
     member this.GetCells(rowStart : int32, columnStart : int32, rowEnd : int32, columnEnd : int32, predicate : FsCell -> bool) = 
 
         let finalRow = if rowEnd > _maxRowUsed then _maxRowUsed else rowEnd
@@ -161,7 +159,8 @@ type FsCellsCollection() =
                     | _ -> ()                   
             | None -> ()
         }
-        
+
+    /// Returns the FsCells from given rowStart to rowEnd and columnStart to columnEnd.
     member this.GetCells(rowStart : int32, columnStart : int32, rowEnd : int32, columnEnd : int32) = 
     
             let finalRow = if rowEnd > _maxRowUsed then _maxRowUsed else rowEnd
@@ -179,16 +178,14 @@ type FsCellsCollection() =
                 | None -> ()
             }
 
+    /// Returns the FsCells from given startAddress to lastAddress.
     member this.GetCells(startAddress : FsAddress, lastAddress : FsAddress) =
         this.GetCells(startAddress.RowNumber,startAddress.ColumnNumber,lastAddress.RowNumber,lastAddress.ColumnNumber)
 
+    /// Returns the FsCells from given startAddress to lastAddress and fulfilling the predicate.
     member this.GetCells(startAddress : FsAddress, lastAddress : FsAddress, predicate : FsCell -> bool) =
         this.GetCells(startAddress.RowNumber,startAddress.ColumnNumber,lastAddress.RowNumber,lastAddress.ColumnNumber, predicate)
 
-
-    member this.MaxRowNumber = _maxRowUsed
-
-    member this.MaxColumnNumber = _maxColumnUsed
 
     //public int FirstRowUsed(int rowStart, int columnStart, int rowEnd, int columnEnd, XLCellsUsedOptions options,
     //    Func<IXLCell, Boolean> predicate = null)
@@ -323,6 +320,7 @@ type FsCellsCollection() =
     //    }
     //}
 
+    /// Returns the FsCell at given rowIndex and columnIndex if it exists. Otherwise returns None.
     member self.TryGetCell(row : int32, column : int32) = 
 
         if (row > _maxRowUsed || column > _maxColumnUsed) then
@@ -335,8 +333,6 @@ type FsCellsCollection() =
                 | Some cell -> Some cell
                 | None -> None
             | None -> None
-
-
 
     //public XLCell GetCell(XLSheetPoint sp)
     //{
@@ -450,12 +446,79 @@ type FsCellsCollection() =
     //    return 0;
     //}
 
-    //public IEnumerable<XLCell> GetCellsInColumn(int32 column)
-    //{
-    //    return GetCells(1, column, MaxRowUsed, column);
-    //}
+    /// Returns all FsCells in the given columnIndex.
+    member self.GetCellsInColumn(colIndex) =
+        self.GetCells(1, colIndex, _maxRowUsed, colIndex)
 
-    //public IEnumerable<XLCell> GetCellsInRow(int32 row)
-    //{
-    //    return GetCells(row, 1, row, MaxColumnUsed);
+    /// Returns all FsCells in the given rowIndex.
+    member self.GetCellsInRow(rowIndex) =
+        self.GetCells(rowIndex, 1, rowIndex, _maxColumnUsed)
 
+
+    // --------------
+    // STATIC METHODS
+    // --------------
+
+    /// 
+    static member private IncrementUsage(dictionary : Dictionary<int, int>, key : int32) =
+
+        match Dictionary.tryGet key dictionary with
+        | Some count -> 
+            dictionary.[key] <- count + 1
+        | None -> 
+            dictionary.Add(key, 1)
+
+    ///// <summary/>
+    ///// <returns>True if the number was lowered to zero so MaxColumnUsed or MaxRowUsed may require
+    ///// recomputation.</returns>
+    static member private DecrementUsage(dictionary : Dictionary<int, int>, key : int32) =
+
+        match Dictionary.tryGet key dictionary with
+        | Some count when count > 1 -> 
+            dictionary.[key] <- count - 1
+            false
+        | Some _ -> 
+            dictionary.Remove(key) |> ignore
+            true
+        | None -> 
+            false
+
+    /// Adds an FsCell of given rowIndex and columnIndex to an FsCellsCollection.
+    static member add rowIndex colIndex (cell : FsCell) (cellsCollection : FsCellsCollection) = 
+        cellsCollection.Add(rowIndex, colIndex, cell)
+
+    /// Removes an FsCell of given rowIndex and columnIndex from an FsCellsCollection.
+    static member remove rowIndex colIndex (cellsCollection : FsCellsCollection) = 
+        cellsCollection.Remove(rowIndex, colIndex)
+
+    /// Returns all FsCells of the FsCellsCollection.
+    static member getCells (cellsCollection : FsCellsCollection) = 
+        cellsCollection.GetCells()
+
+    /// Returns the FsCells from an FsCellsCollection with given rowStart to rowEnd and columnStart to columnEnd and fulfilling the predicate.
+    static member filterCellsFromTo rowStart columnStart rowEnd columnEnd (predicate : FsCell -> bool) (cellsCollection : FsCellsCollection) = 
+        cellsCollection.GetCells(rowStart, columnStart, rowEnd, columnEnd, predicate)
+
+    /// Returns the FsCells from an FsCellsCollection with given rowStart to rowEnd and columnStart to columnEnd.
+    static member getCellsFromTo rowStart columnStart rowEnd columnEnd (cellsCollection : FsCellsCollection) = 
+        cellsCollection.GetCells(rowStart, columnStart, rowEnd, columnEnd)
+
+    /// Returns the FsCells from an FsCellsCollection with given startAddress to lastAddress.
+    static member getCellsFromToAddress startAddress lastAddress (cellsCollection : FsCellsCollection) =
+        cellsCollection.GetCells(startAddress, lastAddress)
+
+    /// Returns the FsCells from an FsCellsCollection with given startAddress to lastAddress and fulfilling the predicate.
+    static member filterCellsFromToAddress startAddress lastAddress (predicate : FsCell -> bool) (cellsCollection : FsCellsCollection) =
+        cellsCollection.GetCells(startAddress, lastAddress, predicate)
+
+    /// Returns the FsCell from an FsCellsCollection at given rowIndex and columnIndex if it exists. Otherwise returns None.
+    static member tryGetCell rowIndex colIndex (cellsCollection : FsCellsCollection) = 
+        cellsCollection.TryGetCell(rowIndex, colIndex)
+
+    /// Returns all FsCells in an FsCellsCollection with the given columnIndex.
+    static member getCellsInColumn colIndex (cellsCollection : FsCellsCollection) =
+        cellsCollection.GetCellsInColumn colIndex
+
+    /// Returns all FsCells in an FsCellsCollection with the given rowIndex.
+    static member getCellsInRow rowIndex (cellsCollection : FsCellsCollection) =
+        cellsCollection.GetCellsInRow rowIndex
