@@ -303,7 +303,7 @@ type FsCell (value : string, dataType : DataType, address : FsAddress) =
     member self.GetDateTime() = raise (System.NotImplementedException())
     
     /// <summary>
-    /// Gets the cell's value converted to Double (64-bit float).
+    /// Gets the FsCell's value converted to Double (64-bit float).
     /// <para>FsSpreadsheet will try to convert the current value to Double.</para>
     /// <para>An exception will be thrown if the current value cannot be converted to Double.</para>
     /// </summary>
@@ -327,7 +327,7 @@ type FsCell (value : string, dataType : DataType, address : FsAddress) =
     member self.GetRichText() = raise (System.NotImplementedException())
     
     /// <summary>
-    /// Gets the cell's value converted to a String.
+    /// Gets the FsCell's value converted to a String.
     /// </summary>
     member self.GetString() = value
     
@@ -535,3 +535,48 @@ type FsCell (value : string, dataType : DataType, address : FsAddress) =
     // STATIC METHODS
     // --------------
 
+    /// <summary>
+    /// Returns a string that represents the current state of the FsCell according to the format.
+    /// </summary>
+    /// <param name="format">A: address, F: formula, NF: number format, BG: background color, FG: foreground color, V: formatted value</param>
+    /// <returns></returns>
+    static member toStringFormat format = raise (System.NotImplementedException())
+
+    /// Copies and replaces DataType and Value from a source FsCell into a target FsCell.
+    static member copy (sourceCell : FsCell) (targetCell : FsCell) =
+        targetCell.DataType <- sourceCell.DataType
+        targetCell.Value <- sourceCell.Value
+        targetCell
+
+    /// <summary>
+    /// Converts an FsCell's value converted to Double (64-bit float).
+    /// <para>FsSpreadsheet will try to convert the current value to Double.</para>
+    /// <para>An exception will be thrown if the current value cannot be converted to Double.</para>
+    /// </summary>
+    static member getDouble (cell : FsCell) =
+        try float cell.Value
+        with _ -> failwith $"FsCell with DataType {cell.DataType} cannot be converted to Double."
+
+    /// <summary>
+    /// Sets the type of an FsCell's data.
+    /// <para>Changing the data type will cause FsSpreadsheet to convert the current value to the new DataType.</para>
+    /// <para>An exception will be thrown if the current value cannot be converted to the new DataType.</para>
+    /// </summary>
+    /// <param name="dataType">Type of the data.</param>
+    /// <returns></returns>
+    static member setDataType dataType (cell : FsCell) =
+        cell.DataType <- dataType
+        cell
+
+    /// <summary>
+    /// Sets an FsCell's value.
+    /// <para>FsSpreadsheet will try to translate it to the corresponding type, if it cannot, the value will be left as a string.</para>
+    /// </summary>
+    /// <value>
+    /// The object containing the value to set.
+    /// </value>
+    static member setValue<'T> value (cell : FsCell)= 
+        let t,v = DataType.InferCellValue value
+        cell.DataType <- t
+        cell.Value <- v
+        cell
