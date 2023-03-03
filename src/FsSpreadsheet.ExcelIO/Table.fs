@@ -360,9 +360,14 @@ module Table =
                 let r = uint i + upperBoundary + 1u
                 match SheetData.tryGetCellValueAt sst r c sheetData with
                 | Some v -> dictionary.Add((i,header),v)
-                | None -> ()                              
+                | None -> ()
             )
             |> ignore
         )
         dictionary
-        
+
+    /// Takes a XlsxTable and returns the FsTable based on it.
+    let toFsTable (table : Table) =
+        let topLeftBoundary, bottomRightBoundary = getArea table |> Area.toBoundaries
+        let ra = FsRangeAddress(FsAddress(topLeftBoundary), FsAddress(bottomRightBoundary))
+        FsTable(table.Name, ra, table.TotalsRowShown, true)

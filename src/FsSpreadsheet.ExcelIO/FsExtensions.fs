@@ -25,11 +25,12 @@ module FsExtensions =
             table.ToExcelTable(cellsCollection)
 
         /// Creates an FsTable on the basis of an XlsxTable.
-        //new(table : Spreadsheet.Table) = 
+        //new(table : Spreadsheet.Table) =        // not permitted :(
+            //FsTable(table)
 
         /// Takes an XlsxTable and returns an FsTable.
-        //static member fromOpenXmlTable table = 
-            //FsTable(table)
+        static member fromOpenXmlTable table = 
+            Table.toFsTable table
 
     type FsWorksheet with
 
