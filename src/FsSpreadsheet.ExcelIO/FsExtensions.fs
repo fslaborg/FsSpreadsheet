@@ -2,13 +2,16 @@
 
 open DocumentFormat.OpenXml
 open FsSpreadsheet
+open System.IO
 
+/// Classes that extend the core FsSpreadsheet library with IO functionalities.
 [<AutoOpen>]
 module FsExtensions =
 
     type FsTable with
 
-        member self.ToExcelTable (cells : FsCellsCollection) = 
+        /// Returns the FsTable with given FsCellsCollection in the form of an XlsxTable.
+        member self.ToExcelTable(cells : FsCellsCollection) = 
 
             let columns =
                 self.FieldNames(cells)
@@ -17,12 +20,24 @@ module FsExtensions =
                 )
             Table.create self.Name (StringValue(self.RangeAddress.Range)) columns
 
+        /// Returns an FsTable with given FsCellsCollection in the form of an XlsxTable.
+        static member toExcelTable cellsCollection (table : FsTable) =
+            table.ToExcelTable(cellsCollection)
+
+        /// Creates an FsTable on the basis of an XlsxTable.
+        //new(table : Spreadsheet.Table) = 
+
+        /// Takes an XlsxTable and returns an FsTable.
+        //static member fromOpenXmlTable table = 
+            //FsTable(table)
+
     type FsWorksheet with
 
+        /// Returns the FsWorksheet in the form of an OpenXmlSpreadsheet.
         member self.ToExcelWorksheet() =
             self.RescanRows()
             let sheet = Worksheet.empty()
-            let sheetData =                 
+            let sheetData =
                 let sd = SheetData.empty()
                 self.SortRows()
                 self.Rows
@@ -44,7 +59,11 @@ module FsExtensions =
                 sd
             Worksheet.setSheetData sheetData sheet
 
+        /// Returns an FsWorksheet in the form of an XlsxSpreadsheet.
+        static member toExcelWorksheet (worksheet : FsWorksheet) = 
+            worksheet.ToExcelWorksheet()
 
+        /// Appends the FsTables of this FsWorksheet to a given OpenXmlWorksheetPart in an XlsxWorkbookPart.
         member self.AppendTablesToWorksheetPart(workbookPart : DocumentFormat.OpenXml.Packaging.WorkbookPart,worksheetPart : DocumentFormat.OpenXml.Packaging.WorksheetPart) =
             self.Tables
             |> Seq.iter (fun t ->
@@ -52,10 +71,15 @@ module FsExtensions =
                 Table.addTable workbookPart worksheetPart table |> ignore
             )
 
+        /// Appends the FsTables of an FsWorksheet to a given OpenXmlWorksheetPart in an XlsxWorkbookPart.
+        static member appendTablesToWorksheetPart workbookPart worksheetPart (fsWorksheet : FsWorksheet) =
+            fsWorksheet.AppendTablesToWorksheetPart(workbookPart, worksheetPart)
+
 
     type FsWorkbook with
 
-        member self.ToStream(stream : System.IO.MemoryStream) = 
+        /// Writes the FsWorkbook into a given MemoryStream.
+        member self.ToStream(stream : MemoryStream) = 
             let doc = Spreadsheet.initEmptyOnStream stream 
 
             let workbookPart = Spreadsheet.initWorkbookPart doc
@@ -74,31 +98,39 @@ module FsExtensions =
 
             Spreadsheet.close doc
 
+        /// Writes an FsWorkbook into a given MemoryStream.
+        static member toStream stream (workbook : FsWorkbook) =
+            workbook.ToStream stream
+
+        /// Returns the FsWorkbook in the form of a byte array.
         member self.ToBytes() =
-            use memoryStream = new System.IO.MemoryStream()
+            use memoryStream = new MemoryStream()
             self.ToStream(memoryStream)
             memoryStream.ToArray()
 
-        member self.ToFile(path) =
-            self.ToBytes()
-            |> fun bytes -> System.IO.File.WriteAllBytes (path, bytes)
-
-        static member toStream(stream : System.IO.MemoryStream,workbook : FsWorkbook) =
-            workbook.ToStream(stream)
-
-        static member toBytes(workbook: FsWorkbook) =
+        /// Returns an FsWorkbook in the form of a byte array.
+        static member toBytes (workbook: FsWorkbook) =
             workbook.ToBytes()
 
-        static member toFile(path,workbook: FsWorkbook) =
+        /// Writes the FsWorkbook into a binary file at the given path.
+        member self.ToFile(path) =
+            self.ToBytes()
+            |> fun bytes -> File.WriteAllBytes (path, bytes)
+
+        /// Writes an FsWorkbook into a binary file at the given path.
+        static member toFile path (workbook : FsWorkbook) =
             workbook.ToFile(path)
 
 type Writer =
     
-    static member toStream(stream : System.IO.MemoryStream,workbook : FsWorkbook) =
+    /// Writes an FsWorkbook into a given MemoryStream.
+    static member toStream(stream : MemoryStream, workbook : FsWorkbook) =
         workbook.ToStream(stream)
 
+    /// Returns an FsWorkbook in the form of a byte array.
     static member toBytes(workbook: FsWorkbook) =
         workbook.ToBytes()
 
+    /// Writes an FsWorkbook into a binary file at the given path.
     static member toFile(path,workbook: FsWorkbook) =
         workbook.ToFile(path)
