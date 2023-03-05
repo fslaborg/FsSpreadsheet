@@ -211,8 +211,8 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
 
     // TO DO (later)
     /// If an FsRow with index rowIndex exists in the FsWorksheet, moves it downwards by amount. Negative amounts will move the FsRow upwards.
-    static member moveRowVertical amount rowIndex (sheet : FsWorksheet) =
-        match FsWorksheet.containsRowAt
+    //static member moveRowVertical amount rowIndex (sheet : FsWorksheet) =
+    //    match FsWorksheet.containsRowAt
 
     // TO DO (later)
     //static member moveRowBlockDownward rowIndex sheet =
