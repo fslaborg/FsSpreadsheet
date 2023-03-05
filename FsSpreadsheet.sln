@@ -14,6 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution", "Solution", "{27
 		.gitignore = .gitignore
 		build.cmd = build.cmd
 		build.fsx = build.fsx
+		playground.fsx = playground.fsx
 		README.md = README.md
 		RELEASE_NOTES.md = RELEASE_NOTES.md
 	EndProjectSection
@@ -21,6 +22,8 @@ EndProject
 Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "FsSpreadsheet.CsvIO", "src\FsSpreadsheet.CsvIO\FsSpreadsheet.CsvIO.fsproj", "{A89CB3BC-7C15-4A71-863C-2E1DDEDDD12A}"
 EndProject
 Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Build", "build\Build.fsproj", "{544DA4BF-E0DB-4222-B5DB-E9A7B9E2A5DD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{828F619E-88DE-4A01-B101-FEBD0DA5DB01}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
