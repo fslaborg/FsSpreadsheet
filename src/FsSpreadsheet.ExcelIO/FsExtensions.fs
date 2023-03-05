@@ -2,6 +2,7 @@
 
 open DocumentFormat.OpenXml
 open FsSpreadsheet
+open FsSpreadsheet.ExcelIO
 open System.IO
 
 /// Classes that extend the core FsSpreadsheet library with IO functionalities.
@@ -30,7 +31,9 @@ module FsExtensions =
 
         /// Takes an XlsxTable and returns an FsTable.
         static member fromOpenXmlTable table = 
-            Table.toFsTable table
+            let topLeftBoundary, bottomRightBoundary = Table.getArea table |> Table.Area.toBoundaries
+            let ra = FsRangeAddress(FsAddress(topLeftBoundary), FsAddress(bottomRightBoundary))
+            FsTable(table.Name, ra, table.TotalsRowShown, true)
 
     type FsWorksheet with
 
@@ -45,7 +48,7 @@ module FsExtensions =
                 |> List.iter (fun row -> 
                     let cells = row.Cells |> Seq.toList
                     if not cells.IsEmpty then
-                        let min,max =                        
+                        let min,max =
                             cells
                             |> List.map (fun cell -> uint32 cell.WorksheetColumn) 
                             |> fun l -> List.min l, List.max l
