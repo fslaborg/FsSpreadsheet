@@ -1,17 +1,24 @@
 ﻿namespace FsSpreadsheet
 
 // Type based on the type XLWorksheet used in ClosedXml
-type FsWorksheet (name) =
-    
+/// Creates an FsWorksheet with the given name, FsRows, FsTables, and FsCellsCollection.
+type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
+
     let mutable _name = name
-    
-    let mutable _rows : FsRow list = []
 
-    let mutable _tables : FsTable list = []
+    let mutable _rows : FsRow list = fsRows
 
-    let mutable _cells = FsCellsCollection()
-    
-    new () = FsWorksheet("")
+    let mutable _tables : FsTable list = fsTables
+
+    let mutable _cells : FsCellsCollection = fsCellsCollection
+
+    /// Creates an empty FsWorksheet.
+    new () = 
+        FsWorksheet("")
+
+    /// Creates an empty FsWorksheet with the given name.
+    new (name) = 
+        FsWorksheet(name, [], [], FsCellsCollection())
 
 
     // ----------
