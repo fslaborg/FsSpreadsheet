@@ -25,7 +25,7 @@ module FsExtensions =
         static member toXlsxTable cellsCollection (table : FsTable) =
             table.ToXlsxTable(cellsCollection)
 
-        /// Creates an FsTable on the basis of an XlsxTable.
+        ///// Creates an FsTable on the basis of an XlsxTable.
         //new(table : Spreadsheet.Table) =        // not permitted :(
             //FsTable(table)
 

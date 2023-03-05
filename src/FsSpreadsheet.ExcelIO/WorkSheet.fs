@@ -147,7 +147,7 @@ module Worksheet =
 
     //let insertCellData (cell:CellData.CellDataValue) (worksheet : Worksheet) =
         
-    ///Convenience
+    //Convenience
 
     //let insertRow (rowIndex) (values: 'T seq) (worksheet:Worksheet) = notImplemented()
     //let overWriteRow (rowIndex) (values: 'T seq) (worksheet:Worksheet) = notImplemented()
