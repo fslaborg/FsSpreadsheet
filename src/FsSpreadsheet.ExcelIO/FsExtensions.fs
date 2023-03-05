@@ -12,7 +12,7 @@ module FsExtensions =
     type FsTable with
 
         /// Returns the FsTable with given FsCellsCollection in the form of an XlsxTable.
-        member self.ToExcelTable(cells : FsCellsCollection) = 
+        member self.ToXlsxTable(cells : FsCellsCollection) = 
 
             let columns =
                 self.FieldNames(cells)
@@ -22,23 +22,23 @@ module FsExtensions =
             Table.create self.Name (StringValue(self.RangeAddress.Range)) columns
 
         /// Returns an FsTable with given FsCellsCollection in the form of an XlsxTable.
-        static member toExcelTable cellsCollection (table : FsTable) =
-            table.ToExcelTable(cellsCollection)
+        static member toXlsxTable cellsCollection (table : FsTable) =
+            table.ToXlsxTable(cellsCollection)
 
         /// Creates an FsTable on the basis of an XlsxTable.
         //new(table : Spreadsheet.Table) =        // not permitted :(
             //FsTable(table)
 
         /// Takes an XlsxTable and returns an FsTable.
-        static member fromOpenXmlTable table = 
+        static member fromXlsxTable table = 
             let topLeftBoundary, bottomRightBoundary = Table.getArea table |> Table.Area.toBoundaries
             let ra = FsRangeAddress(FsAddress(topLeftBoundary), FsAddress(bottomRightBoundary))
             FsTable(table.Name, ra, table.TotalsRowShown, true)
 
     type FsWorksheet with
 
-        /// Returns the FsWorksheet in the form of an OpenXmlSpreadsheet.
-        member self.ToExcelWorksheet() =
+        /// Returns the FsWorksheet in the form of an XlsxSpreadsheet.
+        member self.ToXlsxWorksheet() =
             self.RescanRows()
             let sheet = Worksheet.empty()
             let sheetData =
@@ -64,21 +64,20 @@ module FsExtensions =
             Worksheet.setSheetData sheetData sheet
 
         /// Returns an FsWorksheet in the form of an XlsxSpreadsheet.
-        static member toExcelWorksheet (worksheet : FsWorksheet) = 
-            worksheet.ToExcelWorksheet()
+        static member toXlsxWorksheet (fsWorksheet : FsWorksheet) = 
+            fsWorksheet.ToXlsxWorksheet()
 
         /// Appends the FsTables of this FsWorksheet to a given OpenXmlWorksheetPart in an XlsxWorkbookPart.
-        member self.AppendTablesToWorksheetPart(workbookPart : DocumentFormat.OpenXml.Packaging.WorkbookPart,worksheetPart : DocumentFormat.OpenXml.Packaging.WorksheetPart) =
+        member self.AppendTablesToWorksheetPart(xlsxlWorkbookPart : DocumentFormat.OpenXml.Packaging.WorkbookPart, xlsxWorksheetPart : DocumentFormat.OpenXml.Packaging.WorksheetPart) =
             self.Tables
             |> Seq.iter (fun t ->
-                let table = t.ToExcelTable(self.CellCollection)
-                Table.addTable workbookPart worksheetPart table |> ignore
+                let table = t.ToXlsxTable(self.CellCollection)
+                Table.addTable xlsxlWorkbookPart xlsxWorksheetPart table |> ignore
             )
 
         /// Appends the FsTables of an FsWorksheet to a given OpenXmlWorksheetPart in an XlsxWorkbookPart.
-        static member appendTablesToWorksheetPart workbookPart worksheetPart (fsWorksheet : FsWorksheet) =
-            fsWorksheet.AppendTablesToWorksheetPart(workbookPart, worksheetPart)
-
+        static member appendTablesToWorksheetPart xlsxWorkbookPart xlsxWorksheetPart (fsWorksheet : FsWorksheet) =
+            fsWorksheet.AppendTablesToWorksheetPart(xlsxWorkbookPart, xlsxWorksheetPart)
 
     type FsWorkbook with
 
@@ -92,7 +91,7 @@ module FsExtensions =
             |> List.iter (fun worksheet ->
 
                 let worksheetPart = 
-                    WorkbookPart.appendWorksheet worksheet.Name (worksheet.ToExcelWorksheet()) workbookPart
+                    WorkbookPart.appendWorksheet worksheet.Name (worksheet.ToXlsxWorksheet()) workbookPart
                     |> WorkbookPart.getOrInitWorksheetPartByName worksheet.Name
                
                 worksheet.AppendTablesToWorksheetPart(workbookPart,worksheetPart)
