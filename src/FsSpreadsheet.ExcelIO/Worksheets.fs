@@ -52,7 +52,8 @@ module Worksheet =
         worksheetPart.Worksheet <- worksheet
         worksheetPart
 
-    /// Associates an empty Worksheet with the WworksheetPart.
+    /// <summary>Associates an empty Worksheet with the WorksheetPart.</summary>
+    /// <param name ="worksheetPart">The WorksheetPart to associate the Worksheet with.</param>
     let init (worksheetPart : WorksheetPart) = 
         worksheetPart
         |> setWorksheet (empty())
