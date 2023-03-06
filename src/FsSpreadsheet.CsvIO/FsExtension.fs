@@ -27,7 +27,7 @@ module FsExtensions =
         member self.ToSparseTable() : seq<seq<string option> option>=
             self.RescanRows()
             self.SortRows()
-            let rows = self.GetRows()
+            let rows = self.Rows
             let maxRowIndex = self.CellCollection.MaxRowNumber
             seq {
                 for i = 1 to maxRowIndex do
