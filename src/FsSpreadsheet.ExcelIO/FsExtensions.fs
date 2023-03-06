@@ -35,6 +35,7 @@ module FsExtensions =
             let ra = FsRangeAddress(FsAddress(topLeftBoundary), FsAddress(bottomRightBoundary))
             FsTable(table.Name, ra, table.TotalsRowShown, true)
 
+
     type FsWorksheet with
 
         /// Returns the FsWorksheet in the form of an XlsxSpreadsheet.
@@ -78,6 +79,7 @@ module FsExtensions =
         /// Appends the FsTables of an FsWorksheet to a given OpenXmlWorksheetPart in an XlsxWorkbookPart.
         static member appendTablesToWorksheetPart xlsxWorkbookPart xlsxWorksheetPart (fsWorksheet : FsWorksheet) =
             fsWorksheet.AppendTablesToWorksheetPart(xlsxWorkbookPart, xlsxWorksheetPart)
+
 
     type FsWorkbook with
 
@@ -123,6 +125,7 @@ module FsExtensions =
         /// Writes an FsWorkbook into a binary file at the given path.
         static member toFile path (workbook : FsWorkbook) =
             workbook.ToFile(path)
+
 
 type Writer =
     
