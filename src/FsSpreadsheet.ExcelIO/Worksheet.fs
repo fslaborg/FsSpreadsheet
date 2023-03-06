@@ -82,6 +82,11 @@ module Worksheet =
         /// Returns the WorksheetCommentsPart associated with a WorksheetPart.
         let getWorksheetCommentsPart (worksheetPart : WorksheetPart) = worksheetPart.WorksheetCommentsPart
 
+        /// <summary>Returns the Tables associated with a WorksheetPart</summary>
+        let getTables (worksheetPart : WorksheetPart) = 
+            worksheetPart.TableDefinitionParts
+            |> Seq.map (fun t -> t.Table)
+
 
     /// Functions for extracting / working with WorksheetCommentsParts.
     module WorksheetCommentsPart =
