@@ -1,6 +1,7 @@
 ﻿namespace FsSpreadsheet
 
 
+/// <summary>Creates an empty FsWorkbook.</summary>
 type FsWorkbook() =
  
     let mutable _worksheets = []
