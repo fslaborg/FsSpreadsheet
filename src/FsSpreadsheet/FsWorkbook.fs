@@ -47,12 +47,7 @@ type FsWorkbook() =
 
     /// Removes a given FsWorksheet.
     member self.RemoveWorksheet(sheet : FsWorksheet) =
-        let filteredWorksheets =
-            match _worksheets |> List.tryFind ((=) sheet) with
-            | Some w -> _worksheets |> List.filter ((<>) sheet)
-            | None -> failwith $"FsWorksheet with name {sheet.Name} was not found in FsWorkbook."
-        _worksheets <- filteredWorksheets
-        self
+        self.RemoveWorksheet(sheet.Name)
  
 
     // --------------
