@@ -49,7 +49,8 @@ open DocumentFormat.OpenXml
 
 // ----------------------------------------------
 
-let excelFilePath = @"C:\Users\olive\OneDrive\CSB-Stuff\testFiles\testExcel5.xlsx"
+//let excelFilePath = @"C:\Users\olive\OneDrive\CSB-Stuff\testFiles\testExcel5.xlsx"
+let excelFilePath = @"C:\Users\revil\OneDrive\CSB-Stuff\testFiles\testExcel5.xlsx"
 
 let dslTree = 
     workbook {
@@ -102,9 +103,37 @@ let fswb = new FsWorkbook()
 shtsN[0]
 let name = Sheet.getName shtsN[0]
 let tblN = tblNM[0]
+//tblN[0].TableDefinitionPart
+//Table.
 let fsTblN = tblN |> Array.map FsTable.fromXlsxTable
 let fsCcN = FsCellsCollection()
-fsCcN.Add
+cNMO[0]
+|> Array.iteri (
+    fun iR r ->
+        r
+        |> Array.iteri (
+            fun iC c ->
+                let cv = Cell.getValue sst c
+                let dt = Cell.getType c |> Cell.cellValuesToDataType
+                let fa = Cell.getReference c |> FsAddress
+                let fsc = FsCell(cv, dt, fa)
+                fsCcN.Add(iR, iC, fsc)
+        )
+)
+let sdName = shtsN[0].Name.Value
+let fsRs = 
+    rNM[0]
+    |> Array.map (
+        fun r ->
+            let fi, li = Row.Spans.toBoundaries r.Spans
+            let ri = Row.getIndex r
+            let fa = FsAddress(int ri, int fi)
+            let la = FsAddress(int ri, int li)
+            let fsra = FsRangeAddress(fa, la)
+            let fsCci = fsCcN.GetCellsInRow (int ri)
+            FsRow(fsra, fsCcN, box 0)
+    )
+let fsws = FsWorksheet(sdName, )
 let fswsN = 
     shtsN
     |> Array.mapi (

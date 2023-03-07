@@ -50,6 +50,10 @@ type FsRow (rangeAddress : FsRangeAddress, cells : FsCellsCollection, styleValue
         //    _cells <- List.append _cells [cell]
         //    cell
 
+    /// <summary>Returns the FsCell at the given columnIndex from an FsRow.
+    static member getCellAt colIndex (row : FsRow) =
+        row.Cell(colIndex)
+
     /// Inserts the value at columnIndex as an FsCell. If there is an FsCell at the position, this FsCells and all the ones right to it are shifted to the right.
     member this.InsertValueAt(colIndex, (value : 'a)) =
         let cell = FsCell(value)
