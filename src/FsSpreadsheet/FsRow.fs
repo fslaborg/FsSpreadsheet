@@ -1,14 +1,22 @@
 ﻿namespace FsSpreadsheet
 
 // Type based on the type XLRow used in ClosedXml
+/// <summary>Creates an FsRow from the given FsRangeAddress, consisting of FsCells within a given FsCellsCollection, and a styleValue.</summary>
+/// <remarks>The FsCellsCollection must only cover 1 row!</remarks>
+/// <exception cref="System.Exception">if given FsCellsCollection has more than 1 row.</exception>
 type FsRow (rangeAddress : FsRangeAddress, cells : FsCellsCollection, styleValue)= 
 
     inherit FsRangeBase(rangeAddress,styleValue)
 
-    let cells = cells
+    let cells = 
+        if cells.MaxRowNumber > 1 then
+            failwith "FsCellsCollection must only have 1 row to be qualified for FsRow creation."
+        cells
 
     new () = FsRow (FsRangeAddress(FsAddress(0,0),FsAddress(0,0)),FsCellsCollection(),null)
 
+    // ask HLW: isn't this wrong? The FsRangeAddress will reach from col 1 to col 1 but shouldn't it be reaching from col 1 to how long the FsCellsCollection is?
+    // or even from first colIndex in the FsCellsCollection to last colIndex of it?
     new (index,cells) = FsRow (FsRangeAddress(FsAddress(index,1),FsAddress(index,1)),cells,null)
 
 
