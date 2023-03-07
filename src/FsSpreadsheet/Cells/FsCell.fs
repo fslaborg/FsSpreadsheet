@@ -75,7 +75,7 @@ type FsCell (value : string, dataType : DataType, address : FsAddress) =
     /// <summary>Gets this FsCell's address, relative to the FsWorksheet.</summary>
     /// <value>The FsCell's address.</value>
     member self.Address 
-        with get() = FsAddress(_columnIndex,_rowIndex)
+        with get() = FsAddress(_rowIndex,_columnIndex)
         and internal set(address : FsAddress) =
             _rowIndex <- address.RowNumber
             _columnIndex <- address.ColumnNumber
