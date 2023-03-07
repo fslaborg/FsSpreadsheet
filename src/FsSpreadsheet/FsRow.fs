@@ -12,9 +12,29 @@ type FsRow (rangeAddress : FsRangeAddress, cells : FsCellsCollection, styleValue
     new (index,cells) = FsRow (FsRangeAddress(FsAddress(index,1),FsAddress(index,1)),cells,null)
 
 
-    // ------------------
-    // NON-STATIC METHODS
-    // ------------------
+    // ----------
+    // PROPERTIES
+    // ----------
+
+    /// The associated FsCells.
+    member self.Cells = 
+        base.Cells(cells)
+
+    /// The index of the FsRow.
+    member self.Index 
+        with get() = self.RangeAddress.FirstAddress.RowNumber
+        and set(i) = 
+            self.RangeAddress.FirstAddress.RowNumber <- i
+            self.RangeAddress.LastAddress.RowNumber <- i
+
+
+    // -------
+    // METHODS
+    // -------
+
+    /// Returns the index of the given FsRow.
+    static member getIndex (row : FsRow) = 
+        row.Index
 
     /// Returns the FsCell at columnIndex.
     member self.Cell(columnIndex) = 
@@ -35,31 +55,11 @@ type FsRow (rangeAddress : FsRangeAddress, cells : FsCellsCollection, styleValue
         let cell = FsCell(value)
         cells.Add(int32 this.Index, int32 colIndex, cell)
 
-    /// Returns all FsCells.
-    member self.Cells = 
-        base.Cells(cells)
-
-    /// The index of the FsRow.
-    member self.Index 
-        with get() = self.RangeAddress.FirstAddress.RowNumber
-        and set(i) = 
-            self.RangeAddress.FirstAddress.RowNumber <- i
-            self.RangeAddress.LastAddress.RowNumber <- i
-
-    //member self.SortCells() = _cells <- _cells |> List.sortBy (fun c -> c.WorksheetColumn)
-
-
-    // --------------
-    // STATIC METHODS
-    // --------------
-
-    /// Returns the index of the given FsRow.
-    static member getIndex (row : FsRow) = 
-        row.Index
-
     /// Adds a value at the given row- and columnIndex to FsRow using.
     ///
     /// If a cell exists in the given position, shoves it to the right.
     static member insertValueAt colIndex value (row : FsRow) =
         row.InsertValueAt(colIndex, value)
         row
+
+    //member self.SortCells() = _cells <- _cells |> List.sortBy (fun c -> c.WorksheetColumn)
