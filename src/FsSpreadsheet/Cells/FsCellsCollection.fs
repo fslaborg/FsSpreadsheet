@@ -134,7 +134,7 @@ type FsCellsCollection() =
     //}
 
     /// Removes an FsCell of given rowIndex and columnIndex from the FsCellsCollection.
-    member this.Remove(row : int32, column : int32) = 
+    member this.RemoveCellAt(row : int32, column : int32) = 
 
         _count <- _count - 1
         let rowRemoved = FsCellsCollection.DecrementUsage(_rowsUsed, row);
@@ -173,8 +173,8 @@ type FsCellsCollection() =
             ()
 
     /// Removes an FsCell of given rowIndex and columnIndex from an FsCellsCollection.
-    static member remove rowIndex colIndex (cellsCollection : FsCellsCollection) = 
-        cellsCollection.Remove(rowIndex, colIndex)
+    static member removeCellAt rowIndex colIndex (cellsCollection : FsCellsCollection) = 
+        cellsCollection.RemoveCellAt(rowIndex, colIndex)
 
     /// <summary>Removes the value of an FsCell at given row- and columnIndex if it exists from the FsCollection.</summary>
     /// <remarks>Does nothing if the row or column of given index does not exist.</remarks>

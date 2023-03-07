@@ -327,7 +327,7 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
 
     /// Removes the value at the given row- and columnIndex from the FsWorksheet.
     member self.RemoveCellAt(rowIndex, colIndex) =
-        self.CellCollection.Remove(int32 rowIndex, int32 colIndex)
+        self.CellCollection.RemoveCellAt(int32 rowIndex, int32 colIndex)
         self
 
     /// Removes the value at the given row- and columnIndex from an FsWorksheet.
