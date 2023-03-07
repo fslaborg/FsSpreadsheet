@@ -166,6 +166,38 @@ type FsCellsCollection() =
     static member remove rowIndex colIndex (cellsCollection : FsCellsCollection) = 
         cellsCollection.Remove(rowIndex, colIndex)
 
+    /// <summary>Removes the value of an FsCell at given row- and columnIndex if it exists from the FsCollection.</summary>
+    /// <remarks>Does nothing if the row or column of given index does not exist.</remarks>
+    /// <exception cref="System.ArgumentNullException">if columnIndex is null.</exception>
+    member this.TryRemoveValueAt(rowIndex, colIndex) =
+        match Dictionary.tryGet rowIndex _rowsCollection with
+        | Some colsCollection ->
+            try (colsCollection.Item colIndex).Value <- "" with
+            _ -> ()
+        | None -> ()
+        this
+
+    /// <summary>Removes the value of an FsCell at given row- and columnIndex if it exists from a given FsCollection.</summary>
+    /// <remarks>Does nothing if the row or column of given index does not exist.</remarks>
+    /// <exception>Throws `System.ArgumentNullException` if columnIndex is null.</exception>
+    static member tryRemoveValueAt rowIndex colIndex (cellsCollection : FsCellsCollection) =
+        cellsCollection.TryRemoveValueAt(rowIndex, colIndex)
+
+    /// <summary>Removes the value of an FsCell at given row- and columnIndex from the FsCollection.</summary>
+    /// <exception cref="System.ArgumentNullException">if rowIndex or columnIndex is null.</exception>
+    /// <exception cref="System.Generic.KeyNotFoundException">if row or column at the given index does not exist.</exception>
+    member this.RemoveAt(rowIndex, colIndex) =
+        _rowsCollection
+            .Item(rowIndex)
+            .Item(colIndex)
+            .Value <- ""
+
+    /// <summary>Removes the value of an FsCell at given row- and columnIndex from a given FsCollection.</summary>
+    /// <exception cref="System.ArgumentNullException">if rowIndex or columnIndex is null.</exception>
+    /// <exception cref="System.Generic.KeyNotFoundException">if row or column at the given index does not exist.</exception>
+    static member removeAt rowIndex colIndex (cellsCollection : FsCellsCollection) =
+        cellsCollection.RemoveAt(rowIndex, colIndex)
+
     /// Returns all FsCells of the FsCellsCollection.
     member this.GetCells() = 
     
