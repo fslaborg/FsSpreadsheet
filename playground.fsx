@@ -114,12 +114,21 @@ cNMO[0]
         |> Array.iteri (
             fun iC c ->
                 let cv = Cell.getValue sst c
+                printfn $"cellRef: {Cell.getReference c}, cellV: {cv}"
                 let dt = Cell.getType c |> Cell.cellValuesToDataType
                 let fa = Cell.getReference c |> FsAddress
+                printfn $"Fa: {fa.Address}"
                 let fsc = FsCell(cv, dt, fa)
+                printfn $"Fsc: Row: {fsc.Address.RowNumber} Col: {fsc.Address.ColumnNumber}"
                 fsCcN.Add(iR, iC, fsc)
+                ()
         )
 )
+"A1" |> FsAddress
+"B1" |> FsAddress
+"C2" |> FsAddress
+fsCcN.GetCells() |> Array.ofSeq |> Array.iter (fun fsc -> printfn $"Row: {fsc.Address.RowNumber} Col: {fsc.Address.ColumnNumber} Val: {fsc.Value}")
+//let bla = if 1 > 0 then failwith "sheesh"
 let sdName = shtsN[0].Name.Value
 let fsRs = 
     rNM[0]
@@ -130,8 +139,11 @@ let fsRs =
             let fa = FsAddress(int ri, int fi)
             let la = FsAddress(int ri, int li)
             let fsra = FsRangeAddress(fa, la)
-            let fsCci = fsCcN.GetCellsInRow (int ri)
-            FsRow(fsra, fsCcN, box 0)
+            let fscseq = fsCcN.GetCellsInRow (int ri)
+            let fscCr = FsCellsCollection()
+            fscseq
+            |> Seq.iter (fun fsc -> fscCr.Add(int ri, fsc.Address.ColumnNumber, fsc))
+            FsRow(fsra, fscCr, box 0)
     )
 let fsws = FsWorksheet(sdName, )
 let fswsN = 
