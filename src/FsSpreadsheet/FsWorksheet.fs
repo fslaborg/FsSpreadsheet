@@ -334,6 +334,30 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
     static member removeCellAt rowIndex colIndex (sheet : FsWorksheet) =
         sheet.RemoveCellAt(rowIndex, colIndex)
 
+    /// <summary>Removes the value of an FsCell at given row- and columnIndex if it exists from the FsCollection.</summary>
+    /// <remarks>Does nothing if the row or column of given index does not exist.</remarks>
+    /// <exception cref="System.ArgumentNullException">if columnIndex is null.</exception>
+    member self.TryRemoveValueAt(rowIndex, colIndex) =
+        self.CellCollection.TryRemoveValueAt(rowIndex, colIndex)
+
+    /// <summary>Removes the value of an FsCell at given row- and columnIndex if it exists from the FsCollection of a given FsWorksheet.</summary>
+    /// <remarks>Does nothing if the row or column of given index does not exist.</remarks>
+    /// <exception cref="System.ArgumentNullException">if columnIndex is null.</exception>
+    static member tryRemoveValueAt rowIndex colIndex (sheet : FsWorksheet) =
+        sheet.TryRemoveValueAt(rowIndex, colIndex)
+
+    /// <summary>Removes the value of an FsCell at given row- and columnIndex from the FsCollection.</summary>
+    /// <exception cref="System.ArgumentNullException">if rowIndex or columnIndex is null.</exception>
+    /// <exception cref="System.Generic.KeyNotFoundException">if row or column at the given index does not exist.</exception>
+    member self.RemoveValueAt(rowIndex, colIndex) =
+        self.CellCollection.RemoveValueAt(rowIndex, colIndex)
+
+    /// <summary>Removes the value of an FsCell at given row- and columnIndex from the FsCollection of a given FsWorksheet.</summary>
+    /// <exception cref="System.ArgumentNullException">if rowIndex or columnIndex is null.</exception>
+    /// <exception cref="System.Generic.KeyNotFoundException">if row or column at the given index does not exist.</exception>
+    static member removeValueAt rowIndex colIndex (sheet : FsWorksheet) =
+        sheet.RemoveValueAt(rowIndex, colIndex)
+
     // TO DO (later)
     //static member tryRemoveValueAt 
 
