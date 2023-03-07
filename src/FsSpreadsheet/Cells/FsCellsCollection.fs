@@ -118,6 +118,16 @@ type FsCellsCollection() =
     static member add rowIndex colIndex (cell : FsCell) (cellsCollection : FsCellsCollection) = 
         cellsCollection.Add(rowIndex, colIndex, cell)
 
+    /// <summary>Checks if an FsCell exists at given row- and columnIndex.</summary>
+    member this.ContainsCellAt(rowIndex, colIndex) =
+        match Dictionary.tryGet rowIndex _rowsCollection with
+        | Some colsCollection -> colsCollection.ContainsKey colIndex
+        | None -> false
+
+    /// <summary>Checks if an FsCell exists at given row- and columnIndex of a given FsCellsCollection.</summary>
+    static member containsCellAt rowIndex colIndex (cellsCollection : FsCellsCollection) =
+        cellsCollection.ContainsCellAt(rowIndex, colIndex)
+
     //public void Remove(XLSheetPoint sheetPoint)
     //{
     //    Remove(sheetPoint.Row, sheetPoint.Column);
