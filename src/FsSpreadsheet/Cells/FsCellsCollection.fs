@@ -186,7 +186,7 @@ type FsCellsCollection() =
     /// <summary>Removes the value of an FsCell at given row- and columnIndex from the FsCollection.</summary>
     /// <exception cref="System.ArgumentNullException">if rowIndex or columnIndex is null.</exception>
     /// <exception cref="System.Generic.KeyNotFoundException">if row or column at the given index does not exist.</exception>
-    member this.RemoveAt(rowIndex, colIndex) =
+    member this.RemoveValueAt(rowIndex, colIndex) =
         _rowsCollection
             .Item(rowIndex)
             .Item(colIndex)
@@ -195,8 +195,8 @@ type FsCellsCollection() =
     /// <summary>Removes the value of an FsCell at given row- and columnIndex from a given FsCollection.</summary>
     /// <exception cref="System.ArgumentNullException">if rowIndex or columnIndex is null.</exception>
     /// <exception cref="System.Generic.KeyNotFoundException">if row or column at the given index does not exist.</exception>
-    static member removeAt rowIndex colIndex (cellsCollection : FsCellsCollection) =
-        cellsCollection.RemoveAt(rowIndex, colIndex)
+    static member removeValueAt rowIndex colIndex (cellsCollection : FsCellsCollection) =
+        cellsCollection.RemoveValueAt(rowIndex, colIndex)
 
     /// Returns all FsCells of the FsCellsCollection.
     member this.GetCells() = 
