@@ -45,12 +45,14 @@ open FsSpreadsheet
 open FsSpreadsheet.ExcelIO
 open FsSpreadsheet.DSL
 open DocumentFormat.OpenXml
+open System.IO
 
 
 // ----------------------------------------------
 
 //let excelFilePath = @"C:\Users\olive\OneDrive\CSB-Stuff\testFiles\testExcel5.xlsx"
-let excelFilePath = @"C:\Users\revil\OneDrive\CSB-Stuff\testFiles\testExcel5.xlsx"
+//let excelFilePath = @"C:\Users\revil\OneDrive\CSB-Stuff\testFiles\testExcel5.xlsx"
+let excelFilePath = @"C:\Users\revil\OneDrive\CSB-Stuff\testFiles\testExcel6.xlsx"
 
 let dslTree = 
     workbook {
@@ -110,17 +112,28 @@ let fsCcN = FsCellsCollection()
 cNMO[0]
 |> Array.iteri (
     fun iR r ->
+        printfn $"iR: {iR}"
         r
         |> Array.iteri (
             fun iC c ->
+                printfn $"iC: {iC}"
                 let cv = Cell.getValue sst c
                 printfn $"cellRef: {Cell.getReference c}, cellV: {cv}"
-                let dt = Cell.getType c |> Cell.cellValuesToDataType
+                printfn $"CellDataType?: {c.DataType}"
+                let dt = 
+                    let cvo : Spreadsheet.CellValues option = Cell.tryGetType c
+                    if cvo.IsSome then
+                        Cell.cellValuesToDataType cvo.Value
+                    else DataType.InferCellValue cv |> fst
+                    //match cvo with    // errors. WHY!?
+                    //| Some ct -> Cell.cellValuesToDataType ct
+                    //| None -> DataType.InferCellValue cv |> snd
+                printfn "dt got"
                 let fa = Cell.getReference c |> FsAddress
                 printfn $"Fa: {fa.Address}"
                 let fsc = FsCell(cv, dt, fa)
                 printfn $"Fsc: Row: {fsc.Address.RowNumber} Col: {fsc.Address.ColumnNumber}"
-                fsCcN.Add(iR, iC, fsc)
+                fsCcN.Add(iR + 1, iC + 1, fsc)
                 ()
         )
 )
@@ -134,8 +147,10 @@ let fsRs =
     rNM[0]
     |> Array.map (
         fun r ->
+            //let r = rNM[0].[0]
             let fi, li = Row.Spans.toBoundaries r.Spans
             let ri = Row.getIndex r
+            printfn $"{ri}"
             let fa = FsAddress(int ri, int fi)
             let la = FsAddress(int ri, int li)
             let fsra = FsRangeAddress(fa, la)
@@ -145,7 +160,8 @@ let fsRs =
             |> Seq.iter (fun fsc -> fscCr.Add(int ri, fsc.Address.ColumnNumber, fsc))
             FsRow(fsra, fscCr, box 0)
     )
-let fsws = FsWorksheet(sdName, )
+fsRs |> Array.map (fun r -> r.Cells |> Seq.toArray)
+let fsws = FsWorksheet(sdName, fsRs |> List.ofArray, Array.toList fsTblN, fsCcN)
 let fswsN = 
     shtsN
     |> Array.mapi (
@@ -156,6 +172,13 @@ let fswsN =
             let fsCcN
             FsWorksheet(name, fsRs = , )
     )
+fswb.AddWorksheet fsws
+let newExcelPath =
+    let fi = FileInfo excelFilePath
+    let rawFn = Path.GetFileNameWithoutExtension excelFilePath
+    let newFn = rawFn + "_rewritten.xlsx"
+    Path.Combine(fi.Directory.FullName, newFn)
+FsWorkbook.toFile newExcelPath fswb
 
 let xlsxWorksheet = 0
 

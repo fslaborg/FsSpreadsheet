@@ -9,7 +9,12 @@ type FsRow (rangeAddress : FsRangeAddress, cells : FsCellsCollection, styleValue
     inherit FsRangeBase(rangeAddress,styleValue)
 
     let cells = 
-        if cells.MaxRowNumber > 1 then
+        let rowCount =
+            cells.GetCells()
+            |> Seq.map (fun c -> c.Address.RowNumber)
+            |> Seq.distinct
+            |> Seq.length
+        if rowCount > 1 then
             failwith "FsCellsCollection must only have 1 row to be qualified for FsRow creation."
         cells
 
