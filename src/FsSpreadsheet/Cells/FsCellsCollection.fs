@@ -91,7 +91,7 @@ type FsCellsCollection() =
     //    Add(sheetPoint.Row, sheetPoint.Column, cell);
     //}
 
-    /// Adds an FsCell of given rowIndex and columnIndex to the FsCellsCollection.
+    /// <summary>Adds an FsCell of given rowIndex and columnIndex to the FsCellsCollection.</summary>
     member this.Add(row : int32, column : int32, cell : FsCell) = 
 
         _count <- _count + 1
@@ -121,6 +121,11 @@ type FsCellsCollection() =
     /// Adds an FsCell of given rowIndex and columnIndex to an FsCellsCollection.
     static member add rowIndex colIndex (cell : FsCell) (cellsCollection : FsCellsCollection) = 
         cellsCollection.Add(rowIndex, colIndex, cell)
+
+    /// <summary>Adds an FsCell to the FsCellsCollection.</summary>
+    /// <remarks>Derives row- and columnIndex from the FsAddress of the FsCell.</remarks>
+    member self.Add(cell : FsCell) =
+        self.Add(cell.Address.RowNumber, cell.Address.ColumnNumber, cell)
 
     /// <summary>Checks if an FsCell exists at given row- and columnIndex.</summary>
     member this.ContainsCellAt(rowIndex, colIndex) =
