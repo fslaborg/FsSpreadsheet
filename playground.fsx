@@ -52,7 +52,8 @@ open System.IO
 
 //let excelFilePath = @"C:\Users\olive\OneDrive\CSB-Stuff\testFiles\testExcel5.xlsx"
 //let excelFilePath = @"C:\Users\revil\OneDrive\CSB-Stuff\testFiles\testExcel5.xlsx"
-let excelFilePath = @"C:\Users\revil\OneDrive\CSB-Stuff\testFiles\testExcel6.xlsx"
+//let excelFilePath = @"C:\Users\revil\OneDrive\CSB-Stuff\testFiles\testExcel6.xlsx"
+let excelFilePath = @"C:\Users\revil\OneDrive\CSB-Stuff\testFiles\testExcel6_rewritten.xlsx"
 
 let dslTree = 
     workbook {
@@ -108,6 +109,8 @@ let tblN = tblNM[0]
 //tblN[0].TableDefinitionPart
 //Table.
 let fsTblN = tblN |> Array.map FsTable.fromXlsxTable
+tblN[0] |> FsTable.fromXlsxTable
+//tblN[0] |> Table.
 let fsCcN = FsCellsCollection()
 cNMO[0]
 |> Array.iteri (
@@ -180,7 +183,27 @@ let newExcelPath =
     Path.Combine(fi.Directory.FullName, newFn)
 FsWorkbook.toFile newExcelPath fswb
 
-let xlsxWorksheet = 0
+
+
+
+let testHeaderCells = [
+    FsCell("H1", DataType.String, FsAddress(1,1))
+    FsCell("H2", DataType.String, FsAddress(1,2))
+    FsCell("H3", DataType.String, FsAddress(1,3))
+]
+let testCells1 =
+    Array.init 3 (
+        fun i ->
+            FsCell($"{i * 2}", DataType.Number, FsAddress(2,i + 1))
+    )
+let testColl = FsCellsCollection()
+testHeaderCells |> List.iter (fun c -> testColl.Add(c.Address.RowNumber, c.Address.ColumnNumber, c))
+testCells1 |> Array.iter (fun c -> testColl.Add(c.Address.RowNumber, c.Address.ColumnNumber, c))
+let testRangeAddress = FsRangeAddress(testHeaderCells.Head.Address, testCells1[testCells1.Length - 1].Address)
+let testTab = FsTable("lel", testRangeAddress)
+testTab |> FsTable.toXlsxTable testColl
+FsRow.
+let testWs = FsWorksheet("testSheet", )
 
 let toFsWorkbook spreadsheetDoc =
     let sst = Spreadsheet.tryGetSharedStringTable spreadsheetDoc
