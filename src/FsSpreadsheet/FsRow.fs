@@ -80,3 +80,7 @@ type FsRow (rangeAddress : FsRangeAddress, cells : FsCellsCollection, styleValue
         row
 
     //member self.SortCells() = _cells <- _cells |> List.sortBy (fun c -> c.WorksheetColumn)
+
+    // TO DO (later)
+    ///// Takes an FsCellsCollection and creates an FsRow from the given rowIndex and the cells in the FsCellsCollection that share the same rowIndex.
+    //static member fromCellsCollection rowIndex (cellsCollection : FsCellsCollection) =
