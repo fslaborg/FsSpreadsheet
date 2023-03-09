@@ -75,7 +75,12 @@ type FsCellsCollection() =
         | None -> 
             false
 
-    /// Empties the whole FsCellsCollection.
+    /// <summary>Creates an FsCellsCollection from the given FsCells.</summary>
+    /// <remarks>Derives row- and columnIndeces from the FsAddress of the FsCells.</remarks>
+    static member createFromCells (cells : seq<FsCell>) =
+        FsCellsCollection().Add cells
+
+    /// <summary>Empties the whole FsCellsCollection.</summary>
     member this.Clear() =
 
         _count <- 0;
@@ -85,6 +90,8 @@ type FsCellsCollection() =
         _rowsCollection.Clear();
         _maxRowUsed <- 0;
         _maxColumnUsed <- 0
+
+        this
 
     //public void Add(XLSheetPoint sheetPoint, XLCell cell)
     //{
@@ -118,14 +125,32 @@ type FsCellsCollection() =
         | None -> 
             ()
 
-    /// Adds an FsCell of given rowIndex and columnIndex to an FsCellsCollection.
-    static member add rowIndex colIndex (cell : FsCell) (cellsCollection : FsCellsCollection) = 
+        this
+
+    /// <summary>Adds an FsCell of given rowIndex and columnIndex to an FsCellsCollection.</summary>
+    static member addCellWithIndeces rowIndex colIndex (cell : FsCell) (cellsCollection : FsCellsCollection) = 
         cellsCollection.Add(rowIndex, colIndex, cell)
 
     /// <summary>Adds an FsCell to the FsCellsCollection.</summary>
     /// <remarks>Derives row- and columnIndex from the FsAddress of the FsCell.</remarks>
-    member self.Add(cell : FsCell) =
-        self.Add(cell.Address.RowNumber, cell.Address.ColumnNumber, cell)
+    member this.Add(cell : FsCell) =
+        this.Add(cell.Address.RowNumber, cell.Address.ColumnNumber, cell)
+
+    /// <summary>Adds an FsCell to an FsCellsCollection.</summary>
+    /// <remarks>Derives row- and columnIndex from the FsAddress of the FsCell.</remarks>
+    static member addCell (cell : FsCell) (cellsCollection : FsCellsCollection) =
+        cellsCollection.Add(cell)
+
+    /// <summary>Adds FsCells to the FsCellsCollection.</summary>
+    /// <remarks>Derives row- and columnIndeces from the FsAddress of the FsCells.</remarks>
+    member this.Add(cells : seq<FsCell>) =
+        cells |> Seq.iter (this.Add >> ignore)
+        this
+
+    /// <summary>Adds FsCells to an FsCellsCollection.</summary>
+    /// <remarks>Derives row- and columnIndeces from the FsAddress of the FsCells.</remarks>
+    static member addCells (cells : seq<FsCell>) (cellsCollection : FsCellsCollection) =
+        cellsCollection.Add cells
 
     /// <summary>Checks if an FsCell exists at given row- and columnIndex.</summary>
     member this.ContainsCellAt(rowIndex, colIndex) =
