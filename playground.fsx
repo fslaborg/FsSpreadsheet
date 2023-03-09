@@ -186,6 +186,15 @@ FsWorkbook.toFile newExcelPath fswb
 
 
 
+
+type Test() =
+    member val Prop = 0 with get, set
+
+let test1 = Test()
+test1.Prop
+test1.Prop <- 3
+
+
 let testHeaderCells = [
     FsCell("H1", DataType.String, FsAddress(1,1))
     FsCell("H2", DataType.String, FsAddress(1,2))
