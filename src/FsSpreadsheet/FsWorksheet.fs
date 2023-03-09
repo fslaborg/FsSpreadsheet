@@ -20,6 +20,16 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
     new (name) = 
         FsWorksheet(name, [], [], FsCellsCollection())
 
+    // TO DO: finish
+    //new (name, (fsCells : seq<FsCell>)) =
+    //    let cellsCollection = FsCellsCollection()
+    //    fsCells 
+    //    |> Seq.iter (
+    //        fun c -> cellsCollection.Add(c.Address.RowNumber, c.Address.ColumnNumber, c)
+    //    )
+    //    let rows = 
+    //    FsWorksheet(name)
+
 
     // ----------
     // PROPERTIES
