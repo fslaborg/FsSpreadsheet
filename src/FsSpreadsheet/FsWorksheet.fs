@@ -326,7 +326,7 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
             c.SetValue value |> ignore
             self
         | None -> 
-            self.CellCollection.Add(rowIndex, colIndex, value)
+            self.CellCollection.Add(rowIndex, colIndex, value) |> ignore
             self
 
     /// Adds a value at the given row- and columnIndex of a given FsWorksheet.
