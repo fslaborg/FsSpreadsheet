@@ -128,6 +128,6 @@ type FsAddress(rowNumber : int, columnNumber : int, fixedRow : bool, fixedColumn
     //let mutable _address = address
 
     /// <summary>Updates the row- and columnIndex respective to the given indices.</summary>
-    member self.OfIndices(rowIndex,colIndex) = 
+    member self.UpdateIndices(rowIndex,colIndex) = 
         _columnNumber <- colIndex
         _rowNumber <- rowIndex
