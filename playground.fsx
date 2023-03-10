@@ -1,51 +1,21 @@
 #r "nuget: DocumentFormat.OpenXml"
-//#load "src/FsSpreadsheet/FsAddress.fs"
-//#load "src/FsSpreadsheet/Cells/FsCell.fs"
-//#load "src/FsSpreadsheet/Cells/FsCellsCollection.fs"
-//#load "src/FsSpreadsheet/Ranges/FsRangeAddress.fs"
-//#load "src/FsSpreadsheet/Ranges/FsRangeBase.fs"
-//#load "src/FsSpreadsheet/Ranges/FsRangeRow.fs"
-//#load "src/FsSpreadsheet/Ranges/FsRangeColumn.fs"
-//#load "src/FsSpreadsheet/Ranges/FsRange.fs"
-//#load "src/FsSpreadsheet/Tables/FsTableField.fs"
-//#load "src/FsSpreadsheet/Tables/FsTableRow.fs"
-//#load "src/FsSpreadsheet/Tables/FsTable.fs"
-//#load "src/FsSpreadsheet/FsRow.fs"
-//#load "src/FsSpreadsheet/FsWorksheet.fs"
-//#load "src/FsSpreadsheet/FsWorkbook.fs"
-//#load "src/FsSpreadsheet/DSL/Expression.fs"
-//#load "src/FsSpreadsheet/DSL/Types.fs"
-//#load "src/FsSpreadsheet/DSL/CellBuilder.fs"
-//#load "src/FsSpreadsheet/DSL/RowBuilder.fs"
-//#load "src/FsSpreadsheet/DSL/ColumnBuilder.fs"
-//#load "src/FsSpreadsheet/DSL/TableBuilder.fs"
-//#load "src/FsSpreadsheet/DSL/SheetBuilder.fs"
-//#load "src/FsSpreadsheet/DSL/WorkbookBuilder.fs"
-//#load "src/FsSpreadsheet/DSL/DSL.fs"
-//#load "src/FsSpreadsheet/DSL/Operators.fs"
-//#load "src/FsSpreadsheet/DSL/Transform.fs"
-//#load "src/FsSpreadsheet.CsvIO/FsExtension.fs"
-//#load "src/FsSpreadsheet.ExcelIO/SharedStringTable.fs"
-//#load "src/FsSpreadsheet.ExcelIO/Cell.fs"
-//#load "src/FsSpreadsheet.ExcelIO/CellData.fs"
-//#load "src/FsSpreadsheet.ExcelIO/Row.fs"
-//#load "src/FsSpreadsheet.ExcelIO/SheetData.fs"
-//#load "src/FsSpreadsheet.ExcelIO/Sheet.fs"
-//#load "src/FsSpreadsheet.ExcelIO/Table.fs"
-//#load "src/FsSpreadsheet.ExcelIO/WorkSheet.fs"
-//#load "src/FsSpreadsheet.ExcelIO/Workbook.fs"
-//#load "src/FsSpreadsheet.ExcelIO/Spreadsheet.fs"
-//#load "src/FsSpreadsheet.ExcelIO/FsExtensions.fs"
-#r "src/FsSpreadsheet/bin/Debug/netstandard2.0/FsSpreadsheet.dll"
-#r "src/FsSpreadsheet.CsvIO/bin/Debug/netstandard2.0/FsSpreadsheet.CsvIO.dll"
-#r "src/FsSpreadsheet.ExcelIO/bin/Debug/netstandard2.0/FsSpreadsheet.ExcelIO.dll"
+
+open System.IO
+
+Directory.GetCurrentDirectory()
+File.Copy("src/FsSpreadsheet/bin/Debug/netstandard2.0/FsSpreadsheet.dll", "src/FsSpreadsheet/bin/Debug/netstandard2.0/FsSpreadsheet_Copy.dll")
+File.Copy("src/FsSpreadsheet.CsvIO/bin/Debug/netstandard2.0/FsSpreadsheet.CsvIO.dll", "src/FsSpreadsheet.CsvIO/bin/Debug/netstandard2.0/FsSpreadsheet.CsvIO_Copy.dll")
+File.Copy("src/FsSpreadsheet.ExcelIO/bin/Debug/netstandard2.0/FsSpreadsheet.ExcelIO.dll", "src/FsSpreadsheet.ExcelIO/bin/Debug/netstandard2.0/FsSpreadsheet.ExcelIO_Copy.dll")
+
+#r "src/FsSpreadsheet/bin/Debug/netstandard2.0/FsSpreadsheet_Copy.dll"
+#r "src/FsSpreadsheet.CsvIO/bin/Debug/netstandard2.0/FsSpreadsheet.CsvIO_Copy.dll"
+#r "src/FsSpreadsheet.ExcelIO/bin/Debug/netstandard2.0/FsSpreadsheet.ExcelIO_Copy.dll"
 
 
 open FsSpreadsheet
 open FsSpreadsheet.ExcelIO
 open FsSpreadsheet.DSL
 open DocumentFormat.OpenXml
-open System.IO
 
 
 // ----------------------------------------------
@@ -145,6 +115,7 @@ cNMO[0]
 "C2" |> FsAddress
 fsCcN.GetCells() |> Array.ofSeq |> Array.iter (fun fsc -> printfn $"Row: {fsc.Address.RowNumber} Col: {fsc.Address.ColumnNumber} Val: {fsc.Value}")
 //let bla = if 1 > 0 then failwith "sheesh"
+
 let sdName = shtsN[0].Name.Value
 let fsRs = 
     rNM[0]
@@ -160,7 +131,7 @@ let fsRs =
             let fscseq = fsCcN.GetCellsInRow (int ri)
             let fscCr = FsCellsCollection()
             fscseq
-            |> Seq.iter (fun fsc -> fscCr.Add(int ri, fsc.Address.ColumnNumber, fsc))
+            |> Seq.iter (fun fsc -> fscCr.Add(int ri, fsc.Address.ColumnNumber, fsc) |> ignore)
             FsRow(fsra, fscCr, box 0)
     )
 fsRs |> Array.map (fun r -> r.Cells |> Seq.toArray)
@@ -185,7 +156,27 @@ FsWorkbook.toFile newExcelPath fswb
 
 
 
+let object = FsCell()
+object.Address
+let expectedAddress = FsAddress(0,0)
+let actualAddress = object.Address
+expectedAddress.ColumnNumber = actualAddress.ColumnNumber
 
+/// Checks if 2 FsAddresses are the equal.
+let compareFsAddress (address1 : FsAddress) (address2 : FsAddress) =
+    address1.Address        = address2.Address      &&
+    address1.ColumnNumber   = address2.ColumnNumber &&
+    address1.RowNumber      = address2.RowNumber    &&
+    address1.FixedColumn    = address2.FixedColumn  &&
+    address1.FixedRow       = address2.FixedRow
+
+let stringValTest = 255uy
+let resultDtTest, resultStrTest = DataType.InferCellValue stringValTest
+let x = box stringValTest
+match x with
+| :? char -> ""
+| _ -> "fif"
+x.ToString()
 
 type Test() =
     member val Prop = 0 with get, set
@@ -206,8 +197,8 @@ let testCells1 =
             FsCell($"{i * 2}", DataType.Number, FsAddress(2,i + 1))
     )
 let testColl = FsCellsCollection()
-testHeaderCells |> List.iter (fun c -> testColl.Add(c.Address.RowNumber, c.Address.ColumnNumber, c))
-testCells1 |> Array.iter (fun c -> testColl.Add(c.Address.RowNumber, c.Address.ColumnNumber, c))
+testHeaderCells |> List.iter (fun c -> testColl.Add(c.Address.RowNumber, c.Address.ColumnNumber, c) |> ignore)
+testCells1 |> Array.iter (fun c -> testColl.Add(c.Address.RowNumber, c.Address.ColumnNumber, c) |> ignore)
 let testRangeAddress = FsRangeAddress(testHeaderCells.Head.Address, testCells1[testCells1.Length - 1].Address)
 let testTab = FsTable("lel", testRangeAddress)
 testTab |> FsTable.toXlsxTable testColl
