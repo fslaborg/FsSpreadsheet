@@ -131,3 +131,29 @@ type FsAddress(rowNumber : int, columnNumber : int, fixedRow : bool, fixedColumn
     member self.UpdateIndices(rowIndex,colIndex) = 
         _columnNumber <- colIndex
         _rowNumber <- rowIndex
+
+    /// <summary>Updates the row- and columnIndex of a given FsAddress respective to the given indices.</summary>
+    static member updateIndices rowIndex colIndex (address : FsAddress) =
+        address.UpdateIndices(rowIndex, colIndex)
+
+    /// <summary>Returns the row- and the columnIndex of the FsAddress.</summary>
+    /// <returns>A tuple consisting of the rowIndex (fst) and the columnIndex (snd).</returns>
+    member self.ToIndices() = _rowNumber,_columnNumber
+
+    /// <summary>Returns the row- and the columnIndex of a given FsAddress.</summary>
+    /// <returns>A tuple consisting of the rowIndex (fst) and the columnIndex (snd).</returns>
+    static member toIndices (address : FsAddress) =
+        address.ToIndices()
+
+    /// <summary>Compares the FsAddress with a given other one.</summary>
+    /// <returns>Returns true if both FsAddresses are equal.</returns>
+    member self.Compare(address : FsAddress) =
+        self.Address        = address.Address      &&
+        self.ColumnNumber   = address.ColumnNumber &&
+        self.RowNumber      = address.RowNumber    &&
+        self.FixedColumn    = address.FixedColumn  &&
+        self.FixedRow       = address.FixedRow
+
+    /// <summary>Checks if 2 FsAddresses are equal.</summary>
+    static member compare (address1 : FsAddress) (address2 : FsAddress) =
+        address1.Compare address2
