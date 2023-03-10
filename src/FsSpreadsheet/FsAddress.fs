@@ -82,6 +82,10 @@ type FsAddress(rowNumber : int, columnNumber : int, fixedRow : bool, fixedColumn
 
     let mutable _trimmedAddress = ""
 
+    // ----------------------
+    // ALTERNATE CONSTRUCTORS
+    // ----------------------
+
     new (rowNumber : int, columnLetter : string, fixedRow : bool, fixedColumn : bool) =
         FsAddress(rowNumber,CellReference.colAdressToIndex columnLetter |> int,fixedRow,fixedColumn)
 
@@ -91,22 +95,11 @@ type FsAddress(rowNumber : int, columnNumber : int, fixedRow : bool, fixedColumn
     new (cellAddressString : string) =
         let colIndex,rowIndex = CellReference.toIndices cellAddressString
         FsAddress(int rowIndex,int colIndex)
-
-    member this.LOL () = 1
-    //let mutable _address = address
-
-    member self.Address 
-        with get() = CellReference.ofIndices (uint32 _columnNumber) (uint32 _rowNumber)
-        and set(address) = 
-            let column,row = CellReference.toIndices address
-            _rowNumber <- int row
-            _columnNumber <- int column
-
-    member self.OfIndices(rowIndex,colIndex) = 
-        _columnNumber <- colIndex
-        _rowNumber <- rowIndex
-
-    member self.ToIndices() = _rowNumber,_columnNumber
+    
+    
+    // ----------
+    // PROPERTIES
+    // ----------
 
     member self.ColumnNumber
         with get() = _columnNumber
@@ -116,5 +109,25 @@ type FsAddress(rowNumber : int, columnNumber : int, fixedRow : bool, fixedColumn
         with get() = _rowNumber
         and set(rowI) = _rowNumber <- rowI
 
+    member self.Address 
+        with get() = CellReference.ofIndices (uint32 _columnNumber) (uint32 _rowNumber)
+        and set(address) = 
+            let column,row = CellReference.toIndices address
+            _rowNumber <- int row
+            _columnNumber <- int column
+
     member self.FixedRow = false
     member self.FixedColumn = false
+
+
+    // -------
+    // METHODS
+    // -------
+
+    member this.LOL () = 1
+    //let mutable _address = address
+
+    /// <summary>Updates the row- and columnIndex respective to the given indices.</summary>
+    member self.OfIndices(rowIndex,colIndex) = 
+        _columnNumber <- colIndex
+        _rowNumber <- rowIndex
