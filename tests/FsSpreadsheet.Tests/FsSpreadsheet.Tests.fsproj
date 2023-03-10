@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Compile Include="FsCell.fs" />
-    <Compile Include="Sample.fs" />
     <Compile Include="Main.fs" />
   </ItemGroup>
 
