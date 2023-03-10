@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="FsAddress.fs" />
     <Compile Include="FsCell.fs" />
     <Compile Include="Main.fs" />
   </ItemGroup>
