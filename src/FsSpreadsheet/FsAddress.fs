@@ -25,7 +25,6 @@ module CellReference =
                 sb.Insert(0, char (modulo + 65u)) |> ignore
                 loop ((residual - modulo) / 26u)
         loop i
-        
 
     /// Maps 1 based column and row indices to "A1" style reference.
     let ofIndices column (row : uint32) = 
@@ -72,6 +71,7 @@ module CellReference =
         |> toIndices
         |> fun (c,r) -> c, (int64 r) + (int64 amount) |> uint32
         ||> ofIndices
+
 
 type FsAddress(rowNumber : int, columnNumber : int, fixedRow : bool, fixedColumn : bool) =
 
@@ -131,6 +131,7 @@ type FsAddress(rowNumber : int, columnNumber : int, fixedRow : bool, fixedColumn
     member self.UpdateIndices(rowIndex,colIndex) = 
         _columnNumber <- colIndex
         _rowNumber <- rowIndex
+        self
 
     /// <summary>Updates the row- and columnIndex of a given FsAddress respective to the given indices.</summary>
     static member updateIndices rowIndex colIndex (address : FsAddress) =
