@@ -33,7 +33,7 @@ type FsRow (rangeAddress : FsRangeAddress, cells : FsCellsCollection, styleValue
     member self.Cells = 
         base.Cells(cells)
 
-    /// The index of the FsRow.
+    /// <summary>The index of the FsRow.</summary>
     member self.Index 
         with get() = self.RangeAddress.FirstAddress.RowNumber
         and set(i) = 
@@ -45,11 +45,11 @@ type FsRow (rangeAddress : FsRangeAddress, cells : FsCellsCollection, styleValue
     // METHODS
     // -------
 
-    /// Returns the index of the given FsRow.
+    /// <summary>Returns the index of the given FsRow.</summary>
     static member getIndex (row : FsRow) = 
         row.Index
 
-    /// Returns the FsCell at columnIndex.
+    /// <summary>Returns the FsCell at columnIndex.</summary>
     member self.Cell(columnIndex) = 
         base.Cell(FsAddress(1,columnIndex),cells)
         
