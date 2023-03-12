@@ -63,7 +63,7 @@ type FsRow (rangeAddress : FsRangeAddress, cells : FsCellsCollection, styleValue
         //    _cells <- List.append _cells [cell]
         //    cell
 
-    /// <summary>Returns the FsCell at the given columnIndex from an FsRow.
+    /// <summary>Returns the FsCell at the given columnIndex from an FsRow.</summary>
     static member getCellAt colIndex (row : FsRow) =
         row.Cell(colIndex)
 
@@ -72,11 +72,11 @@ type FsRow (rangeAddress : FsRangeAddress, cells : FsCellsCollection, styleValue
         let cell = FsCell(value)
         cells.Add(int32 this.Index, int32 colIndex, cell)
 
-    /// Adds a value at the given row- and columnIndex to FsRow using.
+    /// <summary>Adds a value at the given row- and columnIndex to FsRow using.
     ///
-    /// If a cell exists in the given position, shoves it to the right.
+    /// If a cell exists in the given position, shoves it to the right.</summary>
     static member insertValueAt colIndex value (row : FsRow) =
-        row.InsertValueAt(colIndex, value)
+        row.InsertValueAt(colIndex, value) |> ignore
         row
 
     //member self.SortCells() = _cells <- _cells |> List.sortBy (fun c -> c.WorksheetColumn)
