@@ -109,8 +109,6 @@ let fsCellTest =
                 Expect.equal (fscellB1_num.RowNumber) 1 "resulting value is not A1 as string"
             testCase "ColNumber: 2 " <| fun _ ->
                 Expect.equal (fscellB1_num.ColumnNumber) 2 "resulting value is not 1 as integer"
-            
-        ]
-        
+
         ]
     ]
