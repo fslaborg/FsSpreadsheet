@@ -61,11 +61,11 @@ let spreadsheetTests =
                 Expect.equal cbsi1[10].CellReference cbsi1Fox[10].CellReference "Differs"
             testCase "element 20 is equal in CellReference to element 20 from OpenXML" <| fun _ ->
                 Expect.equal cbsi1[20].CellReference cbsi1Fox[20].CellReference "Differs"
-            testCase "element 0 is equal in CellValue.Text to element 0 from OpenXML" <| fun _ ->
+            testCase "element 0 is equal in CellValueText to element 0 from OpenXML" <| fun _ ->
                 Expect.equal cbsi1[0].CellValue.Text cbsi1Fox[0].CellValue.Text "Differs"
-            testCase "element 10 is equal in CellValue.Text to element 10 from OpenXML" <| fun _ ->
+            testCase "element 10 is equal in CellValueText to element 10 from OpenXML" <| fun _ ->
                 Expect.equal cbsi1[10].CellValue.Text cbsi1Fox[10].CellValue.Text "Differs"
-            testCase "element 20 is equal in CellValue.Text to element 20 from OpenXML" <| fun _ ->
+            testCase "element 20 is equal in CellValueText to element 20 from OpenXML" <| fun _ ->
                 Expect.equal cbsi1[20].CellValue.Text cbsi1Fox[20].CellValue.Text "Differs"
         ]
     ]
