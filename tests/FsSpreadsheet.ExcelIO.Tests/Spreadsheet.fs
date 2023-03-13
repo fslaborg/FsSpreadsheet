@@ -5,7 +5,6 @@ open FsSpreadsheet.ExcelIO
 open DocumentFormat.OpenXml
 
 
-//let testFilePath = @"C:\Repos\CSBiology\FsSpreadsheet\tests\FsSpreadsheet.ExcelIO.Tests\data\testUnit.xlsx"
 let testFilePath = System.IO.Path.Combine(__SOURCE_DIRECTORY__, "data", "testUnit.xlsx")
 // *fox = from OpenXml, to distinguish between objects from FsSpreadsheet.ExcelIO
 let ssdFox = Packaging.SpreadsheetDocument.Open(testFilePath, false)
