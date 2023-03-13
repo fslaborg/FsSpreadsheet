@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="FsSparseMatrix.fs" />
     <Compile Include="FsAddress.fs" />
     <Compile Include="Cells\FsCell.fs" />
     <Compile Include="Cells\FsCellsCollection.fs" />

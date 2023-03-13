@@ -310,6 +310,11 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
         self.CellCollection.Add cell |> ignore
         self     
 
+    /// Adds a sequence of FsCells to the FsWorksheet. !Exception if cell address already exists!
+    member self.AddCells (cells:seq<FsCell>) =
+        self.CellCollection.Add cells |> ignore
+        self    
+
     /// Adds a value at the given row- and columnIndex to the FsWorksheet.
     ///
     /// If a cell exists at the given postion, it is shoved to the right.
@@ -375,13 +380,17 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
         sheet.RemoveValueAt(rowIndex, colIndex)
 
 
-
-
     // ##########################
     // Static member
     // Adds a FsCell to the FsWorksheet. !Exception if cell address already exists!
     static member addCell (cell:FsCell) (sheet :FsWorksheet) =
         sheet.AddCell cell 
+
+    // ##########################
+    // Static member
+    // Adds a sequence of FsCells to the FsWorksheet. !Exception if cell address already exists!
+    static member addCells (cell:seq<FsCell>) (sheet :FsWorksheet) =
+        sheet.AddCells cell 
         
 
 
