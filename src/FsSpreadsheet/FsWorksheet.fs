@@ -304,6 +304,12 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
     static member getCellAt rowIndex colIndex (sheet : FsWorksheet) =
         sheet.GetCellAt(rowIndex, colIndex)
 
+
+    /// Adds a FsCell to the FsWorksheet. !Exception if cell address already exists!
+    member self.AddCell (cell:FsCell) =
+        self.CellCollection.Add cell |> ignore
+        self     
+
     /// Adds a value at the given row- and columnIndex to the FsWorksheet.
     ///
     /// If a cell exists at the given postion, it is shoved to the right.
@@ -367,6 +373,17 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
     /// <exception cref="System.Generic.KeyNotFoundException">if row or column at the given index does not exist.</exception>
     static member removeValueAt rowIndex colIndex (sheet : FsWorksheet) =
         sheet.RemoveValueAt(rowIndex, colIndex)
+
+
+
+
+    // ##########################
+    // Static member
+    // Adds a FsCell to the FsWorksheet. !Exception if cell address already exists!
+    static member addCell (cell:FsCell) (sheet :FsWorksheet) =
+        sheet.AddCell cell 
+        
+
 
     // TO DO (later)
     //static member tryRemoveValueAt 
