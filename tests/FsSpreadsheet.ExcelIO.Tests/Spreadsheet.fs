@@ -13,7 +13,20 @@ let sstpFox = wbpFox.SharedStringTablePart
 let sstFox = sstpFox.SharedStringTable
 let sstFoxInnerText = sstFox.InnerText
 let wsp1Fox = (wbpFox.WorksheetParts |> Array.ofSeq)[0]
-let cbsi1Fox = wsp1Fox.Worksheet.Descendants<Spreadsheet.Cell>() |> Array.ofSeq
+let cbsi1Fox =      // get the Cells, but with their real values (inferred from the SST) not their SST index
+    wsp1Fox.Worksheet.Descendants<Spreadsheet.Cell>() 
+    |> Array.ofSeq
+    |> Array.map (
+        fun c ->
+            if c.DataType <> null && c.DataType.Value = Spreadsheet.CellValues.SharedString then
+                let index = int c.CellValue.InnerText
+                let item = sstFox.Elements<OpenXmlElement>() |> Seq.item index
+                let value = item.InnerText
+                c.CellValue.Text <- value
+                c
+            else
+                c
+    )
 
 
 //let testSsdFox2 = Packaging.SpreadsheetDocument.Open(testFilePath, false)
