@@ -67,8 +67,8 @@ type FsWorkbook() =
 
     /// Returns all FsWorksheets.
     static member getWorksheets (workbook : FsWorkbook) =
-        workbook.GetWorksheets()  |> ignore
-        workbook
+        workbook.GetWorksheets()
+        
 
     /// Removes an FsWorksheet with given name from an FsWorkbook.
     static member removeWorksheetByName (name : string) (workbook : FsWorkbook) =
