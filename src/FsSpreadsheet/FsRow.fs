@@ -15,9 +15,8 @@ type FsRow (rangeAddress : FsRangeAddress, cells : FsCellsCollection, styleValue
     /// <summary>Create an FsRow from a given FsCellsCollection and an rowIndex.</summary>
     /// <remarks>The appropriate range of the cells (i.e. minimum colIndex and maximum colIndex) is derived from the FsCells with the matching rowIndex.</remarks>
     new (index, (cells : FsCellsCollection)) = 
-        let getColIndexBy f = cells.GetCellsInRow index |> f (fun (c : FsCell) -> c.Address.ColumnNumber)
-        let minColIndex = try (getColIndexBy Seq.minBy).Address.ColumnNumber with _ -> 1
-        let maxColIndex = try (getColIndexBy Seq.maxBy).Address.ColumnNumber with _ -> 1
+        let minColIndex = (cells.GetCellsInRow index |> Seq.minBy (fun c -> c.Address.ColumnNumber)).Address.ColumnNumber
+        let maxColIndex = (cells.GetCellsInRow index |> Seq.maxBy (fun c -> c.Address.ColumnNumber)).Address.ColumnNumber
         FsRow (FsRangeAddress(FsAddress(index, minColIndex),FsAddress(index, maxColIndex)), cells, null)
 
 
