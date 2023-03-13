@@ -75,6 +75,41 @@ let dataTypeTests =
 
 [<Tests>]
 let fsCellTest =
-    testList "Constructors" [
+    testList "FsCell data" [               
+        testList "Data | DataType | Adress" [
+            let fscellA1_string  = FsCell.create "A1" 1 1 
+            let fscellB1_num     = FsCell.create 1 1 2 
+            let fscellA2_bool    = FsCell.create true 1 2 
+            
+            testCase "DataType string" <| fun _ ->
+                Expect.equal fscellA1_string.DataType DataType.String "is not the expected DataType.String"
+            testCase "DataType number" <| fun _ ->
+                Expect.equal fscellB1_num.DataType  DataType.Number "is not the expected DataType.Number"
+            testCase "DataType boolean" <| fun _ ->
+                Expect.equal fscellA2_bool.DataType DataType.Boolean "is not the expected DataType.Boolean"
+
+
+            testCase "Value: A1" <| fun _ ->
+                Expect.equal fscellA1_string.Value "A1" "resulting value is not A1"
+            testCase "Value: 1" <| fun _ ->
+                Expect.equal fscellB1_num.Value "1" "resulting value is not 1"
+            testCase "Value: True" <| fun _ ->
+                Expect.equal fscellA2_bool.Value "True" "resulting value is not True"
+        
+
+            testCase "Value as string : A1" <| fun _ ->
+                Expect.equal (fscellA1_string.GetValueAs<string>()) "A1" "resulting value is not A1 as string"
+            testCase "Value as integer: 1 " <| fun _ ->
+                Expect.equal (fscellB1_num.GetValueAs<int>()) 1 "resulting value is not 1 as integer"
+            testCase "Value as bool: True" <| fun _ ->
+                Expect.equal (fscellA2_bool.GetValueAs<bool>()) true "resulting value is not True as bool"
+
+        
+            testCase "RowNumber: 1 " <| fun _ ->
+                Expect.equal (fscellB1_num.RowNumber) 1 "resulting value is not A1 as string"
+            testCase "ColNumber: 2 " <| fun _ ->
+                Expect.equal (fscellB1_num.ColumnNumber) 2 "resulting value is not 1 as integer"
+            
+        ]
         
     ]

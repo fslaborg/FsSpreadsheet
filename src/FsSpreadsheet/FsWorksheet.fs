@@ -70,7 +70,7 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
             let (newRow : FsRow) = newSheet.Row(row.Index)
             for cell in row.Cells do
                 let newCell = newRow.Cell(cell.Address,newSheet.CellCollection)
-                newCell.SetValue(cell.Value)
+                newCell.SetValueAs(cell.Value)
                 |> ignore
         newSheet
 
@@ -253,14 +253,14 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
     member self.RescanRows() =
         let rows = _rows |> Seq.map (fun r -> r.Index,r) |> Map.ofSeq
         _cells.GetCells()
-        |> Seq.groupBy (fun c -> c.WorksheetRow)
+        |> Seq.groupBy (fun c -> c.RowNumber)
         |> Seq.iter (fun (rowIndex,cells) -> 
             let newRange = 
                 cells
-                |> Seq.sortBy (fun c -> c.WorksheetColumn)
+                |> Seq.sortBy (fun c -> c.ColumnNumber)
                 |> fun cells ->
-                    FsAddress(rowIndex,Seq.head cells |> fun c -> c.WorksheetColumn),
-                    FsAddress(rowIndex,Seq.last cells |> fun c -> c.WorksheetColumn)
+                    FsAddress(rowIndex,Seq.head cells |> fun c -> c.ColumnNumber),
+                    FsAddress(rowIndex,Seq.last cells |> fun c -> c.ColumnNumber)
                 |> FsRangeAddress
             match Map.tryFind rowIndex rows with
             | Some row -> 
@@ -323,7 +323,7 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
     member self.SetValueAt(value : 'a, rowIndex, colIndex) =
         match self.CellCollection.TryGetCell(rowIndex, colIndex) with
         | Some c -> 
-            c.SetValue value |> ignore
+            c.SetValueAs value |> ignore
             self
         | None -> 
             self.CellCollection.Add(rowIndex, colIndex, value) |> ignore

@@ -15,7 +15,7 @@ module FsExtensions =
                 for i = 1 to maxColIndex do
                     cells 
                     |> Seq.tryPick (fun cell ->
-                        if cell.WorksheetColumn = i then 
+                        if cell.ColumnNumber = i then 
                             Option.Some cell.Value
                         else 
                             None

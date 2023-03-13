@@ -51,12 +51,12 @@ module FsExtensions =
                     if not cells.IsEmpty then
                         let min,max =
                             cells
-                            |> List.map (fun cell -> uint32 cell.WorksheetColumn) 
+                            |> List.map (fun cell -> uint32 cell.ColumnNumber) 
                             |> fun l -> List.min l, List.max l
                         let cells = 
                             cells
                             |> List.map (fun cell ->
-                                Cell.fromValueWithDataType None (uint32 cell.WorksheetColumn) (uint32 cell.WorksheetRow) (cell.Value) (cell.DataType)
+                                Cell.fromValueWithDataType None (uint32 cell.ColumnNumber) (uint32 cell.RowNumber) (cell.Value) (cell.DataType)
                             )
                         let row = Row.create (uint32 row.Index) (Row.Spans.fromBoundaries min max) cells
                         SheetData.appendRow row sd |> ignore

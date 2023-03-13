@@ -37,7 +37,7 @@ type FsTableField (name : string, index : int, column : FsRangeColumn, totalsRow
     member this.SetName (name, cells : FsCellsCollection, showHeaderRow : bool) =
         _name <- name
         if showHeaderRow then
-            this.Column.FirstCell(cells).SetValue<string>(name)
+            this.Column.FirstCell(cells).SetValueAs<string>(name)
             |> ignore
 
     member this.HeaderCell (cells : FsCellsCollection, showHeaderRow : bool) =

@@ -62,7 +62,7 @@ type FsTable (name : string, rangeAddress, showTotalsRow, showHeaderRow) =
             let headersRow = self.HeadersRow(false);
             let mutable cellPos = 0
             for cell in headersRow.Cells(cells) do
-                let mutable name = cell.GetString();
+                let mutable name = cell.Value //GetString();
                 match Dictionary.tryGet name oldFieldNames with
                 | Some tableField ->
                     tableField.Index <- cellPos
@@ -74,7 +74,7 @@ type FsTable (name : string, rangeAddress, showTotalsRow, showHeaderRow) =
                     if (name = null) <> (name = "") then
                     
                         name <- self.GetUniqueName("Column", cellPos + 1, true)
-                        cell.SetValue(name) |> ignore
+                        cell.SetValueAs(name) |> ignore
                         cell.DataType <- DataType.String
 
                     if (_fieldNames.ContainsKey(name)) then
@@ -146,7 +146,7 @@ type FsTable (name : string, rangeAddress, showTotalsRow, showHeaderRow) =
             let column = FsRangeColumn(range)
             let newField = FsTableField(name,maxIndex + 1,column,null,null)
             if self.ShowHeaderRow then
-                newField.HeaderCell(cells,true).SetValue name |> ignore
+                newField.HeaderCell(cells,true).SetValueAs name |> ignore
             _fieldNames.Add(name,newField)
             self.RescanRange()
             newField
