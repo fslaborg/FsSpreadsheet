@@ -49,7 +49,7 @@ type FsWorkbook() =
     /// Removes a given FsWorksheet.
     member self.RemoveWorksheet(sheet : FsWorksheet) =
         self.RemoveWorksheet(sheet.Name)
- 
+        self
 
     // --------------
     // STATIC METHODS
@@ -57,20 +57,25 @@ type FsWorkbook() =
 
     /// Adds an FsWorksheet with given name to an FsWorkbook.
     static member addWorksheetWithName (name : string) (workbook : FsWorkbook) = 
-        workbook.AddWorksheet name
+        workbook.AddWorksheet name |> ignore
+        workbook
 
     /// Adds an FsWorksheet to an FsWorkbook.
     static member addWorksheet (sheet : FsWorksheet) (workbook : FsWorkbook) = 
-        workbook.AddWorksheet sheet
+        workbook.AddWorksheet sheet  |> ignore
+        workbook
 
     /// Returns all FsWorksheets.
     static member getWorksheets (workbook : FsWorkbook) =
-        workbook.GetWorksheets()
+        workbook.GetWorksheets()  |> ignore
+        workbook
 
     /// Removes an FsWorksheet with given name from an FsWorkbook.
     static member removeWorksheetByName (name : string) (workbook : FsWorkbook) =
-        workbook.RemoveWorksheet name
+        workbook.RemoveWorksheet name  |> ignore
+        workbook
 
     /// Removes a given FsWorksheet from an FsWorkbook.
     static member removeWorksheet (sheet : FsWorksheet) (workbook : FsWorkbook) =
-        workbook.RemoveWorksheet sheet
+        workbook.RemoveWorksheet sheet  |> ignore
+        workbook

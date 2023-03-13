@@ -9,6 +9,17 @@ open System.IO
 [<AutoOpen>]
 module FsExtensions =
 
+    type FsCell with
+        //member self.ofXlsxCell (sst : Spreadsheet.SharedStringTable option) (xlsxCell:Spreadsheet.Cell) =
+        //    let v =  Cell.getValue sst xlsxCell
+        //    let row,col = xlsxCell.CellReference.Value |> CellReference.toIndices
+        //    FsCell.create (int row) (int col) v
+
+        static member ofXlsxCell (sst : Spreadsheet.SharedStringTable option) (xlsxCell:Spreadsheet.Cell) =
+            let v =  Cell.getValue sst xlsxCell
+            let row,col = xlsxCell.CellReference.Value |> CellReference.toIndices
+            FsCell.create (int row) (int col) v
+
     type FsTable with
 
         /// Returns the FsTable with given FsCellsCollection in the form of an XlsxTable.
@@ -82,6 +93,35 @@ module FsExtensions =
 
 
     type FsWorkbook with
+        
+        member self.FromXlsxStream (stream : Stream) =
+            let doc = Spreadsheet.fromStream stream false
+            let sst = Spreadsheet.tryGetSharedStringTable doc
+            let xlsxWorkbookPart = Spreadsheet.getWorkbookPart doc
+            let xlsxWorkbook = Workbook.get xlsxWorkbookPart
+            let xlsxSheets = 
+                Sheet.Sheets.get xlsxWorkbook
+                |> Sheet.Sheets.getSheets
+            
+            let sheets =
+                xlsxSheets
+                |> Seq.map (fun xlsxSheet ->
+                    let sheetIndex = Sheet.getSheetIndex xlsxSheet
+                    let xlsxCells = 
+                        Spreadsheet.getCellsBySheetIndex sheetIndex doc
+                        |> Seq.map (FsCell.ofXlsxCell sst)
+                    FsWorksheet(xlsxSheet.Name)
+                    |> FsWorksheet.addCells xlsxCells
+                    |> (fun fsws -> fsws.RescanRows(); fsws)
+                    )
+            
+            
+            sheets
+            |> Seq.fold (fun wb sheet -> FsWorkbook.addWorksheet sheet wb) (new FsWorkbook())
+            
+        //member self.FromFile (path:string) =
+        //    use sr = new StreamReader(path)
+        //    self.FromXlsxStream sr.
 
         /// Writes the FsWorkbook into a given MemoryStream.
         member self.ToStream(stream : MemoryStream) = 

@@ -35,6 +35,7 @@ type DataType =
 /// Creates an FsCell of `DataType` dataType, with value of type `string`, and `FsAddress` address.
 type FsCell (value : IConvertible, dataType : DataType, address : FsAddress) =
     
+    // TODO: Maybe save as IConvertible
     let mutable _cellValue = string value
     let mutable _dataType = dataType
     let mutable _comment  = ""
