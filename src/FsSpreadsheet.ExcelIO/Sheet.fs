@@ -103,11 +103,12 @@ module Sheet =
         |> setName name
         |> setSheetID sheetID
 
-    /// Returns the item of the given index in the spreadsheetDocument if it exists. Else returns None.
+    /// <summary>Returns the item at the given index in the SpreadsheetDocument if it exists. Else returns None.</summary>
+    /// <remarks>SheetIndices are 1-based.</remarks>
     let tryItem (index : uint) (spreadsheetDocument : SpreadsheetDocument) : option<Sheet> = 
         let workbookPart = spreadsheetDocument.WorkbookPart    
         workbookPart.Workbook.Descendants<Sheet>()
-        |> Seq.tryItem (int index) 
+        |> Seq.tryItem (int index - 1) 
 
     /// Returns the item with the given name in the spreadsheetDocument if it exists. Else returns None.
     let tryItemByName (name : string) (spreadsheetDocument : SpreadsheetDocument) : option<Sheet> = 
