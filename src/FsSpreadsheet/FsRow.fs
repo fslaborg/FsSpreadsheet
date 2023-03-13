@@ -8,21 +8,17 @@ type FsRow (rangeAddress : FsRangeAddress, cells : FsCellsCollection, styleValue
 
     inherit FsRangeBase(rangeAddress,styleValue)
 
-    let cells = 
-        let rowCount =
-            cells.GetCells()
-            |> Seq.map (fun c -> c.Address.RowNumber)
-            |> Seq.distinct
-            |> Seq.length
-        if rowCount > 1 then
-            failwith "FsCellsCollection must only have 1 row to be qualified for FsRow creation."
-        cells
+    let cells = cells
 
     new () = FsRow (FsRangeAddress(FsAddress(0,0),FsAddress(0,0)),FsCellsCollection(),null)
 
-    // ask HLW: isn't this wrong? The FsRangeAddress will reach from col 1 to col 1 but shouldn't it be reaching from col 1 to how long the FsCellsCollection is?
-    // or even from first colIndex in the FsCellsCollection to last colIndex of it?
-    new (index,cells) = FsRow (FsRangeAddress(FsAddress(index,1),FsAddress(index,1)),cells,null)
+    /// <summary>Create an FsRow from a given FsCellsCollection and an rowIndex.</summary>
+    /// <remarks>The appropriate range of the cells (i.e. minimum colIndex and maximum colIndex) is derived from the FsCells with the matching rowIndex.</remarks>
+    new (index, (cells : FsCellsCollection)) = 
+        let getColIndexBy f = cells.GetCellsInRow index |> f (fun (c : FsCell) -> c.Address.ColumnNumber)
+        let minColIndex = try (getColIndexBy Seq.minBy).Address.ColumnNumber with _ -> 1
+        let maxColIndex = try (getColIndexBy Seq.maxBy).Address.ColumnNumber with _ -> 1
+        FsRow (FsRangeAddress(FsAddress(index, minColIndex),FsAddress(index, maxColIndex)), cells, null)
 
 
     // ----------
