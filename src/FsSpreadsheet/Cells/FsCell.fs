@@ -33,9 +33,9 @@ type DataType =
 
 // Type based on the type XLCell used in ClosedXml
 /// Creates an FsCell of `DataType` dataType, with value of type `string`, and `FsAddress` address.
-type FsCell (value : string, dataType : DataType, address : FsAddress) =
+type FsCell (value : IConvertible, dataType : DataType, address : FsAddress) =
     
-    let mutable _cellValue = value
+    let mutable _cellValue = string value
     let mutable _dataType = dataType
     let mutable _comment  = ""
     let mutable _hyperlink = ""
@@ -51,10 +51,11 @@ type FsCell (value : string, dataType : DataType, address : FsAddress) =
     // ALTERNATIVE CONSTRUCTORS
     // ------------------------
 
+    new (value : IConvertible) = FsCell (string value, DataType.String, FsAddress(0,0))
+
     /// Creates an empty FsCell, set at row 1, column 1 (1-based).
     //new () = FsCell ("", DataType.Empty, FsAddress(0,0))
-    ///// Creates an FsCell of `DataType` `String`, with the given value, set at row 1, column 1 (1-based).
-    //new (value : string) = FsCell (value, DataType.String, FsAddress(0,0))
+    ///// Creates an FsCell of `DataType` `String`, with the given value, set at row 1, column 1 (1-based).       
     ///// Creates an FsCell of `DataType` `Number`, with the given value, set at row 1, column 1 (1-based).
     //new (value : int) = FsCell (string value, DataType.Number, FsAddress(0,0))
     ///// Creates an FsCell of `DataType` `Number`, with the given value, set at row 1, column 1 (1-based).

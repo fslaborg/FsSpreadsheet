@@ -1,5 +1,4 @@
-﻿module FsCell
-
+﻿module FsWorkSheet
 open Expecto
 open FsSpreadsheet
 
@@ -11,7 +10,7 @@ let fsWorksheetTest =
             let fscellB1_num     = FsCell.create 1 2 1
             let fscellA2_bool    = FsCell.create 1 2 true
             
-            let worksheet = FsWorksheet.
+            //let worksheet = FsWorksheet.
 
             testCase "DataType string" <| fun _ ->
                 Expect.equal fscellA1_string.DataType DataType.String "is not the expected DataType.String"
