@@ -9,6 +9,7 @@
   <ItemGroup>
     <Compile Include="Spreadsheet.fs" />
     <Compile Include="Workbook.fs" />
+    <Compile Include="Sheet.fs" />
     <Compile Include="Main.fs" />
   </ItemGroup>
 
