@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <GenerateProgramFile>false</GenerateProgramFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Spreadsheet.fs" />
+    <Compile Include="Main.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Expecto" Version="9.*" />
+    <PackageReference Include="YoloDev.Expecto.TestSdk" Version="0.*" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.*" />
+    <ProjectReference Include="..\..\src\FsSpreadsheet.ExcelIO\FsSpreadsheet.ExcelIO.fsproj" />
+  </ItemGroup>
+
+</Project>
