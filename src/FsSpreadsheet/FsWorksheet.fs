@@ -83,7 +83,7 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
     // Row(s)
     // ------
 
-    /// Returns the FsRow at the given index. If it does not exist, it is created and appended first.
+    /// <summary>Returns the FsRow at the given index. If it does not exist, it is created and appended first.</summary>
     member self.Row(rowIndex) = 
         match _rows |> List.tryFind (fun row -> row.Index = rowIndex) with
         | Some row ->
@@ -93,7 +93,7 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
             _rows <- List.append _rows [row]
             row
 
-    /// Returns the FsRow at the given FsRangeAddress. If it does not exist, it is created and appended first.
+    /// <summary>Returns the FsRow at the given FsRangeAddress. If it does not exist, it is created and appended first.</summary>
     member self.Row(rangeAddress : FsRangeAddress) = 
         if rangeAddress.FirstAddress.RowNumber <> rangeAddress.LastAddress.RowNumber then
             failwithf "Row may not have a range address spanning over different row indices"
