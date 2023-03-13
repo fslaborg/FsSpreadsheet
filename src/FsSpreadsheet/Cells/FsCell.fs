@@ -52,19 +52,19 @@ type FsCell (value : string, dataType : DataType, address : FsAddress) =
     // ------------------------
 
     /// Creates an empty FsCell, set at row 1, column 1 (1-based).
-    new () = FsCell ("", DataType.Empty, FsAddress(0,0))
-    /// Creates an FsCell of `DataType` `String`, with the given value, set at row 1, column 1 (1-based).
-    new (value : string) = FsCell (value, DataType.String, FsAddress(0,0))
-    /// Creates an FsCell of `DataType` `Number`, with the given value, set at row 1, column 1 (1-based).
-    new (value : int) = FsCell (string value, DataType.Number, FsAddress(0,0))
-    /// Creates an FsCell of `DataType` `Number`, with the given value, set at row 1, column 1 (1-based).
-    new (value : float) = FsCell (string value, DataType.Number, FsAddress(0,0))
-    /// Creates an empty FsCell, set at `FsAddress` address.
-    new (address : FsAddress) =
-        FsCell ("", DataType.Empty, address)
-    /// Creates an empty FsCell, set at row rowIndex and column colIndex.
-    new (rowIndex, colIndex) =
-        FsCell("", DataType.Empty, FsAddress(rowIndex, colIndex))
+    //new () = FsCell ("", DataType.Empty, FsAddress(0,0))
+    ///// Creates an FsCell of `DataType` `String`, with the given value, set at row 1, column 1 (1-based).
+    //new (value : string) = FsCell (value, DataType.String, FsAddress(0,0))
+    ///// Creates an FsCell of `DataType` `Number`, with the given value, set at row 1, column 1 (1-based).
+    //new (value : int) = FsCell (string value, DataType.Number, FsAddress(0,0))
+    ///// Creates an FsCell of `DataType` `Number`, with the given value, set at row 1, column 1 (1-based).
+    //new (value : float) = FsCell (string value, DataType.Number, FsAddress(0,0))
+    ///// Creates an empty FsCell, set at `FsAddress` address.
+    //new (address : FsAddress) =
+    //    FsCell ("", DataType.Empty, address)
+    ///// Creates an empty FsCell, set at row rowIndex and column colIndex.
+    //new (rowIndex, colIndex) =
+    //    FsCell("", DataType.Empty, FsAddress(rowIndex, colIndex))
 
     /// <summary>
     /// Gets or sets the cell's value. To get or set a strongly typed value, use the GetValue&lt;T&gt; and SetValue methods.
@@ -242,13 +242,23 @@ type FsCell (value : string, dataType : DataType, address : FsAddress) =
     static member createWithDataType (dataType : DataType) (rowNumber:int) (colNumber:int) (value) =
         FsCell (value, dataType,FsAddress(rowNumber,colNumber))    
 
+    /// Create a FsCell given the Adress
+    static member createWithAdress (adress:FsAddress) (value) =
+        let dataT, value = DataType.InferCellValue(value)
+        FsCell (value, dataT,adress)    
+
     /// Create a FsCell and inferes the dataType
-    static member create (value) (rowNumber:int) (colNumber:int) =
+    static member create (rowNumber:int) (colNumber:int) (value) =
         let dataT, value = DataType.InferCellValue(value)
         FsCell (value, dataT,FsAddress(rowNumber,colNumber))    
 
+    /// Create empty FsCell
+    static member createEmpty ()  =        
+        FsCell ("", DataType.Empty,FsAddress(0,0))    
 
-
+    /// Create empty FsCell
+    static member createEmptyWithAdress (adress:FsAddress)  =        
+        FsCell ("", DataType.Empty,adress)    
 
 
 

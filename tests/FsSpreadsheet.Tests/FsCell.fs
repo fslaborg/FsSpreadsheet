@@ -77,9 +77,9 @@ let dataTypeTests =
 let fsCellTest =
     testList "FsCell data" [               
         testList "Data | DataType | Adress" [
-            let fscellA1_string  = FsCell.create "A1" 1 1 
-            let fscellB1_num     = FsCell.create 1 1 2 
-            let fscellA2_bool    = FsCell.create true 1 2 
+            let fscellA1_string  = FsCell.create 1 1 "A1"
+            let fscellB1_num     = FsCell.create 1 2 1
+            let fscellA2_bool    = FsCell.create 1 2 true
             
             testCase "DataType string" <| fun _ ->
                 Expect.equal fscellA1_string.DataType DataType.String "is not the expected DataType.String"

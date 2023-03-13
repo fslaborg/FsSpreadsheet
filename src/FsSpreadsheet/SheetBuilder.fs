@@ -88,7 +88,7 @@ module SheetBuilder =
                 let activeRowIndex = rowIndex + startRowIndex
                 for field in fields do
 
-                    let headerCell = FsCell()
+                    let headerCell = FsCell.createEmpty()
                     for header in field.HeaderTransformers do ignore (header row headerCell)
                 
                      
@@ -145,7 +145,7 @@ module SheetBuilder =
                 let activeRow = self.Row(rowIndex + startRowIndex)
                 for field in fields do
 
-                    let headerCell = FsCell()
+                    let headerCell = FsCell.createEmpty()
                     for header in field.HeaderTransformers do ignore (header row headerCell)
                 
                     let index = 
