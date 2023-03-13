@@ -12,6 +12,8 @@ let wbpFox = ssdFox.WorkbookPart
 let sstpFox = wbpFox.SharedStringTablePart
 let sstFox = sstpFox.SharedStringTable
 let sstFoxInnerText = sstFox.InnerText
+let wsp1Fox = (wbpFox.WorksheetParts |> Array.ofSeq)[0]
+let cbsi1Fox = wsp1Fox.Worksheet.Descendants<Spreadsheet.Cell>() |> Array.ofSeq
 
 
 //let testSsdFox2 = Packaging.SpreadsheetDocument.Open(testFilePath, false)
@@ -26,10 +28,10 @@ let sstFoxInnerText = sstFox.InnerText
 [<Tests>]
 let spreadsheetTests =
     testList "Spreadsheet" [
+        let ssd = Spreadsheet.fromFile testFilePath false
         // is it even possible to test this?
         //testList "fromFile" [
             //testCase "is equal to testSsd" <| fun _ ->
-            //    let ssd = Spreadsheet.fromFile testFilePath false
             //    Expect.equal testDoc ssdFox "Both testFiles differ"
             //    testSsd.Close()
         //]
@@ -46,6 +48,25 @@ let spreadsheetTests =
             let wbp = Spreadsheet.getWorkbookPart ssdFox
             testCase "is equal to wbpFox" <| fun _ ->
                 Expect.equal wbp wbpFox "Differs"
+        ]
+        testList "getCellsBySheetIndex" [
+            let cbsi1 = Spreadsheet.getCellsBySheetIndex 1u ssd |> Array.ofSeq
+            // not applicable since Cell arrays and Cells always differ from each other (even if you compare the same cell, e.g. `cell1 = cell1`)
+            //testCase "is equal to cbsi1Fox" <| fun _ ->
+            //    Expect.equal cbsi1 cbsi1Fox "Differs"
+            // therefore, test individual Cell properties:
+            testCase "element 0 is equal in CellReference to element 0 from OpenXML" <| fun _ ->
+                Expect.equal cbsi1[0].CellReference cbsi1Fox[0].CellReference "Differs"
+            testCase "element 10 is equal in CellReference to element 10 from OpenXML" <| fun _ ->
+                Expect.equal cbsi1[10].CellReference cbsi1Fox[10].CellReference "Differs"
+            testCase "element 20 is equal in CellReference to element 20 from OpenXML" <| fun _ ->
+                Expect.equal cbsi1[20].CellReference cbsi1Fox[20].CellReference "Differs"
+            testCase "element 0 is equal in CellValue.InnerText to element 0 from OpenXML" <| fun _ ->
+                Expect.equal cbsi1[0].CellValue.InnerText cbsi1Fox[0].CellValue.InnerText "Differs"
+            testCase "element 10 is equal in CellValue.InnerText to element 10 from OpenXML" <| fun _ ->
+                Expect.equal cbsi1[10].CellValue.InnerText cbsi1Fox[10].CellValue.InnerText "Differs"
+            testCase "element 20 is equal in CellValue.InnerText to element 20 from OpenXML" <| fun _ ->
+                Expect.equal cbsi1[20].CellValue.InnerText cbsi1Fox[20].CellValue.InnerText "Differs"
         ]
     ]
 
