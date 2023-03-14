@@ -52,5 +52,22 @@ let fsWorksheetTest =
                     Expect.hasCountOf testSheet.Tables 1u (fun t -> t.Name = dummyTable1.Name) "has dummyTable1 twice (or more)"
                 // DO DO: add more testCases
             ]
+            testList "AddTables" [
+                testCase "dummyTable1 is present" <| fun _ ->
+                    let testSheet = FsWorksheet("testSheet", [], [], FsCellsCollection())
+                    testSheet.AddTables [dummyTable1] |> ignore
+                    Expect.contains testSheet.Tables dummyTable1 "does not contain dummyTable1"
+                testCase "dummyTable1 & dummyTable2 are present" <| fun _ ->
+                    let testSheet = FsWorksheet("testSheet", [], [], FsCellsCollection())
+                    let dummyTablesList = [dummyTable1; dummyTable2]
+                    testSheet.AddTables dummyTablesList |> ignore
+                    Expect.containsAll testSheet.Tables dummyTablesList "does not contain dummyTable1 and/or dummyTable2"
+                testCase "dummyTable1 & dummyTable2 are not present twice" <| fun _ ->
+                    let testSheet = FsWorksheet("testSheet", [], [], FsCellsCollection())
+                    let dummyTablesList = [dummyTable1; dummyTable2]
+                    testSheet.AddTables dummyTablesList |> ignore
+                    testSheet.AddTables dummyTablesList |> ignore
+                    Expect.containsAll testSheet.Tables dummyTablesList "has dummyTable1 and/or twice (or more)"
+            ]
         ]
     ]

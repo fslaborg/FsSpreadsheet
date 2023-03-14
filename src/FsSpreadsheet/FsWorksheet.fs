@@ -314,6 +314,16 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
     static member addTable table (sheet : FsWorksheet) =
         sheet.AddTable table
 
+    /// <summary>Adds a list of FsTables to the FsWorksheet. All FsTables with a name already present in the FsWorksheet are not attached.</summary>
+    // TO DO: Ask HLW: rather printfn or failwith?
+    member self.AddTables(tables) =
+        tables |> List.iter (self.AddTable >> ignore)
+        self
+
+    /// <summary>Adds a list of FsTables to an FsWorksheet. All FsTables with a name already present in the FsWorksheet are not attached.</summary>
+    static member addTables tables (sheet : FsWorksheet) =
+        sheet.AddTables tables
+
 
     // -------
     // Cell(s)
