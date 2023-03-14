@@ -269,7 +269,13 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
                 self.Row(newRange)
         )
 
+
+    // --------
+    // Table(s)
+    // --------
+
     /// Returns the FsTable with the given tableName, rangeAddress, and showHeaderRow parameters. If it does not exist yet, it gets created and appended first.
+    // TO DO: Ask HLW: Is this really a good name for the method?
     member self.Table(tableName,rangeAddress,showHeaderRow) = 
         match _tables |> List.tryFind (fun table -> table.Name = name) with
         | Some table ->
@@ -282,6 +288,31 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
     /// Returns the FsTable with the given tableName and rangeAddress parameters. If it does not exist yet, it gets created first. ShowHeaderRow is true by default.
     member self.Table(tableName,rangeAddress) = 
         self.Table(tableName,rangeAddress,true)
+
+    /// <summary>Returns the FsTable of the given name from an FsWorksheet if it exists. Else returns None.</summary>
+    static member tryGetTableByName tableName (sheet : FsWorksheet) =
+        sheet.Tables |> List.tryFind (fun t -> t.Name = tableName)
+
+    /// <summary>Returns the FsTable of the given name from an FsWorksheet.</summary>
+    static member getTableByName tableName (sheet : FsWorksheet) =
+        try (sheet.Tables |> List.tryFind (fun t -> t.Name = tableName)).Value
+        with _ -> failwith $"FsTable with name {tableName} is not presen in the FsWorksheet {sheet.Name}."
+
+    // TO DO: tryGetTableByRangeAddress
+
+    // TO DO: getTableByRangeAddress
+
+    /// <summary>Adds an FsTable to the FsWorksheet if an FsTable with the same name is not already attached.</summary>
+    // TO DO: Ask HLW: rather printfn or failwith?
+    member self.AddTable(table : FsTable) =
+        if self.Tables |> List.exists (fun t -> t.Name = table.Name) then
+            printfn $"FsTable {table.Name} could not be appended as an FsTable with this name is already present in the FsWorksheet {self.Name}."
+        else _tables <- List.append _tables [table]
+        self
+
+    /// <summary>Adds an FsTable to the FsWorksheet if an FsTable with the same name is not already attached.</summary>
+    static member addTable table (sheet : FsWorksheet) =
+        sheet.AddTable table
 
 
     // -------
