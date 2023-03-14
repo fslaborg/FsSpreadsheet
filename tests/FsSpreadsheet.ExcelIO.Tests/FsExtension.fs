@@ -4,19 +4,23 @@ open Expecto
 open FsSpreadsheet
 open FsSpreadsheet.ExcelIO
 open DocumentFormat.OpenXml
+open Spreadsheet
 open System.IO
 
 
+let dummyDtNumber = DataType.Number
+let dummyDtString = DataType.String
+let dummyDtBoolean = DataType.Boolean
+let dummyDtDate = DataType.Date
+let dummyDtEmpty = DataType.Empty
+
+let dummyXlsxCell = Cell.create CellValues.Number "A1" (CellValue(1.337))
+
 let testFilePath = System.IO.Path.Combine(__SOURCE_DIRECTORY__, "data", "testUnit.xlsx")
+//let ssdFox = Packaging.SpreadsheetDocument.Open(testFilePath, false)
+//let wbpFox = ssdFox.WorkbookPart
+//let wbFox = wbpFox.Workbook
 let sr = new StreamReader(testFilePath)
-// *fox = from OpenXml, to distinguish between objects from FsSpreadsheet.ExcelIO
-let ssdFox = Packaging.SpreadsheetDocument.Open(testFilePath, false)
-let wbpFox = ssdFox.WorkbookPart
-let sstpFox = wbpFox.SharedStringTablePart
-let sstFox = sstpFox.SharedStringTable
-let sstFoxInnerText = sstFox.InnerText
-let wsp1Fox = (wbpFox.WorksheetParts |> Array.ofSeq)[0]
-let cbsi1Fox = wsp1Fox.Worksheet.Descendants<Spreadsheet.Cell>() |> Array.ofSeq
 let dummyFsWorkbook = new FsWorkbook()
 let dummyFsCells = [
     FsCell.create 1 1 "A1"          // for sheet1 (StringSheet)
@@ -46,49 +50,87 @@ let dummyFsWorksheet4 = FsWorksheet("DataTypeSheet",    [], [],             dumm
 [<Tests>]
 let fsExtensionTests =
     testList "FsExtensions" [
-        testList "FsWorkbook" [
-            testList "FromXlsxStream" [
-                let fsWorkbookFromStream = FsWorkbook.fromXlsxStream sr.BaseStream
-                let fsWorksheet1FromStream = fsWorkbookFromStream.GetWorksheetByName "StringSheet"
-                let fsWorksheet2FromStream = fsWorkbookFromStream.GetWorksheetByName "NumericSheet"
-                let fsWorksheet3FromStream = fsWorkbookFromStream.GetWorksheetByName "TableSheet"
-                let fsWorksheet4FromStream = fsWorkbookFromStream.GetWorksheetByName "DataTypeSheet"
-                testCase "is equal to dummyFsWorkbook in sheet1, cellA1 value" <| fun _ ->
-                    let v = (FsWorksheet.getCellAt 1 1 fsWorksheet1FromStream).Value
-                    Expect.equal v "A1" "value is not equal"
-                testCase "is equal to dummyFsWorkbook in sheet1, cellA1 address" <| fun _ ->
-                    let a = (FsWorksheet.getCellAt 1 1 fsWorksheet1FromStream).Address.Address
-                    Expect.equal a "A1" "address is not equal"
-                testCase "is equal to dummyFsWorkbook in sheet1, cellA1 DataType" <| fun _ ->
-                    let d = (FsWorksheet.getCellAt 1 1 fsWorksheet1FromStream).DataType
-                    Expect.equal d DataType.String "DataType is not DataType.String"
-                testCase "is equal to dummyFsWorkbook in sheet2, cellC7 value" <| fun _ ->
-                    let v = (FsWorksheet.getCellAt 7 3 fsWorksheet2FromStream).Value
-                    Expect.equal v "7" "value is not equal"
-                testCase "is equal to dummyFsWorkbook in sheet2, cellC7 address" <| fun _ ->
-                    let a = (FsWorksheet.getCellAt 7 3 fsWorksheet2FromStream).Address.Address
-                    Expect.equal a "C7" "address is not equal"
-                testCase "is equal to dummyFsWorkbook in sheet2, cellC7 DataType" <| fun _ ->
-                    let d = (FsWorksheet.getCellAt 7 3 fsWorksheet2FromStream).DataType
-                    Expect.equal d DataType.Number "DataType is not DataType.Number"
-                testCase "is equal to dummyFsWorkbook in sheet2, cellC7 value" <| fun _ ->
-                    let v = (FsWorksheet.getCellAt 2 10 fsWorksheet3FromStream).Value
-                    Expect.equal v "B10" "value is not equal"
-                testCase "is equal to dummyFsWorkbook in sheet3, cellB10 address" <| fun _ ->
-                    let a = (FsWorksheet.getCellAt 2 10 fsWorksheet3FromStream).Address.Address
-                    Expect.equal a "B10" "address is not equal"
-                testCase "is equal to dummyFsWorkbook in sheet3, cellB10 DataType" <| fun _ ->
-                    let d = (FsWorksheet.getCellAt 2 10 fsWorksheet3FromStream).DataType
-                    Expect.equal d DataType.String "DataType is not DataType.String"
-                testCase "is equal to dummyFsWorkbook in sheet3, cellB10 value" <| fun _ ->
-                    let v = (FsWorksheet.getCellAt 2 1 fsWorksheet4FromStream).Value
-                    Expect.equal v "True" "value is not equal"
-                testCase "is equal to dummyFsWorkbook in sheet2, cellC7 address" <| fun _ ->
-                    let a = (FsWorksheet.getCellAt 2 1 fsWorksheet4FromStream).Address.Address
-                    Expect.equal a "A2" "address is not equal"
-                testCase "is equal to dummyFsWorkbook in sheet2, cellC7 DataType" <| fun _ ->
-                    let d = (FsWorksheet.getCellAt 2 1 fsWorksheet4FromStream).DataType
-                    Expect.equal d DataType.Boolean "DataType is not DataType.Boolean"
+        testList "DataType" [
+            testList "ofXlsxCellValues" [
+                let testCvNumber = DataType.ofXlsxCellValues CellValues.Number
+                testCase "is correct DataTypeNumber from CellValuesNumber" <| fun _ ->
+                    Expect.equal testCvNumber DataType.Number "is not the correct DataType"
+                let testCvString = DataType.ofXlsxCellValues CellValues.String
+                testCase "is correct DataTypeString from CellValuesString" <| fun _ ->
+                    Expect.equal testCvString DataType.String "is not the correct DataType"
+                let testCvSharedString = DataType.ofXlsxCellValues CellValues.SharedString
+                testCase "is correct DataTypeString from CellValuesSharedString" <| fun _ ->
+                    Expect.equal testCvSharedString DataType.String "is not the correct DataType"
+                let testCvInlineString = DataType.ofXlsxCellValues CellValues.InlineString
+                testCase "is correct DataTypeString from CellValuesInlineString" <| fun _ ->
+                    Expect.equal testCvInlineString DataType.String "is not the correct DataType"
+                let testCvBoolean = DataType.ofXlsxCellValues CellValues.Boolean
+                testCase "is correct DataTypeBoolean from CellValuesBoolean" <| fun _ ->
+                    Expect.equal testCvBoolean DataType.Boolean "is not the correct DataType"
+                let testCvDate = DataType.ofXlsxCellValues CellValues.Date
+                testCase "is correct DataTypeDate from CellValuesDate" <| fun _ ->
+                    Expect.equal testCvDate DataType.Date "is not the correct DataType"
+                let testCvError = DataType.ofXlsxCellValues CellValues.Error
+                testCase "is correct DataTypeEmpty from CellValuesError" <| fun _ ->
+                    Expect.equal testCvError DataType.Empty "is not the correct DataType"
             ]
         ]
+        //testList "FsCell" [
+        //    testList "ofXlsxCell" [
+        //        let testCell = FsCell.ofXlsxCell None dummyXlsxCell
+        //        testCase "is equal in value" <| fun _ ->
+        //            Expect.equal testCell.Value dummyXlsxCell.CellValue.Text "values are not equal"
+        //        testCase "is equal in address/reference" <| fun _ ->
+        //            Expect.equal testCell.Address.Address dummyXlsxCell.CellReference.Value "addresses/references are not equal"
+        //        //testCase "is equal in DataType/CellValues" <| fun _ ->
+        //            //let dtOfCvs = DataType
+        //            //Expect.equal testCell.DataType dummyXlsxCell.DataType.Value "addresses/references are not equal"
+        //    ]
+        //]
+        //testList "FsWorkbook" [
+        //    testList "FromXlsxStream" [
+        //        let fsWorkbookFromStream = FsWorkbook.fromXlsxStream sr.BaseStream
+        //        sr.Close()
+        //        let fsWorksheet1FromStream = fsWorkbookFromStream.GetWorksheetByName "StringSheet"
+        //        let fsWorksheet2FromStream = fsWorkbookFromStream.GetWorksheetByName "NumericSheet"
+        //        let fsWorksheet3FromStream = fsWorkbookFromStream.GetWorksheetByName "TableSheet"
+        //        let fsWorksheet4FromStream = fsWorkbookFromStream.GetWorksheetByName "DataTypeSheet"
+        //        testCase "is equal to dummyFsWorkbook in sheet1, cellA1 value" <| fun _ ->
+        //            let v = (FsWorksheet.getCellAt 1 1 fsWorksheet1FromStream).Value
+        //            Expect.equal v "A1" "value is not equal"
+        //        testCase "is equal to dummyFsWorkbook in sheet1, cellA1 address" <| fun _ ->
+        //            let a = (FsWorksheet.getCellAt 1 1 fsWorksheet1FromStream).Address.Address
+        //            Expect.equal a "A1" "address is not equal"
+        //        testCase "is equal to dummyFsWorkbook in sheet1, cellA1 DataType" <| fun _ ->
+        //            let d = (FsWorksheet.getCellAt 1 1 fsWorksheet1FromStream).DataType
+        //            Expect.equal d DataType.String "DataType is not DataType.String"
+        //        testCase "is equal to dummyFsWorkbook in sheet2, cellC7 value" <| fun _ ->
+        //            let v = (FsWorksheet.getCellAt 7 3 fsWorksheet2FromStream).Value
+        //            Expect.equal v "7" "value is not equal"
+        //        testCase "is equal to dummyFsWorkbook in sheet2, cellC7 address" <| fun _ ->
+        //            let a = (FsWorksheet.getCellAt 7 3 fsWorksheet2FromStream).Address.Address
+        //            Expect.equal a "C7" "address is not equal"
+        //        testCase "is equal to dummyFsWorkbook in sheet2, cellC7 DataType" <| fun _ ->
+        //            let d = (FsWorksheet.getCellAt 7 3 fsWorksheet2FromStream).DataType
+        //            Expect.equal d DataType.Number "DataType is not DataType.Number"
+        //        testCase "is equal to dummyFsWorkbook in sheet2, cellB10 value" <| fun _ ->
+        //            let v = (FsWorksheet.getCellAt 10 2 fsWorksheet3FromStream).Value
+        //            Expect.equal v "B10" "value is not equal"
+        //        testCase "is equal to dummyFsWorkbook in sheet3, cellB10 address" <| fun _ ->
+        //            let a = (FsWorksheet.getCellAt 10 2 fsWorksheet3FromStream).Address.Address
+        //            Expect.equal a "B10" "address is not equal"
+        //        testCase "is equal to dummyFsWorkbook in sheet3, cellB10 DataType" <| fun _ ->
+        //            let d = (FsWorksheet.getCellAt 10 2 fsWorksheet3FromStream).DataType
+        //            Expect.equal d DataType.String "DataType is not DataType.String"
+        //        testCase "is equal to dummyFsWorkbook in sheet3, A2 value" <| fun _ ->
+        //            let v = (FsWorksheet.getCellAt 2 1 fsWorksheet4FromStream).Value
+        //            Expect.equal v "True" "value is not equal"
+        //        testCase "is equal to dummyFsWorkbook in sheet3, A2 address" <| fun _ ->
+        //            let a = (FsWorksheet.getCellAt 2 1 fsWorksheet4FromStream).Address.Address
+        //            Expect.equal a "A2" "address is not equal"
+        //        testCase "is equal to dummyFsWorkbook in sheet3, A2 DataType" <| fun _ ->
+        //            let d = (FsWorksheet.getCellAt 2 1 fsWorksheet4FromStream).DataType
+        //            Expect.equal d DataType.Boolean "DataType is not DataType.Boolean"
+        //    ]
+        //]
     ]

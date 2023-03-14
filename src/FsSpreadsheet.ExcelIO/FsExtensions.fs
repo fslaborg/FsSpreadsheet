@@ -1,6 +1,7 @@
 ﻿namespace FsSpreadsheet.ExcelIO
 
 open DocumentFormat.OpenXml
+open DocumentFormat.OpenXml.Spreadsheet
 open FsSpreadsheet
 open FsSpreadsheet.ExcelIO
 open System.IO
@@ -9,16 +10,35 @@ open System.IO
 [<AutoOpen>]
 module FsExtensions =
 
+
+    type DataType with
+
+        /// <summary>Converts a given CellValues to the respective DataType.</summary>
+        static member ofXlsxCellValues (cellValues : CellValues) =
+            match cellValues with
+            | CellValues.Number -> DataType.Number
+            | CellValues.Boolean -> DataType.Boolean
+            | CellValues.Date -> DataType.Date
+            | CellValues.Error -> DataType.Empty
+            | CellValues.InlineString
+            | CellValues.SharedString
+            | CellValues.String 
+            | _ -> DataType.String
+
+
     type FsCell with
         //member self.ofXlsxCell (sst : Spreadsheet.SharedStringTable option) (xlsxCell:Spreadsheet.Cell) =
         //    let v =  Cell.getValue sst xlsxCell
         //    let row,col = xlsxCell.CellReference.Value |> CellReference.toIndices
         //    FsCell.create (int row) (int col) v
 
-        static member ofXlsxCell (sst : Spreadsheet.SharedStringTable option) (xlsxCell:Spreadsheet.Cell) =
+        /// <summary>Creates an FsCell on the basis of an XlsxCell. Uses a SharedStringTable if present to get the XlsxCell's value.</summary>
+        static member ofXlsxCell (sst : SharedStringTable option) (xlsxCell : Cell) =
             let v =  Cell.getValue sst xlsxCell
-            let row,col = xlsxCell.CellReference.Value |> CellReference.toIndices
-            FsCell.create (int row) (int col) v
+            let col,row = xlsxCell.CellReference.Value |> CellReference.toIndices
+            let c = FsCell.create (int row) (int col) v
+            c
+
 
     type FsTable with
 
