@@ -36,7 +36,9 @@ module FsExtensions =
         static member ofXlsxCell (sst : SharedStringTable option) (xlsxCell : Cell) =
             let v =  Cell.getValue sst xlsxCell
             let col, row = xlsxCell.CellReference.Value |> CellReference.toIndices
-            let dt = DataType.ofXlsxCellValues xlsxCell.DataType
+            let dt = 
+                try DataType.ofXlsxCellValues xlsxCell.DataType.Value
+                with _ -> DataType.Empty
             FsCell.createWithDataType dt (int row) (int col) v
 
 

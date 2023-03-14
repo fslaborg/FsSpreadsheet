@@ -16,7 +16,8 @@ let dummyDtEmpty = DataType.Empty
 
 let dummyXlsxCell = Cell.create CellValues.Number "A1" (CellValue(1.337))
 
-let testFilePath = System.IO.Path.Combine(__SOURCE_DIRECTORY__, "data", "testUnit.xlsx")
+let testFilePath = @"C:\Repos\CSBiology\FsSpreadsheet\tests\FsSpreadsheet.ExcelIO.Tests\data\testUnit.xlsx"
+//let testFilePath = System.IO.Path.Combine(__SOURCE_DIRECTORY__, "data", "testUnit.xlsx")
 //let ssdFox = Packaging.SpreadsheetDocument.Open(testFilePath, false)
 //let wbpFox = ssdFox.WorkbookPart
 //let wbFox = wbpFox.Workbook
@@ -87,10 +88,10 @@ let fsExtensionTests =
                     Expect.equal testCell.DataType dtOfCvs "addresses/references are not equal"
             ]
         ]
-        //testList "FsWorkbook" [
-        //    testList "FromXlsxStream" [
-        //        let fsWorkbookFromStream = FsWorkbook.fromXlsxStream sr.BaseStream
-        //        sr.Close()
+        testList "FsWorkbook" [
+            testList "fromXlsxStream" [
+                let fsWorkbookFromStream = FsWorkbook.fromXlsxStream sr.BaseStream
+                sr.Close()
         //        let fsWorksheet1FromStream = fsWorkbookFromStream.GetWorksheetByName "StringSheet"
         //        let fsWorksheet2FromStream = fsWorkbookFromStream.GetWorksheetByName "NumericSheet"
         //        let fsWorksheet3FromStream = fsWorkbookFromStream.GetWorksheetByName "TableSheet"
@@ -113,7 +114,7 @@ let fsExtensionTests =
         //        testCase "is equal to dummyFsWorkbook in sheet2, cellC7 DataType" <| fun _ ->
         //            let d = (FsWorksheet.getCellAt 7 3 fsWorksheet2FromStream).DataType
         //            Expect.equal d DataType.Number "DataType is not DataType.Number"
-        //        testCase "is equal to dummyFsWorkbook in sheet2, cellB10 value" <| fun _ ->
+        //        testCase "is equal to dummyFsWorkbook in sheet3, cellB10 value" <| fun _ ->
         //            let v = (FsWorksheet.getCellAt 10 2 fsWorksheet3FromStream).Value
         //            Expect.equal v "B10" "value is not equal"
         //        testCase "is equal to dummyFsWorkbook in sheet3, cellB10 address" <| fun _ ->
@@ -122,15 +123,15 @@ let fsExtensionTests =
         //        testCase "is equal to dummyFsWorkbook in sheet3, cellB10 DataType" <| fun _ ->
         //            let d = (FsWorksheet.getCellAt 10 2 fsWorksheet3FromStream).DataType
         //            Expect.equal d DataType.String "DataType is not DataType.String"
-        //        testCase "is equal to dummyFsWorkbook in sheet3, A2 value" <| fun _ ->
+        //        testCase "is equal to dummyFsWorkbook in sheet4, cellA2 value" <| fun _ ->
         //            let v = (FsWorksheet.getCellAt 2 1 fsWorksheet4FromStream).Value
-        //            Expect.equal v "True" "value is not equal"
-        //        testCase "is equal to dummyFsWorkbook in sheet3, A2 address" <| fun _ ->
+        //            Expect.equal v "1" "value is not equal"     // should be "True"... why is it not? Maybe bc. it's stored as "1" in the XML and only Excel converts it to "TRUE" on the screen... TO DO: check that.
+        //        testCase "is equal to dummyFsWorkbook in sheet4, cellA2 address" <| fun _ ->
         //            let a = (FsWorksheet.getCellAt 2 1 fsWorksheet4FromStream).Address.Address
         //            Expect.equal a "A2" "address is not equal"
-        //        testCase "is equal to dummyFsWorkbook in sheet3, A2 DataType" <| fun _ ->
+        //        testCase "is equal to dummyFsWorkbook in sheet4, cellA2 DataType" <| fun _ ->
         //            let d = (FsWorksheet.getCellAt 2 1 fsWorksheet4FromStream).DataType
         //            Expect.equal d DataType.Boolean "DataType is not DataType.Boolean"
-        //    ]
-        //]
+            ]
+        ]
     ]
