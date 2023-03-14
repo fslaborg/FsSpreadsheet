@@ -7,9 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="FsWorkbook.fs" />
     <Compile Include="FsWorksheet.fs" />
-    <Compile Include="FsAddress.fs" />
     <Compile Include="FsCell.fs" />
+    <Compile Include="FsAddress.fs" />
     <Compile Include="Main.fs" />
   </ItemGroup>
 

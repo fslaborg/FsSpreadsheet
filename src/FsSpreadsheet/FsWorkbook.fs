@@ -51,6 +51,25 @@ type FsWorkbook() =
     static member getWorksheets (workbook : FsWorkbook) =
         workbook.GetWorksheets()
 
+    /// <summary>Returns the FsWorksheet with the given name if it exists in the FsWorkbook. Else returns None.</summary>
+    member self.TryGetWorksheetByName(sheetName) =
+        _worksheets |> List.tryFind (fun w -> w.Name = sheetName)
+
+    /// <summary>Returns the FsWorksheet with the given name if it exists in a given FsWorkbook. Else returns None.</summary>
+    static member tryGetWorksheetByName sheetName (workbook : FsWorkbook) =
+        workbook.TryGetWorksheetByName sheetName
+
+    /// <summary>Returns the FsWorksheet with the given name.</summary>
+    /// <exception cref="System.Exception">if FsWorksheet with given name is not present in the FsWorkkbook.</exception>
+    member self.GetWorksheetByName(sheetName) =
+        try (self.TryGetWorksheetByName sheetName).Value
+        with _ -> failwith $"FsWorksheet with name {sheetName} is not present in the FsWorkbook."
+
+    /// <summary>Returns the FsWorksheet with the given name from an FsWorkbook.</summary>
+    /// <exception cref="System.Exception">if FsWorksheet with given name is not present in the FsWorkkbook.</exception>
+    static member getWorksheetByName sheetName (workbook : FsWorkbook) =
+        workbook.GetWorksheetByName sheetName
+
     /// <summary>Removes an FsWorksheet with given name.</summary>
     /// <exception cref="System.Exception">if FsWorksheet with given name is not present in the FsWorkkbook.</exception>
     member self.RemoveWorksheet(name : string) =
