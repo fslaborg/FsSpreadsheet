@@ -15,15 +15,20 @@ type FsWorkbook() =
     //    and set(value) = _worksheets <- value
 
 
-    // ------------------
-    // NON-STATIC METHODS
-    // ------------------
+    // -------
+    // METHODS
+    // -------
  
     /// Adds an FsWorksheet with given name.
     member self.AddWorksheet(name : string) = 
         let sheet = FsWorksheet name
         _worksheets <- List.append _worksheets [sheet]
         sheet
+
+    /// Adds an FsWorksheet with given name to an FsWorkbook.
+    static member addWorksheetWithName (name : string) (workbook : FsWorkbook) = 
+        workbook.AddWorksheet name |> ignore
+        workbook
 
     /// Adds a given FsWorksheet.
     member self.AddWorksheet(sheet : FsWorksheet) = 
@@ -33,11 +38,21 @@ type FsWorkbook() =
             _worksheets <- List.append _worksheets [sheet]
         sheet
 
+    /// Adds an FsWorksheet to an FsWorkbook.
+    static member addWorksheet (sheet : FsWorksheet) (workbook : FsWorkbook) = 
+        workbook.AddWorksheet sheet  |> ignore
+        workbook
+
     /// Returns all FsWorksheets.
     member self.GetWorksheets() = 
         _worksheets
 
-    /// Removes an FsWorksheet with given name.
+    /// Returns all FsWorksheets.
+    static member getWorksheets (workbook : FsWorkbook) =
+        workbook.GetWorksheets()
+
+    /// <summary>Removes an FsWorksheet with given name.</summary>
+    /// <exception cref="System.Exception">if FsWorksheet with given name is not present in the FsWorkkbook.</exception>
     member self.RemoveWorksheet(name : string) =
         let filteredWorksheets =
             match _worksheets |> List.tryFind (fun ws -> ws.Name = name) with
@@ -46,34 +61,16 @@ type FsWorkbook() =
         _worksheets <- filteredWorksheets
         self
 
-    /// Removes a given FsWorksheet.
-    member self.RemoveWorksheet(sheet : FsWorksheet) =
-        self.RemoveWorksheet(sheet.Name)
-        self
-
-    // --------------
-    // STATIC METHODS
-    // --------------
-
-    /// Adds an FsWorksheet with given name to an FsWorkbook.
-    static member addWorksheetWithName (name : string) (workbook : FsWorkbook) = 
-        workbook.AddWorksheet name |> ignore
-        workbook
-
-    /// Adds an FsWorksheet to an FsWorkbook.
-    static member addWorksheet (sheet : FsWorksheet) (workbook : FsWorkbook) = 
-        workbook.AddWorksheet sheet  |> ignore
-        workbook
-
-    /// Returns all FsWorksheets.
-    static member getWorksheets (workbook : FsWorkbook) =
-        workbook.GetWorksheets()
-        
-
     /// Removes an FsWorksheet with given name from an FsWorkbook.
     static member removeWorksheetByName (name : string) (workbook : FsWorkbook) =
         workbook.RemoveWorksheet name  |> ignore
         workbook
+
+    /// <summary>Removes a given FsWorksheet.</summary>
+    /// <exception cref="System.Exception">if FsWorksheet with given name is not present in the FsWorkkbook.</exception>
+    member self.RemoveWorksheet(sheet : FsWorksheet) =
+        self.RemoveWorksheet(sheet.Name) |> ignore
+        self
 
     /// Removes a given FsWorksheet from an FsWorkbook.
     static member removeWorksheet (sheet : FsWorksheet) (workbook : FsWorkbook) =
