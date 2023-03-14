@@ -27,6 +27,24 @@ let excelFilePath = @"C:\Users\olive\OneDrive\CSB-Stuff\testFiles\testExcel6.xls
 //let excelFilePath = @"C:\Users\revil\OneDrive\CSB-Stuff\testFiles\testExcel6_rewritten.xlsx"
 //let excelFilePath = @"C:\Users\olive\OneDrive\CSB-Stuff\testFiles\testExcel6_rewritten.xlsx"
 
+
+// inb4 unit tests
+
+let unitTestFilePath = @"C:\Repos\CSBiology\FsSpreadsheet\tests\FsSpreadsheet.ExcelIO.Tests\data\testUnit.xlsx"
+let sr = new StreamReader(unitTestFilePath)
+let fsWorkbookFromStream = FsWorkbook.fromXlsxStream sr.BaseStream
+sr.Close()
+let fsWorksheet1FromStream = fsWorkbookFromStream.GetWorksheetByName "StringSheet"
+let fsWorksheet2FromStream = fsWorkbookFromStream.GetWorksheetByName "NumericSheet"
+let fsWorksheet3FromStream = fsWorkbookFromStream.GetWorksheetByName "TableSheet"
+let fsWorksheet4FromStream = fsWorkbookFromStream.GetWorksheetByName "DataTypeSheet"
+//let v = (FsWorksheet.getCellAt 1 1 fsWorksheet1FromStream).Value
+//let a = (FsWorksheet.getCellAt 1 1 fsWorksheet1FromStream).Address.Address
+//let d = (FsWorksheet.getCellAt 1 1 fsWorksheet1FromStream).DataType
+let v = (FsWorksheet.getCellAt 7 3 fsWorksheet2FromStream).Value
+fsWorksheet2FromStream.CellCollection.GetCells() |> Array.ofSeq
+
+
 // fix some bugs
 
 let sdoc = Spreadsheet.fromFile excelFilePath false
