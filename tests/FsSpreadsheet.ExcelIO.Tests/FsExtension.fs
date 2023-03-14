@@ -75,18 +75,18 @@ let fsExtensionTests =
                     Expect.equal testCvError DataType.Empty "is not the correct DataType"
             ]
         ]
-        //testList "FsCell" [
-        //    testList "ofXlsxCell" [
-        //        let testCell = FsCell.ofXlsxCell None dummyXlsxCell
-        //        testCase "is equal in value" <| fun _ ->
-        //            Expect.equal testCell.Value dummyXlsxCell.CellValue.Text "values are not equal"
-        //        testCase "is equal in address/reference" <| fun _ ->
-        //            Expect.equal testCell.Address.Address dummyXlsxCell.CellReference.Value "addresses/references are not equal"
-        //        //testCase "is equal in DataType/CellValues" <| fun _ ->
-        //            //let dtOfCvs = DataType
-        //            //Expect.equal testCell.DataType dummyXlsxCell.DataType.Value "addresses/references are not equal"
-        //    ]
-        //]
+        testList "FsCell" [
+            testList "ofXlsxCell" [
+                let testCell = FsCell.ofXlsxCell None dummyXlsxCell
+                testCase "is equal in value" <| fun _ ->
+                    Expect.equal testCell.Value dummyXlsxCell.CellValue.Text "values are not equal"
+                testCase "is equal in address/reference" <| fun _ ->
+                    Expect.equal testCell.Address.Address dummyXlsxCell.CellReference.Value "addresses/references are not equal"
+                testCase "is equal in DataType/CellValues" <| fun _ ->
+                    let dtOfCvs = DataType.ofXlsxCellValues dummyXlsxCell.DataType
+                    Expect.equal testCell.DataType dtOfCvs "addresses/references are not equal"
+            ]
+        ]
         //testList "FsWorkbook" [
         //    testList "FromXlsxStream" [
         //        let fsWorkbookFromStream = FsWorkbook.fromXlsxStream sr.BaseStream

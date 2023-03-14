@@ -35,9 +35,9 @@ module FsExtensions =
         /// <summary>Creates an FsCell on the basis of an XlsxCell. Uses a SharedStringTable if present to get the XlsxCell's value.</summary>
         static member ofXlsxCell (sst : SharedStringTable option) (xlsxCell : Cell) =
             let v =  Cell.getValue sst xlsxCell
-            let col,row = xlsxCell.CellReference.Value |> CellReference.toIndices
-            let c = FsCell.create (int row) (int col) v
-            c
+            let col, row = xlsxCell.CellReference.Value |> CellReference.toIndices
+            let dt = DataType.ofXlsxCellValues xlsxCell.DataType
+            FsCell.createWithDataType dt (int row) (int col) v
 
 
     type FsTable with
