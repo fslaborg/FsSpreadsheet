@@ -94,6 +94,7 @@ module FsExtensions =
 
     type FsWorkbook with
         
+        /// <summary>Creates an FsWorkbook from a given Stream to an XlsxFile.</summary>
         member self.FromXlsxStream (stream : Stream) =
             let doc = Spreadsheet.fromStream stream false
             let sst = Spreadsheet.tryGetSharedStringTable doc
@@ -115,9 +116,12 @@ module FsExtensions =
                     |> (fun fsws -> fsws.RescanRows(); fsws)
                     )
             
-            
             sheets
             |> Seq.fold (fun wb sheet -> FsWorkbook.addWorksheet sheet wb) (new FsWorkbook())
+
+        /// <summary>Creates an FsWorkbook from a given Stream to an XlsxFile.</summary>
+        static member fromXlsxStream (stream : Stream) =
+            (new FsWorkbook()).FromXlsxStream stream
             
         //member self.FromFile (path:string) =
         //    use sr = new StreamReader(path)
