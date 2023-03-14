@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="FsWorksheets.fs" />
+    <Compile Include="FsWorksheet.fs" />
     <Compile Include="FsAddress.fs" />
     <Compile Include="FsCell.fs" />
     <Compile Include="Main.fs" />
