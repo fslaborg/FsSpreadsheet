@@ -246,6 +246,7 @@ module Cell =
                 cell  
 
             | _ -> cell
-        else        
-            cell.CellValue.Text <- cell.InnerText
+        else
+            try cell.CellValue.Text <- cell.InnerText
+            with _ -> cell.CellValue <- CellValue.empty()
             cell
