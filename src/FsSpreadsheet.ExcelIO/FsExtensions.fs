@@ -95,6 +95,7 @@ module FsExtensions =
     type FsWorkbook with
         
         /// <summary>Creates an FsWorkbook from a given Stream to an XlsxFile.</summary>
+        // TO DO: Ask HLW/TM: is this REALLY the way to go? This is not a constructor! (though it tries to be one)
         member self.FromXlsxStream (stream : Stream) =
             let doc = Spreadsheet.fromStream stream false
             let sst = Spreadsheet.tryGetSharedStringTable doc
@@ -103,19 +104,39 @@ module FsExtensions =
             let xlsxSheets = 
                 Sheet.Sheets.get xlsxWorkbook
                 |> Sheet.Sheets.getSheets
-            
+            let xlsxWorksheetParts = 
+                xlsxSheets
+                |> Seq.map (
+                    fun s -> 
+                        let sid = Sheet.getID s
+                        sid, Worksheet.WorksheetPart.getByID sid xlsxWorkbookPart
+                )
+            let xlsxTables = 
+                xlsxWorksheetParts 
+                |> Seq.map (fun (sid, wsp) -> sid, Worksheet.WorksheetPart.getTables wsp)
+
             let sheets =
                 xlsxSheets
-                |> Seq.map (fun xlsxSheet ->
-                    let sheetIndex = Sheet.getSheetIndex xlsxSheet
-                    let xlsxCells = 
-                        Spreadsheet.getCellsBySheetIndex sheetIndex doc
-                        |> Seq.map (FsCell.ofXlsxCell sst)
-                    FsWorksheet(xlsxSheet.Name)
-                    |> FsWorksheet.addCells xlsxCells
-                    |> (fun fsws -> fsws.RescanRows(); fsws)
-                    )
-            
+                |> Seq.map (
+                    fun xlsxSheet ->
+                        let sheetIndex = Sheet.getSheetIndex xlsxSheet
+                        let sheetId = Sheet.getID xlsxSheet
+                        let xlsxCells = 
+                            Spreadsheet.getCellsBySheetIndex sheetIndex doc
+                            |> Seq.map (FsCell.ofXlsxCell sst)
+                        let assocXlsxTables = 
+                            xlsxTables 
+                            |> Seq.tryPick (fun (sid,ts) -> if sid = sheetId then Some ts else None)
+                        let fsTables =
+                            match assocXlsxTables with
+                            | Some ts -> ts |> Seq.map FsTable.fromXlsxTable |> List.ofSeq
+                            | None -> []
+                        let fsWorksheet = FsWorksheet(xlsxSheet.Name)
+                        fsWorksheet
+                        |> FsWorksheet.addCells xlsxCells
+                        |> FsWorksheet.addTables fsTables
+                )
+
             sheets
             |> Seq.fold (fun wb sheet -> FsWorkbook.addWorksheet sheet wb) (new FsWorkbook())
 
