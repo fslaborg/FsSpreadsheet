@@ -229,38 +229,37 @@ type FsCell (value : IConvertible, dataType : DataType, address : FsAddress) =
     /// </value>
     static member setValueAs<'T> value (cell : FsCell)= 
         cell.SetValueAs<'T>(value)
-        
+
     /// <summary>
-    /// Gets the cell's value converted to the T type.
-    /// <para>FsSpreadsheet will try to convert the current value to type 'T.</para>
-    /// <para>An exception will be thrown if the current value cannot be converted to the T type.</para>
-    /// </summary>
+    /// Gets the FsCell's value converted to the 'T type.
+    /// 
+    /// FsSpreadsheet will try to convert the current value to type 'T. </summary>
     /// <typeparam name="T">The return type.</typeparam>
-    /// <exception cref="ArgumentException"></exception>
-    static member getValueAs<'T>(cell : FsCell)=         
+    /// <exception cref="System.ArgumentException">if the current value cannot be converted to the 'T type.</exception>
+    static member getValueAs<'T>(cell : FsCell)=
         cell.GetValueAs<'T>()
 
-    /// Create a FsCell given the dataType
-    static member createWithDataType (dataType : DataType) (rowNumber:int) (colNumber:int) (value) =
-        FsCell (value, dataType,FsAddress(rowNumber,colNumber))    
+    /// <summary>Creates an FsCell with the given DataType, rowNumber, colNumber, and value.</summary>
+    static member createWithDataType (dataType : DataType) (rowNumber : int) (colNumber : int) value =
+        FsCell(value, dataType, FsAddress(rowNumber, colNumber))
 
-    /// Create a FsCell given the Adress
-    static member createWithAdress (adress:FsAddress) (value) =
-        let dataT, value = DataType.InferCellValue(value)
-        FsCell (value, dataT,adress)    
+    /// <summary>Creates an FsCell with the given FsAdress and value. Inferes the DataType.</summary>
+    static member createWithAdress (adress : FsAddress) value =
+        let dataT, value = DataType.InferCellValue value
+        FsCell(value, dataT, adress)
 
-    /// Create a FsCell and inferes the dataType
-    static member create (rowNumber:int) (colNumber:int) (value) =
-        let dataT, value = DataType.InferCellValue(value)
-        FsCell (value, dataT,FsAddress(rowNumber,colNumber))    
+    /// <summary>Create an FsCell from given rowNumber, colNumber, and value. Inferes the DataType.</summary>
+    static member create (rowNumber : int) (colNumber : int) value =
+        let dataT, value = DataType.InferCellValue value
+        FsCell(value, dataT, FsAddress(rowNumber, colNumber))
 
-    /// Create empty FsCell
-    static member createEmpty ()  =        
-        FsCell ("", DataType.Empty,FsAddress(0,0))    
+    /// <summary>Creates an empty FsCell.</summary>
+    static member createEmpty ()  =
+        FsCell("", DataType.Empty, FsAddress(0,0))
 
-    /// Create empty FsCell
-    static member createEmptyWithAdress (adress:FsAddress)  =        
-        FsCell ("", DataType.Empty,adress)    
+    /// <summary>Creates an empty FsCell with a given FsAddress.</summary>
+    static member createEmptyWithAdress (adress : FsAddress)  =
+        FsCell("", DataType.Empty, adress)
 
 
 
