@@ -11,7 +11,7 @@
     <Compile Include="Workbook.fs" />
     <Compile Include="Sheet.fs" />
     <Compile Include="Cell.fs" />
-    <Compile Include="FsExtension.fs" />
+    <Compile Include="FsExtensions.fs" />
     <Compile Include="Main.fs" />
   </ItemGroup>
 
