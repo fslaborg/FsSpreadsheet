@@ -165,10 +165,13 @@ module FsExtensions =
         /// <summary>Creates an FsWorkbook from a given Stream to an XlsxFile.</summary>
         static member fromXlsxStream (stream : Stream) =
             (new FsWorkbook()).FromXlsxStream stream
-            
-        //member self.FromFile (path:string) =
-        //    use sr = new StreamReader(path)
-        //    self.FromXlsxStream sr.
+
+        /// <summary>Takes the path to an Xlsx file and returns the FsWorkbook based on its content.</summary>
+        static member fromXlsxFile (filePath : string) =
+            let sr = new StreamReader(filePath)
+            let wb = FsWorkbook.fromXlsxStream sr.BaseStream
+            sr.Close()
+            wb
 
         /// Writes the FsWorkbook into a given MemoryStream.
         member self.ToStream(stream : MemoryStream) = 
