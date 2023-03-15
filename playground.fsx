@@ -43,6 +43,7 @@ let fsWorksheet4FromStream = fsWorkbookFromStream.GetWorksheetByName "DataTypeSh
 //let d = (FsWorksheet.getCellAt 1 1 fsWorksheet1FromStream).DataType
 let v = (FsWorksheet.getCellAt 7 3 fsWorksheet2FromStream).Value
 fsWorksheet2FromStream.CellCollection.GetCells() |> Array.ofSeq
+let t = fsWorksheet3FromStream.Tables |> List.tryFind (fun t -> t.Name = "Table2")
 
 
 // fix some bugs
