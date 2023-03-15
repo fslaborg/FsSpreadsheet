@@ -16,11 +16,8 @@ let dummyDtEmpty = DataType.Empty
 
 let dummyXlsxCell = Cell.create CellValues.Number "A1" (CellValue(1.337))
 
-let testFilePath = @"C:\Repos\CSBiology\FsSpreadsheet\tests\FsSpreadsheet.ExcelIO.Tests\data\testUnit.xlsx"
-//let testFilePath = System.IO.Path.Combine(__SOURCE_DIRECTORY__, "data", "testUnit.xlsx")
-//let ssdFox = Packaging.SpreadsheetDocument.Open(testFilePath, false)
-//let wbpFox = ssdFox.WorkbookPart
-//let wbFox = wbpFox.Workbook
+//let testFilePath = @"C:\Repos\CSBiology\FsSpreadsheet\tests\FsSpreadsheet.ExcelIO.Tests\data\testUnit.xlsx"
+let testFilePath = System.IO.Path.Combine(__SOURCE_DIRECTORY__, "data", "testUnit.xlsx")
 let sr = new StreamReader(testFilePath)
 let dummyFsWorkbook = new FsWorkbook()
 let dummyFsCells = [
