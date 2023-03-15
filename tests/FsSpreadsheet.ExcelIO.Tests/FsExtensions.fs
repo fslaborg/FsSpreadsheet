@@ -92,46 +92,55 @@ let fsExtensionTests =
             testList "fromXlsxStream" [
                 let fsWorkbookFromStream = FsWorkbook.fromXlsxStream sr.BaseStream
                 sr.Close()
-        //        let fsWorksheet1FromStream = fsWorkbookFromStream.GetWorksheetByName "StringSheet"
-        //        let fsWorksheet2FromStream = fsWorkbookFromStream.GetWorksheetByName "NumericSheet"
-        //        let fsWorksheet3FromStream = fsWorkbookFromStream.GetWorksheetByName "TableSheet"
-        //        let fsWorksheet4FromStream = fsWorkbookFromStream.GetWorksheetByName "DataTypeSheet"
-        //        testCase "is equal to dummyFsWorkbook in sheet1, cellA1 value" <| fun _ ->
-        //            let v = (FsWorksheet.getCellAt 1 1 fsWorksheet1FromStream).Value
-        //            Expect.equal v "A1" "value is not equal"
-        //        testCase "is equal to dummyFsWorkbook in sheet1, cellA1 address" <| fun _ ->
-        //            let a = (FsWorksheet.getCellAt 1 1 fsWorksheet1FromStream).Address.Address
-        //            Expect.equal a "A1" "address is not equal"
-        //        testCase "is equal to dummyFsWorkbook in sheet1, cellA1 DataType" <| fun _ ->
-        //            let d = (FsWorksheet.getCellAt 1 1 fsWorksheet1FromStream).DataType
-        //            Expect.equal d DataType.String "DataType is not DataType.String"
-        //        testCase "is equal to dummyFsWorkbook in sheet2, cellC7 value" <| fun _ ->
-        //            let v = (FsWorksheet.getCellAt 7 3 fsWorksheet2FromStream).Value
-        //            Expect.equal v "7" "value is not equal"
-        //        testCase "is equal to dummyFsWorkbook in sheet2, cellC7 address" <| fun _ ->
-        //            let a = (FsWorksheet.getCellAt 7 3 fsWorksheet2FromStream).Address.Address
-        //            Expect.equal a "C7" "address is not equal"
-        //        testCase "is equal to dummyFsWorkbook in sheet2, cellC7 DataType" <| fun _ ->
-        //            let d = (FsWorksheet.getCellAt 7 3 fsWorksheet2FromStream).DataType
-        //            Expect.equal d DataType.Number "DataType is not DataType.Number"
-        //        testCase "is equal to dummyFsWorkbook in sheet3, cellB10 value" <| fun _ ->
-        //            let v = (FsWorksheet.getCellAt 10 2 fsWorksheet3FromStream).Value
-        //            Expect.equal v "B10" "value is not equal"
-        //        testCase "is equal to dummyFsWorkbook in sheet3, cellB10 address" <| fun _ ->
-        //            let a = (FsWorksheet.getCellAt 10 2 fsWorksheet3FromStream).Address.Address
-        //            Expect.equal a "B10" "address is not equal"
-        //        testCase "is equal to dummyFsWorkbook in sheet3, cellB10 DataType" <| fun _ ->
-        //            let d = (FsWorksheet.getCellAt 10 2 fsWorksheet3FromStream).DataType
-        //            Expect.equal d DataType.String "DataType is not DataType.String"
-        //        testCase "is equal to dummyFsWorkbook in sheet4, cellA2 value" <| fun _ ->
-        //            let v = (FsWorksheet.getCellAt 2 1 fsWorksheet4FromStream).Value
-        //            Expect.equal v "1" "value is not equal"     // should be "True"... why is it not? Maybe bc. it's stored as "1" in the XML and only Excel converts it to "TRUE" on the screen... TO DO: check that.
-        //        testCase "is equal to dummyFsWorkbook in sheet4, cellA2 address" <| fun _ ->
-        //            let a = (FsWorksheet.getCellAt 2 1 fsWorksheet4FromStream).Address.Address
-        //            Expect.equal a "A2" "address is not equal"
-        //        testCase "is equal to dummyFsWorkbook in sheet4, cellA2 DataType" <| fun _ ->
-        //            let d = (FsWorksheet.getCellAt 2 1 fsWorksheet4FromStream).DataType
-        //            Expect.equal d DataType.Boolean "DataType is not DataType.Boolean"
+                let fsWorksheet1FromStream = fsWorkbookFromStream.GetWorksheetByName "StringSheet"
+                let fsWorksheet2FromStream = fsWorkbookFromStream.GetWorksheetByName "NumericSheet"
+                let fsWorksheet3FromStream = fsWorkbookFromStream.GetWorksheetByName "TableSheet"
+                let fsWorksheet4FromStream = fsWorkbookFromStream.GetWorksheetByName "DataTypeSheet"
+                testCase "is equal to dummyFsWorkbook in sheet1, cellA1 value" <| fun _ ->
+                    let v = (FsWorksheet.getCellAt 1 1 fsWorksheet1FromStream).Value
+                    Expect.equal v "A1" "value is not equal"
+                testCase "is equal to dummyFsWorkbook in sheet1, cellA1 address" <| fun _ ->
+                    let a = (FsWorksheet.getCellAt 1 1 fsWorksheet1FromStream).Address.Address
+                    Expect.equal a "A1" "address is not equal"
+                testCase "is equal to dummyFsWorkbook in sheet1, cellA1 DataType" <| fun _ ->
+                    let d = (FsWorksheet.getCellAt 1 1 fsWorksheet1FromStream).DataType
+                    Expect.equal d DataType.String "DataType is not DataType.String"
+                testCase "is equal to dummyFsWorkbook in sheet2, cellC7 value" <| fun _ ->
+                    let v = (FsWorksheet.getCellAt 7 3 fsWorksheet2FromStream).Value
+                    Expect.equal v "7" "value is not equal"
+                testCase "is equal to dummyFsWorkbook in sheet2, cellC7 address" <| fun _ ->
+                    let a = (FsWorksheet.getCellAt 7 3 fsWorksheet2FromStream).Address.Address
+                    Expect.equal a "C7" "address is not equal"
+                // TO DO: this does not work right now due to incorrect DataType inference. Fix DataType.InferCellValue
+                //testCase "is equal to dummyFsWorkbook in sheet2, cellC7 DataType" <| fun _ ->
+                //    let d = (FsWorksheet.getCellAt 7 3 fsWorksheet2FromStream).DataType
+                //    Expect.equal d DataType.Number "DataType is not DataType.Number"
+                testCase "is equal to dummyFsWorkbook in sheet3, cellB10 value" <| fun _ ->
+                    let v = (FsWorksheet.getCellAt 10 2 fsWorksheet3FromStream).Value
+                    Expect.equal v "B10" "value is not equal"
+                testCase "is equal to dummyFsWorkbook in sheet3, cellB10 address" <| fun _ ->
+                    let a = (FsWorksheet.getCellAt 10 2 fsWorksheet3FromStream).Address.Address
+                    Expect.equal a "B10" "address is not equal"
+                testCase "is equal to dummyFsWorkbook in sheet3, cellB10 DataType" <| fun _ ->
+                    let d = (FsWorksheet.getCellAt 10 2 fsWorksheet3FromStream).DataType
+                    Expect.equal d DataType.String "DataType is not DataType.String"
+                testCase "is equal to dummyFsWorkbook in sheet4, cellA2 value" <| fun _ ->
+                    let v = (FsWorksheet.getCellAt 2 1 fsWorksheet4FromStream).Value
+                    Expect.equal v "1" "value is not equal"     // should be "True"... why is it not? Maybe bc. it's stored as "1" in the XML and only Excel converts it to "TRUE" on the screen... TO DO: check that.
+                testCase "is equal to dummyFsWorkbook in sheet4, cellA2 address" <| fun _ ->
+                    let a = (FsWorksheet.getCellAt 2 1 fsWorksheet4FromStream).Address.Address
+                    Expect.equal a "A2" "address is not equal"
+                testCase "is equal to dummyFsWorkbook in sheet4, cellA2 DataType" <| fun _ ->
+                    let d = (FsWorksheet.getCellAt 2 1 fsWorksheet4FromStream).DataType
+                    Expect.equal d DataType.Boolean "DataType is not DataType.Boolean"
+                testCase "is equal to dummyFsWorkbook in sheet3, Table exists" <| fun _ ->
+                    let t = fsWorksheet3FromStream.Tables |> List.tryFind (fun t -> t.Name = dummyFsTable.Name)
+                    Expect.isSome t "Table \"table2\" does not exist"
+                testCase "is equal to dummyFsWorkbook in sheet3, Table has same range" <| fun _ ->
+                    let t = fsWorksheet3FromStream.Tables |> List.find (fun t -> t.Name = dummyFsTable.Name)
+                    let rfs = t.RangeAddress.Range
+                    let rdt = dummyFsTable.RangeAddress.Range
+                    Expect.equal rfs rdt "Tables have different ranges"
             ]
         ]
     ]
