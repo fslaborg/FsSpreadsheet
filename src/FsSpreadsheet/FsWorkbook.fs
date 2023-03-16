@@ -95,3 +95,12 @@ type FsWorkbook() =
     static member removeWorksheet (sheet : FsWorksheet) (workbook : FsWorkbook) =
         workbook.RemoveWorksheet sheet  |> ignore
         workbook
+
+    /// <summary>Returns all FsTables from the FsWorkbook.</summary>
+    member self.GetTables() =
+        self.GetWorksheets()
+        |> List.collect (fun s -> s.Tables)
+
+    /// <summary>Returns all FsTables from an FsWorkbook.</summary>
+    static member getTables (workbook : FsWorkbook) =
+        workbook.GetTables()
