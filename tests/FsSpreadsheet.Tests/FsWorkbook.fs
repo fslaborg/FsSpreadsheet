@@ -7,6 +7,7 @@ open FsSpreadsheet
 let dummyWorkbook = new FsWorkbook()
 let dummyWorksheet1 = FsWorksheet("dummyWorksheet1")
 let dummyWorksheet2 = FsWorksheet("dummyWorksheet2")
+let dummyWorksheetList = [dummyWorksheet1; dummyWorksheet2]
 let dummyTables = [
     FsTable("dummyTable1", FsRangeAddress("A1:B2"))
     FsTable("dummyTable2", FsRangeAddress("C3:F5"))
@@ -33,8 +34,16 @@ let fsWorkbookTests =
                 Expect.throws (fun () -> dummyWorkbook.GetWorksheetByName "bla" |> ignore) "did not throw exception"
         ]
         testList "GetTables" [
-            testCase "got correct FsTables" <| fun _ ->
+            testCase "gets correct FsTables" <| fun _ ->
                 let tablesGotten = dummyWorkbook.GetTables()
                 Expect.equal tablesGotten dummyTables "Did not get correct FsTables"
+        ]
+        testList "AddWorksheets" [
+            testCase "adds all FsWorksheets correctly" <| fun _ ->
+                let testWorkbook = new FsWorkbook()
+                testWorkbook.AddWorksheets [dummyWorksheet1; dummyWorksheet2] |> ignore
+                let testWorkbookWorksheetNames = testWorkbook.GetWorksheets() |> List.map (fun ws -> ws.Name)
+                let dummyWorksheetNames = dummyWorksheetList |> List.map (fun ws -> ws.Name)
+                Expect.containsAll testWorkbookWorksheetNames dummyWorksheetNames "Does not contain all FsWorksheets"
         ]
     ]

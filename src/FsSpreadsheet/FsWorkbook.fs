@@ -43,6 +43,16 @@ type FsWorkbook() =
         workbook.AddWorksheet sheet  |> ignore
         workbook
 
+    /// <summary>Adds a collection of FsWorksheets to the FsWorkbook.</summary>
+    member self.AddWorksheets(sheets : seq<FsWorksheet>) =
+        sheets
+        |> Seq.iter (self.AddWorksheet >> ignore)
+        self
+
+    /// <summary>Adds a collection of FsWorksheets to an FsWorkbook.</summary>
+    static member addWorksheets sheets (workbook : FsWorkbook) =
+        workbook.AddWorksheets sheets
+
     /// Returns all FsWorksheets.
     member self.GetWorksheets() = 
         _worksheets
