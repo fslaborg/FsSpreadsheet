@@ -68,6 +68,19 @@ module FsExtensions =
             let ra = FsRangeAddress(FsAddress(topLeftBoundary), FsAddress(bottomRightBoundary))
             FsTable(table.Name, ra, table.TotalsRowShown, true)
 
+        /// <summary>Returns the FsWorksheet associated with the FsTable in a given FsWorkbook.</summary>
+        member self.GetWorksheetOfTable(workbook : FsWorkbook) =
+            workbook.GetWorksheets() 
+            |> List.find (
+                fun s -> 
+                    s.Tables 
+                    |> List.exists (fun t -> t.Name = self.Name)
+            )
+
+        /// <summary>Returns the FsWorksheet associated with a given FsTable in an FsWorkbook.</summary>
+        static member getWorksheetOfTable workbook (table : FsTable) =
+            table.GetWorksheetOfTable workbook
+
 
     type FsWorksheet with
 

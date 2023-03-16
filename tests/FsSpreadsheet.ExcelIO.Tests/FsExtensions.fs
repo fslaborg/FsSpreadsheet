@@ -41,6 +41,10 @@ let dummyFsWorksheet1 = FsWorksheet("StringSheet",      [], [],             dumm
 let dummyFsWorksheet2 = FsWorksheet("NumericSheet",     [], [],             dummyFsCellsCollection2)
 let dummyFsWorksheet3 = FsWorksheet("TableSheet",       [], [dummyFsTable], dummyFsCellsCollection3)
 let dummyFsWorksheet4 = FsWorksheet("DataTypeSheet",    [], [],             dummyFsCellsCollection4)
+dummyFsWorkbook.AddWorksheet(dummyFsWorksheet1) |> ignore
+dummyFsWorkbook.AddWorksheet(dummyFsWorksheet2) |> ignore
+dummyFsWorkbook.AddWorksheet(dummyFsWorksheet3) |> ignore
+dummyFsWorkbook.AddWorksheet(dummyFsWorksheet4) |> ignore
 
 
 
@@ -83,6 +87,13 @@ let fsExtensionTests =
                 testCase "is equal in DataType/CellValues" <| fun _ ->
                     let dtOfCvs = DataType.ofXlsxCellValues dummyXlsxCell.DataType
                     Expect.equal testCell.DataType dtOfCvs "addresses/references are not equal"
+            ]
+        ]
+        testList "FsTable" [
+            testList "GetWorksheetOfTable" [
+                testCase "gets correct worksheet" <| fun _ ->
+                    let gottenWorksheet = dummyFsTable.GetWorksheetOfTable dummyFsWorkbook
+                    Expect.equal gottenWorksheet.Name dummyFsWorksheet3.Name "Worksheets differ"
             ]
         ]
         testList "FsWorkbook" [

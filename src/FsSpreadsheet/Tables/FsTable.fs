@@ -159,5 +159,3 @@ type FsTable (name : string, rangeAddress, showTotalsRow, showHeaderRow) =
             _fieldNames.Add(newName, field)
         | None -> 
             raise (System.ArgumentException("The field does not exist in this table", "oldName"))
-
-        
