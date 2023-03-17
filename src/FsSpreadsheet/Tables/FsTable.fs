@@ -128,6 +128,7 @@ type FsTable (name : string, rangeAddress, showTotalsRow, showHeaderRow) =
     //        _fieldNames.Add(name, new XLTableField(this, name) { Index = cellPos++ });
     //    }
 
+    /// <summary>Returns the FsTableField with given name. If an FsTableField does not exist under this name in the FsTable, adds it.</summary>
     member self.Field(name,cells : FsCellsCollection) = 
         match Dictionary.tryGet name _fieldNames with
         | Some field -> 

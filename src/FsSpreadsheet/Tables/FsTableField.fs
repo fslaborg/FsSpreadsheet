@@ -40,12 +40,14 @@ type FsTableField (name : string, index : int, column : FsRangeColumn, totalsRow
             this.Column.FirstCell(cells).SetValueAs<string>(name)
             |> ignore
 
+    /// <summary>Returns the header cell for the table field.</summary>
     member this.HeaderCell (cells : FsCellsCollection, showHeaderRow : bool) =
         if not showHeaderRow then 
             failwithf "tried to get header cell of table field \"%s\" even though showHeaderRow is set to zero" _name
         else
             this.Column.FirstCell(cells)
 
+    /// <summary>Gets the collection of data cells for this field. Excludes the header and footer cells.</summary>
     member this.DataCells (cells : FsCellsCollection, showHeaderRow : bool) =
         let predicate cell = not (showHeaderRow && this.HeaderCell(cells, showHeaderRow) <> cell)
         this.Column.Cells(cells, predicate)
