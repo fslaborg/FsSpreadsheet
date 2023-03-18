@@ -591,3 +591,28 @@ type FsCellsCollection() =
     /// Returns all FsCells in an FsCellsCollection with the given rowIndex.
     static member getCellsInRow rowIndex (cellsCollection : FsCellsCollection) =
         cellsCollection.GetCellsInRow rowIndex
+
+    /// <summary>Returns the upper left corner of the FsCellsCollection.</summary>
+    member this.GetFirstAddress() =
+        try 
+            let minRow = _rowsCollection.Keys |> Seq.min
+            let minCol = 
+                _rowsCollection.Values 
+                |> Seq.minBy (fun d -> Seq.min d.Keys)
+                |> fun d -> Seq.min d.Keys
+            FsAddress(minRow, minCol)
+        with :? System.ArgumentException -> failwith "The FsCellsCollection is empty."
+
+    /// <summary>Returns the upper left corner of a given FsCellsCollection.</summary>
+    static member getFirstAddress (cells : FsCellsCollection) =
+        cells.GetFirstAddress()
+
+    /// <summary>Returns the lower right corner of the FsCellsCollection.</summary>
+    member this.GetLastAddress() =
+        FsAddress(this.MaxRowNumber, this.MaxColumnNumber)
+
+    /// <summary>Returns the lower right corner of a given FsCellsCollection.</summary>
+    static member getLastAddress (cells : FsCellsCollection) =
+        cells.GetLastAddress()
+
+    // TO DO: Add method to get FsRange when possible
