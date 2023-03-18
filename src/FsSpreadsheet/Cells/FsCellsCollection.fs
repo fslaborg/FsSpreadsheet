@@ -601,7 +601,7 @@ type FsCellsCollection() =
                 |> Seq.minBy (fun d -> Seq.min d.Keys)
                 |> fun d -> Seq.min d.Keys
             FsAddress(minRow, minCol)
-        with :? System.ArgumentException -> failwith "The FsCellsCollection is empty."
+        with :? System.ArgumentException -> FsAddress(0, 0)
 
     /// <summary>Returns the upper left corner of a given FsCellsCollection.</summary>
     static member getFirstAddress (cells : FsCellsCollection) =
