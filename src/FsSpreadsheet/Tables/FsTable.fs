@@ -19,9 +19,11 @@ type FsTable (name : string, rangeAddress, showTotalsRow, showHeaderRow) =
 
     new (name, rangeAddress) = FsTable (name, rangeAddress, false, true)
 
+    /// <summary>The name of the FsTable.>/summary>
     member self.Name 
         with get() = _name
 
+    /// <summary>Returns all fieldnames as `fieldname*FsTableField` dictionary.</summary>
     member self.FieldNames
         with get(cells) =
             if (_fieldNames <> null && _lastRangeAddress <> null && _lastRangeAddress.Equals(self.RangeAddress)) then 
@@ -33,15 +35,18 @@ type FsTable (name : string, rangeAddress, showTotalsRow, showHeaderRow) =
                 
                 _fieldNames;
 
+    /// The FsTableFields of this FsTable.<summary>
     member self.Fields
         with get(cells) =
             let columnCount = base.ColumnCount()
             Seq.init columnCount (fun i -> self.Field(i, cells))
 
+    /// <summary>Gets or sets if the header row is shown.</summary>
     member self.ShowHeaderRow 
         with get () = _showHeaderRow
         and set(showHeaderRow) = _showHeaderRow <- showHeaderRow
 
+    /// <summary>Returns the header row as FsRangeRow. Scans for fieldnames if `scanForNewFieldsNames` is true.</summary>
     member self.HeadersRow(scanForNewFieldsNames : bool) = 
         if (not self.ShowHeaderRow) then null;
         
@@ -53,11 +58,13 @@ type FsTable (name : string, rangeAddress, showTotalsRow, showHeaderRow) =
 
             FsRange(base.RangeAddress).FirstRow();
 
+    /// <summary>Returns the header row as FsRangeRow. Scans for new fieldnames.</summary>
     member self.HeadersRow() = 
         self.HeadersRow(true)
 
-
-    member private self.RescanFieldNames (cells : FsCellsCollection) =
+    /// Takes the respective FsCellsCollection for this FsTable and creates a new _fieldNames dictionary if the current one does not match.</summary>
+    // TO DO: maybe HLW can specify above description a bit...
+    member private self.RescanFieldNames(cells : FsCellsCollection) =
         printfn "Start RescanFieldNames"
         _fieldNames
         |> Seq.iter (fun kv -> printfn "Key: %s, index: %i, name: %s" kv.Key kv.Value.Index kv.Value.Name)
@@ -76,7 +83,7 @@ type FsTable (name : string, rangeAddress, showTotalsRow, showHeaderRow) =
                 | None -> 
 
                     // Be careful here. Fields names may actually be whitespace, but not empty
-                    if (name = null) <> (name = "") then
+                    if (name = null) <> (name = "") then    // TO DO: ask: shouldn't this be XOR?
                     
                         name <- self.GetUniqueName("Column", cellPos + 1, true)
                         cell.SetValueAs(name) |> ignore
