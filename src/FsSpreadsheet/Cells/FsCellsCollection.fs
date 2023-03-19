@@ -76,7 +76,7 @@ type FsCellsCollection() =
             false
 
     /// <summary>Creates an FsCellsCollection from the given FsCells.</summary>
-    /// <remarks>Derives row- and columnIndeces from the FsAddress of the FsCells.</remarks>
+    /// <remarks>Derives row- and columnIndices from the FsAddress of the FsCells.</remarks>
     static member createFromCells (cells : seq<FsCell>) =
         FsCellsCollection().Add cells
 
