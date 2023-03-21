@@ -1,5 +1,3 @@
-#r "nuget: DocumentFormat.OpenXml"
-
 open System.IO
 
 Directory.GetCurrentDirectory()
@@ -15,10 +13,72 @@ File.Copy("src/FsSpreadsheet.ExcelIO/bin/Debug/netstandard2.0/FsSpreadsheet.Exce
 open FsSpreadsheet
 open FsSpreadsheet.ExcelIO
 open FsSpreadsheet.DSL
-open DocumentFormat.OpenXml
+//open DocumentFormat.OpenXml
 
 
 // ----------------------------------------------
+
+// some other bugfixes
+
+let testFsRangeAddress = FsRangeAddress("C1:C3")
+let testFsRangeColumn = FsRangeColumn testFsRangeAddress
+let testFsTableField = FsTableField("testName", 3, testFsRangeColumn)
+let testFsCellsCollection = FsCellsCollection()
+let testFsCells = [
+    FsCell.createWithDataType DataType.String 1 3 "I am the Header!"
+    FsCell.createWithDataType DataType.String 2 3 "first data cell"
+    FsCell.createWithDataType DataType.String 3 3 "second data cell"
+    FsCell.createWithDataType DataType.String 1 4 "Another Header"
+    FsCell.createWithDataType DataType.String 2 4 "first data cell in B col"
+    FsCell.createWithDataType DataType.String 3 4 "second data cell in B col"
+]
+testFsCellsCollection.Add testFsCells |> ignore
+
+let headerCell = testFsTableField.HeaderCell(testFsCellsCollection, true)
+//testFsTableField.SetName("testName2", testFsCellsCollection, true)
+testFsTableField.DataCells(testFsCellsCollection, true)
+testFsTableField.Index <- 5
+testFsTableField.Column
+match testFsTableField.Column with
+| null -> printfn "null!"
+| _ -> printfn "not null!"
+
+
+// test basic stuff
+
+let mutable value1 = "hallo"
+let mutable value2 = value1
+value2 <- "Welt"
+
+let dummyFsCellsCollection = FsCellsCollection()
+let dummyFsCellsCollection2 = dummyFsCellsCollection
+let dummyFsCellsCollection3 = FsCellsCollection()
+dummyFsCellsCollection = dummyFsCellsCollection2
+dummyFsCellsCollection = dummyFsCellsCollection3
+System.Object.Equals(dummyFsCellsCollection, dummyFsCellsCollection2)
+System.Object.Equals(dummyFsCellsCollection, dummyFsCellsCollection3)
+dummyFsCellsCollection.Count
+dummyFsCellsCollection2.Count
+dummyFsCellsCollection2.Add(FsCell.createEmpty())
+dummyFsCellsCollection2.Count
+dummyFsCellsCollection.Count    // changes too...
+//let dummyFsCellsCollection3 : FsCellsCollection = dummyFsCellsCollection.MemberwiseClone() :?> FsCellsCollection
+
+let array1 = [|"Hallo"|]
+let array2 = array1
+array2[0] <- "Welt"
+
+let copy (this : FsCellsCollection) =
+    let newCellsColl = FsCellsCollection()
+    let cells : seq<FsCell> = this.GetCells()
+    newCellsColl.Add cells
+
+let testCell = FsCell.create 1 1 "Hallo"
+let dummyFsCellsCollection4 = FsCellsCollection().Add testCell
+let dummyFsCellsCollection5 = copy dummyFsCellsCollection4
+dummyFsCellsCollection5.TryGetCell(1, 1) |> fun c -> c.Value.Value <- "Welt"
+dummyFsCellsCollection5.TryGetCell(1, 1) |> fun c -> c.Value
+dummyFsCellsCollection4.TryGetCell(1, 1) |> fun c -> c.Value
 
 //let excelFilePath = @"C:\Users\olive\OneDrive\CSB-Stuff\testFiles\testExcel5.xlsx"
 //let excelFilePath = @"C:\Users\revil\OneDrive\CSB-Stuff\testFiles\testExcel5.xlsx"
@@ -47,6 +107,10 @@ let t = fsWorksheet3FromStream.Tables |> List.tryFind (fun t -> t.Name = "Table2
 
 
 // fix some bugs
+
+#r "nuget: DocumentFormat.OpenXml"
+
+open DocumentFormat.OpenXml
 
 let sdoc = Spreadsheet.fromFile excelFilePath false
 //let cell = Cell.fromValueWithDataType None 1u 1u "test" DataType.Number
