@@ -14,7 +14,9 @@ type FsRangeColumn(rangeAddress) =
     member self.Cell(rowIndex,cells) = base.Cell(FsAddress(rowIndex - base.RangeAddress.FirstAddress.RowNumber + 1,1),cells)
     
     member self.FirstCell(cells : FsCellsCollection) = 
-        base.Cell (FsAddress(1,1),cells)
+        //let firstAddrRow, firstAddrCol = base.RangeAddress.FirstAddress |> fun fa -> fa.RowNumber, fa.ColumnNumber
+        //base.Cell(FsAddress(firstAddrRow, firstAddrCol), cells)
+        base.Cell(FsAddress(1, 1), cells)
 
     member self.Cells(cells) = base.Cells(cells)
 
