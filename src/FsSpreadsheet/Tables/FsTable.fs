@@ -39,7 +39,8 @@ type FsTable (name : string, rangeAddress, showTotalsRow, showHeaderRow) =
     member self.Fields
         with get(cellsCollection) =
             let columnCount = base.ColumnCount()
-            Seq.init columnCount (fun i -> self.GetField(i, cellsCollection))
+            let offset = base.RangeAddress.FirstAddress.ColumnNumber
+            Seq.init columnCount (fun i -> self.GetField(i + offset, cellsCollection))
 
     /// <summary>Gets or sets if the header row is shown.</summary>
     member self.ShowHeaderRow 
@@ -150,11 +151,18 @@ type FsTable (name : string, rangeAddress, showTotalsRow, showHeaderRow) =
     static member getUniqueNames originalName initialOffset enforceOffset (table : FsTable) =
         table.GetUniqueName(originalName, initialOffset, enforceOffset)
 
-    //member this.AddFields(fieldNames : IEnumerable<string>) =
+    member this.AddFields(fieldNames : seq<string>) =
     
     //    _fieldNames = new Dictionary<String, IXLTableField>();
 
     //    Int32 cellPos = 0;
+        let mutable cellPos = 0
+        let range = base.RangeAddress.FirstAddress. // NEED: FsRangeBase.toFsRangeColumns
+        fieldNames
+        |> Seq.iter (
+            fun fn ->
+                _fieldNames.Add(fn, FsTableField())
+        )
     //    foreach (var name in fieldNames)
     //    {
     //        _fieldNames.Add(name, new XLTableField(this, name) { Index = cellPos++ });
