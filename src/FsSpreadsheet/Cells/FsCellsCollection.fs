@@ -80,6 +80,18 @@ type FsCellsCollection() =
     static member createFromCells (cells : seq<FsCell>) =
         FsCellsCollection().Add cells
 
+    // TO DO: Must create deep copy methods for ALL other objects in it first, and call them here.
+    ///// <summary>Creates and returns a deep copy of the FsCellsCollection.</summary>
+    //member this.Copy() =
+    //    let newCellsColl = FsCellsCollection()
+    //    let oldCells : seq<FsCell> = this.GetCells()
+    //    let newCells = // create deep copy here
+    //    newCellsColl.Add cells
+
+    ///// <summary>Creates and returns a deep copy of an FsCellsCollection.</summary>
+    //static member copy (cellsCollection : FsCellsCollection) =
+    //    cellsCollection.Copy()
+
     /// <summary>Empties the whole FsCellsCollection.</summary>
     member this.Clear() =
 
