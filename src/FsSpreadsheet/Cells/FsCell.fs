@@ -154,8 +154,8 @@ type FsCell (value : IConvertible, dataType : DataType, address : FsAddress) =
     /// <summary>
     /// Returns a string that represents the current state of the FsCell according to the format.
     /// </summary>
-    /// <param name="format">A: address, F: formula, NF: number format, BG: background color, FG: foreground color, V: formatted value</param>
-    /// <returns></returns>
+    // /// <param name="format">A: address, F: formula, NF: number format, BG: background color, FG: foreground color, V: formatted value</param>
+    // /// <returns></returns>
     override self.ToString() = 
         let cellRef = CellReference.indexToColAdress (uint self.ColumnNumber)
         $"{cellRef}{self.RowNumber} : {self.Value} | {self.DataType}"

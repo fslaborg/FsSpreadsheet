@@ -25,6 +25,17 @@ let clean = BuildTask.create "Clean" [] {
 }
 
 let build = BuildTask.create "Build" [clean] {
-    solutionFile
-    |> DotNet.build id
-}
+        solutionFile 
+        |> DotNet.build (fun p ->
+            let msBuildParams =
+                {p.MSBuildParams with 
+                    Properties = ([
+                        "warnon", "3390"
+                    ])
+                }
+            {
+                p with 
+                    MSBuildParams = msBuildParams
+            }
+        )
+    }

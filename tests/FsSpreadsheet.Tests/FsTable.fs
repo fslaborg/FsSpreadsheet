@@ -87,9 +87,7 @@ let fsTableTests =
                     Expect.sequenceEqual testIndeces dummyIndeces "Indeces are not equal" 
             ]
         ]
-        //testList "Fields" [
-        //    testCase "Correctly retrieved" <| fun _ ->
-        //        let actualFields = dummyFsTable.Fields dummyFsCellsCollection
-        //        Expect.containsAll actualFields dummyFsTableFields "FsTableFields do not match"
-        //]
+        testList "TryGetHeaderCellOfColumn" [
+            //testList ""
+        ]
     ]

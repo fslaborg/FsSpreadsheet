@@ -52,7 +52,7 @@ type FsTable (name : string, rangeAddress, showTotalsRow, showHeaderRow) =
 
     /// <summary>
     /// The FsTableFields of this FsTable.
-    /// <summary>
+    /// </summary>
     member self.Fields
         with get(cellsCollection) =
             let columnCount = base.ColumnCount()
@@ -153,9 +153,7 @@ type FsTable (name : string, rangeAddress, showTotalsRow, showHeaderRow) =
     /// Returns a unique name consisting of the original name and an initial offset that is raised 
     /// if the original name with that offset is already present.
     /// </summary>
-    /// <param name="enforceOffset">
-    /// If true, the initial offset is always 
-    /// </param>
+    /// <param name="enforceOffset">If true, the initial offset is always applied.</param>
     // TO DO: HLW: make this description more precise. What is this method even about?
     member this.GetUniqueName(originalName : string, initialOffset : int32, enforceOffset : bool) =
         let mutable name = originalName + if enforceOffset then string initialOffset else ""
@@ -291,3 +289,110 @@ type FsTable (name : string, rangeAddress, showTotalsRow, showHeaderRow) =
     /// <exception cref="System.ArgumentException">if the FsTableField does not exist in the FsTable.</exception>
     static member renameField oldName newName (table : FsTable) =
         table.RenameField(oldName, newName)
+
+    /// <summary>
+    /// Returns the header cell from a given FsCellsCollection with the given colum index if the cell exists. Else returns None.
+    /// </summary>
+    member this.TryGetHeaderCellOfColumn(cellsCollection : FsCellsCollection, colIndex : int) =
+        let fstRowIndex = this.RangeAddress.FirstAddress.RowNumber
+        cellsCollection.GetCellsInColumn colIndex
+        |> Seq.tryFind (fun c -> c.RowNumber = fstRowIndex)
+
+    /// <summary>
+    /// Returns the header cell from a given FsCellsCollection with the given column index in a given FsTable if the cell exists. Else
+    /// returns None.
+    /// </summary>
+    static member tryGetHeaderCellOfColumnIndex cellsCollection (colIndex : int) (table : FsTable) =
+        table.TryGetHeaderCellOfColumn(cellsCollection, colIndex)
+
+    /// <summary>
+    /// Returns the header cell of a given FsRangeColumn from a given FsCellsCollection if the cell exists. Else returns None.
+    /// </summary>
+    member this.TryGetHeaderCellOfColumn(cellsCollection : FsCellsCollection, column : FsRangeColumn) =
+        this.TryGetHeaderCellOfColumn(cellsCollection, column.Index)
+
+    /// <summary>
+    /// Returns the header cell of a given FsRangeColumn from a given FsCellsCollection in a given FsTable if the cell exists.
+    /// Else returns None.
+    /// </summary>
+    static member tryGetHeaderCellOfColumn cellsCollection (column : FsRangeColumn) (table : FsTable) =
+        table.TryGetHeaderCellOfColumn(cellsCollection, column)
+
+    /// <summary>
+    /// Returns the header cell from a given FsCellsCollection with the given colum index.
+    /// </summary>
+    /// <exception cref="System.NullReferenceException">if the FsCell cannot be found.</exception>
+    member this.GetHeaderCellOfColumn(cellsCollection, colIndex : int) =
+        this.TryGetHeaderCellOfColumn(cellsCollection, colIndex).Value
+
+    /// <summary>
+    /// Returns the header cell from a given FsCellsCollection with the given colum index in a given FsTable.
+    /// </summary>
+    /// <exception cref="System.NullReferenceException">if the FsCell cannot be found.</exception>
+    static member getHeaderCellOfColumnIndex cellsCollection (colIndex : int) (table : FsTable) =
+        table.GetHeaderCellOfColumn(cellsCollection, colIndex)
+
+    /// <summary>
+    /// Returns the header cell of a given FsRangeColumn from a given FsCellsCollection.
+    /// </summary>
+    /// <exception cref="System.NullReferenceException">if the FsCell cannot be found.</exception>
+    member this.GetHeaderCellOfColumn(cellsCollection : FsCellsCollection, column : FsRangeColumn) =
+        this.TryGetHeaderCellOfColumn(cellsCollection, column).Value
+
+    /// <summary>
+    /// Returns the header cell of a given FsRangeColumn from a given FsCellsCollection in a given FsTable.
+    /// </summary>
+    /// <exception cref="System.NullReferenceException">if the FsCell cannot be found.</exception>
+    static member getHeaderCellOfColumn cellsCollection (column : FsRangeColumn) (table : FsTable) =
+        table.GetHeaderCellOfColumn(cellsCollection, column)
+
+    /// <summary>
+    /// Returns the header cell of a given FsTableField from a given FsCellsCollection.
+    /// </summary>
+    member this.GetHeaderCellOfTableField(cellsCollection, tableField : FsTableField) =
+        tableField.HeaderCell(cellsCollection, this.ShowHeaderRow)
+
+    /// <summary>
+    /// Returns the header cell of a given FsTableField from a given FsCellsCollection in a given FsTable.
+    /// </summary>
+    static member getHeaderCellOfTableField cellsCollection (tableField : FsTableField) (table : FsTable) =
+        table.GetHeaderCellOfTableField(cellsCollection, tableField)
+
+    /// <summary>
+    /// Returns the header cell from an FsTableField with the given index using a given FsCellsCollection if the cell exists.
+    /// Else returns None.
+    /// </summary>
+    member this.TryGetHeaderCellOfTableField(cellsCollection, tableFieldIndex : int) =
+        _fieldNames.Values
+        |> Seq.tryPick (
+            fun tf -> 
+                if tf.Index = tableFieldIndex then
+                    Some (tf.HeaderCell(cellsCollection, this.ShowHeaderRow))
+                else None
+        )
+
+    /// <summary>
+    /// Returns the header cell from an FsTableField with the given index using a given FsCellsCollection if the cell exists
+    /// in a given FsTable. Else returns None.
+    /// </summary>
+    static member tryGetHeaderCellOfTableFieldIndex cellsCollection (tableFieldIndex : int) (table : FsTable) =
+        table.TryGetHeaderCellOfTableField(cellsCollection, tableFieldIndex)
+
+    /// <summary>
+    /// Returns the header cell from an FsTableField with the given index using a given FsCellsCollection.
+    /// </summary>
+    /// <exception cref="System.NullReferenceException">if the FsCell cannot be found.</exception>
+    member this.GetHeaderCellOfTableField(cellsCollection, tableFieldIndex : int) =
+        this.TryGetHeaderCellOfTableField(cellsCollection, tableFieldIndex).Value
+
+    /// <summary>
+    /// Returns the header cell from an FsTableField with the given index using a given FsCellsCollection in a given FsTable.
+    /// </summary>
+    /// <exception cref="System.NullReferenceException">if the FsCell cannot be found.</exception>
+    static member getHeaderCellOfTableFieldIndex cellsCollection (tableFieldIndex : int) (table : FsTable) =
+        table.GetHeaderCellOfTableField(cellsCollection, tableFieldIndex)
+
+    member this.TryGetHeaderCellByFieldName(cellsCollection, fieldName : string) =
+        match Dictionary.tryGet fieldName _fieldNames with
+        | Some tf -> Some tf.HeaderCell
+        | None -> None

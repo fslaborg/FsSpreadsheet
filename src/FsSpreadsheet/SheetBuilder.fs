@@ -42,29 +42,29 @@ module SheetBuilder =
                 }
 
             member self.header(name: string) =
-                let transformer _ (cell: FsCell) = cell.SetValueAs(name)
+                let transformer _ (cell: FsCell) = cell.SetValueAs(name); cell
                 { self with HeaderTransformers = List.append self.HeaderTransformers [transformer] }
 
             member self.header(mapHeader: 'T -> string) =
-                let transformer (value : 'T) (cell: FsCell) = cell.SetValueAs(mapHeader value)
+                let transformer (value : 'T) (cell: FsCell) = cell.SetValueAs(mapHeader value); cell
                 { self with HeaderTransformers = List.append self.HeaderTransformers [transformer] }
 
             member self.adjustToContents() =
                 { self with AdjustToContents = true }
 
-            static member field<'T>(map: 'T -> int) = FieldMap<'T>.create(fun row cell -> cell.SetValueAs(map row))
-            static member field<'T>(map: 'T -> string) = FieldMap<'T>.create(fun row cell -> cell.SetValueAs(map row))
-            static member field<'T>(map: 'T -> System.DateTime) = FieldMap<'T>.create(fun row cell -> cell.SetValueAs(map row))
-            static member field<'T>(map: 'T -> bool) = FieldMap<'T>.create(fun row cell -> cell.SetValueAs(map row))
-            static member field<'T>(map: 'T -> double) = FieldMap<'T>.create(fun row cell -> cell.SetValueAs(map row))
-            static member field<'T>(map: 'T -> int option) = FieldMap<'T>.create(fun row cell -> cell.SetValueAs(Option.toNullable (map row)))
-            static member field<'T>(map: 'T -> System.DateTime option) = FieldMap<'T>.create(fun row cell -> cell.SetValueAs(Option.toNullable (map row)))
-            static member field<'T>(map: 'T -> bool option) = FieldMap<'T>.create(fun row cell -> cell.SetValueAs(Option.toNullable (map row)))
-            static member field<'T>(map: 'T -> double option) = FieldMap<'T>.create(fun row cell -> cell.SetValueAs(Option.toNullable (map row)))
+            static member field<'T>(map: 'T -> int) = FieldMap<'T>.create(fun row cell -> cell.SetValueAs(map row); cell)
+            static member field<'T>(map: 'T -> string) = FieldMap<'T>.create(fun row cell -> cell.SetValueAs(map row); cell)
+            static member field<'T>(map: 'T -> System.DateTime) = FieldMap<'T>.create(fun row cell -> cell.SetValueAs(map row); cell)
+            static member field<'T>(map: 'T -> bool) = FieldMap<'T>.create(fun row cell -> cell.SetValueAs(map row); cell)
+            static member field<'T>(map: 'T -> double) = FieldMap<'T>.create(fun row cell -> cell.SetValueAs(map row); cell)
+            static member field<'T>(map: 'T -> int option) = FieldMap<'T>.create(fun row cell -> cell.SetValueAs(Option.toNullable (map row)); cell)
+            static member field<'T>(map: 'T -> System.DateTime option) = FieldMap<'T>.create(fun row cell -> cell.SetValueAs(Option.toNullable (map row)); cell)
+            static member field<'T>(map: 'T -> bool option) = FieldMap<'T>.create(fun row cell -> cell.SetValueAs(Option.toNullable (map row)); cell)
+            static member field<'T>(map: 'T -> double option) = FieldMap<'T>.create(fun row cell -> cell.SetValueAs(Option.toNullable (map row)); cell)
             static member field<'T>(map: 'T -> string option) = FieldMap<'T>.create(fun row cell ->
                 match map row with
                 | None -> cell
-                | Some text -> cell.SetValueAs(text)
+                | Some text -> cell.SetValueAs(text); cell
             )
 
     type FsTable with 
