@@ -9,7 +9,15 @@ type FsRangeColumn(rangeAddress) =
     //    let range = FsRangeAddress(FsAddress(0,0),FsAddress(0,0))
     //    FsRangeColumn(range)
     
-    new (index) = FsRangeColumn (FsRangeAddress(FsAddress(0,index),FsAddress(0,index)))
+    new(index) = FsRangeColumn(FsRangeAddress(FsAddress(0,index),FsAddress(0,index)))
+
+    //new(rangeAddress) = FsRangeColumn()
+
+    member self.Index 
+        with get() = self.RangeAddress.FirstAddress.ColumnNumber
+        and set(i) = 
+            self.RangeAddress.FirstAddress.ColumnNumber <- i
+            self.RangeAddress.LastAddress.ColumnNumber <- i
 
     member self.Cell(rowIndex,cells) = base.Cell(FsAddress(rowIndex - base.RangeAddress.FirstAddress.RowNumber + 1,1),cells)
     
@@ -20,8 +28,26 @@ type FsRangeColumn(rangeAddress) =
 
     member self.Cells(cells) = base.Cells(cells)
 
-    member self.Index 
-        with get() = self.RangeAddress.FirstAddress.ColumnNumber
-        and set(i) = 
-            self.RangeAddress.FirstAddress.ColumnNumber <- i
-            self.RangeAddress.LastAddress.ColumnNumber <- i
+    static member fromRangeAddress (rangeAddress : FsRangeAddress) = 
+        FsRangeColumn rangeAddress
+
+
+[<AutoOpen>]
+module Enhancements =
+    type FsRangeAddress with
+
+        /// <summary>
+        /// Takes an FsRangeAddress and returns, for every column the range address spans, an FsRangeColumn.
+        /// </summary>
+        static member toRangeColumns (rangeAddress : FsRangeAddress) =
+            let columns = [rangeAddress.FirstAddress.ColumnNumber .. rangeAddress.LastAddress.ColumnNumber]
+            let fstRow = rangeAddress.FirstAddress.RowNumber
+            let lstRow = rangeAddress.LastAddress.RowNumber
+            columns
+            |> Seq.map (
+                fun c -> 
+                    let fa = FsAddress(fstRow, c)
+                    let la = FsAddress(lstRow, c)
+                    FsRangeAddress(fa, la)
+                    |> FsRangeColumn
+            )
