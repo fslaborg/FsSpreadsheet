@@ -8,11 +8,11 @@ open Expression
 
 type TableBuilder(name : string) =
 
-    static member Empty : SheetEntity<TableElement list> = SheetEntity.ok []
+    static member Empty : SheetEntity<TableElement list> = SheetEntity.some []
 
     // -- Computation Expression methods --> 
 
-    member inline this.Zero() : SheetEntity<TableElement list> = SheetEntity.ok []
+    member inline this.Zero() : SheetEntity<TableElement list> = SheetEntity.some []
 
     member this.Name = name
 
@@ -21,10 +21,10 @@ type TableBuilder(name : string) =
         |> List.map (fun m -> m.MapText (sprintf "In Sheet %s: %s" name))
 
     member inline _.Yield(se: TableElement) =
-        SheetEntity.ok [se]
+        SheetEntity.some [se]
 
     member inline _.Yield(cs: TableElement list) =
-        SheetEntity.ok cs
+        SheetEntity.some cs
    
     member inline _.Yield(cs: SheetEntity<TableElement list>) =
         cs
@@ -48,10 +48,10 @@ type TableBuilder(name : string) =
             NoneRequired messages
 
     member inline _.Yield(cs: RowElement list) =
-        SheetEntity.ok [TableElement.UnindexedRow cs]
+        SheetEntity.some [TableElement.UnindexedRow cs]
 
     member inline _.Yield(cs: RowBuilder) =
-        SheetEntity.ok [TableElement.UnindexedRow []]
+        SheetEntity.some [TableElement.UnindexedRow []]
 
     member inline _.Yield(c: SheetEntity<ColumnElement list>) =
         match c with 
@@ -63,10 +63,10 @@ type TableBuilder(name : string) =
             NoneRequired messages
 
     member inline _.Yield(cs: ColumnElement list) =
-        SheetEntity.ok [TableElement.UnindexedColumn cs]
+        SheetEntity.some [TableElement.UnindexedColumn cs]
 
     member inline _.Yield(cs: ColumnBuilder) =
-        SheetEntity.ok [TableElement.UnindexedColumn []]
+        SheetEntity.some [TableElement.UnindexedColumn []]
 
 
     member inline this.YieldFrom(ns: SheetEntity<TableElement list> seq) =   

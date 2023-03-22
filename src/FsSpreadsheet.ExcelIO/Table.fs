@@ -360,9 +360,8 @@ module Table =
                 let r = uint i + upperBoundary + 1u
                 match SheetData.tryGetCellValueAt sst r c sheetData with
                 | Some v -> dictionary.Add((i,header),v)
-                | None -> ()                              
+                | None -> ()
             )
             |> ignore
         )
         dictionary
-        

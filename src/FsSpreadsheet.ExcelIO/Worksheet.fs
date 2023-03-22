@@ -52,7 +52,8 @@ module Worksheet =
         worksheetPart.Worksheet <- worksheet
         worksheetPart
 
-    /// Associates an empty Worksheet with the WworksheetPart.
+    /// <summary>Associates an empty Worksheet with the WorksheetPart.</summary>
+    /// <param name ="worksheetPart">The WorksheetPart to associate the Worksheet with.</param>
     let init (worksheetPart : WorksheetPart) = 
         worksheetPart
         |> setWorksheet (empty())
@@ -65,6 +66,7 @@ module Worksheet =
             worksheetPart
             |> init
             |> get
+
 
     /// Functions for extracting / working with WorksheetParts.
     module WorksheetPart = 
@@ -80,6 +82,12 @@ module Worksheet =
         /// Returns the WorksheetCommentsPart associated with a WorksheetPart.
         let getWorksheetCommentsPart (worksheetPart : WorksheetPart) = worksheetPart.WorksheetCommentsPart
 
+        /// <summary>Returns the Tables associated with a WorksheetPart</summary>
+        let getTables (worksheetPart : WorksheetPart) = 
+            worksheetPart.TableDefinitionParts
+            |> Seq.map (fun t -> t.Table)
+
+
     /// Functions for extracting / working with WorksheetCommentsParts.
     module WorksheetCommentsPart =
         
@@ -88,6 +96,7 @@ module Worksheet =
         
         /// Returns the comments of the WorksheetCommentsPart.
         let getComments (worksheetCommentsPart : WorksheetCommentsPart) = worksheetCommentsPart.Comments
+
 
     // TO DO: Atm. both types of comments (REAL comments and notes) are mixed. They seem to only differ in terms of their text: Comments have a disclaimer like "Comment:" or "Reply:" (the latter if it's a reply to a comment) while notes do not have that BUT have text formatting (can be seen in comments.xml in .xlsx archives))
     /// Functions for working with Comments.
@@ -147,7 +156,7 @@ module Worksheet =
 
     //let insertCellData (cell:CellData.CellDataValue) (worksheet : Worksheet) =
         
-    ///Convenience
+    //Convenience
 
     //let insertRow (rowIndex) (values: 'T seq) (worksheet:Worksheet) = notImplemented()
     //let overWriteRow (rowIndex) (values: 'T seq) (worksheet:Worksheet) = notImplemented()

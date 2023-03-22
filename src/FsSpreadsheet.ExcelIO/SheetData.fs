@@ -75,7 +75,7 @@ module SheetData =
             sheetData
         )
 
-    ///If the row with index rowIndex exists in the sheet, moves it downwards by amount. Negative amounts will move the row upwards.
+    /// If the row with index rowIndex exists in the sheet, moves it downwards by amount. Negative amounts will move the row upwards.
     let moveRowVertical (amount : int) rowIndex (sheetData : SheetData) = 
         match sheetData |> tryGetRowAt rowIndex with
         | Some row -> 
@@ -89,7 +89,7 @@ module SheetData =
                     Cell.getReference cell 
                     |> CellReference.moveVertical amount
                 ) 
-                |> ignore            
+                |> ignore
             )
             sheetData
         | None -> 
@@ -227,7 +227,7 @@ module SheetData =
 
     /// Add a value at the given row- and columnindex to sheet using a shared string table.
     ///
-    /// If a cell exists in the given postion, shoves it to the right
+    /// If a cell exists at the given position, it is shoved to the right.
     let insertValueAt (sst : SharedStringTable Option) rowIndex columnIndex (value : 'T) (sheet : SheetData) =
         match tryGetRowAt rowIndex sheet with
         | Some row -> 
@@ -238,9 +238,9 @@ module SheetData =
         | None -> insertRowWithHorizontalOffsetAt sst (columnIndex - 1u |> int) [value] rowIndex sheet
 
 
-    /// Add a value at the given row- and columnIndex using a sharedStringTable.
+    /// Adds a value at the given row- and columnIndex using a sharedStringTable.
     ///
-    /// If a cell exists in the given postion, overwrites it.
+    /// If a cell exists at the given position, overwrites it.
     // To-Do: Add version using a sharedStringTable
     let setValueAt (sst : SharedStringTable Option) rowIndex columnIndex (value : 'T) (sheet : SheetData) =
         match tryGetRowAt rowIndex sheet with

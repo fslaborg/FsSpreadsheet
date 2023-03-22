@@ -2,13 +2,15 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="FsSparseMatrix.fs" />
     <Compile Include="FsAddress.fs" />
     <Compile Include="Cells\FsCell.fs" />
     <Compile Include="Cells\FsCellsCollection.fs" />
-    <Compile Include="Ranges\FsRangeAdress.fs" />
+    <Compile Include="Ranges\FsRangeAddress.fs" />
     <Compile Include="Ranges\FsRangeBase.fs" />
     <Compile Include="Ranges\FsRangeRow.fs" />
     <Compile Include="Ranges\FsRangeColumn.fs" />

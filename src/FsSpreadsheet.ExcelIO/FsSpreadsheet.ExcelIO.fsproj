@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,7 +13,7 @@
     <Compile Include="SheetData.fs" />
     <Compile Include="Sheet.fs" />
     <Compile Include="Table.fs" />
-    <Compile Include="WorkSheet.fs" />
+    <Compile Include="Worksheet.fs" />
     <Compile Include="Workbook.fs" />
     <Compile Include="Spreadsheet.fs" />
     <Compile Include="FsExtensions.fs" />

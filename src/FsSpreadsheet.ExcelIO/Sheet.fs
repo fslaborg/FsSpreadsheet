@@ -3,6 +3,7 @@
 open DocumentFormat.OpenXml
 open DocumentFormat.OpenXml.Spreadsheet
 open DocumentFormat.OpenXml.Packaging
+open System
 
 
 /// Part of the Workbook, stores name and other additional info of the sheet. (Unmanaged: Changing a sheet does not alter the associated worksheet which stores the data)
@@ -77,13 +78,23 @@ module Sheet =
     /// Gets the ID of the sheet (this ID associates the sheet with the worksheet).
     let getID (sheet : Sheet) = sheet.Id.Value
 
-    /// Sets the SheetID of the sheet (this ID determines the position of the sheet tab in MS Excel).
+    /// Sets the SheetID of the sheet (this ID determines the position of the sheet tab in MS Excel).    
+    [<Obsolete("Use setSheetIndex instead ")>]
     let setSheetID id (sheet : Sheet) = 
         sheet.SheetId <- UInt32Value.FromUInt32 id
         sheet
 
-    /// Gets the SheetID of the sheet (this ID determines the position of the sheet tab in MS Excel).
+    /// Sets the SheetID of the sheet (this ID determines the position of the sheet tab in MS Excel).    
+    let setSheetIndex id (sheet : Sheet) = 
+        sheet.SheetId <- UInt32Value.FromUInt32 id
+        sheet
+
+    /// Gets the SheetID of the sheet (this ID determines the position of the sheet tab in MS Excel).    
+    [<Obsolete("Use getSheetIndex instead ")>]
     let getSheetID (sheet : Sheet) = sheet.SheetId.Value
+
+    /// Gets the SheetID of the sheet (this ID determines the position of the sheet tab in MS Excel).
+    let getSheetIndex (sheet : Sheet) = sheet.SheetId.Value
 
     /// Create a sheet from the id, the name and the sheetID.
     let create id name sheetID = 
@@ -92,11 +103,12 @@ module Sheet =
         |> setName name
         |> setSheetID sheetID
 
-    /// Returns the item of the given index in the spreadsheetDocument if it exists. Else returns None.
+    /// <summary>Returns the item at the given index in the SpreadsheetDocument if it exists. Else returns None.</summary>
+    /// <remarks>SheetIndices are 1-based.</remarks>
     let tryItem (index : uint) (spreadsheetDocument : SpreadsheetDocument) : option<Sheet> = 
         let workbookPart = spreadsheetDocument.WorkbookPart    
         workbookPart.Workbook.Descendants<Sheet>()
-        |> Seq.tryItem (int index) 
+        |> Seq.tryItem (int index - 1) 
 
     /// Returns the item with the given name in the spreadsheetDocument if it exists. Else returns None.
     let tryItemByName (name : string) (spreadsheetDocument : SpreadsheetDocument) : option<Sheet> = 

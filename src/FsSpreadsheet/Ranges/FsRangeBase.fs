@@ -16,7 +16,7 @@ type FsRangeBase (rangeAddress : FsRangeAddress, styleValue) =
         IdCounter <- IdCounter + 1
         IdCounter
 
-    new (rangeAddress) = FsRangeBase(rangeAddress,null)
+    new (rangeAddress) = FsRangeBase(rangeAddress, null)
 
     //abstract member OnRangeAddressChanged : FsRangeAddress*FsRangeAddress -> unit 
     
@@ -34,7 +34,8 @@ type FsRangeBase (rangeAddress : FsRangeAddress, styleValue) =
                 _rangeAddress <- rangeAdress
                 //OnRangeAddressChanged(oldAddress, _rangeAddress);
 
-    member self.Cell(cellAddressInRange : FsAddress,cells : FsCellsCollection) = 
+    // TO DO: add description – important and complex function
+    member self.Cell(cellAddressInRange : FsAddress, cells : FsCellsCollection) = 
 
         let absRow = cellAddressInRange.RowNumber + self.RangeAddress.FirstAddress.RowNumber - 1;
         let absColumn = cellAddressInRange.ColumnNumber + self.RangeAddress.FirstAddress.ColumnNumber - 1;
@@ -45,7 +46,7 @@ type FsRangeBase (rangeAddress : FsRangeAddress, styleValue) =
         if (absColumn <= 0 || absColumn > 16384) then
             failwithf "Column number must be between 1 and %i" cells.MaxColumnNumber
 
-        let cell = cells.TryGetCell(absRow,absColumn);
+        let cell = cells.TryGetCell(absRow, absColumn)
         
         match cell with
         | Some cell -> 
@@ -67,11 +68,11 @@ type FsRangeBase (rangeAddress : FsRangeAddress, styleValue) =
 
             // If the default style for this range base is empty, but the worksheet
             // has a default style, use the worksheet's default style
-            let newCell = new FsCell(absoluteAddress);
+            let newCell = FsCell.createEmptyWithAdress absoluteAddress
 
             self.Extend(absoluteAddress)
 
-            cells.Add(absRow, absColumn, newCell);
+            cells.Add(absRow, absColumn, newCell) |> ignore
             newCell
    
     member self.Cells(cells : FsCellsCollection) = 

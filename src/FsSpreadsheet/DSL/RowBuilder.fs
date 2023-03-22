@@ -8,14 +8,14 @@ open Expression
 
 type RowBuilder() =
 
-    static member Empty : SheetEntity<RowElement list> = SheetEntity.ok []
+    static member Empty : SheetEntity<RowElement list> = SheetEntity.some []
 
     // -- Computation Expression methods --> 
 
     member _.Quote  (quotation: Quotations.Expr<'T>) =
         quotation
 
-    member inline this.Zero() : SheetEntity<RowElement list> = SheetEntity.ok []
+    member inline this.Zero() : SheetEntity<RowElement list> = SheetEntity.some []
 
     member this.SignMessages (messages : Message list) : Message list =
         messages
@@ -28,10 +28,10 @@ type RowBuilder() =
         n
 
     member inline _.Yield(c: RowElement) =
-        SheetEntity.ok [c]
+        SheetEntity.some [c]
 
     member inline _.Yield(cs: RowElement list) =
-        SheetEntity.ok cs
+        SheetEntity.some cs
 
     member inline _.Yield(c: SheetEntity<RowElement>) =
         match c with 
@@ -61,7 +61,7 @@ type RowBuilder() =
             match c with
             | v, Option.Some i -> RowElement.IndexedCell (Col i, v)
             | v, None -> RowElement.UnindexedCell v
-        SheetEntity.ok [re]
+        SheetEntity.some [re]
 
     member inline _.Yield(c: SheetEntity<Value>) =
         match c with 
@@ -78,15 +78,15 @@ type RowBuilder() =
         |> Seq.reduce (fun a b -> this.Combine(a,b))
 
     member inline _.Yield(c: Value) =
-        SheetEntity.ok [RowElement.UnindexedCell c]
+        SheetEntity.some [RowElement.UnindexedCell c]
 
     member inline this.Yield(n: 'a when 'a :> System.IFormattable) = 
         let v = DataType.InferCellValue n
-        SheetEntity.ok [RowElement.UnindexedCell v]
+        SheetEntity.some [RowElement.UnindexedCell v]
 
     member inline _.Yield(s : string) = 
         let v = DataType.InferCellValue s
-        SheetEntity.ok [RowElement.UnindexedCell v]
+        SheetEntity.some [RowElement.UnindexedCell v]
 
     member inline this.YieldFrom(ns: SheetEntity<RowElement list> seq) =   
         ns

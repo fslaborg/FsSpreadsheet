@@ -24,6 +24,8 @@ module Cell =
         /// Sets the value inside the CellValue.
         let setValue (value : string) (cellValue : CellValue) =  cellValue.Text <- value
 
+    /// <summary>Takes a DataType and returns the appropriate CellValue.</summary>
+    /// <remarks>DataType is the FsSpreadsheet representation of the CellValue enum in OpenXml.</remarks>
     let cellValuesFromDataType (dataType : DataType) =
         match dataType with
         | String    -> CellValues.String
@@ -32,7 +34,20 @@ module Cell =
         | Date      -> CellValues.Date
         | Empty     -> CellValues.Error
 
-    /// Creates an empty cell.
+    /// <summary>Takes a CellValue and returns the appropriate DataType.</summary>
+    /// <remarks>DataType is the FsSpreadsheet representation of the CellValue enum in OpenXml.</remarks>
+    let cellValuesToDataType (cellValue : CellValues) =
+        match cellValue with
+        | CellValues.SharedString
+        | CellValues.InlineString
+        | CellValues.String     -> String 
+        | CellValues.Boolean    -> Boolean
+        | CellValues.Number     -> Number 
+        | CellValues.Date       -> Date   
+        | CellValues.Error      -> Empty  
+        | _                     -> failwith $"cellValue {cellValue.ToString()} can not be transferred to DataType."
+
+    /// <summary>Creates an empty Cell.</summary>
     let empty () = Cell()
 
     /// Returns the proper CellValues case for the given value.
@@ -231,6 +246,7 @@ module Cell =
                 cell  
 
             | _ -> cell
-        else        
-            cell.CellValue.Text <- cell.InnerText
+        else
+            try cell.CellValue.Text <- cell.InnerText
+            with _ -> cell.CellValue <- CellValue.empty()
             cell

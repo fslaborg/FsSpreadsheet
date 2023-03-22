@@ -42,29 +42,29 @@ module SheetBuilder =
                 }
 
             member self.header(name: string) =
-                let transformer _ (cell: FsCell) = cell.SetValue(name)
+                let transformer _ (cell: FsCell) = cell.SetValueAs(name); cell
                 { self with HeaderTransformers = List.append self.HeaderTransformers [transformer] }
 
             member self.header(mapHeader: 'T -> string) =
-                let transformer (value : 'T) (cell: FsCell) = cell.SetValue(mapHeader value)
+                let transformer (value : 'T) (cell: FsCell) = cell.SetValueAs(mapHeader value); cell
                 { self with HeaderTransformers = List.append self.HeaderTransformers [transformer] }
 
             member self.adjustToContents() =
                 { self with AdjustToContents = true }
 
-            static member field<'T>(map: 'T -> int) = FieldMap<'T>.create(fun row cell -> cell.SetValue(map row))
-            static member field<'T>(map: 'T -> string) = FieldMap<'T>.create(fun row cell -> cell.SetValue(map row))
-            static member field<'T>(map: 'T -> System.DateTime) = FieldMap<'T>.create(fun row cell -> cell.SetValue(map row))
-            static member field<'T>(map: 'T -> bool) = FieldMap<'T>.create(fun row cell -> cell.SetValue(map row))
-            static member field<'T>(map: 'T -> double) = FieldMap<'T>.create(fun row cell -> cell.SetValue(map row))
-            static member field<'T>(map: 'T -> int option) = FieldMap<'T>.create(fun row cell -> cell.SetValue(Option.toNullable (map row)))
-            static member field<'T>(map: 'T -> System.DateTime option) = FieldMap<'T>.create(fun row cell -> cell.SetValue(Option.toNullable (map row)))
-            static member field<'T>(map: 'T -> bool option) = FieldMap<'T>.create(fun row cell -> cell.SetValue(Option.toNullable (map row)))
-            static member field<'T>(map: 'T -> double option) = FieldMap<'T>.create(fun row cell -> cell.SetValue(Option.toNullable (map row)))
+            static member field<'T>(map: 'T -> int) = FieldMap<'T>.create(fun row cell -> cell.SetValueAs(map row); cell)
+            static member field<'T>(map: 'T -> string) = FieldMap<'T>.create(fun row cell -> cell.SetValueAs(map row); cell)
+            static member field<'T>(map: 'T -> System.DateTime) = FieldMap<'T>.create(fun row cell -> cell.SetValueAs(map row); cell)
+            static member field<'T>(map: 'T -> bool) = FieldMap<'T>.create(fun row cell -> cell.SetValueAs(map row); cell)
+            static member field<'T>(map: 'T -> double) = FieldMap<'T>.create(fun row cell -> cell.SetValueAs(map row); cell)
+            static member field<'T>(map: 'T -> int option) = FieldMap<'T>.create(fun row cell -> cell.SetValueAs(Option.toNullable (map row)); cell)
+            static member field<'T>(map: 'T -> System.DateTime option) = FieldMap<'T>.create(fun row cell -> cell.SetValueAs(Option.toNullable (map row)); cell)
+            static member field<'T>(map: 'T -> bool option) = FieldMap<'T>.create(fun row cell -> cell.SetValueAs(Option.toNullable (map row)); cell)
+            static member field<'T>(map: 'T -> double option) = FieldMap<'T>.create(fun row cell -> cell.SetValueAs(Option.toNullable (map row)); cell)
             static member field<'T>(map: 'T -> string option) = FieldMap<'T>.create(fun row cell ->
                 match map row with
                 | None -> cell
-                | Some text -> cell.SetValue(text)
+                | Some text -> cell.SetValueAs(text); cell
             )
 
     type FsTable with 
@@ -88,14 +88,14 @@ module SheetBuilder =
                 let activeRowIndex = rowIndex + startRowIndex
                 for field in fields do
 
-                    let headerCell = FsCell()
+                    let headerCell = FsCell.createEmpty()
                     for header in field.HeaderTransformers do ignore (header row headerCell)
                 
                      
                     let headerString = 
-                        if headerCell.GetValue() = "" then 
+                        if headerCell.Value = "" then 
                             field.Hash 
-                        else headerCell.GetValue()
+                        else headerCell.Value
 
                     let tableField = self.Field(headerString,cells)                
 
@@ -145,14 +145,14 @@ module SheetBuilder =
                 let activeRow = self.Row(rowIndex + startRowIndex)
                 for field in fields do
 
-                    let headerCell = FsCell()
+                    let headerCell = FsCell.createEmpty()
                     for header in field.HeaderTransformers do ignore (header row headerCell)
                 
                     let index = 
                         let hasHeader, headerString = 
-                            if headerCell.GetValue() = "" then 
+                            if headerCell.Value = "" then 
                                 false, field.Hash 
-                            else true, headerCell.GetValue()
+                            else true, headerCell.Value
 
                         match Dictionary.tryGetValue (headerString) headers with
                         | Some int -> int
@@ -161,10 +161,10 @@ module SheetBuilder =
                             let i = headers.Count + 1
                             headers.Add(v,i)
                             if hasHeader then
-                                self.Row(1).Cell(i,self.CellCollection).CopyFrom(headerCell) |> ignore
+                                self.Row(1).Cell(i).CopyFrom(headerCell) |> ignore
                             i
 
-                    let activeCell = activeRow.Cell(index,self.CellCollection)
+                    let activeCell = activeRow.Cell(index)
                     for transformer in field.CellTransformers do
                         ignore (transformer row activeCell)
 

@@ -25,7 +25,6 @@ module CellReference =
                 sb.Insert(0, char (modulo + 65u)) |> ignore
                 loop ((residual - modulo) / 26u)
         loop i
-        
 
     /// Maps 1 based column and row indices to "A1" style reference.
     let ofIndices column (row : uint32) = 
@@ -73,6 +72,7 @@ module CellReference =
         |> fun (c,r) -> c, (int64 r) + (int64 amount) |> uint32
         ||> ofIndices
 
+
 type FsAddress(rowNumber : int, columnNumber : int, fixedRow : bool, fixedColumn : bool) =
 
     let mutable _fixedRow     = fixedRow
@@ -81,6 +81,10 @@ type FsAddress(rowNumber : int, columnNumber : int, fixedRow : bool, fixedColumn
     let mutable _columnNumber = columnNumber
 
     let mutable _trimmedAddress = ""
+
+    // ----------------------
+    // ALTERNATE CONSTRUCTORS
+    // ----------------------
 
     new (rowNumber : int, columnLetter : string, fixedRow : bool, fixedColumn : bool) =
         FsAddress(rowNumber,CellReference.colAdressToIndex columnLetter |> int,fixedRow,fixedColumn)
@@ -91,22 +95,11 @@ type FsAddress(rowNumber : int, columnNumber : int, fixedRow : bool, fixedColumn
     new (cellAddressString : string) =
         let colIndex,rowIndex = CellReference.toIndices cellAddressString
         FsAddress(int rowIndex,int colIndex)
-
-    member this.LOL () = 1
-    //let mutable _address = address
-
-    member self.Address 
-        with get() = CellReference.ofIndices (uint32 _columnNumber) (uint32 _rowNumber)
-        and set(address) = 
-            let column,row = CellReference.toIndices address
-            _rowNumber <- int row
-            _columnNumber <- int column
-
-    member self.OfIndices(rowIndex,colIndex) = 
-        _columnNumber <- colIndex
-        _rowNumber <- rowIndex
-
-    member self.ToIndices() = _rowNumber,_columnNumber
+    
+    
+    // ----------
+    // PROPERTIES
+    // ----------
 
     member self.ColumnNumber
         with get() = _columnNumber
@@ -116,5 +109,52 @@ type FsAddress(rowNumber : int, columnNumber : int, fixedRow : bool, fixedColumn
         with get() = _rowNumber
         and set(rowI) = _rowNumber <- rowI
 
+    member self.Address 
+        with get() = CellReference.ofIndices (uint32 _columnNumber) (uint32 _rowNumber)
+        and set(address) = 
+            let column,row = CellReference.toIndices address
+            _rowNumber <- int row
+            _columnNumber <- int column
+
     member self.FixedRow = false
     member self.FixedColumn = false
+
+
+    // -------
+    // METHODS
+    // -------
+
+    member this.LOL () = 1
+    //let mutable _address = address
+
+    /// <summary>Updates the row- and columnIndex respective to the given indices.</summary>
+    member self.UpdateIndices(rowIndex,colIndex) = 
+        _columnNumber <- colIndex
+        _rowNumber <- rowIndex
+
+    /// <summary>Updates the row- and columnIndex of a given FsAddress respective to the given indices.</summary>
+    static member updateIndices rowIndex colIndex (address : FsAddress) =
+        address.UpdateIndices(rowIndex, colIndex)
+        address
+
+    /// <summary>Returns the row- and the columnIndex of the FsAddress.</summary>
+    /// <returns>A tuple consisting of the rowIndex (fst) and the columnIndex (snd).</returns>
+    member self.ToIndices() = _rowNumber,_columnNumber
+
+    /// <summary>Returns the row- and the columnIndex of a given FsAddress.</summary>
+    /// <returns>A tuple consisting of the rowIndex (fst) and the columnIndex (snd).</returns>
+    static member toIndices (address : FsAddress) =
+        address.ToIndices()
+
+    /// <summary>Compares the FsAddress with a given other one.</summary>
+    /// <returns>Returns true if both FsAddresses are equal.</returns>
+    member self.Compare(address : FsAddress) =
+        self.Address        = address.Address      &&
+        self.ColumnNumber   = address.ColumnNumber &&
+        self.RowNumber      = address.RowNumber    &&
+        self.FixedColumn    = address.FixedColumn  &&
+        self.FixedRow       = address.FixedRow
+
+    /// <summary>Checks if 2 FsAddresses are equal.</summary>
+    static member compare (address1 : FsAddress) (address2 : FsAddress) =
+        address1.Compare address2

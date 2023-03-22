@@ -145,7 +145,8 @@ module Spreadsheet =
             }
         | None -> Seq.empty
 
-    /// Returns a 1D-sequence of cells for the given sheetIndex of the given spreadsheetDocument. 
+    /// <summary>Returns a 1D-sequence of Cells for the given sheetIndex of the given SpreadsheetDocument.</summary>
+    /// <remarks>SheetIndices are 1-based.</remarks>
     let getCellsBySheetIndex (sheetIndex : uint) (spreadsheetDocument : SpreadsheetDocument) =
 
         match (Sheet.tryItem sheetIndex spreadsheetDocument) with

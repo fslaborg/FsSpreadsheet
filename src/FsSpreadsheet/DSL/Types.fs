@@ -65,7 +65,7 @@ type SheetEntity<'T> =
     | NoneOptional of Message list
     | NoneRequired of Message list
 
-    static member ok (v : 'T) : SheetEntity<'T> = SheetEntity.Some (v,[])
+    static member some (v : 'T) : SheetEntity<'T> = SheetEntity.Some (v,[])
 
     /// Get messages
     member this.Messages =

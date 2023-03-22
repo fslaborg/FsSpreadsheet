@@ -2,12 +2,18 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <GenerateProgramFile>false</GenerateProgramFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="Sample.fs" />
+    <Compile Include="FsWorkbook.fs" />
+    <Compile Include="FsWorksheet.fs" />
+    <Compile Include="FsTable.fs" />
+    <Compile Include="FsTableField.fs" />
+    <Compile Include="FsCellsCollection.fs" />
+    <Compile Include="FsCell.fs" />
+    <Compile Include="FsAddress.fs" />
     <Compile Include="Main.fs" />
   </ItemGroup>
 
