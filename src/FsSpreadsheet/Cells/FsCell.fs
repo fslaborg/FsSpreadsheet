@@ -54,19 +54,27 @@ type FsCell (value : IConvertible, dataType : DataType, address : FsAddress) =
 
     new (value : IConvertible) = FsCell (string value, DataType.String, FsAddress(0,0))
 
-    /// Creates an empty FsCell, set at row 1, column 1 (1-based).
+    ///// Creates an empty FsCell, set at row 1, column 1 (1-based).
     //new () = FsCell ("", DataType.Empty, FsAddress(0,0))
-    ///// Creates an FsCell of `DataType` `String`, with the given value, set at row 1, column 1 (1-based).       
+
     ///// Creates an FsCell of `DataType` `Number`, with the given value, set at row 1, column 1 (1-based).
     //new (value : int) = FsCell (string value, DataType.Number, FsAddress(0,0))
+
     ///// Creates an FsCell of `DataType` `Number`, with the given value, set at row 1, column 1 (1-based).
     //new (value : float) = FsCell (string value, DataType.Number, FsAddress(0,0))
+
     ///// Creates an empty FsCell, set at `FsAddress` address.
     //new (address : FsAddress) =
     //    FsCell ("", DataType.Empty, address)
+
     ///// Creates an empty FsCell, set at row rowIndex and column colIndex.
     //new (rowIndex, colIndex) =
     //    FsCell("", DataType.Empty, FsAddress(rowIndex, colIndex))
+
+
+    // ----------
+    // PROPERTIES
+    // ----------
 
     /// <summary>
     /// Gets or sets the cell's value. To get or set a strongly typed value, use the GetValue&lt;T&gt; and SetValue methods.
@@ -109,6 +117,29 @@ type FsCell (value : IConvertible, dataType : DataType, address : FsAddress) =
             _rowIndex <- address.RowNumber
             _columnIndex <- address.ColumnNumber
 
+
+    /// <summary>Create an FsCell from given rowNumber, colNumber, and value. Infers the DataType.</summary>
+    static member create (rowNumber : int) (colNumber : int) value =
+        let dataT, value = DataType.InferCellValue value
+        FsCell(value, dataT, FsAddress(rowNumber, colNumber))
+
+    /// <summary>Creates an empty FsCell.</summary>
+    static member createEmpty ()  =
+        FsCell("", DataType.Empty, FsAddress(0,0))
+
+    /// <summary>Creates an FsCell with the given FsAdress and value. Inferes the DataType.</summary>
+    static member createWithAdress (adress : FsAddress) value =
+        let dataT, value = DataType.InferCellValue value
+        FsCell(value, dataT, adress)
+
+    /// <summary>Creates an empty FsCell with a given FsAddress.</summary>
+    static member createEmptyWithAdress (adress : FsAddress)  =
+        FsCell("", DataType.Empty, adress)
+
+    /// <summary>Creates an FsCell with the given DataType, rowNumber, colNumber, and value.</summary>
+    static member createWithDataType (dataType : DataType) (rowNumber : int) (colNumber : int) value =
+        FsCell(value, dataType, FsAddress(rowNumber, colNumber))
+
     //how 2:
     //return (format.ToUpper()) switch
             //{
@@ -129,17 +160,25 @@ type FsCell (value : IConvertible, dataType : DataType, address : FsAddress) =
         let cellRef = CellReference.indexToColAdress (uint self.ColumnNumber)
         $"{cellRef}{self.RowNumber} : {self.Value} | {self.DataType}"
 
+    /// <summary>
     /// Copies and replaces DataType and Value from a given FsCell into this one.
+    /// </summary>
     member self.CopyFrom(otherCell : FsCell) = 
         self.DataType <- otherCell.DataType
         self.Value <- otherCell.Value
-    
-    //member self.CopyTo(member self.target);
-    
+
     /// Copies DataType and Value from this FsCell to a given one and replaces theirs.
     member self.CopyTo(target : FsCell) = 
         target.DataType <- self.DataType
-        target.Value <- self.Value    
+        target.Value <- self.Value
+
+    /// <summary>
+    /// Copies and replaces DataType and Value from a source FsCell into a target FsCell. Returns the target cell.
+    /// </summary>
+    static member copy (sourceCell : FsCell) (targetCell : FsCell) =
+        targetCell.DataType <- sourceCell.DataType
+        targetCell.Value <- sourceCell.Value
+        targetCell
 
     /// <summary>
     /// Gets the cell's value converted to the T type.
@@ -171,6 +210,14 @@ type FsCell (value : IConvertible, dataType : DataType, address : FsAddress) =
         
         :?> 'T
 
+    /// <summary>
+    /// Gets the FsCell's value converted to the 'T type.
+    /// 
+    /// FsSpreadsheet will try to convert the current value to type 'T. </summary>
+    /// <typeparam name="T">The return type.</typeparam>
+    /// <exception cref="System.ArgumentException">if the current value cannot be converted to the 'T type.</exception>
+    static member getValueAs<'T>(cell : FsCell)=
+        cell.GetValueAs<'T>()
 
     /// <summary>
     /// Sets the FsCell's value.
@@ -183,8 +230,17 @@ type FsCell (value : IConvertible, dataType : DataType, address : FsAddress) =
         let t,v = DataType.InferCellValue value
         _dataType <- t
         _cellValue <- v
-        self
 
+    /// <summary>
+    /// Sets an FsCell's value.
+    /// <para>FsSpreadsheet will try to translate it to the corresponding type, if it cannot, the value will be left as a string.</para>
+    /// </summary>
+    /// <value>
+    /// The object containing the value to set.
+    /// </value>
+    static member setValueAs<'T> value (cell : FsCell)= 
+        cell.SetValueAs<'T>(value)
+        cell
 
     ///// <summary>
     ///// Sets the type of this FsCell's data.
@@ -195,19 +251,6 @@ type FsCell (value : IConvertible, dataType : DataType, address : FsAddress) =
     ///// <returns></returns>
     //member self.SetDataType(dataType) = 
     //    self.DataType <- dataType
-
-
-
-    // --------------
-    // STATIC METHODS
-    // --------------
-
-    /// Copies and replaces DataType and Value from a source FsCell into a target FsCell.
-    static member copy (sourceCell : FsCell) (targetCell : FsCell) =
-        targetCell.DataType <- sourceCell.DataType
-        targetCell.Value <- sourceCell.Value
-        targetCell
-
 
     ///// <summary>
     ///// Sets the type of an FsCell's data.
@@ -220,58 +263,11 @@ type FsCell (value : IConvertible, dataType : DataType, address : FsAddress) =
     //    cell.DataType <- dataType
     //    cell
 
-    /// <summary>
-    /// Sets an FsCell's value.
-    /// <para>FsSpreadsheet will try to translate it to the corresponding type, if it cannot, the value will be left as a string.</para>
-    /// </summary>
-    /// <value>
-    /// The object containing the value to set.
-    /// </value>
-    static member setValueAs<'T> value (cell : FsCell)= 
-        cell.SetValueAs<'T>(value)
-
-    /// <summary>
-    /// Gets the FsCell's value converted to the 'T type.
-    /// 
-    /// FsSpreadsheet will try to convert the current value to type 'T. </summary>
-    /// <typeparam name="T">The return type.</typeparam>
-    /// <exception cref="System.ArgumentException">if the current value cannot be converted to the 'T type.</exception>
-    static member getValueAs<'T>(cell : FsCell)=
-        cell.GetValueAs<'T>()
-
-    /// <summary>Creates an FsCell with the given DataType, rowNumber, colNumber, and value.</summary>
-    static member createWithDataType (dataType : DataType) (rowNumber : int) (colNumber : int) value =
-        FsCell(value, dataType, FsAddress(rowNumber, colNumber))
-
-    /// <summary>Creates an FsCell with the given FsAdress and value. Inferes the DataType.</summary>
-    static member createWithAdress (adress : FsAddress) value =
-        let dataT, value = DataType.InferCellValue value
-        FsCell(value, dataT, adress)
-
-    /// <summary>Create an FsCell from given rowNumber, colNumber, and value. Inferes the DataType.</summary>
-    static member create (rowNumber : int) (colNumber : int) value =
-        let dataT, value = DataType.InferCellValue value
-        FsCell(value, dataT, FsAddress(rowNumber, colNumber))
-
-    /// <summary>Creates an empty FsCell.</summary>
-    static member createEmpty ()  =
-        FsCell("", DataType.Empty, FsAddress(0,0))
-
-    /// <summary>Creates an empty FsCell with a given FsAddress.</summary>
-    static member createEmptyWithAdress (adress : FsAddress)  =
-        FsCell("", DataType.Empty, adress)
-
-
-
-
 
 //################################################################################
 //################################################################################
 // Not implemented yet
 //################################################################################
-
-
-
 
     ///// Gets or sets the FsCell's associated FsWorksheet.
     //member self.Worksheet = raise (System.NotImplementedException())
