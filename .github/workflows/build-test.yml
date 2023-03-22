@@ -2,9 +2,10 @@ name: Build and test
 
 on:
   push:
-    branches: [ developer ]
+    branches: [ main ]
   pull_request:
-    branches: [ developer ]
+    branches: [ main ]
+
 
 jobs:
   build-and-test-linux:
@@ -12,27 +13,27 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Setup .NET
-      uses: actions/setup-dotnet@v1
+      uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 5.0.x
-    - name: Restore local tools
-      run: dotnet tool restore
+        dotnet-version: 6.x.x
+    - name: make script executable
+      run: chmod u+x build.sh
     - name: Build and test
-      run: dotnet fake build -t runTests
+      working-directory: ./
+      run: ./build.sh runtests
 
   build-and-test-windows:
     
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Setup .NET
-      uses: actions/setup-dotnet@v1
+      uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 5.0.x
-    - name: Restore local tools
-      run: dotnet tool restore
+        dotnet-version: 6.x.x
     - name: Build and test
-      run: dotnet fake build -t runTests
+      working-directory: ./
+      run: ./build.cmd runtests
