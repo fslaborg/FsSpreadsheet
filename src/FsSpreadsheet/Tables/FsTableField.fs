@@ -58,11 +58,12 @@ type FsTableField (name : string, index : int, column : FsRangeColumn, totalsRow
                 match _column with
                 | null -> ()
                 | _ -> 
+                    let indDiff = index - _index
                     let newCol =
                         let raFstRow = this.Column.RangeAddress.FirstAddress.RowNumber
-                        let newFstAddr = FsAddress(raFstRow, index)
+                        let newFstAddr = FsAddress(raFstRow, _index + indDiff)
                         let raLstRow = this.Column.RangeAddress.LastAddress.RowNumber
-                        let newLstAddr = FsAddress(raLstRow, index)
+                        let newLstAddr = FsAddress(raLstRow, _index + indDiff)
                         FsRangeAddress(newFstAddr, newLstAddr)
                         |> FsRangeColumn
                     this.Column <- newCol
@@ -81,7 +82,6 @@ type FsTableField (name : string, index : int, column : FsRangeColumn, totalsRow
         _name <- name
         if showHeaderRow then
             this.Column.FirstCell(cellsCollection).SetValueAs<string>(name)
-            |> ignore
 
     /// <summary>
     /// Sets the name of a given FsTableField. If `showHeaderRow` is true, takes the respective FsCellsCollection and renames the header cell 
@@ -89,6 +89,7 @@ type FsTableField (name : string, index : int, column : FsRangeColumn, totalsRow
     /// </summary>
     static member setName name cellsCollection showHeaderRow (tableField : FsTableField) =
         tableField.SetName(name, cellsCollection, showHeaderRow)
+        tableField
 
     /// <summary>
     /// Returns the header cell (taken from a given FsCellsCollection) for the FsTableField if `showHeaderRow` is true. Else fails.

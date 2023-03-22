@@ -56,8 +56,8 @@ type FsTable (name : string, rangeAddress, showTotalsRow, showHeaderRow) =
     member self.Fields
         with get(cellsCollection) =
             let columnCount = base.ColumnCount()
-            let offset = base.RangeAddress.FirstAddress.ColumnNumber
-            Seq.init columnCount (fun i -> self.GetField(i + offset, cellsCollection))
+            //let offset = base.RangeAddress.FirstAddress.ColumnNumber
+            Seq.init columnCount (fun i -> self.GetField(i, cellsCollection))
 
     /// <summary>
     /// Gets or sets if the header row is shown.
@@ -148,6 +148,7 @@ type FsTable (name : string, rangeAddress, showTotalsRow, showHeaderRow) =
     /// </summary>
     static member rescanRange (table : FsTable) =
         table.RescanRange()
+        table
 
     /// <summary>
     /// Returns a unique name consisting of the original name and an initial offset that is raised 
@@ -184,13 +185,13 @@ type FsTable (name : string, rangeAddress, showTotalsRow, showHeaderRow) =
                 let tableField = FsTableField(fn, i, FsRangeColumn i)
                 _fieldNames.Add(fn, tableField)
         )
-        this
 
     /// <summary>
     /// Creates and adds FsTableFields from a sequence of field names to a given FsTable.
     /// </summary>
     static member addFieldsFromNames (fieldNames : seq<string>) (table : FsTable) =
         table.AddFields fieldNames
+        table
 
     /// <summary>
     /// Adds a sequence of FsTableFields to the FsTable.
@@ -200,13 +201,13 @@ type FsTable (name : string, rangeAddress, showTotalsRow, showHeaderRow) =
         |> Seq.iter (
             fun tf -> _fieldNames.Add(tf.Name, tf)
         )
-        this
 
     /// <summary>
     /// Adds a sequence of FsTableFields to a given FsTable.
     /// </summary>
     static member addFields (tableFields : seq<FsTableField>) (table : FsTable) =
         table.AddFields tableFields
+        table
 
     /// <summary>
     /// Returns the FsTableField with given name. If an FsTableField does not exist under this name in the FsTable, adds it.
@@ -289,6 +290,7 @@ type FsTable (name : string, rangeAddress, showTotalsRow, showHeaderRow) =
     /// <exception cref="System.ArgumentException">if the FsTableField does not exist in the FsTable.</exception>
     static member renameField oldName newName (table : FsTable) =
         table.RenameField(oldName, newName)
+        table
 
     /// <summary>
     /// Returns the header cell from a given FsCellsCollection with the given colum index if the cell exists. Else returns None.
@@ -392,7 +394,37 @@ type FsTable (name : string, rangeAddress, showTotalsRow, showHeaderRow) =
     static member getHeaderCellOfTableFieldIndex cellsCollection (tableFieldIndex : int) (table : FsTable) =
         table.GetHeaderCellOfTableField(cellsCollection, tableFieldIndex)
 
+    /// <summary>
+    /// Returns the header cell from an FsTableField with the given name using an FsCellsCollection in the FsTable if the cell exists.
+    /// Else returns None.
+    /// </summary>
     member this.TryGetHeaderCellByFieldName(cellsCollection, fieldName : string) =
         match Dictionary.tryGet fieldName _fieldNames with
-        | Some tf -> Some tf.HeaderCell
+        | Some tf -> Some (tf.HeaderCell(cellsCollection, this.ShowHeaderRow))
         | None -> None
+
+    /// <summary>
+    /// Returns the header cell from an FsTableField with the given name using an FsCellsCollection in a given FsTable if the cell exists.
+    /// Else returns None.
+    /// </summary>
+    static member tryGetHeaderCellByFieldName cellsCollection (fieldName : string) (table : FsTable) =
+        table.TryGetHeaderCellByFieldName(cellsCollection, fieldName)
+
+    /// <summary>
+    /// Returns the data cells from a given FsCellsCollection with the given colum index.
+    /// </summary>
+    member this.GetDataCellsOfColumn(cellsCollection : FsCellsCollection, colIndex) =
+        let fstRowIndex = this.RangeAddress.FirstAddress.RowNumber
+        let lstRowIndex = this.RangeAddress.LastAddress.RowNumber
+        [fstRowIndex + 1 .. lstRowIndex]
+        |> Seq.choose (
+            fun ri -> cellsCollection.TryGetCell(ri, colIndex)
+        )
+
+    /// <summary>
+    /// Returns the data cells from a given FsCellsCollection with the given colum index in a given FsTable.
+    /// </summary>
+    static member getDataCellsOfColumnIndex cellsCollection (colIndex : int) (table : FsTable) =
+        table.GetDataCellsOfColumn(cellsCollection, colIndex)
+
+    // TO DO: add equivalents of the other methods regarding header cell for data cells.
