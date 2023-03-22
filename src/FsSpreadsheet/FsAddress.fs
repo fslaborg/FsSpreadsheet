@@ -131,11 +131,11 @@ type FsAddress(rowNumber : int, columnNumber : int, fixedRow : bool, fixedColumn
     member self.UpdateIndices(rowIndex,colIndex) = 
         _columnNumber <- colIndex
         _rowNumber <- rowIndex
-        self
 
     /// <summary>Updates the row- and columnIndex of a given FsAddress respective to the given indices.</summary>
     static member updateIndices rowIndex colIndex (address : FsAddress) =
         address.UpdateIndices(rowIndex, colIndex)
+        address
 
     /// <summary>Returns the row- and the columnIndex of the FsAddress.</summary>
     /// <returns>A tuple consisting of the rowIndex (fst) and the columnIndex (snd).</returns>
