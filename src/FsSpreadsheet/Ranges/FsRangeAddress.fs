@@ -1,95 +1,127 @@
 ﻿namespace rec FsSpreadsheet
 
 //  Helper functions for working with "A1:A1"-style table areas.
+/// <summary>
 /// The areas marks the area in which the table lies. 
+/// </summary>
 module Range =
 
+    /// <summary>
     /// Given A1-based top left start and bottom right end indices, returns a "A1:A1"-style area-
+    /// </summary>
     let ofBoundaries fromCellReference toCellReference = 
         sprintf "%s:%s" fromCellReference toCellReference
 
+    /// <summary>
     /// Given a "A1:A1"-style area, returns A1-based cell start and end cellReferences.
+    /// </summary>
     let toBoundaries (area : string) = 
         area.Split ':'
         |> fun a -> a.[0], a.[1]
 
+    /// <summary>
     /// Gets the right boundary of the area.
+    /// </summary>
     let rightBoundary (area : string) = 
         toBoundaries area
         |> snd
         |> CellReference.toIndices
         |> fst
 
+    /// <summary>
     /// Gets the left boundary of the area.
+    /// </summary>
     let leftBoundary (area : string) = 
         toBoundaries area
         |> fst
         |> CellReference.toIndices
         |> fst
 
+    /// <summary>
     /// Gets the Upper boundary of the area.
+    /// </summary>
     let upperBoundary (area : string) = 
         toBoundaries area
         |> fst
         |> CellReference.toIndices
         |> snd
 
+    /// <summary>
     /// Gets the lower boundary of the area.
+    /// </summary>
     let lowerBoundary (area : string) = 
         toBoundaries area
         |> snd
         |> CellReference.toIndices
         |> snd
 
+    /// <summary>
     /// Moves both start and end of the area by the given amount (positive amount moves area to right and vice versa).
+    /// </summary>
     let moveHorizontal amount (area : string) =
         area
         |> toBoundaries
         |> fun (f,t) -> CellReference.moveHorizontal amount f, CellReference.moveHorizontal amount t
         ||> ofBoundaries
 
+    /// <summary>
     /// Moves both start and end of the area by the given amount (positive amount moves area to right and vice versa).
+    /// </summary>
     let moveVertical amount (area : string) =
         area
         |> toBoundaries
         |> fun (f,t) -> CellReference.moveHorizontal amount f, CellReference.moveHorizontal amount t
         ||> ofBoundaries
 
+    /// <summary>
     /// Extends the right boundary of the area by the given amount (positive amount increases area to right and vice versa).
+    /// </summary>
     let extendRight amount (area : string) =
         area
         |> toBoundaries
         |> fun (f,t) -> f, CellReference.moveHorizontal amount t
         ||> ofBoundaries
 
+    /// <summary>
     /// Extends the left boundary of the area by the given amount (positive amount decreases the area to left and vice versa).
+    /// </summary>
     let extendLeft amount (area : string) =
         area
         |> toBoundaries
         |> fun (f,t) -> CellReference.moveHorizontal amount f, t
         ||> ofBoundaries
 
+    /// <summary>
     /// Returns true if the column index of the reference exceeds the right boundary of the area.
+    /// </summary>
     let referenceExceedsAreaRight reference area = 
         (reference |> CellReference.toIndices |> fst) 
             > (area |> rightBoundary)
     
+    /// <summary>
     /// Returns true if the column index of the reference exceeds the left boundary of the area.
+    /// </summary>
     let referenceExceedsAreaLeft reference area = 
         (reference |> CellReference.toIndices |> fst) 
             < (area |> leftBoundary)  
  
+    /// <summary>
     /// Returns true if the column index of the reference exceeds the upper boundary of the area.
+    /// </summary>
     let referenceExceedsAreaAbove reference area = 
         (reference |> CellReference.toIndices |> snd) 
             > (area |> upperBoundary)
     
+    /// <summary>
     /// Returns true if the column index of the reference exceeds the lower boundary of the area.
+    /// </summary>
     let referenceExceedsAreaBelow reference area = 
         (reference |> CellReference.toIndices |> snd) 
             < (area |> lowerBoundary )  
 
+    /// <summary>
     /// Returns true if the reference does not lie in the boundary of the area.
+    /// </summary>
     let referenceExceedsArea reference area = 
         referenceExceedsAreaRight reference area
         ||
@@ -99,7 +131,9 @@ module Range =
         ||
         referenceExceedsAreaBelow reference area
  
+    /// <summary>
     /// Returns true if the A1:A1-style area is of correct format.
+    /// </summary>
     let isCorrect area = 
         try
             let hor = leftBoundary  area <= rightBoundary area
@@ -109,7 +143,7 @@ module Range =
             if not ver then printfn "Lower area boundary must be higher or equal to upper area boundary."
 
             hor && ver
-                                    
+
         with
         | err -> 
             printfn "Area \"%s\" could not be parsed: %s" area err.Message
@@ -126,6 +160,18 @@ type FsRangeAddress(firstAddress : FsAddress, lastAddress : FsAddress) =
         let firstAdress,lastAddress = Range.toBoundaries rangeAddress
         FsRangeAddress(FsAddress(firstAdress),FsAddress(lastAddress))
 
+    /// <summary>
+    /// Creates a deep copy of this FsRangeAddress.
+    /// </summary>
+    member self.Copy() =
+        FsRangeAddress(self.Range)
+
+    /// <summary>
+    /// Returns a deep copy of a given FsRangeAddress.
+    /// </summary>
+    static member copy (rangeAddress : FsRangeAddress) =
+        rangeAddress.Copy()
+
     member self.Extend (address : FsAddress) =
         if address.RowNumber < _firstAddress.RowNumber then
             _firstAddress.RowNumber <- address.RowNumber
@@ -139,7 +185,7 @@ type FsRangeAddress(firstAddress : FsAddress, lastAddress : FsAddress) =
         if address.ColumnNumber > _lastAddress.ColumnNumber then
             _lastAddress.ColumnNumber <- address.ColumnNumber
 
-    member self.Normalize () =
+    member self.Normalize() =
 
         let firstRow,lastRow = 
             if firstAddress.RowNumber < lastAddress.RowNumber then 

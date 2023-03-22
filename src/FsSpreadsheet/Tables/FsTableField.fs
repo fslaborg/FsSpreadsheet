@@ -92,6 +92,21 @@ type FsTableField (name : string, index : int, column : FsRangeColumn, totalsRow
         tableField
 
     /// <summary>
+    /// Creates a deep copy of this FsTableField.
+    /// </summary>
+    member this.Copy() =
+        let col = this.Column.Copy()
+        let ind = this.Index
+        let nam = this.Name
+        FsTableField(nam, ind, col, null, null)
+
+    /// <summary>
+    /// Returns a deep copy of a given FsTableField.
+    /// </summary>
+    static member copy (tableField : FsTableField) =
+        tableField.Copy()
+
+    /// <summary>
     /// Returns the header cell (taken from a given FsCellsCollection) for the FsTableField if `showHeaderRow` is true. Else fails.
     /// </summary>
     /// <exception cref="System.Exception">if `showHeaderRow` is false.</exception>

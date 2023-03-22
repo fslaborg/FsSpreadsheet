@@ -2,7 +2,9 @@
 
 open System
 
-/// Possible DataTypes used in a FsCell
+/// <summary>
+/// Possible DataTypes used in a FsCell.
+/// </summary>
 type DataType = 
     | String
     | Boolean
@@ -10,7 +12,9 @@ type DataType =
     | Date
     | Empty
 
+    /// <summary>
     /// Returns the proper CellValues case for the given value.
+    /// </summary>
     static member InferCellValue (value : 'T) = 
         let value = box value
         match value with
@@ -32,7 +36,9 @@ type DataType =
         | _ ->  DataType.String,value.ToString()
 
 // Type based on the type XLCell used in ClosedXml
+/// <summary>
 /// Creates an FsCell of `DataType` dataType, with value of type `string`, and `FsAddress` address.
+/// </summary>
 type FsCell (value : IConvertible, dataType : DataType, address : FsAddress) =
     
     // TODO: Maybe save as IConvertible
@@ -99,17 +105,23 @@ type FsCell (value : IConvertible, dataType : DataType, address : FsAddress) =
         with get() = _dataType
         and internal set(dataType) = _dataType <- dataType 
 
+    /// <summary>
     /// Gets or sets the columnIndex of the FsCell.
+    /// </summary>
     member self.ColumnNumber
         with get() = _columnIndex
         and set(colI) = _columnIndex <- colI
     
+    /// <summary>
     /// Gets or sets the rowIndex of the FsCell.
+    /// </summary>
     member self.RowNumber
         with get() = _rowIndex
         and set(rowI) = _rowIndex <- rowI
 
-    /// <summary>Gets this FsCell's address, relative to the FsWorksheet.</summary>
+    /// <summary>
+    /// Gets this FsCell's address, relative to the FsWorksheet.
+    /// </summary>
     /// <value>The FsCell's address.</value>
     member self.Address 
         with get() = FsAddress(_rowIndex,_columnIndex)
@@ -118,25 +130,35 @@ type FsCell (value : IConvertible, dataType : DataType, address : FsAddress) =
             _columnIndex <- address.ColumnNumber
 
 
-    /// <summary>Create an FsCell from given rowNumber, colNumber, and value. Infers the DataType.</summary>
+    /// <summary>
+    /// Create an FsCell from given rowNumber, colNumber, and value. Infers the DataType.
+    /// </summary>
     static member create (rowNumber : int) (colNumber : int) value =
         let dataT, value = DataType.InferCellValue value
         FsCell(value, dataT, FsAddress(rowNumber, colNumber))
 
-    /// <summary>Creates an empty FsCell.</summary>
+    /// <summary>
+    /// Creates an empty FsCell.
+    /// </summary>
     static member createEmpty ()  =
         FsCell("", DataType.Empty, FsAddress(0,0))
 
-    /// <summary>Creates an FsCell with the given FsAdress and value. Inferes the DataType.</summary>
+    /// <summary>
+    /// Creates an FsCell with the given FsAdress and value. Inferes the DataType.
+    /// </summary>
     static member createWithAdress (adress : FsAddress) value =
         let dataT, value = DataType.InferCellValue value
         FsCell(value, dataT, adress)
 
-    /// <summary>Creates an empty FsCell with a given FsAddress.</summary>
+    /// <summary>
+    /// Creates an empty FsCell with a given FsAddress.
+    /// </summary>
     static member createEmptyWithAdress (adress : FsAddress)  =
         FsCell("", DataType.Empty, adress)
 
-    /// <summary>Creates an FsCell with the given DataType, rowNumber, colNumber, and value.</summary>
+    /// <summary>
+    /// Creates an FsCell with the given DataType, rowNumber, colNumber, and value.
+    /// </summary>
     static member createWithDataType (dataType : DataType) (rowNumber : int) (colNumber : int) value =
         FsCell(value, dataType, FsAddress(rowNumber, colNumber))
 
@@ -167,7 +189,9 @@ type FsCell (value : IConvertible, dataType : DataType, address : FsAddress) =
         self.DataType <- otherCell.DataType
         self.Value <- otherCell.Value
 
+    /// <summary>
     /// Copies DataType and Value from this FsCell to a given one and replaces theirs.
+    /// </summary>
     member self.CopyTo(target : FsCell) = 
         target.DataType <- self.DataType
         target.Value <- self.Value
@@ -175,10 +199,25 @@ type FsCell (value : IConvertible, dataType : DataType, address : FsAddress) =
     /// <summary>
     /// Copies and replaces DataType and Value from a source FsCell into a target FsCell. Returns the target cell.
     /// </summary>
-    static member copy (sourceCell : FsCell) (targetCell : FsCell) =
+    static member copyFromTo (sourceCell : FsCell) (targetCell : FsCell) =
         targetCell.DataType <- sourceCell.DataType
         targetCell.Value <- sourceCell.Value
         targetCell
+
+    /// <summary>
+    /// Creates a deep copy of this FsCell.
+    /// </summary>
+    member self.Copy() =
+        let value = self.Value
+        let dt = self.DataType
+        let addr = self.Address.Copy()
+        FsCell(value, dt, addr)
+
+    /// <summary>
+    /// Returns a deep copy of a given FsCell.
+    /// </summary>
+    static member copy (cell : FsCell) =
+        cell.Copy()
 
     /// <summary>
     /// Gets the cell's value converted to the T type.

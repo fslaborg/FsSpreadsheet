@@ -6,14 +6,18 @@ open FsSpreadsheet
 open FsSpreadsheet.ExcelIO
 open System.IO
 
+/// <summary>
 /// Classes that extend the core FsSpreadsheet library with IO functionalities.
+/// </summary>
 [<AutoOpen>]
 module FsExtensions =
 
 
     type DataType with
 
-        /// <summary>Converts a given CellValues to the respective DataType.</summary>
+        /// <summary>
+        /// Converts a given CellValues to the respective DataType.
+        /// </summary>
         static member ofXlsxCellValues (cellValues : CellValues) =
             match cellValues with
             | CellValues.Number -> DataType.Number
@@ -32,7 +36,9 @@ module FsExtensions =
         //    let row,col = xlsxCell.CellReference.Value |> CellReference.toIndices
         //    FsCell.create (int row) (int col) v
 
-        /// <summary>Creates an FsCell on the basis of an XlsxCell. Uses a SharedStringTable if present to get the XlsxCell's value.</summary>
+        /// <summary>
+        /// Creates an FsCell on the basis of an XlsxCell. Uses a SharedStringTable if present to get the XlsxCell's value.
+        /// </summary>
         static member ofXlsxCell (sst : SharedStringTable option) (xlsxCell : Cell) =
             let v =  Cell.getValue sst xlsxCell
             let col, row = xlsxCell.CellReference.Value |> CellReference.toIndices
@@ -44,7 +50,9 @@ module FsExtensions =
 
     type FsTable with
 
+        /// <summary>
         /// Returns the FsTable with given FsCellsCollection in the form of an XlsxTable.
+        /// </summary>
         member self.ToXlsxTable(cells : FsCellsCollection) = 
 
             let columns =
@@ -54,7 +62,9 @@ module FsExtensions =
                 )
             Table.create self.Name (StringValue(self.RangeAddress.Range)) columns
 
+        /// <summary>
         /// Returns an FsTable with given FsCellsCollection in the form of an XlsxTable.
+        /// </summary>
         static member toXlsxTable cellsCollection (table : FsTable) =
             table.ToXlsxTable(cellsCollection)
 
@@ -62,13 +72,16 @@ module FsExtensions =
         //new(table : Spreadsheet.Table) =        // not permitted :(
             //FsTable(table)
 
+        /// <summary>
         /// Takes an XlsxTable and returns an FsTable.
         static member fromXlsxTable table = 
             let topLeftBoundary, bottomRightBoundary = Table.getArea table |> Table.Area.toBoundaries
             let ra = FsRangeAddress(FsAddress(topLeftBoundary), FsAddress(bottomRightBoundary))
             FsTable(table.Name, ra, table.TotalsRowShown, true)
 
-        /// <summary>Returns the FsWorksheet associated with the FsTable in a given FsWorkbook.</summary>
+        /// <summary>
+        /// Returns the FsWorksheet associated with the FsTable in a given FsWorkbook.
+        /// </summary>
         member self.GetWorksheetOfTable(workbook : FsWorkbook) =
             workbook.GetWorksheets() 
             |> List.find (
@@ -77,14 +90,18 @@ module FsExtensions =
                     |> List.exists (fun t -> t.Name = self.Name)
             )
 
-        /// <summary>Returns the FsWorksheet associated with a given FsTable in an FsWorkbook.</summary>
+        /// <summary>
+        /// Returns the FsWorksheet associated with a given FsTable in an FsWorkbook.
+        /// </summary>
         static member getWorksheetOfTable workbook (table : FsTable) =
             table.GetWorksheetOfTable workbook
 
 
     type FsWorksheet with
 
+        /// <summary>
         /// Returns the FsWorksheet in the form of an XlsxSpreadsheet.
+        /// </summary>
         member self.ToXlsxWorksheet() =
             self.RescanRows()
             let sheet = Worksheet.empty()
@@ -110,11 +127,15 @@ module FsExtensions =
                 sd
             Worksheet.setSheetData sheetData sheet
 
+        /// <summary>
         /// Returns an FsWorksheet in the form of an XlsxSpreadsheet.
+        /// </summary>
         static member toXlsxWorksheet (fsWorksheet : FsWorksheet) = 
             fsWorksheet.ToXlsxWorksheet()
 
+        /// <summary>
         /// Appends the FsTables of this FsWorksheet to a given OpenXmlWorksheetPart in an XlsxWorkbookPart.
+        /// </summary>
         member self.AppendTablesToWorksheetPart(xlsxlWorkbookPart : DocumentFormat.OpenXml.Packaging.WorkbookPart, xlsxWorksheetPart : DocumentFormat.OpenXml.Packaging.WorksheetPart) =
             self.Tables
             |> Seq.iter (fun t ->
@@ -122,14 +143,18 @@ module FsExtensions =
                 Table.addTable xlsxlWorkbookPart xlsxWorksheetPart table |> ignore
             )
 
+        /// <summary>
         /// Appends the FsTables of an FsWorksheet to a given OpenXmlWorksheetPart in an XlsxWorkbookPart.
+        /// </summary>
         static member appendTablesToWorksheetPart xlsxWorkbookPart xlsxWorksheetPart (fsWorksheet : FsWorksheet) =
             fsWorksheet.AppendTablesToWorksheetPart(xlsxWorkbookPart, xlsxWorksheetPart)
 
 
     type FsWorkbook with
         
-        /// <summary>Creates an FsWorkbook from a given Stream to an XlsxFile.</summary>
+        /// <summary>
+        /// Creates an FsWorkbook from a given Stream to an XlsxFile.
+        /// </summary>
         // TO DO: Ask HLW/TM: is this REALLY the way to go? This is not a constructor! (though it tries to be one)
         member self.FromXlsxStream (stream : Stream) =
             let doc = Spreadsheet.fromStream stream false
@@ -175,18 +200,24 @@ module FsExtensions =
             sheets
             |> Seq.fold (fun wb sheet -> FsWorkbook.addWorksheet sheet wb) (new FsWorkbook())
 
-        /// <summary>Creates an FsWorkbook from a given Stream to an XlsxFile.</summary>
+        /// <summary>
+        /// Creates an FsWorkbook from a given Stream to an XlsxFile.
+        /// </summary>
         static member fromXlsxStream (stream : Stream) =
             (new FsWorkbook()).FromXlsxStream stream
 
-        /// <summary>Takes the path to an Xlsx file and returns the FsWorkbook based on its content.</summary>
+        /// <summary>
+        /// Takes the path to an Xlsx file and returns the FsWorkbook based on its content.
+        /// </summary>
         static member fromXlsxFile (filePath : string) =
             let sr = new StreamReader(filePath)
             let wb = FsWorkbook.fromXlsxStream sr.BaseStream
             sr.Close()
             wb
 
+        /// <summary>
         /// Writes the FsWorkbook into a given MemoryStream.
+        /// </summary>
         member self.ToStream(stream : MemoryStream) = 
             let doc = Spreadsheet.initEmptyOnStream stream 
 
@@ -206,40 +237,58 @@ module FsExtensions =
 
             Spreadsheet.close doc
 
+        /// <summary>
         /// Writes an FsWorkbook into a given MemoryStream.
+        /// </summary>
         static member toStream stream (workbook : FsWorkbook) =
             workbook.ToStream stream
 
+        /// <summary>
         /// Returns the FsWorkbook in the form of a byte array.
+        /// </summary>
         member self.ToBytes() =
             use memoryStream = new MemoryStream()
             self.ToStream(memoryStream)
             memoryStream.ToArray()
 
+        /// <summary>
         /// Returns an FsWorkbook in the form of a byte array.
+        /// </summary>
         static member toBytes (workbook: FsWorkbook) =
             workbook.ToBytes()
 
+        /// <summary>
         /// Writes the FsWorkbook into a binary file at the given path.
+        /// </summary>
         member self.ToFile(path) =
             self.ToBytes()
             |> fun bytes -> File.WriteAllBytes (path, bytes)
 
+        /// <summary>
         /// Writes an FsWorkbook into a binary file at the given path.
+        /// </summary>
         static member toFile path (workbook : FsWorkbook) =
             workbook.ToFile(path)
 
 
 type Writer =
-    
+
+    /// <summary>
     /// Writes an FsWorkbook into a given MemoryStream.
+    /// </summary>
     static member toStream(stream : MemoryStream, workbook : FsWorkbook) =
         workbook.ToStream(stream)
 
+    
+    /// <summary>
     /// Returns an FsWorkbook in the form of a byte array.
+    /// </summary>
     static member toBytes(workbook: FsWorkbook) =
         workbook.ToBytes()
 
+
+    /// <summary>
     /// Writes an FsWorkbook into a binary file at the given path.
+    /// </summary>
     static member toFile(path,workbook: FsWorkbook) =
         workbook.ToFile(path)

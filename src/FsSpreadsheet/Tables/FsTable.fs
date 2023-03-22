@@ -428,3 +428,18 @@ type FsTable (name : string, rangeAddress, showTotalsRow, showHeaderRow) =
         table.GetDataCellsOfColumn(cellsCollection, colIndex)
 
     // TO DO: add equivalents of the other methods regarding header cell for data cells.
+
+    /// <summary>
+    /// Creates a deep copy of this FsTable.
+    /// </summary>
+    member this.Copy() =
+        let ra = this.RangeAddress.Copy()
+        let nam = this.Name
+        let shr = this.ShowHeaderRow
+        FsTable(nam, ra, false, shr)
+
+    /// <summary>
+    /// Returns a deep copy of a given FsTable.
+    /// </summary>
+    static member copy (table : FsTable) =
+        table.Copy()

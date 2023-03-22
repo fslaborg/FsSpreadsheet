@@ -64,7 +64,7 @@ type FsRangeBase (rangeAddress : FsRangeAddress, styleValue) =
             //        && column.StyleValue != Worksheet.StyleValue)
             //        styleValue = column.StyleValue;
             //}
-            let absoluteAddress = new FsAddress(absRow,absColumn,cellAddressInRange.FixedRow,cellAddressInRange.FixedColumn);
+            let absoluteAddress = new FsAddress(absRow, absColumn, cellAddressInRange.FixedRow, cellAddressInRange.FixedColumn);
 
             // If the default style for this range base is empty, but the worksheet
             // has a default style, use the worksheet's default style
@@ -76,10 +76,10 @@ type FsRangeBase (rangeAddress : FsRangeAddress, styleValue) =
             newCell
    
     member self.Cells(cells : FsCellsCollection) = 
-        cells.GetCells(self.RangeAddress.FirstAddress,self.RangeAddress.LastAddress)
+        cells.GetCells(self.RangeAddress.FirstAddress, self.RangeAddress.LastAddress)
        
     member self.Cells(cells : FsCellsCollection, predicate : FsCell -> bool) = 
-        cells.GetCells(self.RangeAddress.FirstAddress,self.RangeAddress.LastAddress, predicate)
+        cells.GetCells(self.RangeAddress.FirstAddress, self.RangeAddress.LastAddress, predicate)
      
      member self.ColumnCount() =
         _rangeAddress.LastAddress.ColumnNumber - _rangeAddress.FirstAddress.ColumnNumber + 1;

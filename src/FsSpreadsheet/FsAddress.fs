@@ -127,12 +127,32 @@ type FsAddress(rowNumber : int, columnNumber : int, fixedRow : bool, fixedColumn
     member this.LOL () = 1
     //let mutable _address = address
 
-    /// <summary>Updates the row- and columnIndex respective to the given indices.</summary>
+    /// <summary>
+    /// Creates a deep copy of the FsAddress.
+    /// </summary>
+    member this.Copy() =
+        let colNo = this.ColumnNumber
+        let rowNo = this.RowNumber
+        let fixRow = this.FixedRow
+        let fixedCol = this.FixedColumn
+        FsAddress(rowNo, colNo, fixRow, fixedCol)
+
+    /// <summary>
+    /// Returns a deep copy of the given FsAddress.
+    /// </summary>
+    static member copy (address : FsAddress) =
+        address.Copy()
+
+    /// <summary>
+    /// Updates the row- and columnIndex respective to the given indices.
+    /// </summary>
     member self.UpdateIndices(rowIndex,colIndex) = 
         _columnNumber <- colIndex
         _rowNumber <- rowIndex
 
-    /// <summary>Updates the row- and columnIndex of a given FsAddress respective to the given indices.</summary>
+    /// <summary>
+    /// Updates the row- and columnIndex of a given FsAddress respective to the given indices.
+    /// </summary>
     static member updateIndices rowIndex colIndex (address : FsAddress) =
         address.UpdateIndices(rowIndex, colIndex)
         address
