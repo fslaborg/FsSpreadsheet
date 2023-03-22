@@ -2,6 +2,9 @@
 
 open System.Collections.Generic
 
+/// <summary>
+/// Creates an FsTable from the given name and FsRangeAddres, with totals row shown and header row shown or not, accordingly.
+/// </summary>
 type FsTable (name : string, rangeAddress, showTotalsRow, showHeaderRow) = 
 
     inherit FsRangeBase(rangeAddress)
@@ -15,15 +18,27 @@ type FsTable (name : string, rangeAddress, showTotalsRow, showHeaderRow) =
     let mutable _fieldNames : Dictionary<string,FsTableField> = Dictionary()
     let _uniqueNames : HashSet<string> = HashSet()
 
+    /// <summary>
+    /// Creates an FsTable from the given name and FsRangeAddres, with header row shown or not, accordingly.
+    /// </summary>
+    /// <remarks>`showTotalsRow` is false by default.</remarks>
     new (name, rangeAddress, showHeaderRow) = FsTable (name, rangeAddress, false, showHeaderRow)
 
+    /// <summary>
+    /// Creates an FsTable from the given name and FsRangeAddres.
+    /// </summary>
+    /// <remarks>`showTotalsRow` is false and `showHeaderRow` true, by default.</remarks>
     new (name, rangeAddress) = FsTable (name, rangeAddress, false, true)
 
-    /// <summary>The name of the FsTable.>/summary>
+    /// <summary>
+    /// The name of the FsTable.
+    /// </summary>
     member self.Name 
         with get() = _name
 
-    /// <summary>Returns all fieldnames as `fieldname*FsTableField` dictionary.</summary>
+    /// <summary>
+    /// Returns all fieldnames as `fieldname*FsTableField` dictionary.
+    /// </summary>
     member self.FieldNames
         with get(cellsCollection) =
             if (_fieldNames <> null && _lastRangeAddress <> null && _lastRangeAddress.Equals(self.RangeAddress)) then 
@@ -35,19 +50,25 @@ type FsTable (name : string, rangeAddress, showTotalsRow, showHeaderRow) =
                 
                 _fieldNames;
 
-    /// <summary>The FsTableFields of this FsTable.<summary>
+    /// <summary>
+    /// The FsTableFields of this FsTable.
+    /// <summary>
     member self.Fields
         with get(cellsCollection) =
             let columnCount = base.ColumnCount()
             let offset = base.RangeAddress.FirstAddress.ColumnNumber
             Seq.init columnCount (fun i -> self.GetField(i + offset, cellsCollection))
 
-    /// <summary>Gets or sets if the header row is shown.</summary>
+    /// <summary>
+    /// Gets or sets if the header row is shown.
+    /// </summary>
     member self.ShowHeaderRow 
         with get () = _showHeaderRow
         and set(showHeaderRow) = _showHeaderRow <- showHeaderRow
 
-    /// <summary>Returns the header row as FsRangeRow. Scans for fieldnames if `scanForNewFieldsNames` is true.</summary>
+    /// <summary>
+    /// Returns the header row as FsRangeRow. Scans for fieldnames if `scanForNewFieldsNames` is true.
+    /// </summary>
     member self.HeadersRow(scanForNewFieldsNames : bool) = 
         if (not self.ShowHeaderRow) then null;
         
@@ -59,11 +80,13 @@ type FsTable (name : string, rangeAddress, showTotalsRow, showHeaderRow) =
 
             FsRange(base.RangeAddress).FirstRow();
 
-    /// <summary>Returns the header row as FsRangeRow. Scans for new fieldnames.</summary>
+    /// <summary>
+    /// Returns the header row as FsRangeRow. Scans for new fieldnames.
+    /// </summary>
     member self.HeadersRow() = 
         self.HeadersRow(true)
 
-    /// Takes the respective FsCellsCollection for this FsTable and creates a new _fieldNames dictionary if the current one does not match.</summary>
+    /// Takes the respective FsCellsCollection for this FsTable and creates a new _fieldNames dictionary if the current one does not match.
     // TO DO: maybe HLW can specify above description a bit...
     member private self.RescanFieldNames(cellsCollection : FsCellsCollection) =
         printfn "Start RescanFieldNames"
@@ -151,24 +174,45 @@ type FsTable (name : string, rangeAddress, showTotalsRow, showHeaderRow) =
     static member getUniqueNames originalName initialOffset enforceOffset (table : FsTable) =
         table.GetUniqueName(originalName, initialOffset, enforceOffset)
 
+    /// <summary>
+    /// Creates and adds FsTableFields from a sequence of field names to the FsTable.
+    /// </summary>
     member this.AddFields(fieldNames : seq<string>) =
-    
-    //    _fieldNames = new Dictionary<String, IXLTableField>();
-
-    //    Int32 cellPos = 0;
-        let mutable cellPos = 0
-        let range = base.RangeAddress.FirstAddress. // NEED: FsRangeBase.toFsRangeColumns
+    //    _fieldNames = new Dictionary<String, IXLTableField>();    // let's _not_ do it this way.
+        //let rangeCols = FsRangeAddress.toRangeColumns base.RangeAddress
         fieldNames
-        |> Seq.iter (
-            fun fn ->
-                _fieldNames.Add(fn, FsTableField())
+        |> Seq.iteri (
+            fun i fn ->
+                let tableField = FsTableField(fn, i, FsRangeColumn i)
+                _fieldNames.Add(fn, tableField)
         )
-    //    foreach (var name in fieldNames)
-    //    {
-    //        _fieldNames.Add(name, new XLTableField(this, name) { Index = cellPos++ });
-    //    }
+        this
 
-    /// <summary>Returns the FsTableField with given name. If an FsTableField does not exist under this name in the FsTable, adds it.</summary>
+    /// <summary>
+    /// Creates and adds FsTableFields from a sequence of field names to a given FsTable.
+    /// </summary>
+    static member addFieldsFromNames (fieldNames : seq<string>) (table : FsTable) =
+        table.AddFields fieldNames
+
+    /// <summary>
+    /// Adds a sequence of FsTableFields to the FsTable.
+    /// </summary>
+    member this.AddFields(tableFields : seq<FsTableField>) =
+        tableFields
+        |> Seq.iter (
+            fun tf -> _fieldNames.Add(tf.Name, tf)
+        )
+        this
+
+    /// <summary>
+    /// Adds a sequence of FsTableFields to a given FsTable.
+    /// </summary>
+    static member addFields (tableFields : seq<FsTableField>) (table : FsTable) =
+        table.AddFields tableFields
+
+    /// <summary>
+    /// Returns the FsTableField with given name. If an FsTableField does not exist under this name in the FsTable, adds it.
+    /// </summary>
     member self.Field(name : string, cellsCollection : FsCellsCollection) = 
         match Dictionary.tryGet name _fieldNames with
         | Some field -> 
@@ -192,19 +236,28 @@ type FsTable (name : string, rangeAddress, showTotalsRow, showHeaderRow) =
             self.RescanRange()
             newField
 
-    /// <summary>Takes a name of an FsTableField and an FsCellsCollection (belonging to the FsWorksheet of this FsTable) and returns the respective FsTableField.</summary>
+    /// <summary>
+    /// Takes a name of an FsTableField and an FsCellsCollection (belonging to the FsWorksheet of this 
+    /// FsTable) and returns the respective FsTableField.
+    /// </summary>
     /// <exception cref="System.ArgumentException">if the header row has no field with the given name.</exception>
     member self.GetField(name : string, cellsCollection : FsCellsCollection) =
         let name = name.Replace("\r\n", "\n")
         try self.FieldNames(cellsCollection).Item name
         with _ -> failwith <| "The header row doesn't contain field name '" + name + "'."
 
-    /// <summary>Takes a name of an FsTableField and an FsCellsCollection (belonging to the FsWorksheet of this FsTable) and returns the respective FsTableField.</summary>
+    /// <summary>
+    /// Takes a name of an FsTableField and an FsCellsCollection (belonging to the FsWorksheet of this 
+    /// FsTable) and returns the respective FsTableField.
+    /// </summary>
     /// <exception cref="System.ArgumentException">if the header row has no field with the given name.</exception>
     static member getFieldByName (name : string) (cellsCollection : FsCellsCollection) (table : FsTable) =
         table.GetField(name, cellsCollection)
 
-    /// <summary>Takes the index of an FsTableField and an FsCellsCollection (belonging to the FsWorksheet of this FsTable) and returns the respective FsTableField.</summary>
+    /// <summary>
+    /// Takes the index of an FsTableField and an FsCellsCollection (belonging to the FsWorksheet of
+    /// this FsTable) and returns the respective FsTableField.
+    /// </summary>
     /// <exception cref="System.ArgumentException">if the FsTable has no FsTableField with the given index.</exception>
     member self.GetField(index, cellsCollection) =
         try 
@@ -212,12 +265,17 @@ type FsTable (name : string, rangeAddress, showTotalsRow, showHeaderRow) =
             |> Seq.find (fun ftf -> ftf.Index = index)
         with _ -> failwith $"FsTableField with index {index} does not exist in the FsTable."
 
-    /// <summary>Takes a name of an FsTableField and an FsCellsCollection (belonging to the FsWorksheet of this FsTable) and returns the index of the respective FsTableField.</summary>
+    /// <summary>
+    /// Takes a name of an FsTableField and an FsCellsCollection (belonging to the FsWorksheet of 
+    /// this FsTable) and returns the index of the respective FsTableField.
+    /// </summary>
     /// <exception cref="System.ArgumentException">if the header row has no field with the given name.</exception>
     member self.GetFieldIndex(name : string, cellsCollection) =
         self.GetField(name, cellsCollection).Index
 
-    /// <summary>Renames a fieldname of the FsTable if it exists. Else fails.</summary>
+    /// <summary>
+    /// Renames a fieldname of the FsTable if it exists. Else fails.
+    /// </summary>
     /// <exception cref="System.ArgumentException">if the FsTableField does not exist in the FsTable.</exception>
     member this.RenameField(oldName : string, newName : string) = 
         match Dictionary.tryGet oldName _fieldNames with
@@ -227,7 +285,9 @@ type FsTable (name : string, rangeAddress, showTotalsRow, showHeaderRow) =
         | None -> 
             raise (System.ArgumentException("The FsTabelField does not exist in this FsTable", "oldName"))
 
-    /// <summary>Renames a fieldname of the FsTable if it exists. Else fails.</summary>
+    /// <summary>
+    /// Renames a fieldname of the FsTable if it exists. Else fails.
+    /// </summary>
     /// <exception cref="System.ArgumentException">if the FsTableField does not exist in the FsTable.</exception>
     static member renameField oldName newName (table : FsTable) =
         table.RenameField(oldName, newName)
