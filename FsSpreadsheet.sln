@@ -12,11 +12,13 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution", "Solution", "{276B4810-B0CB-4FDF-9CED-49B3DD59B19F}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		.github\workflows\build-test.yml = .github\workflows\build-test.yml
 		build.cmd = build.cmd
 		build.sh = build.sh
 		.config\dotnet-tools.json = .config\dotnet-tools.json
 		global.json = global.json
 		playground.fsx = playground.fsx
+		.github\workflows\publish-github-pages.yml = .github\workflows\publish-github-pages.yml
 		README.md = README.md
 		RELEASE_NOTES.md = RELEASE_NOTES.md
 	EndProjectSection
