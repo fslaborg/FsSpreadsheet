@@ -52,25 +52,44 @@ let dummyFsCellsCollectionFirstAddress = dummyFsCellsCollection.GetFirstAddress(
 let dummyFsCellsCollectionLastAddress = dummyFsCellsCollection.GetLastAddress()
 let dummyFsTable = FsTable("dummyFsTable", FsRangeAddress(dummyFsCellsCollectionFirstAddress, dummyFsCellsCollectionLastAddress))
 let dummyFsTableFields =
+    let headerRowIndex = 
+        dummyFsCells 
+        |> Seq.map (fun c -> c.RowNumber)
+        |> Seq.min
     dummyFsCells
-    |> Seq.map (
+    |> Seq.choose (
         fun fsc -> 
-            FsTableField(
-                fsc.Value, 
-                fsc.ColumnNumber, 
-                dummyFsRangeColumns |> Seq.find (fun t -> t.Index = fsc.ColumnNumber), 
-                obj, 
-                obj
-            )
+            if fsc.RowNumber = headerRowIndex then
+                FsTableField(
+                    fsc.Value, 
+                    fsc.ColumnNumber, 
+                    dummyFsRangeColumns |> Seq.find (fun t -> t.Index = fsc.ColumnNumber), 
+                    obj, 
+                    obj
+                )
+                |> Option.Some
+            else None
     )
 
 
 [<Tests>]
 let fsTableTests =
     testList "FsTable" [
-        testList "Fields" [
-            testCase "Correctly retrieved" <| fun _ ->
-                let actualFields = dummyFsTable.Fields dummyFsCellsCollection
-                Expect.containsAll actualFields dummyFsTableFields "FsTableFields do not match"
+        testList "AddFields" [
+            testList "tableFields : seq FsTableField" [
+                let testFsTable = FsTable("testFsTable", FsRangeAddress(dummyFsCellsCollectionFirstAddress, dummyFsCellsCollectionLastAddress))
+                testFsTable.AddFields dummyFsTableFields |> ignore
+                let testNames, testIndeces = testFsTable.Fields dummyFsCellsCollection |> Seq.map (fun tf -> tf.Name, tf.Index) |> Seq.toArray |> Array.unzip
+                let dummyNames, dummyIndeces = dummyFsTableFields |> Seq.map (fun tf -> tf.Name, tf.Index) |> Seq.toArray |> Array.unzip
+                testCase "Names are there" <| fun _ ->
+                    Expect.sequenceEqual testNames dummyNames "Names are not equal" 
+                testCase "Indeces are there" <| fun _ ->
+                    Expect.sequenceEqual testIndeces dummyIndeces "Indeces are not equal" 
+            ]
         ]
+        //testList "Fields" [
+        //    testCase "Correctly retrieved" <| fun _ ->
+        //        let actualFields = dummyFsTable.Fields dummyFsCellsCollection
+        //        Expect.containsAll actualFields dummyFsTableFields "FsTableFields do not match"
+        //]
     ]
