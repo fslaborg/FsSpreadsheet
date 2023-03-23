@@ -1,3 +1,12 @@
+### 1.0.1+99dfa53 (Released 2023-3-23)
+* Additions:
+    * [[#3031151](https://github.com/CSBiology/FsSpreadsheet/commit/30311515b1b0ccd6ed3828465739008b5d95fd07)] Add `tryGetById` function
+    * [[#6be69e2](https://github.com/CSBiology/FsSpreadsheet/commit/6be69e22e1104731dc92fda53de07a465de8cca0)] Add `getCellsBySheetId` function
+    * [[#d23ac45](https://github.com/CSBiology/FsSpreadsheet/commit/d23ac45791de604d83d24b15219852e08e29e0c3)] Replace way to get cells from bySheetIndex to bySheetID
+    * [[#3fa594c](https://github.com/CSBiology/FsSpreadsheet/commit/3fa594c84d4fcaaa12f298a13ad962400a97cf89)] Add unit tests for edgecase XlsxFiles
+* Bugfixes:
+    * [[#99dfa53](https://github.com/CSBiology/FsSpreadsheet/commit/99dfa5329fa02d5e7f358a2eb914f6ac9155d63c)] Fix incorrect casename
+
 ### 1.0.0+6f3ddf9 (Released 2023-3-23)
 * Additions:
     * [[#2c052d9](https://github.com/CSBiology/FsSpreadsheet/commit/2c052d900bfceafaeb2c76013556e57124505b78)] rename Missing to SheetEntity

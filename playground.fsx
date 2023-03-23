@@ -22,6 +22,12 @@ open DocumentFormat.OpenXml
 
 // some other bugfixes
 
+let assayTf = @"C:\Users\olive\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
+let xlSsd = Spreadsheet.fromFile assayTf false
+let cs = Spreadsheet.getCellsBySheetIndex 2u xlSsd |> Array.ofSeq
+for cell in cs do
+    printfn "Ref: %s    DT: %A    StyleIndex: %A" cell.CellReference.Value cell.DataType cell.StyleIndex cell.
+
 let kfsTestFile = @"C:\Users\olive\Downloads\2EXT02_Protein (1).xlsx"
 let wb = FsWorkbook.fromXlsxFile kfsTestFile
 let ws = wb.GetWorksheetByName "2EXT02_ProteinTest"
@@ -35,190 +41,190 @@ ws.CellCollection.RemoveCellAt(1, 1)
 //ws.CellCollection.Add
 
 
-type TestClass() =
-    member val Value = 10 with get, set
-    member this.Copy() = 
-        let o = TestClass()
-        o.Value <- this.Value
-        o
+//type TestClass() =
+//    member val Value = 10 with get, set
+//    member this.Copy() = 
+//        let o = TestClass()
+//        o.Value <- this.Value
+//        o
 
-let testObjs = Seq.init 4 (fun i -> TestClass() |> fun x -> x.Value <- i; x)
-let testObjs2 = testObjs |> Seq.map (fun o -> o.Copy())
-testObjs |> Seq.item 0 |> fun x -> x.Value
-testObjs2 |> Seq.item 0 |> fun x -> x.Value
-testObjs2 |> Seq.iter (fun x -> x.Value <- 8)
-testObjs2 |> Array.ofSeq |> Array.map (fun x -> x.Value <- 8; x) |> Array.item 0 |> fun x -> x.Value
-let testObjs3 = testObjs2 |> Array.ofSeq
-testObjs3[0]
-testObjs3 |> Array.iter (fun x -> x.Value <- 9)
-let testObj = TestClass()
-testObj.Value
-testObj.Value <- 9
-let testObjs4 = Array.init 4 (fun i -> TestClass())
-testObjs4[0].Value
-let testObjs5 = testObjs4 |> Array.map (fun o -> o.Copy())
-testObjs5[0].Value
-testObjs5[0].Value <- 5
-testObjs5[0].Value
-let testObjs6 = Seq.init 2 (fun _ -> TestClass())
-testObjs6 |> Seq.item 0 |> fun x -> x.Value
-testObjs6 |> Seq.item 0 |> fun x -> x.Value <- 5
-for i in testObjs6 do i.Value <- 5
-testObjs6 |> Seq.item 0 |> fun x -> x.Value
+//let testObjs = Seq.init 4 (fun i -> TestClass() |> fun x -> x.Value <- i; x)
+//let testObjs2 = testObjs |> Seq.map (fun o -> o.Copy())
+//testObjs |> Seq.item 0 |> fun x -> x.Value
+//testObjs2 |> Seq.item 0 |> fun x -> x.Value
+//testObjs2 |> Seq.iter (fun x -> x.Value <- 8)
+//testObjs2 |> Array.ofSeq |> Array.map (fun x -> x.Value <- 8; x) |> Array.item 0 |> fun x -> x.Value
+//let testObjs3 = testObjs2 |> Array.ofSeq
+//testObjs3[0]
+//testObjs3 |> Array.iter (fun x -> x.Value <- 9)
+//let testObj = TestClass()
+//testObj.Value
+//testObj.Value <- 9
+//let testObjs4 = Array.init 4 (fun i -> TestClass())
+//testObjs4[0].Value
+//let testObjs5 = testObjs4 |> Array.map (fun o -> o.Copy())
+//testObjs5[0].Value
+//testObjs5[0].Value <- 5
+//testObjs5[0].Value
+//let testObjs6 = Seq.init 2 (fun _ -> TestClass())
+//testObjs6 |> Seq.item 0 |> fun x -> x.Value
+//testObjs6 |> Seq.item 0 |> fun x -> x.Value <- 5
+//for i in testObjs6 do i.Value <- 5
+//testObjs6 |> Seq.item 0 |> fun x -> x.Value
 
-let cellSeq = List.init 2 (fun i -> FsCell.create (i + 1) 1 "v")
-let testFCC = FsCellsCollection()
-testFCC.Add cellSeq
-testFCC.GetCells()
-let testCells = testFCC.GetCells() |> Seq.map (fun c -> c.Copy())
-let testFCC2 = FsCellsCollection()
-testFCC2.Add testCells
-testFCC2.GetCells() |> Seq.map (fun c -> c.Value <- "v2")
-testFCC2.GetCells()
+//let cellSeq = List.init 2 (fun i -> FsCell.create (i + 1) 1 "v")
+//let testFCC = FsCellsCollection()
+//testFCC.Add cellSeq
+//testFCC.GetCells()
+//let testCells = testFCC.GetCells() |> Seq.map (fun c -> c.Copy())
+//let testFCC2 = FsCellsCollection()
+//testFCC2.Add testCells
+//testFCC2.GetCells() |> Seq.map (fun c -> c.Value <- "v2")
+//testFCC2.GetCells()
 
-let testFsRangeAddress = FsRangeAddress("C1:C3")
-let testFsRangeColumn = FsRangeColumn testFsRangeAddress
-let testFsTableField = FsTableField("testName", 3, testFsRangeColumn)
-let testFsCellsCollection = FsCellsCollection()
-let testFsCells = [
-    FsCell.createWithDataType DataType.String 1 3 "I am the Header!"
-    FsCell.createWithDataType DataType.String 2 3 "first data cell"
-    FsCell.createWithDataType DataType.String 3 3 "second data cell"
-    FsCell.createWithDataType DataType.String 1 4 "Another Header"
-    FsCell.createWithDataType DataType.String 2 4 "first data cell in B col"
-    FsCell.createWithDataType DataType.String 3 4 "second data cell in B col"
-]
-testFsCellsCollection.Add testFsCells |> ignore
+//let testFsRangeAddress = FsRangeAddress("C1:C3")
+//let testFsRangeColumn = FsRangeColumn testFsRangeAddress
+//let testFsTableField = FsTableField("testName", 3, testFsRangeColumn)
+//let testFsCellsCollection = FsCellsCollection()
+//let testFsCells = [
+//    FsCell.createWithDataType DataType.String 1 3 "I am the Header!"
+//    FsCell.createWithDataType DataType.String 2 3 "first data cell"
+//    FsCell.createWithDataType DataType.String 3 3 "second data cell"
+//    FsCell.createWithDataType DataType.String 1 4 "Another Header"
+//    FsCell.createWithDataType DataType.String 2 4 "first data cell in B col"
+//    FsCell.createWithDataType DataType.String 3 4 "second data cell in B col"
+//]
+//testFsCellsCollection.Add testFsCells |> ignore
 
-let headerCell = testFsTableField.HeaderCell(testFsCellsCollection, true)
-//testFsTableField.SetName("testName2", testFsCellsCollection, true)
-testFsTableField.DataCells(testFsCellsCollection, true)
-testFsTableField.Index <- 5
-testFsTableField.Column
-match testFsTableField.Column with
-| null -> printfn "null!"
-| _ -> printfn "not null!"
-
-
-// test basic stuff
-
-let mutable value1 = "hallo"
-let mutable value2 = value1
-value2 <- "Welt"
-
-let dummyFsCellsCollection = FsCellsCollection()
-let dummyFsCellsCollection2 = dummyFsCellsCollection
-let dummyFsCellsCollection3 = FsCellsCollection()
-dummyFsCellsCollection = dummyFsCellsCollection2
-dummyFsCellsCollection = dummyFsCellsCollection3
-System.Object.Equals(dummyFsCellsCollection, dummyFsCellsCollection2)
-System.Object.Equals(dummyFsCellsCollection, dummyFsCellsCollection3)
-dummyFsCellsCollection.Count
-dummyFsCellsCollection2.Count
-dummyFsCellsCollection2.Add(FsCell.createEmpty())
-dummyFsCellsCollection2.Count
-dummyFsCellsCollection.Count    // changes too...
-//let dummyFsCellsCollection3 : FsCellsCollection = dummyFsCellsCollection.MemberwiseClone() :?> FsCellsCollection
-
-let array1 = [|"Hallo"|]
-let array2 = array1
-array2[0] <- "Welt"
-
-let copy (this : FsCellsCollection) =
-    let newCellsColl = FsCellsCollection()
-    let cells : seq<FsCell> = this.GetCells()
-    newCellsColl.Add cells
-
-let testCell = FsCell.create 1 1 "Hallo"
-let dummyFsCellsCollection4 = FsCellsCollection().Add testCell
-let dummyFsCellsCollection5 = copy dummyFsCellsCollection4
-dummyFsCellsCollection5.TryGetCell(1, 1) |> fun c -> c.Value.Value <- "Welt"
-dummyFsCellsCollection5.TryGetCell(1, 1) |> fun c -> c.Value
-dummyFsCellsCollection4.TryGetCell(1, 1) |> fun c -> c.Value
-
-//let excelFilePath = @"C:\Users\olive\OneDrive\CSB-Stuff\testFiles\testExcel5.xlsx"
-//let excelFilePath = @"C:\Users\revil\OneDrive\CSB-Stuff\testFiles\testExcel5.xlsx"
-//let excelFilePath = @"C:\Users\revil\OneDrive\CSB-Stuff\testFiles\testExcel6.xlsx"
-let excelFilePath = @"C:\Users\olive\OneDrive\CSB-Stuff\testFiles\testExcel6.xlsx"
-//let excelFilePath = @"C:\Users\revil\OneDrive\CSB-Stuff\testFiles\testExcel6_rewritten.xlsx"
-//let excelFilePath = @"C:\Users\olive\OneDrive\CSB-Stuff\testFiles\testExcel6_rewritten.xlsx"
+//let headerCell = testFsTableField.HeaderCell(testFsCellsCollection, true)
+////testFsTableField.SetName("testName2", testFsCellsCollection, true)
+//testFsTableField.DataCells(testFsCellsCollection, true)
+//testFsTableField.Index <- 5
+//testFsTableField.Column
+//match testFsTableField.Column with
+//| null -> printfn "null!"
+//| _ -> printfn "not null!"
 
 
-// inb4 unit tests
+//// test basic stuff
 
-let unitTestFilePath = @"C:\Repos\CSBiology\FsSpreadsheet\tests\FsSpreadsheet.ExcelIO.Tests\data\testUnit.xlsx"
-let sr = new StreamReader(unitTestFilePath)
-let fsWorkbookFromStream = FsWorkbook.fromXlsxStream sr.BaseStream
-sr.Close()
-let fsWorksheet1FromStream = fsWorkbookFromStream.GetWorksheetByName "StringSheet"
-let fsWorksheet2FromStream = fsWorkbookFromStream.GetWorksheetByName "NumericSheet"
-let fsWorksheet3FromStream = fsWorkbookFromStream.GetWorksheetByName "TableSheet"
-let fsWorksheet4FromStream = fsWorkbookFromStream.GetWorksheetByName "DataTypeSheet"
-//let v = (FsWorksheet.getCellAt 1 1 fsWorksheet1FromStream).Value
-//let a = (FsWorksheet.getCellAt 1 1 fsWorksheet1FromStream).Address.Address
-//let d = (FsWorksheet.getCellAt 1 1 fsWorksheet1FromStream).DataType
-let v = (FsWorksheet.getCellAt 7 3 fsWorksheet2FromStream).Value
-fsWorksheet2FromStream.CellCollection.GetCells() |> Array.ofSeq
-let t = fsWorksheet3FromStream.Tables |> List.tryFind (fun t -> t.Name = "Table2")
+//let mutable value1 = "hallo"
+//let mutable value2 = value1
+//value2 <- "Welt"
 
+//let dummyFsCellsCollection = FsCellsCollection()
+//let dummyFsCellsCollection2 = dummyFsCellsCollection
+//let dummyFsCellsCollection3 = FsCellsCollection()
+//dummyFsCellsCollection = dummyFsCellsCollection2
+//dummyFsCellsCollection = dummyFsCellsCollection3
+//System.Object.Equals(dummyFsCellsCollection, dummyFsCellsCollection2)
+//System.Object.Equals(dummyFsCellsCollection, dummyFsCellsCollection3)
+//dummyFsCellsCollection.Count
+//dummyFsCellsCollection2.Count
+//dummyFsCellsCollection2.Add(FsCell.createEmpty())
+//dummyFsCellsCollection2.Count
+//dummyFsCellsCollection.Count    // changes too...
+////let dummyFsCellsCollection3 : FsCellsCollection = dummyFsCellsCollection.MemberwiseClone() :?> FsCellsCollection
 
-// fix some bugs
+//let array1 = [|"Hallo"|]
+//let array2 = array1
+//array2[0] <- "Welt"
 
-#r "nuget: DocumentFormat.OpenXml"
+//let copy (this : FsCellsCollection) =
+//    let newCellsColl = FsCellsCollection()
+//    let cells : seq<FsCell> = this.GetCells()
+//    newCellsColl.Add cells
 
-open DocumentFormat.OpenXml
+//let testCell = FsCell.create 1 1 "Hallo"
+//let dummyFsCellsCollection4 = FsCellsCollection().Add testCell
+//let dummyFsCellsCollection5 = copy dummyFsCellsCollection4
+//dummyFsCellsCollection5.TryGetCell(1, 1) |> fun c -> c.Value.Value <- "Welt"
+//dummyFsCellsCollection5.TryGetCell(1, 1) |> fun c -> c.Value
+//dummyFsCellsCollection4.TryGetCell(1, 1) |> fun c -> c.Value
 
-let sdoc = Spreadsheet.fromFile excelFilePath false
-//let cell = Cell.fromValueWithDataType None 1u 1u "test" DataType.Number
-let cells = Spreadsheet.getCellsBySheetIndex 1u sdoc |> Array.ofSeq
-cells |> Array.iter (fun (c) -> printfn $"Ref: {c.CellReference.Value}   Value: {c.CellValue.Text}")
-let ssdFox = Packaging.SpreadsheetDocument.Open(excelFilePath, false)
-let wbpFox = ssdFox.WorkbookPart
-let sstpFox = wbpFox.SharedStringTablePart
-let sstFox = sstpFox.SharedStringTable
-let sstFoxInnerText = sstFox.InnerText
-let wsp1Fox = (wbpFox.WorksheetParts |> Array.ofSeq)[0]
-let cbsi1Fox = 
-    wsp1Fox.Worksheet.Descendants<Spreadsheet.Cell>() |> Array.ofSeq
-    |> Array.map (
-        fun c ->
-            if c.DataType <> null && c.DataType.Value = Spreadsheet.CellValues.SharedString then
-                let index = int c.CellValue.InnerText
-                let item = sstFox.Elements<OpenXmlElement>() |> Seq.item index
-                let value = item.InnerText
-                c.CellValue.Text <- value
-                c
-            else
-                c
-    )
-cbsi1Fox |> Array.iter (fun c -> printfn $"Ref: {c.CellReference.Value}   Value: {c.CellValue.Text}") 
+////let excelFilePath = @"C:\Users\olive\OneDrive\CSB-Stuff\testFiles\testExcel5.xlsx"
+////let excelFilePath = @"C:\Users\revil\OneDrive\CSB-Stuff\testFiles\testExcel5.xlsx"
+////let excelFilePath = @"C:\Users\revil\OneDrive\CSB-Stuff\testFiles\testExcel6.xlsx"
+//let excelFilePath = @"C:\Users\olive\OneDrive\CSB-Stuff\testFiles\testExcel6.xlsx"
+////let excelFilePath = @"C:\Users\revil\OneDrive\CSB-Stuff\testFiles\testExcel6_rewritten.xlsx"
+////let excelFilePath = @"C:\Users\olive\OneDrive\CSB-Stuff\testFiles\testExcel6_rewritten.xlsx"
 
 
-// test principles of the implementation
+//// inb4 unit tests
 
-let someTestCells = 
-    [
-        [
-            // TO DO: ask: why is ///-text from methods/constructors not shown?!
-            FsCell("H1", DataType.String, FsAddress(1,1))
-            FsCell("H2", DataType.String, FsAddress(1,2))
-            FsCell("H3", DataType.String, FsAddress(1,3))
-        ]
-        List.init 3 (
-            fun i ->
-                FsCell($"{i * 2}", DataType.Number, FsAddress(2,i + 1))
-        )
-    ]
-let testFsCC = FsCellsCollection()
-someTestCells |> List.iter (testFsCC.Add >> ignore)
-let testFsRow = FsRow(2, testFsCC)
-(testFsRow.Cells |> Array.ofSeq).Length
-testFsRow.RangeAddress
+//let unitTestFilePath = @"C:\Repos\CSBiology\FsSpreadsheet\tests\FsSpreadsheet.ExcelIO.Tests\data\testUnit.xlsx"
+//let sr = new StreamReader(unitTestFilePath)
+//let fsWorkbookFromStream = FsWorkbook.fromXlsxStream sr.BaseStream
+//sr.Close()
+//let fsWorksheet1FromStream = fsWorkbookFromStream.GetWorksheetByName "StringSheet"
+//let fsWorksheet2FromStream = fsWorkbookFromStream.GetWorksheetByName "NumericSheet"
+//let fsWorksheet3FromStream = fsWorkbookFromStream.GetWorksheetByName "TableSheet"
+//let fsWorksheet4FromStream = fsWorkbookFromStream.GetWorksheetByName "DataTypeSheet"
+////let v = (FsWorksheet.getCellAt 1 1 fsWorksheet1FromStream).Value
+////let a = (FsWorksheet.getCellAt 1 1 fsWorksheet1FromStream).Address.Address
+////let d = (FsWorksheet.getCellAt 1 1 fsWorksheet1FromStream).DataType
+//let v = (FsWorksheet.getCellAt 7 3 fsWorksheet2FromStream).Value
+//fsWorksheet2FromStream.CellCollection.GetCells() |> Array.ofSeq
+//let t = fsWorksheet3FromStream.Tables |> List.tryFind (fun t -> t.Name = "Table2")
 
-let testFsWs = FsWorksheet("test")
-testFsWs.CellCollection
-testFsWs.Row(1)
-FsRow(1, testFsWs.CellCollection)
+
+//// fix some bugs
+
+//#r "nuget: DocumentFormat.OpenXml"
+
+//open DocumentFormat.OpenXml
+
+//let sdoc = Spreadsheet.fromFile excelFilePath false
+////let cell = Cell.fromValueWithDataType None 1u 1u "test" DataType.Number
+//let cells = Spreadsheet.getCellsBySheetIndex 1u sdoc |> Array.ofSeq
+//cells |> Array.iter (fun (c) -> printfn $"Ref: {c.CellReference.Value}   Value: {c.CellValue.Text}")
+//let ssdFox = Packaging.SpreadsheetDocument.Open(excelFilePath, false)
+//let wbpFox = ssdFox.WorkbookPart
+//let sstpFox = wbpFox.SharedStringTablePart
+//let sstFox = sstpFox.SharedStringTable
+//let sstFoxInnerText = sstFox.InnerText
+//let wsp1Fox = (wbpFox.WorksheetParts |> Array.ofSeq)[0]
+//let cbsi1Fox = 
+//    wsp1Fox.Worksheet.Descendants<Spreadsheet.Cell>() |> Array.ofSeq
+//    |> Array.map (
+//        fun c ->
+//            if c.DataType <> null && c.DataType.Value = Spreadsheet.CellValues.SharedString then
+//                let index = int c.CellValue.InnerText
+//                let item = sstFox.Elements<OpenXmlElement>() |> Seq.item index
+//                let value = item.InnerText
+//                c.CellValue.Text <- value
+//                c
+//            else
+//                c
+//    )
+//cbsi1Fox |> Array.iter (fun c -> printfn $"Ref: {c.CellReference.Value}   Value: {c.CellValue.Text}") 
+
+
+//// test principles of the implementation
+
+//let someTestCells = 
+//    [
+//        [
+//            // TO DO: ask: why is ///-text from methods/constructors not shown?!
+//            FsCell("H1", DataType.String, FsAddress(1,1))
+//            FsCell("H2", DataType.String, FsAddress(1,2))
+//            FsCell("H3", DataType.String, FsAddress(1,3))
+//        ]
+//        List.init 3 (
+//            fun i ->
+//                FsCell($"{i * 2}", DataType.Number, FsAddress(2,i + 1))
+//        )
+//    ]
+//let testFsCC = FsCellsCollection()
+//someTestCells |> List.iter (testFsCC.Add >> ignore)
+//let testFsRow = FsRow(2, testFsCC)
+//(testFsRow.Cells |> Array.ofSeq).Length
+//testFsRow.RangeAddress
+
+//let testFsWs = FsWorksheet("test")
+//testFsWs.CellCollection
+//testFsWs.Row(1)
+//FsRow(1, testFsWs.CellCollection)
 
 
 
