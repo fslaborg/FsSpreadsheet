@@ -183,7 +183,7 @@ module FsExtensions =
                         let sheetIndex = Sheet.getSheetIndex xlsxSheet
                         let sheetId = Sheet.getID xlsxSheet
                         let xlsxCells = 
-                            Spreadsheet.getCellsBySheetIndex sheetIndex doc
+                            Spreadsheet.getCellsBySheetID sheetId doc
                             |> Seq.map (FsCell.ofXlsxCell sst)
                         let assocXlsxTables = 
                             xlsxTables 
