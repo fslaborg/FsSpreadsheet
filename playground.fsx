@@ -22,11 +22,28 @@ open DocumentFormat.OpenXml
 
 // some other bugfixes
 
+let dslTree = 
+    workbook {
+        sheet "MySheet" {
+            row {
+                cell {1}
+                cell {2}
+                cell {3}
+            }
+            row {
+                4
+                5
+                6
+            }
+        }
+    }
+let spreadsheet = dslTree.Value.Parse()
+
 let assayTf = @"C:\Users\olive\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
 let xlSsd = Spreadsheet.fromFile assayTf false
 let cs = Spreadsheet.getCellsBySheetIndex 2u xlSsd |> Array.ofSeq
 for cell in cs do
-    printfn "Ref: %s    DT: %A    StyleIndex: %A" cell.CellReference.Value cell.DataType cell.StyleIndex cell.
+    printfn "Ref: %s    DT: %A    StyleIndex: %A" cell.CellReference.Value cell.DataType cell.StyleIndex
 
 let kfsTestFile = @"C:\Users\olive\Downloads\2EXT02_Protein (1).xlsx"
 let wb = FsWorkbook.fromXlsxFile kfsTestFile
