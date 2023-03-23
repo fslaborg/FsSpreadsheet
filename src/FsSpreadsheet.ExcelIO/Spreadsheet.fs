@@ -51,6 +51,7 @@ module Spreadsheet =
 
     /// <summary>
     /// Closes the FileStream to the spreadsheet.
+    /// </summary>
     let close (spreadsheet : SpreadsheetDocument) = spreadsheet.Close()
 
     /// <summary>

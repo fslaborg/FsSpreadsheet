@@ -1,5 +1,6 @@
 ﻿namespace FsSpreadsheet
 
+
 // Type based on the type XLRow used in ClosedXml
 /// <summary>
 /// Creates an FsRow from the given FsRangeAddress, consisting of FsCells within a given FsCellsCollection, and a styleValue.
@@ -20,12 +21,13 @@ type FsRow (rangeAddress : FsRangeAddress, cells : FsCellsCollection, styleValue
     /// <remarks>The appropriate range of the cells (i.e. minimum colIndex and maximum colIndex) is derived from the FsCells with the matching rowIndex.</remarks>
     new (index, (cells : FsCellsCollection)) = 
         let getIndexBy (f : (FsCell -> int) -> seq<FsCell> -> FsCell) = 
-            try 
+            match cells.GetCellsInRow index |> Seq.length with
+            | 0 -> 0
+            | _ ->
                 (
                     cells.GetCellsInRow index 
                     |> f (fun c -> c.Address.ColumnNumber)
                 ).Address.ColumnNumber
-            with :? System.ArgumentException -> 0
         let minColIndex = getIndexBy Seq.minBy
         let maxColIndex = getIndexBy Seq.maxBy
         FsRow (FsRangeAddress(FsAddress(index, minColIndex),FsAddress(index, maxColIndex)), cells, null)
