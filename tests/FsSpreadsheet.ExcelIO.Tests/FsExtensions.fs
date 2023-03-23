@@ -156,7 +156,7 @@ let fsExtensionTests =
                     Expect.isSome tf2Worksheet "Is None"
                 testCase "Worksheet's name is SwateTemplateMetadata" <| fun _ ->
                     Expect.equal tf2Worksheet.Value.Name "SwateTemplateMetadata" "Name is incorrect"
-                testCase "is equal to dummyFsWorkbook in sheet3, cellB10 value" <| fun _ ->
+                testCase "Worksheet SwateTemplateMetadata from 2EXT02_Protein has correct value" <| fun _ ->
                     let v = tf2Worksheet.Value.CellCollection.TryGetCell(1,1).Value.Value
                     Expect.equal v "Id" "value is not equal"
             ]
