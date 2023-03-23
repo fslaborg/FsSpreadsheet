@@ -17,7 +17,7 @@ let dummyDtEmpty = DataType.Empty
 let dummyXlsxCell = Cell.create CellValues.Number "A1" (CellValue(1.337))
 
 //let testFilePath = @"C:\Repos\CSBiology\FsSpreadsheet\tests\FsSpreadsheet.ExcelIO.Tests\data\testUnit.xlsx"
-let testFilePath = System.IO.Path.Combine(__SOURCE_DIRECTORY__, "data", "testUnit.xlsx")
+let testFilePath = Path.Combine(__SOURCE_DIRECTORY__, "data", "testUnit.xlsx")
 let sr = new StreamReader(testFilePath)
 let dummyFsWorkbook = new FsWorkbook()
 let dummyFsCells = [
@@ -46,7 +46,8 @@ dummyFsWorkbook.AddWorksheet(dummyFsWorksheet2) |> ignore
 dummyFsWorkbook.AddWorksheet(dummyFsWorksheet3) |> ignore
 dummyFsWorkbook.AddWorksheet(dummyFsWorksheet4) |> ignore
 
-
+//let testFile2Path = @"C:\Repos\CSBiology\FsSpreadsheet\tests\FsSpreadsheet.ExcelIO.Tests\data\2EXT02_Protein.xlsx"
+let testFile2Path = Path.Combine(__SOURCE_DIRECTORY__, "data", "2EXT02_Protein.xlsx")
 
 
 [<Tests>]
@@ -149,6 +150,15 @@ let fsExtensionTests =
                     let rfs = t.RangeAddress.Range
                     let rdt = dummyFsTable.RangeAddress.Range
                     Expect.equal rfs rdt "Tables have different ranges"
+                let tf2Workbook = FsWorkbook.fromXlsxFile testFile2Path
+                let tf2Worksheet = FsWorkbook.tryGetWorksheetByName "SwateTemplateMetadata" tf2Workbook
+                testCase "Worksheet SwateTemplateMetadata from 2EXT02_Protein is Some" <| fun _ ->
+                    Expect.isSome tf2Worksheet "Is None"
+                testCase "Worksheet's name is SwateTemplateMetadata" <| fun _ ->
+                    Expect.equal tf2Worksheet.Value.Name "SwateTemplateMetadata" "Name is incorrect"
+                testCase "is equal to dummyFsWorkbook in sheet3, cellB10 value" <| fun _ ->
+                    let v = tf2Worksheet.Value.CellCollection.TryGetCell(1,1).Value.Value
+                    Expect.equal v "Id" "value is not equal"
             ]
         ]
     ]

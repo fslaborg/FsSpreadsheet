@@ -1,3 +1,5 @@
+#r "nuget: DocumentFormat.OpenXml"
+
 open System.IO
 
 Directory.GetCurrentDirectory()
@@ -13,12 +15,25 @@ File.Copy("src/FsSpreadsheet.ExcelIO/bin/Debug/netstandard2.0/FsSpreadsheet.Exce
 open FsSpreadsheet
 open FsSpreadsheet.ExcelIO
 open FsSpreadsheet.DSL
-//open DocumentFormat.OpenXml
+open DocumentFormat.OpenXml
 
 
 // ----------------------------------------------
 
 // some other bugfixes
+
+let kfsTestFile = @"C:\Users\olive\Downloads\2EXT02_Protein (1).xlsx"
+let wb = FsWorkbook.fromXlsxFile kfsTestFile
+let ws = wb.GetWorksheetByName "2EXT02_ProteinTest"
+ws.CellCollection.TryGetCell(2,1)
+
+let x = FsCell.create 1 1 "Kevin"
+let y = x.Copy()
+x.Value
+y.Value <- "Oliver"
+ws.CellCollection.RemoveCellAt(1, 1)
+//ws.CellCollection.Add
+
 
 type TestClass() =
     member val Value = 10 with get, set
