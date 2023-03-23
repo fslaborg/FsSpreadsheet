@@ -20,6 +20,46 @@ open FsSpreadsheet.DSL
 
 // some other bugfixes
 
+type TestClass() =
+    member val Value = 10 with get, set
+    member this.Copy() = 
+        let o = TestClass()
+        o.Value <- this.Value
+        o
+
+let testObjs = Seq.init 4 (fun i -> TestClass() |> fun x -> x.Value <- i; x)
+let testObjs2 = testObjs |> Seq.map (fun o -> o.Copy())
+testObjs |> Seq.item 0 |> fun x -> x.Value
+testObjs2 |> Seq.item 0 |> fun x -> x.Value
+testObjs2 |> Seq.iter (fun x -> x.Value <- 8)
+testObjs2 |> Array.ofSeq |> Array.map (fun x -> x.Value <- 8; x) |> Array.item 0 |> fun x -> x.Value
+let testObjs3 = testObjs2 |> Array.ofSeq
+testObjs3[0]
+testObjs3 |> Array.iter (fun x -> x.Value <- 9)
+let testObj = TestClass()
+testObj.Value
+testObj.Value <- 9
+let testObjs4 = Array.init 4 (fun i -> TestClass())
+testObjs4[0].Value
+let testObjs5 = testObjs4 |> Array.map (fun o -> o.Copy())
+testObjs5[0].Value
+testObjs5[0].Value <- 5
+testObjs5[0].Value
+let testObjs6 = Seq.init 2 (fun _ -> TestClass())
+testObjs6 |> Seq.item 0 |> fun x -> x.Value
+testObjs6 |> Seq.item 0 |> fun x -> x.Value <- 5
+for i in testObjs6 do i.Value <- 5
+testObjs6 |> Seq.item 0 |> fun x -> x.Value
+
+let cellSeq = List.init 2 (fun i -> FsCell.create (i + 1) 1 "v")
+let testFCC = FsCellsCollection()
+testFCC.Add cellSeq
+testFCC.GetCells()
+let testCells = testFCC.GetCells() |> Seq.map (fun c -> c.Copy())
+let testFCC2 = FsCellsCollection()
+testFCC2.Add testCells
+testFCC2.GetCells() |> Seq.map (fun c -> c.Value <- "v2")
+testFCC2.GetCells()
 
 let testFsRangeAddress = FsRangeAddress("C1:C3")
 let testFsRangeColumn = FsRangeColumn testFsRangeAddress

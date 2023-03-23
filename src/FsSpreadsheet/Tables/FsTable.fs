@@ -413,6 +413,7 @@ type FsTable (name : string, rangeAddress, showTotalsRow, showHeaderRow) =
     /// <summary>
     /// Returns the data cells from a given FsCellsCollection with the given colum index.
     /// </summary>
+    /// <remarks>Column index must fit the FsCellsCollection, not the FsTable!</remarks>
     member this.GetDataCellsOfColumn(cellsCollection : FsCellsCollection, colIndex) =
         let fstRowIndex = this.RangeAddress.FirstAddress.RowNumber
         let lstRowIndex = this.RangeAddress.LastAddress.RowNumber
@@ -424,6 +425,7 @@ type FsTable (name : string, rangeAddress, showTotalsRow, showHeaderRow) =
     /// <summary>
     /// Returns the data cells from a given FsCellsCollection with the given colum index in a given FsTable.
     /// </summary>
+    /// <remarks>Column index must fit the FsCellsCollection, not the FsTable!</remarks>
     static member getDataCellsOfColumnIndex cellsCollection (colIndex : int) (table : FsTable) =
         table.GetDataCellsOfColumn(cellsCollection, colIndex)
 

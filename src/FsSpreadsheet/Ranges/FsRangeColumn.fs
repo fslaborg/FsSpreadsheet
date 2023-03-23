@@ -31,13 +31,13 @@ type FsRangeColumn(rangeAddress) =
     static member fromRangeAddress (rangeAddress : FsRangeAddress) = 
         FsRangeColumn rangeAddress
 
-    /// </summary>
+    /// <summary>
     /// Creates a deep copy of this FsRangeColumn.
     /// </summary>
     member self.Copy() =
         FsRangeColumn(self.RangeAddress.Copy())
 
-    /// </summary>
+    /// <summary>
     /// Returns a deep copy of a given FsRangeColumn.
     /// </summary>
     static member copy (rangeColumn : FsRangeColumn) =

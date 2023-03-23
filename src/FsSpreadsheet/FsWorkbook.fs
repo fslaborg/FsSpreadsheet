@@ -28,6 +28,7 @@ type FsWorkbook() =
         let shts = self.GetWorksheets() |> List.map (fun (s : FsWorksheet) -> s.Copy())
         let wb = new FsWorkbook()
         wb.AddWorksheets shts
+        wb
 
     /// <summary>
     /// Returns a deep copy of a given FsWorkbook.
@@ -36,35 +37,34 @@ type FsWorkbook() =
         workbook.Copy()
  
     /// <summary>
-    /// Adds an FsWorksheet with given name.
+    /// Adds an empty FsWorksheet with given name to the FsWorkbook.
     /// </summary>
     member self.AddWorksheet(name : string) = 
         let sheet = FsWorksheet name
         _worksheets <- List.append _worksheets [sheet]
-        sheet
 
-    /// Adds an FsWorksheet with given name to an FsWorkbook.
+    /// <summary>
+    /// Adds an empty FsWorksheet with given name to an FsWorkbook.
     /// </summary>
     static member addWorksheetWithName (name : string) (workbook : FsWorkbook) = 
-        workbook.AddWorksheet name |> ignore
+        workbook.AddWorksheet name
         workbook
 
     
     /// <summary>
-    /// Adds a given FsWorksheet.
+    /// Adds a given FsWorksheet to the FsWorkbook.
     /// </summary>
     member self.AddWorksheet(sheet : FsWorksheet) = 
         if _worksheets |> List.exists (fun ws -> ws.Name = sheet.Name) then
             failwithf "Could not add worksheet with name \"%s\" to workbook as it already contains a worksheet with the same name" sheet.Name
         else
             _worksheets <- List.append _worksheets [sheet]
-        sheet
 
     /// <summary>
     /// Adds an FsWorksheet to an FsWorkbook.
     /// </summary>
     static member addWorksheet (sheet : FsWorksheet) (workbook : FsWorkbook) = 
-        workbook.AddWorksheet sheet  |> ignore
+        workbook.AddWorksheet sheet
         workbook
 
     /// <summary>
@@ -72,14 +72,14 @@ type FsWorkbook() =
     /// </summary>
     member self.AddWorksheets(sheets : seq<FsWorksheet>) =
         sheets
-        |> Seq.iter (self.AddWorksheet >> ignore)
-        self
+        |> Seq.iter self.AddWorksheet
 
     /// <summary>
     /// Adds a collection of FsWorksheets to an FsWorkbook.
     /// </summary>
     static member addWorksheets sheets (workbook : FsWorkbook) =
         workbook.AddWorksheets sheets
+        workbook
 
     /// <summary>
     /// Returns all FsWorksheets.
@@ -130,13 +130,12 @@ type FsWorkbook() =
             | Some w -> _worksheets |> List.filter (fun ws -> ws.Name <> name)
             | None -> failwith $"FsWorksheet with name {name} was not found in FsWorkbook."
         _worksheets <- filteredWorksheets
-        self
 
     /// <summary>
     /// Removes an FsWorksheet with given name from an FsWorkbook.
     /// </summary>
     static member removeWorksheetByName (name : string) (workbook : FsWorkbook) =
-        workbook.RemoveWorksheet name  |> ignore
+        workbook.RemoveWorksheet name
         workbook
 
     /// <summary>
@@ -144,14 +143,13 @@ type FsWorkbook() =
     /// </summary>
     /// <exception cref="System.Exception">if FsWorksheet with given name is not present in the FsWorkkbook.</exception>
     member self.RemoveWorksheet(sheet : FsWorksheet) =
-        self.RemoveWorksheet(sheet.Name) |> ignore
-        self
+        self.RemoveWorksheet(sheet.Name)
 
     /// <summary>
     /// Removes a given FsWorksheet from an FsWorkbook.
     /// </summary>
     static member removeWorksheet (sheet : FsWorksheet) (workbook : FsWorkbook) =
-        workbook.RemoveWorksheet sheet  |> ignore
+        workbook.RemoveWorksheet sheet
         workbook
 
     /// <summary>

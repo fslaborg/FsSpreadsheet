@@ -60,8 +60,8 @@ let dummyFsTableFields =
     dummyFsCells
     |> Seq.choose (
         fun fsc -> 
-            i <- i + 1
             if fsc.RowNumber = headerRowIndex then
+                i <- i + 1
                 FsTableField(
                     fsc.Value, 
                     i, 
@@ -72,6 +72,7 @@ let dummyFsTableFields =
                 |> Option.Some
             else None
     )
+    |> List.ofSeq
 
 
 [<Tests>]
@@ -135,6 +136,31 @@ let fsTableTests =
                 testCase "Has correct value" <| fun _ ->
                     let actualCell = dummyFsCells |> Seq.item 1
                     Expect.equal testHeaderCell.Value actualCell.Value "FsCell is incorrect in value"
+            ]
+        ]
+        testList "TryGetHeaderCellByFieldName" [
+            testList "cellsCollection : FsCellsCollection, fieldName : string" [
+                let testFsTable = FsTable("testFsTable", FsRangeAddress(dummyFsCellsCollectionFirstAddress, dummyFsCellsCollectionLastAddress))
+                testFsTable.AddFields dummyFsTableFields
+                let testHeaderCell = testFsTable.TryGetHeaderCellByFieldName(dummyFsCellsCollection, "Location")
+                testCase "Is Some" <| fun _ ->
+                    Expect.isSome testHeaderCell "Is None"
+                testCase "Has correct value" <| fun _ ->
+                    let actualCell = dummyFsCells |> Seq.item 2
+                    Expect.equal testHeaderCell.Value.Value actualCell.Value "FsCell is incorrect in value"
+            ]
+        ]
+        testList "GetDataCellsOfColumn" [
+            testList "cellsCollection : FsCellsCollection, fieldName : FsTableField" [
+                let testFsTable = FsTable("testFsTable", FsRangeAddress(dummyFsCellsCollectionFirstAddress, dummyFsCellsCollectionLastAddress))
+                testFsTable.AddFields dummyFsTableFields
+                let testDataCells = testFsTable.GetDataCellsOfColumn(dummyFsCellsCollection, 2)
+                testCase "Is Some" <| fun _ ->
+                    Expect.isNonEmpty testDataCells "Seq is empty"
+                testCase "Has correct values" <| fun _ ->
+                    let minRowNo = dummyFsCells |> Seq.map (fun c -> c.RowNumber) |> Seq.min
+                    let actualCells = dummyFsCells |> Seq.filter (fun c -> c.ColumnNumber = 2 && c.RowNumber > minRowNo)
+                    Expect.sequenceEqual (testDataCells |> Seq.map (fun c -> c.Value)) (actualCells |> Seq.map (fun c -> c.Value)) "FsCells are incorrect in value"
             ]
         ]
     ]

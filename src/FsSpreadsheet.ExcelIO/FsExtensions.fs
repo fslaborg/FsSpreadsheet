@@ -74,6 +74,7 @@ module FsExtensions =
 
         /// <summary>
         /// Takes an XlsxTable and returns an FsTable.
+        /// </summary>
         static member fromXlsxTable table = 
             let topLeftBoundary, bottomRightBoundary = Table.getArea table |> Table.Area.toBoundaries
             let ra = FsRangeAddress(FsAddress(topLeftBoundary), FsAddress(bottomRightBoundary))
