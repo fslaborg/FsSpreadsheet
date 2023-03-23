@@ -4,7 +4,7 @@ module SheetBuilder =
    
     module internal Dictionary =
 
-        let tryGetValue k (dict:System.Collections.Generic.Dictionary<'K,'V>) = 
+        let tryGetValue k (dict : System.Collections.Generic.Dictionary<'K,'V>) = 
             let b,v = dict.TryGetValue(k)
             // Only get value if 
             if b 
@@ -13,7 +13,7 @@ module SheetBuilder =
             else 
                 None
 
-        let length (dict:System.Collections.Generic.Dictionary<'K,'V>) = 
+        let length (dict : System.Collections.Generic.Dictionary<'K,'V>) = 
             dict.Count
 
     type FieldMap<'T> =
@@ -35,18 +35,18 @@ module SheetBuilder =
                 Hash = System.Guid.NewGuid().ToString()
             }
 
-            static member create<'T>(mapRow: 'T -> FsCell -> FsCell) =
+            static member create<'T>(mapRow : 'T -> FsCell -> FsCell) =
                 let empty = FieldMap<'T>.empty()
                 { empty with 
                     CellTransformers = List.append empty.CellTransformers [mapRow] 
                 }
 
-            member self.header(name: string) =
-                let transformer _ (cell: FsCell) = cell.SetValueAs(name); cell
+            member self.header(name : string) =
+                let transformer _ (cell : FsCell) = cell.SetValueAs(name); cell
                 { self with HeaderTransformers = List.append self.HeaderTransformers [transformer] }
 
-            member self.header(mapHeader: 'T -> string) =
-                let transformer (value : 'T) (cell: FsCell) = cell.SetValueAs(mapHeader value); cell
+            member self.header(mapHeader : 'T -> string) =
+                let transformer (value : 'T) (cell : FsCell) = cell.SetValueAs(mapHeader value); cell
                 { self with HeaderTransformers = List.append self.HeaderTransformers [transformer] }
 
             member self.adjustToContents() =
@@ -69,7 +69,7 @@ module SheetBuilder =
 
     type FsTable with 
 
-        member self.Populate(cells : FsCellsCollection, data : seq<'T>, fields: FieldMap<'T> list) =
+        member self.Populate(cells : FsCellsCollection, data : seq<'T>, fields : FieldMap<'T> list) =
             let headerTransformerGroups = fields |> List.map (fun field -> field.HeaderTransformers)
             let noHeadersAvailable =
                 headerTransformerGroups
@@ -124,12 +124,12 @@ module SheetBuilder =
                     //| None ->
                     //    ()
 
-        static member populate<'T>(table : FsTable, cells : FsCellsCollection, data : seq<'T>, fields: FieldMap<'T> list) : unit =
+        static member populate<'T> (table : FsTable, cells : FsCellsCollection, data : seq<'T>, fields : FieldMap<'T> list) : unit =
             table.Populate(cells,data,fields)
 
     type FsWorksheet with
         
-        member self.Populate(data : seq<'T>, fields: FieldMap<'T> list) =
+        member self.Populate(data : seq<'T>, fields : FieldMap<'T> list) =
             let headerTransformerGroups = fields |> List.map (fun field -> field.HeaderTransformers)
             let noHeadersAvailable =
                 headerTransformerGroups
@@ -191,18 +191,18 @@ module SheetBuilder =
 
             self.SortRows()
 
-        static member populate<'T>(sheet: FsWorksheet, data: seq<'T>, fields: FieldMap<'T> list) : unit =
+        static member populate<'T>(sheet : FsWorksheet, data : seq<'T>, fields : FieldMap<'T> list) : unit =
             sheet.Populate(data,fields)
 
-        static member createFrom(name: string, data: seq<'T>, fields: FieldMap<'T> list) (*: byte[]*) =          
+        static member createFrom (name : string, data : seq<'T>, fields : FieldMap<'T> list) (*: byte[]*) =          
             let sheet = FsWorksheet(name)
             FsWorksheet.populate(sheet, data, fields)
             sheet
 
-        static member createFrom(data: seq<'T>, fields: FieldMap<'T> list) (*: byte[]*) =
+        static member createFrom (data : seq<'T>, fields : FieldMap<'T> list) (*: byte[]*) =
             FsWorksheet.createFrom("Sheet1", data, fields)
             
-        member self.PopulateTable(tableName : string, startAddress : FsAddress, data : seq<'T>, fields: FieldMap<'T> list) =
+        member self.PopulateTable(tableName : string, startAddress : FsAddress, data : seq<'T>, fields : FieldMap<'T> list) =
             let headerTransformerGroups = fields |> List.map (fun field -> field.HeaderTransformers)
             let noHeadersAvailable =
                 headerTransformerGroups
@@ -217,7 +217,7 @@ module SheetBuilder =
 
             self.SortRows()
 
-        static member createTableFrom(name: string, tableName : string, data: seq<'T>, fields: FieldMap<'T> list) (*: byte[]*) =          
+        static member createTableFrom (name : string, tableName : string, data : seq<'T>, fields : FieldMap<'T> list) (*: byte[]*) =          
             let sheet = FsWorksheet(name)
             sheet.PopulateTable(tableName, FsAddress (1,1), data, fields)
             sheet
@@ -226,22 +226,23 @@ module SheetBuilder =
 
     type FsWorkbook with
 
-        member self.Populate<'T>(name : string, data: seq<'T>, fields: FieldMap<'T> list) : unit =
-            let sheet = self.AddWorksheet(name)
-            FsWorksheet.populate(sheet,data,fields)     
+        member self.Populate<'T>(name : string, data : seq<'T>, fields : FieldMap<'T> list) : unit =
+            self.AddWorksheet(name)
+            let sheet = self.GetWorksheets() |> Seq.find (fun s -> s.Name = name)
+            FsWorksheet.populate(sheet, data, fields)
 
-        static member populate<'T>(workbook: FsWorkbook, name : string, data: seq<'T>, fields: FieldMap<'T> list) : unit =
-            workbook.Populate(name,data,fields)       
+        static member populate<'T> (workbook : FsWorkbook, name : string, data : seq<'T>, fields : FieldMap<'T> list) : unit =
+            workbook.Populate(name, data, fields)
 
-        static member createFrom(name: string, data: seq<'T>, fields: FieldMap<'T> list) (*: byte[]*) =
+        static member createFrom (name : string, data : seq<'T>, fields : FieldMap<'T> list) (*: byte[]*) =
             let workbook = new FsWorkbook()
             FsWorkbook.populate(workbook, name, data, fields)
             workbook
 
-        static member createFrom(data: seq<'T>, fields: FieldMap<'T> list) (*: byte[]*) =
+        static member createFrom (data: seq<'T>, fields: FieldMap<'T> list) (*: byte[]*) =
             FsWorkbook.createFrom("Sheet1", data, fields)
 
-        static member createFrom(sheets : FsWorksheet list)=
+        static member createFrom (sheets : FsWorksheet list)=
             let workbook = new FsWorkbook()
             sheets
             |> List.iter (fun sheet -> workbook.AddWorksheet(sheet) |> ignore)
