@@ -5,8 +5,20 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <Authors>Heinrich Lukas Weil, Oliver Maus, Kevin Schneider, Timo Mühlhaus</Authors>
+    <Description>CSV IO Extensions for the FsSpreadsheet Datamodel</Description>
+    <Summary>CSV IO Extensions for the FsSpreadsheet Datamodel</Summary>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIcon>logo.png</PackageIcon>
+    <PackageTags>F# FSharp spreadsheet csv datascience</PackageTags>
+    <RepositoryUrl>https://github.com/CSBiology/FsSpreadsheet</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
+  
   <ItemGroup>
     <Compile Include="FsExtension.fs" />
+    <None Include="..\..\docs\img\logo.png" Pack="true" PackagePath="\" />
   </ItemGroup>
 
   <ItemGroup>

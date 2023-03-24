@@ -5,6 +5,17 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <Authors>Heinrich Lukas Weil, Oliver Maus, Kevin Schneider, Timo Mühlhaus</Authors>
+    <Description>Excel IO Extensions for the FsSpreadsheet Datamodel</Description>
+    <Summary>Excel IO Extensions for the FsSpreadsheet Datamodel</Summary>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIcon>logo.png</PackageIcon>
+    <PackageTags>F# FSharp spreadsheet xlsx datascience</PackageTags>
+    <RepositoryUrl>https://github.com/CSBiology/FsSpreadsheet</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
+
   <ItemGroup>
     <Compile Include="SharedStringTable.fs" />
     <Compile Include="Cell.fs" />
@@ -21,6 +32,7 @@
 
   <ItemGroup>
     <PackageReference Include="DocumentFormat.OpenXml" Version="[2.12.3]" />
+    <None Include="..\..\docs\img\logo.png" Pack="true" PackagePath="\" />
   </ItemGroup>
 
   <ItemGroup>
