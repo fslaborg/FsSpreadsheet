@@ -90,14 +90,14 @@ module SheetBuilder =
 
                     let headerCell = FsCell.createEmpty()
                     for header in field.HeaderTransformers do ignore (header row headerCell)
-                
-                     
+
+
                     let headerString = 
                         if headerCell.Value = "" then 
                             field.Hash 
                         else headerCell.Value
 
-                    let tableField = self.Field(headerString,cells)                
+                    let tableField = self.Field(headerString,cells)
 
                     let activeCell = tableField.Column.Cell(activeRowIndex,cells) // .Cell(index,self.CellCollection)
                     for transformer in field.CellTransformers do
@@ -201,7 +201,7 @@ module SheetBuilder =
 
         static member createFrom (data : seq<'T>, fields : FieldMap<'T> list) (*: byte[]*) =
             FsWorksheet.createFrom("Sheet1", data, fields)
-            
+
         member self.PopulateTable(tableName : string, startAddress : FsAddress, data : seq<'T>, fields : FieldMap<'T> list) =
             let headerTransformerGroups = fields |> List.map (fun field -> field.HeaderTransformers)
             let noHeadersAvailable =

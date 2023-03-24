@@ -22,7 +22,25 @@ open DocumentFormat.OpenXml
 
 // some other bugfixes
 
-
+//let lolCell = Cell.fromValueWithDataType None 1u 1u "3/3" DataType.String
+let lolCell = Cell.create Spreadsheet.CellValues.String "A1" <| Spreadsheet.CellValue("3/3")
+//let lolCell = Cell.create Spreadsheet.CellValues.InlineString "A1" <| Spreadsheet.CellValue("3/3")
+let ssd = Spreadsheet.init "test" @"C:\Users\revil\Downloads\test.xlsx"
+let wbp = Spreadsheet.getWorkbookPart ssd
+let wb = Workbook.get wbp
+let shts = Sheet.Sheets.get wb
+let sht1 = Sheet.Sheets.getFirstSheet shts
+let sd1 = Spreadsheet.tryGetSheetBySheetName "test" ssd |> Option.get
+SheetData.tryGetCellAt 1u 1u sd1
+let rw = Row.empty()
+Row.getRowValues None rw |> Seq.toArray
+Row.setIndex 1u rw
+Row.getIndex rw
+Row.appendCell lolCell rw
+SheetData.appendRow rw sd1
+Sheet.countSheets ssd
+ssd.Save()
+ssd.Close()
 
 let dslTree = 
     workbook {
