@@ -14,7 +14,7 @@
 
   <PropertyGroup>
     <Authors>Heinrich Lukas Weil, Oliver Maus, Kevin Schneider, Timo Mühlhaus</Authors>
-    <Description>A .NET Interactive Kernel Extension for displaying the FsSpreadsheet datamodel.l</Description>
+    <Description>A .NET Interactive Kernel Extension for displaying the FsSpreadsheet datamodel.</Description>
     <Summary>A .NET Interactive Kernel Extension for displaying the FsSpreadsheet datamodel.</Summary>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageIcon>logo.png</PackageIcon>
