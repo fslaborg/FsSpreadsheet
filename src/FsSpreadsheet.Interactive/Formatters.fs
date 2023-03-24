@@ -7,7 +7,7 @@ module Formatters =
     
     let formatWorkbook (workbook: FsWorkbook) =
         div [] [
-            style [] [str ".fs-table, .fs-th, .fs-td { border: 1px solid black; text-align: left; border-collapse: collapse;}"]
+            style [] [str ".fs-table, .fs-th, .fs-td { border: 1px solid black !important; text-align: left; border-collapse: collapse;}"]
             h3 [] [ str $"FsWorkbook with {workbook.GetWorksheets().Length} worksheets:" ]
             table [_class "fs-table"] [
                 thead [] [
@@ -45,7 +45,7 @@ module Formatters =
             |> FsSparseMatrix.toArray2D
 
         div [] [
-            style [] [str ".fs-table, .fs-th, .fs-td { border: 1px solid black; text-align: left; border-collapse: collapse;}"]
+            style [] [str ".fs-table, .fs-th, .fs-td { border: 1px solid black !important; text-align: left; border-collapse: collapse;}"]
             h3 [] [ str worksheet.Name ]
             table [
                 _class "fs-table"
