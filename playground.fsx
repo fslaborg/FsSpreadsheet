@@ -1,5 +1,3 @@
-#r "nuget: DocumentFormat.OpenXml"
-
 open System.IO
 
 Directory.GetCurrentDirectory()
@@ -11,6 +9,8 @@ File.Copy("src/FsSpreadsheet.ExcelIO/bin/Debug/netstandard2.0/FsSpreadsheet.Exce
 #r "src/FsSpreadsheet.CsvIO/bin/Debug/netstandard2.0/FsSpreadsheet.CsvIO_Copy.dll"
 #r "src/FsSpreadsheet.ExcelIO/bin/Debug/netstandard2.0/FsSpreadsheet.ExcelIO_Copy.dll"
 
+#r "nuget: DocumentFormat.OpenXml"
+
 
 open FsSpreadsheet
 open FsSpreadsheet.ExcelIO
@@ -21,6 +21,8 @@ open DocumentFormat.OpenXml
 // ----------------------------------------------
 
 // some other bugfixes
+
+
 
 let dslTree = 
     workbook {
@@ -38,6 +40,7 @@ let dslTree =
         }
     }
 let spreadsheet = dslTree.Value.Parse()
+spreadsheet.GetWorksheets().Head.CellCollection.GetCells() |> List.ofSeq
 
 let assayTf = @"C:\Users\olive\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
 let xlSsd = Spreadsheet.fromFile assayTf false

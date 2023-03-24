@@ -9,20 +9,20 @@
 /// <exception cref="System.Exception">if given FsCellsCollection has more than 1 row.</exception>
 type FsRow (rangeAddress : FsRangeAddress, cells : FsCellsCollection, styleValue)= 
 
-    inherit FsRangeBase(rangeAddress,styleValue)
+    inherit FsRangeBase(rangeAddress, styleValue)
 
     let cells = cells
 
-    new () = FsRow (FsRangeAddress(FsAddress(0,0),FsAddress(0,0)),FsCellsCollection(),null)
+    new() = FsRow (FsRangeAddress(FsAddress(0,0),FsAddress(0,0)),FsCellsCollection(),null)
 
     /// <summary>
     /// Create an FsRow from a given FsCellsCollection and an rowIndex.
     /// </summary>
     /// <remarks>The appropriate range of the cells (i.e. minimum colIndex and maximum colIndex) is derived from the FsCells with the matching rowIndex.</remarks>
-    new (index, (cells : FsCellsCollection)) = 
+    new(index, (cells : FsCellsCollection)) = 
         let getIndexBy (f : (FsCell -> int) -> seq<FsCell> -> FsCell) = 
             match cells.GetCellsInRow index |> Seq.length with
-            | 0 -> 0
+            | 0 -> 1
             | _ ->
                 (
                     cells.GetCellsInRow index 
