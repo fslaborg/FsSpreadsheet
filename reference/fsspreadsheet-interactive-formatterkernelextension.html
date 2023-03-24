@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>ColumnIndex (FsSpreadsheet)</title>
+    <title>FormatterKernelExtension (FsSpreadsheet)</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="author" content="Heinrich Lukas Weil, Oliver Maus, Kevin Schneider, Timo Mühlhaus">
     <link rel="shortcut icon" type="image/x-icon" href="/FsSpreadsheet//img/favicon.ico">
@@ -73,17 +73,17 @@
                 <div class="container" id="fsdocs-content">
                     <div>
   <h2>
-    ColumnIndex Type
+    FormatterKernelExtension Type
   </h2>
   <dl class="fsdocs-metadata">
     <dt>
       Namespace: 
-      <a href="/FsSpreadsheet/reference/fsspreadsheet-dsl.html">
-        FsSpreadsheet.DSL
+      <a href="/FsSpreadsheet/reference/fsspreadsheet-interactive.html">
+        FsSpreadsheet.Interactive
       </a>
     </dt>
     <dt>
-      Assembly: FsSpreadsheet.dll
+      Assembly: FsSpreadsheet.Interactive.dll
     </dt>
     <dt>
       Base Type: 
@@ -91,15 +91,7 @@
     </dt>
     <dt>
       All Interfaces: 
-      <code><span><a href="https://docs.microsoft.com/dotnet/api/system.iequatable-1">IEquatable</a>&lt;<a href="/FsSpreadsheet/reference/fsspreadsheet-dsl-columnindex.html">ColumnIndex</a>&gt;</span></code>
-      , 
-      <code><a href="https://docs.microsoft.com/dotnet/api/system.collections.istructuralequatable">IStructuralEquatable</a></code>
-      , 
-      <code><span><a href="https://docs.microsoft.com/dotnet/api/system.icomparable-1">IComparable</a>&lt;<a href="/FsSpreadsheet/reference/fsspreadsheet-dsl-columnindex.html">ColumnIndex</a>&gt;</span></code>
-      , 
-      <code><a href="https://docs.microsoft.com/dotnet/api/system.icomparable">IComparable</a></code>
-      , 
-      <code><a href="https://docs.microsoft.com/dotnet/api/system.collections.istructuralcomparable">IStructuralComparable</a></code>
+      <code><a href="https://docs.microsoft.com/dotnet/api/microsoft.dotnet.interactive.ikernelextension">IKernelExtension</a></code>
     </dt>
   </dl>
   <div class="fsdocs-xmldoc">
@@ -112,15 +104,18 @@
   <div></div>
   <div></div>
   <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
   <div>
     <h3>
-      Union cases
+      Constructors
     </h3>
     <table class="table outer-list fsdocs-member-list">
       <thead>
         <tr>
           <td class="fsdocs-member-list-header">
-            Union case
+            Constructor
           </td>
           <td class="fsdocs-member-list-header">
             Description
@@ -131,102 +126,24 @@
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '737', 737)" onmouseover="showTip(event, '737', 737)">
+              <code onmouseout="hideTip(event, '898', 898)" onmouseover="showTip(event, '898', 898)">
                 <p>
-                  <a id="Col">
-                    <a href="#Col">
-                      <code><span>Col&#32;int</span></code>
+                  <a id="``.ctor``">
+                    <a href="#``.ctor``">
+                      <code><span>FormatterKernelExtension<span>()</span></span></code>
                     </a>
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="737">
+              <div class="fsdocs-tip" id="898">
                 <div class="member-tooltip">
                   Full Usage: 
-                  <code><span>Col&#32;int</span></code>
-                  <br/>
-                  <br/>
-                  Parameters: 
-                  <ul>
-                    <span>
-                      <b>
-                        Item
-                      </b>
-                      :
-                      <code>int</code>
-                    </span>
-                    <br/>
-                  </ul>
-                  <br/>
-                </div>
-              </div>
-            </div>
-          </td>
-          <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/DSL/Types.fs#L96-96" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
-              </p>
-            </div>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  Item
-                </span>
-                :
-                <code>int</code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <div></div>
-  <div></div>
-  <div></div>
-  <div>
-    <h3>
-      Instance members
-    </h3>
-    <table class="table outer-list fsdocs-member-list">
-      <thead>
-        <tr>
-          <td class="fsdocs-member-list-header">
-            Instance member
-          </td>
-          <td class="fsdocs-member-list-header">
-            Description
-          </td>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="fsdocs-member-usage">
-            <div>
-              <code onmouseout="hideTip(event, '738', 738)" onmouseover="showTip(event, '738', 738)">
-                <p>
-                  <a id="Index">
-                    <a href="#Index">
-                      <code><span>this.Index</span></code>
-                    </a>
-                  </a>
-                </p>
-              </code>
-              <div class="fsdocs-tip" id="738">
-                <div class="member-tooltip">
-                  Full Usage: 
-                  <code><span>this.Index</span></code>
+                  <code><span>FormatterKernelExtension<span>()</span></span></code>
                   <br/>
                   <br/>
                   <span>
                     Returns: 
-                    <code>int</code>
+                    <code><a href="/FsSpreadsheet/reference/fsspreadsheet-interactive-formatterkernelextension.html">FormatterKernelExtension</a></code>
                   </span>
                   <br/>
                 </div>
@@ -235,15 +152,15 @@
           </td>
           <td class="fsdocs-member-xmldoc">
             <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:P:FsSpreadsheet.DSL.ColumnIndex.Index`')">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Interactive.FormatterKernelExtension.#ctor`')">
                 <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
               </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'P:FsSpreadsheet.DSL.ColumnIndex.Index\'/>')">
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Interactive.FormatterKernelExtension.#ctor\'/>')">
                 <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/DSL/Types.fs#L98-98" class="fsdocs-source-link" title="Source on GitHub">
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Interactive/Extension.fs#L9-9" class="fsdocs-source-link" title="Source on GitHub">
                 <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
               </a>
@@ -256,7 +173,7 @@
                 <span class="fsdocs-return-name">
                   Returns: 
                 </span>
-                <code>int</code>
+                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-interactive-formatterkernelextension.html">FormatterKernelExtension</a></code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -265,6 +182,7 @@
       </tbody>
     </table>
   </div>
+  <div></div>
   <div></div>
 </div>
                 </div>
