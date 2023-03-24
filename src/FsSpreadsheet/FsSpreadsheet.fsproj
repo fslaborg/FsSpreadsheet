@@ -33,6 +33,7 @@
     <Compile Include="DSL\DSL.fs" />
     <Compile Include="DSL\Operators.fs" />
     <Compile Include="DSL\Transform.fs" />
+    <None Include="..\..\docs\img\logo.png" Pack="true" PackagePath="\" />
   </ItemGroup>
 
   <PropertyGroup>
@@ -40,7 +41,7 @@
     <Description>Spreadsheet creation and manipulation in FSharp</Description>
     <Summary>Spreadsheet creation and manipulation in FSharp</Summary>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageIconUrl>https://fslab.org/docs-template/img/logo.png</PackageIconUrl>
+    <PackageIcon>logo.png</PackageIcon>
     <PackageTags>F# FSharp spreadsheet Excel datascience</PackageTags>
     <RepositoryUrl>https://github.com/CSBiology/FsSpreadsheet</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
