@@ -38,11 +38,15 @@ type FsCellsCollection() =
         with get () = _count
         and private set(count) = _count <- count
 
-    /// <summary>The highest rowIndex in The FsCellsCollection.</summary>
+    /// <summary>
+    /// The highest rowIndex in The FsCellsCollection.
+    /// </summary>
     /// <remarks>Do not confuse with the number of rows in the FsCellsCollection.</remarks>
     member this.MaxRowNumber = _maxRowUsed
 
-    /// <summary>The highest columnIndex in The FsCellsCollection.</summary>
+    /// <summary>
+    /// The highest columnIndex in The FsCellsCollection.
+    /// </summary>
     /// <remarks>Do not confuse with the number of columns in the FsCellsCollection.</remarks>
     member this.MaxColumnNumber = _maxColumnUsed
 
