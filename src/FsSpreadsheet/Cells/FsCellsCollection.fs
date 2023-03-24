@@ -13,6 +13,9 @@ module Dictionary =
         else None
 
 
+/// <summary>
+///
+/// </summary>
 type FsCellsCollection() =
 
     // ---------
