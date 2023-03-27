@@ -24,13 +24,29 @@ let dummyFsCells =
     ]
     |> Seq.concat
 let dummyFsCellsCollection = FsCellsCollection()
-dummyFsCells |> Seq.iter (dummyFsCellsCollection.Add >> ignore)
+dummyFsCells |> Seq.iter dummyFsCellsCollection.Add
 
 
 
 [<Tests>]
 let fsCellsCollectionTests =
     testList "FsCellsCollection" [
+        testList "MaxRowNumber" [
+            testCase "Returns correct maximum row index" <| fun _ ->
+                Expect.equal dummyFsCellsCollection.MaxRowNumber 3 "Is not the expected row index"
+        ]
+        testList "MinRowNumber" [
+            testCase "Returns correct minimum row index" <| fun _ ->
+                Expect.equal dummyFsCellsCollection.MinRowNumber 1 "Is not the expected row index"
+        ]
+        testList "MaxColNumber" [
+            testCase "Returns correct maximum column index" <| fun _ ->
+                Expect.equal dummyFsCellsCollection.MaxColumnNumber 3 "Is not the expected column index"
+        ]
+        testList "MinColNumber" [
+            testCase "Returns correct minimum column index" <| fun _ ->
+                Expect.equal dummyFsCellsCollection.MinColNumber 1 "Is not the expected column index"
+        ]
         testList "Add | GetCells" [
             testCase "FsCells are present" <| fun _ ->
                 let gottenCells = dummyFsCellsCollection.GetCells()
