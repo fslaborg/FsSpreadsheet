@@ -38,7 +38,7 @@ type FsCellsCollection() =
     // ----------
 
     member this.Count 
-        with get () = _count
+        with get() = _count
         and private set(count) = _count <- count
 
     /// <summary>
@@ -52,6 +52,31 @@ type FsCellsCollection() =
     /// </summary>
     /// <remarks>Do not confuse with the number of columns in the FsCellsCollection.</remarks>
     member this.MaxColumnNumber = _maxColumnUsed
+
+    /// <summary>
+    /// The lowest rowIndex in The FsCellsCollection.
+    /// </summary>
+    member this.MinRowNumber =
+        if _rowsCollection.Count = 0 then 0
+        else _rowsCollection.Keys |> Seq.min
+
+    /// <summary>
+    /// The lowest rowIndex in The FsCellsCollection.
+    /// </summary>
+    member this.MinColNumber =
+        // no rows
+        if _rowsCollection.Count = 0 then 0
+        // no columns
+        elif (_rowsCollection.Values |> Seq.collect (fun d -> d.Keys) |> Seq.length) = 0 then 0
+        else
+            _rowsCollection.Values
+            |> Seq.collect (fun d -> d.Keys)
+            |> Seq.min
+
+    member this.Item
+        with get(i,j) = 
+            try (_rowsCollection.Item i).Item j
+            with _ -> failwith $"There is no FsCell at row {i}, column {j}"
 
 
     // -------
