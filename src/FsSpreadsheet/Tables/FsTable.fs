@@ -3,9 +3,9 @@
 open System.Collections.Generic
 
 /// <summary>
-/// Creates an FsTable from the given name and FsRangeAddres, with totals row shown and header row shown or not, accordingly.
+/// Creates an FsTable from the given name and FsRangeAddress, with totals row shown and header row shown or not, accordingly.
 /// </summary>
-type FsTable (name : string, rangeAddress, showTotalsRow, showHeaderRow) = 
+type FsTable(name : string, rangeAddress, cellsCollection : FsCellsCollection, showTotalsRow, showHeaderRow) = 
 
     inherit FsRangeBase(rangeAddress)
 
@@ -15,26 +15,57 @@ type FsTable (name : string, rangeAddress, showTotalsRow, showHeaderRow) =
     let mutable _showTotalsRow : bool = showTotalsRow
     let mutable _showHeaderRow : bool = showHeaderRow
 
+    let mutable _cellsCollection = cellsCollection
+
     let mutable _fieldNames : Dictionary<string,FsTableField> = Dictionary()
     let _uniqueNames : HashSet<string> = HashSet()
 
     /// <summary>
-    /// Creates an FsTable from the given name and FsRangeAddres, with header row shown or not, accordingly.
+    /// Creates an FsTable from the given name and FsRangeAddress, with header row shown or not, accordingly.
     /// </summary>
-    /// <remarks>`showTotalsRow` is false by default.</remarks>
-    new (name, rangeAddress, showHeaderRow) = FsTable (name, rangeAddress, false, showHeaderRow)
+    /// <remarks>`showTotalsRow` is false and `cellsCollection` is empty, by default.</remarks>
+    new(name, rangeAddress, showHeaderRow) = FsTable(name, rangeAddress, FsCellsCollection(), false, showHeaderRow)
 
     /// <summary>
-    /// Creates an FsTable from the given name and FsRangeAddres.
+    /// Creates an FsTable from the given name, FsCellsCollection, and FsRangeAddress, with header row shown or not, accordingly.
     /// </summary>
-    /// <remarks>`showTotalsRow` is false and `showHeaderRow` true, by default.</remarks>
-    new (name, rangeAddress) = FsTable (name, rangeAddress, false, true)
+    /// <remarks>`showTotalsRow` is false by default.</remarks>
+    new(name, rangeAddress, cellsCollection, showHeaderRow) = FsTable(name, rangeAddress, cellsCollection, false, showHeaderRow)
+
+    /// <summary>
+    /// Creates an FsTable from the given name and FsRangeAddress.
+    /// </summary>
+    /// <remarks>`showTotalsRow` is false, `cellsCollection` is empty and `showHeaderRow` true, by default.</remarks>
+    new(name, rangeAddress) = FsTable(name, rangeAddress, FsCellsCollection(), false, true)
+
+    /// <summary>
+    /// Creates an FsTable from the given name, FsCellsCollection, and FsRangeAddress.
+    /// </summary>
+    /// <remarks>`showTotalsRow` is false, and `showHeaderRow` true, by default.</remarks>
+    new(name, rangeAddress, cellsCollection) = FsTable(name, rangeAddress, cellsCollection, false, true)
 
     /// <summary>
     /// The name of the FsTable.
     /// </summary>
     member self.Name 
         with get() = _name
+
+    member self.CellsCollection
+        with get() = _cellsCollection
+
+    member self.Item
+        with get(i,j) =
+            let iMin = self.GetFirstRowIndex()
+            let iMax = self.GetLastRowIndex()
+            let jMin = self.GetFirstColIndex()
+            let jMax = self.GetLastColIndex()
+            match i,j with
+            // out of range case
+            | x,y when x > iMax || x < iMin || y > jMax || y < jMin
+                -> raise (System.IndexOutOfRangeException($"Item {i},{j} is out of range {self.RangeAddress.Range}"))
+            | _ -> 
+                try cellsCollection[i,j]
+                with _ -> ()
 
     /// <summary>
     /// Returns all fieldnames as `fieldname*FsTableField` dictionary.
@@ -438,10 +469,59 @@ type FsTable (name : string, rangeAddress, showTotalsRow, showHeaderRow) =
         let ra = this.RangeAddress.Copy()
         let nam = this.Name
         let shr = this.ShowHeaderRow
-        FsTable(nam, ra, false, shr)
+        let fcc = this.CellsCollection.Copy()
+        FsTable(nam, ra, fcc, false, shr)
 
     /// <summary>
     /// Returns a deep copy of a given FsTable.
     /// </summary>
     static member copy (table : FsTable) =
         table.Copy()
+
+    /// <summary>
+    /// Returns the index of the first row of the FsTable.
+    /// </summary>
+    member this.GetFirstRowIndex() =
+        this.RangeAddress.FirstAddress.RowNumber
+
+    /// <summary>
+    /// Returns the index of the first row of a given FsTable.
+    /// </summary>
+    static member getFirstRowIndex (table : FsTable) =
+        table.GetFirstRowIndex()
+
+    /// <summary>
+    /// Returns the index of the last row of the FsTable.
+    /// </summary>
+    member this.GetLastRowIndex() =
+        this.RangeAddress.LastAddress.RowNumber
+
+    /// <summary>
+    /// Returns the index of the last row of a given FsTable.
+    /// </summary>
+    static member getLastRowIndex (table : FsTable) =
+        table.GetFirstRowIndex()
+
+    /// <summary>
+    /// Returns the index of the first column of the FsTable.
+    /// </summary>
+    member this.GetFirstColIndex() =
+        this.RangeAddress.FirstAddress.ColumnNumber
+
+    /// <summary>
+    /// Returns the index of the first column of a given FsTable.
+    /// </summary>
+    static member getFirstColIndex (table : FsTable) =
+        table.GetFirstRowIndex()
+
+    /// <summary>
+    /// Returns the index of the last column of the FsTable.
+    /// </summary>
+    member this.GetLastColIndex() =
+        this.RangeAddress.LastAddress.ColumnNumber
+
+    /// <summary>
+    /// Returns the index of the last column of a given FsTable.
+    /// </summary>
+    static member getLastColIndex (table : FsTable) =
+        table.GetLastRowIndex()
