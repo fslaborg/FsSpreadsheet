@@ -31,6 +31,16 @@ dummyFsCells |> Seq.iter dummyFsCellsCollection.Add
 [<Tests>]
 let fsCellsCollectionTests =
     testList "FsCellsCollection" [
+        testList "Item" [
+            testCase "Returns correct FsCell in terms of value" <| fun _ ->
+                Expect.equal dummyFsCellsCollection[2,3].Value "C2" "Returns incorrect FsCell value"
+            testList "Throws when FsCell does not exist" [
+                testCase "Inexistent column" <| fun _ ->
+                    Expect.throws (fun _ -> dummyFsCellsCollection[2,8].Value |> ignore) "Does not throw when column does not exist"
+                testCase "Inexistent row" <| fun _ ->
+                    Expect.throws (fun _ -> dummyFsCellsCollection[8,3].Value |> ignore) "Does not throw when row does not exist"
+            ]
+        ]
         testList "MaxRowNumber" [
             testCase "Returns correct maximum row index" <| fun _ ->
                 Expect.equal dummyFsCellsCollection.MaxRowNumber 3 "Is not the expected row index"
