@@ -2,8 +2,6 @@
 
 [<AbstractClass>][<AllowNullLiteral>]
 type FsRangeBase (rangeAddress : FsRangeAddress, styleValue) = 
-    //: XLStylizedBase, IXLRangeBase, IXLStylized
-
 
     let mutable _sortRows    = null
     let mutable _sortColumns = null
@@ -44,7 +42,7 @@ type FsRangeBase (rangeAddress : FsRangeAddress, styleValue) =
             failwithf "Row number must be between 1 and %i" cells.MaxRowNumber
 
         if (absColumn <= 0 || absColumn > 16384) then
-            failwithf "Column number must be between 1 and %i" cells.MaxColNumber
+            failwithf "Column number must be between 1 and %i" cells.MaxColumnNumber
 
         let cell = cells.TryGetCell(absRow, absColumn)
         

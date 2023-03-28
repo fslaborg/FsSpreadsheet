@@ -64,11 +64,11 @@ let fsCellsCollectionTests =
         ]
         testList "MaxColNumber" [
             testCase "Returns correct maximum column index" <| fun _ ->
-                Expect.equal dummyFsCellsCollection.MaxColNumber 3 "Is not the expected column index"
+                Expect.equal dummyFsCellsCollection.MaxColumnNumber 3 "Is not the expected column index"
         ]
         testList "MinColNumber" [
             testCase "Returns correct minimum column index" <| fun _ ->
-                Expect.equal dummyFsCellsCollection.MinColNumber 1 "Is not the expected column index"
+                Expect.equal dummyFsCellsCollection.MinColumnNumber 1 "Is not the expected column index"
         ]
         testList "Add | GetCells" [
             testCase "FsCells are present" <| fun _ ->

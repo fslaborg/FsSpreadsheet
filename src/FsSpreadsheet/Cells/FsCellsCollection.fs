@@ -51,7 +51,7 @@ type FsCellsCollection() =
     /// The highest columnIndex in The FsCellsCollection.
     /// </summary>
     /// <remarks>Do not confuse with the number of columns in the FsCellsCollection.</remarks>
-    member this.MaxColNumber = _maxColumnUsed
+    member this.MaxColumnNumber = _maxColumnUsed
 
     /// <summary>
     /// The lowest rowIndex in The FsCellsCollection.
@@ -63,7 +63,7 @@ type FsCellsCollection() =
     /// <summary>
     /// The lowest rowIndex in The FsCellsCollection.
     /// </summary>
-    member this.MinColNumber =
+    member this.MinColumnNumber =
         // no rows
         if _rowsCollection.Count = 0 then 0
         // no columns
@@ -94,8 +94,8 @@ type FsCellsCollection() =
     member this.GetSlice(start1, end1, start2, end2) =
         let start1' = Option.defaultValue this.MinRowNumber start1
         let end1'   = Option.defaultValue this.MaxRowNumber end1
-        let start2' = Option.defaultValue this.MinColNumber start2
-        let end2'   = Option.defaultValue this.MaxColNumber end2
+        let start2' = Option.defaultValue this.MinColumnNumber start2
+        let end2'   = Option.defaultValue this.MaxColumnNumber end2
         seq {
             for i = start1' to end1' do 
                 seq {
@@ -109,8 +109,8 @@ type FsCellsCollection() =
     /// </summary>
     /// <exception cref="System.ArgumentException">if one or several items do not exist in given range.</exception>
     member this.GetSlice(i, start2, end2) =
-        let start2' = Option.defaultValue this.MinColNumber start2
-        let end2'   = Option.defaultValue this.MaxColNumber end2
+        let start2' = Option.defaultValue this.MinColumnNumber start2
+        let end2'   = Option.defaultValue this.MaxColumnNumber end2
         seq {
             for j = start2' to end2' do
                 this[i,j]
@@ -121,8 +121,8 @@ type FsCellsCollection() =
     /// </summary>
     /// <exception cref="System.ArgumentException">if one or several items do not exist in given range.</exception>
     member this.GetSlice(start1, end1, j) =
-        let start1' = Option.defaultValue this.MinColNumber start1
-        let end1'   = Option.defaultValue this.MaxColNumber end1
+        let start1' = Option.defaultValue this.MinColumnNumber start1
+        let end1'   = Option.defaultValue this.MaxColumnNumber end1
         //try 
         seq {
             for i = start1' to end1' do
@@ -767,7 +767,7 @@ type FsCellsCollection() =
     /// Returns the upper left corner of the FsCellsCollection.
     /// </summary>
     member this.GetFirstAddress() =
-        FsAddress(this.MinRowNumber, this.MinColNumber)
+        FsAddress(this.MinRowNumber, this.MinColumnNumber)
 
     /// <summary>
     /// Returns the upper left corner of a given FsCellsCollection.
@@ -779,7 +779,7 @@ type FsCellsCollection() =
     /// Returns the lower right corner of the FsCellsCollection.
     /// </summary>
     member this.GetLastAddress() =
-        FsAddress(this.MaxRowNumber, this.MaxColNumber)
+        FsAddress(this.MaxRowNumber, this.MaxColumnNumber)
 
     /// <summary>
     /// Returns the lower right corner of a given FsCellsCollection.

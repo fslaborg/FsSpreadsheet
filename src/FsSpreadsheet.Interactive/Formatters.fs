@@ -40,7 +40,7 @@ module Formatters =
             FsSparseMatrix.init 
                 "" 
                 (worksheet.CellCollection.MaxRowNumber)
-                (worksheet.CellCollection.MaxColNumber)
+                (worksheet.CellCollection.MaxColumnNumber)
                 cells
             |> FsSparseMatrix.toArray2D
 
@@ -51,7 +51,7 @@ module Formatters =
                 _class "fs-table"
             ] [
                 thead [] [
-                    for i in 0 .. worksheet.CellCollection.MaxColNumber ->
+                    for i in 0 .. worksheet.CellCollection.MaxColumnNumber ->
                         th [_class "fs-th"] [ str (string (CellReference.indexToColAdress (uint32 i))) ]
                 ]
                 tbody [] (
@@ -59,7 +59,7 @@ module Formatters =
                         tr [] [
                             td [_class "fs-td"] [str (string (i+1))]
                             yield! 
-                                List.init (worksheet.CellCollection.MaxColNumber) (fun j -> 
+                                List.init (worksheet.CellCollection.MaxColumnNumber) (fun j -> 
                                     td [_class "fs-td"] [ str matrix.[i,j] ]
                                 )
                         ]
