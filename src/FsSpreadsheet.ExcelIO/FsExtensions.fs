@@ -75,10 +75,11 @@ module FsExtensions =
         /// <summary>
         /// Takes an XlsxTable and returns an FsTable.
         /// </summary>
+        /// <remarks>The FsTable has an empty FsCellsCollection that needs to be filled with the appropriate FsCells.</remarks>
         static member fromXlsxTable table = 
             let topLeftBoundary, bottomRightBoundary = Table.getArea table |> Table.Area.toBoundaries
             let ra = FsRangeAddress(FsAddress(topLeftBoundary), FsAddress(bottomRightBoundary))
-            FsTable(table.Name, ra, table.TotalsRowShown, true)
+            FsTable(table.Name, ra, FsCellsCollection(), table.TotalsRowShown, true)
 
         /// <summary>
         /// Returns the FsWorksheet associated with the FsTable in a given FsWorkbook.

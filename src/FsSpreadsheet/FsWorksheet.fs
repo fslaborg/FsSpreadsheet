@@ -353,12 +353,12 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
     /// Returns the FsTable with the given tableName, rangeAddress, and showHeaderRow parameters. If it does not exist yet, it gets created and appended first.
     /// </summary>
     // TO DO: Ask HLW: Is this really a good name for the method?
-    member self.Table(tableName,rangeAddress,showHeaderRow) = 
+    member self.Table(tableName, rangeAddress : FsRangeAddress, showHeaderRow : bool) = 
         match _tables |> List.tryFind (fun table -> table.Name = name) with
         | Some table ->
             table
         | None -> 
-            let table = FsTable(tableName,rangeAddress,showHeaderRow)
+            let table = FsTable(tableName, rangeAddress, showHeaderRow)
             _tables <- List.append _tables [table]
             table
     

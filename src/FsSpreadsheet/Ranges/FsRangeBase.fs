@@ -44,7 +44,7 @@ type FsRangeBase (rangeAddress : FsRangeAddress, styleValue) =
             failwithf "Row number must be between 1 and %i" cells.MaxRowNumber
 
         if (absColumn <= 0 || absColumn > 16384) then
-            failwithf "Column number must be between 1 and %i" cells.MaxColumnNumber
+            failwithf "Column number must be between 1 and %i" cells.MaxColNumber
 
         let cell = cells.TryGetCell(absRow, absColumn)
         
