@@ -51,7 +51,7 @@ type FsCellsCollection() =
     /// The highest columnIndex in The FsCellsCollection.
     /// </summary>
     /// <remarks>Do not confuse with the number of columns in the FsCellsCollection.</remarks>
-    member this.MaxColumnNumber = _maxColumnUsed
+    member this.MaxColNumber = _maxColumnUsed
 
     /// <summary>
     /// The lowest rowIndex in The FsCellsCollection.
@@ -73,6 +73,10 @@ type FsCellsCollection() =
             |> Seq.collect (fun d -> d.Keys)
             |> Seq.min
 
+    /// <summary>
+    /// Returns the item at the given position.
+    /// </summary>
+    /// <exception cref="System.ArgumentException">if an item does not exist at given position.</exception>
     member this.Item
         with get(i,j) = 
             try (_rowsCollection.Item i).Item j
@@ -82,6 +86,49 @@ type FsCellsCollection() =
     // -------
     // METHODS
     // -------
+
+    /// <summary>
+    /// Returns a sequence of items at the given range.
+    /// </summary>
+    /// <exception cref="System.ArgumentException">if one or several items do not exist in given range.</exception>
+    member this.GetSlice(start1, end1, start2, end2) =
+        let start1' = Option.defaultValue this.MinRowNumber start1
+        let end1'   = Option.defaultValue this.MaxRowNumber end1
+        let start2' = Option.defaultValue this.MinColNumber start2
+        let end2'   = Option.defaultValue this.MaxColNumber end2
+        seq {
+            for i = start1' to end1' do 
+                seq {
+                    for j = start2' to end2' do
+                        this[i,j]
+                }
+        }
+
+    /// <summary>
+    /// Returns a sequence of items at the given range.
+    /// </summary>
+    /// <exception cref="System.ArgumentException">if one or several items do not exist in given range.</exception>
+    member this.GetSlice(i, start2, end2) =
+        let start2' = Option.defaultValue this.MinColNumber start2
+        let end2'   = Option.defaultValue this.MaxColNumber end2
+        seq {
+            for j = start2' to end2' do
+                this[i,j]
+        }
+
+    /// <summary>
+    /// Returns a sequence of items at the given range.
+    /// </summary>
+    /// <exception cref="System.ArgumentException">if one or several items do not exist in given range.</exception>
+    member this.GetSlice(start1, end1, j) =
+        let start1' = Option.defaultValue this.MinColNumber start1
+        let end1'   = Option.defaultValue this.MaxColNumber end1
+        //try 
+        seq {
+            for i = start1' to end1' do
+                this[i,j]
+        }
+        //with _ -> failwith $"There is no FsCell in given range {start1} .. {end1}, {start2} .. {end2}."
 
     /// <summary>
     /// Creates a deep copy of the FsCellsCollection.
@@ -732,7 +779,7 @@ type FsCellsCollection() =
     /// Returns the lower right corner of the FsCellsCollection.
     /// </summary>
     member this.GetLastAddress() =
-        FsAddress(this.MaxRowNumber, this.MaxColumnNumber)
+        FsAddress(this.MaxRowNumber, this.MaxColNumber)
 
     /// <summary>
     /// Returns the lower right corner of a given FsCellsCollection.
