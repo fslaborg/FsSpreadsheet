@@ -1,6 +1,6 @@
-### 1.0.1+304cea4 (Released 2023-3-29)
+### 1.1.0+304cea4 (Released 2023-3-29)
 * Additions:
-    * [[#1d3698b](https://github.com/CSBiology/FsSpreadsheet/commit/1d3698b1d55d4831890af8cc1936fc98703f1c7c)] Update Release Notes to v1.0.1
+    * [[#1d3698b](https://github.com/CSBiology/FsSpreadsheet/commit/1d3698b1d55d4831890af8cc1936fc98703f1c7c)] Update Release Notes to v1.1.0
     * [[#0f443f1](https://github.com/CSBiology/FsSpreadsheet/commit/0f443f1a700d272f1942c57486151e7f68da431d)] Replace unallowed constructor pattern
     * [[#38864cb](https://github.com/CSBiology/FsSpreadsheet/commit/38864cbc8322bee08493a5bceafeeecc57305c16)] Add critical error when creating FsRows
     * [[#d5f599b](https://github.com/CSBiology/FsSpreadsheet/commit/d5f599bc73d14ddba8f44a1c20f987677b962b7a)] Update ///-comments & test CellValues
