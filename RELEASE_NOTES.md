@@ -1,10 +1,31 @@
-### 1.0.1+99dfa53 (Released 2023-3-23)
+### 1.0.1+304cea4 (Released 2023-3-29)
 * Additions:
+    * [[#1d3698b](https://github.com/CSBiology/FsSpreadsheet/commit/1d3698b1d55d4831890af8cc1936fc98703f1c7c)] Update Release Notes to v1.0.1
+    * [[#0f443f1](https://github.com/CSBiology/FsSpreadsheet/commit/0f443f1a700d272f1942c57486151e7f68da431d)] Replace unallowed constructor pattern
+    * [[#38864cb](https://github.com/CSBiology/FsSpreadsheet/commit/38864cbc8322bee08493a5bceafeeecc57305c16)] Add critical error when creating FsRows
+    * [[#d5f599b](https://github.com/CSBiology/FsSpreadsheet/commit/d5f599bc73d14ddba8f44a1c20f987677b962b7a)] Update ///-comments & test CellValues
+    * [[#a3de3cb](https://github.com/CSBiology/FsSpreadsheet/commit/a3de3cbae23c00f4561a64f3a86ec69efe939a72)] Update ///
+    * [[#571cab1](https://github.com/CSBiology/FsSpreadsheet/commit/571cab12945fffb837bf400460952089a4004dc1)] Comment
+    * [[#97ec087](https://github.com/CSBiology/FsSpreadsheet/commit/97ec087527b9cd21b0055b56a08fca4a9a3c03b5)] Add nuget package metadata
+    * [[#bbed3ca](https://github.com/CSBiology/FsSpreadsheet/commit/bbed3ca4c14bbf999afd77b4cab2cf6aa4a2cd96)] Add Interactive extension with tests for formatters
+    * [[#03298f2](https://github.com/CSBiology/FsSpreadsheet/commit/03298f25d90ceea279acc783378effe8ede990b4)] Add more functionality for FsCellsCollection (WIP)
+    * [[#99bcb5a](https://github.com/CSBiology/FsSpreadsheet/commit/99bcb5aee50ba99560a23278dd9d8e91d3554e2c)] Add more functionality for FsTable (WIP)
+    * [[#342d02d](https://github.com/CSBiology/FsSpreadsheet/commit/342d02de28206811e7d02161c608fb15d3d00ea5)] Add unit tests for new FsCellsCollection functions
+    * [[#a9494e2](https://github.com/CSBiology/FsSpreadsheet/commit/a9494e28c4d19fbfe33dbad7d235033290e6e4c1)] Use new properties for `GetFirstAddress` method
+    * [[#c8275af](https://github.com/CSBiology/FsSpreadsheet/commit/c8275afcf20f5dbb261c054a7a7058ba338f7f51)] Add FsCellsCollections `Item` tests
+    * [[#66e1c3c](https://github.com/CSBiology/FsSpreadsheet/commit/66e1c3cd881e8cb58fee53dda6d6ef0df221a98c)] Add slicing to FsCellsCollections
+    * [[#bdce2f4](https://github.com/CSBiology/FsSpreadsheet/commit/bdce2f4e554bc022b38bcc33cdb72b4d042e00a3)] Add unit tests for FsCellsCollection slicing
+    * [[#6679a5c](https://github.com/CSBiology/FsSpreadsheet/commit/6679a5cb7ab0bcc0b20c73e95b14ae0fb85372ab)] Adjust FsCellsCollection calls
+    * [[#74c0062](https://github.com/CSBiology/FsSpreadsheet/commit/74c0062191f097c31adf426b60353dbd56113792)] Adjust property naming
+    * [[#304cea4](https://github.com/CSBiology/FsSpreadsheet/commit/304cea4ab29c1bbca6c74ed80881ec06c1a2ad2d)] Refurbish FsTable
     * [[#3031151](https://github.com/CSBiology/FsSpreadsheet/commit/30311515b1b0ccd6ed3828465739008b5d95fd07)] Add `tryGetById` function
     * [[#6be69e2](https://github.com/CSBiology/FsSpreadsheet/commit/6be69e22e1104731dc92fda53de07a465de8cca0)] Add `getCellsBySheetId` function
     * [[#d23ac45](https://github.com/CSBiology/FsSpreadsheet/commit/d23ac45791de604d83d24b15219852e08e29e0c3)] Replace way to get cells from bySheetIndex to bySheetID
     * [[#3fa594c](https://github.com/CSBiology/FsSpreadsheet/commit/3fa594c84d4fcaaa12f298a13ad962400a97cf89)] Add unit tests for edgecase XlsxFiles
 * Bugfixes:
+    * [[#b52ec35](https://github.com/CSBiology/FsSpreadsheet/commit/b52ec35163f247b7858d1b346b86e2d8f24ca157)] Fix critical error in FsRow constructor
+    * [[#808dea1](https://github.com/CSBiology/FsSpreadsheet/commit/808dea13f05c05f1a1e68d278013119f1a9188e5)] fix border
+    * [[#8ddfd39](https://github.com/CSBiology/FsSpreadsheet/commit/8ddfd39f637a2f7056f36352e08148dda7ea4a3a)] Fix typo
     * [[#99dfa53](https://github.com/CSBiology/FsSpreadsheet/commit/99dfa5329fa02d5e7f358a2eb914f6ac9155d63c)] Fix incorrect casename
 
 ### 1.0.0+6f3ddf9 (Released 2023-3-23)
