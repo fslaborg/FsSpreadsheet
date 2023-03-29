@@ -1,3 +1,7 @@
+### 1.2.0+8538793 (Released 2023-3-29)
+* Additions:
+    * [[#8538793](https://github.com/CSBiology/FsSpreadsheet/commit/8538793f874bb5193d20b53be86184b6fc47a115)] Init fable compatibility :sparkles::tada:
+
 ### 1.1.0+f1bd7ed (Released 2023-3-29)
 * Additions:
     * [[#f1bd7ed](https://github.com/CSBiology/FsSpreadsheet/commit/f1bd7ed2a885e9a29a3b51fcaa836d21e370ee79)] Add Fable logic
