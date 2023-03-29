@@ -1,3 +1,19 @@
+### 1.1.0+f1bd7ed (Released 2023-3-29)
+* Additions:
+    * [[#f1bd7ed](https://github.com/CSBiology/FsSpreadsheet/commit/f1bd7ed2a885e9a29a3b51fcaa836d21e370ee79)] Add Fable logic
+    * [[#bbed3ca](https://github.com/CSBiology/FsSpreadsheet/commit/bbed3ca4c14bbf999afd77b4cab2cf6aa4a2cd96)] Add Interactive extension with tests for formatters
+    * [[#97ec087](https://github.com/CSBiology/FsSpreadsheet/commit/97ec087527b9cd21b0055b56a08fca4a9a3c03b5)] Add nuget package metadata
+    * [[#571cab1](https://github.com/CSBiology/FsSpreadsheet/commit/571cab12945fffb837bf400460952089a4004dc1)] Comment
+    * [[#a3de3cb](https://github.com/CSBiology/FsSpreadsheet/commit/a3de3cbae23c00f4561a64f3a86ec69efe939a72)] Update ///
+    * [[#d5f599b](https://github.com/CSBiology/FsSpreadsheet/commit/d5f599bc73d14ddba8f44a1c20f987677b962b7a)] Update ///-comments & test CellValues
+    * [[#38864cb](https://github.com/CSBiology/FsSpreadsheet/commit/38864cbc8322bee08493a5bceafeeecc57305c16)] Add critical error when creating FsRows
+    * [[#0f443f1](https://github.com/CSBiology/FsSpreadsheet/commit/0f443f1a700d272f1942c57486151e7f68da431d)] Replace unallowed constructor pattern
+    * [[#1d3698b](https://github.com/CSBiology/FsSpreadsheet/commit/1d3698b1d55d4831890af8cc1936fc98703f1c7c)] Upate Release Notes to v1.0.1
+* Bugfixes:
+    * [[#8ddfd39](https://github.com/CSBiology/FsSpreadsheet/commit/8ddfd39f637a2f7056f36352e08148dda7ea4a3a)] Fix typo
+    * [[#808dea1](https://github.com/CSBiology/FsSpreadsheet/commit/808dea13f05c05f1a1e68d278013119f1a9188e5)] fix border
+    * [[#b52ec35](https://github.com/CSBiology/FsSpreadsheet/commit/b52ec35163f247b7858d1b346b86e2d8f24ca157)] Fix critical error in FsRow constructor
+
 ### 1.0.1+99dfa53 (Released 2023-3-23)
 * Additions:
     * [[#3031151](https://github.com/CSBiology/FsSpreadsheet/commit/30311515b1b0ccd6ed3828465739008b5d95fd07)] Add `tryGetById` function

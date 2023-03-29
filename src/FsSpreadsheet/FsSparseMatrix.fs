@@ -70,6 +70,9 @@ type FsSparseMatrix<'T>(defaultEmptyValue: 'T,sparseValues : 'T array, sparseRow
 
         FsSparseMatrix(emptyValue, sparseValues=valsA, sparseRowOffsets=offsA, ncols=maxj, columnValues=colsA)
 
+    #if FABLE_COMPILER
+    #else
     /// Returns the SparseMatrix as Array2D
     static member toArray2D (m:FsSparseMatrix<'T>) =
         Array2D.init m.NumRows m.NumCols (fun i j -> m.[i,j])
+    #endif

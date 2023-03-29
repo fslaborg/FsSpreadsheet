@@ -219,6 +219,8 @@ type FsCell (value : IConvertible, dataType : DataType, address : FsAddress) =
     static member copy (cell : FsCell) =
         cell.Copy()
 
+    #if FABLE_COMPILER
+    #else
     /// <summary>
     /// Gets the cell's value converted to the T type.
     /// <para>FsSpreadsheet will try to convert the current value to type 'T.</para>
@@ -226,7 +228,7 @@ type FsCell (value : IConvertible, dataType : DataType, address : FsAddress) =
     /// </summary>
     /// <typeparam name="T">The return type.</typeparam>
     /// <exception cref="ArgumentException"></exception>
-    member self.GetValueAs<'T>() =          
+    member inline self.GetValueAs<'T>() =
         match (typeof<'T>) with
         | t when t = typeof<string>           -> self.Value |> box
         | t when t = typeof<bool>             -> bool.Parse (self.Value) |> box
@@ -257,6 +259,7 @@ type FsCell (value : IConvertible, dataType : DataType, address : FsAddress) =
     /// <exception cref="System.ArgumentException">if the current value cannot be converted to the 'T type.</exception>
     static member getValueAs<'T>(cell : FsCell)=
         cell.GetValueAs<'T>()
+    #endif
 
     /// <summary>
     /// Sets the FsCell's value.
@@ -667,4 +670,3 @@ type FsCell (value : IConvertible, dataType : DataType, address : FsAddress) =
     
     //// same problem like with .GetValue<'T>
     //member self.TryGetValue<'T>(value) = raise (System.NotImplementedException())
-

@@ -78,14 +78,22 @@ type SheetEntity<'T> =
 [<AutoOpen>]
 module SheetEntityExtensions =
     type SheetEntity<'T> with
-        member this.Value =
+        member inline this.Value =
             match this with 
             | Some (f,errs) -> f
             | NoneOptional ms | NoneRequired ms when ms = [] -> 
+                #if FABLE_COMPILER
+                failwith $"SheetEntity does not contain Value."
+                #else
                 failwith $"SheetEntity of type {typeof<'T>.Name} does not contain Value."
+                #endif
             | NoneOptional ms | NoneRequired ms -> 
                 let appendedMessages = Messages.format ms
+                #if FABLE_COMPILER
+                failwith $"SheetEntity does not contain Value: \n\t{appendedMessages}"
+                #else
                 failwith $"SheetEntity of type {typeof<'T>.Name} does not contain Value: \n\t{appendedMessages}"
+                #endif
 
 type Value = DataType * string
 
