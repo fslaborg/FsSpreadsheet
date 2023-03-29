@@ -1,8 +1,6 @@
 ﻿namespace FsSpreadsheet
 
 open System.Collections.Generic
-open System.Linq
-
 
 module Dictionary = 
 
@@ -11,7 +9,6 @@ module Dictionary =
         if dict.ContainsKey k then
             Some (dict.Item k)
         else None
-
 
 /// <summary>
 ///
@@ -236,15 +233,15 @@ type FsCellsCollection() =
         if rowRemoved && row = _maxRowUsed then
 
             _maxRowUsed <- 
-                if (_rowsUsed.Keys :> IEnumerable<_>).Any() then
-                    _rowsUsed.Keys.Max()
+                if (_rowsUsed.Keys :> IEnumerable<_>) |> Seq.isEmpty |> not then
+                    _rowsUsed.Keys |> Seq.max
                 else 0
 
         if columnRemoved && column = _maxColumnUsed then
         
             _maxColumnUsed <- 
-                if (_columnsUsed.Keys :> IEnumerable<_>).Any() then
-                    _columnsUsed.Keys.Max()
+                if (_columnsUsed.Keys :> IEnumerable<_>) |> Seq.isEmpty |> not then
+                    _columnsUsed.Keys |> Seq.max
                 else 0
 
         match Dictionary.tryGet row _deleted with

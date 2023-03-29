@@ -1,6 +1,5 @@
 ﻿namespace FsSpreadsheet.DSL
 
-open Microsoft.FSharp.Linq.RuntimeHelpers
 
 module Expression =
 
@@ -17,4 +16,9 @@ module Expression =
 
         member this.Source = s
 
+    #if FABLE_COMPILER
+    #else
+    open Microsoft.FSharp.Linq.RuntimeHelpers
+
     let eval<'T> q = LeafExpressionConverter.EvaluateQuotation q :?> 'T
+    #endif

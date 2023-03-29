@@ -7,12 +7,15 @@ open Expression
 [<AutoOpen>]
 module Operators = 
  
+    #if FABLE_COMPILER
+    #else
     let inline parseExpression (def : string -> SheetEntity<Value>) (s : Expr<'a>) : SheetEntity<Value> =
         try 
             let value = eval<'a> s |> DataType.InferCellValue
             SheetEntity.some value         
         with
         | err -> def err.Message
+    #endif
 
     let inline parseOption (def : string -> SheetEntity<Value>) (s : Option<'a>) : SheetEntity<Value> =
         match s with
@@ -30,12 +33,15 @@ module Operators =
 
     let inline parseAny (f : string -> SheetEntity<Value>) (v: 'T) : SheetEntity<Value> =
         match box v with
+        #if FABLE_COMPILER
+        #else
         | :? Expr<string> as e ->           parseExpression f e
         | :? Expr<int> as e ->              parseExpression f e
         | :? Expr<float> as e ->            parseExpression f e
         | :? Expr<single> as e ->           parseExpression f e
         | :? Expr<byte> as e ->             parseExpression f e
         | :? Expr<System.DateTime> as e ->  parseExpression f e
+        #endif  
 
         | :? Option<string> as o ->             parseOption f o
         | :? Option<int> as o ->                parseOption f o
