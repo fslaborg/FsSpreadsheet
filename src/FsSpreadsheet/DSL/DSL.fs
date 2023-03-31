@@ -10,36 +10,39 @@ type DSL =
     /// Create a cell from a value
     static member inline cell = CellBuilder()
 
-    ///// Create a row from cells
-    //static member inline row = RowBuilder()
+    /// Create a row from cells
+    static member inline row = RowBuilder()
     
-    ///// Create a column from cells
-    //static member inline column = ColumnBuilder()
+    /// Create a column from cells
+    static member inline column = ColumnBuilder()
 
-    ///// Create a table from either exclusively rows or exclusively columns. 
-    //static member inline table name = TableBuilder(name)
+    /// Create a table from either exclusively rows or exclusively columns. 
+    static member inline table name = TableBuilder(name)
 
-    ///// Create a sheet from rows, tables and columns
-    //static member inline sheet name = SheetBuilder(name)
+    /// Create a sheet from rows, tables and columns
+    static member inline sheet name = SheetBuilder(name)
 
-    ///// Create a workbook from sheets
-    //static member inline workbook = WorkbookBuilder()
+    /// Create a workbook from sheets
+    static member inline workbook = WorkbookBuilder()
 
-    ///// Transforms any given missing element to an optional.
-    //static member opt (elem : SheetEntity<'T list>) = 
-    //    match elem with
-    //    | Some (f,messages) -> elem
-    //    | NoneOptional (messages) -> NoneOptional(messages)
-    //    | NoneRequired (messages) -> NoneOptional(messages)
+    /// Transforms any given missing element to an optional.
+    static member opt (elem : SheetEntity<'T list>) = 
+        match elem with
+        | Some (f,messages) -> elem
+        | NoneOptional (messages) -> NoneOptional(messages)
+        | NoneRequired (messages) -> NoneOptional(messages)
 
-    ///// Transforms any given missing element expression to an optional.
-    //static member opt (elem : Expr<SheetEntity<'T list>>) = 
-    //    try 
-    //        let elem = eval<SheetEntity<'T list>> elem
-    //        DSL.opt elem
-    //    with
-    //    | err -> 
-    //        NoneOptional([message err.Message])
+    #if FABLE_COMPILER
+    #else
+    /// Transforms any given missing element expression to an optional.
+    static member opt (elem : Expr<SheetEntity<'T list>>) = 
+        try 
+            let elem = eval<SheetEntity<'T list>> elem
+            DSL.opt elem
+        with
+        | err -> 
+            NoneOptional([message err.Message])
+    #endif
 
     /// Drops the cell with the given message
     static member dropCell message : SheetEntity<Value> = NoneRequired [message]
