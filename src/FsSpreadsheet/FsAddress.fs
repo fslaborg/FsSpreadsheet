@@ -25,19 +25,6 @@ module CellReference =
                 let nextChar = char (uint 'A' + mod26)
                 loop ((index - 1u) / 26u) (string nextChar + acc)
         loop i ""
-        //#if FABLE_COMPILER
-        //fable i
-        //#else
-        //let sb = System.Text.StringBuilder()
-        //let rec loop residual = 
-        //    if residual = 0u then
-        //        sb.ToString()
-        //    else
-        //        let modulo = (residual - 1u) % 26u
-        //        sb.Insert(0, char (modulo + 65u)) |> ignore
-        //        loop ((residual - modulo) / 26u)
-        //loop i
-        //#endif
 
     /// Maps 1 based column and row indices to "A1" style reference.
     let ofIndices column (row : uint32) = 
