@@ -1,5 +1,6 @@
-### 1.2.0+8538793 (Released 2023-3-29)
+### 1.2.0+c6e7cc4 (Released 2023-3-29)
 * Additions:
+    * [[#c6e7cc4](https://github.com/CSBiology/FsSpreadsheet/commit/c6e7cc4073c1d0b035742358d9132cc3e99efbda)] Fix cell getValueAs<_> for fable :sparkles:
     * [[#8538793](https://github.com/CSBiology/FsSpreadsheet/commit/8538793f874bb5193d20b53be86184b6fc47a115)] Init fable compatibility :sparkles::tada:
 
 ### 1.1.0+f1bd7ed (Released 2023-3-29)
