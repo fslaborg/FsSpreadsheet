@@ -219,8 +219,6 @@ type FsCell (value : IConvertible, dataType : DataType, address : FsAddress) =
     static member copy (cell : FsCell) =
         cell.Copy()
 
-    #if FABLE_COMPILER
-    #else
     /// <summary>
     /// Gets the cell's value converted to the T type.
     /// <para>FsSpreadsheet will try to convert the current value to type 'T.</para>
@@ -257,9 +255,8 @@ type FsCell (value : IConvertible, dataType : DataType, address : FsAddress) =
     /// FsSpreadsheet will try to convert the current value to type 'T. </summary>
     /// <typeparam name="T">The return type.</typeparam>
     /// <exception cref="System.ArgumentException">if the current value cannot be converted to the 'T type.</exception>
-    static member getValueAs<'T>(cell : FsCell)=
+    static member inline getValueAs<'T>(cell : FsCell) =
         cell.GetValueAs<'T>()
-    #endif
 
     /// <summary>
     /// Sets the FsCell's value.
