@@ -7,13 +7,13 @@
 /// </summary>
 /// <remarks>The FsCellsCollection must only cover 1 row!</remarks>
 /// <exception cref="System.Exception">if given FsCellsCollection has more than 1 row.</exception>
-type FsRow (rangeAddress : FsRangeAddress, cells : FsCellsCollection, styleValue)= 
+type FsRow(rangeAddress : FsRangeAddress, cells : FsCellsCollection, styleValue)= 
 
     inherit FsRangeBase(rangeAddress, styleValue)
 
     let cells = cells
 
-    new() = FsRow (FsRangeAddress(FsAddress(0,0),FsAddress(0,0)),FsCellsCollection(),null)
+    new() = FsRow(FsRangeAddress(FsAddress(0,0), FsAddress(0,0)), FsCellsCollection(), null)
 
     /// <summary>
     /// Create an FsRow from a given FsCellsCollection and an rowIndex.
