@@ -45,13 +45,13 @@ type FsTable(name : string, rangeAddress, cellsCollection : FsCellsCollection, s
         |> Seq.iter (
             fun fsc -> 
                 match fsc.Address.RowNumber, fsc.Address.ColumnNumber with
-                // cell is inside of the table range, and is header cell
+                // cell is inside of the table range and is header cell
                 | x,y when x = minRi && y >= minCi && y <= maxCi ->
                     // header cells must have unique names (= values); name is changed according to Excel standards if duplicate
                     let newVal = addUniqueName fsc.Value 2 false
                     fsc.Value <- newVal
                     nFcc.Add fsc
-                // cell is inside of the table range, but not header cell
+                // cell is inside of the table range but no header cell
                 | x,y when x > minRi && x <= maxRi && y >= minCi && y <= maxCi
                     -> nFcc.Add fsc
                 | _ -> ()
@@ -458,7 +458,7 @@ type FsTable(name : string, rangeAddress, cellsCollection : FsCellsCollection, s
     /// <summary>
     /// Returns the header cell with the given colum index if the cell exists. Else returns None.
     /// </summary>
-    member this.TryGetHeaderCellOfColumn(colIndex : int) =
+    member this.TryGetHeaderCell(colIndex : int) =
         let fstRowIndex = this.GetFirstRowIndex()
         try this[fstRowIndex,colIndex] |> Some
         with _ -> None
@@ -468,48 +468,48 @@ type FsTable(name : string, rangeAddress, cellsCollection : FsCellsCollection, s
     /// returns None.
     /// </summary>
     static member tryGetHeaderCellOfColumnIndex (colIndex : int) (table : FsTable) =
-        table.TryGetHeaderCellOfColumn colIndex
+        table.TryGetHeaderCell colIndex
 
     /// <summary>
     /// Returns the header cell of a given FsRangeColumn from a given FsCellsCollection if the cell exists. Else returns None.
     /// </summary>
-    member this.TryGetHeaderCellOfColumn(column : FsRangeColumn) =
-        this.TryGetHeaderCellOfColumn column.Index
+    member this.TryGetHeaderCell(column : FsRangeColumn) =
+        this.TryGetHeaderCell column.Index
 
     /// <summary>
     /// Returns the header cell of a given FsRangeColumn from a given FsCellsCollection in a given FsTable if the cell exists.
     /// Else returns None.
     /// </summary>
     static member tryGetHeaderCellOfColumn (column : FsRangeColumn) (table : FsTable) =
-        table.TryGetHeaderCellOfColumn column
+        table.TryGetHeaderCell column
 
     /// <summary>
-    /// Returns the header cell from a given FsCellsCollection with the given colum index.
+    /// Returns the header cell at the given column index.
     /// </summary>
-    /// <exception cref="System.NullReferenceException">if the FsCell cannot be found.</exception>
-    member this.GetHeaderCellOfColumn(colIndex : int) =
-        this.TryGetHeaderCellOfColumn(colIndex).Value
+    /// <exception cref="System.IndexOutOfRangeException">if the column index is outside the range of the FsTable.</exception>
+    member this.GetHeaderCell(colIndex : int) =
+        this[this.GetFirstRowIndex(),colIndex]
 
     /// <summary>
-    /// Returns the header cell from a given FsCellsCollection with the given colum index in a given FsTable.
+    /// Returns the header cell at the given column index of the given FsTable.
     /// </summary>
-    /// <exception cref="System.NullReferenceException">if the FsCell cannot be found.</exception>
+    /// <exception cref="System.IndexOutOfRangeException">if the column index is outside the range of the FsTable.</exception>
     static member getHeaderCellOfColumnIndex (colIndex : int) (table : FsTable) =
-        table.GetHeaderCellOfColumn colIndex
+        table.GetHeaderCell colIndex
 
     /// <summary>
-    /// Returns the header cell of a given FsRangeColumn from a given FsCellsCollection.
+    /// Returns the header cell of a given FsRangeColumn.
     /// </summary>
-    /// <exception cref="System.NullReferenceException">if the FsCell cannot be found.</exception>
-    member this.GetHeaderCellOfColumn(column : FsRangeColumn) =
-        this.TryGetHeaderCellOfColumn(column).Value
+    /// <exception cref="System.NullReferenceException">if the FsRangeColumn is outside the range of the FsTable.</exception>
+    member this.GetHeaderCell(column : FsRangeColumn) =
+        this.TryGetHeaderCell(column).Value
 
     /// <summary>
-    /// Returns the header cell of a given FsRangeColumn from a given FsCellsCollection in a given FsTable.
+    /// Returns the header cell of a given FsRangeColumn.
     /// </summary>
-    /// <exception cref="System.NullReferenceException">if the FsCell cannot be found.</exception>
+    /// <exception cref="System.NullReferenceException">if the FsRangeColumn is outside the range of the FsTable.</exception>
     static member getHeaderCellOfColumn (column : FsRangeColumn) (table : FsTable) =
-        table.GetHeaderCellOfColumn column
+        table.GetHeaderCell column
 
     /// <summary>
     /// Returns the header cell of a given FsTableField from a given FsCellsCollection.
@@ -574,30 +574,63 @@ type FsTable(name : string, rangeAddress, cellsCollection : FsCellsCollection, s
         | None -> None
 
     /// <summary>
-    /// Returns the header cell from an FsTableField with the given name using an FsCellsCollection in a given FsTable if the cell exists.
-    /// Else returns None.
+    /// Returns the header cell from an FsTableField with the given name using an FsCellsCollection in a given FsTable if the cell 
+    /// exists. Else returns None.
     /// </summary>
     [<Obsolete "Use `GetHeaderCell` & `GetDataCells` instead.">]
     static member tryGetHeaderCellByFieldName cellsCollection (fieldName : string) (table : FsTable) =
         table.TryGetHeaderCellByFieldName(cellsCollection, fieldName)
 
     /// <summary>
-    /// Returns the data cells from a given FsCellsCollection with the given colum index.
+    /// Returns the data cells with the given colum index if they are within the range of the FsTable. Else returns None.
     /// </summary>
-    // /// <remarks>Column index must fit the FsCellsCollection, not the FsTable!</remarks>
-    member this.GetDataCellsOfColumn(colIndex) =
-        let fstRowIndex = this.GetFirstRowIndex()
-        let lstRowIndex = this.GetLastRowIndex()
-        this[fstRowIndex + 1 .. lstRowIndex,colIndex]
+    member this.TryGetDataCells(colIndex) =
+        try Some this[this.GetFirstRowIndex() + 1 ..,colIndex]
+        with _ -> None
+
+    /// <summary>
+    /// Returns the data cells with the given colum index if they are within the range of the given FsTable. Else returns None.
+    /// </summary>
+    static member tryGetDataCellsFromColIndex (colIndex : int) (table : FsTable) =
+        table.TryGetDataCells colIndex
+
+    /// <summary>
+    /// Returns the data cells with the given FsRangeColum if they are within the range of the FsTable. Else returns None.
+    /// </summary>
+    member this.TryGetDataCells(column : FsRangeColumn) =
+        try Some this[this.GetFirstRowIndex() + 1 ..,column.Index]
+        with _ -> None
+
+    /// <summary>
+    /// Returns the data cells with the given FsRangeColum if they are within the range of the given FsTable. Else returns None.
+    /// </summary>
+    static member tryGetDataCellsFromColumn (column : FsRangeColumn) (table : FsTable) =
+        table.TryGetDataCells column
+
+    /// <summary>
+    /// Returns the data cells with the given colum index.
+    /// </summary>
+    /// <exception cref="System.NullReferenceException">if the FsRangeColumn is outside the range of the FsTable.</exception>
+    member this.GetDataCells(colIndex) =
+        this[this.GetFirstRowIndex() + 1 ..,colIndex]
 
     /// <summary>
     /// Returns the data cells from a given FsCellsCollection with the given colum index in a given FsTable.
     /// </summary>
     /// <remarks>Column index must fit the FsCellsCollection, not the FsTable!</remarks>
     static member getDataCellsOfColumnIndex (colIndex : int) (table : FsTable) =
-        table.GetDataCellsOfColumn colIndex
+        table.GetDataCells colIndex
 
-    // TO DO: add equivalents of the other methods regarding header cell for data cells.
+    /// <summary>
+    /// Returns the data cells of the given header cell value.
+    /// </summary>
+    /// <exception cref="System.ArgumentException">if the header cell value is not presen in the FsTable.</exception>
+    member this.GetDataCells(headerCellValue : string) =
+        if _uniqueNames.Contains headerCellValue then
+            this.CellsCollection[this.CellsCollection.MinRowNumber,*] 
+            |> Seq.find (fun c -> c.Value = headerCellValue)
+            |> fun c -> this[this.GetFirstRowIndex() + 1,c.Address.ColumnNumber]
+        else failwith "Given header cell value is not present in the given FsTable."
 
     /// <summary>
     /// Creates a deep copy of this FsTable.
@@ -662,6 +695,3 @@ type FsTable(name : string, rangeAddress, cellsCollection : FsCellsCollection, s
     /// </summary>
     static member getLastColIndex (table : FsTable) =
         table.GetLastRowIndex()
-
-    member this.GetHeaderCell colIndex =
-        this[*,colIndex]
