@@ -90,11 +90,47 @@ let fsTableTests =
             testCase "Throws when outside of range" <| fun _ ->
                 Expect.throws (fun _ -> dummyFsTable[10 .. 15,0 .. 1] |> ignore) "Did not throw although outside of range"
             testList "[*,4]" [
-                let testSlice = dummyFsTable[*,4] |> List.ofSeq |> List.map FsCell.getValueAs<string>
+                let testSlice = dummyFsTable[*,4] |> List.map FsCell.getValueAs<string>
                 let expectedSlice = dummyFsCells |> List.ofSeq |> List.takeNth 3 |> List.map FsCell.getValueAs<string>
                 testCase "Returned list has correct values" <| fun _ ->
                     Expect.sequenceEqual testSlice expectedSlice "FsCells are incorrect in value"
             ]
+            testList "[3,*]" [
+                let testSlice = dummyFsTable[3,*] |> List.map FsCell.getValueAs<string>
+                let expectedSlice = dummyFsCells |> List.ofSeq |> List.skip 3 |> List.take 3 |> List.map FsCell.getValueAs<string>
+                testCase "Returned list has correct values" <| fun _ ->
+                    Expect.sequenceEqual testSlice expectedSlice "FsCells are incorrect in value"
+            ]
+            testList "[3 to 4,3 to 4]" [
+                let testSlice = dummyFsTable[3 .. 4,3 .. 4] |> JaggedList.map FsCell.getValueAs<string> |> List.concat
+                let expectedSlice = 
+                    dummyFsCells 
+                    |> List.ofSeq 
+                    |> List.choose (
+                        fun c -> 
+                            match c.Address.RowNumber, c.Address.ColumnNumber with
+                            | x,y when x >= 3 && x <= 4 && y >= 3 && y <= 4 -> (Some << FsCell.getValueAs<string>) c 
+                            | _ -> None
+                    )
+                testCase "Returned list has correct values" <| fun _ ->
+                    Expect.sequenceEqual testSlice expectedSlice "FsCells are incorrect in value"
+            ]
+        ]
+        testList "GetFirstRowIndex" [
+            testCase "Returns correct index" <| fun _ ->
+                Expect.equal (dummyFsTable.GetFirstRowIndex()) 2 "Returns incorrect index"
+        ]
+        testList "GetLastRowIndex" [
+            testCase "Returns correct index" <| fun _ ->
+                Expect.equal (dummyFsTable.GetLastRowIndex()) 5 "Returns incorrect index"
+        ]
+        testList "GetFirstColIndex" [
+            testCase "Returns correct index" <| fun _ ->
+                Expect.equal (dummyFsTable.GetFirstColIndex()) 2 "Returns incorrect index"
+        ]
+        testList "GetLastColIndex" [
+            testCase "Returns correct index" <| fun _ ->
+                Expect.equal (dummyFsTable.GetLastColIndex()) 4 "Returns incorrect index"
         ]
         testList "TryGetHeaderCell" [
             testList "colIndex : int" [
@@ -127,5 +163,125 @@ let fsTableTests =
                     let actualCell = dummyFsCells |> Seq.item 1
                     Expect.equal testHeaderCell.Value actualCell.Value "FsCell is incorrect in value"
             ]
+        ]
+        testList "TryGetDataCells" [
+            testList "colIndex : int" [
+                let testDataCells = dummyFsTable.TryGetDataCells 3
+                testCase "Is Some" <| fun _ ->
+                    Expect.isSome testDataCells "Is None"
+                testCase "Returned FsCells have correct values" <| fun _ ->
+                    let expectedDataCells = 
+                        dummyFsCells 
+                        |> List.ofSeq 
+                        |> List.choose (
+                            fun c -> 
+                                match c.Address.RowNumber, c.Address.ColumnNumber with
+                                | x,y when x >= 3 && y = 3 -> (Some << FsCell.getValueAs<string>) c 
+                                | _ -> None
+                        )
+                    let actualDataCells = testDataCells.Value |> List.ofSeq |> List.map FsCell.getValueAs<string>
+                    Expect.sequenceEqual actualDataCells expectedDataCells "FsCell list is incorrect"
+            ]
+            testList "column : FsRangeColumn" [
+                let testDataCells = dummyFsTable.TryGetDataCells(Seq.head dummyFsRangeColumns)
+                testCase "Is Some" <| fun _ ->
+                    Expect.isSome testDataCells "Is None"
+                testCase "Returned FsCells have correct values" <| fun _ ->
+                    let expectedDataCells = 
+                        dummyFsCells 
+                        |> List.ofSeq 
+                        |> List.choose (
+                            fun c -> 
+                                match c.Address.RowNumber, c.Address.ColumnNumber with
+                                | x,y when x >= 3 && y = 2 -> (Some << FsCell.getValueAs<string>) c 
+                                | _ -> None
+                        )
+                    let actualDataCells = testDataCells.Value |> List.ofSeq |> List.map FsCell.getValueAs<string>
+                    Expect.sequenceEqual actualDataCells expectedDataCells "FsCell list is incorrect"
+            ]
+            testList "headerCellValue : string" [
+                let testDataCells = dummyFsTable.TryGetDataCells(Seq.item 2 dummyFsCells |> FsCell.getValueAs<string>)
+                testCase "Is Some" <| fun _ ->
+                    Expect.isSome testDataCells "Is None"
+                testCase "Returned FsCells have correct values" <| fun _ ->
+                    let expectedDataCells = 
+                        dummyFsCells 
+                        |> List.ofSeq 
+                        |> List.choose (
+                            fun c -> 
+                                match c.Address.RowNumber, c.Address.ColumnNumber with
+                                | x,y when x >= 3 && y = 4 -> (Some << FsCell.getValueAs<string>) c 
+                                | _ -> None
+                        )
+                    let actualDataCells = testDataCells.Value |> List.ofSeq |> List.map FsCell.getValueAs<string>
+                    Expect.sequenceEqual actualDataCells expectedDataCells "FsCell list is incorrect"
+            ]
+        ]
+        testList "GetDataCells" [
+            testList "colIndex : int" [
+                let testDataCells = dummyFsTable.GetDataCells 3
+                testCase "Returned FsCells have correct values" <| fun _ ->
+                    let expectedDataCells = 
+                        dummyFsCells 
+                        |> List.ofSeq 
+                        |> List.choose (
+                            fun c -> 
+                                match c.Address.RowNumber, c.Address.ColumnNumber with
+                                | x,y when x >= 3 && y = 3 -> (Some << FsCell.getValueAs<string>) c 
+                                | _ -> None
+                        )
+                    let actualDataCells = testDataCells |> List.ofSeq |> List.map FsCell.getValueAs<string>
+                    Expect.sequenceEqual actualDataCells expectedDataCells "FsCell list is incorrect"
+            ]
+            testList "column : FsRangeColumn" [
+                let testDataCells = dummyFsTable.GetDataCells(Seq.head dummyFsRangeColumns)
+                testCase "Returned FsCells have correct values" <| fun _ ->
+                    let expectedDataCells = 
+                        dummyFsCells 
+                        |> List.ofSeq 
+                        |> List.choose (
+                            fun c -> 
+                                match c.Address.RowNumber, c.Address.ColumnNumber with
+                                | x,y when x >= 3 && y = 2 -> (Some << FsCell.getValueAs<string>) c 
+                                | _ -> None
+                        )
+                    let actualDataCells = testDataCells |> List.ofSeq |> List.map FsCell.getValueAs<string>
+                    Expect.sequenceEqual actualDataCells expectedDataCells "FsCell list is incorrect"
+            ]
+            testList "headerCellValue : string" [
+                let testDataCells = dummyFsTable.GetDataCells(Seq.item 2 dummyFsCells |> FsCell.getValueAs<string>)
+                testCase "Returned FsCells have correct values" <| fun _ ->
+                    let expectedDataCells = 
+                        dummyFsCells 
+                        |> List.ofSeq 
+                        |> List.choose (
+                            fun c -> 
+                                match c.Address.RowNumber, c.Address.ColumnNumber with
+                                | x,y when x >= 3 && y = 4 -> (Some << FsCell.getValueAs<string>) c 
+                                | _ -> None
+                        )
+                    let actualDataCells = testDataCells |> List.ofSeq |> List.map FsCell.getValueAs<string>
+                    Expect.sequenceEqual actualDataCells expectedDataCells "FsCell list is incorrect"
+            ]
+        ]
+        testList "Copy" [
+            let testFsTable = dummyFsTable.Copy()
+            let testFsTable2 = dummyFsTable.Copy()
+            testCase "Copies correctly" <| fun _ ->
+                let testName = testFsTable.Name
+                let actualName = dummyFsTable.Name
+                Expect.equal actualName testName "Differs in name"
+                let testRange = testFsTable.RangeAddress.FirstAddress.Address, testFsTable.RangeAddress.LastAddress.Address
+                let actualRange = dummyFsTable.RangeAddress.FirstAddress.Address, dummyFsTable.RangeAddress.LastAddress.Address
+                Expect.equal actualRange testRange "Differs in range"
+                let testShowHeaderRow = testFsTable.ShowHeaderRow
+                let actualShowHeaderRow = dummyFsTable.ShowHeaderRow
+                Expect.equal actualShowHeaderRow testShowHeaderRow "Differs in ShowHeaderRow"
+                let testFccValues = testFsTable.CellsCollection.GetCells() |> Seq.toList |> List.map FsCell.getValueAs<string>
+                let actualFccValues = dummyFsTable.CellsCollection.GetCells() |> Seq.toList |> List.map FsCell.getValueAs<string>
+                Expect.sequenceEqual actualFccValues testFccValues "Differs in FsCellsCollection values"
+            testCase "Does not change original FsTable" <| fun _ ->
+                testFsTable2[2,2].Value <- "new Value"
+                Expect.equal dummyFsTable[2,2].Value "Name" "Did change original FsTable in terms of FsCell value"
         ]
     ]
