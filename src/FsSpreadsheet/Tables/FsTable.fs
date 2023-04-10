@@ -649,7 +649,7 @@ type FsTable(name : string, rangeAddress, cellsCollection : FsCellsCollection, s
         if _uniqueNames.Contains headerCellValue then
             this.CellsCollection[this.CellsCollection.MinRowNumber,*] 
             |> Seq.find (fun c -> c.Value = headerCellValue)
-            |> fun c -> this[this.GetFirstRowIndex() + 1,c.Address.ColumnNumber]
+            |> fun c -> this[this.GetFirstRowIndex() + 1 ..,c.Address.ColumnNumber]
         else failwith "Given header cell value is not present in the given FsTable."
 
     /// <summary>
