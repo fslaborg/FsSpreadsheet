@@ -173,12 +173,11 @@ type FsTable(name : string, rangeAddress, cellsCollection : FsCellsCollection, s
         let e1 = Option.defaultValue (this.GetLastRowIndex())  end1
         let s2 = Option.defaultValue (this.GetFirstColIndex()) start2
         let e2 = Option.defaultValue (this.GetLastColIndex())  end2
-        seq {
+        [
             for i = s1 to e1 do
-                seq {
-                    for j = s2 to e2 do this[i,j]
-                }
-        }
+                // debatable approach: throws atm. although `GetSlice` in lists and arrays just returns empty when outside of range
+                [for j = s2 to e2 do this[i,j]]
+        ]
 
     /// <summary>
     /// Returns a sequence of items at the given range.
@@ -187,10 +186,7 @@ type FsTable(name : string, rangeAddress, cellsCollection : FsCellsCollection, s
     member this.GetSlice(i, start2, end2) =
         let s2 = Option.defaultValue (this.GetFirstColIndex()) start2
         let e2 = Option.defaultValue (this.GetLastColIndex())  end2
-        seq {
-            for j = s2 to e2 do
-                this[i,j]
-        }
+        [for j = s2 to e2 do this[i,j]]
 
     /// <summary>
     /// Returns a sequence of items at the given range.
@@ -199,10 +195,7 @@ type FsTable(name : string, rangeAddress, cellsCollection : FsCellsCollection, s
     member this.GetSlice(start1, end1, j) =
         let s1 = Option.defaultValue (this.GetFirstRowIndex()) start1
         let e1 = Option.defaultValue (this.GetLastRowIndex())  end1
-        seq {
-            for i = s1 to e1 do
-                this[i,j]
-        }
+        [for i = s1 to e1 do this[i,j]]
 
     /// <summary>
     /// Returns the header row as FsRangeRow. Scans for fieldnames if `scanForNewFieldsNames` is true.
