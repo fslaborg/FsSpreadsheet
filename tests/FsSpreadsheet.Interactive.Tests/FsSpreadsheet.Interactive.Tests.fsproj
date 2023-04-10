@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="Formatters.fs" />
+    <Compile Include="FormattersTests.fs" />
     <Compile Include="Main.fs" />
   </ItemGroup>
 
