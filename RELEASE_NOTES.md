@@ -1,5 +1,15 @@
-### 1.1.0+304cea4 (Released 2023-3-29)
+### 1.2.0-preview+c74747e (Released 2023-4-10)
 * Additions:
+    * [[#0d408e9](https://github.com/CSBiology/FsSpreadsheet/commit/0d408e98eedbefb1d4bd9726df3edad772e0473f)] Add more FsTable tests (WIP)
+    * [[#db69b80](https://github.com/CSBiology/FsSpreadsheet/commit/db69b807aeaf0b47ef3b249edff22b75bf3c3692)] Add table methods for adding cells, unify naming
+    * [[#b1959a0](https://github.com/CSBiology/FsSpreadsheet/commit/b1959a0a9b8e81e8ecfa746733514938349dbc4c)] Add some get data cells functions
+    * [[#c3f39db](https://github.com/CSBiology/FsSpreadsheet/commit/c3f39dba67d6bd3156d227610d9c54e35fd5c2c5)] Finish table functions to get data cells
+    * [[#692b708](https://github.com/CSBiology/FsSpreadsheet/commit/692b70829350e055e980667a06e32bf1963bdd96)] Rename tests for easier distinction
+    * [[#40095b1](https://github.com/CSBiology/FsSpreadsheet/commit/40095b1b247d894f020a0f23258e822fd15eeb2c)] Rename remaining test files
+    * [[#0e16718](https://github.com/CSBiology/FsSpreadsheet/commit/0e167181cd607220fc7c74946220e1c3d98b0eb5)] Add F#Aux package
+    * [[#fccb63b](https://github.com/CSBiology/FsSpreadsheet/commit/fccb63b8b858afe51f452c4b4e1db4c19f170919)] Change `GetSlice` output to list
+    * [[#d74fd5c](https://github.com/CSBiology/FsSpreadsheet/commit/d74fd5ca9a24cf4b48afa706b47c300b1941215b)] Add some table tests
+    * [[#c74747e](https://github.com/CSBiology/FsSpreadsheet/commit/c74747e9d7fe4715e950e29a7d7b44560793f034)] Finish table tests
     * [[#1d3698b](https://github.com/CSBiology/FsSpreadsheet/commit/1d3698b1d55d4831890af8cc1936fc98703f1c7c)] Update Release Notes to v1.1.0
     * [[#0f443f1](https://github.com/CSBiology/FsSpreadsheet/commit/0f443f1a700d272f1942c57486151e7f68da431d)] Replace unallowed constructor pattern
     * [[#38864cb](https://github.com/CSBiology/FsSpreadsheet/commit/38864cbc8322bee08493a5bceafeeecc57305c16)] Add critical error when creating FsRows
@@ -22,7 +32,11 @@
     * [[#6be69e2](https://github.com/CSBiology/FsSpreadsheet/commit/6be69e22e1104731dc92fda53de07a465de8cca0)] Add `getCellsBySheetId` function
     * [[#d23ac45](https://github.com/CSBiology/FsSpreadsheet/commit/d23ac45791de604d83d24b15219852e08e29e0c3)] Replace way to get cells from bySheetIndex to bySheetID
     * [[#3fa594c](https://github.com/CSBiology/FsSpreadsheet/commit/3fa594c84d4fcaaa12f298a13ad962400a97cf89)] Add unit tests for edgecase XlsxFiles
+* Deletions:
+    * [[#1fea7c1](https://github.com/CSBiology/FsSpreadsheet/commit/1fea7c127f824aef2241ad2db4bae591004044b2)] Remove tests for deprecated functionality
 * Bugfixes:
+    * [[#efc0070](https://github.com/CSBiology/FsSpreadsheet/commit/efc00704bd63f8e37607efeca09080cb03e3f85f)] Fix Release Notes blemish
+    * [[#57a1d3d](https://github.com/CSBiology/FsSpreadsheet/commit/57a1d3d46b59e8f05a447b8c42a8911237014d64)] Fix bug in method to get data cells
     * [[#b52ec35](https://github.com/CSBiology/FsSpreadsheet/commit/b52ec35163f247b7858d1b346b86e2d8f24ca157)] Fix critical error in FsRow constructor
     * [[#808dea1](https://github.com/CSBiology/FsSpreadsheet/commit/808dea13f05c05f1a1e68d278013119f1a9188e5)] fix border
     * [[#8ddfd39](https://github.com/CSBiology/FsSpreadsheet/commit/8ddfd39f637a2f7056f36352e08148dda7ea4a3a)] Fix typo
