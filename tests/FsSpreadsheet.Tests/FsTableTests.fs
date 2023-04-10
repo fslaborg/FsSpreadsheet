@@ -102,7 +102,7 @@ let fsTableTests =
         ]
         testList "TryGetHeaderCellOfColumn" [
             testList "cellsCollection : FsCellsCollection, colIndex : int" [
-                let testHeaderCell = dummyFsTable.TryGetHeaderCellOfColumn 3
+                let testHeaderCell = dummyFsTable.TryGetHeaderCell 3
                 testCase "Is Some" <| fun _ ->
                     Expect.isSome testHeaderCell "Is None"
                 testCase "Has correct value" <| fun _ ->
@@ -110,7 +110,7 @@ let fsTableTests =
                     Expect.equal testHeaderCell.Value.Value actualCell.Value "FsCell is incorrect in value"
             ]
             testList "cellsCollection : FsCellsCollection, column : FsRangeColumn" [
-                let testHeaderCell = dummyFsTable.TryGetHeaderCellOfColumn(Seq.item 1 dummyFsRangeColumns)
+                let testHeaderCell = dummyFsTable.TryGetHeaderCell(Seq.item 1 dummyFsRangeColumns)
                 testCase "Is Some" <| fun _ ->
                     Expect.isSome testHeaderCell "Is None"
                 testCase "Has correct value" <| fun _ ->
@@ -156,7 +156,7 @@ let fsTableTests =
             testList "cellsCollection : FsCellsCollection, fieldName : FsTableField" [
                 let testFsTable = FsTable("testFsTable", FsRangeAddress(dummyFsCellsCollectionFirstAddress, dummyFsCellsCollectionLastAddress))
                 testFsTable.AddFields dummyFsTableFields
-                let testDataCells = testFsTable.GetDataCellsOfColumn 2
+                let testDataCells = testFsTable.GetDataCells 2
                 testCase "Is Some" <| fun _ ->
                     Expect.isNonEmpty testDataCells "Seq is empty"
                 testCase "Has correct values" <| fun _ ->

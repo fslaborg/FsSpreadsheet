@@ -7,13 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="FsWorkbook.fs" />
-    <Compile Include="FsWorksheet.fs" />
-    <Compile Include="FsTable.fs" />
-    <Compile Include="FsTableField.fs" />
-    <Compile Include="FsCellsCollection.fs" />
-    <Compile Include="FsCell.fs" />
-    <Compile Include="FsAddress.fs" />
+    <Compile Include="FsWorkbookTests.fs" />
+    <Compile Include="FsWorksheetTests.fs" />
+    <Compile Include="FsTableTests.fs" />
+    <Compile Include="FsTableFieldTests.fs" />
+    <Compile Include="FsCellsCollectionTests.fs" />
+    <Compile Include="FsCellTests.fs" />
+    <Compile Include="FsAddressTests.fs" />
     <Compile Include="Main.fs" />
   </ItemGroup>
 
