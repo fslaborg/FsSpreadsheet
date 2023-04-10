@@ -44,26 +44,26 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
     /// <summary>
     /// The name of the FsWorksheet.
     /// </summary>
-    member self.Name
+    member this.Name
         with get() = _name
         and set(name) = _name <- name
 
     /// <summary>
     /// The FsCellCollection of the FsWorksheet.
     /// </summary>
-    member self.CellCollection
+    member this.CellCollection
         with get () = _cells
 
     /// <summary>
     /// The FsTables of the FsWorksheet.
     /// </summary>
-    member self.Tables 
+    member this.Tables 
         with get() = _tables
         
     /// <summary>
     /// The FsRows of the FsWorksheet.
     /// </summary>
-    member self.Rows
+    member this.Rows
         with get () = _rows
 
 
@@ -74,11 +74,11 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
     /// <summary>
     /// Returns a copy of the FsWorksheet.
     /// </summary>
-    member self.Copy() =
-        let fcc = self.CellCollection.Copy()
-        let nam = self.Name
-        let rws = self.Rows |> List.map (fun r -> r.Copy())
-        let tbs = self.Tables |> List.map (fun t -> t.Copy())
+    member this.Copy() =
+        let fcc = this.CellCollection.Copy()
+        let nam = this.Name
+        let rws = this.Rows |> List.map (fun r -> r.Copy())
+        let tbs = this.Tables |> List.map (fun t -> t.Copy())
         FsWorksheet(nam, rws, tbs, fcc)
         //let newSheet = FsWorksheet(self.Name)
         //self.Tables 
@@ -109,22 +109,22 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
     /// <summary>
     /// Returns the FsRow at the given index. If it does not exist, creates and appends it first.
     /// </summary>
-    member self.Row(rowIndex) = 
+    member this.Row(rowIndex) = 
         match _rows |> List.tryFind (fun row -> row.Index = rowIndex) with
         | Some row ->
             row
         | None -> 
-            let row = FsRow(rowIndex,self.CellCollection) 
+            let row = FsRow(rowIndex, this.CellCollection) 
             _rows <- List.append _rows [row]
             row
 
     /// <summary>
     /// Returns the FsRow at the given FsRangeAddress. If it does not exist, creates and appends first.
     /// </summary>
-    member self.Row(rangeAddress : FsRangeAddress) = 
+    member this.Row(rangeAddress : FsRangeAddress) = 
         if rangeAddress.FirstAddress.RowNumber <> rangeAddress.LastAddress.RowNumber then
             failwithf "Row may not have a range address spanning over different row indices"
-        self.Row(rangeAddress.FirstAddress.RowNumber).RangeAddress <- rangeAddress
+        this.Row(rangeAddress.FirstAddress.RowNumber).RangeAddress <- rangeAddress
 
     /// <summary>
     /// Appends an FsRow to an FsWorksheet if the rowIndex is not already taken.
@@ -164,15 +164,15 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
     /// <summary>
     /// Inserts an FsRow into the FsWorksheet before a reference FsRow.
     /// </summary>
-    member self.InsertBefore(row : FsRow, refRow : FsRow) =
+    member this.InsertBefore(row : FsRow, refRow : FsRow) =
         _rows
         |> List.iter (
             fun (r : FsRow) -> 
                 if r.Index >= refRow.Index then
                     r.Index <- r.Index + 1
         )
-        self.Row(row.Index) |> ignore
-        self
+        this.Row(row.Index) |> ignore
+        this
 
     /// <summary>
     /// Inserts an FsRow into the FsWorksheet before a reference FsRow.
@@ -183,8 +183,8 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
     /// <summary>
     /// Returns true if the FsWorksheet contains an FsRow with the given rowIndex.
     /// </summary>
-    member self.ContainsRowAt(rowIndex) =
-        self.Rows
+    member this.ContainsRowAt(rowIndex) =
+        this.Rows
         |> List.exists (fun t -> t.Index = rowIndex)
 
     /// <summary>
@@ -202,7 +202,7 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
     /// <summary>
     /// Removes the FsRow at the given rowIndex.
     /// </summary>
-    member self.RemoveRowAt(rowIndex) =
+    member this.RemoveRowAt(rowIndex) =
         let newRows = 
             _rows 
             |> List.filter (fun r -> r.Index <> rowIndex)
@@ -218,10 +218,9 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
     /// <summary>
     /// Removes the FsRow at a given rowIndex of the FsWorksheet if the FsRow exists.
     /// </summary>
-    member self.TryRemoveAt(rowIndex) =
-        if self.ContainsRowAt rowIndex then
-            self.RemoveRowAt rowIndex
-        self
+    member this.TryRemoveAt(rowIndex) =
+        if this.ContainsRowAt rowIndex then
+            this.RemoveRowAt rowIndex
 
     /// <summary>
     /// Removes the FsRow at a given rowIndex of an FsWorksheet if the FsRow exists.
@@ -233,18 +232,17 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
     /// <summary>
     /// Sorts the FsRows by their rowIndex.
     /// </summary>
-    member self.SortRows() = 
+    member this.SortRows() = 
         _rows <- _rows |> List.sortBy (fun r -> r.Index)
 
     /// <summary>
     /// Applies function f to all FsRows and returns the modified FsWorksheet.
     /// </summary>
-    member self.MapRowsInPlace(f : FsRow -> FsRow) =
-        let indeces = self.Rows |> List.map (fun r -> r.Index)
+    member this.MapRowsInPlace(f : FsRow -> FsRow) =
+        let indeces = this.Rows |> List.map (fun r -> r.Index)
         indeces
-        |> List.map (fun i -> f (self.Row(i)))
+        |> List.map (fun i -> f (this.Row(i)))
         |> fun res -> _rows <- res
-        self
     
     /// <summary>
     /// Applies function f in a given FsWorksheet to all FsRows and returns the modified FsWorksheet.
@@ -268,9 +266,9 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
     /// <summary>
     /// Returns the highest index of any FsRow.
     /// </summary>
-    member self.GetMaxRowIndex() =
+    member this.GetMaxRowIndex() =
         try 
-            self.Rows
+            this.Rows
             |> List.maxBy (fun r -> r.Index)
         with :? System.ArgumentException -> failwith "The FsWorksheet has no FsRows."
 
@@ -283,9 +281,9 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
     /// <summary>
     /// Gets the string values of the FsRow at the given 1-based rowIndex.
     /// </summary>
-    member self.GetRowValuesAt(rowIndex) =
-        if self.ContainsRowAt rowIndex then
-            self.Row(rowIndex).Cells
+    member this.GetRowValuesAt(rowIndex) =
+        if this.ContainsRowAt rowIndex then
+            this.Row(rowIndex).Cells
             |> Seq.map (fun c -> c.Value)
         else Seq.empty
 
@@ -298,9 +296,9 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
     /// <summary>
     /// Gets the string values at the given 1-based rowIndex of the FsRow if it exists, else returns None.
     /// </summary>
-    member self.TryGetRowValuesAt(rowIndex) =
-        if self.ContainsRowAt rowIndex then
-            Some (self.GetRowValuesAt rowIndex)
+    member this.TryGetRowValuesAt(rowIndex) =
+        if this.ContainsRowAt rowIndex then
+            Some (this.GetRowValuesAt rowIndex)
         else None
 
     /// <summary>
@@ -325,7 +323,7 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
     /// <summary>
     /// Checks the cell collection and recreate the whole set of rows, so that all cells are placed in a row
     /// </summary>
-    member self.RescanRows() =
+    member this.RescanRows() =
         let rows = _rows |> Seq.map (fun r -> r.Index,r) |> Map.ofSeq
         _cells.GetCells()
         |> Seq.groupBy (fun c -> c.RowNumber)
@@ -341,7 +339,7 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
             | Some row -> 
                 row.RangeAddress <- newRange
             | None ->
-                self.Row(newRange)
+                this.Row(newRange)
         )
 
 
@@ -354,12 +352,12 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
     /// and appends it first.
     /// </summary>
     // TO DO: Ask HLW: Is this really a good name for the method?
-    member self.Table(tableName, rangeAddress : FsRangeAddress, showHeaderRow : bool) = 
+    member this.Table(tableName, rangeAddress : FsRangeAddress, showHeaderRow : bool) = 
         match _tables |> List.tryFind (fun table -> table.Name = name) with
         | Some table ->
             table
         | None -> 
-            let table = FsTable(tableName, rangeAddress, self.CellCollection, showHeaderRow)
+            let table = FsTable(tableName, rangeAddress, this.CellCollection, showHeaderRow)
             _tables <- List.append _tables [table]
             table
 
@@ -367,8 +365,8 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
     /// Returns the FsTable with the given tableName and rangeAddress parameters. If it does not exist yet, it creates and appends
     /// it first. ShowHeaderRow is true by default.
     /// </summary>
-    member self.Table(tableName, rangeAddress) = 
-        self.Table(tableName, rangeAddress, true)
+    member this.Table(tableName, rangeAddress) = 
+        this.Table(tableName, rangeAddress, true)
 
     /// <summary>
     /// Returns the FsTable of the given name from an FsWorksheet if it exists. Else returns None.
@@ -391,11 +389,10 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
     /// Adds an FsTable to the FsWorksheet if an FsTable with the same name is not already attached.
     /// </summary>
     // TO DO: Ask HLW: rather printfn or failwith?
-    member self.AddTable(table : FsTable) =
-        if self.Tables |> List.exists (fun t -> t.Name = table.Name) then
-            printfn $"FsTable {table.Name} could not be appended as an FsTable with this name is already present in the FsWorksheet {self.Name}."
+    member this.AddTable(table : FsTable) =
+        if this.Tables |> List.exists (fun t -> t.Name = table.Name) then
+            printfn $"FsTable {table.Name} could not be appended as an FsTable with this name is already present in the FsWorksheet {this.Name}."
         else _tables <- List.append _tables [table]
-        self
 
     /// <summary>
     /// Adds an FsTable to the FsWorksheet if an FsTable with the same name is not already attached.
@@ -407,9 +404,8 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
     /// Adds a list of FsTables to the FsWorksheet. All FsTables with a name already present in the FsWorksheet are not attached.
     /// </summary>
     // TO DO: Ask HLW: rather printfn or failwith?
-    member self.AddTables(tables) =
-        tables |> List.iter (self.AddTable >> ignore)
-        self
+    member this.AddTables(tables) =
+        tables |> List.iter (this.AddTable >> ignore)
 
     /// <summary>
     /// Adds a list of FsTables to an FsWorksheet. All FsTables with a name already present in the FsWorksheet are not attached.
@@ -425,8 +421,8 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
     /// <summary>
     /// Returns the FsCell at the given row- and columnIndex if the FsCell exists, else returns None.
     /// </summary>
-    member self.TryGetCellAt(rowIndex, colIndex) =
-        self.CellCollection.TryGetCell(rowIndex, colIndex)
+    member this.TryGetCellAt(rowIndex, colIndex) =
+        this.CellCollection.TryGetCell(rowIndex, colIndex)
 
     /// <summary>
     /// Returns the FsCell at the given row- and columnIndex of a given FsWorksheet if the FsCell exists, else returns None.
@@ -437,8 +433,8 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
     /// <summary>
     /// Returns the FsCell at the given row- and columnIndex.
     /// </summary>
-    member self.GetCellAt(rowIndex, colIndex) =
-        self.TryGetCellAt(rowIndex, colIndex).Value
+    member this.GetCellAt(rowIndex, colIndex) =
+        this.TryGetCellAt(rowIndex, colIndex).Value
 
     /// <summary>
     /// Returns the FsCell at the given row- and columnIndex of a given FsWorksheet.
@@ -449,25 +445,23 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
     /// <summary>
     /// Adds a FsCell to the FsWorksheet. !Exception if cell address already exists!
     /// </summary>
-    member self.AddCell (cell:FsCell) =
-        self.CellCollection.Add cell |> ignore
-        self     
+    member this.AddCell (cell:FsCell) =
+        this.CellCollection.Add cell |> ignore
 
     /// <summary>
     /// Adds a sequence of FsCells to the FsWorksheet. !Exception if cell address already exists!
     /// </summary>
-    member self.AddCells (cells:seq<FsCell>) =
-        self.CellCollection.Add cells |> ignore
-        self    
+    member this.AddCells (cells:seq<FsCell>) =
+        this.CellCollection.Add cells |> ignore
 
     /// <summary>
     /// Adds a value at the given row- and columnIndex to the FsWorksheet.
     ///
     /// If a cell exists at the given postion, it is shoved to the right.
     /// </summary>
-    member self.InsertValueAt(value : 'a, rowIndex, colIndex)=
+    member this.InsertValueAt(value : 'a, rowIndex, colIndex)=
         let cell = FsCell(value)
-        self.CellCollection.Add(int32 rowIndex, int32 colIndex, cell)
+        this.CellCollection.Add(int32 rowIndex, int32 colIndex, cell)
 
     /// <summary>
     /// Adds a value at the given row- and columnIndex to a given FsWorksheet.
@@ -482,14 +476,12 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
     ///
     /// If an FsCell exists at the given position, overwrites it.
     /// </summary>
-    member self.SetValueAt(value : 'a, rowIndex, colIndex) =
-        match self.CellCollection.TryGetCell(rowIndex, colIndex) with
+    member this.SetValueAt(value : 'a, rowIndex, colIndex) =
+        match this.CellCollection.TryGetCell(rowIndex, colIndex) with
         | Some c -> 
             c.SetValueAs value |> ignore
-            self
         | None -> 
-            self.CellCollection.Add(rowIndex, colIndex, value) |> ignore
-            self
+            this.CellCollection.Add(rowIndex, colIndex, value) |> ignore
 
     /// <summary>
     /// Adds a value at the given row- and columnIndex of a given FsWorksheet.
@@ -502,9 +494,8 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
     /// <summary>
     /// Removes the value at the given row- and columnIndex from the FsWorksheet.
     /// </summary>
-    member self.RemoveCellAt(rowIndex, colIndex) =
-        self.CellCollection.RemoveCellAt(int32 rowIndex, int32 colIndex)
-        self
+    member this.RemoveCellAt(rowIndex, colIndex) =
+        this.CellCollection.RemoveCellAt(int32 rowIndex, int32 colIndex)
 
     /// <summary>
     /// Removes the value at the given row- and columnIndex from an FsWorksheet.
@@ -517,8 +508,8 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
     /// </summary>
     /// <remarks>Does nothing if the row or column of given index does not exist.</remarks>
     /// <exception cref="System.ArgumentNullException">if columnIndex is null.</exception>
-    member self.TryRemoveValueAt(rowIndex, colIndex) =
-        self.CellCollection.TryRemoveValueAt(rowIndex, colIndex)
+    member this.TryRemoveValueAt(rowIndex, colIndex) =
+        this.CellCollection.TryRemoveValueAt(rowIndex, colIndex)
 
     /// <summary>
     /// Removes the value of an FsCell at given row- and columnIndex if it exists from the FsCollection of a given FsWorksheet.
@@ -533,8 +524,8 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
     /// </summary>
     /// <exception cref="System.ArgumentNullException">if rowIndex or columnIndex is null.</exception>
     /// <exception cref="System.Generic.KeyNotFoundException">if row or column at the given index does not exist.</exception>
-    member self.RemoveValueAt(rowIndex, colIndex) =
-        self.CellCollection.RemoveValueAt(rowIndex, colIndex)
+    member this.RemoveValueAt(rowIndex, colIndex) =
+        this.CellCollection.RemoveValueAt(rowIndex, colIndex)
 
     /// <summary>
     /// Removes the value of an FsCell at given row- and columnIndex from the FsCollection of a given FsWorksheet.
@@ -547,15 +538,14 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
     /// <summary>
     /// Adds a FsCell to the FsWorksheet. !Exception if cell address already exists!
     /// </summary>
-    static member addCell (cell:FsCell) (sheet :FsWorksheet) =
+    static member addCell (cell : FsCell) (sheet : FsWorksheet) =
         sheet.AddCell cell 
 
     /// <summary>
     /// Adds a sequence of FsCells to the FsWorksheet. !Exception if cell address already exists!
     /// </summary>
-    static member addCells (cell:seq<FsCell>) (sheet :FsWorksheet) =
+    static member addCells (cell : seq<FsCell>) (sheet : FsWorksheet) =
         sheet.AddCells cell 
-        
 
 
     // TO DO (later)
