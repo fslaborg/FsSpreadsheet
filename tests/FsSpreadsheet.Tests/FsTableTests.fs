@@ -2,6 +2,7 @@
 
 open Expecto
 open FsSpreadsheet
+open FSharpAux
 
 
 let dummyFsCells = 
@@ -78,8 +79,25 @@ let dummyFsTableFields =
 [<Tests>]
 let fsTableTests =
     testList "FsTable" [
-        testList "TryGetHeaderCellOfColumn" [
-            testList "cellsCollection : FsCellsCollection, colIndex : int" [
+        testList "Item" [
+            let testItem = dummyFsTable[5,4]
+            testCase "Has correct value" <| fun _ ->
+                Expect.equal testItem.Value "Newville" "FsCell is incorrect in value"
+            testCase "Throws when outside of range" <| fun _ ->
+                Expect.throws (fun _ -> dummyFsTable[1,1] |> ignore) "Did not throw although outside of range"
+        ]
+        testList "GetSlice" [
+            testCase "Throws when outside of range" <| fun _ ->
+                Expect.throws (fun _ -> dummyFsTable[10 .. 15,0 .. 1] |> ignore) "Did not throw although outside of range"
+            testList "[*,4]" [
+                let testSlice = dummyFsTable[*,4] |> List.ofSeq |> List.map FsCell.getValueAs<string>
+                let expectedSlice = dummyFsCells |> List.ofSeq |> List.takeNth 3 |> List.map FsCell.getValueAs<string>
+                testCase "Returned list has correct values" <| fun _ ->
+                    Expect.sequenceEqual testSlice expectedSlice "FsCells are incorrect in value"
+            ]
+        ]
+        testList "TryGetHeaderCell" [
+            testList "colIndex : int" [
                 let testHeaderCell = dummyFsTable.TryGetHeaderCell 3
                 testCase "Is Some" <| fun _ ->
                     Expect.isSome testHeaderCell "Is None"
@@ -87,13 +105,27 @@ let fsTableTests =
                     let actualCell = dummyFsCells |> Seq.item 1
                     Expect.equal testHeaderCell.Value.Value actualCell.Value "FsCell is incorrect in value"
             ]
-            testList "cellsCollection : FsCellsCollection, column : FsRangeColumn" [
+            testList "column : FsRangeColumn" [
                 let testHeaderCell = dummyFsTable.TryGetHeaderCell(Seq.item 1 dummyFsRangeColumns)
                 testCase "Is Some" <| fun _ ->
                     Expect.isSome testHeaderCell "Is None"
                 testCase "Has correct value" <| fun _ ->
                     let actualCell = dummyFsCells |> Seq.item 1
                     Expect.equal testHeaderCell.Value.Value actualCell.Value "FsCell is incorrect in value"
+            ]
+        ]
+        testList "GetHeaderCell" [
+            testList "colIndex : int" [
+                let testHeaderCell = dummyFsTable.GetHeaderCell 3
+                testCase "Has correct value" <| fun _ ->
+                    let actualCell = dummyFsCells |> Seq.item 1
+                    Expect.equal testHeaderCell.Value actualCell.Value "FsCell is incorrect in value"
+            ]
+            testList "column : FsRangeColumn" [
+                let testHeaderCell = dummyFsTable.GetHeaderCell(Seq.item 1 dummyFsRangeColumns)
+                testCase "Has correct value" <| fun _ ->
+                    let actualCell = dummyFsCells |> Seq.item 1
+                    Expect.equal testHeaderCell.Value actualCell.Value "FsCell is incorrect in value"
             ]
         ]
     ]
