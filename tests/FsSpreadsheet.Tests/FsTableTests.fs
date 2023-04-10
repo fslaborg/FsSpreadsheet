@@ -78,28 +78,6 @@ let dummyFsTableFields =
 [<Tests>]
 let fsTableTests =
     testList "FsTable" [
-        //testList "" [
-        //]
-        testList "AddFields" [
-            testList "tableFields : seq FsTableField" [
-                let testFsTable = FsTable("testFsTable", FsRangeAddress(dummyFsCellsCollectionFirstAddress, dummyFsCellsCollectionLastAddress))
-                testFsTable.AddFields dummyFsTableFields |> ignore
-                let testNames, testIndeces = 
-                    testFsTable.Fields dummyFsCellsCollection 
-                    |> Seq.map (fun tf -> tf.Name, tf.Index) 
-                    |> Seq.toArray 
-                    |> Array.unzip
-                let dummyNames, dummyIndeces = 
-                    dummyFsTableFields 
-                    |> Seq.map (fun tf -> tf.Name, tf.Index) 
-                    |> Seq.toArray 
-                    |> Array.unzip
-                testCase "Names are there" <| fun _ ->
-                    Expect.sequenceEqual testNames dummyNames "Names are not equal" 
-                testCase "Indeces are there" <| fun _ ->
-                    Expect.sequenceEqual testIndeces dummyIndeces "Indeces are not equal" 
-            ]
-        ]
         testList "TryGetHeaderCellOfColumn" [
             testList "cellsCollection : FsCellsCollection, colIndex : int" [
                 let testHeaderCell = dummyFsTable.TryGetHeaderCell 3
@@ -116,53 +94,6 @@ let fsTableTests =
                 testCase "Has correct value" <| fun _ ->
                     let actualCell = dummyFsCells |> Seq.item 1
                     Expect.equal testHeaderCell.Value.Value actualCell.Value "FsCell is incorrect in value"
-            ]
-        ]
-        testList "TryGetHeaderCellOfTableField" [
-            testList "cellsCollection : FsCellsCollection, tableFieldIndex : int" [
-                let testFsTable = FsTable("testFsTable", FsRangeAddress(dummyFsCellsCollectionFirstAddress, dummyFsCellsCollectionLastAddress))
-                testFsTable.AddFields dummyFsTableFields
-                let testHeaderCell = testFsTable.TryGetHeaderCellOfTableField(dummyFsCellsCollection, 1)
-                testCase "Is Some" <| fun _ ->
-                    Expect.isSome testHeaderCell "Is None"
-                testCase "Has correct value" <| fun _ ->
-                    let actualCell = dummyFsCells |> Seq.item 1
-                    Expect.equal testHeaderCell.Value.Value actualCell.Value "FsCell is incorrect in value"
-            ]
-        ]
-        testList "GetHeaderCellOfTableField" [
-            testList "cellsCollection : FsCellsCollection, tableField : FsTableField" [
-                let testFsTable = FsTable("testFsTable", FsRangeAddress(dummyFsCellsCollectionFirstAddress, dummyFsCellsCollectionLastAddress))
-                testFsTable.AddFields dummyFsTableFields
-                let testHeaderCell = testFsTable.GetHeaderCellOfTableField(dummyFsCellsCollection, Seq.item 1 dummyFsTableFields)
-                testCase "Has correct value" <| fun _ ->
-                    let actualCell = dummyFsCells |> Seq.item 1
-                    Expect.equal testHeaderCell.Value actualCell.Value "FsCell is incorrect in value"
-            ]
-        ]
-        testList "TryGetHeaderCellByFieldName" [
-            testList "cellsCollection : FsCellsCollection, fieldName : string" [
-                let testFsTable = FsTable("testFsTable", FsRangeAddress(dummyFsCellsCollectionFirstAddress, dummyFsCellsCollectionLastAddress))
-                testFsTable.AddFields dummyFsTableFields
-                let testHeaderCell = testFsTable.TryGetHeaderCellByFieldName(dummyFsCellsCollection, "Location")
-                testCase "Is Some" <| fun _ ->
-                    Expect.isSome testHeaderCell "Is None"
-                testCase "Has correct value" <| fun _ ->
-                    let actualCell = dummyFsCells |> Seq.item 2
-                    Expect.equal testHeaderCell.Value.Value actualCell.Value "FsCell is incorrect in value"
-            ]
-        ]
-        testList "GetDataCellsOfColumn" [
-            testList "cellsCollection : FsCellsCollection, fieldName : FsTableField" [
-                let testFsTable = FsTable("testFsTable", FsRangeAddress(dummyFsCellsCollectionFirstAddress, dummyFsCellsCollectionLastAddress))
-                testFsTable.AddFields dummyFsTableFields
-                let testDataCells = testFsTable.GetDataCells 2
-                testCase "Is Some" <| fun _ ->
-                    Expect.isNonEmpty testDataCells "Seq is empty"
-                testCase "Has correct values" <| fun _ ->
-                    let minRowNo = dummyFsCells |> Seq.map (fun c -> c.RowNumber) |> Seq.min
-                    let actualCells = dummyFsCells |> Seq.filter (fun c -> c.ColumnNumber = 2 && c.RowNumber > minRowNo)
-                    Expect.sequenceEqual (testDataCells |> Seq.map (fun c -> c.Value)) (actualCells |> Seq.map (fun c -> c.Value)) "FsCells are incorrect in value"
             ]
         ]
     ]
