@@ -85,5 +85,14 @@ let fsWorksheetTest =
                     Expect.isTrue containsDummyTable1Not "Does contain dummyTable1"
                     Expect.contains testSheet.Tables dummyTable2 "Does not contain dummyTable2"
             ]
+            testList "UpdateTable" [
+                testCase "dummyTable1 is updated" <| fun _ ->
+                    let testSheet = FsWorksheet("testSheet", [], [], FsCellsCollection())
+                    testSheet.AddTable dummyTable1
+                    let newDummyTable1 = FsTable("dummyTable1", FsRangeAddress("C4:D5"))
+                    testSheet.UpdateTable newDummyTable1
+                    let extractedTable = testSheet.Tables |> List.find (fun t -> t.Name = "dummyTable1")
+                    Expect.equal extractedTable.RangeAddress.Range "C4:D5" "TableRange does not fit the updated one"
+            ]
         ]
     ]

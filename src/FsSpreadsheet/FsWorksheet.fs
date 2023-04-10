@@ -431,6 +431,23 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
         sheet.RemoveTable table
         sheet
 
+    /// <summary>
+    /// Replaces the FsTable of the same name with the given one.
+    /// </summary>
+    /// <exception cref="System.ArgumentException">if an FsTable with the given name is not present in the FsWorksheet.</exception>
+    member this.UpdateTable(table : FsTable) =
+        if this.Tables |> List.exists (fun t -> t.Name = table.Name) then
+            _tables <- this.Tables |> List.map (fun t -> if t.Name = table.Name then table else t)
+        else failwith $"FsTable {table.Name} was not found in FsWorksheet {this.Name}"
+
+    /// <summary>
+    /// Replaces the FsTable of the same name with the given one in the FsWorksheet.
+    /// </summary>
+    /// <exception cref="System.ArgumentException">if an FsTable with the given name is not present in the FsWorksheet.</exception>
+    static member updateTable table (sheet : FsWorksheet) =
+        sheet.UpdateTable table
+        sheet
+
 
     // -------
     // Cell(s)
