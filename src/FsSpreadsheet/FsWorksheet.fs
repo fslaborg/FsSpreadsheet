@@ -107,7 +107,7 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
     // ------
 
     /// <summary>
-    /// Returns the FsRow at the given index. If it does not exist, it is created and appended first.
+    /// Returns the FsRow at the given index. If it does not exist, creates and appends it first.
     /// </summary>
     member self.Row(rowIndex) = 
         match _rows |> List.tryFind (fun row -> row.Index = rowIndex) with
@@ -119,7 +119,7 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
             row
 
     /// <summary>
-    /// Returns the FsRow at the given FsRangeAddress. If it does not exist, it is created and appended first.
+    /// Returns the FsRow at the given FsRangeAddress. If it does not exist, creates and appends first.
     /// </summary>
     member self.Row(rangeAddress : FsRangeAddress) = 
         if rangeAddress.FirstAddress.RowNumber <> rangeAddress.LastAddress.RowNumber then
@@ -350,7 +350,8 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
     // --------
 
     /// <summary>
-    /// Returns the FsTable with the given tableName, rangeAddress, and showHeaderRow parameters. If it does not exist yet, it gets created and appended first.
+    /// Returns the FsTable with the given tableName, rangeAddress, and showHeaderRow parameters. If it does not exist yet, creates
+    /// and appends it first.
     /// </summary>
     // TO DO: Ask HLW: Is this really a good name for the method?
     member self.Table(tableName, rangeAddress : FsRangeAddress, showHeaderRow : bool) = 
@@ -358,15 +359,16 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
         | Some table ->
             table
         | None -> 
-            let table = FsTable(tableName, rangeAddress, showHeaderRow)
+            let table = FsTable(tableName, rangeAddress, self.CellCollection, showHeaderRow)
             _tables <- List.append _tables [table]
             table
-    
+
     /// <summary>
-    /// Returns the FsTable with the given tableName and rangeAddress parameters. If it does not exist yet, it gets created first. ShowHeaderRow is true by default.
+    /// Returns the FsTable with the given tableName and rangeAddress parameters. If it does not exist yet, it creates and appends
+    /// it first. ShowHeaderRow is true by default.
     /// </summary>
-    member self.Table(tableName,rangeAddress) = 
-        self.Table(tableName,rangeAddress,true)
+    member self.Table(tableName, rangeAddress) = 
+        self.Table(tableName, rangeAddress, true)
 
     /// <summary>
     /// Returns the FsTable of the given name from an FsWorksheet if it exists. Else returns None.
