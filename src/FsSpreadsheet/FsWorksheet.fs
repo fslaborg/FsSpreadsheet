@@ -405,13 +405,31 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
     /// </summary>
     // TO DO: Ask HLW: rather printfn or failwith?
     member this.AddTables(tables) =
-        tables |> List.iter (this.AddTable >> ignore)
+        tables |> List.iter this.AddTable
 
     /// <summary>
     /// Adds a list of FsTables to an FsWorksheet. All FsTables with a name already present in the FsWorksheet are not attached.
     /// </summary>
     static member addTables tables (sheet : FsWorksheet) =
         sheet.AddTables tables
+        sheet
+
+    /// <summary>
+    /// Removes the given FsTable from the FsWorksheet.
+    /// </summary>
+    /// <exception cref="System.ArgumentException">if the given FsTable is not present in the FsWorksheet.</exception>
+    member this.RemoveTable(table : FsTable) =
+        if this.Tables |> List.exists (fun t -> t.Name = table.Name) then
+            _tables <- this.Tables |> List.filter (fun t -> t.Name <> table.Name)
+        else failwith $"FsTable {table.Name} was not found in FsWorksheet {this.Name}"
+
+    /// <summary>
+    /// Removes the given FsTable from the given FsWorksheet.
+    /// </summary>
+    /// <exception cref="System.ArgumentException">if the given FsTable is not present in the FsWorksheet.</exception>
+    static member removeTable table (sheet : FsWorksheet) =
+        sheet.RemoveTable table
+        sheet
 
 
     // -------
@@ -470,6 +488,7 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
     /// </summary>
     static member insertValueAt (value : 'a) rowIndex colIndex (sheet : FsWorksheet)=
         sheet.InsertValueAt(value, rowIndex, colIndex)
+        sheet
 
     /// <summary>
     /// Adds a value at the given row- and columnIndex.
@@ -490,6 +509,7 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
     /// </summary>
     static member setValueAt (value : 'a) rowIndex colIndex (sheet : FsWorksheet) =
         sheet.SetValueAt(value, rowIndex, colIndex)
+        sheet
 
     /// <summary>
     /// Removes the value at the given row- and columnIndex from the FsWorksheet.
@@ -502,6 +522,7 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
     /// </summary>
     static member removeCellAt rowIndex colIndex (sheet : FsWorksheet) =
         sheet.RemoveCellAt(rowIndex, colIndex)
+        sheet
 
     /// <summary>
     /// Removes the value of an FsCell at given row- and columnIndex if it exists from the FsCollection.
@@ -518,6 +539,7 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
     /// <exception cref="System.ArgumentNullException">if columnIndex is null.</exception>
     static member tryRemoveValueAt rowIndex colIndex (sheet : FsWorksheet) =
         sheet.TryRemoveValueAt(rowIndex, colIndex)
+        sheet
 
     /// <summary>
     /// Removes the value of an FsCell at given row- and columnIndex from the FsCollection.
@@ -534,18 +556,21 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
     /// <exception cref="System.Generic.KeyNotFoundException">if row or column at the given index does not exist.</exception>
     static member removeValueAt rowIndex colIndex (sheet : FsWorksheet) =
         sheet.RemoveValueAt(rowIndex, colIndex)
+        sheet
 
     /// <summary>
     /// Adds a FsCell to the FsWorksheet. !Exception if cell address already exists!
     /// </summary>
     static member addCell (cell : FsCell) (sheet : FsWorksheet) =
         sheet.AddCell cell 
+        sheet
 
     /// <summary>
     /// Adds a sequence of FsCells to the FsWorksheet. !Exception if cell address already exists!
     /// </summary>
     static member addCells (cell : seq<FsCell>) (sheet : FsWorksheet) =
         sheet.AddCells cell 
+        sheet
 
 
     // TO DO (later)
