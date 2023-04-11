@@ -20,6 +20,59 @@ open DocumentFormat.OpenXml
 
 // ----------------------------------------------
 
+// test a new approach for FsTable and FsWorksheet sharing one FsCellsCollection
+
+let dummyFsCells = 
+    [   // rows
+        [   // single cells in row
+            FsCell.createWithDataType DataType.String 2 2 "Name"
+            FsCell.createWithDataType DataType.String 2 3 "Age"
+            FsCell.createWithDataType DataType.String 2 4 "Location"
+        ]
+        [
+            FsCell.createWithDataType DataType.String 3 2 "John Doe"
+            FsCell.createWithDataType DataType.Number 3 3 "69"
+            FsCell.createWithDataType DataType.String 3 4 "Springfield"
+        ]
+        [
+            FsCell.createWithDataType DataType.String 4 2 "Jane Doe"
+            FsCell.createWithDataType DataType.Number 4 3 "23"
+            FsCell.createWithDataType DataType.String 4 4 "Springfield"
+        ]
+        [
+            FsCell.createWithDataType DataType.String 5 2 "Jack Doe"
+            FsCell.createWithDataType DataType.Number 5 3 "4"
+            FsCell.createWithDataType DataType.String 5 4 "Newville"
+        ]
+    ]
+    |> Seq.concat
+let newCc = FsCellsCollection()
+dummyFsCells |> Seq.iter newCc.Add
+let newWs = FsWorksheet("thisSheet", [], [], newCc)
+let newTbl = FsTable("myTable", FsRangeAddress "B2:D5", newCc)
+newWs.AddTable newTbl
+newTbl[2,2]
+newTbl[2,2].Value <- "lal"
+newTbl.CellsCollection[2,2]
+newWs.CellCollection[2,2]
+
+let ra1 = FsRangeAddress("A1:B1")
+let ra2 = FsRangeAddress("D1:E1")
+let ra3 = FsRangeAddress("B1:C1")
+let ra4 = FsRangeAddress("A1:A5")
+let ra5 = FsRangeAddress("A2:A5")
+ra1.Overlaps ra2
+ra1.Overlaps ra3
+ra1.Overlaps ra4
+ra1.Overlaps ra5
+let ra6 = FsRangeAddress("B2:D4")
+let ra7 = FsRangeAddress("D5:E17")
+ra6.Overlaps ra7
+ra1.Overlaps ra1
+
+(false && false)
+|> not
+
 // some other bugfixes
 
 //let lolCell = Cell.fromValueWithDataType None 1u 1u "3/3" DataType.String

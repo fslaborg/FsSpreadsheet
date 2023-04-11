@@ -156,15 +156,33 @@ type FsRangeAddress(firstAddress : FsAddress, lastAddress : FsAddress) =
     let mutable _lastAddress = lastAddress
 
 
+    // ------------------------
+    // ALTERNATIVE CONSTRUCTORS
+    // ------------------------
+
     new(rangeAddress) =
         let firstAdress,lastAddress = Range.toBoundaries rangeAddress
         FsRangeAddress(FsAddress(firstAdress),FsAddress(lastAddress))
 
+
+    // ----------
+    // PROPERTIES
+    // ----------
+
+    member this.FirstAddress = _firstAddress
+
+    member this.LastAddress = _lastAddress
+
+
+    // -------
+    // METHODS
+    // -------
+
     /// <summary>
     /// Creates a deep copy of this FsRangeAddress.
     /// </summary>
-    member self.Copy() =
-        FsRangeAddress(self.Range)
+    member this.Copy() =
+        FsRangeAddress(this.Range)
 
     /// <summary>
     /// Returns a deep copy of a given FsRangeAddress.
@@ -172,7 +190,7 @@ type FsRangeAddress(firstAddress : FsAddress, lastAddress : FsAddress) =
     static member copy (rangeAddress : FsRangeAddress) =
         rangeAddress.Copy()
 
-    member self.Extend (address : FsAddress) =
+    member this.Extend (address : FsAddress) =
         if address.RowNumber < _firstAddress.RowNumber then
             _firstAddress.RowNumber <- address.RowNumber
 
@@ -185,7 +203,7 @@ type FsRangeAddress(firstAddress : FsAddress, lastAddress : FsAddress) =
         if address.ColumnNumber > _lastAddress.ColumnNumber then
             _lastAddress.ColumnNumber <- address.ColumnNumber
 
-    member self.Normalize() =
+    member this.Normalize() =
 
         let firstRow,lastRow = 
             if firstAddress.RowNumber < lastAddress.RowNumber then 
@@ -200,21 +218,38 @@ type FsRangeAddress(firstAddress : FsAddress, lastAddress : FsAddress) =
         _firstAddress <- FsAddress(firstRow,firstColumn)
         _lastAddress <- FsAddress(lastRow,lastColumn)
 
-    member self.Range 
+    member this.Range 
         with get() = Range.ofBoundaries _firstAddress.Address _lastAddress.Address
         and set(address) = 
-            let firstAdress, lastAdress = Range.toBoundaries address            
+            let firstAdress, lastAdress = Range.toBoundaries address
             _firstAddress <- FsAddress (firstAdress)
             _lastAddress <- FsAddress (lastAdress)
 
-    override self.ToString() =
-        self.Range
+    override this.ToString() =
+        this.Range
 
-    member self.FirstAddress = _firstAddress
+    member this.Union(rangeAddress : FsRangeAddress) =
+        this.Extend(rangeAddress.FirstAddress)
+        this.Extend(rangeAddress.LastAddress)
+        this
 
-    member self.LastAddress = _lastAddress
+    /// <summary>
+    /// Returns true if this FsRangeAddress overlaps with a given one.
+    /// </summary>
+    member this.Overlaps(range : FsRangeAddress) =
+        let minRi1 = this.FirstAddress.RowNumber
+        let maxRi1 = this.LastAddress.RowNumber
+        let minCi1 = this.FirstAddress.ColumnNumber
+        let maxCi1 = this.LastAddress.ColumnNumber
+        let minRi2 = range.FirstAddress.RowNumber
+        let maxRi2 = range.LastAddress.RowNumber
+        let minCi2 = range.FirstAddress.ColumnNumber
+        let maxCi2 = range.LastAddress.ColumnNumber
+        (min maxRi1 maxRi2 < max minRi1 minRi2 || min maxCi1 maxCi2 < max minCi1 minCi2)
+        |> not
 
-    member self.Union(rangeAddress : FsRangeAddress) =
-        self.Extend(rangeAddress.FirstAddress)
-        self.Extend(rangeAddress.LastAddress)
-        self
+    /// <summary>
+    /// Returns true if two given FsRangeAddresses overlap.
+    /// </summary>
+    static member overlaps (range1 : FsRangeAddress) range2 =
+        range1.Overlaps range2

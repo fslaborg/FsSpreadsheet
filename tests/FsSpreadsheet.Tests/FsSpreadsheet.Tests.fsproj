@@ -11,6 +11,7 @@
     <Compile Include="FsWorksheetTests.fs" />
     <Compile Include="FsTableTests.fs" />
     <Compile Include="FsTableFieldTests.fs" />
+    <Compile Include="FsRangeAddressTests.fs" />
     <Compile Include="FsCellsCollectionTests.fs" />
     <Compile Include="FsCellTests.fs" />
     <Compile Include="FsAddressTests.fs" />
