@@ -34,13 +34,14 @@ type FsTable(name : string, rangeAddress, cellsCollection : FsCellsCollection, s
         _uniqueNames.Add name |> ignore
         name
 
-    let mutable _cellsCollection =
+    //let mutable _cellsCollection =
+    do
         // input cellsColl gets cropped to match the range of the table
         let minRi = base.RangeAddress.FirstAddress.RowNumber
         let maxRi = base.RangeAddress.LastAddress.RowNumber
         let minCi = base.RangeAddress.FirstAddress.ColumnNumber
         let maxCi = base.RangeAddress.LastAddress.ColumnNumber
-        let nFcc = FsCellsCollection()
+        //let nFcc = FsCellsCollection()
         cellsCollection.GetCells()
         |> Seq.iter (
             fun fsc -> 
@@ -50,13 +51,16 @@ type FsTable(name : string, rangeAddress, cellsCollection : FsCellsCollection, s
                     // header cells must have unique names (= values); name is changed according to Excel standards if duplicate
                     let newVal = addUniqueName fsc.Value 2 false
                     fsc.Value <- newVal
-                    nFcc.Add fsc
-                // cell is inside of the table range but no header cell
-                | x,y when x > minRi && x <= maxRi && y >= minCi && y <= maxCi
-                    -> nFcc.Add fsc
+                    //nFcc.Add fsc
+                //// cell is inside of the table range but no header cell
+                //| x,y when x > minRi && x <= maxRi && y >= minCi && y <= maxCi
+                    //-> nFcc.Add fsc
                 | _ -> ()
         )
-        nFcc
+        //nFcc
+
+    // !test new approach: FsTable & FsWorksheet share a CellsCollection (like FsRow)
+    let mutable _cellsCollection = cellsCollection
 
     let mutable _fieldNames : Dictionary<string,FsTableField> = Dictionary()
 

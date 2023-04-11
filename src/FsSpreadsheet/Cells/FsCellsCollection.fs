@@ -788,3 +788,6 @@ type FsCellsCollection() =
         cells.GetLastAddress()
 
     // TO DO: Add method to get FsRange when possible
+
+    member this.Update(cellsCollection : FsCellsCollection) =
+        ()

@@ -392,7 +392,13 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
     member this.AddTable(table : FsTable) =
         if this.Tables |> List.exists (fun t -> t.Name = table.Name) then
             printfn $"FsTable {table.Name} could not be appended as an FsTable with this name is already present in the FsWorksheet {this.Name}."
-        else _tables <- List.append _tables [table]
+        elif this.Tables |> List.exists (fun t -> t.RangeAddress.Overlaps table.RangeAddress) then
+            printfn $"FsTable {table.Name} could not be appended as its range overlaps with another FsTable in the FsWorksheet {this.Name}."
+        else 
+            _tables <- List.append _tables [table]
+            let tCc = table.CellsCollection
+            // TO DO: add cellsCollection.Update method here
+            ()
 
     /// <summary>
     /// Adds an FsTable to the FsWorksheet if an FsTable with the same name is not already attached.
