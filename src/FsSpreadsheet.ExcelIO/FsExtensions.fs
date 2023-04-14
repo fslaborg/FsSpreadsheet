@@ -68,10 +68,6 @@ module FsExtensions =
         static member toXlsxTable cellsCollection (table : FsTable) =
             table.ToXlsxTable(cellsCollection)
 
-        ///// Creates an FsTable on the basis of an XlsxTable.
-        //new(table : Spreadsheet.Table) =        // not permitted :(
-            //FsTable(table)
-
         /// <summary>
         /// Takes an XlsxTable and returns an FsTable.
         /// </summary>
@@ -80,6 +76,17 @@ module FsExtensions =
             let topLeftBoundary, bottomRightBoundary = Table.getArea table |> Table.Area.toBoundaries
             let ra = FsRangeAddress(FsAddress(topLeftBoundary), FsAddress(bottomRightBoundary))
             FsTable(table.Name, ra, FsCellsCollection(), table.TotalsRowShown, true)
+
+        static member fromXlsxTableAndSheetData sheetData table =
+            let fcc = FsCellsCollection()
+            SheetData.
+            sheetData
+            |> Seq.iter (
+                fun 
+            )
+            let topLeftBoundary, bottomRightBoundary = Table.getArea table |> Table.Area.toBoundaries
+            let ra = FsRangeAddress(FsAddress(topLeftBoundary), FsAddress(bottomRightBoundary))
+            FsTable(table.Name, ra, fcc, table.TotalsRowShown, true)
 
         /// <summary>
         /// Returns the FsWorksheet associated with the FsTable in a given FsWorkbook.
@@ -153,12 +160,11 @@ module FsExtensions =
 
 
     type FsWorkbook with
-        
+
         /// <summary>
         /// Creates an FsWorkbook from a given Stream to an XlsxFile.
         /// </summary>
-        // TO DO: Ask HLW/TM: is this REALLY the way to go? This is not a constructor! (though it tries to be one)
-        member self.FromXlsxStream (stream : Stream) =
+        static member fromXlsxStream (stream : Stream) =
             let doc = Spreadsheet.fromStream stream false
             let sst = Spreadsheet.tryGetSharedStringTable doc
             let xlsxWorkbookPart = Spreadsheet.getWorkbookPart doc
@@ -201,12 +207,6 @@ module FsExtensions =
 
             sheets
             |> Seq.fold (fun wb sheet -> FsWorkbook.addWorksheet sheet wb) (new FsWorkbook())
-
-        /// <summary>
-        /// Creates an FsWorkbook from a given Stream to an XlsxFile.
-        /// </summary>
-        static member fromXlsxStream (stream : Stream) =
-            (new FsWorkbook()).FromXlsxStream stream
 
         /// <summary>
         /// Takes the path to an Xlsx file and returns the FsWorkbook based on its content.
