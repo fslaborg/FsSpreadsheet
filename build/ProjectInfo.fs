@@ -6,7 +6,9 @@ let project = "FsSpreadsheet"
 
 let testProjects = 
     [
-        // add relative paths (from project root) to your testprojects here
+        "tests/FsSpreadsheet.Tests/FsSpreadsheet.Tests.fsproj"
+        "tests/FsSpreadsheet.ExcelIO.Tests/FsSpreadsheet.ExcelIO.Tests.fsproj"
+        "tests/FsSpreadsheet.Interactive.Tests/FsSpreadsheet.Interactive.Tests.fsproj"
     ]
 
 let solutionFile  = $"{project}.sln"
