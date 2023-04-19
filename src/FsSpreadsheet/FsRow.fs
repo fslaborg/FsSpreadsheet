@@ -1,5 +1,8 @@
 ﻿namespace FsSpreadsheet
 
+open System.Collections.Generic
+open System.Collections
+
 
 // Type based on the type XLRow used in ClosedXml
 /// <summary>
@@ -32,6 +35,11 @@ type FsRow (rangeAddress : FsRangeAddress, cells : FsCellsCollection, styleValue
         let maxColIndex = getIndexBy Seq.maxBy
         FsRow (FsRangeAddress(FsAddress(index, minColIndex),FsAddress(index, maxColIndex)), cells, null)
 
+    interface IEnumerable<FsCell> with
+        member this.GetEnumerator() : System.Collections.Generic.IEnumerator<FsCell> = this.Cells.GetEnumerator()
+
+    interface IEnumerable with
+        member this.GetEnumerator() = (this :> IEnumerable<FsCell>).GetEnumerator() :> IEnumerator
 
     // ----------
     // PROPERTIES
@@ -82,7 +90,12 @@ type FsRow (rangeAddress : FsRangeAddress, cells : FsCellsCollection, styleValue
     /// </summary>
     member self.Cell(columnIndex) = 
         base.Cell(FsAddress(1,columnIndex),cells)
-        
+       
+    /// <summary>
+    /// Returns the FsCell at columnIndex.
+    /// </summary>
+    member this.Item (columnIndex) =
+        this.Cell(columnIndex)
         //match _cells |> List.tryFind (fun cell -> cell.WorksheetColumn = columnIndex) with
         //| Some cell ->
         //    cell
