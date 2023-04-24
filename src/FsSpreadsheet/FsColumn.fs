@@ -35,6 +35,8 @@ type FsColumn (rangeAddress : FsRangeAddress, cells : FsCellsCollection)=
         let maxRowIndex = getIndexBy Seq.maxBy
         FsColumn (FsRangeAddress(FsAddress(minRowIndex, index),FsAddress(maxRowIndex, index)), cells)
 
+    new (columnRange : FsRangeColumn, cells : FsCellsCollection) = FsColumn(columnRange.RangeAddress,cells)
+
     interface IEnumerable<FsCell> with
         member this.GetEnumerator() : System.Collections.Generic.IEnumerator<FsCell> = this.Cells.GetEnumerator()
 

@@ -57,4 +57,14 @@ let columnOperations =
             testCase "CorrectIndex" <| fun _ ->
                 Expect.equal (dummyWorkSheet.Column(2).Index) 2 "Column index is not correct"
         ]
+        testList "FromTableRetrieval" [
+            
+            testCase "CorrectColumnCount" <| fun _ ->
+                let columns = FsTable.dummyFsTable.Columns(FsTable.dummyFsCellsCollection)
+                Expect.equal (columns |> Seq.length) (FsTable.dummyFsTable.ColumnCount()) "Column count is not correct"
+            testCase "Correct values" <| fun _ ->
+                let columns = FsTable.dummyFsTable.Columns(FsTable.dummyFsCellsCollection)
+                let expectedValues = ["Name";"John Doe";"Jane Doe";"Jack Doe"]
+                Expect.sequenceEqual (Seq.item 0 columns |> Seq.map FsCell.getValueAs<string>) expectedValues "Values are not correct"
+        ]
     ]
