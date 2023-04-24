@@ -66,6 +66,23 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
     member self.Rows
         with get () = _rows
 
+    /// <summary>
+    /// The FsColumns of the FsWorksheet.
+    /// </summary>
+    member self.Columns
+        with get () = 
+            _cells.GetCells()
+            |> Seq.groupBy (fun c -> c.ColumnNumber)
+            |> Seq.map (fun (columnIndex,cells) -> 
+                let newRange = 
+                    cells
+                    |> Seq.sortBy (fun c -> c.RowNumber)
+                    |> fun cells ->
+                        FsAddress((Seq.head cells |> fun c -> c.RowNumber), columnIndex),
+                        FsAddress((Seq.last cells |> fun c -> c.RowNumber), columnIndex)
+                    |> FsRangeAddress
+                FsColumn(newRange,self.CellCollection)
+            )
 
     // -------
     // METHODS
@@ -344,6 +361,45 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
                 self.Row(newRange)
         )
 
+
+
+    // ------
+    // Column(s)
+    // ------
+
+    /// <summary>
+    /// Returns the FsColumn at the given index. If it does not exist, it is created and appended first.
+    /// </summary>
+    member self.Column(columnIndex : int32) = FsColumn(columnIndex,self.CellCollection)
+
+    /// <summary>
+    /// Returns the FsColumn at the given FsRangeAddress. If it does not exist, it is created and appended first.
+    /// </summary>
+    member self.Column(rangeAddress : FsRangeAddress) = 
+        if rangeAddress.FirstAddress.ColumnNumber <> rangeAddress.LastAddress.ColumnNumber then
+            failwithf "Column may not have a range address spanning over different column indices"
+        self.Column(rangeAddress.FirstAddress.ColumnNumber).RangeAddress <- rangeAddress
+
+    /// <summary>
+    /// Returns the FsColumns of a given FsWorksheet.
+    /// </summary>
+    static member getColumns (sheet : FsWorksheet) = 
+        sheet.Columns
+
+    /// <summary>
+    /// Returns the FsColumn at the given columnIndex of an FsWorksheet.
+    /// </summary>
+    static member getColumnAt columnIndex sheet =
+        FsWorksheet.getColumns sheet
+        // to do: getIndex
+        |> Seq.find (FsColumn.getIndex >> (=) columnIndex)
+
+    /// <summary>
+    /// Returns the FsColumn at the given columnIndex of an FsWorksheet if it exists, else returns None.
+    /// </summary>
+    static member tryGetColumnAt columnIndex (sheet : FsWorksheet) =
+        sheet.Columns
+        |> Seq.tryFind (FsColumn.getIndex >> (=) columnIndex)
 
     // --------
     // Table(s)

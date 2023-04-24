@@ -86,6 +86,19 @@ type FsTable (name : string, rangeAddress, showTotalsRow, showHeaderRow) =
     member self.HeadersRow() = 
         self.HeadersRow(true)
 
+    /// <summary>
+    /// Returns the columns from the table.
+    /// </summary>
+    member self.Columns 
+        with get(cellsCollection : FsCellsCollection) = 
+            seq {
+                for i = self.RangeAddress.FirstAddress.ColumnNumber to self.RangeAddress.LastAddress.ColumnNumber do 
+                    let firstAddress = FsAddress(self.RangeAddress.FirstAddress.RowNumber,i)
+                    let lastAddress = FsAddress(self.RangeAddress.LastAddress.RowNumber,i)
+                    let range = FsRangeAddress (firstAddress,lastAddress)
+                    FsColumn(range,cellsCollection)
+            }
+
     /// Takes the respective FsCellsCollection for this FsTable and creates a new _fieldNames dictionary if the current one does not match.
     // TO DO: maybe HLW can specify above description a bit...
     member private self.RescanFieldNames(cellsCollection : FsCellsCollection) =

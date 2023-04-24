@@ -143,6 +143,8 @@ type FsCellsCollection() =
     /// </summary>
     member this.Add(row : int32, column : int32, cell : FsCell) = 
 
+        cell.RowNumber <- row
+        cell.ColumnNumber <- column
         _count <- _count + 1
 
         FsCellsCollection.IncrementUsage(_rowsUsed, row);

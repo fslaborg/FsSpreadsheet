@@ -15,10 +15,11 @@
     <Compile Include="Ranges\FsRangeRow.fs" />
     <Compile Include="Ranges\FsRangeColumn.fs" />
     <Compile Include="Ranges\FsRange.fs" />
+    <Compile Include="FsRow.fs" />
+    <Compile Include="FsColumn.fs" />
     <Compile Include="Tables\FsTableField.fs" />
     <Compile Include="Tables\FsTableRow.fs" />
     <Compile Include="Tables\FsTable.fs" />
-    <Compile Include="FsRow.fs" />
     <Compile Include="FsWorksheet.fs" />
     <Compile Include="FsWorkbook.fs" />
     <Compile Include="SheetBuilder.fs" />
