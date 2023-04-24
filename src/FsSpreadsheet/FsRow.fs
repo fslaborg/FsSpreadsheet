@@ -88,6 +88,7 @@ type FsRow (rangeAddress : FsRangeAddress, cells : FsCellsCollection, styleValue
     /// <summary>
     /// Returns the FsCell at columnIndex.
     /// </summary>
+    [<System.Obsolete("Use Item instead")>]
     member self.Cell(columnIndex) = 
         base.Cell(FsAddress(1,columnIndex),cells)
        
@@ -95,22 +96,21 @@ type FsRow (rangeAddress : FsRangeAddress, cells : FsCellsCollection, styleValue
     /// Returns the FsCell at columnIndex.
     /// </summary>
     member this.Item (columnIndex) =
-        this.Cell(columnIndex)
-        //match _cells |> List.tryFind (fun cell -> cell.WorksheetColumn = columnIndex) with
-        //| Some cell ->
-        //    cell
-        //| None -> 
-        //    let cell = FsCell()
-        //    cell.WorksheetColumn <- columnIndex
-        //    cell.WorksheetRow <- _index
-        //    _cells <- List.append _cells [cell]
-        //    cell
+        // use FsRangeBase call with colindex 1
+        base.Cell(FsAddress(1,columnIndex),cells)       
 
     /// <summary>
     /// Returns the FsCell at the given columnIndex from an FsRow.
     /// </summary>
+    [<System.Obsolete("Use FsRow.item instead")>]
     static member getCellAt colIndex (row : FsRow) =
         row.Cell(colIndex)
+
+    /// <summary>
+    /// Returns the FsCell at the given columnIndex from an FsRow.
+    /// </summary>
+    static member item colIndex (row : FsRow) =
+        row.Item(colIndex)
 
     /// <summary>
     /// Inserts the value at columnIndex as an FsCell. If there is an FsCell at the position, this FsCells and all the ones right to it are shifted to the right.
