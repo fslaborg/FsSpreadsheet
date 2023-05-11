@@ -1,11 +1,13 @@
 ﻿module FsCell
 
+#if FABLE_COMPILER
+open Fable.Mocha
+#else
 open Expecto
+#endif
 open FsSpreadsheet
-//open FsSpreadsheet.ExcelIO
 
-[<Tests>]
-let dataTypeTests =
+let dataType =
     testList "DataType" [
         testList "InferCellValue bool = true" [
             let boolValTrue = true
@@ -13,7 +15,8 @@ let dataTypeTests =
             testCase "Correct DataType" <| fun _ ->
                 Expect.isTrue (resultDtTrue = DataType.Boolean) "is not the expected DataType.Boolean"
             testCase "Correct string" <| fun _ ->
-                Expect.isTrue (resultStrTrue = "True") "resulting string is not correct"
+                let expected = "True"
+                Expect.equal resultStrTrue expected $"resulting string is not correct: {resultStrTrue}"
         ]
         testList "InferCellValue bool = false" [
             let boolValFalse = false
@@ -21,7 +24,8 @@ let dataTypeTests =
             testCase "Correct DataType" <| fun _ ->
                 Expect.isTrue (resultDtFalse = DataType.Boolean) "is not the expected DataType.Boolean"
             testCase "Correct string" <| fun _ ->
-                Expect.isTrue (resultStrFalse = "False") "resulting string is not correct"
+                let expected = "False"
+                Expect.equal resultStrFalse expected "resulting string is not correct"
         ]
         testList "InferCellValue string = \"test\"" [
             let stringValTest = "test"
@@ -73,8 +77,7 @@ let dataTypeTests =
         ]
     ]
 
-[<Tests>]
-let fsCellTest =
+let fsCellData =
     testList "FsCell data" [               
         testList "Data | DataType | Adress" [
             let fscellA1_string  = FsCell.create 1 1 "A1"
@@ -112,3 +115,8 @@ let fsCellTest =
 
         ]
     ]
+
+let main = testList "FsCell" [
+    dataType
+    fsCellData
+]

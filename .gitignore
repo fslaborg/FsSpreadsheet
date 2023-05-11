@@ -353,3 +353,4 @@ pkg/
 
 tmp/
 .fsdocs/
+/tests/FsSpreadsheet.JsNativeTests/fable/**/*.js

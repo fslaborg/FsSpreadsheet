@@ -6,9 +6,9 @@ let project = "FsSpreadsheet"
 
 let testProjects = 
     [
-        "tests/FsSpreadsheet.Tests/FsSpreadsheet.Tests.fsproj"
-        "tests/FsSpreadsheet.ExcelIO.Tests/FsSpreadsheet.ExcelIO.Tests.fsproj"
-        "tests/FsSpreadsheet.Interactive.Tests/FsSpreadsheet.Interactive.Tests.fsproj"
+        "tests/FsSpreadsheet.Tests"
+        "tests/FsSpreadsheet.ExcelIO.Tests"
+        "tests/FsSpreadsheet.Interactive.Tests"
     ]
 
 let solutionFile  = $"{project}.sln"

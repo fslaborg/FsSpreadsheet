@@ -115,7 +115,7 @@ module WorkbookPart =
             let worksheetPart = initWorksheetPart workbookPart
             let id = getWorksheetPartID worksheetPart workbookPart
             let sheetID = 
-                sheets |> Sheet.Sheets.getSheets |> Seq.map Sheet.getSheetID
+                sheets |> Sheet.Sheets.getSheets |> Seq.map Sheet.getSheetIndex
                 |> fun s -> 
                     if Seq.length s = 0 then 1u
                     else s |> Seq.max |> (+) 1ul
@@ -138,7 +138,7 @@ module WorkbookPart =
         let sheets = Sheet.Sheets.getOrInit workbook
         let id = getWorksheetPartID worksheetPart workbookPart
         let sheetID = 
-            sheets |> Sheet.Sheets.getSheets |> Seq.map Sheet.getSheetID
+            sheets |> Sheet.Sheets.getSheets |> Seq.map Sheet.getSheetIndex
             |> fun s -> 
                 if Seq.length s = 0 then 1u
                 else s |> Seq.max |> (+) 1ul
@@ -163,7 +163,7 @@ module WorkbookPart =
         let sheets = Sheet.Sheets.getOrInit workbook
         let id = getWorksheetPartID worksheetPart workbookPart
         let sheetID = 
-            sheets |> Sheet.Sheets.getSheets |> Seq.map Sheet.getSheetID
+            sheets |> Sheet.Sheets.getSheets |> Seq.map Sheet.getSheetIndex
             |> fun s -> 
                 if Seq.length s = 0 then 1u
                 else s |> Seq.max |> (+) 1ul

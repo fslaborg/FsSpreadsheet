@@ -1,6 +1,10 @@
 ﻿module FsWorkbook
 
+#if FABLE_COMPILER
+open Fable.Mocha
+#else
 open Expecto
+#endif
 open FsSpreadsheet
 
 
@@ -18,8 +22,7 @@ dummyWorksheet1.AddTable dummyTables[0] |> ignore
 dummyWorksheet2.AddTable dummyTables[1] |> ignore
 
 
-[<Tests>]
-let fsWorkbookTests =
+let main =
     testList "FsWorkbook" [
         testList "TryGetWorksheetByName" [
             let testWorksheet = dummyWorkbook.TryGetWorksheetByName "dummyWorksheet1"

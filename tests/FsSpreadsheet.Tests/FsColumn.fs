@@ -1,7 +1,10 @@
 ﻿module FsColumn
 
-
+#if FABLE_COMPILER
+open Fable.Mocha
+#else
 open Expecto
+#endif
 open FsSpreadsheet
 
 let getDummyWorkSheet() = 
@@ -11,8 +14,7 @@ let getDummyWorkSheet() =
     |> Seq.iter (fun c -> worksheet.InsertValueAt(c.Value,c.RowNumber,c.ColumnNumber))
     worksheet
 
-[<Tests>]
-let columnOperations =
+let main =
     testList "columnOperations" [
         testList "Prerequisites" [
             let dummyWorkSheet = getDummyWorkSheet()
@@ -31,7 +33,7 @@ let columnOperations =
             testCase "CorrectCellCount" <| fun _ ->
                 Expect.equal (column.Cells |> Seq.length) 3 "Column length is not correct"
             testCase "RetreiveCorrectCell" <| fun _ ->
-                Expect.equal (column.Cell(3).Value) "B3" "Did not retreive correct cell"
+                Expect.equal (column.[3].Value) "B3" "Did not retreive correct cell"
             testCase "IsEnumerable" <| fun _ ->
                 Expect.equal (column |> Seq.toList |> List.length ) 3 "Did not enumerate correctly"
         ]
@@ -46,7 +48,7 @@ let columnOperations =
             testCase "CorrectCellCount" <| fun _ ->
                 Expect.equal (column.Cells |> Seq.length) 3 "Column length is not correct"
             testCase "RetreiveCorrectCell" <| fun _ ->
-                Expect.equal (column.Cell(3).Value) "B3" "Did not retreive correct cell"
+                Expect.equal (column.[3].Value) "B3" "Did not retreive correct cell"
             testCase "IsEnumerable" <| fun _ ->
                 Expect.equal (column |> Seq.toList |> List.length ) 3 "Did not enumerate correctly"
         ]
@@ -65,6 +67,6 @@ let columnOperations =
             testCase "Correct values" <| fun _ ->
                 let columns = FsTable.dummyFsTable.Columns(FsTable.dummyFsCellsCollection)
                 let expectedValues = ["Name";"John Doe";"Jane Doe";"Jack Doe"]
-                Expect.sequenceEqual (Seq.item 0 columns |> Seq.map FsCell.getValueAs<string>) expectedValues "Values are not correct"
+                Expect.mySequenceEqual (Seq.item 0 columns |> Seq.map FsCell.getValueAs<string>) expectedValues "Values are not correct"
         ]
     ]

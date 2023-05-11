@@ -6,7 +6,6 @@ on:
   pull_request:
     branches: [ main ]
 
-
 jobs:
   build-and-test-linux:
 
@@ -18,9 +17,17 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 6.x.x
+    - name: Restore fable
+      run: dotnet tool restore
+    - name: Setup Node.js environment
+      uses: actions/setup-node@v3
+      with:
+          node-version: 16
+    - name: install node modules
+      run: npm install
     - name: make script executable
       run: chmod u+x build.sh
-    - name: Build and test
+    - name: Build and test dotnet
       working-directory: ./
       run: ./build.sh runtests
 
@@ -34,6 +41,14 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 6.x.x
-    - name: Build and test
+    - name: Restore fable
+      run: dotnet tool restore
+    - name: Setup Node.js environment
+      uses: actions/setup-node@v3
+      with:
+          node-version: 16
+    - name: install node modules
+      run: npm install
+    - name: Build and test dotnet
       working-directory: ./
       run: ./build.cmd runtests

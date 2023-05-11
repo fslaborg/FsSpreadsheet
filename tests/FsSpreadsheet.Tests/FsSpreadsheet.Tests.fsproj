@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -7,20 +7,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="Utils.fs" />
     <Compile Include="Resources.fs" />
-    <Compile Include="FsWorkbook.fs" />
-    <Compile Include="FsWorksheet.fs" />
-    <Compile Include="FsTable.fs" />
-    <Compile Include="FsTableField.fs" />
-    <Compile Include="FsColumn.fs" />
-    <Compile Include="FsCellsCollection.fs" />
     <Compile Include="FsCell.fs" />
     <Compile Include="FsAddress.fs" />
+    <Compile Include="FsTableField.fs" />
+    <Compile Include="FsCellsCollection.fs" />
+    <Compile Include="FsTable.fs" />
+    <Compile Include="FsColumn.fs" />
+    <Compile Include="FsWorksheet.fs" />
+    <Compile Include="FsWorkbook.fs" />
+    <Compile Include="DSL\CellBuilder.fs" />
     <Compile Include="Main.fs" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Expecto" Version="9.*" />
+    <PackageReference Include="Fable.Mocha" Version="2.16.0" />
     <PackageReference Include="YoloDev.Expecto.TestSdk" Version="0.*" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.*" />
   </ItemGroup>

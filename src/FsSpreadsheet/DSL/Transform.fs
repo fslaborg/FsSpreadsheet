@@ -31,6 +31,7 @@ module Transform =
             | Table (t,n) :: tail when inColumns            -> loop false false [] tail (("Table",[Table (t,n)]) :: ("Columns",current|> List.rev) :: agg)
             | Table (t,n) :: tail                           -> loop false false [] tail (("Table",[Table (t,n)]) :: agg)
 
+            | _ -> failwith "Unknown element combination when grouping Sheet elements"
 
         loop false false [] els []
         |> List.rev
@@ -47,8 +48,10 @@ module Transform =
                             col
                             |> List.map (fun cell ->
                                 match cell with 
-                                | ColumnElement.UnindexedCell cell -> cell                                
+                                | ColumnElement.UnindexedCell cell -> cell      
+                                | _ -> failwith "Indexed cells not supported in column transformation"
                             )
+                        | _ -> failwith "Indexed columns not supported in table transformation"
                     )
                 else 
                     els
@@ -58,20 +61,24 @@ module Transform =
                             row
                             |> List.map (fun cell ->
                                 match cell with 
-                                | RowElement.UnindexedCell cell -> cell                                
+                                | RowElement.UnindexedCell cell -> cell    
+                                | _ -> failwith "Indexed cells not supported in row transformation"
                             )
+                        | _ -> failwith "Indexed rows not supported in table transformation"
                     )
                     |> List.transpose
             cols
             |> List.iter (fun col ->
-                let header :: fields = col
-                let field = table.Field(snd header, cellCollection)
-                fields
-                |> List.iteri (fun i (dataType,value) ->
-                    let cell = field.Column.Cell(i + 2,cellCollection)
-                    cell.DataType <- dataType
-                    cell.Value <- value
-                )
+                match col with
+                | [] -> failwith "Empty column"
+                | header :: fields ->
+                    let field = table.Field(snd header, cellCollection)
+                    fields
+                    |> List.iteri (fun i (dataType,value) ->
+                        let cell = field.Column.Cell(i + 2,cellCollection)
+                        cell.DataType <- dataType
+                        cell.Value <- value
+                    )
                 
             )
 
@@ -92,11 +99,11 @@ module Transform =
             |> List.iter (fun el ->
                 match el with 
                 | RowElement.IndexedCell(i,(datatype,value)) -> 
-                    let cell = row.Cell(i.Index)
+                    let cell = row.[i.Index]
                     cell.DataType <- datatype
                     cell.Value <- value
                 | RowElement.UnindexedCell(datatype,value) -> 
-                    let cell = row.Cell(getNextIndex())
+                    let cell = row.[getNextIndex()]
                     cell.DataType <- datatype
                     cell.Value <- value
             )
@@ -145,6 +152,7 @@ module Transform =
                             i.Index,colElements
                         | UnindexedColumn(colElements) -> 
                             getNextColumnIndex(),colElements
+                        | _ -> failwith "Expected column elements"
                     let mutable cellIndexSet = 
                         elements 
                         |> List.choose (fun el -> match el with | ColumnElement.IndexedCell(i,_) -> Option.Some i.Index | _ -> None)
@@ -163,13 +171,13 @@ module Transform =
                         | ColumnElement.IndexedCell(i,(datatype,value)) -> 
                             let row = sheet.Row(i.Index + baseRowIndex - 1)
                             rowIndexSet <- Set.add (i.Index) rowIndexSet
-                            let cell = row.Cell(colI)
+                            let cell = row.[colI]
                             cell.DataType <- datatype
                             cell.Value <- value
                         | ColumnElement.UnindexedCell(datatype,value) -> 
                             let row = sheet.Row(getNextIndex () + baseRowIndex - 1)
                             rowIndexSet <- Set.add row.Index rowIndexSet
-                            let cell = row.Cell(colI)
+                            let cell = row.[colI]
                             cell.DataType <- datatype
                             cell.Value <- value
                     )
@@ -195,8 +203,10 @@ module Transform =
                 
                         | UnindexedRow(rowElements) -> 
                             let row = sheet.Row(getFillRowIndex())
-                            Workbook.parseRow sheet.CellCollection row rowElements                   
+                            Workbook.parseRow sheet.CellCollection row rowElements        
+                        | _ -> failwith "Expected row elements"
                     )
+                | s, _  -> failwithf "Invalid sheet element %s" s
             )
 
         member self.Parse() =

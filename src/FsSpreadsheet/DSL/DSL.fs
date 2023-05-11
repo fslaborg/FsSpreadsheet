@@ -32,6 +32,8 @@ type DSL =
         | NoneOptional (messages) -> NoneOptional(messages)
         | NoneRequired (messages) -> NoneOptional(messages)
 
+    #if FABLE_COMPILER
+    #else
     /// Transforms any given missing element expression to an optional.
     static member opt (elem : Expr<SheetEntity<'T list>>) = 
         try 
@@ -40,6 +42,7 @@ type DSL =
         with
         | err -> 
             NoneOptional([message err.Message])
+    #endif
 
     /// Drops the cell with the given message
     static member dropCell message : SheetEntity<Value> = NoneRequired [message]

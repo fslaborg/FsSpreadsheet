@@ -14,8 +14,6 @@ type ReduceOperation =
             values 
             |> List.map (snd >> string)
             |> List.reduce (fun a b -> $"{a}{separator}{b}")
-            
-            
 
 type CellBuilder() =
 
@@ -24,9 +22,11 @@ type CellBuilder() =
     static member Empty : SheetEntity<Value list> = SheetEntity.NoneOptional []
 
     // -- Computation Expression methods --> 
-
+    #if FABLE_COMPILER
+    #else
     member _.Quote  (quotation: Quotations.Expr<'T>) =
         quotation
+    #endif
 
     member inline this.Zero() : SheetEntity<Value list> = SheetEntity.NoneOptional []
 
@@ -142,12 +142,36 @@ type CellBuilder() =
 
     member this.AsCellElement(children: SheetEntity<Value list>) : SheetEntity<CellElement> =
         match children with
+        | Some (v :: [],messages) ->
+            let cellElement = v, None
+            SheetEntity.Some(cellElement, messages)
         | Some (vals,messages) ->
             let cellElement = reducer.Reduce (vals), None
             SheetEntity.Some(cellElement, messages)
         | NoneRequired messages -> NoneRequired messages
         | NoneOptional messages -> NoneOptional messages
 
+    #if FABLE_COMPILER
+    member inline this.Run(children: OptionalSource<SheetEntity<Value list>>) =
+        try 
+            match this.AsCellElement (children.Source) with
+            | NoneRequired m -> NoneOptional m
+            | se -> se
+        with
+        | err -> NoneOptional [message err.Message]
+
+    member inline this.Run(children: RequiredSource<SheetEntity<Value list>>) =
+        try 
+            match this.AsCellElement (children.Source) with
+            | NoneOptional m -> NoneRequired m
+            | se -> se
+        with
+        | err -> NoneOptional [message err.Message]
+
+    member inline this.Run(children: SheetEntity<Value list>) =
+        this.AsCellElement (children)
+        |> fun v -> v.Value
+    #else
     member inline this.Run(children: Expr<OptionalSource<SheetEntity<Value list>>>) =
         try 
             match this.AsCellElement ((eval<OptionalSource<SheetEntity<Value list>>> children).Source) with
@@ -167,5 +191,5 @@ type CellBuilder() =
     member inline this.Run(children: Expr<SheetEntity<Value list>>) =
         this.AsCellElement (eval<SheetEntity<Value list>> children)
         |> fun v -> v.Value
-
+    #endif
     member inline _.Delay(n: unit -> 'T) = n()

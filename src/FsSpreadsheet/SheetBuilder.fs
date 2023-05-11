@@ -161,10 +161,10 @@ module SheetBuilder =
                             let i = headers.Count + 1
                             headers.Add(v,i)
                             if hasHeader then
-                                self.Row(1).Cell(i).CopyFrom(headerCell) |> ignore
+                                self.Row(1).[i].CopyFrom(headerCell) |> ignore
                             i
 
-                    let activeCell = activeRow.Cell(index)
+                    let activeCell = activeRow.[index]
                     for transformer in field.CellTransformers do
                         ignore (transformer row activeCell)
 

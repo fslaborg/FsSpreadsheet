@@ -16,15 +16,15 @@ module CellReference =
 
     /// Transforms number index to excel column string indices (e.g. A, B, Z, AA, CD) (starting with A = 1).
     let indexToColAdress i =
-        let sb = System.Text.StringBuilder()
-        let rec loop residual = 
-            if residual = 0u then
-                sb.ToString()
-            else
-                let modulo = (residual - 1u) % 26u
-                sb.Insert(0, char (modulo + 65u)) |> ignore
-                loop ((residual - modulo) / 26u)
-        loop i
+        // Cannot use StringBuilder, as it is not compatible with Fable
+        let rec loop index acc =
+            match index with
+            | 0u -> acc
+            | _ ->
+                let mod26 = (index - 1u) % 26u
+                let nextChar = char (uint 'A' + mod26)
+                loop ((index - 1u) / 26u) (string nextChar + acc)
+        loop i ""
 
     /// Maps 1 based column and row indices to "A1" style reference.
     let ofIndices column (row : uint32) = 

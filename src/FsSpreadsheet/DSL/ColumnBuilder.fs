@@ -4,8 +4,6 @@ open FsSpreadsheet
 open FsSpreadsheet.DSL
 
 open Microsoft.FSharp.Quotations
-open Microsoft.FSharp.Linq.RuntimeHelpers
-open Microsoft.FSharp.Quotations.Patterns
 open Expression
 
 
@@ -14,9 +12,11 @@ type ColumnBuilder() =
     static member Empty : SheetEntity<ColumnElement list> = SheetEntity.some []
 
     // -- Computation Expression methods --> 
-
+    #if FABLE_COMPILER
+    #else
     member _.Quote  (quotation: Quotations.Expr<'T>) =
         quotation
+    #endif
 
     member inline this.Zero() : SheetEntity<ColumnElement list> = SheetEntity.some []
 
@@ -167,8 +167,26 @@ type ColumnBuilder() =
         this.Combine(wx1,wx2.Source) 
         |> OptionalSource
 
-    member inline _.Delay(n: unit -> 'T) = n()
+    #if FABLE_COMPILER
+    member inline this.Run(children: OptionalSource<SheetEntity<ColumnElement list>>) =
+        try 
+            match children.Source with
+            | NoneRequired m -> NoneOptional m
+            | se -> se
+        with
+        | err -> NoneOptional [message err.Message]
 
+    member inline this.Run(children: RequiredSource<SheetEntity<ColumnElement list>>) =
+        try 
+            match children.Source with
+            | NoneOptional m -> NoneRequired m
+            | se -> se
+        with
+        | err -> NoneOptional [message err.Message]
+
+    member inline this.Run(children: SheetEntity<ColumnElement list>) =
+        children.Value
+    #else
     member inline this.Run(children: Expr<OptionalSource<SheetEntity<ColumnElement list>>>) =
         try 
             match (eval<OptionalSource<SheetEntity<ColumnElement list>>> children).Source with
@@ -176,7 +194,7 @@ type ColumnBuilder() =
             | se -> se
         with
         | err -> NoneOptional [message err.Message]
-
+    
     member inline this.Run(children: Expr<RequiredSource<SheetEntity<ColumnElement list>>>) =
         try 
             match (eval<RequiredSource<SheetEntity<ColumnElement list>>> children).Source with
@@ -187,3 +205,5 @@ type ColumnBuilder() =
 
     member inline this.Run(children: Expr<SheetEntity<ColumnElement list>>) =
         (eval<SheetEntity<ColumnElement list>> children).Value
+    #endif
+    member inline _.Delay(n: unit -> 'T) = n()

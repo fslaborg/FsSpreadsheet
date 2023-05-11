@@ -286,10 +286,9 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
     /// Returns the highest index of any FsRow.
     /// </summary>
     member self.GetMaxRowIndex() =
-        try 
-            self.Rows
-            |> List.maxBy (fun r -> r.Index)
-        with :? System.ArgumentException -> failwith "The FsWorksheet has no FsRows."
+        if self.Rows.IsEmpty then failwith "The FsWorksheet has no FsRows."
+        self.Rows 
+        |> List.maxBy (fun r -> r.Index)
 
     /// <summary>
     /// Returns the highest index of any FsRow in a given FsWorksheet.

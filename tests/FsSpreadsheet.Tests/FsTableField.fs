@@ -1,8 +1,11 @@
 ﻿module FsTableField
 
 open FsSpreadsheet
+#if FABLE_COMPILER
+open Fable.Mocha
+#else
 open Expecto
-
+#endif
 
 let dummyFsRangeAddress = FsRangeAddress("C1:C3")
 let dummyFsRangeColumn = FsRangeColumn(dummyFsRangeAddress)
@@ -18,9 +21,7 @@ let dummyFsCells = [
 let dummyFsCellsCollection = FsCellsCollection()
 dummyFsCellsCollection.Add dummyFsCells |> ignore
 
-
-[<Tests>]
-let fsTableField =
+let main =
     testList "FsTableField" [
         testList "Constructors" [
             testList "unit" [
@@ -151,7 +152,7 @@ let fsTableField =
                         let col3Cells = testFsCellsCollection.GetCellsInColumn 3
                         let col3CellsNoHeader = col3Cells |> Seq.skip 1
                         let col3CellsNoHeaderVals = col3CellsNoHeader |> Seq.map (fun c -> c.Value)
-                        Expect.sequenceEqual dataCellsVals col3CellsNoHeaderVals "Values of data cells are not equal to values of expected cells"
+                        Expect.mySequenceEqual dataCellsVals col3CellsNoHeaderVals "Values of data cells are not equal to values of expected cells"
                 ]
                 //testCase "Gets correct header cell" <| fun _ ->
                 //    Expect.equal headerCell.Value "I am the Header!" "Value is not I am the Header!"

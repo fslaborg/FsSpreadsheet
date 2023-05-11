@@ -25,6 +25,8 @@
     <Compile Include="SheetBuilder.fs" />
     <Compile Include="DSL\Expression.fs" />
     <Compile Include="DSL\Types.fs" />
+    <Compile Include="DSL\Transform.fs" />
+    <Compile Include="DSL\Operators.fs" />
     <Compile Include="DSL\CellBuilder.fs" />
     <Compile Include="DSL\RowBuilder.fs" />
     <Compile Include="DSL\ColumnBuilder.fs" />
@@ -32,20 +34,22 @@
     <Compile Include="DSL\SheetBuilder.fs" />
     <Compile Include="DSL\WorkbookBuilder.fs" />
     <Compile Include="DSL\DSL.fs" />
-    <Compile Include="DSL\Operators.fs" />
-    <Compile Include="DSL\Transform.fs" />
     <None Include="..\..\docs\img\logo.png" Pack="true" PackagePath="\" />
   </ItemGroup>
 
   <PropertyGroup>
-    <Authors>Heinrich Lukas Weil, Oliver Maus, Kevin Schneider, Timo Mühlhaus</Authors>
-    <Description>Spreadsheet creation and manipulation in FSharp</Description>
+    <Authors>Heinrich Lukas Weil, Oliver Maus, Kevin Schneider, Kevin Frey, Timo Mühlhaus</Authors>
+    <Description>Fable compliant Spreadsheet creation and manipulation in FSharp</Description>
     <Summary>Spreadsheet creation and manipulation in FSharp</Summary>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageIcon>logo.png</PackageIcon>
-    <PackageTags>F# FSharp spreadsheet Excel datascience</PackageTags>
+    <PackageTags>F# FSharp spreadsheet Excel xlsx datascience fable fable-library</PackageTags>
     <RepositoryUrl>https://github.com/CSBiology/FsSpreadsheet</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>
+
+  <ItemGroup>
+	<Content Include="*.fsproj; **\*.fs; **\*.fsi" PackagePath="fable\" />
+  </ItemGroup>
 
 </Project>

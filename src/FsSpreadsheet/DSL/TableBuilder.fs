@@ -68,7 +68,6 @@ type TableBuilder(name : string) =
     member inline _.Yield(cs: ColumnBuilder) =
         SheetEntity.some [TableElement.UnindexedColumn []]
 
-
     member inline this.YieldFrom(ns: SheetEntity<TableElement list> seq) =   
         ns
         |> Seq.fold (fun state we ->

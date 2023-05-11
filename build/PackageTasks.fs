@@ -45,19 +45,19 @@ let packPrerelease = BuildTask.create "PackPrerelease" [setPrereleaseTag; clean;
             !! "src/**/*.*proj"
             -- "src/bin/*"
             |> Seq.iter (Fake.DotNet.DotNet.pack (fun p ->
-                        let msBuildParams =
-                            {p.MSBuildParams with 
-                                Properties = ([
-                                    "Version", prereleaseTag
-                                    "PackageReleaseNotes",  (release.Notes |> List.map replaceCommitLink  |> String.toLines )
-                                ] @ p.MSBuildParams.Properties)
-                            }
-                        {
-                            p with 
-                                VersionSuffix = Some prereleaseSuffix
-                                OutputPath = Some pkgDir
-                                MSBuildParams = msBuildParams
-                        }
+                let msBuildParams =
+                    {p.MSBuildParams with 
+                        Properties = ([
+                            "Version", prereleaseTag
+                            "PackageReleaseNotes",  (release.Notes |> List.map replaceCommitLink  |> String.toLines )
+                        ] @ p.MSBuildParams.Properties)
+                    }
+                {
+                    p with 
+                        VersionSuffix = Some prereleaseSuffix
+                        OutputPath = Some pkgDir
+                        MSBuildParams = msBuildParams
+                }
             ))
     else
         failwith "aborted"

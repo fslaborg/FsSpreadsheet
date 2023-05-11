@@ -11,9 +11,11 @@ type RowBuilder() =
     static member Empty : SheetEntity<RowElement list> = SheetEntity.some []
 
     // -- Computation Expression methods --> 
-
+    #if FABLE_COMPILER
+    #else
     member _.Quote  (quotation: Quotations.Expr<'T>) =
         quotation
+    #endif
 
     member inline this.Zero() : SheetEntity<RowElement list> = SheetEntity.some []
 
@@ -155,8 +157,26 @@ type RowBuilder() =
         this.Combine(wx1,wx2.Source) 
         |> OptionalSource
 
-    member inline _.Delay(n: unit -> 'T) = n()
+    #if FABLE_COMPILER
+    member inline this.Run(children: OptionalSource<SheetEntity<RowElement list>>) =
+        try 
+            match children.Source with
+            | NoneRequired m -> NoneOptional m
+            | se -> se
+        with
+        | err -> NoneOptional [message err.Message]
 
+    member inline this.Run(children: RequiredSource<SheetEntity<RowElement list>>) =
+        try 
+            match children.Source with
+            | NoneOptional m -> NoneRequired m
+            | se -> se
+        with
+        | err -> NoneOptional [message err.Message]
+
+    member inline this.Run(children: SheetEntity<RowElement list>) =
+        children.Value
+    #else
     member inline this.Run(children: Expr<OptionalSource<SheetEntity<RowElement list>>>) =
         try 
             match (eval<OptionalSource<SheetEntity<RowElement list>>> children).Source with
@@ -175,3 +195,6 @@ type RowBuilder() =
 
     member inline this.Run(children: Expr<SheetEntity<RowElement list>>) =
         (eval<SheetEntity<RowElement list>> children).Value
+    #endif
+
+    member inline _.Delay(n: unit -> 'T) = n()

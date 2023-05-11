@@ -1,8 +1,11 @@
 ﻿module FsTable
 
+#if FABLE_COMPILER
+open Fable.Mocha
+#else
 open Expecto
+#endif
 open FsSpreadsheet
-
 
 let dummyFsCells = 
     [   // rows
@@ -75,8 +78,7 @@ let dummyFsTableFields =
     |> List.ofSeq
 
 
-[<Tests>]
-let fsTableTests =
+let main =
     testList "FsTable" [
         testList "AddFields" [
             testList "tableFields : seq FsTableField" [
@@ -93,9 +95,9 @@ let fsTableTests =
                     |> Seq.toArray 
                     |> Array.unzip
                 testCase "Names are there" <| fun _ ->
-                    Expect.sequenceEqual testNames dummyNames "Names are not equal" 
+                    Expect.mySequenceEqual testNames dummyNames "Names are not equal" 
                 testCase "Indeces are there" <| fun _ ->
-                    Expect.sequenceEqual testIndeces dummyIndeces "Indeces are not equal" 
+                    Expect.mySequenceEqual testIndeces dummyIndeces "Indeces are not equal" 
             ]
         ]
         testList "TryGetHeaderCellOfColumn" [
@@ -160,7 +162,7 @@ let fsTableTests =
                 testCase "Has correct values" <| fun _ ->
                     let minRowNo = dummyFsCells |> Seq.map (fun c -> c.RowNumber) |> Seq.min
                     let actualCells = dummyFsCells |> Seq.filter (fun c -> c.ColumnNumber = 2 && c.RowNumber > minRowNo)
-                    Expect.sequenceEqual (testDataCells |> Seq.map (fun c -> c.Value)) (actualCells |> Seq.map (fun c -> c.Value)) "FsCells are incorrect in value"
+                    Expect.mySequenceEqual (testDataCells |> Seq.map (fun c -> c.Value)) (actualCells |> Seq.map (fun c -> c.Value)) "FsCells are incorrect in value"
             ]
         ]
     ]
