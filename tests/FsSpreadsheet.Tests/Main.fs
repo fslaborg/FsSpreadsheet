@@ -17,6 +17,8 @@ let all =
             FsCellsCollection.main
             FsCell.main
             FsAddress.main
+
+            DSL.CellBuilder.main
         ]
 
 [<EntryPoint>]

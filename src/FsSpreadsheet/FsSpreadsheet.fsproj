@@ -38,20 +38,14 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <Authors>Heinrich Lukas Weil, Oliver Maus, Kevin Schneider, Timo Mühlhaus</Authors>
-    <Description>Spreadsheet creation and manipulation in FSharp</Description>
+    <Authors>Heinrich Lukas Weil, Oliver Maus, Kevin Schneider, Kevin Frey, Timo Mühlhaus</Authors>
+    <Description>Fable compliant Spreadsheet creation and manipulation in FSharp</Description>
     <Summary>Spreadsheet creation and manipulation in FSharp</Summary>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageIcon>logo.png</PackageIcon>
-    <PackageTags>F# FSharp spreadsheet Excel datascience</PackageTags>
+    <PackageTags>F# FSharp spreadsheet Excel xlsx datascience fable fable-library</PackageTags>
     <RepositoryUrl>https://github.com/CSBiology/FsSpreadsheet</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-  </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(PackageId)' == 'FsSpreadsheet.Fable' ">
-    <Description>Fable compliant release for spreadsheet creation and manipulation in FSharp</Description>
-    <Summary>Spreadsheet creation and manipulation in FSharp</Summary>
-    <PackageTags>F# FSharp spreadsheet Excel datascience fable fable-library</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>

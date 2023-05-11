@@ -19,7 +19,6 @@ type DataType =
         let value = box value
         match value with
         | :? char as c -> DataType.String,c.ToString()
-        | :? string as s -> DataType.String,s.ToString()
         | :? bool as true -> DataType.Boolean, "True"
         | :? bool as false -> DataType.Boolean, "False"
         | :? byte as i -> DataType.Number,i.ToString()
@@ -34,6 +33,7 @@ type DataType =
         | :? float as i -> DataType.Number,i.ToString()
         | :? decimal as i -> DataType.Number,i.ToString()
         | :? System.DateTime as d -> DataType.Date,d.ToString()
+        | :? string as s -> DataType.String,s.ToString()
         | _ ->  DataType.String,value.ToString()
 
 // Type based on the type XLCell used in ClosedXml

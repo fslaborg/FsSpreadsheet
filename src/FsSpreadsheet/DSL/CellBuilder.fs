@@ -142,6 +142,9 @@ type CellBuilder() =
 
     member this.AsCellElement(children: SheetEntity<Value list>) : SheetEntity<CellElement> =
         match children with
+        | Some (v :: [],messages) ->
+            let cellElement = v, None
+            SheetEntity.Some(cellElement, messages)
         | Some (vals,messages) ->
             let cellElement = reducer.Reduce (vals), None
             SheetEntity.Some(cellElement, messages)
