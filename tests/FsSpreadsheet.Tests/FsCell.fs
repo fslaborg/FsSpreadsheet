@@ -1,11 +1,13 @@
 ﻿module FsCell
 
+#if FABLE_COMPILER
+open Fable.Mocha
+#else
 open Expecto
+#endif
 open FsSpreadsheet
-//open FsSpreadsheet.ExcelIO
 
-[<Tests>]
-let dataTypeTests =
+let main =
     testList "DataType" [
         testList "InferCellValue bool = true" [
             let boolValTrue = true

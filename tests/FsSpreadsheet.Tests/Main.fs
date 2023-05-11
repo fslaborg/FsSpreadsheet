@@ -1,6 +1,34 @@
 ﻿module FsSpreadsheet.Tests
+#if FABLE_COMPILER
+open Fable.Mocha
+#else
 open Expecto
 
+[<Tests>]
+#endif
+let all =
+    testList "All"
+        [
+            FsWorkbook.main
+            FsWorkSheet.main
+            FsTable.main
+            FsTableField.main
+            FsColumn.main
+            FsCellsCollection.main
+            FsCell.main
+            FsAddress.main
+        ]
+
 [<EntryPoint>]
-let main argv =
-    Tests.runTestsInAssembly defaultConfig argv
+let main argv = 
+    #if FABLE_COMPILER
+    Mocha.runTests all
+    #else
+    Tests.runTestsWithCLIArgs [] argv all
+    #endif
+
+#if FABLE_COMPILER
+open Fable.Mocha
+#else
+open Expecto
+#endif

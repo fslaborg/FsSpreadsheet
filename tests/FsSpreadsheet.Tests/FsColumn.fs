@@ -1,7 +1,10 @@
 ﻿module FsColumn
 
-
+#if FABLE_COMPILER
+open Fable.Mocha
+#else
 open Expecto
+#endif
 open FsSpreadsheet
 
 let getDummyWorkSheet() = 
@@ -11,8 +14,7 @@ let getDummyWorkSheet() =
     |> Seq.iter (fun c -> worksheet.InsertValueAt(c.Value,c.RowNumber,c.ColumnNumber))
     worksheet
 
-[<Tests>]
-let columnOperations =
+let main =
     testList "columnOperations" [
         testList "Prerequisites" [
             let dummyWorkSheet = getDummyWorkSheet()

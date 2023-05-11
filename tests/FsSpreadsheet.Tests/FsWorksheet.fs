@@ -1,6 +1,10 @@
 ﻿module FsWorkSheet
 
+#if FABLE_COMPILER
+open Fable.Mocha
+#else
 open Expecto
+#endif
 open FsSpreadsheet
 
 
@@ -10,10 +14,7 @@ let dummyTable2 = FsTable("dummyTable2", FsRangeAddress("D1:F3"))
 let dummySheet1 = FsWorksheet("dummySheet1", [], [], dummyCellsColl)
 let dummySheet2 = FsWorksheet("dummySheet2", [], [dummyTable1; dummyTable2], dummyCellsColl)
 
-
-
-[<Tests>]
-let fsWorksheetTest =
+let main =
     testList "FsWorksheet" [
         testList "FsCell data" [
             // TO DO: Ask TM: useful? or was that a mistake? (since the same test is seen in FsCell.fs)

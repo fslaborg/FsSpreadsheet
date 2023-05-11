@@ -1,0 +1,24 @@
+{
+  "name": "fsspreadsheet",
+  "version": "1.3.0",
+  "description": "Spreadsheet creation and manipulation in FSharp",
+  "type": "module",
+  "scripts": {
+    "pretest": "dotnet fable tests/FsSpreadsheet.Tests -o tests/FsSpreadsheet.JsNativeTests/fable",
+    "test": "mocha tests/FsSpreadsheet.JsNativeTests/fable",
+    "posttest": "mocha tests/FsSpreadsheet.JsNativeTests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CSBiology/FsSpreadsheet.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CSBiology/FsSpreadsheet/issues"
+  },
+  "homepage": "https://github.com/CSBiology/FsSpreadsheet#readme",
+  "devDependencies": {
+    "mocha": "^10.2.0"
+  }
+}

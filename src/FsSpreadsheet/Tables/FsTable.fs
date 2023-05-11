@@ -7,7 +7,7 @@ open System.Collections.Generic
 /// </summary>
 type FsTable (name : string, rangeAddress, showTotalsRow, showHeaderRow) = 
 
-    inherit FsRangeBase(rangeAddress)
+    inherit FsRangeBase(rangeAddress, null)
 
     let mutable _name = name
 

@@ -1,8 +1,11 @@
 ﻿module FsTable
 
+#if FABLE_COMPILER
+open Fable.Mocha
+#else
 open Expecto
+#endif
 open FsSpreadsheet
-
 
 let dummyFsCells = 
     [   // rows
@@ -75,8 +78,7 @@ let dummyFsTableFields =
     |> List.ofSeq
 
 
-[<Tests>]
-let fsTableTests =
+let main =
     testList "FsTable" [
         testList "AddFields" [
             testList "tableFields : seq FsTableField" [

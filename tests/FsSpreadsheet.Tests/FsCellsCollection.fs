@@ -1,8 +1,11 @@
 ﻿module FsCellsCollection
 
+#if FABLE_COMPILER
+open Fable.Mocha
+#else
 open Expecto
+#endif
 open FsSpreadsheet
-
 
 let dummyFsCells =
     Resources.dummyFsCells
@@ -11,9 +14,7 @@ let dummyFsCellsCollection = FsCellsCollection()
 dummyFsCells |> Seq.iter (dummyFsCellsCollection.Add >> ignore)
 
 
-
-[<Tests>]
-let fsCellsCollectionTests =
+let main =
     testList "FsCellsCollection" [
         testList "Add | GetCells" [
             testCase "FsCells are present" <| fun _ ->

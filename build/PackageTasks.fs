@@ -36,25 +36,6 @@ let pack = BuildTask.create "Pack" [clean; build; runTests] {
                         OutputPath = Some pkgDir
                 }
             ))
-            // This is used to create ISADotNet.Fable with the Fable subfolder as explained here:
-            // https://fable.io/docs/your-fable-project/author-a-fable-library.html
-            "src/FsSpreadsheet/FsSpreadsheet.fsproj"
-            |> Fake.DotNet.DotNet.pack (fun p ->
-                let msBuildParams =
-                    {p.MSBuildParams with 
-                        Properties = ([
-                            "PackageId", "FsSpreadsheet.Fable"
-                            "Version",stableVersionTag
-                            "PackageReleaseNotes",  (release.Notes |> List.map replaceCommitLink |> String.concat "\r\n")
-                        ] @ p.MSBuildParams.Properties)
-                    }
-                let test = p
-                {
-                    p with 
-                        MSBuildParams = msBuildParams
-                        OutputPath = Some pkgDir
-                }
-            )
     else failwith "aborted"
 }
 

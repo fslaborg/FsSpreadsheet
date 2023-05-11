@@ -1,6 +1,10 @@
 ﻿module FsAddress
 
+#if FABLE_COMPILER
+open Fable.Mocha
+#else
 open Expecto
+#endif
 open FsSpreadsheet
 
 
@@ -11,9 +15,7 @@ let testAddress4 = FsAddress(2, "D", true, true)
 let testAddress5 = FsAddress("Z69")
 let testAddress6 = FsAddress(5, 2)
 
-
-[<Tests>]
-let fsAddressTests = 
+let main = 
     testList "FsAddress" [
         testList "Constructors" [
             testList "cellAddressString" [

@@ -1,8 +1,11 @@
 ﻿module FsTableField
 
 open FsSpreadsheet
+#if FABLE_COMPILER
+open Fable.Mocha
+#else
 open Expecto
-
+#endif
 
 let dummyFsRangeAddress = FsRangeAddress("C1:C3")
 let dummyFsRangeColumn = FsRangeColumn(dummyFsRangeAddress)
@@ -18,9 +21,7 @@ let dummyFsCells = [
 let dummyFsCellsCollection = FsCellsCollection()
 dummyFsCellsCollection.Add dummyFsCells |> ignore
 
-
-[<Tests>]
-let fsTableField =
+let main =
     testList "FsTableField" [
         testList "Constructors" [
             testList "unit" [

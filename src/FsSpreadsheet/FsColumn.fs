@@ -12,7 +12,7 @@ open System.Collections
 /// <exception cref="System.Exception">if given FsCellsCollection has more than 1 column.</exception>
 type FsColumn (rangeAddress : FsRangeAddress, cells : FsCellsCollection)= 
 
-    inherit FsRangeBase(rangeAddress)
+    inherit FsRangeBase(rangeAddress, null)
 
     let cells = cells
 
