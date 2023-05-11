@@ -7,7 +7,6 @@ open Expecto
 #endif
 open FsSpreadsheet
 
-
 let dummyCellsColl = FsCellsCollection()
 let dummyTable1 = FsTable("dummyTable1", FsRangeAddress("A1:B2"))
 let dummyTable2 = FsTable("dummyTable2", FsRangeAddress("D1:F3"))
@@ -15,20 +14,16 @@ let dummySheet1 = FsWorksheet("dummySheet1", [], [], dummyCellsColl)
 let dummySheet2 = FsWorksheet("dummySheet2", [], [dummyTable1; dummyTable2], dummyCellsColl)
 
 let main =
-    testList "FsWorksheet" [
+    testSequenced <| testList "FsWorksheet" [
         testList "FsCell data" [
             // TO DO: Ask TM: useful? or was that a mistake? (since the same test is seen in FsCell.fs)
             testList "Data | DataType | Adress" [
                 let fscellA1_string  = FsCell.create 1 1 "A1"
                 let fscellB1_num     = FsCell.create 1 2 1
                 let fscellA2_bool    = FsCell.create 1 2 true
-            
                 //let worksheet = FsWorksheet.
-
                 testCase "DataType string" <| fun _ ->
                     Expect.equal fscellA1_string.DataType DataType.String "is not the expected DataType.String"
-            
-
             ]
         ]
         testList "FsTable methods" [
@@ -45,20 +40,22 @@ let main =
                 // TO DO: add more testCases
             ]
             testList "AddTable" [
-                let testSheet = FsWorksheet("testSheet", [], [], FsCellsCollection())
-                testSheet.AddTable dummyTable1 |> ignore
                 testCase "dummyTable1 is present" <| fun _ ->
-                    Expect.contains testSheet.Tables dummyTable1 "does not contain dummyTable1"
+                    let ws = new FsWorksheet("testSheet", [], [], FsCellsCollection())
+                    ws.AddTable dummyTable1 |> ignore
+                    Expect.myContains ws.Tables dummyTable1 "does not contain dummyTable1"
                 testCase "dummyTable1 is not present twice" <| fun _ ->
-                    testSheet.AddTable dummyTable1 |> ignore
-                    Expect.hasCountOf testSheet.Tables 1u (fun t -> t.Name = dummyTable1.Name) "has dummyTable1 twice (or more)"
+                    let ws = new FsWorksheet("testSheet", [], [], FsCellsCollection())
+                    ws.AddTable dummyTable1 |> ignore
+                    ws.AddTable dummyTable1 |> ignore
+                    Expect.myHasCountOf ws.Tables 1 (fun t -> t.Name = dummyTable1.Name) "has dummyTable1 twice (or more)"
                 // DO DO: add more testCases
             ]
             testList "AddTables" [
                 testCase "dummyTable1 is present" <| fun _ ->
                     let testSheet = FsWorksheet("testSheet", [], [], FsCellsCollection())
                     testSheet.AddTables [dummyTable1] |> ignore
-                    Expect.contains testSheet.Tables dummyTable1 "does not contain dummyTable1"
+                    Expect.myContains testSheet.Tables dummyTable1 "does not contain dummyTable1"
                 testCase "dummyTable1 & dummyTable2 are present" <| fun _ ->
                     let testSheet = FsWorksheet("testSheet", [], [], FsCellsCollection())
                     let dummyTablesList = [dummyTable1; dummyTable2]

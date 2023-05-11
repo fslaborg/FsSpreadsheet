@@ -67,6 +67,6 @@ let main =
             testCase "Correct values" <| fun _ ->
                 let columns = FsTable.dummyFsTable.Columns(FsTable.dummyFsCellsCollection)
                 let expectedValues = ["Name";"John Doe";"Jane Doe";"Jack Doe"]
-                Expect.sequenceEqual (Seq.item 0 columns |> Seq.map FsCell.getValueAs<string>) expectedValues "Values are not correct"
+                Expect.mySequenceEqual (Seq.item 0 columns |> Seq.map FsCell.getValueAs<string>) expectedValues "Values are not correct"
         ]
     ]

@@ -694,12 +694,15 @@ type FsCellsCollection() =
     /// Returns the upper left corner of the FsCellsCollection.
     /// </summary>
     member this.GetFirstAddress() =
-        let minRow = _rowsCollection.Keys |> Seq.min
-        let minCol = 
-            _rowsCollection.Values 
-            |> Seq.minBy (fun d -> Seq.min d.Keys)
-            |> fun d -> Seq.min d.Keys
-        FsAddress(minRow, minCol)
+        if Seq.isEmpty _rowsCollection || Seq.isEmpty _rowsCollection.Keys then 
+            FsAddress(0,0)
+        else
+            let minRow = _rowsCollection.Keys |> Seq.min
+            let minCol = 
+                _rowsCollection.Values 
+                |> Seq.minBy (fun d -> Seq.min d.Keys)
+                |> fun d -> Seq.min d.Keys
+            FsAddress(minRow, minCol)
 
     /// <summary>
     /// Returns the upper left corner of a given FsCellsCollection.

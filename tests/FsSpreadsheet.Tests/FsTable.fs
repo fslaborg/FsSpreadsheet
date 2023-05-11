@@ -95,9 +95,9 @@ let main =
                     |> Seq.toArray 
                     |> Array.unzip
                 testCase "Names are there" <| fun _ ->
-                    Expect.sequenceEqual testNames dummyNames "Names are not equal" 
+                    Expect.mySequenceEqual testNames dummyNames "Names are not equal" 
                 testCase "Indeces are there" <| fun _ ->
-                    Expect.sequenceEqual testIndeces dummyIndeces "Indeces are not equal" 
+                    Expect.mySequenceEqual testIndeces dummyIndeces "Indeces are not equal" 
             ]
         ]
         testList "TryGetHeaderCellOfColumn" [
@@ -162,7 +162,7 @@ let main =
                 testCase "Has correct values" <| fun _ ->
                     let minRowNo = dummyFsCells |> Seq.map (fun c -> c.RowNumber) |> Seq.min
                     let actualCells = dummyFsCells |> Seq.filter (fun c -> c.ColumnNumber = 2 && c.RowNumber > minRowNo)
-                    Expect.sequenceEqual (testDataCells |> Seq.map (fun c -> c.Value)) (actualCells |> Seq.map (fun c -> c.Value)) "FsCells are incorrect in value"
+                    Expect.mySequenceEqual (testDataCells |> Seq.map (fun c -> c.Value)) (actualCells |> Seq.map (fun c -> c.Value)) "FsCells are incorrect in value"
             ]
         ]
     ]

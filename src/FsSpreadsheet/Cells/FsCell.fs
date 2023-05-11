@@ -20,7 +20,8 @@ type DataType =
         match value with
         | :? char as c -> DataType.String,c.ToString()
         | :? string as s -> DataType.String,s.ToString()
-        | :? bool as c -> DataType.Boolean,c.ToString()
+        | :? bool as true -> DataType.Boolean, "True"
+        | :? bool as false -> DataType.Boolean, "False"
         | :? byte as i -> DataType.Number,i.ToString()
         | :? sbyte as i -> DataType.Number,i.ToString()
         | :? int as i -> DataType.Number,i.ToString()
