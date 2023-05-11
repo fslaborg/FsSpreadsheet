@@ -86,13 +86,6 @@ type FsColumn (rangeAddress : FsRangeAddress, cells : FsCellsCollection)=
     /// </summary>
     static member getIndex (column : FsColumn) = 
         column.Index
-
-    /// <summary>
-    /// Returns the FsCell at rowIndex.
-    /// </summary>
-    [<System.Obsolete("Use Item instead")>]
-    member self.Cell(rowIndex) = 
-        base.Cell(FsAddress(rowIndex,1),cells)
        
     /// <summary>
     /// Returns the FsCell at rowIndex.
@@ -100,7 +93,6 @@ type FsColumn (rangeAddress : FsRangeAddress, cells : FsCellsCollection)=
     member this.Item (rowIndex) =
         // use FsRangeBase call with colindex 1
         base.Cell(FsAddress(rowIndex,1),cells)
-
 
     /// <summary>
     /// Returns the FsCell at the given rowIndex from an FsColumn.

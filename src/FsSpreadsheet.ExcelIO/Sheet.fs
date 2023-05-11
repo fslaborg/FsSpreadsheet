@@ -112,23 +112,9 @@ module Sheet =
     /// <summary>
     /// Sets the SheetID of the sheet (this ID determines the position of the sheet tab in MS Excel).
     /// </summary>
-    [<Obsolete("Use setSheetIndex instead ")>]
-    let setSheetID id (sheet : Sheet) = 
-        sheet.SheetId <- UInt32Value.FromUInt32 id
-        sheet
-
-    /// <summary>
-    /// Sets the SheetID of the sheet (this ID determines the position of the sheet tab in MS Excel).
-    /// </summary>
     let setSheetIndex id (sheet : Sheet) = 
         sheet.SheetId <- UInt32Value.FromUInt32 id
         sheet
-
-    /// <summary>
-    /// Gets the SheetID of the sheet (this ID determines the position of the sheet tab in MS Excel).
-    /// </summary>
-    [<Obsolete("Use getSheetIndex instead.")>]
-    let getSheetID (sheet : Sheet) = sheet.SheetId.Value
 
     /// <summary>
     /// Gets the SheetID of the sheet (this ID determines the position of the sheet tab in MS Excel).
@@ -142,7 +128,7 @@ module Sheet =
         Sheet()
         |> setID id
         |> setName name
-        |> setSheetID sheetID
+        |> setSheetIndex sheetID
 
     /// <summary>
     /// Returns the item at the given index in the SpreadsheetDocument if it exists. Else returns None.

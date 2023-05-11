@@ -7,11 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="Spreadsheet.fs" />
-    <Compile Include="Workbook.fs" />
-    <Compile Include="Sheet.fs" />
-    <Compile Include="Cell.fs" />
     <Compile Include="FsExtensions.fs" />
+    <Compile Include="Cell.fs" />
+    <Compile Include="Sheet.fs" />
+    <Compile Include="Workbook.fs" />
+    <Compile Include="Spreadsheet.fs" />
     <Compile Include="Main.fs" />
   </ItemGroup>
 

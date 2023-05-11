@@ -33,7 +33,7 @@ let main =
             testCase "CorrectCellCount" <| fun _ ->
                 Expect.equal (column.Cells |> Seq.length) 3 "Column length is not correct"
             testCase "RetreiveCorrectCell" <| fun _ ->
-                Expect.equal (column.Cell(3).Value) "B3" "Did not retreive correct cell"
+                Expect.equal (column.[3].Value) "B3" "Did not retreive correct cell"
             testCase "IsEnumerable" <| fun _ ->
                 Expect.equal (column |> Seq.toList |> List.length ) 3 "Did not enumerate correctly"
         ]
@@ -48,7 +48,7 @@ let main =
             testCase "CorrectCellCount" <| fun _ ->
                 Expect.equal (column.Cells |> Seq.length) 3 "Column length is not correct"
             testCase "RetreiveCorrectCell" <| fun _ ->
-                Expect.equal (column.Cell(3).Value) "B3" "Did not retreive correct cell"
+                Expect.equal (column.[3].Value) "B3" "Did not retreive correct cell"
             testCase "IsEnumerable" <| fun _ ->
                 Expect.equal (column |> Seq.toList |> List.length ) 3 "Did not enumerate correctly"
         ]
