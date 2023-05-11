@@ -1,3 +1,9 @@
+### 2.0.1+bd195cc (Released 2023-5-11)
+* Additions:
+    * [[#e8e7a88](https://github.com/CSBiology/FsSpreadsheet/commit/e8e7a88064dd85ec4d2ed6037237626fd46b7ec6)] update CI to include Fable
+* Deletions:
+    * [[#bd195cc](https://github.com/CSBiology/FsSpreadsheet/commit/bd195cc0920f9e723c4aa163b6935a229c7d730d)] remove deprecated functions and fill incomplete matches
+
 ### 2.0.0+2b67a3f (Released 2023-5-11)
 * Additions:
     * [[#2b67a3f](https://github.com/CSBiology/FsSpreadsheet/commit/2b67a3f18a1c0cbcce92747e64e39ef4959abba7)] start adding DSL test
