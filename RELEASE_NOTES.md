@@ -1,3 +1,18 @@
+### 2.0.0+2b67a3f (Released 2023-5-11)
+* Additions:
+    * [[#2b67a3f](https://github.com/CSBiology/FsSpreadsheet/commit/2b67a3f18a1c0cbcce92747e64e39ef4959abba7)] start adding DSL test
+    * [[#eab82ec](https://github.com/CSBiology/FsSpreadsheet/commit/eab82ec6fd136cba6e60d20a9cbb8346e296faba)] Merge pull request #24 from CSBiology/FsColumn
+    * [[#9fa9537](https://github.com/CSBiology/FsSpreadsheet/commit/9fa9537ba2e9b049679ea491bc52a1e6c8707bb3)] Update ReleaseNotes
+    * [[#ff35f3d](https://github.com/CSBiology/FsSpreadsheet/commit/ff35f3d060f311e6bb54ad70f80a890a49f60a49)] Add Fable logic
+    * [[#d89c88b](https://github.com/CSBiology/FsSpreadsheet/commit/d89c88b126125dafc552328ec04f1c1e77036f0f)] Init fable compatibility :sparkles::tada:
+    * [[#5f60c82](https://github.com/CSBiology/FsSpreadsheet/commit/5f60c8264b9655ac8c7ebb6c766458cb6506d9ec)] Add dsl logic back to fable version :sparkles:
+    * [[#9b51c85](https://github.com/CSBiology/FsSpreadsheet/commit/9b51c85de78c85f2181d94e8b5be8edaa930198d)] Init fable test suit :sparkles:
+    * [[#58dc08c](https://github.com/CSBiology/FsSpreadsheet/commit/58dc08c0cbbd412305e15bb1ea412e57ffae6e45)] Make tests pass :heavy_check_mark:
+* Deletions:
+    * [[#d158414](https://github.com/CSBiology/FsSpreadsheet/commit/d15841424793c84cd94311da7bfb59afe65c9b82)] remove argument exception mapping
+* Bugfixes:
+    * [[#1c72afb](https://github.com/CSBiology/FsSpreadsheet/commit/1c72afbd410bf6093ad3cc664305228fd057908e)] Fix cell getValueAs<_> for fable :sparkles:
+
 ### 1.3.0-preview+549125f (Released 2023-4-24)
 * Additions:
     * [[#549125f](https://github.com/CSBiology/FsSpreadsheet/commit/549125f54d5aa1b7b41f8e52962bf506bc5eb9f4)] add Columns field to FsTable
