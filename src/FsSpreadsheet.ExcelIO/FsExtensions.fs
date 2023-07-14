@@ -199,7 +199,11 @@ module FsExtensions =
                 )
 
             sheets
-            |> Seq.fold (fun wb sheet -> FsWorkbook.addWorksheet sheet wb) (new FsWorkbook())
+            |> Seq.fold (
+                fun wb sheet -> 
+                    sheet.RescanRows()      // we need this to have all FsRows present in the final FsWorksheet
+                    FsWorkbook.addWorksheet sheet wb
+            ) (new FsWorkbook())
 
         /// <summary>
         /// Creates an FsWorkbook from a given Stream to an XlsxFile.
