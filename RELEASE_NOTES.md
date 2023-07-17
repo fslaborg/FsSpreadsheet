@@ -1,3 +1,10 @@
+### 2.0.2+1b8d874 (Released 2023-7-17)
+* Additions:
+    * latest commit #1b8d874
+* Bugfixes:
+    * [[#a72d301](https://github.com/CSBiology/FsSpreadsheet/commit/a72d3014417b940aeca6089bd8c973e521e2f51c)] Fix bug with read Xlsx file having no FsRows
+    * [[#0dfd1f0](https://github.com/CSBiology/FsSpreadsheet/commit/0dfd1f0d11d53008ee0fe8182675a183108d7f96)] Add unit test for bug case
+
 ### 2.0.1+bd195cc (Released 2023-5-11)
 * Additions:
     * [[#e8e7a88](https://github.com/CSBiology/FsSpreadsheet/commit/e8e7a88064dd85ec4d2ed6037237626fd46b7ec6)] update CI to include Fable
