@@ -159,6 +159,9 @@ let fsExtensionTests =
                 testCase "Worksheet SwateTemplateMetadata from 2EXT02_Protein has correct value" <| fun _ ->
                     let v = tf2Worksheet.Value.CellCollection.TryGetCell(1,1).Value.Value
                     Expect.equal v "Id" "value is not equal"
+                testCase "Worksheet SwateTemplateMetadata from 2EXT02_Protein has FsRows" <| fun _ ->
+                    let rows = tf2Worksheet.Value.Rows
+                    Expect.isGreaterThan rows.Length 0 "Worksheet SwateTemplateMetadata from 2EXT02_Protein has no FsRows"
             ]
         ]
     ]
