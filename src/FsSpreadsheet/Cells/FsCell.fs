@@ -55,7 +55,7 @@ type FsCell (value : IConvertible, ?dataType : DataType, ?address : FsAddress) =
     let mutable _columnIndex : int = address |> Option.map (fun a -> a.ColumnNumber) |> Option.defaultValue 0
 
 
-    ///// Creates an empty FsCell, set at row 1, column 1 (1-based).
+    /// Creates an empty FsCell, set at row 0, column 0 (1-based).
     static member empty () = FsCell ("", DataType.Empty, FsAddress(0,0))
 
     ///// Creates an FsCell of `DataType` `Number`, with the given value, set at row 1, column 1 (1-based).

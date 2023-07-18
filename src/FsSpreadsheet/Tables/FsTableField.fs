@@ -128,12 +128,9 @@ type FsTableField (name : string, index : int, column : FsRangeColumn, totalsRow
     /// </summary>
     /// <param name="cellsCollection">The FsCellsCollection respective to the FsTableField where the data cells are taken from.</param>
     /// <param name="showHeaderRow">If the header row is shown or not.</param>
-    member this.DataCells (cellsCollection : FsCellsCollection, showHeaderRow : bool) =
-        // TO DO: Ask HLW: isn't this predicate pointless? If showHeaderRow is false, the code breaks as soon as trying to call .HeaderCell
-        //let predicate cell = (not showHeaderRow) && (this.HeaderCell(cellsCollection, showHeaderRow) <> cell)
-        let predicate = fun _ -> true
-        this.Column.CellsSelect(cellsCollection, predicate)
-        |> Seq.skip 1       // ClosedXML implementation never shows header cell
+    member this.DataCells (cellsCollection : FsCellsCollection) =        
+        this.Column.Cells(cellsCollection)
+        |> Seq.skip 1 // ClosedXML implementation never shows header cell
 
     /// <summary>
     /// Gets the collection of data cells for a given FsTableField. Excludes the header and footer cells.
@@ -141,5 +138,5 @@ type FsTableField (name : string, index : int, column : FsRangeColumn, totalsRow
     /// <param name="cellsCollection">The FsCellsCollection respective to the FsTableField where the data cells are taken from.</param>
     /// <param name="showHeaderRow">If the header row is shown or not.</param>
     /// <param name="tableField">The FsTableField to get the data cells from.</param>
-    static member getDataCells cellsCollection showHeaderRow (tableField : FsTableField) =
-        tableField.DataCells(cellsCollection, showHeaderRow)
+    static member getDataCells cellsCollection (tableField : FsTableField) =
+        tableField.DataCells(cellsCollection)

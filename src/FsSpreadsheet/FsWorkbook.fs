@@ -39,14 +39,14 @@ type FsWorkbook() =
         workbook.Copy()
  
     /// <summary>
-    /// Adds an empty FsWorksheet with given name to the FsWorkbook.
+    /// Creates an empty FsWorksheet with given name and adds it to the FsWorkbook.
     /// </summary>
     member self.InitWorksheet(name : string) = 
         let sheet = FsWorksheet name
         _worksheets <- List.append _worksheets [sheet]
 
     /// <summary>
-    /// Adds an empty FsWorksheet with given name to an FsWorkbook.
+    /// Creates an empty FsWorksheet with given name and adds it to the FsWorkbook.
     /// </summary>
     static member initWorksheet (name : string) (workbook : FsWorkbook) = 
         workbook.InitWorksheet name

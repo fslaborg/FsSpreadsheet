@@ -21,6 +21,7 @@ type FsColumn (rangeAddress : FsRangeAddress, cells : FsCellsCollection)=
     // Creation
     // ----------
 
+    /// Creates an empty FsColumn, ranging from row 0, column 0 to row 0, column (1-based).
     static member empty() = FsColumn (FsRangeAddress(FsAddress(0,0),FsAddress(0,0)),FsCellsCollection())
 
     /// <summary>

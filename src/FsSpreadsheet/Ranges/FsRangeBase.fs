@@ -75,8 +75,5 @@ type FsRangeBase (rangeAddress : FsRangeAddress) =
     member self.Cells(cells : FsCellsCollection) = 
         cells.GetCells(self.RangeAddress.FirstAddress, self.RangeAddress.LastAddress)
        
-    member self.CellsSelect(cells : FsCellsCollection, predicate : FsCell -> bool) = 
-        cells.GetCells(self.RangeAddress.FirstAddress, self.RangeAddress.LastAddress, predicate)
-     
      member self.ColumnCount() =
         _rangeAddress.LastAddress.ColumnNumber - _rangeAddress.FirstAddress.ColumnNumber + 1;
