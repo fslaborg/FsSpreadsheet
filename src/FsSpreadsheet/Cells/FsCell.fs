@@ -40,29 +40,23 @@ type DataType =
 /// <summary>
 /// Creates an FsCell of `DataType` dataType, with value of type `string`, and `FsAddress` address.
 /// </summary>
-type FsCell (value : IConvertible, dataType : DataType, address : FsAddress) =
+type FsCell (value : IConvertible, ?dataType : DataType, ?address : FsAddress) =
     
     // TODO: Maybe save as IConvertible
     let mutable _cellValue = string value
-    let mutable _dataType = dataType
+    let mutable _dataType = dataType |> Option.defaultValue DataType.String
     let mutable _comment  = ""
     let mutable _hyperlink = ""
     let mutable _richText = ""
     let mutable _formulaA1 = ""
     let mutable _formulaR1C1 = ""
 
-    let mutable _rowIndex : int = address.RowNumber
-    let mutable _columnIndex : int = address.ColumnNumber
+    let mutable _rowIndex : int = address |> Option.map (fun a -> a.RowNumber) |> Option.defaultValue 0
+    let mutable _columnIndex : int = address |> Option.map (fun a -> a.ColumnNumber) |> Option.defaultValue 0
 
 
-    // ------------------------
-    // ALTERNATIVE CONSTRUCTORS
-    // ------------------------
-
-    new (value : IConvertible) = FsCell (string value, DataType.String, FsAddress(0,0))
-
-    ///// Creates an empty FsCell, set at row 1, column 1 (1-based).
-    //new () = FsCell ("", DataType.Empty, FsAddress(0,0))
+    /// Creates an empty FsCell, set at row 0, column 0 (1-based).
+    static member empty () = FsCell ("", DataType.Empty, FsAddress(0,0))
 
     ///// Creates an FsCell of `DataType` `Number`, with the given value, set at row 1, column 1 (1-based).
     //new (value : int) = FsCell (string value, DataType.Number, FsAddress(0,0))

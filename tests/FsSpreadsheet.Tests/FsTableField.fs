@@ -147,7 +147,7 @@ let main =
                 testFsCellsCollection.Add testFsCells |> ignore
                 testList "showHeaderRow = true" [
                     testCase "Returns correct data cells" <| fun _ ->
-                        let dataCells = testFsTableField.DataCells(testFsCellsCollection, true)
+                        let dataCells = testFsTableField.DataCells(testFsCellsCollection)
                         let dataCellsVals = dataCells |> Seq.map (fun c -> c.Value)
                         let col3Cells = testFsCellsCollection.GetCellsInColumn 3
                         let col3CellsNoHeader = col3Cells |> Seq.skip 1

@@ -1,9 +1,11 @@
 ﻿namespace FsSpreadsheet
 
-
+open Fable.Core
 /// <summary>
 /// Creates an empty FsWorkbook.
 /// </summary>
+
+[<AttachMembers>]
 type FsWorkbook() =
  
     let mutable _worksheets = []
@@ -37,17 +39,17 @@ type FsWorkbook() =
         workbook.Copy()
  
     /// <summary>
-    /// Adds an empty FsWorksheet with given name to the FsWorkbook.
+    /// Creates an empty FsWorksheet with given name and adds it to the FsWorkbook.
     /// </summary>
-    member self.AddWorksheet(name : string) = 
+    member self.InitWorksheet(name : string) = 
         let sheet = FsWorksheet name
         _worksheets <- List.append _worksheets [sheet]
 
     /// <summary>
-    /// Adds an empty FsWorksheet with given name to an FsWorkbook.
+    /// Creates an empty FsWorksheet with given name and adds it to the FsWorkbook.
     /// </summary>
-    static member addWorksheetWithName (name : string) (workbook : FsWorkbook) = 
-        workbook.AddWorksheet name
+    static member initWorksheet (name : string) (workbook : FsWorkbook) = 
+        workbook.InitWorksheet name
         workbook
 
     
@@ -94,6 +96,34 @@ type FsWorkbook() =
         workbook.GetWorksheets()
 
     /// <summary>
+    /// Returns the FsWorksheet with the given 1 based index if it exists. Else returns None.
+    /// </summary>
+    member self.TryGetWorksheetAt(index : int) =
+        _worksheets |> List.tryItem (index - 1)
+
+    /// <summary>
+    /// Returns the FsWorksheet with the given 1 based index if it exists in a given FsWorkbook. Else returns None.
+    /// </summary>
+    static member tryGetWorksheetAt (index : int) (workbook : FsWorkbook) =
+        workbook.TryGetWorksheetAt index
+
+    /// <summary>
+    /// Returns the FsWorksheet with the given 1 based index.
+    /// </summary>
+    /// <exception cref="System.Exception">if FsWorksheet with at position is not present in the FsWorkkbook.</exception>
+    member self.GetWorksheetAt(index : int) =
+        match self.TryGetWorksheetAt index with
+        | Some w -> w
+        | None -> failwith $"FsWorksheet at position {index} is not present in the FsWorkbook."
+
+    /// <summary>
+    /// Returns the FsWorksheet with the given the given 1 based indexk.
+    /// </summary>
+    /// <exception cref="System.Exception">if FsWorksheet with at position is not present in the FsWorkkbook.</exception>
+    static member getWorksheetAt (index : int) (workbook : FsWorkbook) =
+        workbook.GetWorksheetAt index
+
+    /// <summary>
     /// Returns the FsWorksheet with the given name if it exists in the FsWorkbook. Else returns None.
     /// </summary>
     member self.TryGetWorksheetByName(sheetName) =
@@ -134,22 +164,8 @@ type FsWorkbook() =
     /// <summary>
     /// Removes an FsWorksheet with given name from an FsWorkbook.
     /// </summary>
-    static member removeWorksheetByName (name : string) (workbook : FsWorkbook) =
+    static member removeWorksheet (name : string) (workbook : FsWorkbook) =
         workbook.RemoveWorksheet name
-        workbook
-
-    /// <summary>
-    /// Removes a given FsWorksheet.
-    /// </summary>
-    /// <exception cref="System.Exception">if FsWorksheet with given name is not present in the FsWorkkbook.</exception>
-    member self.RemoveWorksheet(sheet : FsWorksheet) =
-        self.RemoveWorksheet(sheet.Name)
-
-    /// <summary>
-    /// Removes a given FsWorksheet from an FsWorkbook.
-    /// </summary>
-    static member removeWorksheet (sheet : FsWorksheet) (workbook : FsWorkbook) =
-        workbook.RemoveWorksheet sheet
         workbook
 
     /// <summary>

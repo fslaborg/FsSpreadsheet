@@ -1,29 +1,26 @@
 ﻿namespace FsSpreadsheet
 
+open Fable.Core
+
 // Type based on the type XLWorksheet used in ClosedXml
 /// <summary>
 /// Creates an FsWorksheet with the given name, FsRows, FsTables, and FsCellsCollection.
 /// </summary>
-type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
+[<AttachMembers>]
+type FsWorksheet (name, ?fsRows, ?fsTables, ?fsCellsCollection) =
 
     let mutable _name = name
 
-    let mutable _rows : FsRow list = fsRows
+    let mutable _rows : FsRow list = fsRows |> Option.defaultValue []
 
-    let mutable _tables : FsTable list = fsTables
+    let mutable _tables : FsTable list = fsTables |> Option.defaultValue []
 
-    let mutable _cells : FsCellsCollection = fsCellsCollection
-
-    /// <summary>
-    /// Creates an empty FsWorksheet.
-    /// </summary>
-    new () = 
-        FsWorksheet("")
+    let mutable _cells : FsCellsCollection = fsCellsCollection  |> Option.defaultValue (FsCellsCollection())
 
     /// <summary>
     /// Creates an empty FsWorksheet with the given name.
     /// </summary>
-    new (name) = 
+    static member init (name) = 
         FsWorksheet(name, [], [], FsCellsCollection())
 
     // TO DO: finish
@@ -131,14 +128,14 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
         | Some row ->
             row
         | None -> 
-            let row = FsRow(rowIndex,self.CellCollection) 
+            let row = FsRow.createAt(rowIndex,self.CellCollection) 
             _rows <- List.append _rows [row]
             row
 
     /// <summary>
     /// Returns the FsRow at the given FsRangeAddress. If it does not exist, it is created and appended first.
     /// </summary>
-    member self.Row(rangeAddress : FsRangeAddress) = 
+    member self.RowWithRange(rangeAddress : FsRangeAddress) = 
         if rangeAddress.FirstAddress.RowNumber <> rangeAddress.LastAddress.RowNumber then
             failwithf "Row may not have a range address spanning over different row indices"
         self.Row(rangeAddress.FirstAddress.RowNumber).RangeAddress <- rangeAddress
@@ -357,7 +354,7 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
             | Some row -> 
                 row.RangeAddress <- newRange
             | None ->
-                self.Row(newRange)
+                self.RowWithRange(newRange)
         )
 
 
@@ -369,12 +366,12 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
     /// <summary>
     /// Returns the FsColumn at the given index. If it does not exist, it is created and appended first.
     /// </summary>
-    member self.Column(columnIndex : int32) = FsColumn(columnIndex,self.CellCollection)
+    member self.Column(columnIndex : int32) = FsColumn.createAt(columnIndex,self.CellCollection)
 
     /// <summary>
     /// Returns the FsColumn at the given FsRangeAddress. If it does not exist, it is created and appended first.
     /// </summary>
-    member self.Column(rangeAddress : FsRangeAddress) = 
+    member self.ColumnWithRange(rangeAddress : FsRangeAddress) = 
         if rangeAddress.FirstAddress.ColumnNumber <> rangeAddress.LastAddress.ColumnNumber then
             failwithf "Column may not have a range address spanning over different column indices"
         self.Column(rangeAddress.FirstAddress.ColumnNumber).RangeAddress <- rangeAddress
@@ -408,7 +405,8 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
     /// Returns the FsTable with the given tableName, rangeAddress, and showHeaderRow parameters. If it does not exist yet, it gets created and appended first.
     /// </summary>
     // TO DO: Ask HLW: Is this really a good name for the method?
-    member self.Table(tableName,rangeAddress,showHeaderRow) = 
+    member self.Table(tableName,rangeAddress,?showHeaderRow : bool) = 
+        let showHeaderRow = defaultArg showHeaderRow true
         match _tables |> List.tryFind (fun table -> table.Name = name) with
         | Some table ->
             table
@@ -416,12 +414,6 @@ type FsWorksheet (name, fsRows, fsTables, fsCellsCollection) =
             let table = FsTable(tableName,rangeAddress,showHeaderRow)
             _tables <- List.append _tables [table]
             table
-    
-    /// <summary>
-    /// Returns the FsTable with the given tableName and rangeAddress parameters. If it does not exist yet, it gets created first. ShowHeaderRow is true by default.
-    /// </summary>
-    member self.Table(tableName,rangeAddress) = 
-        self.Table(tableName,rangeAddress,true)
 
     /// <summary>
     /// Returns the FsTable of the given name from an FsWorksheet if it exists. Else returns None.

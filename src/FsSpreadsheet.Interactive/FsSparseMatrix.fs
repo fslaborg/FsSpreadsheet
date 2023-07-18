@@ -1,5 +1,6 @@
-﻿namespace FsSpreadsheet
+﻿namespace FsSpreadsheet.Interactive
 
+open FsSpreadsheet
 
 /// A FsSparseMatrix
 type FsSparseMatrix<'T>(defaultEmptyValue: 'T,sparseValues : 'T array, sparseRowOffsets : int array, ncols:int, columnValues: int array) =     

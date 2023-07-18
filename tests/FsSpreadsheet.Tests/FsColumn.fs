@@ -39,7 +39,7 @@ let main =
         ]
         testList "ColumnFromIndex" [
             let dummyWorkSheet = getDummyWorkSheet()
-            let column = FsColumn(2, dummyWorkSheet.CellCollection)
+            let column = FsColumn.createAt(2, dummyWorkSheet.CellCollection)
             testCase "CorrectIndex" <| fun _ ->
                 Expect.equal column.Index 2 "Column index is not correct"
             testCase "CorrectRange" <| fun _ ->
@@ -56,16 +56,22 @@ let main =
             let dummyWorkSheet = getDummyWorkSheet()
             testCase "CorrectColumnCount" <| fun _ ->
                 Expect.equal (dummyWorkSheet.Columns |> Seq.length) 3 "Column count is not correct"
+            testCase "DoesNotFail" <| fun _ ->
+                let c = dummyWorkSheet.Column(2)
+                Expect.equal 1 1 "Failed when retreiving column"
+            testCase "HasRangeAddress" <| fun _ ->
+                let c = dummyWorkSheet.Column(2)
+                Expect.equal c.RangeAddress.Range "B1:B3" "Column range is not correct"
             testCase "CorrectIndex" <| fun _ ->
                 Expect.equal (dummyWorkSheet.Column(2).Index) 2 "Column index is not correct"
         ]
         testList "FromTableRetrieval" [
             
             testCase "CorrectColumnCount" <| fun _ ->
-                let columns = FsTable.dummyFsTable.Columns(FsTable.dummyFsCellsCollection)
+                let columns = FsTable.dummyFsTable.GetColumns(FsTable.dummyFsCellsCollection)
                 Expect.equal (columns |> Seq.length) (FsTable.dummyFsTable.ColumnCount()) "Column count is not correct"
             testCase "Correct values" <| fun _ ->
-                let columns = FsTable.dummyFsTable.Columns(FsTable.dummyFsCellsCollection)
+                let columns = FsTable.dummyFsTable.GetColumns(FsTable.dummyFsCellsCollection)
                 let expectedValues = ["Name";"John Doe";"Jane Doe";"Jack Doe"]
                 Expect.mySequenceEqual (Seq.item 0 columns |> Seq.map FsCell.getValueAs<string>) expectedValues "Values are not correct"
         ]

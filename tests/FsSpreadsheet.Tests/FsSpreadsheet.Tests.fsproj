@@ -31,4 +31,8 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\FsSpreadsheet\FsSpreadsheet.fsproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="FSharp.Core" Version="7.0.300" />
+  </ItemGroup>
 </Project>
