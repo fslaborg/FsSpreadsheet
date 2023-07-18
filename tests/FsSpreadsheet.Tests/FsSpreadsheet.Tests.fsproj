@@ -22,9 +22,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Expecto" Version="9.*" />
-    <PackageReference Include="Fable.Mocha" Version="2.16.0" />
-    <PackageReference Include="YoloDev.Expecto.TestSdk" Version="0.*" />
+    <PackageReference Include="Expecto" Version="[10.0.0]" />
+    <PackageReference Include="Fable.Mocha" Version="[2.16.0]" />
+    <PackageReference Include="YoloDev.Expecto.TestSdk" Version="[0.14.1]" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.*" />
   </ItemGroup>
 
