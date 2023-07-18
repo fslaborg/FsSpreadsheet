@@ -1,3 +1,8 @@
+### 2.0.3+3a1d082 (Released 2023-7-18)
+* Additions:
+    * [[#3a1d082](https://github.com/CSBiology/FsSpreadsheet/commit/3a1d08253839fe8f85f017a7a304ce766e06f71b)] Bump project version dependencies
+    * [[#42bebcc](https://github.com/CSBiology/FsSpreadsheet/commit/42bebcc4236142d9431268a0dc58692e3d5cd444)] bump to 2.0.2
+
 ### 2.0.2+1b8d874 (Released 2023-7-17)
 * Additions:
     * latest commit #1b8d874
