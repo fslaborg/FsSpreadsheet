@@ -127,7 +127,6 @@ type FsTableField (name : string, index : int, column : FsRangeColumn, totalsRow
     /// Gets the collection of data cells for this FsTableField. Excludes the header and footer cells.
     /// </summary>
     /// <param name="cellsCollection">The FsCellsCollection respective to the FsTableField where the data cells are taken from.</param>
-    /// <param name="showHeaderRow">If the header row is shown or not.</param>
     member this.DataCells (cellsCollection : FsCellsCollection) =        
         this.Column.Cells(cellsCollection)
         |> Seq.skip 1 // ClosedXML implementation never shows header cell
@@ -136,7 +135,6 @@ type FsTableField (name : string, index : int, column : FsRangeColumn, totalsRow
     /// Gets the collection of data cells for a given FsTableField. Excludes the header and footer cells.
     /// </summary>
     /// <param name="cellsCollection">The FsCellsCollection respective to the FsTableField where the data cells are taken from.</param>
-    /// <param name="showHeaderRow">If the header row is shown or not.</param>
     /// <param name="tableField">The FsTableField to get the data cells from.</param>
     static member getDataCells cellsCollection (tableField : FsTableField) =
         tableField.DataCells(cellsCollection)

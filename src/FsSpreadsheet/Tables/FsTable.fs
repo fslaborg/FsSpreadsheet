@@ -76,53 +76,6 @@ type FsTable (name : string, rangeAddress : FsRangeAddress, ?showTotalsRow : boo
                 FsColumn(range,cellsCollection)
         }
 
-    /// Takes the respective FsCellsCollection for this FsTable and creates a new _fieldNames dictionary if the current one does not match.
-    // TO DO: maybe HLW can specify above description a bit...
-    member private self.RescanFieldNames(cellsCollection : FsCellsCollection) =
-        printfn "Start RescanFieldNames"
-        _fieldNames
-        |> Seq.iter (fun kv -> printfn "Key: %s, index: %i, name: %s" kv.Key kv.Value.Index kv.Value.Name)
-        if self.ShowHeaderRow then
-            let oldFieldNames =  _fieldNames
-            _fieldNames <- new Dictionary<string, FsTableField>()
-            let headersRow = self.HeadersRow();
-            let mutable cellPos = 0
-            for cell in headersRow.Cells(cellsCollection) do
-                let mutable name = cell.Value //GetString();
-                match Dictionary.tryGet name oldFieldNames with
-                | Some tableField ->
-                    tableField.Index <- cellPos
-                    _fieldNames.Add(name,tableField)
-                    cellPos <- cellPos + 1
-                | None -> 
-
-                    // Be careful here. Fields names may actually be whitespace, but not empty
-                    if (name = null) <> (name = "") then    // TO DO: ask: shouldn't this be XOR?
-                    
-                        name <- self.GetUniqueName("Column", cellPos + 1, true)
-                        cell.SetValueAs(name) |> ignore
-                        cell.DataType <- DataType.String
-
-                    if (_fieldNames.ContainsKey(name)) then
-                        raise (System.ArgumentException("The header row contains more than one field name '" + name + "'."))
-
-                    _fieldNames.Add(name, new FsTableField(name, cellPos))
-                    cellPos <- cellPos + 1
-        else
-            
-            let colCount = base.ColumnCount();
-            for i = 1 to colCount (**i <= colCount**) do
-
-                if _fieldNames.Values |> Seq.exists (fun v -> v.Index = i - 1) |> not then //.All(f => f.Index != i - 1)) then
-
-                    let name = "Column" + string i;
-
-                    _fieldNames.Add(name, new FsTableField(name, i - 1));
-
-        printfn "Finished RescanFWieldNames"
-        _fieldNames
-        |> Seq.iter (fun kv -> printfn "Key: %s, index: %i, name: %s" kv.Key kv.Value.Index kv.Value.Name)
-
     /// <summary>
     /// Updates the FsRangeAddress of the FsTable according to the FsTableFields associated.
     /// </summary>
@@ -144,8 +97,9 @@ type FsTable (name : string, rangeAddress : FsRangeAddress, ?showTotalsRow : boo
     /// Returns a unique name consisting of the original name and an initial offset that is raised 
     /// if the original name with that offset is already present.
     /// </summary>
+    /// <param name="originalName">Header name that was tried to be used.</param>
+    /// <param name="initialOffset">First number that together with the originalName, leads to a unique column header.</param>
     /// <param name="enforceOffset">If true, the initial offset is always applied.</param>
-    // TO DO: HLW: make this description more precise. What is this method even about?
     member this.GetUniqueName(originalName : string, initialOffset : int32, enforceOffset : bool) =
         let mutable name = originalName + if enforceOffset then string initialOffset else ""
         if _uniqueNames.Contains(name) then
@@ -160,6 +114,13 @@ type FsTable (name : string, rangeAddress : FsRangeAddress, ?showTotalsRow : boo
         _uniqueNames.Add name |> ignore
         name
 
+    /// <summary>
+    /// Returns a unique name consisting of the original name and an initial offset that is raised 
+    /// if the original name with that offset is already present.
+    /// </summary>
+    /// <param name="originalName">Header name that was tried to be used.</param>
+    /// <param name="initialOffset">First number that together with the originalName, leads to a unique column header.</param>
+    /// <param name="enforceOffset">If true, the initial offset is always applied.</param>
     static member getUniqueNames originalName initialOffset enforceOffset (table : FsTable) =
         table.GetUniqueName(originalName, initialOffset, enforceOffset)
 
