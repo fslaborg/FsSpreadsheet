@@ -40,7 +40,7 @@
   </ItemGroup>
   
   <ItemGroup>
-    <ProjectReference Include="..\FsSpreadsheet\FsSpreadsheet.fsproj" PackageVersion="[1.0.0, 2.0.0)" />
+    <ProjectReference Include="..\FsSpreadsheet\FsSpreadsheet.fsproj" PackageVersion="[2.0.0, 3.0.0)" />
     <PackageReference Include="Giraffe.ViewEngine" Version="1.4.0" />
     <PackageReference Include="Microsoft.DotNet.Interactive" Version="1.0.0-beta.23165.2" />
     <PackageReference Include="Microsoft.DotNet.Interactive.Formatting" Version="1.0.0-beta.23165.2" />
