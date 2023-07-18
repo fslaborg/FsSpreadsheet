@@ -124,118 +124,19 @@
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '529', 529)" onmouseover="showTip(event, '529', 529)">
+              <code onmouseout="hideTip(event, '515', 515)" onmouseover="showTip(event, '515', 515)">
                 <p>
                   <a id="``.ctor``">
                     <a href="#``.ctor``">
-                      <code><span>FsTable<span><span>(<span>name,&#32;rangeAddress</span>)</span></span></span></code>
+                      <code><span>FsTable<span><span>(<span>name,&#32;rangeAddress,&#32;?showTotalsRow,&#32;?showHeaderRow</span>)</span></span></span></code>
                     </a>
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="529">
+              <div class="fsdocs-tip" id="515">
                 <div class="member-tooltip">
                   Full Usage: 
-                  <code><span>FsTable<span><span>(<span>name,&#32;rangeAddress</span>)</span></span></span></code>
-                  <br/>
-                  <br/>
-                  Parameters: 
-                  <ul>
-                    <span>
-                      <b>
-                        name
-                      </b>
-                      :
-                      <code>string</code>
-                    </span>
-                    <br/>
-                    <span>
-                      <b>
-                        rangeAddress
-                      </b>
-                      :
-                      <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsrangeaddress.html">FsRangeAddress</a></code>
-                    </span>
-                    <br/>
-                  </ul>
-                  <br/>
-                  <span>
-                    Returns: 
-                    <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fstable.html">FsTable</a></code>
-                  </span>
-                  <br/>
-                </div>
-              </div>
-            </div>
-          </td>
-          <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.FsTable.#ctor`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.FsTable.#ctor\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L31-31" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- Creates an FsTable from the given name and FsRangeAddres.
- 
-              </p>
-            </div>
-            <p class="fsdocs-remarks">
-              `showTotalsRow` is false and `showHeaderRow` true, by default.
-            </p>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  name
-                </span>
-                :
-                <code>string</code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  rangeAddress
-                </span>
-                :
-                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsrangeaddress.html">FsRangeAddress</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
-                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fstable.html">FsTable</a></code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
-          </td>
-        </tr>
-        <tr>
-          <td class="fsdocs-member-usage">
-            <div>
-              <code onmouseout="hideTip(event, '530', 530)" onmouseover="showTip(event, '530', 530)">
-                <p>
-                  <a id="``.ctor``">
-                    <a href="#``.ctor``">
-                      <code><span>FsTable<span><span>(<span>name,&#32;rangeAddress,&#32;showHeaderRow</span>)</span></span></span></code>
-                    </a>
-                  </a>
-                </p>
-              </code>
-              <div class="fsdocs-tip" id="530">
-                <div class="member-tooltip">
-                  Full Usage: 
-                  <code><span>FsTable<span><span>(<span>name,&#32;rangeAddress,&#32;showHeaderRow</span>)</span></span></span></code>
+                  <code><span>FsTable<span><span>(<span>name,&#32;rangeAddress,&#32;?showTotalsRow,&#32;?showHeaderRow</span>)</span></span></span></code>
                   <br/>
                   <br/>
                   Parameters: 
@@ -258,7 +159,15 @@
                     <br/>
                     <span>
                       <b>
-                        showHeaderRow
+                        ?showTotalsRow
+                      </b>
+                      :
+                      <code>bool</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?showHeaderRow
                       </b>
                       :
                       <code>bool</code>
@@ -285,130 +194,7 @@
                 <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L25-25" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- Creates an FsTable from the given name and FsRangeAddres, with header row shown or not, accordingly.
- 
-              </p>
-            </div>
-            <p class="fsdocs-remarks">
-              `showTotalsRow` is false by default.
-            </p>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  name
-                </span>
-                :
-                <code>string</code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  rangeAddress
-                </span>
-                :
-                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsrangeaddress.html">FsRangeAddress</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  showHeaderRow
-                </span>
-                :
-                <code>bool</code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
-                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fstable.html">FsTable</a></code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
-          </td>
-        </tr>
-        <tr>
-          <td class="fsdocs-member-usage">
-            <div>
-              <code onmouseout="hideTip(event, '531', 531)" onmouseover="showTip(event, '531', 531)">
-                <p>
-                  <a id="``.ctor``">
-                    <a href="#``.ctor``">
-                      <code><span>FsTable<span><span>(<span>name,&#32;rangeAddress,&#32;showTotalsRow,&#32;showHeaderRow</span>)</span></span></span></code>
-                    </a>
-                  </a>
-                </p>
-              </code>
-              <div class="fsdocs-tip" id="531">
-                <div class="member-tooltip">
-                  Full Usage: 
-                  <code><span>FsTable<span><span>(<span>name,&#32;rangeAddress,&#32;showTotalsRow,&#32;showHeaderRow</span>)</span></span></span></code>
-                  <br/>
-                  <br/>
-                  Parameters: 
-                  <ul>
-                    <span>
-                      <b>
-                        name
-                      </b>
-                      :
-                      <code>string</code>
-                    </span>
-                    <br/>
-                    <span>
-                      <b>
-                        rangeAddress
-                      </b>
-                      :
-                      <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsrangeaddress.html">FsRangeAddress</a></code>
-                    </span>
-                    <br/>
-                    <span>
-                      <b>
-                        showTotalsRow
-                      </b>
-                      :
-                      <code>bool</code>
-                    </span>
-                    <br/>
-                    <span>
-                      <b>
-                        showHeaderRow
-                      </b>
-                      :
-                      <code>bool</code>
-                    </span>
-                    <br/>
-                  </ul>
-                  <br/>
-                  <span>
-                    Returns: 
-                    <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fstable.html">FsTable</a></code>
-                  </span>
-                  <br/>
-                </div>
-              </div>
-            </div>
-          </td>
-          <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.FsTable.#ctor`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.FsTable.#ctor\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L8-8" class="fsdocs-source-link" title="Source on GitHub">
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L11-11" class="fsdocs-source-link" title="Source on GitHub">
                 <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
               </a>
@@ -435,7 +221,7 @@
               <dd class="fsdocs-param-docs"></dd>
               <dt class="fsdocs-param">
                 <span class="fsdocs-param-name">
-                  showTotalsRow
+                  ?showTotalsRow
                 </span>
                 :
                 <code>bool</code>
@@ -443,7 +229,7 @@
               <dd class="fsdocs-param-docs"></dd>
               <dt class="fsdocs-param">
                 <span class="fsdocs-param-name">
-                  showHeaderRow
+                  ?showHeaderRow
                 </span>
                 :
                 <code>bool</code>
@@ -483,7 +269,7 @@
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '532', 532)" onmouseover="showTip(event, '532', 532)">
+              <code onmouseout="hideTip(event, '516', 516)" onmouseover="showTip(event, '516', 516)">
                 <p>
                   <a id="AddFields">
                     <a href="#AddFields">
@@ -492,7 +278,7 @@
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="532">
+              <div class="fsdocs-tip" id="516">
                 <div class="member-tooltip">
                   Full Usage: 
                   <code><span>this.AddFields</span></code>
@@ -524,7 +310,7 @@
                 <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L212-212" class="fsdocs-source-link" title="Source on GitHub">
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L150-150" class="fsdocs-source-link" title="Source on GitHub">
                 <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
               </a>
@@ -549,153 +335,7 @@
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '533', 533)" onmouseover="showTip(event, '533', 533)">
-                <p>
-                  <a id="AddFields">
-                    <a href="#AddFields">
-                      <code><span>this.AddFields</span></code>
-                    </a>
-                  </a>
-                </p>
-              </code>
-              <div class="fsdocs-tip" id="533">
-                <div class="member-tooltip">
-                  Full Usage: 
-                  <code><span>this.AddFields</span></code>
-                  <br/>
-                  <br/>
-                  Parameters: 
-                  <ul>
-                    <span>
-                      <b>
-                        fieldNames
-                      </b>
-                      :
-                      <code><span>seq&lt;string&gt;</span></code>
-                    </span>
-                    <br/>
-                  </ul>
-                  <br/>
-                </div>
-              </div>
-            </div>
-          </td>
-          <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.FsTable.AddFields`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.FsTable.AddFields\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L192-192" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- Creates and adds FsTableFields from a sequence of field names to the FsTable.
- 
-              </p>
-            </div>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  fieldNames
-                </span>
-                :
-                <code><span>seq&lt;string&gt;</span></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-          </td>
-        </tr>
-        <tr>
-          <td class="fsdocs-member-usage">
-            <div>
-              <code onmouseout="hideTip(event, '534', 534)" onmouseover="showTip(event, '534', 534)">
-                <p>
-                  <a id="Columns">
-                    <a href="#Columns">
-                      <code><span>this.Columns</span></code>
-                    </a>
-                  </a>
-                </p>
-              </code>
-              <div class="fsdocs-tip" id="534">
-                <div class="member-tooltip">
-                  Full Usage: 
-                  <code><span>this.Columns</span></code>
-                  <br/>
-                  <br/>
-                  Parameters: 
-                  <ul>
-                    <span>
-                      <b>
-                        cellsCollection
-                      </b>
-                      :
-                      <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fscellscollection.html">FsCellsCollection</a></code>
-                    </span>
-                    <br/>
-                  </ul>
-                  <br/>
-                  <span>
-                    Returns: 
-                    <code><span>seq&lt;<a href="/FsSpreadsheet/reference/fsspreadsheet-fscolumn.html">FsColumn</a>&gt;</span></code>
-                  </span>
-                  <br/>
-                </div>
-              </div>
-            </div>
-          </td>
-          <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:P:FsSpreadsheet.FsTable.Columns`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'P:FsSpreadsheet.FsTable.Columns\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L92-92" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- Returns the columns from the table.
- 
-              </p>
-            </div>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  cellsCollection
-                </span>
-                :
-                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fscellscollection.html">FsCellsCollection</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
-                <code><span>seq&lt;<a href="/FsSpreadsheet/reference/fsspreadsheet-fscolumn.html">FsColumn</a>&gt;</span></code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
-          </td>
-        </tr>
-        <tr>
-          <td class="fsdocs-member-usage">
-            <div>
-              <code onmouseout="hideTip(event, '535', 535)" onmouseover="showTip(event, '535', 535)">
+              <code onmouseout="hideTip(event, '517', 517)" onmouseover="showTip(event, '517', 517)">
                 <p>
                   <a id="Copy">
                     <a href="#Copy">
@@ -704,7 +344,7 @@
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="535">
+              <div class="fsdocs-tip" id="517">
                 <div class="member-tooltip">
                   Full Usage: 
                   <code><span>this.Copy</span></code>
@@ -729,7 +369,7 @@
                 <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L450-450" class="fsdocs-source-link" title="Source on GitHub">
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L388-388" class="fsdocs-source-link" title="Source on GitHub">
                 <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
               </a>
@@ -753,7 +393,7 @@
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '536', 536)" onmouseover="showTip(event, '536', 536)">
+              <code onmouseout="hideTip(event, '518', 518)" onmouseover="showTip(event, '518', 518)">
                 <p>
                   <a id="Field">
                     <a href="#Field">
@@ -762,7 +402,7 @@
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="536">
+              <div class="fsdocs-tip" id="518">
                 <div class="member-tooltip">
                   Full Usage: 
                   <code><span>this.Field</span></code>
@@ -807,7 +447,7 @@
                 <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L228-228" class="fsdocs-source-link" title="Source on GitHub">
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L166-166" class="fsdocs-source-link" title="Source on GitHub">
                 <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
               </a>
@@ -849,19 +489,19 @@
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '537', 537)" onmouseover="showTip(event, '537', 537)">
+              <code onmouseout="hideTip(event, '519', 519)" onmouseover="showTip(event, '519', 519)">
                 <p>
-                  <a id="FieldNames">
-                    <a href="#FieldNames">
-                      <code><span>this.FieldNames</span></code>
+                  <a id="GetColumns">
+                    <a href="#GetColumns">
+                      <code><span>this.GetColumns</span></code>
                     </a>
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="537">
+              <div class="fsdocs-tip" id="519">
                 <div class="member-tooltip">
                   Full Usage: 
-                  <code><span>this.FieldNames</span></code>
+                  <code><span>this.GetColumns</span></code>
                   <br/>
                   <br/>
                   Parameters: 
@@ -878,7 +518,7 @@
                   <br/>
                   <span>
                     Returns: 
-                    <code><span><a href="https://docs.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<span>string,&#32;<a href="/FsSpreadsheet/reference/fsspreadsheet-fstablefield.html">FsTableField</a></span>&gt;</span></code>
+                    <code><span>seq&lt;<a href="/FsSpreadsheet/reference/fsspreadsheet-fscolumn.html">FsColumn</a>&gt;</span></code>
                   </span>
                   <br/>
                 </div>
@@ -887,21 +527,21 @@
           </td>
           <td class="fsdocs-member-xmldoc">
             <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:P:FsSpreadsheet.FsTable.FieldNames`')">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.FsTable.GetColumns`')">
                 <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
               </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'P:FsSpreadsheet.FsTable.FieldNames\'/>')">
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.FsTable.GetColumns\'/>')">
                 <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L42-42" class="fsdocs-source-link" title="Source on GitHub">
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L70-70" class="fsdocs-source-link" title="Source on GitHub">
                 <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
               </a>
               <p class="fsdocs-summary">
                 
- Returns all fieldnames as `fieldname*FsTableField` dictionary.
+ Returns the columns from the table.
  
               </p>
             </div>
@@ -920,7 +560,7 @@
                 <span class="fsdocs-return-name">
                   Returns: 
                 </span>
-                <code><span><a href="https://docs.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<span>string,&#32;<a href="/FsSpreadsheet/reference/fsspreadsheet-fstablefield.html">FsTableField</a></span>&gt;</span></code>
+                <code><span>seq&lt;<a href="/FsSpreadsheet/reference/fsspreadsheet-fscolumn.html">FsColumn</a>&gt;</span></code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -929,99 +569,19 @@
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '538', 538)" onmouseover="showTip(event, '538', 538)">
+              <code onmouseout="hideTip(event, '520', 520)" onmouseover="showTip(event, '520', 520)">
                 <p>
-                  <a id="Fields">
-                    <a href="#Fields">
-                      <code><span>this.Fields</span></code>
+                  <a id="GetDataCellsOfColumnAt">
+                    <a href="#GetDataCellsOfColumnAt">
+                      <code><span>this.GetDataCellsOfColumnAt</span></code>
                     </a>
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="538">
+              <div class="fsdocs-tip" id="520">
                 <div class="member-tooltip">
                   Full Usage: 
-                  <code><span>this.Fields</span></code>
-                  <br/>
-                  <br/>
-                  Parameters: 
-                  <ul>
-                    <span>
-                      <b>
-                        cellsCollection
-                      </b>
-                      :
-                      <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fscellscollection.html">FsCellsCollection</a></code>
-                    </span>
-                    <br/>
-                  </ul>
-                  <br/>
-                  <span>
-                    Returns: 
-                    <code><span>seq&lt;<a href="/FsSpreadsheet/reference/fsspreadsheet-fstablefield.html">FsTableField</a>&gt;</span></code>
-                  </span>
-                  <br/>
-                </div>
-              </div>
-            </div>
-          </td>
-          <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:P:FsSpreadsheet.FsTable.Fields`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'P:FsSpreadsheet.FsTable.Fields\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L56-56" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- The FsTableFields of this FsTable.
- 
-              </p>
-            </div>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  cellsCollection
-                </span>
-                :
-                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fscellscollection.html">FsCellsCollection</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
-                <code><span>seq&lt;<a href="/FsSpreadsheet/reference/fsspreadsheet-fstablefield.html">FsTableField</a>&gt;</span></code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
-          </td>
-        </tr>
-        <tr>
-          <td class="fsdocs-member-usage">
-            <div>
-              <code onmouseout="hideTip(event, '539', 539)" onmouseover="showTip(event, '539', 539)">
-                <p>
-                  <a id="GetDataCellsOfColumn">
-                    <a href="#GetDataCellsOfColumn">
-                      <code><span>this.GetDataCellsOfColumn</span></code>
-                    </a>
-                  </a>
-                </p>
-              </code>
-              <div class="fsdocs-tip" id="539">
-                <div class="member-tooltip">
-                  Full Usage: 
-                  <code><span>this.GetDataCellsOfColumn</span></code>
+                  <code><span>this.GetDataCellsOfColumnAt</span></code>
                   <br/>
                   <br/>
                   Parameters: 
@@ -1055,15 +615,15 @@
           </td>
           <td class="fsdocs-member-xmldoc">
             <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.FsTable.GetDataCellsOfColumn`')">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.FsTable.GetDataCellsOfColumnAt`')">
                 <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
               </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.FsTable.GetDataCellsOfColumn\'/>')">
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.FsTable.GetDataCellsOfColumnAt\'/>')">
                 <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L430-430" class="fsdocs-source-link" title="Source on GitHub">
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L368-368" class="fsdocs-source-link" title="Source on GitHub">
                 <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
               </a>
@@ -1108,7 +668,7 @@
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '540', 540)" onmouseover="showTip(event, '540', 540)">
+              <code onmouseout="hideTip(event, '521', 521)" onmouseover="showTip(event, '521', 521)">
                 <p>
                   <a id="GetField">
                     <a href="#GetField">
@@ -1117,116 +677,7 @@
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="540">
-                <div class="member-tooltip">
-                  Full Usage: 
-                  <code><span>this.GetField</span></code>
-                  <br/>
-                  <br/>
-                  Parameters: 
-                  <ul>
-                    <span>
-                      <b>
-                        index
-                      </b>
-                      :
-                      <code>int</code>
-                    </span>
-                    <br/>
-                    <span>
-                      <b>
-                        cellsCollection
-                      </b>
-                      :
-                      <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fscellscollection.html">FsCellsCollection</a></code>
-                    </span>
-                    <br/>
-                  </ul>
-                  <br/>
-                  <span>
-                    Returns: 
-                    <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fstablefield.html">FsTableField</a></code>
-                  </span>
-                  <br/>
-                </div>
-              </div>
-            </div>
-          </td>
-          <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.FsTable.GetField`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.FsTable.GetField\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L274-274" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- Takes the index of an FsTableField and an FsCellsCollection (belonging to the FsWorksheet of
- this FsTable) and returns the respective FsTableField.
- 
-              </p>
-            </div>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  index
-                </span>
-                :
-                <code>int</code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  cellsCollection
-                </span>
-                :
-                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fscellscollection.html">FsCellsCollection</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
-                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fstablefield.html">FsTableField</a></code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
-            <table class="fsdocs-exception-list">
-              <tr>
-                <td>
-                  <a href="https://docs.microsoft.com/dotnet/api/system.argumentexception">
-                    ArgumentException
-                  </a>
-                </td>
-                <td>
-                  if the FsTable has no FsTableField with the given index.
-                </td>
-              </tr>
-            </table>
-          </td>
-        </tr>
-        <tr>
-          <td class="fsdocs-member-usage">
-            <div>
-              <code onmouseout="hideTip(event, '541', 541)" onmouseover="showTip(event, '541', 541)">
-                <p>
-                  <a id="GetField">
-                    <a href="#GetField">
-                      <code><span>this.GetField</span></code>
-                    </a>
-                  </a>
-                </p>
-              </code>
-              <div class="fsdocs-tip" id="541">
+              <div class="fsdocs-tip" id="521">
                 <div class="member-tooltip">
                   Full Usage: 
                   <code><span>this.GetField</span></code>
@@ -1271,7 +722,7 @@
                 <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L256-256" class="fsdocs-source-link" title="Source on GitHub">
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L194-194" class="fsdocs-source-link" title="Source on GitHub">
                 <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
               </a>
@@ -1326,7 +777,116 @@
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '542', 542)" onmouseover="showTip(event, '542', 542)">
+              <code onmouseout="hideTip(event, '522', 522)" onmouseover="showTip(event, '522', 522)">
+                <p>
+                  <a id="GetFieldAt">
+                    <a href="#GetFieldAt">
+                      <code><span>this.GetFieldAt</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="522">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.GetFieldAt</span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        index
+                      </b>
+                      :
+                      <code>int</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        cellsCollection
+                      </b>
+                      :
+                      <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fscellscollection.html">FsCellsCollection</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fstablefield.html">FsTableField</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.FsTable.GetFieldAt`')">
+                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.FsTable.GetFieldAt\'/>')">
+                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L212-212" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+ Takes the index of an FsTableField and an FsCellsCollection (belonging to the FsWorksheet of
+ this FsTable) and returns the respective FsTableField.
+ 
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  index
+                </span>
+                :
+                <code>int</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  cellsCollection
+                </span>
+                :
+                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fscellscollection.html">FsCellsCollection</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fstablefield.html">FsTableField</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+            <table class="fsdocs-exception-list">
+              <tr>
+                <td>
+                  <a href="https://docs.microsoft.com/dotnet/api/system.argumentexception">
+                    ArgumentException
+                  </a>
+                </td>
+                <td>
+                  if the FsTable has no FsTableField with the given index.
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '523', 523)" onmouseover="showTip(event, '523', 523)">
                 <p>
                   <a id="GetFieldIndex">
                     <a href="#GetFieldIndex">
@@ -1335,7 +895,7 @@
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="542">
+              <div class="fsdocs-tip" id="523">
                 <div class="member-tooltip">
                   Full Usage: 
                   <code><span>this.GetFieldIndex</span></code>
@@ -1380,7 +940,7 @@
                 <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L285-285" class="fsdocs-source-link" title="Source on GitHub">
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L223-223" class="fsdocs-source-link" title="Source on GitHub">
                 <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
               </a>
@@ -1435,7 +995,167 @@
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '543', 543)" onmouseover="showTip(event, '543', 543)">
+              <code onmouseout="hideTip(event, '524', 524)" onmouseover="showTip(event, '524', 524)">
+                <p>
+                  <a id="GetFieldNames">
+                    <a href="#GetFieldNames">
+                      <code><span>this.GetFieldNames</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="524">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.GetFieldNames</span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        cellsCollection
+                      </b>
+                      :
+                      <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fscellscollection.html">FsCellsCollection</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><a href="https://docs.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<span>string,&#32;<a href="/FsSpreadsheet/reference/fsspreadsheet-fstablefield.html">FsTableField</a></span>&gt;</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.FsTable.GetFieldNames`')">
+                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.FsTable.GetFieldNames\'/>')">
+                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L34-34" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+ Returns all fieldnames as `fieldname*FsTableField` dictionary.
+ 
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  cellsCollection
+                </span>
+                :
+                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fscellscollection.html">FsCellsCollection</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><a href="https://docs.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<span>string,&#32;<a href="/FsSpreadsheet/reference/fsspreadsheet-fstablefield.html">FsTableField</a></span>&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '525', 525)" onmouseover="showTip(event, '525', 525)">
+                <p>
+                  <a id="GetFields">
+                    <a href="#GetFields">
+                      <code><span>this.GetFields</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="525">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.GetFields</span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        cellsCollection
+                      </b>
+                      :
+                      <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fscellscollection.html">FsCellsCollection</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span>seq&lt;<a href="/FsSpreadsheet/reference/fsspreadsheet-fstablefield.html">FsTableField</a>&gt;</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.FsTable.GetFields`')">
+                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.FsTable.GetFields\'/>')">
+                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L47-47" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+ The FsTableFields of this FsTable.
+ 
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  cellsCollection
+                </span>
+                :
+                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fscellscollection.html">FsCellsCollection</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span>seq&lt;<a href="/FsSpreadsheet/reference/fsspreadsheet-fstablefield.html">FsTableField</a>&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '526', 526)" onmouseover="showTip(event, '526', 526)">
                 <p>
                   <a id="GetHeaderCellOfColumn">
                     <a href="#GetHeaderCellOfColumn">
@@ -1444,7 +1164,7 @@
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="543">
+              <div class="fsdocs-tip" id="526">
                 <div class="member-tooltip">
                   Full Usage: 
                   <code><span>this.GetHeaderCellOfColumn</span></code>
@@ -1489,7 +1209,7 @@
                 <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L354-354" class="fsdocs-source-link" title="Source on GitHub">
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L292-292" class="fsdocs-source-link" title="Source on GitHub">
                 <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
               </a>
@@ -1543,19 +1263,19 @@
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '544', 544)" onmouseover="showTip(event, '544', 544)">
+              <code onmouseout="hideTip(event, '527', 527)" onmouseover="showTip(event, '527', 527)">
                 <p>
-                  <a id="GetHeaderCellOfColumn">
-                    <a href="#GetHeaderCellOfColumn">
-                      <code><span>this.GetHeaderCellOfColumn</span></code>
+                  <a id="GetHeaderCellOfColumnAt">
+                    <a href="#GetHeaderCellOfColumnAt">
+                      <code><span>this.GetHeaderCellOfColumnAt</span></code>
                     </a>
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="544">
+              <div class="fsdocs-tip" id="527">
                 <div class="member-tooltip">
                   Full Usage: 
-                  <code><span>this.GetHeaderCellOfColumn</span></code>
+                  <code><span>this.GetHeaderCellOfColumnAt</span></code>
                   <br/>
                   <br/>
                   Parameters: 
@@ -1589,15 +1309,15 @@
           </td>
           <td class="fsdocs-member-xmldoc">
             <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.FsTable.GetHeaderCellOfColumn`')">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.FsTable.GetHeaderCellOfColumnAt`')">
                 <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
               </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.FsTable.GetHeaderCellOfColumn\'/>')">
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.FsTable.GetHeaderCellOfColumnAt\'/>')">
                 <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L340-340" class="fsdocs-source-link" title="Source on GitHub">
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L278-278" class="fsdocs-source-link" title="Source on GitHub">
                 <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
               </a>
@@ -1651,7 +1371,7 @@
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '545', 545)" onmouseover="showTip(event, '545', 545)">
+              <code onmouseout="hideTip(event, '528', 528)" onmouseover="showTip(event, '528', 528)">
                 <p>
                   <a id="GetHeaderCellOfTableField">
                     <a href="#GetHeaderCellOfTableField">
@@ -1660,10 +1380,106 @@
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="545">
+              <div class="fsdocs-tip" id="528">
                 <div class="member-tooltip">
                   Full Usage: 
                   <code><span>this.GetHeaderCellOfTableField</span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        cellsCollection
+                      </b>
+                      :
+                      <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fscellscollection.html">FsCellsCollection</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        tableField
+                      </b>
+                      :
+                      <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fstablefield.html">FsTableField</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fscell.html">FsCell</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.FsTable.GetHeaderCellOfTableField`')">
+                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.FsTable.GetHeaderCellOfTableField\'/>')">
+                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L305-305" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+ Returns the header cell of a given FsTableField from a given FsCellsCollection.
+ 
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  cellsCollection
+                </span>
+                :
+                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fscellscollection.html">FsCellsCollection</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  tableField
+                </span>
+                :
+                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fstablefield.html">FsTableField</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fscell.html">FsCell</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '529', 529)" onmouseover="showTip(event, '529', 529)">
+                <p>
+                  <a id="GetHeaderCellOfTableFieldAt">
+                    <a href="#GetHeaderCellOfTableFieldAt">
+                      <code><span>this.GetHeaderCellOfTableFieldAt</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="529">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.GetHeaderCellOfTableFieldAt</span></code>
                   <br/>
                   <br/>
                   Parameters: 
@@ -1697,15 +1513,15 @@
           </td>
           <td class="fsdocs-member-xmldoc">
             <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.FsTable.GetHeaderCellOfTableField`')">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.FsTable.GetHeaderCellOfTableFieldAt`')">
                 <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
               </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.FsTable.GetHeaderCellOfTableField\'/>')">
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.FsTable.GetHeaderCellOfTableFieldAt\'/>')">
                 <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L400-400" class="fsdocs-source-link" title="Source on GitHub">
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L338-338" class="fsdocs-source-link" title="Source on GitHub">
                 <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
               </a>
@@ -1759,103 +1575,7 @@
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '546', 546)" onmouseover="showTip(event, '546', 546)">
-                <p>
-                  <a id="GetHeaderCellOfTableField">
-                    <a href="#GetHeaderCellOfTableField">
-                      <code><span>this.GetHeaderCellOfTableField</span></code>
-                    </a>
-                  </a>
-                </p>
-              </code>
-              <div class="fsdocs-tip" id="546">
-                <div class="member-tooltip">
-                  Full Usage: 
-                  <code><span>this.GetHeaderCellOfTableField</span></code>
-                  <br/>
-                  <br/>
-                  Parameters: 
-                  <ul>
-                    <span>
-                      <b>
-                        cellsCollection
-                      </b>
-                      :
-                      <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fscellscollection.html">FsCellsCollection</a></code>
-                    </span>
-                    <br/>
-                    <span>
-                      <b>
-                        tableField
-                      </b>
-                      :
-                      <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fstablefield.html">FsTableField</a></code>
-                    </span>
-                    <br/>
-                  </ul>
-                  <br/>
-                  <span>
-                    Returns: 
-                    <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fscell.html">FsCell</a></code>
-                  </span>
-                  <br/>
-                </div>
-              </div>
-            </div>
-          </td>
-          <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.FsTable.GetHeaderCellOfTableField`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.FsTable.GetHeaderCellOfTableField\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L367-367" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- Returns the header cell of a given FsTableField from a given FsCellsCollection.
- 
-              </p>
-            </div>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  cellsCollection
-                </span>
-                :
-                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fscellscollection.html">FsCellsCollection</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  tableField
-                </span>
-                :
-                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fstablefield.html">FsTableField</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
-                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fscell.html">FsCell</a></code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
-          </td>
-        </tr>
-        <tr>
-          <td class="fsdocs-member-usage">
-            <div>
-              <code onmouseout="hideTip(event, '547', 547)" onmouseover="showTip(event, '547', 547)">
+              <code onmouseout="hideTip(event, '530', 530)" onmouseover="showTip(event, '530', 530)">
                 <p>
                   <a id="GetUniqueName">
                     <a href="#GetUniqueName">
@@ -1864,7 +1584,7 @@
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="547">
+              <div class="fsdocs-tip" id="530">
                 <div class="member-tooltip">
                   Full Usage: 
                   <code><span>this.GetUniqueName</span></code>
@@ -1878,6 +1598,8 @@
                       </b>
                       :
                       <code>string</code>
+                       - 
+                      Header name that was tried to be used.
                     </span>
                     <br/>
                     <span>
@@ -1886,6 +1608,8 @@
                       </b>
                       :
                       <code>int32</code>
+                       - 
+                      First number that together with the originalName, leads to a unique column header.
                     </span>
                     <br/>
                     <span>
@@ -1919,7 +1643,7 @@
                 <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L172-172" class="fsdocs-source-link" title="Source on GitHub">
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L103-103" class="fsdocs-source-link" title="Source on GitHub">
                 <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
               </a>
@@ -1938,7 +1662,11 @@
                 :
                 <code>string</code>
               </dt>
-              <dd class="fsdocs-param-docs"></dd>
+              <dd class="fsdocs-param-docs">
+                <p>
+                  Header name that was tried to be used.
+                </p>
+              </dd>
               <dt class="fsdocs-param">
                 <span class="fsdocs-param-name">
                   initialOffset
@@ -1946,7 +1674,11 @@
                 :
                 <code>int32</code>
               </dt>
-              <dd class="fsdocs-param-docs"></dd>
+              <dd class="fsdocs-param-docs">
+                <p>
+                  First number that together with the originalName, leads to a unique column header.
+                </p>
+              </dd>
               <dt class="fsdocs-param">
                 <span class="fsdocs-param-name">
                   enforceOffset
@@ -1974,7 +1706,7 @@
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '548', 548)" onmouseover="showTip(event, '548', 548)">
+              <code onmouseout="hideTip(event, '531', 531)" onmouseover="showTip(event, '531', 531)">
                 <p>
                   <a id="HeadersRow">
                     <a href="#HeadersRow">
@@ -1983,7 +1715,7 @@
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="548">
+              <div class="fsdocs-tip" id="531">
                 <div class="member-tooltip">
                   Full Usage: 
                   <code><span>this.HeadersRow</span></code>
@@ -2008,7 +1740,7 @@
                 <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L86-86" class="fsdocs-source-link" title="Source on GitHub">
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L62-62" class="fsdocs-source-link" title="Source on GitHub">
                 <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
               </a>
@@ -2032,37 +1764,32 @@
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '549', 549)" onmouseover="showTip(event, '549', 549)">
+              <code onmouseout="hideTip(event, '532', 532)" onmouseover="showTip(event, '532', 532)">
                 <p>
-                  <a id="HeadersRow">
-                    <a href="#HeadersRow">
-                      <code><span>this.HeadersRow</span></code>
+                  <a id="InitFields">
+                    <a href="#InitFields">
+                      <code><span>this.InitFields</span></code>
                     </a>
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="549">
+              <div class="fsdocs-tip" id="532">
                 <div class="member-tooltip">
                   Full Usage: 
-                  <code><span>this.HeadersRow</span></code>
+                  <code><span>this.InitFields</span></code>
                   <br/>
                   <br/>
                   Parameters: 
                   <ul>
                     <span>
                       <b>
-                        scanForNewFieldsNames
+                        fieldNames
                       </b>
                       :
-                      <code>bool</code>
+                      <code><span>seq&lt;string&gt;</span></code>
                     </span>
                     <br/>
                   </ul>
-                  <br/>
-                  <span>
-                    Returns: 
-                    <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsrangerow.html">FsRangeRow</a></code>
-                  </span>
                   <br/>
                 </div>
               </div>
@@ -2070,49 +1797,40 @@
           </td>
           <td class="fsdocs-member-xmldoc">
             <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.FsTable.HeadersRow`')">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.FsTable.InitFields`')">
                 <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
               </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.FsTable.HeadersRow\'/>')">
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.FsTable.InitFields\'/>')">
                 <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L72-72" class="fsdocs-source-link" title="Source on GitHub">
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L130-130" class="fsdocs-source-link" title="Source on GitHub">
                 <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
               </a>
               <p class="fsdocs-summary">
                 
- Returns the header row as FsRangeRow. Scans for fieldnames if `scanForNewFieldsNames` is true.
+ Creates and adds FsTableFields from a sequence of field names to the FsTable.
  
               </p>
             </div>
             <dl class="fsdocs-params">
               <dt class="fsdocs-param">
                 <span class="fsdocs-param-name">
-                  scanForNewFieldsNames
+                  fieldNames
                 </span>
                 :
-                <code>bool</code>
+                <code><span>seq&lt;string&gt;</span></code>
               </dt>
               <dd class="fsdocs-param-docs"></dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
-                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsrangerow.html">FsRangeRow</a></code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
             </dl>
           </td>
         </tr>
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '550', 550)" onmouseover="showTip(event, '550', 550)">
+              <code onmouseout="hideTip(event, '533', 533)" onmouseover="showTip(event, '533', 533)">
                 <p>
                   <a id="Name">
                     <a href="#Name">
@@ -2121,7 +1839,7 @@
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="550">
+              <div class="fsdocs-tip" id="533">
                 <div class="member-tooltip">
                   Full Usage: 
                   <code><span>this.Name</span></code>
@@ -2146,7 +1864,7 @@
                 <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L36-36" class="fsdocs-source-link" title="Source on GitHub">
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L28-28" class="fsdocs-source-link" title="Source on GitHub">
                 <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
               </a>
@@ -2170,7 +1888,7 @@
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '551', 551)" onmouseover="showTip(event, '551', 551)">
+              <code onmouseout="hideTip(event, '534', 534)" onmouseover="showTip(event, '534', 534)">
                 <p>
                   <a id="RenameField">
                     <a href="#RenameField">
@@ -2179,7 +1897,7 @@
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="551">
+              <div class="fsdocs-tip" id="534">
                 <div class="member-tooltip">
                   Full Usage: 
                   <code><span>this.RenameField</span></code>
@@ -2219,7 +1937,7 @@
                 <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L292-292" class="fsdocs-source-link" title="Source on GitHub">
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L230-230" class="fsdocs-source-link" title="Source on GitHub">
                 <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
               </a>
@@ -2264,7 +1982,7 @@
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '552', 552)" onmouseover="showTip(event, '552', 552)">
+              <code onmouseout="hideTip(event, '535', 535)" onmouseover="showTip(event, '535', 535)">
                 <p>
                   <a id="RescanRange">
                     <a href="#RescanRange">
@@ -2273,7 +1991,7 @@
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="552">
+              <div class="fsdocs-tip" id="535">
                 <div class="member-tooltip">
                   Full Usage: 
                   <code><span>this.RescanRange</span></code>
@@ -2293,7 +2011,7 @@
                 <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L152-152" class="fsdocs-source-link" title="Source on GitHub">
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L82-82" class="fsdocs-source-link" title="Source on GitHub">
                 <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
               </a>
@@ -2308,7 +2026,7 @@
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '553', 553)" onmouseover="showTip(event, '553', 553)">
+              <code onmouseout="hideTip(event, '536', 536)" onmouseover="showTip(event, '536', 536)">
                 <p>
                   <a id="ShowHeaderRow">
                     <a href="#ShowHeaderRow">
@@ -2317,7 +2035,7 @@
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="553">
+              <div class="fsdocs-tip" id="536">
                 <div class="member-tooltip">
                   Full Usage: 
                   <code><span>this.ShowHeaderRow</span></code>
@@ -2337,7 +2055,7 @@
                 <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L65-65" class="fsdocs-source-link" title="Source on GitHub">
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L55-55" class="fsdocs-source-link" title="Source on GitHub">
                 <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
               </a>
@@ -2352,7 +2070,7 @@
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '554', 554)" onmouseover="showTip(event, '554', 554)">
+              <code onmouseout="hideTip(event, '537', 537)" onmouseover="showTip(event, '537', 537)">
                 <p>
                   <a id="TryGetHeaderCellByFieldName">
                     <a href="#TryGetHeaderCellByFieldName">
@@ -2361,7 +2079,7 @@
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="554">
+              <div class="fsdocs-tip" id="537">
                 <div class="member-tooltip">
                   Full Usage: 
                   <code><span>this.TryGetHeaderCellByFieldName</span></code>
@@ -2406,7 +2124,7 @@
                 <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L414-414" class="fsdocs-source-link" title="Source on GitHub">
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L352-352" class="fsdocs-source-link" title="Source on GitHub">
                 <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
               </a>
@@ -2449,7 +2167,7 @@
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '555', 555)" onmouseover="showTip(event, '555', 555)">
+              <code onmouseout="hideTip(event, '538', 538)" onmouseover="showTip(event, '538', 538)">
                 <p>
                   <a id="TryGetHeaderCellOfColumn">
                     <a href="#TryGetHeaderCellOfColumn">
@@ -2458,7 +2176,7 @@
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="555">
+              <div class="fsdocs-tip" id="538">
                 <div class="member-tooltip">
                   Full Usage: 
                   <code><span>this.TryGetHeaderCellOfColumn</span></code>
@@ -2503,7 +2221,7 @@
                 <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L326-326" class="fsdocs-source-link" title="Source on GitHub">
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L264-264" class="fsdocs-source-link" title="Source on GitHub">
                 <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
               </a>
@@ -2545,19 +2263,19 @@
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '556', 556)" onmouseover="showTip(event, '556', 556)">
+              <code onmouseout="hideTip(event, '539', 539)" onmouseover="showTip(event, '539', 539)">
                 <p>
-                  <a id="TryGetHeaderCellOfColumn">
-                    <a href="#TryGetHeaderCellOfColumn">
-                      <code><span>this.TryGetHeaderCellOfColumn</span></code>
+                  <a id="TryGetHeaderCellOfColumnAt">
+                    <a href="#TryGetHeaderCellOfColumnAt">
+                      <code><span>this.TryGetHeaderCellOfColumnAt</span></code>
                     </a>
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="556">
+              <div class="fsdocs-tip" id="539">
                 <div class="member-tooltip">
                   Full Usage: 
-                  <code><span>this.TryGetHeaderCellOfColumn</span></code>
+                  <code><span>this.TryGetHeaderCellOfColumnAt</span></code>
                   <br/>
                   <br/>
                   Parameters: 
@@ -2591,15 +2309,15 @@
           </td>
           <td class="fsdocs-member-xmldoc">
             <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.FsTable.TryGetHeaderCellOfColumn`')">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.FsTable.TryGetHeaderCellOfColumnAt`')">
                 <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
               </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.FsTable.TryGetHeaderCellOfColumn\'/>')">
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.FsTable.TryGetHeaderCellOfColumnAt\'/>')">
                 <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L311-311" class="fsdocs-source-link" title="Source on GitHub">
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L249-249" class="fsdocs-source-link" title="Source on GitHub">
                 <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
               </a>
@@ -2641,19 +2359,19 @@
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '557', 557)" onmouseover="showTip(event, '557', 557)">
+              <code onmouseout="hideTip(event, '540', 540)" onmouseover="showTip(event, '540', 540)">
                 <p>
-                  <a id="TryGetHeaderCellOfTableField">
-                    <a href="#TryGetHeaderCellOfTableField">
-                      <code><span>this.TryGetHeaderCellOfTableField</span></code>
+                  <a id="TryGetHeaderCellOfTableFieldAt">
+                    <a href="#TryGetHeaderCellOfTableFieldAt">
+                      <code><span>this.TryGetHeaderCellOfTableFieldAt</span></code>
                     </a>
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="557">
+              <div class="fsdocs-tip" id="540">
                 <div class="member-tooltip">
                   Full Usage: 
-                  <code><span>this.TryGetHeaderCellOfTableField</span></code>
+                  <code><span>this.TryGetHeaderCellOfTableFieldAt</span></code>
                   <br/>
                   <br/>
                   Parameters: 
@@ -2687,15 +2405,15 @@
           </td>
           <td class="fsdocs-member-xmldoc">
             <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.FsTable.TryGetHeaderCellOfTableField`')">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.FsTable.TryGetHeaderCellOfTableFieldAt`')">
                 <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
               </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.FsTable.TryGetHeaderCellOfTableField\'/>')">
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.FsTable.TryGetHeaderCellOfTableFieldAt\'/>')">
                 <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L380-380" class="fsdocs-source-link" title="Source on GitHub">
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L318-318" class="fsdocs-source-link" title="Source on GitHub">
                 <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
               </a>
@@ -2757,7 +2475,7 @@
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '558', 558)" onmouseover="showTip(event, '558', 558)">
+              <code onmouseout="hideTip(event, '541', 541)" onmouseover="showTip(event, '541', 541)">
                 <p>
                   <a id="addFields">
                     <a href="#addFields">
@@ -2766,7 +2484,7 @@
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="558">
+              <div class="fsdocs-tip" id="541">
                 <div class="member-tooltip">
                   Full Usage: 
                   <code><span>FsTable.addFields&#32;<span>tableFields&#32;table</span></span></code>
@@ -2811,7 +2529,7 @@
                 <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L221-221" class="fsdocs-source-link" title="Source on GitHub">
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L159-159" class="fsdocs-source-link" title="Source on GitHub">
                 <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
               </a>
@@ -2853,103 +2571,7 @@
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '559', 559)" onmouseover="showTip(event, '559', 559)">
-                <p>
-                  <a id="addFieldsFromNames">
-                    <a href="#addFieldsFromNames">
-                      <code><span>FsTable.addFieldsFromNames&#32;<span>fieldNames&#32;table</span></span></code>
-                    </a>
-                  </a>
-                </p>
-              </code>
-              <div class="fsdocs-tip" id="559">
-                <div class="member-tooltip">
-                  Full Usage: 
-                  <code><span>FsTable.addFieldsFromNames&#32;<span>fieldNames&#32;table</span></span></code>
-                  <br/>
-                  <br/>
-                  Parameters: 
-                  <ul>
-                    <span>
-                      <b>
-                        fieldNames
-                      </b>
-                      :
-                      <code><span>seq&lt;string&gt;</span></code>
-                    </span>
-                    <br/>
-                    <span>
-                      <b>
-                        table
-                      </b>
-                      :
-                      <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fstable.html">FsTable</a></code>
-                    </span>
-                    <br/>
-                  </ul>
-                  <br/>
-                  <span>
-                    Returns: 
-                    <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fstable.html">FsTable</a></code>
-                  </span>
-                  <br/>
-                </div>
-              </div>
-            </div>
-          </td>
-          <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.FsTable.addFieldsFromNames`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.FsTable.addFieldsFromNames\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L205-205" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- Creates and adds FsTableFields from a sequence of field names to a given FsTable.
- 
-              </p>
-            </div>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  fieldNames
-                </span>
-                :
-                <code><span>seq&lt;string&gt;</span></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  table
-                </span>
-                :
-                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fstable.html">FsTable</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
-                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fstable.html">FsTable</a></code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
-          </td>
-        </tr>
-        <tr>
-          <td class="fsdocs-member-usage">
-            <div>
-              <code onmouseout="hideTip(event, '560', 560)" onmouseover="showTip(event, '560', 560)">
+              <code onmouseout="hideTip(event, '542', 542)" onmouseover="showTip(event, '542', 542)">
                 <p>
                   <a id="copy">
                     <a href="#copy">
@@ -2958,7 +2580,7 @@
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="560">
+              <div class="fsdocs-tip" id="542">
                 <div class="member-tooltip">
                   Full Usage: 
                   <code><span>FsTable.copy&#32;<span>table</span></span></code>
@@ -2995,7 +2617,7 @@
                 <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L459-459" class="fsdocs-source-link" title="Source on GitHub">
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L397-397" class="fsdocs-source-link" title="Source on GitHub">
                 <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
               </a>
@@ -3029,19 +2651,19 @@
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '561', 561)" onmouseover="showTip(event, '561', 561)">
+              <code onmouseout="hideTip(event, '543', 543)" onmouseover="showTip(event, '543', 543)">
                 <p>
-                  <a id="getDataCellsOfColumnIndex">
-                    <a href="#getDataCellsOfColumnIndex">
-                      <code><span>FsTable.getDataCellsOfColumnIndex&#32;<span>cellsCollection&#32;colIndex&#32;table</span></span></code>
+                  <a id="getDataCellsOfColumnIndexAt">
+                    <a href="#getDataCellsOfColumnIndexAt">
+                      <code><span>FsTable.getDataCellsOfColumnIndexAt&#32;<span>cellsCollection&#32;colIndex&#32;table</span></span></code>
                     </a>
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="561">
+              <div class="fsdocs-tip" id="543">
                 <div class="member-tooltip">
                   Full Usage: 
-                  <code><span>FsTable.getDataCellsOfColumnIndex&#32;<span>cellsCollection&#32;colIndex&#32;table</span></span></code>
+                  <code><span>FsTable.getDataCellsOfColumnIndexAt&#32;<span>cellsCollection&#32;colIndex&#32;table</span></span></code>
                   <br/>
                   <br/>
                   Parameters: 
@@ -3083,15 +2705,15 @@
           </td>
           <td class="fsdocs-member-xmldoc">
             <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.FsTable.getDataCellsOfColumnIndex`')">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.FsTable.getDataCellsOfColumnIndexAt`')">
                 <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
               </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.FsTable.getDataCellsOfColumnIndex\'/>')">
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.FsTable.getDataCellsOfColumnIndexAt\'/>')">
                 <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L442-442" class="fsdocs-source-link" title="Source on GitHub">
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L380-380" class="fsdocs-source-link" title="Source on GitHub">
                 <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
               </a>
@@ -3144,19 +2766,19 @@
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '562', 562)" onmouseover="showTip(event, '562', 562)">
+              <code onmouseout="hideTip(event, '544', 544)" onmouseover="showTip(event, '544', 544)">
                 <p>
-                  <a id="getFieldByName">
-                    <a href="#getFieldByName">
-                      <code><span>FsTable.getFieldByName&#32;<span>name&#32;cellsCollection&#32;table</span></span></code>
+                  <a id="getField">
+                    <a href="#getField">
+                      <code><span>FsTable.getField&#32;<span>name&#32;cellsCollection&#32;table</span></span></code>
                     </a>
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="562">
+              <div class="fsdocs-tip" id="544">
                 <div class="member-tooltip">
                   Full Usage: 
-                  <code><span>FsTable.getFieldByName&#32;<span>name&#32;cellsCollection&#32;table</span></span></code>
+                  <code><span>FsTable.getField&#32;<span>name&#32;cellsCollection&#32;table</span></span></code>
                   <br/>
                   <br/>
                   Parameters: 
@@ -3198,15 +2820,15 @@
           </td>
           <td class="fsdocs-member-xmldoc">
             <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.FsTable.getFieldByName`')">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.FsTable.getField`')">
                 <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
               </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.FsTable.getFieldByName\'/>')">
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.FsTable.getField\'/>')">
                 <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L266-266" class="fsdocs-source-link" title="Source on GitHub">
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L204-204" class="fsdocs-source-link" title="Source on GitHub">
                 <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
               </a>
@@ -3269,7 +2891,7 @@
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '563', 563)" onmouseover="showTip(event, '563', 563)">
+              <code onmouseout="hideTip(event, '545', 545)" onmouseover="showTip(event, '545', 545)">
                 <p>
                   <a id="getHeaderCellOfColumn">
                     <a href="#getHeaderCellOfColumn">
@@ -3278,7 +2900,7 @@
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="563">
+              <div class="fsdocs-tip" id="545">
                 <div class="member-tooltip">
                   Full Usage: 
                   <code><span>FsTable.getHeaderCellOfColumn&#32;<span>cellsCollection&#32;column&#32;table</span></span></code>
@@ -3331,7 +2953,7 @@
                 <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L361-361" class="fsdocs-source-link" title="Source on GitHub">
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L299-299" class="fsdocs-source-link" title="Source on GitHub">
                 <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
               </a>
@@ -3393,19 +3015,19 @@
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '564', 564)" onmouseover="showTip(event, '564', 564)">
+              <code onmouseout="hideTip(event, '546', 546)" onmouseover="showTip(event, '546', 546)">
                 <p>
-                  <a id="getHeaderCellOfColumnIndex">
-                    <a href="#getHeaderCellOfColumnIndex">
-                      <code><span>FsTable.getHeaderCellOfColumnIndex&#32;<span>cellsCollection&#32;colIndex&#32;table</span></span></code>
+                  <a id="getHeaderCellOfColumnIndexAt">
+                    <a href="#getHeaderCellOfColumnIndexAt">
+                      <code><span>FsTable.getHeaderCellOfColumnIndexAt&#32;<span>cellsCollection&#32;colIndex&#32;table</span></span></code>
                     </a>
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="564">
+              <div class="fsdocs-tip" id="546">
                 <div class="member-tooltip">
                   Full Usage: 
-                  <code><span>FsTable.getHeaderCellOfColumnIndex&#32;<span>cellsCollection&#32;colIndex&#32;table</span></span></code>
+                  <code><span>FsTable.getHeaderCellOfColumnIndexAt&#32;<span>cellsCollection&#32;colIndex&#32;table</span></span></code>
                   <br/>
                   <br/>
                   Parameters: 
@@ -3447,15 +3069,15 @@
           </td>
           <td class="fsdocs-member-xmldoc">
             <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.FsTable.getHeaderCellOfColumnIndex`')">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.FsTable.getHeaderCellOfColumnIndexAt`')">
                 <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
               </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.FsTable.getHeaderCellOfColumnIndex\'/>')">
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.FsTable.getHeaderCellOfColumnIndexAt\'/>')">
                 <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L347-347" class="fsdocs-source-link" title="Source on GitHub">
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L285-285" class="fsdocs-source-link" title="Source on GitHub">
                 <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
               </a>
@@ -3517,7 +3139,7 @@
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '565', 565)" onmouseover="showTip(event, '565', 565)">
+              <code onmouseout="hideTip(event, '547', 547)" onmouseover="showTip(event, '547', 547)">
                 <p>
                   <a id="getHeaderCellOfTableField">
                     <a href="#getHeaderCellOfTableField">
@@ -3526,7 +3148,7 @@
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="565">
+              <div class="fsdocs-tip" id="547">
                 <div class="member-tooltip">
                   Full Usage: 
                   <code><span>FsTable.getHeaderCellOfTableField&#32;<span>cellsCollection&#32;tableField&#32;table</span></span></code>
@@ -3579,7 +3201,7 @@
                 <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L373-373" class="fsdocs-source-link" title="Source on GitHub">
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L311-311" class="fsdocs-source-link" title="Source on GitHub">
                 <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
               </a>
@@ -3629,19 +3251,19 @@
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '566', 566)" onmouseover="showTip(event, '566', 566)">
+              <code onmouseout="hideTip(event, '548', 548)" onmouseover="showTip(event, '548', 548)">
                 <p>
-                  <a id="getHeaderCellOfTableFieldIndex">
-                    <a href="#getHeaderCellOfTableFieldIndex">
-                      <code><span>FsTable.getHeaderCellOfTableFieldIndex&#32;<span>cellsCollection&#32;tableFieldIndex&#32;table</span></span></code>
+                  <a id="getHeaderCellOfTableFieldIndexAt">
+                    <a href="#getHeaderCellOfTableFieldIndexAt">
+                      <code><span>FsTable.getHeaderCellOfTableFieldIndexAt&#32;<span>cellsCollection&#32;tableFieldIndex&#32;table</span></span></code>
                     </a>
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="566">
+              <div class="fsdocs-tip" id="548">
                 <div class="member-tooltip">
                   Full Usage: 
-                  <code><span>FsTable.getHeaderCellOfTableFieldIndex&#32;<span>cellsCollection&#32;tableFieldIndex&#32;table</span></span></code>
+                  <code><span>FsTable.getHeaderCellOfTableFieldIndexAt&#32;<span>cellsCollection&#32;tableFieldIndex&#32;table</span></span></code>
                   <br/>
                   <br/>
                   Parameters: 
@@ -3683,15 +3305,15 @@
           </td>
           <td class="fsdocs-member-xmldoc">
             <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.FsTable.getHeaderCellOfTableFieldIndex`')">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.FsTable.getHeaderCellOfTableFieldIndexAt`')">
                 <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
               </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.FsTable.getHeaderCellOfTableFieldIndex\'/>')">
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.FsTable.getHeaderCellOfTableFieldIndexAt\'/>')">
                 <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L407-407" class="fsdocs-source-link" title="Source on GitHub">
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L345-345" class="fsdocs-source-link" title="Source on GitHub">
                 <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
               </a>
@@ -3753,7 +3375,7 @@
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '567', 567)" onmouseover="showTip(event, '567', 567)">
+              <code onmouseout="hideTip(event, '549', 549)" onmouseover="showTip(event, '549', 549)">
                 <p>
                   <a id="getUniqueNames">
                     <a href="#getUniqueNames">
@@ -3762,7 +3384,7 @@
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="567">
+              <div class="fsdocs-tip" id="549">
                 <div class="member-tooltip">
                   Full Usage: 
                   <code><span>FsTable.getUniqueNames&#32;<span>originalName&#32;initialOffset&#32;enforceOffset&#32;table</span></span></code>
@@ -3776,6 +3398,8 @@
                       </b>
                       :
                       <code>string</code>
+                       - 
+                      Header name that was tried to be used.
                     </span>
                     <br/>
                     <span>
@@ -3784,6 +3408,8 @@
                       </b>
                       :
                       <code>int32</code>
+                       - 
+                      First number that together with the originalName, leads to a unique column header.
                     </span>
                     <br/>
                     <span>
@@ -3792,6 +3418,8 @@
                       </b>
                       :
                       <code>bool</code>
+                       - 
+                      If true, the initial offset is always applied.
                     </span>
                     <br/>
                     <span>
@@ -3823,12 +3451,15 @@
                 <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L186-186" class="fsdocs-source-link" title="Source on GitHub">
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L124-124" class="fsdocs-source-link" title="Source on GitHub">
                 <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
               </a>
               <p class="fsdocs-summary">
                 
+ Returns a unique name consisting of the original name and an initial offset that is raised 
+ if the original name with that offset is already present.
+ 
               </p>
             </div>
             <dl class="fsdocs-params">
@@ -3839,7 +3470,11 @@
                 :
                 <code>string</code>
               </dt>
-              <dd class="fsdocs-param-docs"></dd>
+              <dd class="fsdocs-param-docs">
+                <p>
+                  Header name that was tried to be used.
+                </p>
+              </dd>
               <dt class="fsdocs-param">
                 <span class="fsdocs-param-name">
                   initialOffset
@@ -3847,7 +3482,11 @@
                 :
                 <code>int32</code>
               </dt>
-              <dd class="fsdocs-param-docs"></dd>
+              <dd class="fsdocs-param-docs">
+                <p>
+                  First number that together with the originalName, leads to a unique column header.
+                </p>
+              </dd>
               <dt class="fsdocs-param">
                 <span class="fsdocs-param-name">
                   enforceOffset
@@ -3855,7 +3494,11 @@
                 :
                 <code>bool</code>
               </dt>
-              <dd class="fsdocs-param-docs"></dd>
+              <dd class="fsdocs-param-docs">
+                <p>
+                  If true, the initial offset is always applied.
+                </p>
+              </dd>
               <dt class="fsdocs-param">
                 <span class="fsdocs-param-name">
                   table
@@ -3879,7 +3522,103 @@
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '568', 568)" onmouseover="showTip(event, '568', 568)">
+              <code onmouseout="hideTip(event, '550', 550)" onmouseover="showTip(event, '550', 550)">
+                <p>
+                  <a id="initFields">
+                    <a href="#initFields">
+                      <code><span>FsTable.initFields&#32;<span>fieldNames&#32;table</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="550">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>FsTable.initFields&#32;<span>fieldNames&#32;table</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        fieldNames
+                      </b>
+                      :
+                      <code><span>seq&lt;string&gt;</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        table
+                      </b>
+                      :
+                      <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fstable.html">FsTable</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fstable.html">FsTable</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.FsTable.initFields`')">
+                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.FsTable.initFields\'/>')">
+                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L143-143" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+ Creates and adds FsTableFields from a sequence of field names to a given FsTable.
+ 
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  fieldNames
+                </span>
+                :
+                <code><span>seq&lt;string&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  table
+                </span>
+                :
+                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fstable.html">FsTable</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fstable.html">FsTable</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '551', 551)" onmouseover="showTip(event, '551', 551)">
                 <p>
                   <a id="renameField">
                     <a href="#renameField">
@@ -3888,7 +3627,7 @@
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="568">
+              <div class="fsdocs-tip" id="551">
                 <div class="member-tooltip">
                   Full Usage: 
                   <code><span>FsTable.renameField&#32;<span>oldName&#32;newName&#32;table</span></span></code>
@@ -3941,7 +3680,7 @@
                 <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L304-304" class="fsdocs-source-link" title="Source on GitHub">
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L242-242" class="fsdocs-source-link" title="Source on GitHub">
                 <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
               </a>
@@ -4003,7 +3742,7 @@
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '569', 569)" onmouseover="showTip(event, '569', 569)">
+              <code onmouseout="hideTip(event, '552', 552)" onmouseover="showTip(event, '552', 552)">
                 <p>
                   <a id="rescanRange">
                     <a href="#rescanRange">
@@ -4012,7 +3751,7 @@
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="569">
+              <div class="fsdocs-tip" id="552">
                 <div class="member-tooltip">
                   Full Usage: 
                   <code><span>FsTable.rescanRange&#32;<span>table</span></span></code>
@@ -4049,7 +3788,7 @@
                 <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L162-162" class="fsdocs-source-link" title="Source on GitHub">
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L92-92" class="fsdocs-source-link" title="Source on GitHub">
                 <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
               </a>
@@ -4083,7 +3822,7 @@
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '570', 570)" onmouseover="showTip(event, '570', 570)">
+              <code onmouseout="hideTip(event, '553', 553)" onmouseover="showTip(event, '553', 553)">
                 <p>
                   <a id="tryGetHeaderCellByFieldName">
                     <a href="#tryGetHeaderCellByFieldName">
@@ -4092,7 +3831,7 @@
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="570">
+              <div class="fsdocs-tip" id="553">
                 <div class="member-tooltip">
                   Full Usage: 
                   <code><span>FsTable.tryGetHeaderCellByFieldName&#32;<span>cellsCollection&#32;fieldName&#32;table</span></span></code>
@@ -4145,7 +3884,7 @@
                 <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L423-423" class="fsdocs-source-link" title="Source on GitHub">
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L361-361" class="fsdocs-source-link" title="Source on GitHub">
                 <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
               </a>
@@ -4196,7 +3935,7 @@
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '571', 571)" onmouseover="showTip(event, '571', 571)">
+              <code onmouseout="hideTip(event, '554', 554)" onmouseover="showTip(event, '554', 554)">
                 <p>
                   <a id="tryGetHeaderCellOfColumn">
                     <a href="#tryGetHeaderCellOfColumn">
@@ -4205,7 +3944,7 @@
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="571">
+              <div class="fsdocs-tip" id="554">
                 <div class="member-tooltip">
                   Full Usage: 
                   <code><span>FsTable.tryGetHeaderCellOfColumn&#32;<span>cellsCollection&#32;column&#32;table</span></span></code>
@@ -4258,7 +3997,7 @@
                 <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L333-333" class="fsdocs-source-link" title="Source on GitHub">
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L271-271" class="fsdocs-source-link" title="Source on GitHub">
                 <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
               </a>
@@ -4309,19 +4048,19 @@
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '572', 572)" onmouseover="showTip(event, '572', 572)">
+              <code onmouseout="hideTip(event, '555', 555)" onmouseover="showTip(event, '555', 555)">
                 <p>
-                  <a id="tryGetHeaderCellOfColumnIndex">
-                    <a href="#tryGetHeaderCellOfColumnIndex">
-                      <code><span>FsTable.tryGetHeaderCellOfColumnIndex&#32;<span>cellsCollection&#32;colIndex&#32;table</span></span></code>
+                  <a id="tryGetHeaderCellOfColumnIndexAt">
+                    <a href="#tryGetHeaderCellOfColumnIndexAt">
+                      <code><span>FsTable.tryGetHeaderCellOfColumnIndexAt&#32;<span>cellsCollection&#32;colIndex&#32;table</span></span></code>
                     </a>
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="572">
+              <div class="fsdocs-tip" id="555">
                 <div class="member-tooltip">
                   Full Usage: 
-                  <code><span>FsTable.tryGetHeaderCellOfColumnIndex&#32;<span>cellsCollection&#32;colIndex&#32;table</span></span></code>
+                  <code><span>FsTable.tryGetHeaderCellOfColumnIndexAt&#32;<span>cellsCollection&#32;colIndex&#32;table</span></span></code>
                   <br/>
                   <br/>
                   Parameters: 
@@ -4363,15 +4102,15 @@
           </td>
           <td class="fsdocs-member-xmldoc">
             <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.FsTable.tryGetHeaderCellOfColumnIndex`')">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.FsTable.tryGetHeaderCellOfColumnIndexAt`')">
                 <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
               </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.FsTable.tryGetHeaderCellOfColumnIndex\'/>')">
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.FsTable.tryGetHeaderCellOfColumnIndexAt\'/>')">
                 <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L320-320" class="fsdocs-source-link" title="Source on GitHub">
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L258-258" class="fsdocs-source-link" title="Source on GitHub">
                 <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
               </a>
@@ -4422,19 +4161,19 @@
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '573', 573)" onmouseover="showTip(event, '573', 573)">
+              <code onmouseout="hideTip(event, '556', 556)" onmouseover="showTip(event, '556', 556)">
                 <p>
-                  <a id="tryGetHeaderCellOfTableFieldIndex">
-                    <a href="#tryGetHeaderCellOfTableFieldIndex">
-                      <code><span>FsTable.tryGetHeaderCellOfTableFieldIndex&#32;<span>cellsCollection&#32;tableFieldIndex&#32;table</span></span></code>
+                  <a id="tryGetHeaderCellOfTableFieldIndexAt">
+                    <a href="#tryGetHeaderCellOfTableFieldIndexAt">
+                      <code><span>FsTable.tryGetHeaderCellOfTableFieldIndexAt&#32;<span>cellsCollection&#32;tableFieldIndex&#32;table</span></span></code>
                     </a>
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="573">
+              <div class="fsdocs-tip" id="556">
                 <div class="member-tooltip">
                   Full Usage: 
-                  <code><span>FsTable.tryGetHeaderCellOfTableFieldIndex&#32;<span>cellsCollection&#32;tableFieldIndex&#32;table</span></span></code>
+                  <code><span>FsTable.tryGetHeaderCellOfTableFieldIndexAt&#32;<span>cellsCollection&#32;tableFieldIndex&#32;table</span></span></code>
                   <br/>
                   <br/>
                   Parameters: 
@@ -4476,15 +4215,15 @@
           </td>
           <td class="fsdocs-member-xmldoc">
             <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.FsTable.tryGetHeaderCellOfTableFieldIndex`')">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.FsTable.tryGetHeaderCellOfTableFieldIndexAt`')">
                 <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
               </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.FsTable.tryGetHeaderCellOfTableFieldIndex\'/>')">
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.FsTable.tryGetHeaderCellOfTableFieldIndexAt\'/>')">
                 <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L393-393" class="fsdocs-source-link" title="Source on GitHub">
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Tables/FsTable.fs#L331-331" class="fsdocs-source-link" title="Source on GitHub">
                 <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
               </a>
