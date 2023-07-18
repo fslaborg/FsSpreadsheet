@@ -36,7 +36,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FsSpreadsheet\FsSpreadsheet.fsproj" PackageVersion="[2.0.0, 3.0.0)" />
+    <ProjectReference Include="..\FsSpreadsheet\FsSpreadsheet.fsproj" PackageVersion="[3.0.0, 4.0.0)" />
   </ItemGroup>
 
   <Target Name="UseExplicitPackageVersions" BeforeTargets="GenerateNuspec">

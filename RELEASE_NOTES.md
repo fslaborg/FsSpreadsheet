@@ -1,3 +1,14 @@
+### 3.0.0+4da5e50 (Released 2023-7-18)
+* Additions:
+    * [[#ece7f02](https://github.com/CSBiology/FsSpreadsheet/commit/ece7f02b70dcffc5000957a82e44f95907885e40)] Bump ReleaseNotes to v2.0.3
+    * [[#a9c1f29](https://github.com/CSBiology/FsSpreadsheet/commit/a9c1f2923a12334a37b9d094025e9619fb4b4d3c)] Update test project dependencies for Fable compatability
+    * [[#1c9f1bd](https://github.com/CSBiology/FsSpreadsheet/commit/1c9f1bd875af5308ff44295b284329c1ef7c5311)] use attachmembers for improved javascript transpilation
+    * [[#6085c47](https://github.com/CSBiology/FsSpreadsheet/commit/6085c47c060d9ef252b9ec2fad927208f0d2bc9f)] improve comments
+    * [[#4da5e50](https://github.com/CSBiology/FsSpreadsheet/commit/4da5e5062dcd1bffcb5e917585a00034dbf8bd82)] Merge pull request #34 from CSBiology/fable
+* Bugfixes:
+    * [[#8c8e720](https://github.com/CSBiology/FsSpreadsheet/commit/8c8e720f04af1e004cfef8c4da3236e00e7ffeb4)] Affix Build QuickStart to Readme
+    * [[#70df6e6](https://github.com/CSBiology/FsSpreadsheet/commit/70df6e63578ab7330939486a81ab221af22c7eeb)] fix xml comments
+
 ### 2.0.3+3a1d082 (Released 2023-7-18)
 * Additions:
     * [[#3a1d082](https://github.com/CSBiology/FsSpreadsheet/commit/3a1d08253839fe8f85f017a7a304ce766e06f71b)] Bump project version dependencies
