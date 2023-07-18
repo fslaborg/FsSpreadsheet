@@ -85,7 +85,7 @@ let main =
                 let testFsTable = FsTable("testFsTable", FsRangeAddress(dummyFsCellsCollectionFirstAddress, dummyFsCellsCollectionLastAddress))
                 testFsTable.AddFields dummyFsTableFields |> ignore
                 let testNames, testIndeces = 
-                    testFsTable.Fields dummyFsCellsCollection 
+                    testFsTable.GetFields(dummyFsCellsCollection)
                     |> Seq.map (fun tf -> tf.Name, tf.Index) 
                     |> Seq.toArray 
                     |> Array.unzip
@@ -102,7 +102,7 @@ let main =
         ]
         testList "TryGetHeaderCellOfColumn" [
             testList "cellsCollection : FsCellsCollection, colIndex : int" [
-                let testHeaderCell = dummyFsTable.TryGetHeaderCellOfColumn(dummyFsCellsCollection, 3)
+                let testHeaderCell = dummyFsTable.TryGetHeaderCellOfColumnAt(dummyFsCellsCollection, 3)
                 testCase "Is Some" <| fun _ ->
                     Expect.isSome testHeaderCell "Is None"
                 testCase "Has correct value" <| fun _ ->
@@ -122,7 +122,7 @@ let main =
             testList "cellsCollection : FsCellsCollection, tableFieldIndex : int" [
                 let testFsTable = FsTable("testFsTable", FsRangeAddress(dummyFsCellsCollectionFirstAddress, dummyFsCellsCollectionLastAddress))
                 testFsTable.AddFields dummyFsTableFields
-                let testHeaderCell = testFsTable.TryGetHeaderCellOfTableField(dummyFsCellsCollection, 1)
+                let testHeaderCell = testFsTable.TryGetHeaderCellOfTableFieldAt(dummyFsCellsCollection, 1)
                 testCase "Is Some" <| fun _ ->
                     Expect.isSome testHeaderCell "Is None"
                 testCase "Has correct value" <| fun _ ->
@@ -156,7 +156,7 @@ let main =
             testList "cellsCollection : FsCellsCollection, fieldName : FsTableField" [
                 let testFsTable = FsTable("testFsTable", FsRangeAddress(dummyFsCellsCollectionFirstAddress, dummyFsCellsCollectionLastAddress))
                 testFsTable.AddFields dummyFsTableFields
-                let testDataCells = testFsTable.GetDataCellsOfColumn(dummyFsCellsCollection, 2)
+                let testDataCells = testFsTable.GetDataCellsOfColumnAt(dummyFsCellsCollection, 2)
                 testCase "Is Some" <| fun _ ->
                     Expect.isNonEmpty testDataCells "Seq is empty"
                 testCase "Has correct values" <| fun _ ->

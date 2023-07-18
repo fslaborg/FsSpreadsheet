@@ -56,7 +56,7 @@ module FsExtensions =
         member self.ToXlsxTable(cells : FsCellsCollection) = 
 
             let columns =
-                self.FieldNames(cells)
+                self.GetFieldNames(cells)
                 |> Seq.map (fun kv -> 
                     Table.TableColumn.create (1 + kv.Value.Index |> uint) kv.Value.Name
                 )

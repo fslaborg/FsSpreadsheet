@@ -227,7 +227,7 @@ module SheetBuilder =
     type FsWorkbook with
 
         member self.Populate<'T>(name : string, data : seq<'T>, fields : FieldMap<'T> list) : unit =
-            self.AddWorksheet(name)
+            self.InitWorksheet(name)
             let sheet = self.GetWorksheets() |> Seq.find (fun s -> s.Name = name)
             FsWorksheet.populate(sheet, data, fields)
 

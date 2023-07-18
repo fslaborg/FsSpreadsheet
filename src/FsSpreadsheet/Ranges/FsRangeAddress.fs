@@ -210,9 +210,9 @@ type FsRangeAddress(firstAddress : FsAddress, lastAddress : FsAddress) =
     override self.ToString() =
         self.Range
 
-    member self.FirstAddress = _firstAddress
+    member self.FirstAddress : FsAddress = _firstAddress
 
-    member self.LastAddress = _lastAddress
+    member self.LastAddress : FsAddress = _lastAddress
 
     member self.Union(rangeAddress : FsRangeAddress) =
         self.Extend(rangeAddress.FirstAddress)

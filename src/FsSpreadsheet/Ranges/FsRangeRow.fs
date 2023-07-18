@@ -3,7 +3,7 @@
 [<AllowNullLiteral>]
 type FsRangeRow(rangeAddress) =
 
-    inherit FsRangeBase(rangeAddress, null)
+    inherit FsRangeBase(rangeAddress)
     
     //new () = 
     //    let range = FsRangeAddress(FsAddress(0,0),FsAddress(0,0))

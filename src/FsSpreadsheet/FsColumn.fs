@@ -3,26 +3,31 @@
 open System.Collections.Generic
 open System.Collections
 
-
+open Fable.Core
 // Type based on the type XLRow used in ClosedXml
 /// <summary>
 /// Creates an FsColumn from the given FsRangeAddress, consisting of FsCells within a given FsCellsCollection, and a styleValue.
 /// </summary>
 /// <remarks>The FsCellsCollection must only cover 1 column!</remarks>
 /// <exception cref="System.Exception">if given FsCellsCollection has more than 1 column.</exception>
+[<AttachMembers>]
 type FsColumn (rangeAddress : FsRangeAddress, cells : FsCellsCollection)= 
 
-    inherit FsRangeBase(rangeAddress, null)
+    inherit FsRangeBase(rangeAddress)
 
     let cells = cells
 
-    new() = FsColumn (FsRangeAddress(FsAddress(0,0),FsAddress(0,0)),FsCellsCollection())
+    // ----------
+    // Creation
+    // ----------
+
+    static member empty() = FsColumn (FsRangeAddress(FsAddress(0,0),FsAddress(0,0)),FsCellsCollection())
 
     /// <summary>
     /// Create an FsColumn from a given FsCellsCollection and an columnColumn.
     /// </summary>
     /// <remarks>The appropriate range of the cells (i.e. minimum colIndex and maximum colIndex) is derived from the FsCells with the matching rowIndex.</remarks>
-    new(index, (cells : FsCellsCollection)) = 
+    static member createAt(index : int32, (cells : FsCellsCollection)) = 
         let getIndexBy (f : (FsCell -> int) -> seq<FsCell> -> FsCell) = 
             match cells.GetCellsInColumn index |> Seq.length with
             | 0 -> 1
@@ -34,8 +39,6 @@ type FsColumn (rangeAddress : FsRangeAddress, cells : FsCellsCollection)=
         let minRowIndex = getIndexBy Seq.minBy
         let maxRowIndex = getIndexBy Seq.maxBy
         FsColumn (FsRangeAddress(FsAddress(minRowIndex, index),FsAddress(maxRowIndex, index)), cells)
-
-    new (columnRange : FsRangeColumn, cells : FsCellsCollection) = FsColumn(columnRange.RangeAddress,cells)
 
     interface IEnumerable<FsCell> with
         member this.GetEnumerator() : System.Collections.Generic.IEnumerator<FsCell> = this.Cells.GetEnumerator()
@@ -100,9 +103,9 @@ type FsColumn (rangeAddress : FsRangeAddress, cells : FsCellsCollection)=
     static member item rowIndex (column : FsColumn) =
         column.Item(rowIndex)
 
-    /// <summary>
-    /// Inserts the value at columnIndex as an FsCell. If there is an FsCell at the position, this FsCells and all the ones right to it are shifted to the right.
-    /// </summary>
+    ///// <summary>
+    ///// Inserts the value at columnIndex as an FsCell. If there is an FsCell at the position, this FsCells and all the ones /right /to it are shifted to the right.
+    ///// </summary>
     //member this.InsertValueAt(colIndex, (value : 'a)) =
     //    let cell = FsCell(value)
     //    cells.Add(int32 this.Index, int32 colIndex, cell)

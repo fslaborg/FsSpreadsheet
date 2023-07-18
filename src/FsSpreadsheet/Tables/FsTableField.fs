@@ -132,7 +132,7 @@ type FsTableField (name : string, index : int, column : FsRangeColumn, totalsRow
         // TO DO: Ask HLW: isn't this predicate pointless? If showHeaderRow is false, the code breaks as soon as trying to call .HeaderCell
         //let predicate cell = (not showHeaderRow) && (this.HeaderCell(cellsCollection, showHeaderRow) <> cell)
         let predicate = fun _ -> true
-        this.Column.Cells(cellsCollection, predicate)
+        this.Column.CellsSelect(cellsCollection, predicate)
         |> Seq.skip 1       // ClosedXML implementation never shows header cell
 
     /// <summary>

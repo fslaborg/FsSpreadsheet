@@ -3,7 +3,7 @@
 
 type FsRange(rangeAddress : FsRangeAddress, styleValue) = 
 
-    inherit FsRangeBase(rangeAddress, styleValue)
+    inherit FsRangeBase(rangeAddress)
 
     new (rangeAddress : FsRangeAddress) = FsRange(rangeAddress, null)
     new (rangeBase : FsRangeBase) = FsRange(rangeBase.RangeAddress, null)

@@ -30,6 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="FsSparseMatrix.fs" />
     <Compile Include="Formatters.fs" />
     <Compile Include="Extension.fs" />
     <None Include="..\..\docs\img\logo.png" Pack="true" PackagePath="\" />

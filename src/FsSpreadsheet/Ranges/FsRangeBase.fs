@@ -1,7 +1,7 @@
 ﻿namespace FsSpreadsheet
 
 [<AbstractClass>][<AllowNullLiteral>]
-type FsRangeBase (rangeAddress : FsRangeAddress, styleValue) = 
+type FsRangeBase (rangeAddress : FsRangeAddress) = 
     //: XLStylizedBase, IXLRangeBase, IXLStylized
 
 
@@ -9,14 +9,11 @@ type FsRangeBase (rangeAddress : FsRangeAddress, styleValue) =
     let mutable _sortColumns = null
     let mutable _rangeAddress = rangeAddress
 
-    let mutable _styleValue = styleValue
 
     static let mutable IdCounter = 0;
     let _id = 
         IdCounter <- IdCounter + 1
         IdCounter
-
-    new (rangeAddress) = FsRangeBase(rangeAddress, null)
 
     //abstract member OnRangeAddressChanged : FsRangeAddress*FsRangeAddress -> unit 
     
@@ -78,7 +75,7 @@ type FsRangeBase (rangeAddress : FsRangeAddress, styleValue) =
     member self.Cells(cells : FsCellsCollection) = 
         cells.GetCells(self.RangeAddress.FirstAddress, self.RangeAddress.LastAddress)
        
-    member self.Cells(cells : FsCellsCollection, predicate : FsCell -> bool) = 
+    member self.CellsSelect(cells : FsCellsCollection, predicate : FsCell -> bool) = 
         cells.GetCells(self.RangeAddress.FirstAddress, self.RangeAddress.LastAddress, predicate)
      
      member self.ColumnCount() =
