@@ -24,6 +24,11 @@ dummyWorksheet2.AddTable dummyTables[1] |> ignore
 
 let main =
     testList "FsWorkbook" [
+        testList "GetWorksheets" [        
+            testCase "empty" <| fun _ -> 
+                let wb = new FsWorkbook()
+                Expect.equal 0 (wb.GetWorksheets().Length) "Should be empty"
+        ]
         testList "TryGetWorksheetByName" [
             let testWorksheet = dummyWorkbook.TryGetWorksheetByName "dummyWorksheet1"
             testCase "is Some" <| fun _ ->

@@ -7,11 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="FsExtensions.fs" />
-    <Compile Include="Cell.fs" />
-    <Compile Include="Sheet.fs" />
-    <Compile Include="Workbook.fs" />
-    <Compile Include="Spreadsheet.fs" />
+    <Compile Include="Utils.fs" />
+    <Compile Include="TestObjects.fs" />
+    <Compile Include="OpenXml\FsExtensions.fs" />
+    <Compile Include="OpenXml\Cell.fs" />
+    <Compile Include="OpenXml\Sheet.fs" />
+    <Compile Include="OpenXml\Workbook.fs" />
+    <Compile Include="OpenXml\Spreadsheet.fs" />
+    <Compile Include="FsWorkbook.fs" />
     <Compile Include="Main.fs" />
   </ItemGroup>
 
@@ -25,5 +28,4 @@
   <ItemGroup>
     <PackageReference Update="FSharp.Core" Version="7.0.300" />
   </ItemGroup>
-
 </Project>

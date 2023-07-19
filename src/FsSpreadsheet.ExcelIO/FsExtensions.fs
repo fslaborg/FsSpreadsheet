@@ -160,11 +160,14 @@ module FsExtensions =
         member self.FromXlsxStream (stream : Stream) =
             let doc = Spreadsheet.fromStream stream false
             let sst = Spreadsheet.tryGetSharedStringTable doc
-            let xlsxWorkbookPart = Spreadsheet.getWorkbookPart doc
-            let xlsxWorkbook = Workbook.get xlsxWorkbookPart
+            let xlsxWorkbookPart = Spreadsheet.getWorkbookPart doc        
             let xlsxSheets = 
-                Sheet.Sheets.get xlsxWorkbook
-                |> Sheet.Sheets.getSheets
+                try
+                    let xlsxWorkbook = Workbook.get xlsxWorkbookPart
+                    Sheet.Sheets.get xlsxWorkbook
+                    |> Sheet.Sheets.getSheets
+                with 
+                | _ -> []
             let xlsxWorksheetParts = 
                 xlsxSheets
                 |> Seq.map (
@@ -209,6 +212,13 @@ module FsExtensions =
         /// Creates an FsWorkbook from a given Stream to an XlsxFile.
         /// </summary>
         static member fromXlsxStream (stream : Stream) =
+            (new FsWorkbook()).FromXlsxStream stream
+
+        /// <summary>
+        /// Creates an FsWorkbook from a given Stream to an XlsxFile.
+        /// </summary>
+        static member fromBytes (bytes : byte []) =
+            let stream = new MemoryStream(bytes)
             (new FsWorkbook()).FromXlsxStream stream
 
         /// <summary>

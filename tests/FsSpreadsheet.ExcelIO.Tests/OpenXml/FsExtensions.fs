@@ -17,7 +17,7 @@ let dummyDtEmpty = DataType.Empty
 let dummyXlsxCell = Cell.create CellValues.Number "A1" (CellValue(1.337))
 
 //let testFilePath = @"C:\Repos\CSBiology\FsSpreadsheet\tests\FsSpreadsheet.ExcelIO.Tests\data\testUnit.xlsx"
-let testFilePath = Path.Combine(__SOURCE_DIRECTORY__, "data", "testUnit.xlsx")
+let testFilePath = Path.Combine(__SOURCE_DIRECTORY__, "../data", "testUnit.xlsx")
 let sr = new StreamReader(testFilePath)
 let dummyFsWorkbook = new FsWorkbook()
 let dummyFsCells = [
@@ -47,7 +47,7 @@ dummyFsWorkbook.AddWorksheet(dummyFsWorksheet3) |> ignore
 dummyFsWorkbook.AddWorksheet(dummyFsWorksheet4) |> ignore
 
 //let testFile2Path = @"C:\Repos\CSBiology\FsSpreadsheet\tests\FsSpreadsheet.ExcelIO.Tests\data\2EXT02_Protein.xlsx"
-let testFile2Path = Path.Combine(__SOURCE_DIRECTORY__, "data", "2EXT02_Protein.xlsx")
+let testFile2Path = Path.Combine(__SOURCE_DIRECTORY__, "../data", "2EXT02_Protein.xlsx")
 
 
 [<Tests>]
