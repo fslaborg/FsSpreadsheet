@@ -195,7 +195,10 @@ module Spreadsheet =
     let getCellsBySheet (sheet : Sheet) (spreadsheetDocument : SpreadsheetDocument) =
         let workbookPart = spreadsheetDocument.WorkbookPart
         let worksheetPart = Worksheet.WorksheetPart.getByID sheet.Id.Value workbookPart
-        let stringTablePart = getOrInitSharedStringTablePart spreadsheetDocument
+        let includeSSV = 
+            match tryGetSharedStringTable spreadsheetDocument with 
+            | Some sst -> Cell.includeSharedStringValue sst
+            | None -> id
         seq {
         use reader = OpenXmlReader.Create(worksheetPart)
         
@@ -203,7 +206,7 @@ module Spreadsheet =
             if (reader.ElementType = typeof<Cell>) then 
                 let cell    = reader.LoadCurrentElement() :?> Cell 
                 let cellRef = if cell.CellReference.HasValue then cell.CellReference.Value else ""
-                yield Cell.includeSharedStringValue stringTablePart.SharedStringTable cell
+                yield includeSSV cell
         }
 
     /// <summary>

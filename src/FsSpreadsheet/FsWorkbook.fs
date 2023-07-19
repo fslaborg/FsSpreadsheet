@@ -44,14 +44,14 @@ type FsWorkbook() =
     member self.InitWorksheet(name : string) = 
         let sheet = FsWorksheet name
         _worksheets <- List.append _worksheets [sheet]
+        sheet
 
     /// <summary>
     /// Creates an empty FsWorksheet with given name and adds it to the FsWorkbook.
     /// </summary>
     static member initWorksheet (name : string) (workbook : FsWorkbook) = 
         workbook.InitWorksheet name
-        workbook
-
+        
     
     /// <summary>
     /// Adds a given FsWorksheet to the FsWorkbook.
