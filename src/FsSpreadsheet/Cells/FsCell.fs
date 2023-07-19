@@ -2,6 +2,8 @@
 
 open System
 
+open Fable.Core
+
 /// <summary>
 /// Possible DataTypes used in a FsCell.
 /// </summary>
@@ -40,6 +42,8 @@ type DataType =
 /// <summary>
 /// Creates an FsCell of `DataType` dataType, with value of type `string`, and `FsAddress` address.
 /// </summary>
+
+[<AttachMembers>]
 type FsCell (value : IConvertible, ?dataType : DataType, ?address : FsAddress) =
     
     // TODO: Maybe save as IConvertible
@@ -214,44 +218,150 @@ type FsCell (value : IConvertible, ?dataType : DataType, ?address : FsAddress) =
     static member copy (cell : FsCell) =
         cell.Copy()
 
+
     /// <summary>
-    /// Gets the cell's value converted to the T type.
-    /// <para>FsSpreadsheet will try to convert the current value to type 'T.</para>
-    /// <para>An exception will be thrown if the current value cannot be converted to the T type.</para>
+    /// Gets the value as string
     /// </summary>
-    /// <typeparam name="T">The return type.</typeparam>
-    /// <exception cref="ArgumentException"></exception>
-    member inline self.GetValueAs<'T>() =
-        match (typeof<'T>) with
-        | t when t = typeof<string>           -> self.Value |> box
-        | t when t = typeof<bool>             -> bool.Parse (self.Value) |> box
-        | t when t = typeof<float>            -> Double.Parse (self.Value) |> box
-        | t when t = typeof<int>              -> Int32.Parse (self.Value) |> box
-        
-        | t when t = typeof<int16>            -> Int16.Parse (self.Value) |> box
-        | t when t = typeof<int64>            -> Int64.Parse (self.Value) |> box
-        
-        | t when t = typeof<uint>             -> UInt32.Parse (self.Value) |> box
-        | t when t = typeof<uint16>           -> UInt16.Parse (self.Value) |> box
-        | t when t = typeof<uint64>           -> UInt64.Parse (self.Value) |> box
-
-        | t when t = typeof<single>           -> Single.Parse (self.Value) |> box
-        | t when t = typeof<decimal>          -> Decimal.Parse (self.Value) |> box
-        | t when t = typeof<Guid>             -> Guid.Parse (self.Value) |> box
-        | t when t = typeof<char>             -> Char.Parse (self.Value) |> box
-        | t when t = typeof<DateTime>         -> DateTime.Parse (self.Value) |> box
-        | t -> failwith $"FsCell with value {self.Value} cannot be parsed to {typeof<double>.Name}."
-        
-        :?> 'T
+    member self.ValueAsString() =
+        self.Value
 
     /// <summary>
-    /// Gets the FsCell's value converted to the 'T type.
-    /// 
-    /// FsSpreadsheet will try to convert the current value to type 'T. </summary>
-    /// <typeparam name="T">The return type.</typeparam>
-    /// <exception cref="System.ArgumentException">if the current value cannot be converted to the 'T type.</exception>
-    static member inline getValueAs<'T>(cell : FsCell) =
-        cell.GetValueAs<'T>()
+    /// Gets the value as string
+    /// </summary>
+    static member getValueAsString (cell : FsCell) =
+        cell.ValueAsString()
+
+    /// <summary>
+    /// Gets the value as bool
+    /// </summary>
+    member self.ValueAsBool() =
+        bool.Parse (self.Value)
+
+    /// <summary>
+    /// Gets the value as bool
+    /// </summary>
+    static member getValueAsBool (cell : FsCell) =
+        cell.ValueAsBool()
+
+    /// <summary>
+    /// Gets the value as float
+    /// </summary>
+    member self.ValueAsFloat() =
+        Double.Parse (self.Value)
+
+    /// <summary>
+    /// Gets the value as float
+    /// </summary>
+    static member getValueAsFloat (cell : FsCell) =
+        cell.ValueAsFloat()
+
+    /// <summary>
+    /// Gets the value as int
+    /// </summary>
+    member self.ValueAsInt() =
+        Int32.Parse (self.Value)
+
+    /// <summary>
+    /// Gets the value as int
+    /// </summary>
+    static member getValueAsInt (cell : FsCell) =
+        cell.ValueAsInt()
+
+    /// <summary>
+    /// Gets the value as uint
+    /// </summary>
+    member self.ValueAsUInt() =
+        UInt32.Parse (self.Value)
+
+    /// <summary>
+    /// Gets the value as uint
+    /// </summary>
+    static member getValueAsUInt (cell : FsCell) =
+        cell.ValueAsUInt()
+
+    /// <summary>
+    /// Gets the value as long
+    /// </summary>
+    member self.ValueAsLong() =
+        Int64.Parse (self.Value)
+
+    /// <summary>
+    /// Gets the value as long
+    /// </summary>
+    static member getValueAsLong (cell : FsCell) =
+        cell.ValueAsLong()
+
+    /// <summary>
+    /// Gets the value as ulong
+    /// </summary>
+    member self.ValueAsULong() =
+        UInt64.Parse (self.Value)
+
+    /// <summary>
+    /// Gets the value as ulong
+    /// </summary>
+    static member getValueAsULong (cell : FsCell) =
+        cell.ValueAsULong()
+
+    /// <summary>
+    /// Gets the value as double
+    /// </summary>
+    member self.ValueAsDouble() =
+        Double.Parse (self.Value)
+
+    /// <summary>
+    /// Gets the value as double
+    /// </summary>
+    static member getValueAsDouble (cell : FsCell) =
+        cell.ValueAsDouble()
+
+    /// <summary>
+    /// Gets the value as decimal
+    /// </summary>
+    member self.ValueAsDecimal() =
+        Decimal.Parse (self.Value)
+
+    /// <summary>
+    /// Gets the value as decimal
+    /// </summary>
+    static member getValueAsDecimal (cell : FsCell) =
+        cell.ValueAsDecimal()
+
+    /// <summary>
+    /// Gets the value as DateTime
+    /// </summary>
+    member self.ValueAsDateTime() =
+        DateTime.Parse (self.Value)
+
+    /// <summary>
+    /// Gets the value as DateTime
+    /// </summary>
+    static member getValueAsDateTime (cell : FsCell) =
+        cell.ValueAsDateTime()
+
+    /// <summary>
+    /// Gets the value as Guid
+    /// </summary>
+    member self.ValueAsGuid() =
+        Guid.Parse (self.Value)
+
+    /// <summary>
+    /// Gets the value as Guid
+    /// </summary>
+    static member getValueAsGuid (cell : FsCell) =
+        cell.ValueAsGuid()
+
+    /// <summary>
+    /// Gets the value as char
+    /// </summary>
+    member self.ValueAsChar() =
+        Char.Parse (self.Value)
+
+    /// <summary>
+    /// Gets the value as char
+    /// </summary>
+    static member getValueAsChar (cell : FsCell) =
+        cell.ValueAsChar()
 
     /// <summary>
     /// Sets the FsCell's value.

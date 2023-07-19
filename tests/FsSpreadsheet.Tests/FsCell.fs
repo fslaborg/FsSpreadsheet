@@ -101,11 +101,11 @@ let fsCellData =
         
 
             testCase "Value as string : A1" <| fun _ ->
-                Expect.equal (fscellA1_string.GetValueAs<string>()) "A1" "resulting value is not A1 as string"
+                Expect.equal (fscellA1_string.ValueAsString()) "A1" "resulting value is not A1 as string"
             testCase "Value as integer: 1 " <| fun _ ->
-                Expect.equal (fscellB1_num.GetValueAs<int>()) 1 "resulting value is not 1 as integer"
+                Expect.equal (fscellB1_num.ValueAsInt()) 1 "resulting value is not 1 as integer"
             testCase "Value as bool: True" <| fun _ ->
-                Expect.equal (fscellA2_bool.GetValueAs<bool>()) true "resulting value is not True as bool"
+                Expect.equal (fscellA2_bool.ValueAsBool()) true "resulting value is not True as bool"
 
         
             testCase "RowNumber: 1 " <| fun _ ->
