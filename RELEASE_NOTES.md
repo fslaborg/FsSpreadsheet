@@ -1,3 +1,9 @@
+### 3.1.0+0d7e699 (Released 2023-7-19)
+* Additions:
+    * [[#af1920a](https://github.com/CSBiology/FsSpreadsheet/commit/af1920a3a05efcb0953408f9f42bb398dbb3a38e)] add attachmembers attribute to FsCell
+* Bugfixes:
+    * [[#d6f86d2](https://github.com/CSBiology/FsSpreadsheet/commit/d6f86d24f62c74fd0ca8aa40a6d239818256aace)] test and fix writeAndReadSpreadsheet
+
 ### 3.0.0+4da5e50 (Released 2023-7-18)
 * Additions:
     * [[#ece7f02](https://github.com/CSBiology/FsSpreadsheet/commit/ece7f02b70dcffc5000957a82e44f95907885e40)] Bump ReleaseNotes to v2.0.3
