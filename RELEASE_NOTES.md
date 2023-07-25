@@ -1,3 +1,7 @@
+### 3.1.1+64f86ec (Released 2023-7-25)
+* Bugfixes:
+    * [[#1ee068c](https://github.com/CSBiology/FsSpreadsheet/commit/1ee068c9c0f8f0c42137defb2837c8c54308dbc6)] fix and test #42
+
 ### 3.1.0+0d7e699 (Released 2023-7-19)
 * Additions:
     * [[#af1920a](https://github.com/CSBiology/FsSpreadsheet/commit/af1920a3a05efcb0953408f9f42bb398dbb3a38e)] add attachmembers attribute to FsCell
