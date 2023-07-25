@@ -78,7 +78,8 @@ module FsExtensions =
         static member fromXlsxTable table = 
             let topLeftBoundary, bottomRightBoundary = Table.getArea table |> Table.Area.toBoundaries
             let ra = FsRangeAddress(FsAddress(topLeftBoundary), FsAddress(bottomRightBoundary))
-            FsTable(table.Name, ra, table.TotalsRowShown, true)
+            let totalsRowShown = if table.TotalsRowShown = null then false else table.TotalsRowShown.Value
+            FsTable(table.Name, ra, totalsRowShown, true)
 
         /// <summary>
         /// Returns the FsWorksheet associated with the FsTable in a given FsWorkbook.
