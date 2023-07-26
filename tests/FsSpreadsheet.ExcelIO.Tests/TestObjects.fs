@@ -40,4 +40,4 @@ let sheet2() =
     ws
 
 let headerLessTablePath = 
-    System.IO.Path.Combine("data", "headerLessTable.xlsx").Replace('\\',System.IO.Path.DirectorySeparatorChar).Replace('/',System.IO.Path.DirectorySeparatorChar)
+    "data/headerLessTable.xlsx"
