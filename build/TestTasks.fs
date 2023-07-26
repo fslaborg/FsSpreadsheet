@@ -8,8 +8,6 @@ open BasicTasks
 
 [<Literal>]
 let FableTestPath_input = "tests/FsSpreadsheet.Tests"
-[<Literal>]
-let FableTestPath_output = "tests/FsSpreadsheet.JsNativeTests/fable"
 
 [<AutoOpen>]
 module private Helper =
@@ -108,17 +106,13 @@ module private Helper =
         |> Proc.Parallel.run
         |> ignore
     
-    let cleanFable = BuildTask.create "cleanFable" [clean; build] {
-        System.IO.Directory.CreateDirectory FableTestPath_output |> ignore
-        run dotnet "fable clean --yes" FableTestPath_output
-    }
 
 module RunTests = 
 
     /// runs `npm test` in root. 
     /// npm test consists of `test` and `pretest`
     /// check package.json in root for behavior
-    let runTestsJs = BuildTask.create "runTestsJS" [clean; cleanFable; build] {
+    let runTestsJs = BuildTask.create "runTestsJS" [clean; build] {
         run npm "test" ""
     }
 
@@ -138,41 +132,4 @@ module RunTests =
 
 let runTests = BuildTask.create "RunTests" [clean; build; RunTests.runTestsJs; RunTests.runTestsDotnet] { 
     ()
-}
-
-module WatchTests =
-
-    let private watchProjTests (projPath:string) =
-        let pName = 
-            let n = System.IO.Path.GetFileNameWithoutExtension(projPath)
-            $"[{n}]"
-        pName, dotnet "watch run" projPath
-
-    let private dotnetTestsProcesses =
-        [
-            for testProj in testProjects do
-                yield watchProjTests testProj
-        ]
-
-    let private fableTestsProcesses =
-        [
-            "[Fable]", dotnet $"fable watch {FableTestPath_input} -o {FableTestPath_output} -s --run npm run test:live" "."
-            "[Mocha]", npm $"run testnative:live" "."
-        ]
-
-    let allTest = dotnetTestsProcesses@fableTestsProcesses
-
-    let watchTestsDotnet = BuildTask.create "watchTestsDotnet" [clean; build] {
-        dotnetTestsProcesses
-        |> runParallel
-    }
-
-    let watchJS = BuildTask.create "watchTestsJS" [clean; build] {
-        fableTestsProcesses
-        |> runParallel
-    }
-
-let watchTests = BuildTask.create "watchTests" [clean; build] {
-    WatchTests.allTest
-    |> runParallel
 }
