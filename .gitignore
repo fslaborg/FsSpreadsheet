@@ -357,3 +357,4 @@ tmp/
 /js
 /tests/FsSpreadsheet.Tests/js
 /tests/JS/fable
+/tests/JS/FsSpreadsheet.Exceljs
