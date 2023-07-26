@@ -14,7 +14,14 @@ let transformTable =
             Expect.isTrue (table.TotalsRowShown = null) "Check that field of interest is None"
             FsTable.fromXlsxTable table |> ignore
             )
-    
+        testCase "handleNoHeaders" (fun () ->
+            let doc = Spreadsheet.fromFile TestObjects.headerLessTablePath false
+            let wsp = doc.WorkbookPart.WorksheetParts |> Seq.head
+            let t = wsp |> Worksheet.WorksheetPart.getTables |> Seq.head
+            let parsed = FsTable.fromXlsxTable t
+            Expect.equal (parsed.RangeAddress.ToString()) "B8:B8" "Range address should be B8:B8"
+            Expect.isFalse parsed.ShowHeaderRow "ShowHeaderRow should be false"
+        )
     ]
     
 

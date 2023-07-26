@@ -79,7 +79,8 @@ module FsExtensions =
             let topLeftBoundary, bottomRightBoundary = Table.getArea table |> Table.Area.toBoundaries
             let ra = FsRangeAddress(FsAddress(topLeftBoundary), FsAddress(bottomRightBoundary))
             let totalsRowShown = if table.TotalsRowShown = null then false else table.TotalsRowShown.Value
-            FsTable(table.Name, ra, totalsRowShown, true)
+            let showHeaderRow = if table.HeaderRowCount = null then false else table.HeaderRowCount.Value = 1u
+            FsTable(table.Name, ra, totalsRowShown, showHeaderRow)
 
         /// <summary>
         /// Returns the FsWorksheet associated with the FsTable in a given FsWorkbook.

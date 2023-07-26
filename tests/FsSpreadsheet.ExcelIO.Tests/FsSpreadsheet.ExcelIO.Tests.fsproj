@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="data/*.xlsx" CopyToOutputDirectory="Always"/>
     <Compile Include="Utils.fs" />
     <Compile Include="TestObjects.fs" />
     <Compile Include="OpenXml\FsExtensions.fs" />
@@ -18,6 +19,8 @@
     <Compile Include="FsWorkbook.fs" />
     <Compile Include="Main.fs" />
   </ItemGroup>
+
+  <ItemGroup />
 
   <ItemGroup>
     <PackageReference Include="Expecto" Version="10.1.0" />

@@ -38,3 +38,6 @@ let sheet2() =
     ]
     |> List.iter (fun c -> ws.Row(c.RowNumber).[c.ColumnNumber].SetValueAs c.Value)
     ws
+
+let headerLessTablePath = 
+    "data/headerLessTable.xlsx"
