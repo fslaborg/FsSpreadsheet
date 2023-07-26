@@ -1,6 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
+	<PropertyGroup>
+		<Authors>Kevin Frey, Heinrich Lukas Weil, Oliver Maus, Kevin Schneider, Timo Mühlhaus</Authors>
+		<Description>Excel IO Extensions for the FsSpreadsheet Datamodel in js environments using exceljs.</Description>
+		<Summary>Spreadsheet creation and manipulation in FSharp</Summary>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageIcon>logo.png</PackageIcon>
+		<PackageTags>F# FSharp spreadsheet Excel xlsx datascience fable fable-library fable-javascript</PackageTags>
+		<RepositoryUrl>https://github.com/CSBiology/FsSpreadsheet</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+	</PropertyGroup>
+
+	<PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
@@ -12,5 +23,14 @@
   <ItemGroup>
     <PackageReference Include="Fable.Exceljs" Version="1.3.4" />
   </ItemGroup>
+
+	<ItemGroup>
+	<Content Include="*.fsproj; **\*.fs; **\*.fsi" PackagePath="fable\" />
+	</ItemGroup>
+	<PropertyGroup>
+		<NpmDependencies>
+			<NpmPackage Name="exceljs" Version="gte 4.3.0 lt 5.0.0" ResolutionStrategy="Max" />
+		</NpmDependencies>
+	</PropertyGroup>
 
 </Project>
