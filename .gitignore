@@ -355,3 +355,5 @@ tmp/
 .fsdocs/
 /tests/FsSpreadsheet.JsNativeTests/fable/**/*.js
 /js
+/tests/FsSpreadsheet.Tests/js
+/tests/JS/fable
