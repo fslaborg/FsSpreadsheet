@@ -3,7 +3,6 @@
 open DocumentFormat.OpenXml
 open DocumentFormat.OpenXml.Spreadsheet
 open FsSpreadsheet
-open FsSpreadsheet.ExcelIO
 open System.IO
 
 /// <summary>

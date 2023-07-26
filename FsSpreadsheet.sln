@@ -38,11 +38,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{F77AD108
 EndProject
 Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "FsSpreadsheet.Interactive.Tests", "tests\FsSpreadsheet.Interactive.Tests\FsSpreadsheet.Interactive.Tests.fsproj", "{7AC6357C-BDA0-40AE-955E-953C4BFF5BB0}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FsSpreadsheet.JsNativeTests", "FsSpreadsheet.JsNativeTests", "{CA144336-9B18-429F-A11B-81EC3CB06CE5}"
-	ProjectSection(SolutionItems) = preProject
-		tests\FsSpreadsheet.JsNativeTests\Main.js = tests\FsSpreadsheet.JsNativeTests\Main.js
-	EndProjectSection
-EndProject
 Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "FsSpreadsheet.Exceljs", "src\FsSpreadsheet.Exceljs\FsSpreadsheet.Exceljs.fsproj", "{E72A14FF-5026-463B-B0FA-2DA104D67B0C}"
 EndProject
 Global
@@ -176,7 +171,6 @@ Global
 		{C7DF552E-DDE1-4D6D-B0A3-B9D273FC0E32} = {F77AD108-C6B4-46BB-B7BC-13573F45F876}
 		{5F8EBA76-7B6B-4BAF-9426-F17B14FA5C4C} = {1CF1274C-DE28-4446-9B4E-5884E797B87B}
 		{7AC6357C-BDA0-40AE-955E-953C4BFF5BB0} = {F77AD108-C6B4-46BB-B7BC-13573F45F876}
-		{CA144336-9B18-429F-A11B-81EC3CB06CE5} = {F77AD108-C6B4-46BB-B7BC-13573F45F876}
 		{E72A14FF-5026-463B-B0FA-2DA104D67B0C} = {1CF1274C-DE28-4446-9B4E-5884E797B87B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution

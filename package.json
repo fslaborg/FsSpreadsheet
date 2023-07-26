@@ -4,9 +4,11 @@
   "description": "Spreadsheet creation and manipulation in FSharp",
   "type": "module",
   "scripts": {
-    "pretest": "dotnet fable tests/FsSpreadsheet.Tests -o tests/FsSpreadsheet.Tests/js",
+    "clean-test": "cd tests/FsSpreadsheet.Tests/js & dotnet fable clean --extension .js --yes",
+    "pretest": "npm run clean-test && dotnet fable tests/FsSpreadsheet.Tests -o tests/FsSpreadsheet.Tests/js",
     "test": "mocha tests/FsSpreadsheet.Tests/js",
-    "pretestjs": "",
+    "clean-testjs": "cd tests/JS/FsSpreadsheet.Exceljs & dotnet fable clean --extension .js --yes",
+    "pretestjs": "npm run clean-testjs && dotnet fable src/FsSpreadsheet.Exceljs -o tests/JS/FsSpreadsheet.Exceljs",
     "testjs": ""
   },
   "repository": {
