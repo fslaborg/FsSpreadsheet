@@ -4,10 +4,10 @@
   "description": "Spreadsheet creation and manipulation in FSharp",
   "type": "module",
   "scripts": {
-    "fable-js": "dotnet fable ./src/FsSpreadsheet -o ./js",
-    "pretest": "dotnet fable tests/FsSpreadsheet.Tests -o tests/FsSpreadsheet.JsNativeTests/fable",
-    "test": "mocha tests/FsSpreadsheet.JsNativeTests/fable",
-    "posttest": "mocha tests/FsSpreadsheet.JsNativeTests"
+    "pretest": "dotnet fable tests/FsSpreadsheet.Tests -o tests/FsSpreadsheet.Tests/js",
+    "test": "mocha tests/FsSpreadsheet.Tests/js",
+    "pretestjs": "",
+    "testjs": ""
   },
   "repository": {
     "type": "git",
