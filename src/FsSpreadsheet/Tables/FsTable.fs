@@ -121,6 +121,7 @@ type FsTable (name : string, rangeAddress : FsRangeAddress, ?showTotalsRow : boo
     /// <param name="originalName">Header name that was tried to be used.</param>
     /// <param name="initialOffset">First number that together with the originalName, leads to a unique column header.</param>
     /// <param name="enforceOffset">If true, the initial offset is always applied.</param>
+    /// <param name="table">The FsTable on which this function is called.</param>
     static member getUniqueNames originalName initialOffset enforceOffset (table : FsTable) =
         table.GetUniqueName(originalName, initialOffset, enforceOffset)
 

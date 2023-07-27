@@ -114,6 +114,7 @@ module RunTests =
     /// check package.json in root for behavior
     let runTestsJs = BuildTask.create "runTestsJS" [clean; build] {
         run npm "test" ""
+        run npm "run testexceljs" ""
     }
 
     let runTestsDotnet = BuildTask.create "runTestsDotnet" [clean; build] {

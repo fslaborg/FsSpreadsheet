@@ -12,13 +12,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Expecto" Version="9.*" />
-    <PackageReference Include="YoloDev.Expecto.TestSdk" Version="0.*" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.*" />
+	  <PackageReference Include="Expecto" Version="[10.1.0]" />
+	  <PackageReference Include="YoloDev.Expecto.TestSdk" Version="[0.14.1]" />
+	  <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.*" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\FsSpreadsheet\FsSpreadsheet.fsproj" />
     <ProjectReference Include="..\..\src\FsSpreadsheet.Interactive\FsSpreadsheet.Interactive.fsproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="FSharp.Core" Version="7.0.300" />
   </ItemGroup>
 </Project>
