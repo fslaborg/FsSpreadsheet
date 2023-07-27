@@ -123,8 +123,6 @@ type FsAddress(rowNumber : int, columnNumber : int, fixedRow : bool, fixedColumn
     // -------
     // METHODS
     // -------
-
-    member this.LOL () = 1
     //let mutable _address = address
 
     /// <summary>
