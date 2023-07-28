@@ -12,7 +12,7 @@
     "testexceljs": "mocha tests/FsSpreadsheet.Exceljs.Tests/js",
     "clean-testjs": "cd tests/JS/FsSpreadsheet.Exceljs & dotnet fable clean --extension .fs.js --yes",
     "pretestjs": "npm run clean-testjs && dotnet fable src/FsSpreadsheet.Exceljs -o tests/JS/FsSpreadsheet.Exceljs --extension .fs.js",
-    "testjs": ""
+    "testjs": "mocha tests/JS"
   },
   "repository": {
     "type": "git",

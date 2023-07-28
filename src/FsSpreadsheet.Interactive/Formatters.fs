@@ -8,7 +8,7 @@ module Formatters =
     let formatWorkbook (workbook: FsWorkbook) =
         div [] [
             style [] [str ".fs-table, .fs-th, .fs-td { border: 1px solid black !important; text-align: left; border-collapse: collapse;}"]
-            h3 [] [ str $"FsWorkbook with {workbook.GetWorksheets().Length} worksheets:" ]
+            h3 [] [ str $"FsWorkbook with {workbook.GetWorksheets().Count} worksheets:" ]
             table [_class "fs-table"] [
                 thead [] [
                     tr [] [

@@ -22,7 +22,7 @@ let private tests_toFsWorkbook = testList "toFsWorkbook" [
         Expect.passWithMsg "Convert to fswb"
         let fswsList = fswb.GetWorksheets()
         let jswsList = jswb.worksheets
-        Expect.equal fswsList.Length jswsList.Length "Both no worksheet"
+        Expect.equal fswsList.Count jswsList.Length "Both no worksheet"
     testCase "worksheet" <| fun _ ->
         let jswb = ExcelJs.Excel.Workbook()
         let _ = jswb.addWorksheet("My Awesome Worksheet")
@@ -31,8 +31,8 @@ let private tests_toFsWorkbook = testList "toFsWorkbook" [
         Expect.passWithMsg "Convert to fswb"
         let jswsList = jswb.worksheets
         let fswsList = fswb.GetWorksheets()
-        Expect.equal fswsList.Length jswsList.Length "Both 1 worksheet"
-        Expect.equal fswsList.Head.Name "My Awesome Worksheet" "Correct worksheet name"
+        Expect.equal fswsList.Count jswsList.Length "Both 1 worksheet"
+        Expect.equal fswsList.[0].Name "My Awesome Worksheet" "Correct worksheet name"
     testCase "worksheets" <| fun _ ->
         let jswb = ExcelJs.Excel.Workbook()
         let _ = jswb.addWorksheet("My Awesome Worksheet")
@@ -43,7 +43,7 @@ let private tests_toFsWorkbook = testList "toFsWorkbook" [
         Expect.passWithMsg "Convert to fswb"
         let jswsList = jswb.worksheets
         let fswsList = fswb.GetWorksheets()
-        Expect.equal fswsList.Length jswsList.Length "Both 3 worksheets"
+        Expect.equal fswsList.Count jswsList.Length "Both 3 worksheets"
         let testWs (index:int) =
             let fsws = fswsList.Item index
             let jsws = jswsList.[index]
@@ -59,7 +59,7 @@ let private tests_toFsWorkbook = testList "toFsWorkbook" [
         Expect.passWithMsg "Create jswb"
         let fswb = JsWorkbook.toFsWorkbook jswb
         Expect.passWithMsg "Convert to fswb"
-        let fsTables_a = fswb.GetWorksheets().Head.Tables
+        let fsTables_a = fswb.GetWorksheets().[0].Tables
         let fsTables_b = fswb.GetTables()        
         Expect.hasLength (jsws.getTables()) 1 "js table count"
         Expect.hasLength fsTables_a 1 "fs table count (a)"
@@ -92,7 +92,7 @@ let private tests_toFsWorkbook = testList "toFsWorkbook" [
         let fsTables = fswb.GetTables()        
         Expect.hasLength (jsws.getTables()) 1 "js table count"
         Expect.hasLength fsTables 1 "fs table count "
-        let fsTable = fsTables.Head
+        let fsTable = fsTables.[0]
         Expect.equal fsTable.Name "My Awesome Table" "table name"
         Expect.isTrue (fsTable.ShowHeaderRow) "show header row"
         Expect.equal (fsTable.RangeAddress.Range) ("B1:D3") "RangeAddress"
@@ -136,7 +136,7 @@ let tests_toJsWorkbook = testList "toJsWorkbook" [
         Expect.passWithMsg "Convert to jswb"
         let fswsList = fswb.GetWorksheets()
         let jswsList = jswb.worksheets
-        Expect.equal fswsList.Length jswsList.Length "Both no worksheet"
+        Expect.equal fswsList.Count jswsList.Length "Both no worksheet"
     testCase "worksheet" <| fun _ ->
         let fswb = new FsWorkbook()
         let _ = fswb.InitWorksheet("My Awesome Worksheet")
@@ -145,7 +145,7 @@ let tests_toJsWorkbook = testList "toJsWorkbook" [
         Expect.passWithMsg "Convert to jswb"
         let fswsList = fswb.GetWorksheets()
         let jswsList = jswb.worksheets
-        Expect.equal fswsList.Length jswsList.Length "Both no worksheet"
+        Expect.equal fswsList.Count jswsList.Length "Both no worksheet"
         Expect.hasLength jswsList 1 "worksheet count"
         Expect.equal jswsList.[0].name "My Awesome Worksheet" "worksheet name"
     testCase "worksheets" <| fun _ ->
@@ -158,7 +158,7 @@ let tests_toJsWorkbook = testList "toJsWorkbook" [
         Expect.passWithMsg "Convert to jswb"
         let fswsList = fswb.GetWorksheets()
         let jswsList = jswb.worksheets
-        Expect.equal fswsList.Length jswsList.Length "Both no worksheet"
+        Expect.equal fswsList.Count jswsList.Length "Both no worksheet"
         Expect.hasLength jswsList 3 "worksheet count"
         Expect.equal jswsList.[0].name "My Awesome Worksheet" "1 worksheet name"
         Expect.equal jswsList.[1].name "My cool Worksheet" "2 worksheet name"

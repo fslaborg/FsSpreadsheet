@@ -25,7 +25,8 @@
 	</ItemGroup>
 
   <ItemGroup>   
-    <PackageReference Include="Fable.Exceljs" Version="1.3.6" />
+    <PackageReference Include="Fable.Exceljs" Version="1.3.6" />   
+    <PackageReference Include="Fable.Promise" Version="3.2.0" />
   </ItemGroup>
 
   <ItemGroup>

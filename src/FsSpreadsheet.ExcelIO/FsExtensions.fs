@@ -85,7 +85,7 @@ module FsExtensions =
         /// </summary>
         member self.GetWorksheetOfTable(workbook : FsWorkbook) =
             workbook.GetWorksheets() 
-            |> List.find (
+            |> Seq.find (
                 fun s -> 
                     s.Tables 
                     |> List.exists (fun t -> t.Name = self.Name)
@@ -238,9 +238,7 @@ module FsExtensions =
 
             let workbookPart = Spreadsheet.initWorkbookPart doc
 
-            self.GetWorksheets()
-            |> List.iter (fun worksheet ->
-
+            for worksheet in self.GetWorksheets() do
                 let worksheetPart = 
                     WorkbookPart.appendWorksheet worksheet.Name (worksheet.ToXlsxWorksheet()) workbookPart
                     |> WorkbookPart.getOrInitWorksheetPartByName worksheet.Name
@@ -248,7 +246,6 @@ module FsExtensions =
                 worksheet.AppendTablesToWorksheetPart(workbookPart,worksheetPart)
                 //Worksheet.setSheetData sheetData sheet |> ignore
                 //WorkbookPart.appendWorksheet worksheet.Name sheet workbookPart |> ignore
-            )
 
             Spreadsheet.close doc
 

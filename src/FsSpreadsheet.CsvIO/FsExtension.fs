@@ -60,7 +60,7 @@ module FsExtensions =
 
         member self.ToStream(stream : System.IO.MemoryStream,?Separator : char) = 
             let streamWriter = new System.IO.StreamWriter(stream)
-            self.GetWorksheets().Head.ToTableString(Separator)
+            self.GetWorksheets().[0].ToTableString(Separator)
             |> streamWriter.Write
             streamWriter.Flush()
 

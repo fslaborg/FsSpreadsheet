@@ -11,7 +11,7 @@ open Fable.Core.JsInterop
 // If you want to use these bindings from js, you should use the ones in `Xlsx.fs`
 type FsWorkbook with
 
-    static member fromXlsxFile(path:string) : Async<FsWorkbook> =
+    static member fromXlsxFile(path:string) : Promise<FsWorkbook> =
         Xlsx.fromXlsxFile(path)
 
     static member fromXlsxStream(stream:System.IO.Stream) : Async<FsWorkbook> =

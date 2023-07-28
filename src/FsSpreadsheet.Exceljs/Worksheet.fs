@@ -43,10 +43,9 @@ module JsWorksheet =
             ws.addTable(table)
             |> ignore
 
-
     let addJsWorksheet (wb: FsWorkbook) (jsws: Worksheet) : unit =
         let fsws = FsWorksheet(jsws.name)
-        for row in jsws.rows do
+        jsws.eachRow(fun (row, rowIndex) ->
             row.eachCell(fun (c, rowIndex) ->
                 if c.value.IsSome then
                     let t = enum<Unions.ValueType>(c.``type``)
@@ -69,6 +68,7 @@ module JsWorksheet =
                             vTemp |> createFscell
                     fsws.AddCell(fscell) |> ignore
             )
+        )
         for jstableref in jsws.getTables() do
             let table = jstableref.table.Value
             let tableRef = table.tableRef |> FsRangeAddress
