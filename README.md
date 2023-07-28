@@ -46,40 +46,22 @@ spreadsheet.ToFile(excelFilePath)
 ## Code Examples
 
 ```fsharp
-let parseWorkbook wb =
-    let tables = getAnnotationTables wb
-    let worksheets = wb.GetWorksheets()
-    // get worksheet and its AnnotationTable as tuple
-    let worksheetsAndTables =
-        tables
-        |> List.map (
-            fun t ->
-                let associatedWs = 
-                    worksheets
-                    |> List.find (
-                        fun ws -> 
-                            ws.Tables
-                            |> List.exists (fun t2 -> t2.Name = t.Name)
-                    )
-                associatedWs, t
-        )
-    worksheetsAndTables
-    |> List.map (
-        fun (ws,t) ->
-            let headerCells = getHeaderCellsOf ws.CellCollection t |> List.ofSeq
-            let ioColumns = 
-                headerCells
-                |> List.map (parseIOColumns ws.CellCollection t)
-            let termRelatedBuildingBlocks =
-                headerCells
-                |> groupTermRelatedBuildingBlocks t ws.CellCollection
-                |> List.map (parseTermRelatedBuildingBlocks true t ws.CellCollection)
-            ws.Name,
-            {|
-                IOColumns = ioColumns
-                TermRelatedBuildingBlocks = termRelatedBuildingBlocks
-            |}
-    )
+let tables = workbook.GetTables()
+let worksheets = workbook.GetWorksheets()
+// get worksheet and its table as tuple
+let worksheetsAndTables =
+tables
+|> List.map (
+    fun t ->
+	let associatedWs = 
+	    worksheets
+	    |> List.find (
+		fun ws -> 
+		    ws.Tables
+		    |> List.exists (fun t2 -> t2.Name = t.Name)
+	    )
+	associatedWs, t
+)
 ```
 
 
