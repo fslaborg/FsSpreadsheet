@@ -2,8 +2,8 @@
 
 open FsSpreadsheet
 
-let sheet1Name = "Sheet1"
-let sheet2Name = "Sheet2"
+let sheet1Name = "MySheet1"
+let sheet2Name = "MySheet2"
 
 let sheet1() =
     let ws = new FsWorksheet(sheet1Name)

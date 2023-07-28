@@ -14,7 +14,7 @@ module JsWorksheet =
 
     let addFsWorksheet (wb: Workbook) (fsws:FsWorksheet) : unit =
         fsws.RescanRows()
-        let rows = fsws.Rows |> List.map (fun x -> x.Cells)
+        let rows = fsws.Rows |> Seq.map (fun x -> x.Cells)
         let ws = wb.addWorksheet(fsws.Name)
         // due to the design of fsspreadsheet this might overwrite some of the stuff from tables, 
         // but as it should be the same, this is only a performance sink.
@@ -38,7 +38,7 @@ module JsWorksheet =
                     printfn "%s" msg
                     #endif
                     c.value <- cell.Value |> box |> Some 
-        let tables = fsws.Tables |> List.map (fun table -> JsTable.fromFsTable fsws.CellCollection table)
+        let tables = fsws.Tables |> Seq.map (fun table -> JsTable.fromFsTable fsws.CellCollection table)
         for table in tables do
             ws.addTable(table)
             |> ignore

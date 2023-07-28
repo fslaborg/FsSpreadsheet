@@ -88,7 +88,7 @@ module FsExtensions =
             |> Seq.find (
                 fun s -> 
                     s.Tables 
-                    |> List.exists (fun t -> t.Name = self.Name)
+                    |> Seq.exists (fun t -> t.Name = self.Name)
             )
 
         /// <summary>
@@ -109,8 +109,7 @@ module FsExtensions =
             let sheetData =
                 let sd = SheetData.empty()
                 self.SortRows()
-                self.Rows
-                |> List.iter (fun row -> 
+                for row in self.Rows do
                     let cells = row.Cells |> Seq.toList
                     if not cells.IsEmpty then
                         let min,max =
@@ -124,7 +123,6 @@ module FsExtensions =
                             )
                         let row = Row.create (uint32 row.Index) (Row.Spans.fromBoundaries min max) cells
                         SheetData.appendRow row sd |> ignore
-                ) 
                 sd
             Worksheet.setSheetData sheetData sheet
 

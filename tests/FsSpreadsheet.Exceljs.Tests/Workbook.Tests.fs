@@ -64,8 +64,8 @@ let private tests_toFsWorkbook = testList "toFsWorkbook" [
         Expect.hasLength (jsws.getTables()) 1 "js table count"
         Expect.hasLength fsTables_a 1 "fs table count (a)"
         Expect.hasLength fsTables_b 1 "fs table count (b)"
-        Expect.equal fsTables_a.Head.Name "My Awesome Table" "table name"
-        let fsTable = fsTables_a.Head
+        Expect.equal fsTables_a.[0].Name "My Awesome Table" "table name"
+        let fsTable = fsTables_a.[0]
         Expect.isTrue (fsTable.ShowHeaderRow) "show header row"
         Expect.equal (fsTable.RangeAddress.Range) ("B1:C1") "RangeAddress"
         let getCellValue (address: string) = 

@@ -6,19 +6,17 @@ open Fable.Core
 open Fable.Core.JsInterop
 open Fable.Core.JS
 
-
 /// This does currently not correctly work if you want to use this from js
 /// https://github.com/fable-compiler/Fable/issues/3498
 [<AttachMembers>]
 type Xlsx =
     static member fromXlsxFile (path:string) : Promise<FsWorkbook> =
-        async {
+        promise {
             let wb = ExcelJs.Excel.Workbook()
-            do! wb.xlsx.readFile(path)
+            do! wb.xlsx.readFile(path) |> Async.StartAsPromise
             let fswb = JsWorkbook.toFsWorkbook wb
             return fswb
         }
-        |> Async.StartAsPromise
 
     static member fromXlsxStream (stream:System.IO.Stream) : Async<FsWorkbook> =
         async {

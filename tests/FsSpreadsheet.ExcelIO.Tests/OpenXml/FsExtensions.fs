@@ -37,10 +37,10 @@ let dummyFsCellsCollection4 = FsCellsCollection()
 dummyFsCellsCollection4.Add dummyFsCells[3] |> ignore
 dummyFsCellsCollection4.Add dummyFsCells[4] |> ignore
 let dummyFsTable = FsTable("Table2", FsRangeAddress("A1:D13"))
-let dummyFsWorksheet1 = FsWorksheet("StringSheet",      [], [],             dummyFsCellsCollection1)
-let dummyFsWorksheet2 = FsWorksheet("NumericSheet",     [], [],             dummyFsCellsCollection2)
-let dummyFsWorksheet3 = FsWorksheet("TableSheet",       [], [dummyFsTable], dummyFsCellsCollection3)
-let dummyFsWorksheet4 = FsWorksheet("DataTypeSheet",    [], [],             dummyFsCellsCollection4)
+let dummyFsWorksheet1 = FsWorksheet("StringSheet",      ResizeArray(), ResizeArray(),             dummyFsCellsCollection1)
+let dummyFsWorksheet2 = FsWorksheet("NumericSheet",     ResizeArray(), ResizeArray(),             dummyFsCellsCollection2)
+let dummyFsWorksheet3 = FsWorksheet("TableSheet",       ResizeArray(), ResizeArray([dummyFsTable]), dummyFsCellsCollection3)
+let dummyFsWorksheet4 = FsWorksheet("DataTypeSheet",    ResizeArray(), ResizeArray(),             dummyFsCellsCollection4)
 dummyFsWorkbook.AddWorksheet(dummyFsWorksheet1) |> ignore
 dummyFsWorkbook.AddWorksheet(dummyFsWorksheet2) |> ignore
 dummyFsWorkbook.AddWorksheet(dummyFsWorksheet3) |> ignore
@@ -143,10 +143,10 @@ let fsExtensionTests =
                     let d = (FsWorksheet.getCellAt 2 1 fsWorksheet4FromStream).DataType
                     Expect.equal d DataType.Boolean "DataType is not DataType.Boolean"
                 testCase "is equal to dummyFsWorkbook in sheet3, Table exists" <| fun _ ->
-                    let t = fsWorksheet3FromStream.Tables |> List.tryFind (fun t -> t.Name = dummyFsTable.Name)
+                    let t = fsWorksheet3FromStream.Tables |> Seq.tryFind (fun t -> t.Name = dummyFsTable.Name)
                     Expect.isSome t "Table \"table2\" does not exist"
                 testCase "is equal to dummyFsWorkbook in sheet3, Table has same range" <| fun _ ->
-                    let t = fsWorksheet3FromStream.Tables |> List.find (fun t -> t.Name = dummyFsTable.Name)
+                    let t = fsWorksheet3FromStream.Tables |> Seq.find (fun t -> t.Name = dummyFsTable.Name)
                     let rfs = t.RangeAddress.Range
                     let rdt = dummyFsTable.RangeAddress.Range
                     Expect.equal rfs rdt "Tables have different ranges"
@@ -161,7 +161,7 @@ let fsExtensionTests =
                     Expect.equal v "Id" "value is not equal"
                 testCase "Worksheet SwateTemplateMetadata from 2EXT02_Protein has FsRows" <| fun _ ->
                     let rows = tf2Worksheet.Value.Rows
-                    Expect.isGreaterThan rows.Length 0 "Worksheet SwateTemplateMetadata from 2EXT02_Protein has no FsRows"
+                    Expect.isGreaterThan rows.Count 0 "Worksheet SwateTemplateMetadata from 2EXT02_Protein has no FsRows"
             ]
         ]
     ]
