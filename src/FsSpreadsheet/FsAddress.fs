@@ -95,8 +95,7 @@ type FsAddress(rowNumber : int, columnNumber : int, fixedRow : bool, fixedColumn
     new (cellAddressString : string) =
         let colIndex,rowIndex = CellReference.toIndices cellAddressString
         FsAddress(int rowIndex,int colIndex)
-    
-    
+
     // ----------
     // PROPERTIES
     // ----------

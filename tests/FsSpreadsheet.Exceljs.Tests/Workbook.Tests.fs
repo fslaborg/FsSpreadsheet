@@ -239,6 +239,23 @@ let tests_toJsWorkbook = testList "toJsWorkbook" [
         Expect.equal row1.[1] "row20" "C3"
         Expect.equal row0.[2] true "D2"
         Expect.equal row1.[2] false "D3"
+    testCase "table ColumnCount()" <| fun _ ->
+        let fswb = new FsWorkbook()
+        let fsws = fswb.InitWorksheet("My Awesome Worksheet")
+        let _ = fsws.AddCell(FsCell("My Column 1",address=FsAddress("B1")))
+        let _ = fsws.AddCell(FsCell(2,DataType.Number,address=FsAddress("B2")))
+        let _ = fsws.AddCell(FsCell(20,DataType.Number,address=FsAddress("B3")))
+        let _ = fsws.AddCell(FsCell("My Column 2",address=FsAddress("C1")))
+        let _ = fsws.AddCell(FsCell("row2",address=FsAddress("C2")))
+        let _ = fsws.AddCell(FsCell("row20",address=FsAddress("C3")))
+        let _ = fsws.AddCell(FsCell("My Column 3",address=FsAddress("D1")))
+        let _ = fsws.AddCell(FsCell(true, DataType.Boolean, address=FsAddress("D2")))
+        let _ = fsws.AddCell(FsCell(false, DataType.Boolean, address=FsAddress("D3")))
+        let t = FsTable("My New Table", FsRangeAddress("B1:D3"))
+        let _ = fsws.AddTable(t)
+        fsws.RescanRows()
+        let table = fsws.Tables.[0]
+        Expect.equal (table.ColumnCount()) 3 "column count"
 ]
 
 let main = testList "JsWorkbook<->FsWorkbook" [

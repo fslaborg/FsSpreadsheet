@@ -1,5 +1,7 @@
 ﻿namespace rec FsSpreadsheet
 
+open Fable.Core
+
 //  Helper functions for working with "A1:A1"-style table areas.
 /// <summary>
 /// The areas marks the area in which the table lies. 
