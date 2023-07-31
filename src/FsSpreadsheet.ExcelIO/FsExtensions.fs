@@ -53,7 +53,7 @@ module FsExtensions =
         /// Returns the FsTable with given FsCellsCollection in the form of an XlsxTable.
         /// </summary>
         member self.ToXlsxTable(cells : FsCellsCollection) = 
-
+            self.RescanFieldNames cells
             let columns =
                 self.GetFieldNames(cells)
                 |> Seq.map (fun kv -> 

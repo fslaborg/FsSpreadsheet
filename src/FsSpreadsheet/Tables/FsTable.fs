@@ -12,7 +12,7 @@ type FsTable (name : string, rangeAddress : FsRangeAddress, ?showTotalsRow : boo
 
     inherit FsRangeBase(rangeAddress)
 
-    let mutable _name = name
+    let mutable _name = name.Trim().Replace(" ","_")
 
     let mutable _lastRangeAddress = rangeAddress
     let mutable _showTotalsRow : bool = Option.defaultValue false showTotalsRow
@@ -397,3 +397,45 @@ type FsTable (name : string, rangeAddress : FsRangeAddress, ?showTotalsRow : boo
     /// </summary>
     static member copy (table : FsTable) =
         table.Copy()
+
+
+    /// Updates the TableFields according to the range of the table and the underlying cellcollection.
+    ///
+    /// For this, maps over the range of the table and sets the header of the table fields to the value of the cell. If no cell value is set, the header value and the underlying cell value are set to a default value.
+    member this.RescanFieldNames(cellsCollection : FsCellsCollection) =
+        if this.ShowHeaderRow then
+            let oldFieldNames =  _fieldNames
+            _fieldNames <- new Dictionary<string, FsTableField>()
+            let headersRow = this.HeadersRow();
+            let mutable cellPos = 0
+            for cell in headersRow.Cells(cellsCollection) do
+                let mutable name = cell.Value //GetString();
+                match Dictionary.tryGet name oldFieldNames with
+                | Some tableField ->
+                    tableField.Index <- cellPos
+                    _fieldNames.Add(name,tableField)
+                    cellPos <- cellPos + 1
+                | None -> 
+
+                    // Be careful here. Fields names may actually be whitespace, but not empty
+                    if (name = null) <> (name = "") then    // TO DO: ask: shouldn't this be XOR?
+
+                        name <- this.GetUniqueName("Column", cellPos + 1, true)
+                        cell.SetValueAs(name) |> ignore
+                        cell.DataType <- DataType.String
+
+                    if (_fieldNames.ContainsKey(name)) then
+                        raise (System.ArgumentException("The header row contains more than one field name '" + name + "'."))
+
+                    _fieldNames.Add(name, new FsTableField(name, cellPos))
+                    cellPos <- cellPos + 1
+        else
+
+            let colCount = base.ColumnCount();
+            for i = 1 to colCount do
+
+                if _fieldNames.Values |> Seq.exists (fun v -> v.Index = i - 1) |> not then 
+
+                    let name = "Column" + string i;
+
+                    _fieldNames.Add(name, new FsTableField(name, i - 1));
