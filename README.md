@@ -43,6 +43,28 @@ spreadsheet.ToFile(excelFilePath)
 
 ![image](https://user-images.githubusercontent.com/17880410/167841765-f67e1fa2-3806-4f32-9223-bdecc8253568.png)
 
+## Code Examples
+
+```fsharp
+let tables = workbook.GetTables()
+let worksheets = workbook.GetWorksheets()
+// get worksheet and its table as tuple
+let worksheetsAndTables =
+tables
+|> List.map (
+    fun t ->
+	let associatedWs = 
+	    worksheets
+	    |> List.find (
+		fun ws -> 
+		    ws.Tables
+		    |> List.exists (fun t2 -> t2.Name = t.Name)
+	    )
+	associatedWs, t
+)
+```
+
+
 ## Develop
 
 ### Build QuickStart

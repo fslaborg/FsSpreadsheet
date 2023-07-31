@@ -8,7 +8,7 @@ open Fable.Core
 [<AttachMembers>]
 type FsWorkbook() =
  
-    let mutable _worksheets = []
+    let _worksheets = ResizeArray()
 
     interface System.IDisposable with
         member self.Dispose() = ()
@@ -27,7 +27,7 @@ type FsWorkbook() =
     /// Creates a deep copy of this FsWorkbook.
     /// </summary>
     member self.Copy() =
-        let shts = self.GetWorksheets() |> List.map (fun (s : FsWorksheet) -> s.Copy())
+        let shts = self.GetWorksheets().ToArray() |> Array.map (fun (s : FsWorksheet) -> s.Copy())
         let wb = new FsWorkbook()
         wb.AddWorksheets shts
         wb
@@ -43,7 +43,7 @@ type FsWorkbook() =
     /// </summary>
     member self.InitWorksheet(name : string) = 
         let sheet = FsWorksheet name
-        _worksheets <- List.append _worksheets [sheet]
+        _worksheets.Add(sheet)
         sheet
 
     /// <summary>
@@ -57,10 +57,10 @@ type FsWorkbook() =
     /// Adds a given FsWorksheet to the FsWorkbook.
     /// </summary>
     member self.AddWorksheet(sheet : FsWorksheet) = 
-        if _worksheets |> List.exists (fun ws -> ws.Name = sheet.Name) then
+        if _worksheets |> Seq.exists (fun ws -> ws.Name = sheet.Name) then
             failwithf "Could not add worksheet with name \"%s\" to workbook as it already contains a worksheet with the same name" sheet.Name
         else
-            _worksheets <- List.append _worksheets [sheet]
+            _worksheets.Add(sheet)
 
     /// <summary>
     /// Adds an FsWorksheet to an FsWorkbook.
@@ -86,7 +86,7 @@ type FsWorkbook() =
     /// <summary>
     /// Returns all FsWorksheets.
     /// </summary>
-    member self.GetWorksheets() = 
+    member self.GetWorksheets() : ResizeArray<FsWorksheet> = 
         _worksheets
 
     /// <summary>
@@ -99,7 +99,7 @@ type FsWorkbook() =
     /// Returns the FsWorksheet with the given 1 based index if it exists. Else returns None.
     /// </summary>
     member self.TryGetWorksheetAt(index : int) =
-        _worksheets |> List.tryItem (index - 1)
+        _worksheets |> Seq.tryItem (index - 1)
 
     /// <summary>
     /// Returns the FsWorksheet with the given 1 based index if it exists in a given FsWorkbook. Else returns None.
@@ -127,7 +127,7 @@ type FsWorkbook() =
     /// Returns the FsWorksheet with the given name if it exists in the FsWorkbook. Else returns None.
     /// </summary>
     member self.TryGetWorksheetByName(sheetName) =
-        _worksheets |> List.tryFind (fun w -> w.Name = sheetName)
+        _worksheets |> Seq.tryFind (fun w -> w.Name = sheetName)
 
     /// <summary>
     /// Returns the FsWorksheet with the given name if it exists in a given FsWorkbook. Else returns None.
@@ -155,11 +155,12 @@ type FsWorkbook() =
     /// </summary>
     /// <exception cref="System.Exception">if FsWorksheet with given name is not present in the FsWorkkbook.</exception>
     member self.RemoveWorksheet(name : string) =
-        let filteredWorksheets =
-            match _worksheets |> List.tryFind (fun ws -> ws.Name = name) with
-            | Some w -> _worksheets |> List.filter (fun ws -> ws.Name <> name)
-            | None -> failwith $"FsWorksheet with name {name} was not found in FsWorkbook."
-        _worksheets <- filteredWorksheets
+        let ws = 
+            try 
+                _worksheets.Find(fun ws -> ws.Name = name)
+            with
+                | _ -> failwith $"FsWorksheet with name {name} was not found in FsWorkbook."
+        _worksheets.Remove(ws) |> ignore
 
     /// <summary>
     /// Removes an FsWorksheet with given name from an FsWorkbook.
@@ -172,8 +173,8 @@ type FsWorkbook() =
     /// Returns all FsTables from the FsWorkbook.
     /// </summary>
     member self.GetTables() =
-        self.GetWorksheets()
-        |> List.collect (fun s -> s.Tables)
+        self.GetWorksheets().ToArray()
+        |> Array.collect (fun s -> s.Tables |> Array.ofSeq)
 
     /// <summary>
     /// Returns all FsTables from an FsWorkbook.

@@ -3,7 +3,6 @@
 open DocumentFormat.OpenXml
 open DocumentFormat.OpenXml.Spreadsheet
 open FsSpreadsheet
-open FsSpreadsheet.ExcelIO
 open System.IO
 
 /// <summary>
@@ -54,7 +53,7 @@ module FsExtensions =
         /// Returns the FsTable with given FsCellsCollection in the form of an XlsxTable.
         /// </summary>
         member self.ToXlsxTable(cells : FsCellsCollection) = 
-
+            self.RescanFieldNames cells
             let columns =
                 self.GetFieldNames(cells)
                 |> Seq.map (fun kv -> 
@@ -79,17 +78,17 @@ module FsExtensions =
             let topLeftBoundary, bottomRightBoundary = Table.getArea table |> Table.Area.toBoundaries
             let ra = FsRangeAddress(FsAddress(topLeftBoundary), FsAddress(bottomRightBoundary))
             let totalsRowShown = if table.TotalsRowShown = null then false else table.TotalsRowShown.Value
-            FsTable(table.Name, ra, totalsRowShown, true)
+            FsTable(table.DisplayName, ra, totalsRowShown, true)
 
         /// <summary>
         /// Returns the FsWorksheet associated with the FsTable in a given FsWorkbook.
         /// </summary>
         member self.GetWorksheetOfTable(workbook : FsWorkbook) =
             workbook.GetWorksheets() 
-            |> List.find (
+            |> Seq.find (
                 fun s -> 
                     s.Tables 
-                    |> List.exists (fun t -> t.Name = self.Name)
+                    |> Seq.exists (fun t -> t.Name = self.Name)
             )
 
         /// <summary>
@@ -110,8 +109,7 @@ module FsExtensions =
             let sheetData =
                 let sd = SheetData.empty()
                 self.SortRows()
-                self.Rows
-                |> List.iter (fun row -> 
+                for row in self.Rows do
                     let cells = row.Cells |> Seq.toList
                     if not cells.IsEmpty then
                         let min,max =
@@ -125,7 +123,6 @@ module FsExtensions =
                             )
                         let row = Row.create (uint32 row.Index) (Row.Spans.fromBoundaries min max) cells
                         SheetData.appendRow row sd |> ignore
-                ) 
                 sd
             Worksheet.setSheetData sheetData sheet
 
@@ -239,9 +236,7 @@ module FsExtensions =
 
             let workbookPart = Spreadsheet.initWorkbookPart doc
 
-            self.GetWorksheets()
-            |> List.iter (fun worksheet ->
-
+            for worksheet in self.GetWorksheets() do
                 let worksheetPart = 
                     WorkbookPart.appendWorksheet worksheet.Name (worksheet.ToXlsxWorksheet()) workbookPart
                     |> WorkbookPart.getOrInitWorksheetPartByName worksheet.Name
@@ -249,7 +244,6 @@ module FsExtensions =
                 worksheet.AppendTablesToWorksheetPart(workbookPart,worksheetPart)
                 //Worksheet.setSheetData sheetData sheet |> ignore
                 //WorkbookPart.appendWorksheet worksheet.Name sheet workbookPart |> ignore
-            )
 
             Spreadsheet.close doc
 

@@ -17,7 +17,7 @@ type DataType =
     /// <summary>
     /// Returns the proper CellValues case for the given value.
     /// </summary>
-    static member InferCellValue (value : 'T) = 
+    static member inline InferCellValue (value : 'T) = 
         let value = box value
         match value with
         | :? char as c -> DataType.String,c.ToString()

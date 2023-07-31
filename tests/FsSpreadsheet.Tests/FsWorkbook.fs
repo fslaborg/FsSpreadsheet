@@ -12,10 +12,10 @@ let dummyWorkbook = new FsWorkbook()
 let dummyWorksheet1 = FsWorksheet("dummyWorksheet1")
 let dummyWorksheet2 = FsWorksheet("dummyWorksheet2")
 let dummyWorksheetList = [dummyWorksheet1; dummyWorksheet2]
-let dummyTables = [
+let dummyTables = [|
     FsTable("dummyTable1", FsRangeAddress("A1:B2"))
     FsTable("dummyTable2", FsRangeAddress("C3:F5"))
-]
+|]
 dummyWorkbook.AddWorksheet dummyWorksheet1 |> ignore
 dummyWorkbook.AddWorksheet dummyWorksheet2 |> ignore
 dummyWorksheet1.AddTable dummyTables[0] |> ignore
@@ -27,7 +27,7 @@ let main =
         testList "GetWorksheets" [        
             testCase "empty" <| fun _ -> 
                 let wb = new FsWorkbook()
-                Expect.equal 0 (wb.GetWorksheets().Length) "Should be empty"
+                Expect.equal 0 (wb.GetWorksheets().Count) "Should be empty"
         ]
         testList "TryGetWorksheetByName" [
             let testWorksheet = dummyWorkbook.TryGetWorksheetByName "dummyWorksheet1"
@@ -50,7 +50,7 @@ let main =
             testCase "adds all FsWorksheets correctly" <| fun _ ->
                 let testWorkbook = new FsWorkbook()
                 testWorkbook.AddWorksheets [dummyWorksheet1; dummyWorksheet2] |> ignore
-                let testWorkbookWorksheetNames = testWorkbook.GetWorksheets() |> List.map (fun ws -> ws.Name)
+                let testWorkbookWorksheetNames = testWorkbook.GetWorksheets() |> Seq.map (fun ws -> ws.Name)
                 let dummyWorksheetNames = dummyWorksheetList |> List.map (fun ws -> ws.Name)
                 Expect.containsAll testWorkbookWorksheetNames dummyWorksheetNames "Does not contain all FsWorksheets"
         ]
