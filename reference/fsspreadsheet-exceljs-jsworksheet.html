@@ -3,9 +3,9 @@
 
 <head>
     <meta charset="utf-8">
-    <title>ColumnElement (FsSpreadsheet)</title>
+    <title>JsWorksheet (FsSpreadsheet)</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="author" content="Heinrich Lukas Weil, Oliver Maus, Kevin Schneider, Kevin Frey, Timo Mühlhaus">
+    <meta name="author" content="Kevin Frey, Heinrich Lukas Weil, Oliver Maus, Kevin Schneider, Timo Mühlhaus">
     <link rel="shortcut icon" type="image/x-icon" href="/FsSpreadsheet//img/favicon.ico">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
@@ -73,33 +73,17 @@
                 <div class="container" id="fsdocs-content">
                     <div>
   <h2>
-    ColumnElement Type
+    JsWorksheet Module
   </h2>
   <dl class="fsdocs-metadata">
     <dt>
       Namespace: 
-      <a href="/FsSpreadsheet/reference/fsspreadsheet-dsl.html">
-        FsSpreadsheet.DSL
+      <a href="/FsSpreadsheet/reference/fsspreadsheet-exceljs.html">
+        FsSpreadsheet.Exceljs
       </a>
     </dt>
     <dt>
-      Assembly: FsSpreadsheet.dll
-    </dt>
-    <dt>
-      Base Type: 
-      <code>obj</code>
-    </dt>
-    <dt>
-      All Interfaces: 
-      <code><span><a href="https://docs.microsoft.com/dotnet/api/system.iequatable-1">IEquatable</a>&lt;<a href="/FsSpreadsheet/reference/fsspreadsheet-dsl-columnelement.html">ColumnElement</a>&gt;</span></code>
-      , 
-      <code><a href="https://docs.microsoft.com/dotnet/api/system.collections.istructuralequatable">IStructuralEquatable</a></code>
-      , 
-      <code><span><a href="https://docs.microsoft.com/dotnet/api/system.icomparable-1">IComparable</a>&lt;<a href="/FsSpreadsheet/reference/fsspreadsheet-dsl-columnelement.html">ColumnElement</a>&gt;</span></code>
-      , 
-      <code><a href="https://docs.microsoft.com/dotnet/api/system.icomparable">IComparable</a></code>
-      , 
-      <code><a href="https://docs.microsoft.com/dotnet/api/system.collections.istructuralcomparable">IStructuralComparable</a></code>
+      Assembly: FsSpreadsheet.Exceljs.dll
     </dt>
   </dl>
   <div class="fsdocs-xmldoc">
@@ -109,18 +93,15 @@
       </p>
     </div>
   </div>
-  <div></div>
-  <div></div>
-  <div></div>
   <div>
     <h3>
-      Union cases
+      Functions and values
     </h3>
     <table class="table outer-list fsdocs-member-list">
       <thead>
         <tr>
           <td class="fsdocs-member-list-header">
-            Union case
+            Function or value
           </td>
           <td class="fsdocs-member-list-header">
             Description
@@ -131,37 +112,37 @@
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '773', 773)" onmouseover="showTip(event, '773', 773)">
+              <code onmouseout="hideTip(event, '361', 361)" onmouseover="showTip(event, '361', 361)">
                 <p>
-                  <a id="IndexedCell">
-                    <a href="#IndexedCell">
-                      <code><span>IndexedCell(<span><a href="/FsSpreadsheet/reference/fsspreadsheet-dsl-rowindex.html">RowIndex</a>,&#32;<a href="/FsSpreadsheet/reference/fsspreadsheet-dsl-value.html">Value</a></span>)</span></code>
+                  <a id="addFsWorksheet">
+                    <a href="#addFsWorksheet">
+                      <code><span>addFsWorksheet&#32;<span>wb&#32;fsws</span></span></code>
                     </a>
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="773">
+              <div class="fsdocs-tip" id="361">
                 <div class="member-tooltip">
                   Full Usage: 
-                  <code><span>IndexedCell(<span><a href="/FsSpreadsheet/reference/fsspreadsheet-dsl-rowindex.html">RowIndex</a>,&#32;<a href="/FsSpreadsheet/reference/fsspreadsheet-dsl-value.html">Value</a></span>)</span></code>
+                  <code><span>addFsWorksheet&#32;<span>wb&#32;fsws</span></span></code>
                   <br/>
                   <br/>
                   Parameters: 
                   <ul>
                     <span>
                       <b>
-                        Item1
+                        wb
                       </b>
                       :
-                      <code><a href="/FsSpreadsheet/reference/fsspreadsheet-dsl-rowindex.html">RowIndex</a></code>
+                      <code><a href="https://docs.microsoft.com/dotnet/api/fable.exceljs.workbook.workbook">Workbook</a></code>
                     </span>
                     <br/>
                     <span>
                       <b>
-                        Item2
+                        fsws
                       </b>
                       :
-                      <code><a href="/FsSpreadsheet/reference/fsspreadsheet-dsl-value.html">Value</a></code>
+                      <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworksheet.html">FsWorksheet</a></code>
                     </span>
                     <br/>
                   </ul>
@@ -172,7 +153,15 @@
           </td>
           <td class="fsdocs-member-xmldoc">
             <div class="fsdocs-summary">
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/DSL/Types.fs#L115-115" class="fsdocs-source-link" title="Source on GitHub">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Exceljs.JsWorksheet.addFsWorksheet`')">
+                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Exceljs.JsWorksheet.addFsWorksheet\'/>')">
+                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Exceljs/Worksheet.fs#L15-15" class="fsdocs-source-link" title="Source on GitHub">
                 <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
               </a>
@@ -183,18 +172,18 @@
             <dl class="fsdocs-params">
               <dt class="fsdocs-param">
                 <span class="fsdocs-param-name">
-                  Item1
+                  wb
                 </span>
                 :
-                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-dsl-rowindex.html">RowIndex</a></code>
+                <code><a href="https://docs.microsoft.com/dotnet/api/fable.exceljs.workbook.workbook">Workbook</a></code>
               </dt>
               <dd class="fsdocs-param-docs"></dd>
               <dt class="fsdocs-param">
                 <span class="fsdocs-param-name">
-                  Item2
+                  fsws
                 </span>
                 :
-                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-dsl-value.html">Value</a></code>
+                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworksheet.html">FsWorksheet</a></code>
               </dt>
               <dd class="fsdocs-param-docs"></dd>
             </dl>
@@ -203,29 +192,37 @@
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '774', 774)" onmouseover="showTip(event, '774', 774)">
+              <code onmouseout="hideTip(event, '362', 362)" onmouseover="showTip(event, '362', 362)">
                 <p>
-                  <a id="UnindexedCell">
-                    <a href="#UnindexedCell">
-                      <code><span>UnindexedCell&#32;<a href="/FsSpreadsheet/reference/fsspreadsheet-dsl-value.html">Value</a></span></code>
+                  <a id="addJsWorksheet">
+                    <a href="#addJsWorksheet">
+                      <code><span>addJsWorksheet&#32;<span>wb&#32;jsws</span></span></code>
                     </a>
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="774">
+              <div class="fsdocs-tip" id="362">
                 <div class="member-tooltip">
                   Full Usage: 
-                  <code><span>UnindexedCell&#32;<a href="/FsSpreadsheet/reference/fsspreadsheet-dsl-value.html">Value</a></span></code>
+                  <code><span>addJsWorksheet&#32;<span>wb&#32;jsws</span></span></code>
                   <br/>
                   <br/>
                   Parameters: 
                   <ul>
                     <span>
                       <b>
-                        Item
+                        wb
                       </b>
                       :
-                      <code><a href="/FsSpreadsheet/reference/fsspreadsheet-dsl-value.html">Value</a></code>
+                      <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        jsws
+                      </b>
+                      :
+                      <code><a href="https://docs.microsoft.com/dotnet/api/fable.exceljs.worksheet.worksheet">Worksheet</a></code>
                     </span>
                     <br/>
                   </ul>
@@ -236,7 +233,15 @@
           </td>
           <td class="fsdocs-member-xmldoc">
             <div class="fsdocs-summary">
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/DSL/Types.fs#L116-116" class="fsdocs-source-link" title="Source on GitHub">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Exceljs.JsWorksheet.addJsWorksheet`')">
+                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Exceljs.JsWorksheet.addJsWorksheet\'/>')">
+                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Exceljs/Worksheet.fs#L45-45" class="fsdocs-source-link" title="Source on GitHub">
                 <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
               </a>
@@ -247,10 +252,18 @@
             <dl class="fsdocs-params">
               <dt class="fsdocs-param">
                 <span class="fsdocs-param-name">
-                  Item
+                  wb
                 </span>
                 :
-                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-dsl-value.html">Value</a></code>
+                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  jsws
+                </span>
+                :
+                <code><a href="https://docs.microsoft.com/dotnet/api/fable.exceljs.worksheet.worksheet">Worksheet</a></code>
               </dt>
               <dd class="fsdocs-param-docs"></dd>
             </dl>
@@ -259,6 +272,9 @@
       </tbody>
     </table>
   </div>
+  <div></div>
+  <div></div>
+  <div></div>
   <div></div>
   <div></div>
   <div></div>
