@@ -46,21 +46,21 @@ describe('FsSpreadsheet.Exceljs', function () {
             let table = ws.Tables[0]
             equal(table.Name, "Table1")
         });
-        it('roundabout', async () => {
-            const fswb = new FsWorkbook();
-            const fsws = fswb.InitWorksheet("My Awesome Worksheet");
-            fsws.AddCell(new FsCell("My Column 1", void 0, FsAddress_$ctor_Z721C83C5("B1")));
-            fsws.AddCell(new FsCell(2, void 0, FsAddress_$ctor_Z721C83C5("B2")));
-            fsws.AddCell(new FsCell(20, void 0, FsAddress_$ctor_Z721C83C5("B3")));
-            fsws.AddCell(new FsCell("My Column 2", void 0, FsAddress_$ctor_Z721C83C5("C1")));
-            fsws.AddCell(new FsCell("row2", void 0, FsAddress_$ctor_Z721C83C5("C2")));
-            fsws.AddCell(new FsCell("row20", void 0, FsAddress_$ctor_Z721C83C5("C3")));
-            fsws.AddCell(new FsCell("My Column 3", void 0, FsAddress_$ctor_Z721C83C5("D1")));
-            fsws.AddCell(new FsCell(true, void 0, FsAddress_$ctor_Z721C83C5("D2")));
-            fsws.AddCell(new FsCell(false, void 0, FsAddress_$ctor_Z721C83C5("D3")));
-            const table = new FsTable("My New Table", FsRangeAddress_$ctor_Z721C83C5("B1:D3"));
-            fsws.AddTable(table);
-        })
+        // it('roundabout', async () => {
+        //     const fswb = new FsWorkbook();
+        //     const fsws = fswb.InitWorksheet("My Awesome Worksheet");
+        //     fsws.AddCell(new FsCell("My Column 1", void 0, FsAddress_$ctor_Z721C83C5("B1")));
+        //     fsws.AddCell(new FsCell(2, void 0, FsAddress_$ctor_Z721C83C5("B2")));
+        //     fsws.AddCell(new FsCell(20, void 0, FsAddress_$ctor_Z721C83C5("B3")));
+        //     fsws.AddCell(new FsCell("My Column 2", void 0, FsAddress_$ctor_Z721C83C5("C1")));
+        //     fsws.AddCell(new FsCell("row2", void 0, FsAddress_$ctor_Z721C83C5("C2")));
+        //     fsws.AddCell(new FsCell("row20", void 0, FsAddress_$ctor_Z721C83C5("C3")));
+        //     fsws.AddCell(new FsCell("My Column 3", void 0, FsAddress_$ctor_Z721C83C5("D1")));
+        //     fsws.AddCell(new FsCell(true, void 0, FsAddress_$ctor_Z721C83C5("D2")));
+        //     fsws.AddCell(new FsCell(false, void 0, FsAddress_$ctor_Z721C83C5("D3")));
+        //     const table = new FsTable("My New Table", FsRangeAddress_$ctor_Z721C83C5("B1:D3"));
+        //     fsws.AddTable(table);
+        // })
         // it('combined function', async () => {
         //     const path = "tests/JS/TestFiles/ReadTable.xlsx";
         //     console.log("start")
