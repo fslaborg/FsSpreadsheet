@@ -54,7 +54,7 @@ let private tests_toFsWorkbook = testList "toFsWorkbook" [
         let jswb = ExcelJs.Excel.Workbook()
         let jsws = jswb.addWorksheet("My Awesome Worksheet")
         let tableColumns = [|TableColumn("Column 1 nice"); TableColumn("Column 2 cool")|]
-        let table = Table("My Awesome Table", "B1", tableColumns, [||])
+        let table = Table("My_Awesome_Table", "B1", tableColumns, [||])
         let _ = jsws.addTable(table)
         Expect.passWithMsg "Create jswb"
         let fswb = JsWorkbook.toFsWorkbook jswb
@@ -64,7 +64,7 @@ let private tests_toFsWorkbook = testList "toFsWorkbook" [
         Expect.hasLength (jsws.getTables()) 1 "js table count"
         Expect.hasLength fsTables_a 1 "fs table count (a)"
         Expect.hasLength fsTables_b 1 "fs table count (b)"
-        Expect.equal fsTables_a.[0].Name "My Awesome Table" "table name"
+        Expect.equal fsTables_a.[0].Name "My_Awesome_Table" "table name"
         let fsTable = fsTables_a.[0]
         Expect.isTrue (fsTable.ShowHeaderRow) "show header row"
         Expect.equal (fsTable.RangeAddress.Range) ("B1:C1") "RangeAddress"
@@ -84,7 +84,7 @@ let private tests_toFsWorkbook = testList "toFsWorkbook" [
             [| box "Test"; box 2; box true|]
             [| box "Test2"; box 20; box false|]
         |]
-        let table = Table("My Awesome Table", "B1", tableColumns, rows)
+        let table = Table("My_Awesome_Table", "B1", tableColumns, rows)
         let _ = jsws.addTable(table)
         Expect.passWithMsg "Create jswb"
         let fswb = JsWorkbook.toFsWorkbook jswb
@@ -93,7 +93,7 @@ let private tests_toFsWorkbook = testList "toFsWorkbook" [
         Expect.hasLength (jsws.getTables()) 1 "js table count"
         Expect.hasLength fsTables 1 "fs table count "
         let fsTable = fsTables.[0]
-        Expect.equal fsTable.Name "My Awesome Table" "table name"
+        Expect.equal fsTable.Name "My_Awesome_Table" "table name"
         Expect.isTrue (fsTable.ShowHeaderRow) "show header row"
         Expect.equal (fsTable.RangeAddress.Range) ("B1:D3") "RangeAddress"
     testCase "table, with body, check cells" <| fun _ ->
@@ -104,7 +104,7 @@ let private tests_toFsWorkbook = testList "toFsWorkbook" [
             [| box "Test"; box 2; box true|]
             [| box "Test2"; box 20; box false|]
         |]
-        let table = Table("My Awesome Table", "B1", tableColumns, rows)
+        let table = Table("My_Awesome_Table", "B1", tableColumns, rows)
         let _ = jsws.addTable(table)
         Expect.passWithMsg "Create jswb"
         let fswb = JsWorkbook.toFsWorkbook jswb  
@@ -168,7 +168,7 @@ let tests_toJsWorkbook = testList "toJsWorkbook" [
         let fsws = fswb.InitWorksheet("My Awesome Worksheet")
         let _ = fsws.AddCell(FsCell("My Column 1",address=FsAddress("B1")))
         let _ = fsws.AddCell(FsCell("My Column 2",address=FsAddress("C1")))
-        let t = FsTable("My New Table", FsRangeAddress("B1:C1"))
+        let t = FsTable("My_New_Table", FsRangeAddress("B1:C1"))
         let _ = fsws.AddTable(t)
         Expect.passWithMsg "Create jswb"
         let jswb = JsWorkbook.toJsWorkbook fswb
@@ -178,7 +178,7 @@ let tests_toJsWorkbook = testList "toJsWorkbook" [
         let jstables = jsws.getTables()
         Expect.hasLength jstables 1 "table count"
         let jstableref = jstables.[0]
-        Expect.equal jstableref.name "My New Table" "table name"
+        Expect.equal jstableref.name "My_New_Table" "table name"
         let jstable = jstables.[0].table.Value
         Expect.hasLength jstable.rows 0 "table body is 0"
         Expect.equal jstable.columns.[0].name "My Column 1" "My Column 1"
@@ -195,7 +195,7 @@ let tests_toJsWorkbook = testList "toJsWorkbook" [
         let _ = fsws.AddCell(FsCell("My Column 3",address=FsAddress("D1")))
         let _ = fsws.AddCell(FsCell(true,address=FsAddress("D2")))
         let _ = fsws.AddCell(FsCell(false,address=FsAddress("D3")))
-        let t = FsTable("My New Table", FsRangeAddress("B1:D3"))
+        let t = FsTable("My_New_Table", FsRangeAddress("B1:D3"))
         let _ = fsws.AddTable(t)
         Expect.passWithMsg "Create jswb"
         let jswb = JsWorkbook.toJsWorkbook fswb
@@ -205,7 +205,7 @@ let tests_toJsWorkbook = testList "toJsWorkbook" [
         let jstables = jsws.getTables()
         Expect.hasLength jstables 1 "table count"
         let jstableref = jstables.[0]
-        Expect.equal jstableref.name "My New Table" "table name"
+        Expect.equal jstableref.name "My_New_Table" "table name"
         let jstable = jstables.[0].table.Value
         Expect.equal jstable.columns.[0].name "My Column 1" "My Column 1"
         Expect.equal jstable.columns.[1].name "My Column 2" "My Column 2"
@@ -223,7 +223,7 @@ let tests_toJsWorkbook = testList "toJsWorkbook" [
         let _ = fsws.AddCell(FsCell("My Column 3",address=FsAddress("D1")))
         let _ = fsws.AddCell(FsCell(true, DataType.Boolean, address=FsAddress("D2")))
         let _ = fsws.AddCell(FsCell(false, DataType.Boolean, address=FsAddress("D3")))
-        let t = FsTable("My New Table", FsRangeAddress("B1:D3"))
+        let t = FsTable("My_New_Table", FsRangeAddress("B1:D3"))
         let _ = fsws.AddTable(t)
         fsws.RescanRows()
         Expect.passWithMsg "Create jswb"
@@ -251,7 +251,7 @@ let tests_toJsWorkbook = testList "toJsWorkbook" [
         let _ = fsws.AddCell(FsCell("My Column 3",address=FsAddress("D1")))
         let _ = fsws.AddCell(FsCell(true, DataType.Boolean, address=FsAddress("D2")))
         let _ = fsws.AddCell(FsCell(false, DataType.Boolean, address=FsAddress("D3")))
-        let t = FsTable("My New Table", FsRangeAddress("B1:D3"))
+        let t = FsTable("My_New_Table", FsRangeAddress("B1:D3"))
         let _ = fsws.AddTable(t)
         fsws.RescanRows()
         let table = fsws.Tables.[0]
