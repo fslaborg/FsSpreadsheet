@@ -256,6 +256,23 @@ let tests_toJsWorkbook = testList "toJsWorkbook" [
         fsws.RescanRows()
         let table = fsws.Tables.[0]
         Expect.equal (table.ColumnCount()) 3 "column count"
+    testCase "table with implicit set" <| fun _ ->
+        let fswb = new FsWorkbook()
+        let fsws = fswb.InitWorksheet("My Awesome Worksheet")
+        fsws.Row(1).[2].SetValueAs "My Column 1"
+        fsws.Row(2).[2].SetValueAs 2
+        fsws.Row(3).[2].SetValueAs 20
+        fsws.Row(1).[3].SetValueAs "My Column 2"
+        fsws.Row(2).[3].SetValueAs "row2"
+        fsws.Row(3).[3].SetValueAs "row20"
+        fsws.Row(1).[4].SetValueAs "My Column 2"
+        fsws.Row(2).[4].SetValueAs true
+        fsws.Row(3).[4].SetValueAs false
+        let t = FsTable("My New Table", FsRangeAddress("B1:D3"))
+        let _ = fsws.AddTable(t)
+        fsws.RescanRows()
+        let table = fsws.Tables.[0]
+        Expect.equal (table.ColumnCount()) 3 "column count"
 ]
 
 let main = testList "JsWorkbook<->FsWorkbook" [

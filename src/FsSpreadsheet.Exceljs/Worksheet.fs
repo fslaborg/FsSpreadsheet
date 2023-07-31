@@ -40,8 +40,7 @@ module JsWorksheet =
                     c.value <- cell.Value |> box |> Some 
         let tables = fsws.Tables |> Seq.map (fun table -> JsTable.fromFsTable fsws.CellCollection table)
         for table in tables do
-            ws.addTable(table)
-            |> ignore
+            ws.addTable(table) |> ignore
 
     let addJsWorksheet (wb: FsWorkbook) (jsws: Worksheet) : unit =
         let fsws = FsWorksheet(jsws.name)
@@ -50,14 +49,14 @@ module JsWorksheet =
                 if c.value.IsSome then
                     let t = enum<Unions.ValueType>(c.``type``)
                     let fsadress = FsAddress(c.address)
-                    let createFscell = fun v -> FsCell(v,address = fsadress)
+                    let createFscell = fun dt v -> FsCell(v,dt,address = fsadress)
                     let vTemp = string c.value.Value
                     let fscell =
                         match t with
-                        | ValueType.Boolean -> System.Boolean.Parse(vTemp) |> createFscell
-                        | ValueType.Number -> float vTemp |> createFscell
-                        | ValueType.Date -> System.DateTime.Parse(vTemp) |> createFscell
-                        | ValueType.String -> vTemp |> createFscell
+                        | ValueType.Boolean -> System.Boolean.Parse(vTemp) |> createFscell DataType.Boolean
+                        | ValueType.Number -> float vTemp |> createFscell DataType.Number
+                        | ValueType.Date -> System.DateTime.Parse(vTemp) |> createFscell DataType.Date
+                        | ValueType.String -> vTemp |> createFscell DataType.String
                         | anyElse -> 
                             let msg = sprintf "ValueType '%A' is not fully implemented in FsSpreadsheet and is handled as string input." anyElse
                             #if FABLE_COMPILER_JAVASCRIPT
@@ -65,7 +64,7 @@ module JsWorksheet =
                             #else
                             printfn "%s" msg
                             #endif
-                            vTemp |> createFscell
+                            vTemp |> createFscell DataType.String
                     fsws.AddCell(fscell) |> ignore
             )
         )
@@ -74,4 +73,5 @@ module JsWorksheet =
             let tableRef = table.tableRef |> FsRangeAddress
             let table = FsTable(table.name, tableRef, table.totalsRow, table.headerRow)
             fsws.AddTable table |> ignore
+        fsws.RescanRows()
         wb.AddWorksheet(fsws)
