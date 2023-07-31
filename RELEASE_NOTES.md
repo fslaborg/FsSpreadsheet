@@ -1,3 +1,29 @@
+### 3.2.0+e47262b (Released 2023-7-31)
+* Additions:
+    * [[#2b9c7fa](https://github.com/CSBiology/FsSpreadsheet/commit/2b9c7fa2c3fccfb6a5956b2e244a557fda4e0793)] Add some tests for exceljs
+    * [[#1fd0e34](https://github.com/CSBiology/FsSpreadsheet/commit/1fd0e34fafc9e82f0a509af9a4d1579a4ea458d5)] Add fable necessities to fsproj.
+    * [[#72bb41e](https://github.com/CSBiology/FsSpreadsheet/commit/72bb41ea6b8ad2c5490619af35a4d9038f0700da)] Write some tests #54
+    * [[#95c5d16](https://github.com/CSBiology/FsSpreadsheet/commit/95c5d167403cb5a3323782b2e6895c66c9f1ebd8)] Push WIP state
+    * [[#58b57ae](https://github.com/CSBiology/FsSpreadsheet/commit/58b57ae74d7d5d98e6146c75ce31eb819c0ed5d9)] Start refactoring to resizeArray :hammer:#53
+    * [[#5ed3752](https://github.com/CSBiology/FsSpreadsheet/commit/5ed37521a61683dfb6f6240a1c807474f50b9574)] Specify code snippet
+    * [[#4a9ff2e](https://github.com/CSBiology/FsSpreadsheet/commit/4a9ff2e91cf16c3d7d5587937f9c97d0c348e967)] Initiate test setup for FsSpreadsheet.Exceljs
+    * [[#d785795](https://github.com/CSBiology/FsSpreadsheet/commit/d785795061967c0206855983eebf49f1f182fe86)] Finish Api for both f# fable access and js native :sparkles:
+    * [[#1456337](https://github.com/CSBiology/FsSpreadsheet/commit/1456337f88c8af863fb24bf134a93580ef5ed8b6)] update gitignore
+    * [[#97f712c](https://github.com/CSBiology/FsSpreadsheet/commit/97f712cfe1d8422835a50c0186e28fc5cd2fcc4a)] setup msbuild
+    * [[#efa9815](https://github.com/CSBiology/FsSpreadsheet/commit/efa981573a24015d110a70c2e306e2678a5a36d5)] Init FsSpreadsheet.Exceljs and add Fable.Exceljs dependency
+    * [[#c4fdce6](https://github.com/CSBiology/FsSpreadsheet/commit/c4fdce69ea59a6a7da12fd190249a8e2f8d43136)] improve testsuit
+    * [[#33eb847](https://github.com/CSBiology/FsSpreadsheet/commit/33eb84701d24d145cef5801966bf25844a8a7931)] cleanup test tasks
+    * [[#3116aae](https://github.com/CSBiology/FsSpreadsheet/commit/3116aae6831fddcccc552d9d68b1bf4a565578ec)] Add dotnet tool femto
+    * [[#eb7160d](https://github.com/CSBiology/FsSpreadsheet/commit/eb7160d105d3d3fbabaea36abdc085412e173d75)] Update .gitignore
+* Deletions:
+    * [[#2253fb1](https://github.com/CSBiology/FsSpreadsheet/commit/2253fb1ef938754f8135d18949252d991ec1af32)] Remove some js tests until fsspreadsheet syntax better fits js.
+    * [[#146d920](https://github.com/CSBiology/FsSpreadsheet/commit/146d9205a549e6ccbf0b317a52fe56ea63e08bfc)] Delete .zip :fire:
+    * [[#6b3a27b](https://github.com/CSBiology/FsSpreadsheet/commit/6b3a27bf8db2ee6b23c2dacce8466ea22bcda9b4)] remove annoying warning
+* Bugfixes:
+    * [[#a680d45](https://github.com/CSBiology/FsSpreadsheet/commit/a680d45f9a7b985d61fa9887fd984e32024faf9a)] fix xlsxparser picking the wrong name fix teststrings
+    * [[#5293ae9](https://github.com/CSBiology/FsSpreadsheet/commit/5293ae92184f4dc4038076761cd65beb3e243aba)] hotfix table not written correctly #49
+    * [[#53b109c](https://github.com/CSBiology/FsSpreadsheet/commit/53b109cf42b9fba59c55011d2eb45fa39132b9c2)] fix datatypes in fs->js conversion + finish tests
+
 ### 3.1.1+64f86ec (Released 2023-7-25)
 * Bugfixes:
     * [[#1ee068c](https://github.com/CSBiology/FsSpreadsheet/commit/1ee068c9c0f8f0c42137defb2837c8c54308dbc6)] fix and test #42
@@ -10,7 +36,6 @@
 
 ### 3.0.0+4da5e50 (Released 2023-7-18)
 * Additions:
-    * [[#ece7f02](https://github.com/CSBiology/FsSpreadsheet/commit/ece7f02b70dcffc5000957a82e44f95907885e40)] Bump ReleaseNotes to v2.0.3
     * [[#a9c1f29](https://github.com/CSBiology/FsSpreadsheet/commit/a9c1f2923a12334a37b9d094025e9619fb4b4d3c)] Update test project dependencies for Fable compatability
     * [[#1c9f1bd](https://github.com/CSBiology/FsSpreadsheet/commit/1c9f1bd875af5308ff44295b284329c1ef7c5311)] use attachmembers for improved javascript transpilation
     * [[#6085c47](https://github.com/CSBiology/FsSpreadsheet/commit/6085c47c060d9ef252b9ec2fad927208f0d2bc9f)] improve comments
@@ -22,7 +47,6 @@
 ### 2.0.3+3a1d082 (Released 2023-7-18)
 * Additions:
     * [[#3a1d082](https://github.com/CSBiology/FsSpreadsheet/commit/3a1d08253839fe8f85f017a7a304ce766e06f71b)] Bump project version dependencies
-    * [[#42bebcc](https://github.com/CSBiology/FsSpreadsheet/commit/42bebcc4236142d9431268a0dc58692e3d5cd444)] bump to 2.0.2
 
 ### 2.0.2+1b8d874 (Released 2023-7-17)
 * Additions:
@@ -40,7 +64,6 @@
 ### 2.0.0+2b67a3f (Released 2023-5-11)
 * Additions:
     * [[#2b67a3f](https://github.com/CSBiology/FsSpreadsheet/commit/2b67a3f18a1c0cbcce92747e64e39ef4959abba7)] start adding DSL test
-    * [[#eab82ec](https://github.com/CSBiology/FsSpreadsheet/commit/eab82ec6fd136cba6e60d20a9cbb8346e296faba)] Merge pull request #24 from CSBiology/FsColumn
     * [[#9fa9537](https://github.com/CSBiology/FsSpreadsheet/commit/9fa9537ba2e9b049679ea491bc52a1e6c8707bb3)] Update ReleaseNotes
     * [[#ff35f3d](https://github.com/CSBiology/FsSpreadsheet/commit/ff35f3d060f311e6bb54ad70f80a890a49f60a49)] Add Fable logic
     * [[#d89c88b](https://github.com/CSBiology/FsSpreadsheet/commit/d89c88b126125dafc552328ec04f1c1e77036f0f)] Init fable compatibility :sparkles::tada:
@@ -66,7 +89,6 @@
     * [[#d5f599b](https://github.com/CSBiology/FsSpreadsheet/commit/d5f599bc73d14ddba8f44a1c20f987677b962b7a)] Update ///-comments & test CellValues
     * [[#38864cb](https://github.com/CSBiology/FsSpreadsheet/commit/38864cbc8322bee08493a5bceafeeecc57305c16)] Add critical error when creating FsRows
     * [[#0f443f1](https://github.com/CSBiology/FsSpreadsheet/commit/0f443f1a700d272f1942c57486151e7f68da431d)] Replace unallowed constructor pattern
-    * [[#1d3698b](https://github.com/CSBiology/FsSpreadsheet/commit/1d3698b1d55d4831890af8cc1936fc98703f1c7c)] Upate Release Notes to v1.0.1
 * Bugfixes:
     * [[#49b5d0f](https://github.com/CSBiology/FsSpreadsheet/commit/49b5d0f5f49ddd39ddbdf6c477bcda57a341b19b)] small fix cell add function
     * [[#8ddfd39](https://github.com/CSBiology/FsSpreadsheet/commit/8ddfd39f637a2f7056f36352e08148dda7ea4a3a)] Fix typo
@@ -88,9 +110,7 @@
     * [[#b3225ef](https://github.com/CSBiology/FsSpreadsheet/commit/b3225efcda3d29f2524ea9306191adeeac66c453)] allow cell, row and column builders yield optional or required operator
     * [[#4a8649a](https://github.com/CSBiology/FsSpreadsheet/commit/4a8649a962cdf6ac02ba83854b893c83d2b000ad)] make SheetEntity type more robust
     * [[#ec31b63](https://github.com/CSBiology/FsSpreadsheet/commit/ec31b63add8228ecd54aacdfe88aa94e5d832595)] change target framework
-    * [[#7b777d6](https://github.com/CSBiology/FsSpreadsheet/commit/7b777d6bd2464da401b20ec9a6fa6df668d1ff2a)] Merge pull request #8 from CSBiology/DSL
     * [[#fa28800](https://github.com/CSBiology/FsSpreadsheet/commit/fa2880025dd54aeda84c85e0abe2a2ea17251031)] allow message type to be exception
-    * [[#81891f4](https://github.com/CSBiology/FsSpreadsheet/commit/81891f4456c2aa3b108ee72a04ab8bce2a8ba487)] Merge pull request #9 from CSBiology/DSL
     * [[#bfd58ae](https://github.com/CSBiology/FsSpreadsheet/commit/bfd58ae0fad619ce68ecf3ab3ce91b51283bc302)] add csv writing capabilities
     * [[#41ea33a](https://github.com/CSBiology/FsSpreadsheet/commit/41ea33af36ac6667a414db66d3bacdc08c6b862d)] replace build script by build project
     * [[#bf9b8ea](https://github.com/CSBiology/FsSpreadsheet/commit/bf9b8ea87760d84d4762fcf7ef069bae1c6c0572)] rename ok operator to some to match SheetEntity case name
@@ -218,7 +238,6 @@
     * [[#43aad4a](https://github.com/CSBiology/FsSpreadsheet/commit/43aad4a4b5f4ffd76cf1d7b64ae669417240637b)] Adjust method return for FsAddress
     * [[#6966580](https://github.com/CSBiology/FsSpreadsheet/commit/6966580264237f37712cf5a5c7fb8ffed1ca2b21)] Reformat FsCell structure
     * [[#291d6c8](https://github.com/CSBiology/FsSpreadsheet/commit/291d6c816cbb9f8c2eb984402ce20c91654c0293)] Setup docs, add some methods, downgrade to .NET 6, ...
-    * [[#8291561](https://github.com/CSBiology/FsSpreadsheet/commit/8291561f147c46bb87928c6754e22e85c4e02fd4)] Merge pull request #17 from CSBiology/datamodel
     * [[#772a315](https://github.com/CSBiology/FsSpreadsheet/commit/772a3152c8c615b6627d21dad7fa3443fbeee790)] Add build.sh to sln
     * [[#811f491](https://github.com/CSBiology/FsSpreadsheet/commit/811f491c52b72ae5d54370ef0babf1e781b87b5c)] Update build and deploy actions
     * [[#cbc91db](https://github.com/CSBiology/FsSpreadsheet/commit/cbc91db43c2a09bb5b16e0bd7081af4ca4c914dc)] Update Logo
@@ -251,7 +270,6 @@
 
 ### 0.2.2+b86ecfd (Released 2023-2-3)
 * Additions:
-    * latest commit #b86ecfd
     * [[#b86ecfd](https://github.com/CSBiology/FsSpreadsheet/commit/b86ecfda1831d8793df9d49060787901916fcca6)] add additional yield method to DSL
 
 ### 0.2.1+927f365 (Released 2022-12-12)
@@ -262,7 +280,6 @@
 
 ### 0.2.0+8084a32 (Released 2022-12-12)
 * Additions:
-    * latest commit #8084a32
     * [[#8084a32](https://github.com/CSBiology/FsSpreadsheet/commit/8084a32ef40e54a0f38c6bac67246d5f8deb9458)] allow for trailing spaces to be preserved when writing strings
 
 ### 0.1.7+a227766 (Released 2022-6-24)
@@ -273,7 +290,6 @@
 
 ### 0.1.6+807ec9b (Released 2022-6-21)
 * Additions:
-    * latest commit #807ec9b
     * [[#d097bd3](https://github.com/CSBiology/FsSpreadsheet/commit/d097bd37bf2b742af0465a428abeea2b4000a49a)] add table to dsl
     * [[#cfc60cc](https://github.com/CSBiology/FsSpreadsheet/commit/cfc60cca3eaf9235b34202f5deb2230e2edc8553)] start working on TableBuilder for DSL
     * [[#a85093f](https://github.com/CSBiology/FsSpreadsheet/commit/a85093f23613c11fb8131e0adbee6124ff744b9a)] Add basic coding examples to ReadMe.md
@@ -324,7 +340,6 @@
 
 ### 0.0.1+7be5a42 (Released 2022-1-20)
 * Additions:
-    * latest commit #7be5a42
     * Setup basic types based on ClosedXML
     * Add Sheetbuilder based on ClosedXML.SimpleSheets
     * Copy DocumentFormat.OpenXML wrapper functions from FSharpSpreadsheetML
