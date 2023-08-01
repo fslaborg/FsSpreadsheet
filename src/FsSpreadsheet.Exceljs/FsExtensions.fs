@@ -14,26 +14,26 @@ type FsWorkbook with
     static member fromXlsxFile(path:string) : Promise<FsWorkbook> =
         Xlsx.fromXlsxFile(path)
 
-    static member fromXlsxStream(stream:System.IO.Stream) : Async<FsWorkbook> =
+    static member fromXlsxStream(stream:System.IO.Stream) : Promise<FsWorkbook> =
         Xlsx.fromXlsxStream stream
 
-    static member fromBytes(bytes: byte []) : Async<FsWorkbook> =
+    static member fromBytes(bytes: byte []) : Promise<FsWorkbook> =
         Xlsx.fromBytes bytes
 
-    static member toFile(path: string) (wb:FsWorkbook) : Async<unit> =
+    static member toFile(path: string) (wb:FsWorkbook) : Promise<unit> =
         Xlsx.toFile path wb
 
-    static member toStream(stream: System.IO.Stream) (wb:FsWorkbook) : Async<unit> =
+    static member toStream(stream: System.IO.Stream) (wb:FsWorkbook) : Promise<unit> =
         Xlsx.toStream stream wb
 
-    static member toBytes(wb:FsWorkbook) : Async<byte []> =
+    static member toBytes(wb:FsWorkbook) : Promise<byte []> =
         Xlsx.toBytes wb
 
-    member this.ToFile(path: string) : Async<unit> =
+    member this.ToFile(path: string) : Promise<unit> =
         FsWorkbook.toFile path this
 
-    member this.ToStream(stream: System.IO.Stream) : Async<unit> =
+    member this.ToStream(stream: System.IO.Stream) : Promise<unit> =
         FsWorkbook.toStream stream this
 
-    member this.ToBytes() : Async<byte []> =
+    member this.ToBytes() : Promise<byte []> =
         FsWorkbook.toBytes this

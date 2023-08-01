@@ -18,7 +18,7 @@ let updateReleaseNotes = BuildTask.createFn "ReleaseNotes" [] (fun config ->
         |> fun x -> x.SemVer.AsString
 
     // Update Version in src/Nfdi4Plants.Fornax.Template/package.json
-    let p = "src/Nfdi4Plants.Fornax.Template/content/package.json"
+    let p = "package.json"
     let t = System.IO.File.ReadAllText p
     let tNew = System.Text.RegularExpressions.Regex.Replace(t, """\"version\": \".*\",""", sprintf "\"version\": \"%s\"," semVer )
     System.IO.File.WriteAllText(p, tNew)
