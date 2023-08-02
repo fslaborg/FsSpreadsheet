@@ -3,7 +3,8 @@
   "version": "3.2.2+caf21db",
   "description": "Minimal spreadsheet creation and manipulation using exceljs io.",
   "type": "module",
-  "main": "npmpkg/Xlsx.js",
+  "main": "dist/Xlsx.js",
+  "files": [ "dist", "package.json" ],
   "scripts": {
     "clean-test": "cd tests/FsSpreadsheet.Tests/js & dotnet fable clean --extension .js --yes",
     "pretest": "npm run clean-test && dotnet fable tests/FsSpreadsheet.Tests -o tests/FsSpreadsheet.Tests/js",
@@ -32,6 +33,6 @@
     "mocha": "^10.2.0"
   },
   "dependencies": {
-    "exceljs": "^4.3.0"
+    "@nfdi4plants/exceljs": "0.1.0"
   }
 }

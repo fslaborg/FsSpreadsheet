@@ -1,6 +1,6 @@
 import { FsWorkbook } from "./FsSpreadsheet/FsWorkbook.js";
 import { addFsWorksheet, addJsWorksheet } from "./Worksheet.js";
-import { Excel } from "./fable_modules/Fable.Exceljs.1.3.6/ExcelJs.fs.js";
+import { Excel } from "./fable_modules/Fable.Exceljs.1.5.0/ExcelJs.fs.js";
 import { disposeSafe, getEnumerator } from "./fable_modules/fable-library.4.1.3/Util.js";
 
 export function toFsWorkbook(jswb) {

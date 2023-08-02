@@ -1,0 +1,1 @@
+Never open these test files and save them with libre office or microsoft excel. They will automatically standardize the files to their favored format, making them all uniform and working with both OpenXml and Exceljs.

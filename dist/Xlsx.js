@@ -1,9 +1,7 @@
 import { PromiseBuilder__Delay_62FBFDE1, PromiseBuilder__Run_212F1D4B } from "./fable_modules/Fable.Promise.3.2.0/Promise.fs.js";
-import { Excel } from "./fable_modules/Fable.Exceljs.1.3.6/ExcelJs.fs.js";
+import { Excel } from "./fable_modules/Fable.Exceljs.1.5.0/ExcelJs.fs.js";
 import { promise } from "./fable_modules/Fable.Promise.3.2.0/PromiseImpl.fs.js";
-import { startAsPromise } from "./fable_modules/fable-library.4.1.3/Async.js";
 import { toJsWorkbook, toFsWorkbook } from "./Workbook.js";
-import { singleton } from "./fable_modules/fable-library.4.1.3/AsyncBuilder.js";
 import { class_type } from "./fable_modules/fable-library.4.1.3/Reflection.js";
 
 export class Xlsx {
@@ -12,24 +10,24 @@ export class Xlsx {
     static fromXlsxFile(path) {
         return PromiseBuilder__Run_212F1D4B(promise, PromiseBuilder__Delay_62FBFDE1(promise, () => {
             const wb = new Excel.Workbook();
-            return startAsPromise(wb.xlsx.readFile(path)).then(() => {
+            return wb.xlsx.readFile(path).then(() => {
                 const fswb = toFsWorkbook(wb);
                 return Promise.resolve(fswb);
             });
         }));
     }
     static fromXlsxStream(stream) {
-        return singleton.Delay(() => {
+        return PromiseBuilder__Run_212F1D4B(promise, PromiseBuilder__Delay_62FBFDE1(promise, () => {
             const wb = new Excel.Workbook();
-            return singleton.Bind(wb.xlsx.read(stream), () => singleton.Return(toFsWorkbook(wb)));
-        });
+            return wb.xlsx.read(stream).then(() => (Promise.resolve(toFsWorkbook(wb))));
+        }));
     }
     static fromBytes(bytes) {
-        return singleton.Delay(() => {
+        return PromiseBuilder__Run_212F1D4B(promise, PromiseBuilder__Delay_62FBFDE1(promise, () => {
             const wb = new Excel.Workbook();
             const uint8 = new Uint8Array(bytes);
-            return singleton.Bind(wb.xlsx.load(uint8.buffer), () => singleton.Return(toFsWorkbook(wb)));
-        });
+            return wb.xlsx.load(uint8.buffer).then(() => (Promise.resolve(toFsWorkbook(wb))));
+        }));
     }
     static toFile(path, wb) {
         const jswb = toJsWorkbook(wb);
@@ -40,11 +38,11 @@ export class Xlsx {
         return jswb.xlsx.write(stream);
     }
     static toBytes(wb) {
-        return singleton.Delay(() => {
+        return PromiseBuilder__Run_212F1D4B(promise, PromiseBuilder__Delay_62FBFDE1(promise, () => {
             const jswb = toJsWorkbook(wb);
             const buffer = jswb.xlsx.writeBuffer();
-            return singleton.Return(buffer);
-        });
+            return Promise.resolve(buffer);
+        }));
     }
 }
 
