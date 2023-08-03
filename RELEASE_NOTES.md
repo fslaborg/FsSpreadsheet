@@ -1,3 +1,11 @@
+### 3.2.2+caf21db (Released 2023-8-1)
+
+### 3.2.1+caf21db (Released 2023-8-1)
+* Additions:
+    * [[#cb35186](https://github.com/CSBiology/FsSpreadsheet/commit/cb3518609e9fe42e05789441906dc148a4b8d53e)] Update and clean up RELEASE_NOTES.md
+    * [[#489f6b7](https://github.com/CSBiology/FsSpreadsheet/commit/489f6b77789cca13840382d5c2dd03dc973b65df)] Add logo to Exceljs project file
+    * [[#caf21db](https://github.com/CSBiology/FsSpreadsheet/commit/caf21db25490908a61381fd229fdaf5cc9a66ab2)] INcrease package.json version together with fake task.
+
 ### 3.2.0+e47262b (Released 2023-7-31)
 * Additions:
     * [[#2b9c7fa](https://github.com/CSBiology/FsSpreadsheet/commit/2b9c7fa2c3fccfb6a5956b2e244a557fda4e0793)] Add some tests for exceljs

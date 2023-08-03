@@ -1,8 +1,10 @@
 {
   "name": "fsspreadsheet",
-  "version": "1.3.0",
-  "description": "Spreadsheet creation and manipulation in FSharp",
+  "version": "3.2.2+caf21db",
+  "description": "Minimal spreadsheet creation and manipulation using exceljs io.",
   "type": "module",
+  "main": "dist/Xlsx.js",
+  "files": [ "dist", "package.json" ],
   "scripts": {
     "clean-test": "cd tests/FsSpreadsheet.Tests/js & dotnet fable clean --extension .js --yes",
     "pretest": "npm run clean-test && dotnet fable tests/FsSpreadsheet.Tests -o tests/FsSpreadsheet.Tests/js",
@@ -12,13 +14,16 @@
     "testexceljs": "mocha tests/FsSpreadsheet.Exceljs.Tests/js",
     "clean-testjs": "cd tests/JS/FsSpreadsheet.Exceljs & dotnet fable clean --extension .fs.js --yes",
     "pretestjs": "npm run clean-testjs && dotnet fable src/FsSpreadsheet.Exceljs -o tests/JS/FsSpreadsheet.Exceljs --extension .fs.js",
-    "testjs": "mocha tests/JS"
+    "testjs": "mocha tests/JS --timeout 20000",
+    "prebundle": "mkdir dist & dotnet fable clean --extension .js --yes -o dist",
+    "bundle": "dotnet fable src/FsSpreadsheet.Exceljs -o dist"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/CSBiology/FsSpreadsheet.git"
   },
-  "author": "",
+  "author": "Kevin Frey",
+  "contributors": [ "Heinrich Lukas Weil", "Oliver Maus", "Kevin Schneider", "Timo Mühlhaus" ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/CSBiology/FsSpreadsheet/issues"
@@ -28,6 +33,6 @@
     "mocha": "^10.2.0"
   },
   "dependencies": {
-    "exceljs": "^4.3.0"
+    "@nfdi4plants/exceljs": "0.1.0"
   }
 }
