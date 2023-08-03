@@ -275,8 +275,20 @@ let tests_toJsWorkbook = testList "toJsWorkbook" [
         Expect.equal (table.ColumnCount()) 3 "column count"
 ]
 
+open Fable.Core
+
+let tests_xlsx = testList "xlsx" [
+    testList "read" [
+        testAsync "isa.assay.xlsx" {
+            let! fswb = Xlsx.fromXlsxFile("./tests/JS/TestFiles/isa.assay.xlsx") |> Async.AwaitPromise
+            Expect.equal (fswb.GetWorksheets().Count) 5 "Count"
+        }
+    ]
+]
+
 let main = testList "JsWorkbook<->FsWorkbook" [
     tests_toFsWorkbook
     tests_toJsWorkbook
+    tests_xlsx
 ]
 

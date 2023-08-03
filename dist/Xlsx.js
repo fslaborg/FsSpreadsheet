@@ -1,5 +1,5 @@
 import { PromiseBuilder__Delay_62FBFDE1, PromiseBuilder__Run_212F1D4B } from "./fable_modules/Fable.Promise.3.2.0/Promise.fs.js";
-import { Excel } from "./fable_modules/Fable.Exceljs.1.5.0/ExcelJs.fs.js";
+import { Excel } from "./fable_modules/Fable.Exceljs.1.6.0/ExcelJs.fs.js";
 import { promise } from "./fable_modules/Fable.Promise.3.2.0/PromiseImpl.fs.js";
 import { toJsWorkbook, toFsWorkbook } from "./Workbook.js";
 import { class_type } from "./fable_modules/fable-library.4.1.3/Reflection.js";
