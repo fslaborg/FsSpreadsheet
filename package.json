@@ -14,7 +14,7 @@
     "testexceljs": "mocha tests/FsSpreadsheet.Exceljs.Tests/js",
     "clean-testjs": "cd tests/JS/FsSpreadsheet.Exceljs & dotnet fable clean --extension .fs.js --yes",
     "pretestjs": "npm run clean-testjs && dotnet fable src/FsSpreadsheet.Exceljs -o tests/JS/FsSpreadsheet.Exceljs --extension .fs.js",
-    "testjs": "mocha tests/JS",
+    "testjs": "mocha tests/JS --timeout 20000",
     "prebundle": "mkdir dist & dotnet fable clean --extension .js --yes -o dist",
     "bundle": "dotnet fable src/FsSpreadsheet.Exceljs -o dist"
   },
