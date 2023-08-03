@@ -1,4 +1,13 @@
-### 3.2.2+caf21db (Released 2023-8-1)
+### 3.3.0+ec1b7c9 (Released 2023-8-3)
+* Additions:
+    * [[#c228e7f](https://github.com/CSBiology/FsSpreadsheet/commit/c228e7f3799d87d34e44fb96500fe4f360d6454e)] Change npm dependency to exceljs fork
+    * [[#5625b33](https://github.com/CSBiology/FsSpreadsheet/commit/5625b3310a5918a5396d49a7bef1e6654d50d295)] Update more tests
+    * [[#4378808](https://github.com/CSBiology/FsSpreadsheet/commit/4378808c13d3250b90ac2311fd127b999498b2c4)] Update gitignore
+* Deletions:
+    * [[#7779011](https://github.com/CSBiology/FsSpreadsheet/commit/77790114c7d652e818ab1c9492f730ce573c47b3)] delete dist
+* Bugfixes:
+    * [[#d14448e](https://github.com/CSBiology/FsSpreadsheet/commit/d14448e093ffe8268a2445d31f2aeeccf6a79fc1)] Fix Async/Promises and fsspreadsheet readin :tada:
+    * [[#a96bcd0](https://github.com/CSBiology/FsSpreadsheet/commit/a96bcd0082dab203a7fdbed7ba12e96e21203f33)] fix timeout issue :bug:
 
 ### 3.2.1+caf21db (Released 2023-8-1)
 * Additions:
