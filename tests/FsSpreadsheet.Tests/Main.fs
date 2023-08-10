@@ -14,6 +14,7 @@ let all =
             FsTable.main
             FsTableField.main
             FsColumn.main
+            FsRow.main
             FsCellsCollection.main
             FsCell.main
             FsAddress.main

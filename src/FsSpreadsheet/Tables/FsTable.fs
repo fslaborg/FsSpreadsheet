@@ -71,10 +71,10 @@ type FsTable (name : string, rangeAddress : FsRangeAddress, ?showTotalsRow : boo
     member this.GetColumns(cellsCollection : FsCellsCollection) = 
         seq {
             for i = this.RangeAddress.FirstAddress.ColumnNumber to this.RangeAddress.LastAddress.ColumnNumber do 
-                let firstAddress = FsAddress(this.RangeAddress.FirstAddress.RowNumber,i)
-                let lastAddress = FsAddress(this.RangeAddress.LastAddress.RowNumber,i)
-                let range = FsRangeAddress (firstAddress,lastAddress)
-                FsColumn(range,cellsCollection)
+                let firstAddress = FsAddress(this.RangeAddress.FirstAddress.RowNumber, i)
+                let lastAddress = FsAddress(this.RangeAddress.LastAddress.RowNumber, i)
+                let range = FsRangeAddress (firstAddress, lastAddress)
+                FsColumn(range, cellsCollection)
         }
 
     /// <summary>
@@ -84,9 +84,9 @@ type FsTable (name : string, rangeAddress : FsRangeAddress, ?showTotalsRow : boo
     member this.GetRows(cellsCollection : FsCellsCollection) =
         seq {
             for i = this.RangeAddress.FirstAddress.RowNumber to this.RangeAddress.LastAddress.RowNumber do 
-                let firstAddress = FsAddress(this.RangeAddress.FirstAddress.ColumnNumber,i)
-                let lastAddress = FsAddress(this.RangeAddress.LastAddress.ColumnNumber,i)
-                let range = FsRangeAddress (firstAddress,lastAddress)
+                let firstAddress = FsAddress(i, this.RangeAddress.FirstAddress.ColumnNumber)
+                let lastAddress = FsAddress(i, this.RangeAddress.LastAddress.ColumnNumber)
+                let range = FsRangeAddress (firstAddress, lastAddress)
                 FsRow(range, cellsCollection)
         }
 

@@ -9,15 +9,16 @@
   <ItemGroup>
     <Compile Include="Utils.fs" />
     <Compile Include="Resources.fs" />
-    <Compile Include="FsCell.fs" />
-    <Compile Include="FsAddress.fs" />
-    <Compile Include="FsTableField.fs" />
-    <Compile Include="FsCellsCollection.fs" />
-    <Compile Include="FsTable.fs" />
-    <Compile Include="FsColumn.fs" />
-    <Compile Include="FsWorksheet.fs" />
-    <Compile Include="FsWorkbook.fs" />
-    <Compile Include="DSL\CellBuilder.fs" />
+    <Compile Include="FsCellTests.fs" />
+    <Compile Include="FsAddressTests.fs" />
+    <Compile Include="FsTableFieldTests.fs" />
+    <Compile Include="FsCellsCollectionTests.fs" />
+    <Compile Include="FsTableTests.fs" />
+    <Compile Include="FsColumnTests.fs" />
+    <Compile Include="FsRowTests.fs" />
+    <Compile Include="FsWorksheetTests.fs" />
+    <Compile Include="FsWorkbookTests.fs" />
+    <Compile Include="DSL\CellBuilderTests.fs" />
     <Compile Include="Main.fs" />
   </ItemGroup>
 
