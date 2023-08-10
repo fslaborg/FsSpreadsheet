@@ -25,61 +25,75 @@ type FsTable (name : string, rangeAddress : FsRangeAddress, ?showTotalsRow : boo
     /// <summary>
     /// The name of the FsTable.
     /// </summary>
-    member self.Name 
+    member this.Name 
         with get() = _name
 
     /// <summary>
     /// Returns all fieldnames as `fieldname*FsTableField` dictionary.
     /// </summary>
-    member self.GetFieldNames (cellsCollection : FsCellsCollection) =
-        if (_fieldNames <> null && _lastRangeAddress <> null && _lastRangeAddress.Equals(self.RangeAddress)) then 
+    member this.GetFieldNames (cellsCollection : FsCellsCollection) =
+        if (_fieldNames <> null && _lastRangeAddress <> null && _lastRangeAddress.Equals(this.RangeAddress)) then 
             _fieldNames;
         else 
-            _lastRangeAddress <- self.RangeAddress
+            _lastRangeAddress <- this.RangeAddress
 
-            //self.RescanFieldNames(cellsCollection)
+            //this.RescanFieldNames(cellsCollection)
                 
             _fieldNames;
 
     /// <summary>
     /// The FsTableFields of this FsTable.
     /// </summary>
-    member self.GetFields (cellsCollection : FsCellsCollection) =
+    member this.GetFields (cellsCollection : FsCellsCollection) =
         let columnCount = base.ColumnCount()
         //let offset = base.RangeAddress.FirstAddress.ColumnNumber
-        Seq.init columnCount (fun i -> self.GetFieldAt(i, cellsCollection))
+        Seq.init columnCount (fun i -> this.GetFieldAt(i, cellsCollection))
 
     /// <summary>
     /// Gets or sets if the header row is shown.
     /// </summary>
-    member self.ShowHeaderRow 
+    member this.ShowHeaderRow 
         with get () = _showHeaderRow
         and set(showHeaderRow) = _showHeaderRow <- showHeaderRow
 
     /// <summary>
     /// Returns the header row as FsRangeRow. Scans for new fieldnames.
     /// </summary>
-    member self.HeadersRow() = 
-        if (not self.ShowHeaderRow) then null;        
+    member this.HeadersRow() = 
+        if (not this.ShowHeaderRow) then null;        
         else 
             FsRange(base.RangeAddress).FirstRow();
 
     /// <summary>
-    /// Returns the columns from the table.
+    /// Returns the FsColumns from the FsTable.
     /// </summary>
-    member self.GetColumns (cellsCollection : FsCellsCollection) = 
+    /// <param name="cellsCollection">The FsCellsCollection associated with this FsTable.</param>
+    member this.GetColumns(cellsCollection : FsCellsCollection) = 
         seq {
-            for i = self.RangeAddress.FirstAddress.ColumnNumber to self.RangeAddress.LastAddress.ColumnNumber do 
-                let firstAddress = FsAddress(self.RangeAddress.FirstAddress.RowNumber,i)
-                let lastAddress = FsAddress(self.RangeAddress.LastAddress.RowNumber,i)
-                let range = FsRangeAddress (firstAddress,lastAddress)
-                FsColumn(range,cellsCollection)
+            for i = this.RangeAddress.FirstAddress.ColumnNumber to this.RangeAddress.LastAddress.ColumnNumber do 
+                let firstAddress = FsAddress(this.RangeAddress.FirstAddress.RowNumber, i)
+                let lastAddress = FsAddress(this.RangeAddress.LastAddress.RowNumber, i)
+                let range = FsRangeAddress (firstAddress, lastAddress)
+                FsColumn(range, cellsCollection)
+        }
+
+    /// <summary>
+    /// Returns the FsRows from the FsTable.
+    /// </summary>
+    /// <param name="cellsCollection">The FsCellsCollection associated with this FsTable.</param>
+    member this.GetRows(cellsCollection : FsCellsCollection) =
+        seq {
+            for i = this.RangeAddress.FirstAddress.RowNumber to this.RangeAddress.LastAddress.RowNumber do 
+                let firstAddress = FsAddress(i, this.RangeAddress.FirstAddress.ColumnNumber)
+                let lastAddress = FsAddress(i, this.RangeAddress.LastAddress.ColumnNumber)
+                let range = FsRangeAddress (firstAddress, lastAddress)
+                FsRow(range, cellsCollection)
         }
 
     /// <summary>
     /// Updates the FsRangeAddress of the FsTable according to the FsTableFields associated.
     /// </summary>
-    member self.RescanRange() =
+    member this.RescanRange() =
         let rangeAddress = 
             _fieldNames.Values
             |> Seq.map (fun v -> v.Column.RangeAddress)
@@ -164,7 +178,7 @@ type FsTable (name : string, rangeAddress : FsRangeAddress, ?showTotalsRow : boo
     /// <summary>
     /// Returns the FsTableField with given name. If an FsTableField does not exist under this name in the FsTable, adds it.
     /// </summary>
-    member self.Field(name : string, cellsCollection : FsCellsCollection) = 
+    member this.Field(name : string, cellsCollection : FsCellsCollection) = 
         match Dictionary.tryGet name _fieldNames with
         | Some field -> 
             field
@@ -176,15 +190,15 @@ type FsTable (name : string, rangeAddress : FsRangeAddress, ?showTotalsRow : boo
                     if Seq.length s = 0 then 0 else Seq.max s
             let range = 
                 let offset = _fieldNames.Count
-                let firstAddress = FsAddress(self.RangeAddress.FirstAddress.RowNumber,self.RangeAddress.FirstAddress.ColumnNumber + offset)
-                let lastAddress = FsAddress(self.RangeAddress.LastAddress.RowNumber,self.RangeAddress.FirstAddress.ColumnNumber + offset)
+                let firstAddress = FsAddress(this.RangeAddress.FirstAddress.RowNumber,this.RangeAddress.FirstAddress.ColumnNumber + offset)
+                let lastAddress = FsAddress(this.RangeAddress.LastAddress.RowNumber,this.RangeAddress.FirstAddress.ColumnNumber + offset)
                 FsRangeAddress(firstAddress,lastAddress)
             let column = FsRangeColumn(range)
             let newField = FsTableField(name,maxIndex + 1,column,null,null)
-            if self.ShowHeaderRow then
+            if this.ShowHeaderRow then
                 newField.HeaderCell(cellsCollection,true).SetValueAs name |> ignore
             _fieldNames.Add(name,newField)
-            self.RescanRange()
+            this.RescanRange()
             newField
 
     /// <summary>
@@ -192,9 +206,9 @@ type FsTable (name : string, rangeAddress : FsRangeAddress, ?showTotalsRow : boo
     /// FsTable) and returns the respective FsTableField.
     /// </summary>
     /// <exception cref="System.ArgumentException">if the header row has no field with the given name.</exception>
-    member self.GetField(name : string, cellsCollection : FsCellsCollection) =
+    member this.GetField(name : string, cellsCollection : FsCellsCollection) =
         let name = name.Replace("\r\n", "\n")
-        try self.GetFieldNames(cellsCollection).Item name
+        try this.GetFieldNames(cellsCollection).Item name
         with _ -> failwith <| "The header row doesn't contain field name '" + name + "'."
 
     /// <summary>
@@ -210,9 +224,9 @@ type FsTable (name : string, rangeAddress : FsRangeAddress, ?showTotalsRow : boo
     /// this FsTable) and returns the respective FsTableField.
     /// </summary>
     /// <exception cref="System.ArgumentException">if the FsTable has no FsTableField with the given index.</exception>
-    member self.GetFieldAt(index, cellsCollection) =
+    member this.GetFieldAt(index, cellsCollection) =
         try 
-            self.GetFieldNames(cellsCollection).Values
+            this.GetFieldNames(cellsCollection).Values
             |> Seq.find (fun ftf -> ftf.Index = index)
         with _ -> failwith $"FsTableField with index {index} does not exist in the FsTable."
 
@@ -221,8 +235,8 @@ type FsTable (name : string, rangeAddress : FsRangeAddress, ?showTotalsRow : boo
     /// this FsTable) and returns the index of the respective FsTableField.
     /// </summary>
     /// <exception cref="System.ArgumentException">if the header row has no field with the given name.</exception>
-    member self.GetFieldIndex(name : string, cellsCollection) =
-        self.GetField(name, cellsCollection).Index
+    member this.GetFieldIndex(name : string, cellsCollection) =
+        this.GetField(name, cellsCollection).Index
 
     /// <summary>
     /// Renames a fieldname of the FsTable if it exists. Else fails.

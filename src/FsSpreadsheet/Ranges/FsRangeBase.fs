@@ -1,5 +1,6 @@
 ﻿namespace FsSpreadsheet
 
+
 [<AbstractClass>][<AllowNullLiteral>]
 type FsRangeBase (rangeAddress : FsRangeAddress) = 
     //: XLStylizedBase, IXLRangeBase, IXLStylized
@@ -17,13 +18,13 @@ type FsRangeBase (rangeAddress : FsRangeAddress) =
 
     //abstract member OnRangeAddressChanged : FsRangeAddress*FsRangeAddress -> unit 
     
-    //default self.OnRangeAddressChanged (oldAddress, newAddress) =
+    //default this.OnRangeAddressChanged (oldAddress, newAddress) =
     
     //    Worksheet.RellocateRange(RangeType, oldAddress, newAddress);
 
-    member self.Extend(address : FsAddress) = _rangeAddress.Extend(address)
+    member this.Extend(address : FsAddress) = _rangeAddress.Extend(address)
 
-    member self.RangeAddress
+    member this.RangeAddress
         with get () = _rangeAddress
         and set (rangeAdress) =
             if rangeAdress <> _rangeAddress then
@@ -32,10 +33,10 @@ type FsRangeBase (rangeAddress : FsRangeAddress) =
                 //OnRangeAddressChanged(oldAddress, _rangeAddress);
 
     // TO DO: add description – important and complex function
-    member self.Cell(cellAddressInRange : FsAddress, cells : FsCellsCollection) = 
+    member this.Cell(cellAddressInRange : FsAddress, cells : FsCellsCollection) = 
 
-        let absRow = cellAddressInRange.RowNumber + self.RangeAddress.FirstAddress.RowNumber - 1;
-        let absColumn = cellAddressInRange.ColumnNumber + self.RangeAddress.FirstAddress.ColumnNumber - 1;
+        let absRow = cellAddressInRange.RowNumber + this.RangeAddress.FirstAddress.RowNumber - 1;
+        let absColumn = cellAddressInRange.ColumnNumber + this.RangeAddress.FirstAddress.ColumnNumber - 1;
 
         if (absRow <= 0 || absRow > 1048576) then
             failwithf "Row number must be between 1 and %i" cells.MaxRowNumber
@@ -67,13 +68,26 @@ type FsRangeBase (rangeAddress : FsRangeAddress) =
             // has a default style, use the worksheet's default style
             let newCell = FsCell.createEmptyWithAdress absoluteAddress
 
-            self.Extend(absoluteAddress)
+            this.Extend(absoluteAddress)
 
             cells.Add(absRow, absColumn, newCell) |> ignore
             newCell
-   
-    member self.Cells(cells : FsCellsCollection) = 
-        cells.GetCells(self.RangeAddress.FirstAddress, self.RangeAddress.LastAddress)
-       
-     member self.ColumnCount() =
-        _rangeAddress.LastAddress.ColumnNumber - _rangeAddress.FirstAddress.ColumnNumber + 1;
+
+    /// <summary>
+    /// Returns the FsCells of this FsRangeBase with the given FsCellsCollection.
+    /// </summary>
+    /// <param name="cells">The FsCellsCollection where the FsCells are retrieved from.</param>
+    member this.Cells(cells : FsCellsCollection) = 
+        cells.GetCells(this.RangeAddress.FirstAddress, this.RangeAddress.LastAddress)
+
+    /// <summary>
+    /// The number of columns in the FsRangeBase.
+    /// </summary>
+     member this.ColumnCount() =
+        _rangeAddress.LastAddress.ColumnNumber - _rangeAddress.FirstAddress.ColumnNumber + 1
+
+    /// <summary>
+    /// The number of rows in the FsRangeBase.
+    /// </summary>
+    member this.RowCount() =
+        _rangeAddress.LastAddress.RowNumber - _rangeAddress.FirstAddress.RowNumber + 1
