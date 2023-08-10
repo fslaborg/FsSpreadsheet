@@ -89,7 +89,31 @@ let main =
                 let row = FsRow(FsRangeAddress("A1:C1"), cellsCollWithEmpty)
                 let actual = FsRow.toDenseRow row |> Seq.map FsCell.getValueAsString |> Seq.toList
                 let expected = ["Kevin"; ""; "Schneider"]
-                Expect.sequenceEqual actual expected "Row values differ"
+                Expect.mySequenceEqual actual expected "Row values differ"
             )
+        ]
+        testList "Base.Cells" [
+            testCase "can be retrieved" <| fun _ ->
+                let cellsColl = FsCellsCollection()
+                cellsColl.Add (FsCell.create 1 1 "Kevin")
+                let row = FsRow(FsRangeAddress("A1:A1"), cellsColl)
+                let firstCell = row.Cells |> Seq.head
+                Expect.equal (FsCell.getValueAsString firstCell) "Kevin" "Did not retrieve"
+        ]
+        testList "MinColIndex" [
+            testCase "can be retrieved" <| fun _ ->
+                let cellsColl = FsCellsCollection()
+                cellsColl.Add (FsCell.create 1 1 "Kevin")
+                let row = FsRow(FsRangeAddress("A1:A1"), cellsColl)
+                let minColIndex = row.MinColIndex
+                Expect.equal minColIndex 1 "Incorrect index"
+        ]
+        testList "MaxColIndex" [
+            testCase "can be retrieved" <| fun _ ->
+                let cellsColl = FsCellsCollection()
+                cellsColl.Add (FsCell.create 1 1 "Kevin")
+                let row = FsRow(FsRangeAddress("A1:A1"), cellsColl)
+                let maxColIndex = row.MaxColIndex
+                Expect.equal maxColIndex 1 "Incorrect index"
         ]
     ]
