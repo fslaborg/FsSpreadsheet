@@ -1,9 +1,12 @@
 ﻿namespace FsSpreadsheet
 
+
 open System.Collections.Generic
 open System.Collections
 
 open Fable.Core
+
+
 // Type based on the type XLRow used in ClosedXml
 /// <summary>
 /// Creates an FsRow from the given FsRangeAddress, consisting of FsCells within a given FsCellsCollection, and a styleValue.
@@ -67,13 +70,13 @@ type FsRow (rangeAddress : FsRangeAddress, cells : FsCellsCollection)=
     /// The number of the lowest column index of the FsRow where an FsCell exists.
     /// </summary>
     member this.MinColIndex
-        with get() = base.RangeAddress.FirstAddress.ColumnNumber
+        with get() = this.RangeAddress.FirstAddress.ColumnNumber
 
     /// <summary>
     /// The number of the highest column index of the FsRow where an FsCell exists.
     /// </summary>
     member this.MaxColIndex
-        with get() = base.RangeAddress.LastAddress.ColumnNumber
+        with get() = this.RangeAddress.LastAddress.ColumnNumber
 
 
     // -------
@@ -83,9 +86,9 @@ type FsRow (rangeAddress : FsRangeAddress, cells : FsCellsCollection)=
     /// <summary>
     /// Creates a deep copy of this FsRow.
     /// </summary>
-    member self.Copy() =
-        let ra = self.RangeAddress.Copy()
-        let cells = self.Cells |> Seq.map (fun c -> c.Copy())
+    member this.Copy() =
+        let ra = this.RangeAddress.Copy()
+        let cells = this.Cells |> Seq.map (fun c -> c.Copy())
         let fcc = FsCellsCollection()
         fcc.Add cells
         FsRow(ra, fcc)
@@ -161,7 +164,7 @@ type FsRow (rangeAddress : FsRangeAddress, cells : FsCellsCollection)=
         row.InsertValueAt(colIndex, value) |> ignore
         row
 
-    //member self.SortCells() = _cells <- _cells |> List.sortBy (fun c -> c.WorksheetColumn)
+    //member this.SortCells() = _cells <- _cells |> List.sortBy (fun c -> c.WorksheetColumn)
 
     // TO DO (later)
     ///// Takes an FsCellsCollection and creates an FsRow from the given rowIndex and the cells in the FsCellsCollection that share the same rowIndex.
@@ -182,7 +185,7 @@ type FsRow (rangeAddress : FsRangeAddress, cells : FsCellsCollection)=
     /// FsRows are sparse by default. This means there are no FsCells present between positions with that are filled with FsCells. In dense FsRows, such "empty positions" are then filled with empty FsCells.
     /// </summary>
     /// <param name="row">The FsRow that gets transformed into a dense FsRow.</param>
-    /// <remarks>This is an in-place operation.</summary>
+    /// <remarks>This is an in-place operation.</remarks>
     static member toDenseRow (row : FsRow) =
         row.ToDenseRow()
         row

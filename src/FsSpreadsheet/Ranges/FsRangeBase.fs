@@ -1,5 +1,6 @@
 ﻿namespace FsSpreadsheet
 
+
 [<AbstractClass>][<AllowNullLiteral>]
 type FsRangeBase (rangeAddress : FsRangeAddress) = 
     //: XLStylizedBase, IXLRangeBase, IXLStylized
