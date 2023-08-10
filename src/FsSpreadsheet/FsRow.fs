@@ -24,7 +24,7 @@ type FsRow (rangeAddress : FsRangeAddress, cells : FsCellsCollection)=
     static member empty() = FsRow (FsRangeAddress(FsAddress(0,0),FsAddress(0,0)),FsCellsCollection())
 
     /// <summary>
-    /// Create an FsRow from a given FsCellsCollection and an rowIndex.
+    /// Creates an FsRow from a given FsCellsCollection and an rowIndex.
     /// </summary>
     /// <remarks>The appropriate range of the cells (i.e. minimum colIndex and maximum colIndex) is derived from the FsCells with the matching rowIndex.</remarks>
     static member createAt(index, (cells : FsCellsCollection)) = 
@@ -51,17 +51,29 @@ type FsRow (rangeAddress : FsRangeAddress, cells : FsCellsCollection)=
     // ----------
 
     /// The associated FsCells.
-    member self.Cells = 
+    member this.Cells = 
         base.Cells(cells)
 
     /// <summary>
     /// The index of the FsRow.
     /// </summary>
-    member self.Index 
-        with get() = self.RangeAddress.FirstAddress.RowNumber
+    member this.Index 
+        with get() = this.RangeAddress.FirstAddress.RowNumber
         and set(i) = 
-            self.RangeAddress.FirstAddress.RowNumber <- i
-            self.RangeAddress.LastAddress.RowNumber <- i
+            this.RangeAddress.FirstAddress.RowNumber <- i
+            this.RangeAddress.LastAddress.RowNumber <- i
+
+    /// <summary>
+    /// The number of the lowest column index of the FsRow where an FsCell exists.
+    /// </summary>
+    member this.MinColIndex
+        with get() = base.RangeAddress.FirstAddress.ColumnNumber
+
+    /// <summary>
+    /// The number of the highest column index of the FsRow where an FsCell exists.
+    /// </summary>
+    member this.MaxColIndex
+        with get() = base.RangeAddress.LastAddress.ColumnNumber
 
 
     // -------
@@ -89,19 +101,49 @@ type FsRow (rangeAddress : FsRangeAddress, cells : FsCellsCollection)=
     /// </summary>
     static member getIndex (row : FsRow) = 
         row.Index
-       
-    /// <summary>
-    /// Returns the FsCell at columnIndex.
-    /// </summary>
-    member this.Item (columnIndex) =
-        // use FsRangeBase call with colindex 1
-        base.Cell(FsAddress(1,columnIndex),cells)       
 
     /// <summary>
-    /// Returns the FsCell at the given columnIndex from an FsRow.
+    /// Checks if there is an FsCell at given column index.
+    /// </summary>
+    /// <param name="colIndex">The number of the column where the presence of an FsCell shall be checked.</param>
+    member this.HasCellAt(colIndex) =
+        this.Cells
+        |> Seq.exists (fun c -> c.ColumnNumber = colIndex)
+
+    /// <summary>
+    /// Checks if there is an FsCell at given column index of a given FsRow.
+    /// </summary>
+    /// <param name="colIndex">The number of the column where the presence of an FsCell shall be checked.</param>
+    static member hasCellAt colIndex (row : FsRow) =
+        row.HasCellAt colIndex
+
+    /// <summary>
+    /// Returns the FsCell at columnIndex if it exists. Else creates an empty FsCell at that position.
+    /// </summary>
+    member this.Item(columnIndex) =
+        // use FsRangeBase call with colindex 1
+        base.Cell(FsAddress(1,columnIndex),cells)
+
+    /// <summary>
+    /// Returns the FsCell at the given columnIndex from an FsRow if it exists. Else creates an ampty FsCell at that position.
     /// </summary>
     static member item colIndex (row : FsRow) =
         row.Item(colIndex)
+
+    /// <summary>
+    /// Returns the FsCell at the given columnIndex if it exists. Else returns None.
+    /// </summary>
+    /// <param name="colIndex">The number of the column where the FsCell shall be retrieved.</param>
+    member this.TryItem(colIndex) =
+        if this.HasCellAt colIndex then Some this[colIndex]
+        else None
+
+    /// <summary>
+    /// Returns the FsCell at the given columnIndex if it exists in the given FsRow. Else returns None.
+    /// </summary>
+    /// <param name="colIndex">The number of the column where the FsCell shall be retrieved.</param>
+    static member tryItem colIndex (row: FsRow) =
+        row.TryItem colIndex
 
     /// <summary>
     /// Inserts the value at columnIndex as an FsCell. If there is an FsCell at the position, this FsCells and all the ones right to it are shifted to the right.
@@ -124,3 +166,34 @@ type FsRow (rangeAddress : FsRangeAddress, cells : FsCellsCollection)=
     // TO DO (later)
     ///// Takes an FsCellsCollection and creates an FsRow from the given rowIndex and the cells in the FsCellsCollection that share the same rowIndex.
     //static member fromCellsCollection rowIndex (cellsCollection : FsCellsCollection) =
+
+    /// <summary>
+    /// Transforms the FsRow into a dense FsRow.
+    /// 
+    /// FsRows are sparse by default. This means there are no FsCells present between positions with that are filled with FsCells. In dense FsRows, such "empty positions" are then filled with empty FsCells.
+    /// </summary>
+    member this.ToDenseRow() =
+        for i = this.MinColIndex to this.MaxColIndex do 
+            ignore this[i]
+
+    /// <summary>
+    /// Transforms the given FsRow into a dense FsRow.
+    /// 
+    /// FsRows are sparse by default. This means there are no FsCells present between positions with that are filled with FsCells. In dense FsRows, such "empty positions" are then filled with empty FsCells.
+    /// </summary>
+    /// <param name="row">The FsRow that gets transformed into a dense FsRow.</param>
+    /// <remarks>This is an in-place operation.</summary>
+    static member toDenseRow (row : FsRow) =
+        row.ToDenseRow()
+        row
+
+    /// <summary>
+    /// Takes a given FsRow and returns a new dense FsRow from it.
+    /// 
+    /// FsRows are sparse by default. This means there are no FsCells present between positions with that are filled with FsCells. In dense FsRows, such "empty positions" are then filled with empty FsCells.
+    /// </summary>
+    /// <param name="row">The FsRow that whose copy gets transformed into a dense FsRow.</param>
+    static member createDenseRowOf (row : FsRow) =
+        let newRow = row.Copy()
+        newRow.ToDenseRow()
+        newRow
