@@ -52,17 +52,29 @@ type FsColumn (rangeAddress : FsRangeAddress, cells : FsCellsCollection)=
     // ----------
 
     /// The associated FsCells.
-    member self.Cells = 
+    member this.Cells = 
         base.Cells(cells)
 
     /// <summary>
     /// The index of the FsColumn.
     /// </summary>
-    member self.Index 
-        with get() = self.RangeAddress.FirstAddress.ColumnNumber
+    member this.Index 
+        with get() = this.RangeAddress.FirstAddress.ColumnNumber
         and set(i) = 
-            self.RangeAddress.FirstAddress.ColumnNumber <- i
-            self.RangeAddress.LastAddress.ColumnNumber <- i
+            this.RangeAddress.FirstAddress.ColumnNumber <- i
+            this.RangeAddress.LastAddress.ColumnNumber <- i
+
+    /// <summary>
+    /// The number of the lowest row index of the FsColumn where an FsCell exists.
+    /// </summary>
+    member this.MinRowIndex
+        with get() = this.RangeAddress.FirstAddress.RowNumber
+
+    /// <summary>
+    /// The number of the highest row index of the FsColumn where an FsCell exists.
+    /// </summary>
+    member this.MaxRowIndex
+        with get() = this.RangeAddress.LastAddress.RowNumber
 
 
     // -------
@@ -70,11 +82,11 @@ type FsColumn (rangeAddress : FsRangeAddress, cells : FsCellsCollection)=
     // -------
 
     /// <summary>
-    /// Creates a deep copy of this FsRow.
+    /// Creates a deep copy of this FsColumn.
     /// </summary>
-    member self.Copy() =
-        let ra = self.RangeAddress.Copy()
-        let cells = self.Cells |> Seq.map (fun c -> c.Copy())
+    member this.Copy() =
+        let ra = this.RangeAddress.Copy()
+        let cells = this.Cells |> Seq.map (fun c -> c.Copy())
         let fcc = FsCellsCollection()
         fcc.Add cells
         FsColumn(ra, fcc)
@@ -90,7 +102,7 @@ type FsColumn (rangeAddress : FsRangeAddress, cells : FsCellsCollection)=
     /// </summary>
     static member getIndex (column : FsColumn) = 
         column.Index
-       
+
     /// <summary>
     /// Returns the FsCell at rowIndex.
     /// </summary>
@@ -120,7 +132,7 @@ type FsColumn (rangeAddress : FsRangeAddress, cells : FsCellsCollection)=
     //    row.InsertValueAt(colIndex, value) |> ignore
     //    row
 
-    //member self.SortCells() = _cells <- _cells |> List.sortBy (fun c -> c.WorksheetColumn)
+    //member this.SortCells() = _cells <- _cells |> List.sortBy (fun c -> c.WorksheetColumn)
 
     // TO DO (later)
     ///// Takes an FsCellsCollection and creates an FsRow from the given rowIndex and the cells in the FsCellsCollection that share the same rowIndex.
