@@ -22,7 +22,7 @@ type FsColumn (rangeAddress : FsRangeAddress, cells : FsCellsCollection)=
     // ----------
 
     /// Creates an empty FsColumn, ranging from row 0, column 0 to row 0, column (1-based).
-    static member empty() = FsColumn (FsRangeAddress(FsAddress(0,0),FsAddress(0,0)),FsCellsCollection())
+    static member empty() = FsColumn (FsRangeAddress(FsAddress(0,0), FsAddress(0,0)), FsCellsCollection())
 
     /// <summary>
     /// Create an FsColumn from a given FsCellsCollection and an columnColumn.
@@ -39,7 +39,7 @@ type FsColumn (rangeAddress : FsRangeAddress, cells : FsCellsCollection)=
                 ).Address.RowNumber
         let minRowIndex = getIndexBy Seq.minBy
         let maxRowIndex = getIndexBy Seq.maxBy
-        FsColumn (FsRangeAddress(FsAddress(minRowIndex, index),FsAddress(maxRowIndex, index)), cells)
+        FsColumn (FsRangeAddress(FsAddress(minRowIndex, index), FsAddress(maxRowIndex, index)), cells)
 
     interface IEnumerable<FsCell> with
         member this.GetEnumerator() : System.Collections.Generic.IEnumerator<FsCell> = this.Cells.GetEnumerator()
@@ -123,7 +123,7 @@ type FsColumn (rangeAddress : FsRangeAddress, cells : FsCellsCollection)=
     /// </summary>
     member this.Item (rowIndex) =
         // use FsRangeBase call with colindex 1
-        base.Cell(FsAddress(rowIndex,1),cells)
+        base.Cell(FsAddress(rowIndex, 1), cells)
 
     /// <summary>
     /// Returns the FsCell at the given rowIndex from an FsColumn.
@@ -143,7 +143,7 @@ type FsColumn (rangeAddress : FsRangeAddress, cells : FsCellsCollection)=
     /// Returns the FsCell at the given rowIndex if it exists in the given FsColumn. Else returns None.
     /// </summary>
     /// <param name="rowIndex">The number of the column where the FsCell shall be retrieved.</param>
-    static member tryItem rowIndex (column: FsColumn) =
+    static member tryItem rowIndex (column : FsColumn) =
         column.TryItem rowIndex
 
     ///// <summary>
@@ -168,3 +168,33 @@ type FsColumn (rangeAddress : FsRangeAddress, cells : FsCellsCollection)=
     ///// Takes an FsCellsCollection and creates an FsRow from the given rowIndex and the cells in the FsCellsCollection that share the same rowIndex.
     //static member fromCellsCollection rowIndex (cellsCollection : FsCellsCollection) =
 
+    /// <summary>
+    /// Transforms the FsColumn into a dense FsColumn.
+    /// 
+    /// FsColumns are sparse by default. This means there are no FsCells present between positions with that are filled with FsCells. In dense FsColumns, such "empty positions" are then filled with empty FsCells.
+    /// </summary>
+    member this.ToDenseColumn() =
+        for i = this.MinRowIndex to this.MaxRowIndex do 
+            ignore this[i]
+
+    /// <summary>
+    /// Transforms the given FsColumn into a dense FsColumn.
+    /// 
+    /// FsColumns are sparse by default. This means there are no FsCells present between positions with that are filled with FsCells. In dense FsColumns, such "empty positions" are then filled with empty FsCells.
+    /// </summary>
+    /// <param name="column">The FsColumn that gets transformed into a dense FsColumn.</param>
+    /// <remarks>This is an in-place operation.</remarks>
+    static member toDenseColumn (column : FsColumn) =
+        column.ToDenseColumn()
+        column
+
+    /// <summary>
+    /// Takes a given FsColumn and returns a new dense FsColumn from it.
+    /// 
+    /// FsColumns are sparse by default. This means there are no FsCells present between positions with that are filled with FsCells. In dense FsColumns, such "empty positions" are then filled with empty FsCells.
+    /// </summary>
+    /// <param name="column">The FsColumn that whose copy gets transformed into a dense FsColumn.</param>
+    static member createDenseColumnOf (column : FsColumn) =
+        let newColumn = column.Copy()
+        newColumn.ToDenseColumn()
+        newColumn
