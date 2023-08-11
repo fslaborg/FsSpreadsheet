@@ -75,4 +75,42 @@ let main =
                 let expectedValues = ["Name";"John Doe";"Jane Doe";"Jack Doe"]
                 Expect.mySequenceEqual (Seq.item 0 columns |> Seq.map FsCell.getValueAsString) expectedValues "Values are not correct"
         ]
+        testList "ToDenseColumn" [
+            testCase "is correct" (fun _ ->
+                let cellsCollWithEmpty = FsCellsCollection()
+                cellsCollWithEmpty.Add [
+                    FsCell.create 1 1 "Kevin"
+                    FsCell.createEmptyWithAdress(FsAddress("A2"))
+                    FsCell.create 3 1 "Schneider"
+                ]
+                let column = FsColumn(FsRangeAddress("A1:A3"), cellsCollWithEmpty)
+                let actual = FsColumn.toDenseColumn column |> Seq.map FsCell.getValueAsString |> Seq.toList
+                let expected = ["Kevin"; ""; "Schneider"]
+                Expect.mySequenceEqual actual expected "Column values differ"
+            )
+        ]
+        testList "Base.Cells" [
+            testCase "can be retrieved" <| fun _ ->
+                let cellsColl = FsCellsCollection()
+                cellsColl.Add (FsCell.create 1 1 "Kevin")
+                let column = FsColumn(FsRangeAddress("A1:A1"), cellsColl)
+                let firstCell = column.Cells |> Seq.head
+                Expect.equal (FsCell.getValueAsString firstCell) "Kevin" "Did not retrieve"
+        ]
+        testList "MinColIndex" [
+            testCase "can be retrieved" <| fun _ ->
+                let cellsColl = FsCellsCollection()
+                cellsColl.Add (FsCell.create 1 1 "Kevin")
+                let column = FsColumn(FsRangeAddress("A1:A1"), cellsColl)
+                let minRowIndex = column.MinRowIndex
+                Expect.equal minRowIndex 1 "Incorrect index"
+        ]
+        testList "MaxColIndex" [
+            testCase "can be retrieved" <| fun _ ->
+                let cellsColl = FsCellsCollection()
+                cellsColl.Add (FsCell.create 1 1 "Kevin")
+                let column = FsColumn(FsRangeAddress("A1:A1"), cellsColl)
+                let maxRowIndex = column.MaxRowIndex
+                Expect.equal maxRowIndex 1 "Incorrect index"
+        ]
     ]
