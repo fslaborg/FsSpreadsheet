@@ -1,3 +1,13 @@
+### 3.4.0+39d270a (Released 2023-8-11)
+* Additions:
+    * [[#ac14e0d](https://github.com/CSBiology/FsSpreadsheet/commit/ac14e0d2b8df599aa83e0c93326553f4bb2c2d79)] Add unit tests for column index getting and base cells in FsRow
+    * [[#36b2b16](https://github.com/CSBiology/FsSpreadsheet/commit/36b2b163e17a944da64f04074e539cc7cd687b0c)] Add tests for FsRow
+    * [[#05f19ae](https://github.com/CSBiology/FsSpreadsheet/commit/05f19ae60db21031fb0ee527ef94431d199bee6e)] Add `GetRowCount` functionality to FsRangeBase
+    * [[#aa4938c](https://github.com/CSBiology/FsSpreadsheet/commit/aa4938cb7dff34e84cf4d15d7325fd60ed1ebd85)] Add `GetRows` functionality to FsTable
+    * [[#2a29cfe](https://github.com/CSBiology/FsSpreadsheet/commit/2a29cfe16f4360ad0f0fbb213ccc0abcbb653087)] Add FsRow members: `TryItem`, `ToDenseRow`, `HasCellAt`, `MinColIndex`, `MaxColIndex`
+* Bugfixes:
+    * [[#2b3b30b](https://github.com/CSBiology/FsSpreadsheet/commit/2b3b30b30a03ef821668ab6a011368662622b564)] Fix critical JS bug in column index getting
+
 ### 3.3.0+ec1b7c9 (Released 2023-8-3)
 * Additions:
     * [[#c228e7f](https://github.com/CSBiology/FsSpreadsheet/commit/c228e7f3799d87d34e44fb96500fe4f360d6454e)] Change npm dependency to exceljs fork
