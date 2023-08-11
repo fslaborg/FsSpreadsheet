@@ -131,6 +131,21 @@ type FsColumn (rangeAddress : FsRangeAddress, cells : FsCellsCollection)=
     static member item rowIndex (column : FsColumn) =
         column.Item(rowIndex)
 
+    /// <summary>
+    /// Returns the FsCell at the given rowIndex if it exists. Else returns None.
+    /// </summary>
+    /// <param name="rowIndex">The number of the column where the FsCell shall be retrieved.</param>
+    member this.TryItem(rowIndex) =
+        if this.HasCellAt rowIndex then Some this[rowIndex]
+        else None
+
+    /// <summary>
+    /// Returns the FsCell at the given rowIndex if it exists in the given FsColumn. Else returns None.
+    /// </summary>
+    /// <param name="rowIndex">The number of the column where the FsCell shall be retrieved.</param>
+    static member tryItem rowIndex (column: FsColumn) =
+        column.TryItem rowIndex
+
     ///// <summary>
     ///// Inserts the value at columnIndex as an FsCell. If there is an FsCell at the position, this FsCells and all the ones /right /to it are shifted to the right.
     ///// </summary>
