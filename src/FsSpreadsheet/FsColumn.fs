@@ -104,6 +104,21 @@ type FsColumn (rangeAddress : FsRangeAddress, cells : FsCellsCollection)=
         column.Index
 
     /// <summary>
+    /// Checks if there is an FsCell at given row index.
+    /// </summary>
+    /// <param name="rowIndex">The number of the row where the presence of an FsCell shall be checked.</param>
+    member this.HasCellAt(rowIndex) =
+        this.Cells
+        |> Seq.exists (fun c -> c.RowNumber = rowIndex)
+
+    /// <summary>
+    /// Checks if there is an FsCell at given row index of a given FsColumn.
+    /// </summary>
+    /// <param name="colIndex">The number of the row where the presence of an FsCell shall be checked.</param>
+    static member hasCellAt rowIndex (column : FsColumn) =
+        column.HasCellAt rowIndex
+
+    /// <summary>
     /// Returns the FsCell at rowIndex.
     /// </summary>
     member this.Item (rowIndex) =
