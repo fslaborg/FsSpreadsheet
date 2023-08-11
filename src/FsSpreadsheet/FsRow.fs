@@ -24,7 +24,7 @@ type FsRow (rangeAddress : FsRangeAddress, cells : FsCellsCollection)=
     // Creation
     // ----------
 
-    static member empty() = FsRow (FsRangeAddress(FsAddress(0,0),FsAddress(0,0)),FsCellsCollection())
+    static member empty() = FsRow (FsRangeAddress(FsAddress(0,0), FsAddress(0,0)), FsCellsCollection())
 
     /// <summary>
     /// Creates an FsRow from a given FsCellsCollection and an rowIndex.
@@ -41,7 +41,7 @@ type FsRow (rangeAddress : FsRangeAddress, cells : FsCellsCollection)=
                 ).Address.ColumnNumber
         let minColIndex = getIndexBy Seq.minBy
         let maxColIndex = getIndexBy Seq.maxBy
-        FsRow (FsRangeAddress(FsAddress(index, minColIndex),FsAddress(index, maxColIndex)), cells)
+        FsRow (FsRangeAddress(FsAddress(index, minColIndex), FsAddress(index, maxColIndex)), cells)
 
     interface IEnumerable<FsCell> with
         member this.GetEnumerator() : System.Collections.Generic.IEnumerator<FsCell> = this.Cells.GetEnumerator()
@@ -125,7 +125,7 @@ type FsRow (rangeAddress : FsRangeAddress, cells : FsCellsCollection)=
     /// </summary>
     member this.Item(columnIndex) =
         // use FsRangeBase call with colindex 1
-        base.Cell(FsAddress(1,columnIndex),cells)
+        base.Cell(FsAddress(1, columnIndex), cells)
 
     /// <summary>
     /// Returns the FsCell at the given columnIndex from an FsRow if it exists. Else creates an ampty FsCell at that position.
@@ -145,7 +145,7 @@ type FsRow (rangeAddress : FsRangeAddress, cells : FsCellsCollection)=
     /// Returns the FsCell at the given columnIndex if it exists in the given FsRow. Else returns None.
     /// </summary>
     /// <param name="colIndex">The number of the column where the FsCell shall be retrieved.</param>
-    static member tryItem colIndex (row: FsRow) =
+    static member tryItem colIndex (row : FsRow) =
         row.TryItem colIndex
 
     /// <summary>

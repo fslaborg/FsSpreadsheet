@@ -1,6 +1,6 @@
 {
   "name": "fsspreadsheet",
-  "version": "3.4.0+39d270a",
+  "version": "4.0.0+5d5067f",
   "description": "Minimal spreadsheet creation and manipulation using exceljs io.",
   "type": "module",
   "main": "dist/Xlsx.js",

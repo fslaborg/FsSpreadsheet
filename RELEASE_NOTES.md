@@ -1,32 +1,20 @@
-### 3.4.0+39d270a (Released 2023-8-11)
+### 4.0.0+5d5067f (Released 2023-8-11)
 * Additions:
+    * [[#19bd2a8](https://github.com/CSBiology/FsSpreadsheet/commit/19bd2a8817940d4f8725a85ebfa595faa214a24d)] Add `MinRowIndex` and `MinColIndex` to FsColumn
+    * [[#5c2e616](https://github.com/CSBiology/FsSpreadsheet/commit/5c2e6167c3c0ea9bfd6ae4a59de60485325a31ab)] Add `HasCellAt` to FsColumn
+    * [[#3e7b7d2](https://github.com/CSBiology/FsSpreadsheet/commit/3e7b7d2c76a7ab1b72c13dd20983b975cb8b1308)] Add `TryItem` functionality to FsColumn
+    * [[#5d5067f](https://github.com/CSBiology/FsSpreadsheet/commit/5d5067f81459164c72e6abf7db1c94b7b494d1ee)] Add dense column functionality
     * [[#ac14e0d](https://github.com/CSBiology/FsSpreadsheet/commit/ac14e0d2b8df599aa83e0c93326553f4bb2c2d79)] Add unit tests for column index getting and base cells in FsRow
     * [[#36b2b16](https://github.com/CSBiology/FsSpreadsheet/commit/36b2b163e17a944da64f04074e539cc7cd687b0c)] Add tests for FsRow
     * [[#05f19ae](https://github.com/CSBiology/FsSpreadsheet/commit/05f19ae60db21031fb0ee527ef94431d199bee6e)] Add `GetRowCount` functionality to FsRangeBase
     * [[#aa4938c](https://github.com/CSBiology/FsSpreadsheet/commit/aa4938cb7dff34e84cf4d15d7325fd60ed1ebd85)] Add `GetRows` functionality to FsTable
     * [[#2a29cfe](https://github.com/CSBiology/FsSpreadsheet/commit/2a29cfe16f4360ad0f0fbb213ccc0abcbb653087)] Add FsRow members: `TryItem`, `ToDenseRow`, `HasCellAt`, `MinColIndex`, `MaxColIndex`
-* Bugfixes:
-    * [[#2b3b30b](https://github.com/CSBiology/FsSpreadsheet/commit/2b3b30b30a03ef821668ab6a011368662622b564)] Fix critical JS bug in column index getting
-
-### 3.3.0+ec1b7c9 (Released 2023-8-3)
-* Additions:
-    * [[#c228e7f](https://github.com/CSBiology/FsSpreadsheet/commit/c228e7f3799d87d34e44fb96500fe4f360d6454e)] Change npm dependency to exceljs fork
+	* [[#c228e7f](https://github.com/CSBiology/FsSpreadsheet/commit/c228e7f3799d87d34e44fb96500fe4f360d6454e)] Change npm dependency to exceljs fork
     * [[#5625b33](https://github.com/CSBiology/FsSpreadsheet/commit/5625b3310a5918a5396d49a7bef1e6654d50d295)] Update more tests
     * [[#4378808](https://github.com/CSBiology/FsSpreadsheet/commit/4378808c13d3250b90ac2311fd127b999498b2c4)] Update gitignore
-* Deletions:
-    * [[#7779011](https://github.com/CSBiology/FsSpreadsheet/commit/77790114c7d652e818ab1c9492f730ce573c47b3)] delete dist
-* Bugfixes:
-    * [[#d14448e](https://github.com/CSBiology/FsSpreadsheet/commit/d14448e093ffe8268a2445d31f2aeeccf6a79fc1)] Fix Async/Promises and fsspreadsheet readin :tada:
-    * [[#a96bcd0](https://github.com/CSBiology/FsSpreadsheet/commit/a96bcd0082dab203a7fdbed7ba12e96e21203f33)] fix timeout issue :bug:
-
-### 3.2.1+caf21db (Released 2023-8-1)
-* Additions:
     * [[#cb35186](https://github.com/CSBiology/FsSpreadsheet/commit/cb3518609e9fe42e05789441906dc148a4b8d53e)] Update and clean up RELEASE_NOTES.md
     * [[#489f6b7](https://github.com/CSBiology/FsSpreadsheet/commit/489f6b77789cca13840382d5c2dd03dc973b65df)] Add logo to Exceljs project file
     * [[#caf21db](https://github.com/CSBiology/FsSpreadsheet/commit/caf21db25490908a61381fd229fdaf5cc9a66ab2)] INcrease package.json version together with fake task.
-
-### 3.2.0+e47262b (Released 2023-7-31)
-* Additions:
     * [[#2b9c7fa](https://github.com/CSBiology/FsSpreadsheet/commit/2b9c7fa2c3fccfb6a5956b2e244a557fda4e0793)] Add some tests for exceljs
     * [[#1fd0e34](https://github.com/CSBiology/FsSpreadsheet/commit/1fd0e34fafc9e82f0a509af9a4d1579a4ea458d5)] Add fable necessities to fsproj.
     * [[#72bb41e](https://github.com/CSBiology/FsSpreadsheet/commit/72bb41ea6b8ad2c5490619af35a4d9038f0700da)] Write some tests #54
@@ -43,10 +31,14 @@
     * [[#3116aae](https://github.com/CSBiology/FsSpreadsheet/commit/3116aae6831fddcccc552d9d68b1bf4a565578ec)] Add dotnet tool femto
     * [[#eb7160d](https://github.com/CSBiology/FsSpreadsheet/commit/eb7160d105d3d3fbabaea36abdc085412e173d75)] Update .gitignore
 * Deletions:
+    * [[#7779011](https://github.com/CSBiology/FsSpreadsheet/commit/77790114c7d652e818ab1c9492f730ce573c47b3)] delete dist
     * [[#2253fb1](https://github.com/CSBiology/FsSpreadsheet/commit/2253fb1ef938754f8135d18949252d991ec1af32)] Remove some js tests until fsspreadsheet syntax better fits js.
     * [[#146d920](https://github.com/CSBiology/FsSpreadsheet/commit/146d9205a549e6ccbf0b317a52fe56ea63e08bfc)] Delete .zip :fire:
     * [[#6b3a27b](https://github.com/CSBiology/FsSpreadsheet/commit/6b3a27bf8db2ee6b23c2dacce8466ea22bcda9b4)] remove annoying warning
 * Bugfixes:
+    * [[#2b3b30b](https://github.com/CSBiology/FsSpreadsheet/commit/2b3b30b30a03ef821668ab6a011368662622b564)] Fix critical JS bug in column index getting
+    * [[#d14448e](https://github.com/CSBiology/FsSpreadsheet/commit/d14448e093ffe8268a2445d31f2aeeccf6a79fc1)] Fix Async/Promises and fsspreadsheet readin :tada:
+    * [[#a96bcd0](https://github.com/CSBiology/FsSpreadsheet/commit/a96bcd0082dab203a7fdbed7ba12e96e21203f33)] fix timeout issue :bug:
     * [[#a680d45](https://github.com/CSBiology/FsSpreadsheet/commit/a680d45f9a7b985d61fa9887fd984e32024faf9a)] fix xlsxparser picking the wrong name fix teststrings
     * [[#5293ae9](https://github.com/CSBiology/FsSpreadsheet/commit/5293ae92184f4dc4038076761cd65beb3e243aba)] hotfix table not written correctly #49
     * [[#53b109c](https://github.com/CSBiology/FsSpreadsheet/commit/53b109cf42b9fba59c55011d2eb45fa39132b9c2)] fix datatypes in fs->js conversion + finish tests
