@@ -72,6 +72,12 @@ describe('FsSpreadsheet.Exceljs', function () {
             let worksheets = fswb.GetWorksheets()
             equal(worksheets.length, 5)
         });
+        it('readOldClosedXml', async () => {
+            const path = "tests/JS/TestFiles/readOldClosedXml.xlsx";
+            const fswb = await Xlsx.fromXlsxFile(path)
+            let worksheets = fswb.GetWorksheets()
+            equal(worksheets.length, 1)
+        });
     })
     describe('write', function () {
         it('roundabout', async () => {
