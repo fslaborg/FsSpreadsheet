@@ -139,6 +139,7 @@ type FsWorksheet (name, ?fsRows, ?fsTables, ?fsCellsCollection) =
         | None -> 
             let row = FsRow.createAt(rowIndex,self.CellCollection) 
             _rows.Add row
+            self.RescanRows()   // <-- test if needed
             row
 
     /// <summary>
@@ -265,6 +266,7 @@ type FsWorksheet (name, ?fsRows, ?fsTables, ?fsCellsCollection) =
         for i in 0 .. (_rows.Count-1) do
             let r = _rows.[i]
             _rows.[i] <- f r
+            self.RescanRows()   // <-- check if this is needed
         self
     
     /// <summary>
