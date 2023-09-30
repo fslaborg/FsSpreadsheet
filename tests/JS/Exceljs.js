@@ -95,7 +95,7 @@ describe('FsSpreadsheet.Exceljs', function () {
             fsws.Row(3).Item(4).SetValueAs(false);
             const table = new FsTable("MyNewTable", FsRangeAddress_$ctor_Z721C83C5("B1:D3"));
             fsws.AddTable(table);
-            fsws.RescanRows()
+            //fsws.RescanRows()
             await Xlsx.toFile(path, fswb)
             const readfswb = await Xlsx.fromXlsxFile(path)
             equal(readfswb.GetWorksheets().length, fswb.GetWorksheets().length)

@@ -225,7 +225,7 @@ let tests_toJsWorkbook = testList "toJsWorkbook" [
         let _ = fsws.AddCell(FsCell(false, DataType.Boolean, address=FsAddress("D3")))
         let t = FsTable("My_New_Table", FsRangeAddress("B1:D3"))
         let _ = fsws.AddTable(t)
-        fsws.RescanRows()
+        //fsws.RescanRows()
         Expect.passWithMsg "Create jswb"
         let jswb = JsWorkbook.toJsWorkbook fswb
         let jstable = jswb.worksheets.[0].getTables().[0].table.Value
@@ -253,7 +253,7 @@ let tests_toJsWorkbook = testList "toJsWorkbook" [
         let _ = fsws.AddCell(FsCell(false, DataType.Boolean, address=FsAddress("D3")))
         let t = FsTable("My_New_Table", FsRangeAddress("B1:D3"))
         let _ = fsws.AddTable(t)
-        fsws.RescanRows()
+        //fsws.RescanRows()
         let table = fsws.Tables.[0]
         Expect.equal (table.ColumnCount()) 3 "column count"
     testCase "table with implicit set" <| fun _ ->
@@ -270,7 +270,7 @@ let tests_toJsWorkbook = testList "toJsWorkbook" [
         fsws.Row(3).[4].SetValueAs false
         let t = FsTable("My New Table", FsRangeAddress("B1:D3"))
         let _ = fsws.AddTable(t)
-        fsws.RescanRows()
+        //fsws.RescanRows()
         let table = fsws.Tables.[0]
         Expect.equal (table.ColumnCount()) 3 "column count"
 ]

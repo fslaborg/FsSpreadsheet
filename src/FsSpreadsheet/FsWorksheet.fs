@@ -17,6 +17,8 @@ type FsWorksheet (name, ?fsRows, ?fsTables, ?fsCellsCollection) =
 
     let mutable _cells : FsCellsCollection = fsCellsCollection  |> Option.defaultValue (FsCellsCollection())
 
+    do self.RescanRows()
+
     /// <summary>
     /// Creates an empty FsWorksheet with the given name.
     /// </summary>

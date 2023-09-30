@@ -104,7 +104,7 @@ module FsExtensions =
         /// Returns the FsWorksheet in the form of an XlsxSpreadsheet.
         /// </summary>
         member self.ToXlsxWorksheet() =
-            self.RescanRows()
+            //self.RescanRows()
             let sheet = Worksheet.empty()
             let sheetData =
                 let sd = SheetData.empty()
@@ -202,7 +202,7 @@ module FsExtensions =
             sheets
             |> Seq.fold (
                 fun wb sheet -> 
-                    sheet.RescanRows()      // we need this to have all FsRows present in the final FsWorksheet
+                    //sheet.RescanRows()      // we need this to have all FsRows present in the final FsWorksheet
                     FsWorkbook.addWorksheet sheet wb
             ) (new FsWorkbook())
 

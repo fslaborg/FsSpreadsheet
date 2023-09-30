@@ -14,7 +14,7 @@ let getDummyWorkSheet() =
     Resources.dummyFsCells
     |> Seq.concat
     |> Seq.iter (fun c -> worksheet.InsertValueAt(c.Value,c.RowNumber,c.ColumnNumber))
-    worksheet.RescanRows()
+    //worksheet.RescanRows()
     worksheet
 
 let main =

@@ -7,7 +7,7 @@ module Expect =
 
     let workSheetEqual (actual : FsWorksheet) (expected : FsWorksheet) message =
         let f (ws : FsWorksheet) = 
-            ws.RescanRows()
+            //ws.RescanRows()
             ws.Rows
             |> Seq.map (fun r -> r.Cells |> Seq.map (fun c -> c.Value) |> Seq.reduce (fun a b -> a + b)) 
         if actual.Name <> expected.Name then
