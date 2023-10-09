@@ -15,7 +15,7 @@ let updateReleaseNotes = BuildTask.createFn "ReleaseNotes" [] (fun config ->
 
     let semVer = 
         Fake.Core.ReleaseNotes.load "RELEASE_NOTES.md"
-        |> fun x -> x.SemVer.AsString
+        |> fun x -> sprintf "%i.%i.%i" x.SemVer.Major x.SemVer.Minor x.SemVer.Patch
 
     // Update Version in src/Nfdi4Plants.Fornax.Template/package.json
     let p = "package.json"
