@@ -22,6 +22,7 @@ let gitHome = $"https://github.com/{gitOwner}"
 let projectRepo = $"https://github.com/{gitOwner}/{project}"
 
 let pkgDir = "pkg"
+let npmPkgDir = "dist"
 
 // Create RELEASE_NOTES.md if not existing. Or "release" would throw an error.
 Fake.Extensions.Release.ReleaseNotes.ensure()
