@@ -152,11 +152,9 @@ module FsExtensions =
     type FsWorkbook with
         
         /// <summary>
-        /// Creates an FsWorkbook from a given Stream to an XlsxFile.
+        /// Creates an FsWorkbook from a given SpreadsheetDocument.
         /// </summary>
-        // TO DO: Ask HLW/TM: is this REALLY the way to go? This is not a constructor! (though it tries to be one)
-        member self.FromXlsxStream (stream : Stream) =
-            let doc = Spreadsheet.fromStream stream false
+        static member fromSpreadsheetDocument (doc : Packaging.SpreadsheetDocument) =
             let sst = Spreadsheet.tryGetSharedStringTable doc
             let xlsxWorkbookPart = Spreadsheet.getWorkbookPart doc        
             let xlsxSheets = 
@@ -207,17 +205,25 @@ module FsExtensions =
             ) (new FsWorkbook())
 
         /// <summary>
+        /// Creates an FsWorkbook from a given Packaging.Package xlsx package.
+        /// </summary>
+        static member fromPackage(package:Packaging.Package) =
+            let doc = Packaging.SpreadsheetDocument.Open(package)
+            FsWorkbook.fromSpreadsheetDocument doc
+
+        /// <summary>
         /// Creates an FsWorkbook from a given Stream to an XlsxFile.
         /// </summary>
         static member fromXlsxStream (stream : Stream) =
-            (new FsWorkbook()).FromXlsxStream stream
+            let doc = Spreadsheet.fromStream stream false
+            FsWorkbook.fromSpreadsheetDocument doc
 
         /// <summary>
         /// Creates an FsWorkbook from a given Stream to an XlsxFile.
         /// </summary>
         static member fromBytes (bytes : byte []) =
             let stream = new MemoryStream(bytes)
-            (new FsWorkbook()).FromXlsxStream stream
+            FsWorkbook.fromXlsxStream stream
 
         /// <summary>
         /// Takes the path to an Xlsx file and returns the FsWorkbook based on its content.
