@@ -82,7 +82,7 @@ describe('FsSpreadsheet.Exceljs', function () {
     })
     describe('write', function () {
         it('passes', async () => {
-            const path = "tests/JS/TestFiles/WriteTable.xlsx"
+            const path = "tests/JS/TestFiles/WRITE_Table.xlsx"
             const fswb = new FsWorkbook();
             const fsws = fswb.InitWorksheet("My Awesome Worksheet");
             fsws.Row(1).Item(2).SetValueAs("My Column 1");
@@ -111,20 +111,6 @@ describe('FsSpreadsheet.Exceljs', function () {
         })
     });
     describe('read-write', function (){
-        // it('from fsspreadsheet', async () => {
-        //     const inputPath = "tests/JS/TestFiles/TestAssayFsSpreadsheet.xlsx"
-        //     const fswb = await Xlsx.fromXlsxFile(inputPath)
-        //     equal(fswb.GetWorksheets().length, 5, "test correct read")
-        //     let ws1 = fswb.GetWorksheets()[0]
-        //     equal(ws1.name, "Cell Lysis", "ws1.name")
-        //     let table = ws1.Tables[0]
-        //     equal(table.Name, "annotationTableStupidQuail41", "table.Name")
-        //     // equal(table.ShowHeaderRow, true, "table.ShowHeaderRow") // issue #69
-        //     const outoutPath = "tests/JS/TestFiles/TestAssayFsSpreadsheetJS.xlsx"
-        //     await Xlsx.toFile(outoutPath, fswb)
-        //     // const fswb2 = await Xlsx.fromXlsxFile(outoutPath)
-        //     // equal(fswb2.GetWorksheets().length, 5) // test correct read
-        // })
         it('from excel', async () => {
             const inputPath = "tests/JS/TestFiles/TestAssayExcel.xlsx"
             const fswb = await Xlsx.fromXlsxFile(inputPath)
@@ -133,11 +119,11 @@ describe('FsSpreadsheet.Exceljs', function () {
             equal(ws1.name, "Cell Lysis", "ws1.name")
             let table = ws1.Tables[0]
             equal(table.Name, "annotationTableStupidQuail41", "table.Name")
-            // equal(table.ShowHeaderRow, true, "table.ShowHeaderRow") // issue #69
-            const outoutPath = "tests/JS/TestFiles/TestAssayExcelJs.xlsx"
+            equal(table.ShowHeaderRow, true, "table.ShowHeaderRow") // issue #69
+            const outoutPath = "tests/JS/TestFiles/WRITE_TestAssayExcel.xlsx"
             await Xlsx.toFile(outoutPath, fswb)
-            // const fswb2 = await Xlsx.fromXlsxFile(outoutPath)
-            // equal(fswb2.GetWorksheets().length, 5) // test correct read
+            const fswb2 = await Xlsx.fromXlsxFile(outoutPath)
+            equal(fswb2.GetWorksheets().length, 5) // test correct read
         })
     })
 });

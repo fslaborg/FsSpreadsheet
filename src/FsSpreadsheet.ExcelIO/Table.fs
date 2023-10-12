@@ -225,6 +225,7 @@ module Table =
         a.Reference <- area
         t.AutoFilter <- a
         t.Reference <- area
+        t.Name <- StringValue(displayName)
         t.DisplayName <- StringValue(displayName)
         t.TableColumns <- TableColumns.create tableColumns
         t

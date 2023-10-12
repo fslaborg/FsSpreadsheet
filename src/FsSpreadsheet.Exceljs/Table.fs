@@ -11,7 +11,6 @@ module JsTable =
     let private log (obj:obj) = jsNative
 
     let fromFsTable (fscellcollection: FsCellsCollection) (fsTable: FsTable) : Table =
-        //fsTable.ShowHeaderRow <- true //hotfix for issue #69
         let fsColumns = fsTable.GetColumns fscellcollection
         let columns = 
             if fsTable.ShowHeaderRow then
@@ -48,10 +47,8 @@ module JsTable =
             |> Array.map (fun (_,arr) ->
                 arr |> Array.map snd
             )
-        log ("Name: ",fsTable.Name)
-        log ("Range: ",fsTable.RangeAddress.Range)
-        log ("columns: ",columns.Length)
-        log ("columns: ",columns)
-        log ("rows: ",rows.Length)
-        log ("headerRow: ",fsTable.ShowHeaderRow)
-        Table(fsTable.Name,fsTable.RangeAddress.Range,columns,rows,headerRow = fsTable.ShowHeaderRow)
+        let defaultStyle = {|
+            theme = "TableStyleMedium7"
+            showRowStripes = true
+        |}
+        Table(fsTable.Name,fsTable.RangeAddress.Range,columns,rows,fsTable.Name,headerRow = fsTable.ShowHeaderRow, style = defaultStyle)

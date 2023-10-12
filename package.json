@@ -22,7 +22,12 @@
     "url": "git+https://github.com/CSBiology/FsSpreadsheet.git"
   },
   "author": "Kevin Frey",
-  "contributors": [ "Heinrich Lukas Weil", "Oliver Maus", "Kevin Schneider", "Timo Mühlhaus" ],
+  "contributors": [
+    "Heinrich Lukas Weil",
+    "Oliver Maus",
+    "Kevin Schneider",
+    "Timo Mühlhaus"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/CSBiology/FsSpreadsheet/issues"
@@ -32,6 +37,6 @@
     "mocha": "^10.2.0"
   },
   "dependencies": {
-    "@nfdi4plants/exceljs": "0.2.0"
+    "@nfdi4plants/exceljs": "^0.3.0"
   }
 }
