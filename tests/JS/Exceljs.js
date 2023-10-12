@@ -3,7 +3,7 @@ import { Xlsx } from './FsSpreadsheet.Exceljs/Xlsx.fs.js';
 import { FsWorkbook } from "./FsSpreadsheet.Exceljs/FsSpreadsheet/FsWorkbook.fs.js";
 import { FsRangeAddress_$ctor_Z721C83C5, FsRangeAddress__get_Range } from "./FsSpreadsheet.Exceljs/FsSpreadsheet/Ranges/FsRangeAddress.fs.js";
 import { FsTable } from "./FsSpreadsheet.Exceljs/FsSpreadsheet/Tables/FsTable.fs.js";
-import { toJsWorkbook, toFsWorkbook } from "./FsSpreadsheet.Exceljs/Workbook.fs.js";
+import { fromFsWorkbook, toFsWorkbook } from "./FsSpreadsheet.Exceljs/Workbook.fs.js";
 
 describe('FsSpreadsheet.Exceljs', function () {
     describe('read', function () {
@@ -53,13 +53,14 @@ describe('FsSpreadsheet.Exceljs', function () {
             let worksheets = fswb.GetWorksheets()
             equal(worksheets.length, 1)
         });
+        // issue #58
         // TypeError: Cannot read properties of undefined (reading 'company')
-        //it('ClosedXml.Table', async () => {
+        // it('ClosedXml.Table', async () => {
         //    const path = "tests/JS/TestFiles/ClosedXml.Table.xlsx";
         //    const fswb = await Xlsx.fromXlsxFile(path)
         //    let worksheets = fswb.GetWorksheets()
         //    equal(worksheets.length, 1)
-        //});
+        // });
         it('fsspreadsheet.minimalTable', async () => {
             const path = "tests/JS/TestFiles/fsspreadsheet.minimalTable.xlsx";
             const fswb = await Xlsx.fromXlsxFile(path)
@@ -80,7 +81,7 @@ describe('FsSpreadsheet.Exceljs', function () {
         });
     })
     describe('write', function () {
-        it('roundabout', async () => {
+        it('passes', async () => {
             const path = "tests/JS/TestFiles/WriteTable.xlsx"
             const fswb = new FsWorkbook();
             const fsws = fswb.InitWorksheet("My Awesome Worksheet");
@@ -109,4 +110,34 @@ describe('FsSpreadsheet.Exceljs', function () {
             equal(readfswb.GetWorksheets()[0].GetCellAt(2,4).ValueAsBool(), true)
         })
     });
+    describe('read-write', function (){
+        // it('from fsspreadsheet', async () => {
+        //     const inputPath = "tests/JS/TestFiles/TestAssayFsSpreadsheet.xlsx"
+        //     const fswb = await Xlsx.fromXlsxFile(inputPath)
+        //     equal(fswb.GetWorksheets().length, 5, "test correct read")
+        //     let ws1 = fswb.GetWorksheets()[0]
+        //     equal(ws1.name, "Cell Lysis", "ws1.name")
+        //     let table = ws1.Tables[0]
+        //     equal(table.Name, "annotationTableStupidQuail41", "table.Name")
+        //     // equal(table.ShowHeaderRow, true, "table.ShowHeaderRow") // issue #69
+        //     const outoutPath = "tests/JS/TestFiles/TestAssayFsSpreadsheetJS.xlsx"
+        //     await Xlsx.toFile(outoutPath, fswb)
+        //     // const fswb2 = await Xlsx.fromXlsxFile(outoutPath)
+        //     // equal(fswb2.GetWorksheets().length, 5) // test correct read
+        // })
+        it('from excel', async () => {
+            const inputPath = "tests/JS/TestFiles/TestAssayExcel.xlsx"
+            const fswb = await Xlsx.fromXlsxFile(inputPath)
+            equal(fswb.GetWorksheets().length, 5, "test correct read")
+            let ws1 = fswb.GetWorksheets()[0]
+            equal(ws1.name, "Cell Lysis", "ws1.name")
+            let table = ws1.Tables[0]
+            equal(table.Name, "annotationTableStupidQuail41", "table.Name")
+            // equal(table.ShowHeaderRow, true, "table.ShowHeaderRow") // issue #69
+            const outoutPath = "tests/JS/TestFiles/TestAssayExcelJs.xlsx"
+            await Xlsx.toFile(outoutPath, fswb)
+            // const fswb2 = await Xlsx.fromXlsxFile(outoutPath)
+            // equal(fswb2.GetWorksheets().length, 5) // test correct read
+        })
+    })
 });

@@ -34,16 +34,16 @@ type Xlsx =
         }
 
     static member toFile (path: string) (wb:FsWorkbook) : Promise<unit> =
-        let jswb = JsWorkbook.toJsWorkbook wb
+        let jswb = JsWorkbook.fromFsWorkbook wb
         jswb.xlsx.writeFile(path)
 
     static member toStream (stream: System.IO.Stream) (wb:FsWorkbook) : Promise<unit> =
-        let jswb = JsWorkbook.toJsWorkbook wb
+        let jswb = JsWorkbook.fromFsWorkbook wb
         jswb.xlsx.write(stream)
 
     static member toBytes (wb:FsWorkbook) : Promise<byte []> =
         promise {
-            let jswb = JsWorkbook.toJsWorkbook wb
+            let jswb = JsWorkbook.fromFsWorkbook wb
             let buffer = jswb.xlsx.writeBuffer()
             return !!buffer
         }

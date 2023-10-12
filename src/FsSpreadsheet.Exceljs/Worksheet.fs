@@ -13,11 +13,13 @@ module JsWorksheet =
     open Fable.Core.JsInterop
 
     let addFsWorksheet (wb: Workbook) (fsws:FsWorksheet) : unit =
+        log $"{fsws.Name}"
         fsws.RescanRows()
         let rows = fsws.Rows |> Seq.map (fun x -> x.Cells)
         let ws = wb.addWorksheet(fsws.Name)
         // due to the design of fsspreadsheet this might overwrite some of the stuff from tables, 
         // but as it should be the same, this is only a performance sink.
+        log "Add cells"
         for row in rows do
             for cell in row do
                 let c = ws.getCell(cell.Address.Address)
@@ -39,6 +41,7 @@ module JsWorksheet =
                     #endif
                     c.value <- cell.Value |> box |> Some 
         let tables = fsws.Tables |> Seq.map (fun table -> JsTable.fromFsTable fsws.CellCollection table)
+        log "Add tables"
         for table in tables do
             ws.addTable(table) |> ignore
 

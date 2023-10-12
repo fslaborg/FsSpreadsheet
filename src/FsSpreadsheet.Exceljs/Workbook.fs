@@ -15,8 +15,9 @@ module JsWorkbook =
             JsWorksheet.addJsWorksheet fswb jsws
         fswb
 
-    let toJsWorkbook (fswb: FsWorkbook) =
+    let fromFsWorkbook (fswb: FsWorkbook) =
         let jswb = ExcelJs.Excel.Workbook()
+        log "Hit"
         for fsws in fswb.GetWorksheets() do
             JsWorksheet.addFsWorksheet jswb fsws 
         jswb
