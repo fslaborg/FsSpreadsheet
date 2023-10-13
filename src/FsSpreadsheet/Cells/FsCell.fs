@@ -385,3 +385,20 @@ type FsCell (value : IConvertible, ?dataType : DataType, ?address : FsAddress) =
     static member setValueAs<'T> value (cell : FsCell)= 
         cell.SetValueAs<'T>(value)
         cell
+
+    member this.StructurallyEquals (other: FsCell) =
+        [|
+            this.Value = other.Value
+            this.DataType = other.DataType
+            [|
+                this.Address.Address = other.Address.Address
+                this.Address.ColumnNumber = other.Address.ColumnNumber
+                this.Address.RowNumber = other.Address.RowNumber
+                this.Address.FixedColumn = other.Address.FixedColumn
+                this.Address.FixedRow = other.Address.FixedRow
+            |]
+            |> Seq.forall (fun x -> x=true)
+            this.ColumnNumber = other.ColumnNumber
+            this.RowNumber = other.RowNumber
+        |]
+        |> Seq.forall (fun x -> x=true)

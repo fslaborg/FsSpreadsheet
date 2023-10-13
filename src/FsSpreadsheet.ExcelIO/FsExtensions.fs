@@ -39,13 +39,21 @@ module FsExtensions =
         /// Creates an FsCell on the basis of an XlsxCell. Uses a SharedStringTable if present to get the XlsxCell's value.
         /// </summary>
         static member ofXlsxCell (sst : SharedStringTable option) (xlsxCell : Cell) =
-            let v =  Cell.getValue sst xlsxCell
+            let mutable v =  Cell.getValue sst xlsxCell
             let col, row = xlsxCell.CellReference.Value |> CellReference.toIndices
             let dt = 
                 try DataType.ofXlsxCellValues xlsxCell.DataType.Value
-                with _ -> DataType.Empty
+                with _ -> DataType.Number // default is number 
+            match dt with
+            | Date ->
+                try 
+                    // datetime is written as float counting days since 1900. 
+                    // We use the .NET helper because we really do not want to deal with datetime issues.
+                    v <- System.DateTime.FromOADate(float v).ToString()
+                with 
+                    | _ -> ()
+            | _ -> ()
             FsCell.createWithDataType dt (int row) (int col) v
-
 
     type FsTable with
 
@@ -183,7 +191,22 @@ module FsExtensions =
                         let sheetId = Sheet.getID xlsxSheet
                         let xlsxCells = 
                             Spreadsheet.getCellsBySheetID sheetId doc
-                            |> Seq.map (FsCell.ofXlsxCell sst)
+                            |> Seq.map (fun c ->
+                                //https://stackoverflow.com/a/13178043/12858021
+                                //https://stackoverflow.com/a/55425719/12858021
+                                // check if styleindex exists
+                                if c.StyleIndex <> null then
+                                    try
+                                        // get cellformat from stylesheet
+                                        let cellFormat : CellFormat = xlsxWorkbookPart.WorkbookStylesPart.Stylesheet.CellFormats.ChildElements.GetItem (int c.StyleIndex.InnerText) :?> CellFormat
+                                        if cellFormat <> null then
+                                            // if numberformatid is between 14 and 18 it is date time.
+                                            if cellFormat.NumberFormatId >= UInt32Value(uint32 14) && cellFormat.NumberFormatId <= UInt32Value(uint32 18) then 
+                                                c.DataType <- CellValues.Date
+                                    with
+                                        | _ -> ()
+                                FsCell.ofXlsxCell sst c
+                            )
                         let assocXlsxTables = 
                             xlsxTables 
                             |> Seq.tryPick (fun (sid,ts) -> if sid = sheetId then Some ts else None)

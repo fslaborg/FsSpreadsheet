@@ -256,7 +256,6 @@ module Cell =
         match cell |> tryGetType with
         | Some (CellValues.SharedString) when sharedStringTable.IsSome->
             let sharedStringTable = sharedStringTable.Value
-
             let sharedStringTableIndex = 
                 cell
                 |> getCellValue
