@@ -49,6 +49,20 @@ let writeAndReadBytes =
             Expect.workSheetEqual (wb.GetWorksheetByName(TestObjects.sheet1Name)) (wb2.GetWorksheetByName(TestObjects.sheet1Name)) "First Worksheet did not match"
             Expect.workSheetEqual (wb.GetWorksheetByName(TestObjects.sheet2Name)) (wb2.GetWorksheetByName(TestObjects.sheet2Name)) "Second Worksheet did not match"
         )
+        testCase "WriteToDisc" (fun () -> 
+            let wb = new FsWorkbook()
+            let ws1 = TestObjects.sheet1()
+            let table = ws1.Table("My Test Table", FsRangeAddress(FsAddress(1,1),FsAddress(3,3)))
+            wb.AddWorksheet(ws1)
+            wb.AddWorksheet(TestObjects.sheet2())
+            System.IO.Directory.CreateDirectory("./TestFiles") |> ignore
+            let p = "./TestFiles/WRITE_Roundabout.xlsx"
+            wb.ToFile(p)
+            let wb2 = FsWorkbook.fromXlsxFile(p)
+            Expect.equal (wb.GetWorksheets().Count) (wb2.GetWorksheets().Count) "Worksheet count should be equal"
+            Expect.workSheetEqual (wb.GetWorksheetByName(TestObjects.sheet1Name)) (wb2.GetWorksheetByName(TestObjects.sheet1Name)) "First Worksheet did not match"
+            Expect.workSheetEqual (wb.GetWorksheetByName(TestObjects.sheet2Name)) (wb2.GetWorksheetByName(TestObjects.sheet2Name)) "Second Worksheet did not match"
+        )
     ]
 
 

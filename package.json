@@ -5,14 +5,11 @@
   "type": "module",
   "main": "Xlsx.js",
   "scripts": {
-    "clean-test": "cd tests/FsSpreadsheet.Tests/js & dotnet fable clean --extension .js --yes",
-    "pretest": "npm run clean-test && dotnet fable tests/FsSpreadsheet.Tests -o tests/FsSpreadsheet.Tests/js",
+    "pretest": "dotnet fable tests/FsSpreadsheet.Tests --noCache -o tests/FsSpreadsheet.Tests/js",
     "test": "mocha tests/FsSpreadsheet.Tests/js",
-    "clean-testexceljs": "cd tests/FsSpreadsheet.Exceljs.Tests/js & dotnet fable clean --extension .js --yes",
-    "pretestexceljs": "npm run clean-testexceljs && dotnet fable tests/FsSpreadsheet.Exceljs.Tests -o tests/FsSpreadsheet.Exceljs.Tests/js",
+    "pretestexceljs": "dotnet fable tests/FsSpreadsheet.Exceljs.Tests --noCache -o tests/FsSpreadsheet.Exceljs.Tests/js",
     "testexceljs": "mocha tests/FsSpreadsheet.Exceljs.Tests/js --timeout 20000",
-    "clean-testjs": "cd tests/JS/FsSpreadsheet.Exceljs & dotnet fable clean --extension .fs.js --yes",
-    "pretestjs": "npm run clean-testjs && dotnet fable src/FsSpreadsheet.Exceljs -o tests/JS/FsSpreadsheet.Exceljs --extension .fs.js",
+    "pretestjs": "dotnet fable src/FsSpreadsheet.Exceljs --noCache -o tests/JS/FsSpreadsheet.Exceljs",
     "testjs": "mocha tests/JS --timeout 20000",
     "prebundle": "mkdir dist & dotnet fable clean --extension .js --yes -o dist",
     "bundle": "dotnet fable src/FsSpreadsheet.Exceljs -o dist"
@@ -22,7 +19,12 @@
     "url": "git+https://github.com/CSBiology/FsSpreadsheet.git"
   },
   "author": "Kevin Frey",
-  "contributors": [ "Heinrich Lukas Weil", "Oliver Maus", "Kevin Schneider", "Timo Mühlhaus" ],
+  "contributors": [
+    "Heinrich Lukas Weil",
+    "Oliver Maus",
+    "Kevin Schneider",
+    "Timo Mühlhaus"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/CSBiology/FsSpreadsheet/issues"
@@ -32,6 +34,6 @@
     "mocha": "^10.2.0"
   },
   "dependencies": {
-    "@nfdi4plants/exceljs": "0.2.0"
+    "@nfdi4plants/exceljs": "^0.3.0"
   }
 }

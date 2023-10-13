@@ -17,6 +17,7 @@ module RunTests =
     let runTestsJs = BuildTask.create "runTestsJS" [clean; build] {
         run npm "test" ""
         run npm "run testexceljs" ""
+        run npm "run testjs" ""
     }
 
     let runTestsDotnet = BuildTask.create "runTestsDotnet" [clean; build] {

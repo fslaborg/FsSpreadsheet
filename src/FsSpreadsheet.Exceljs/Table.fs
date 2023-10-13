@@ -11,15 +11,19 @@ module JsTable =
     let private log (obj:obj) = jsNative
 
     let fromFsTable (fscellcollection: FsCellsCollection) (fsTable: FsTable) : Table =
+        let fsColumns = fsTable.GetColumns fscellcollection
         let columns = 
             if fsTable.ShowHeaderRow then
                 [| for headerCell in fsTable.HeadersRow().Cells(fscellcollection) do
                     yield TableColumn(headerCell.Value) |]
             else
-                [||]
+                [|
+                    for i in 1 .. Seq.length fsColumns do yield TableColumn(string i)
+                |] 
         let rows = 
-            [| for col in fsTable.GetColumns fscellcollection do
-                let cells = if fsTable.ShowHeaderRow then col.Cells |> Seq.tail else col.Cells
+            [| for col in fsColumns do
+                let cells = 
+                    if fsTable.ShowHeaderRow then col.Cells |> Seq.tail else col.Cells 
                 yield! cells |> Seq.mapi (fun i c -> 
                     let rowValue = 
                         match c.DataType with
@@ -35,7 +39,7 @@ module JsTable =
                             printfn "%s" msg
                             #endif
                             c.Value |> box
-                    i, rowValue
+                    i+1, rowValue
                 ) 
             |]
             |> Array.groupBy fst
@@ -43,5 +47,8 @@ module JsTable =
             |> Array.map (fun (_,arr) ->
                 arr |> Array.map snd
             )
-
-        Table(fsTable.Name,fsTable.RangeAddress.Range,columns,rows,headerRow = fsTable.ShowHeaderRow)
+        let defaultStyle = {|
+            theme = "TableStyleMedium7"
+            showRowStripes = true
+        |}
+        Table(fsTable.Name,fsTable.RangeAddress.Range,columns,rows,fsTable.Name,headerRow = fsTable.ShowHeaderRow, style = defaultStyle)
