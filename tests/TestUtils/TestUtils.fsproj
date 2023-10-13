@@ -7,7 +7,7 @@
 
   <ItemGroup>
     <Compile Include="DefaultTestObjects.fs" />
-    <Compile Include="Utils.fs" />
+    <Compile Include="TestingUtils.fs" />
   </ItemGroup>
 
 	<ItemGroup>
@@ -22,7 +22,7 @@
   </ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Update="FSharp.Core" Version="7.0.400" />
+	  <PackageReference Update="FSharp.Core" Version="7.0.300" />
 	</ItemGroup>
 
 </Project>

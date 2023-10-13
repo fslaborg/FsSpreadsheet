@@ -1,4 +1,4 @@
-﻿module TestUtils.Utils
+﻿module TestingUtils
 
 open FsSpreadsheet
 #if FABLE_COMPILER
@@ -21,7 +21,7 @@ module Utils =
         |> Array.countBy id
         |> Array.sortBy fst
 
-    let firstDiff s1 s2 =
+    let inline firstDiff s1 s2 =
       let s1 = Seq.append (Seq.map Some s1) (Seq.initInfinite (fun _ -> None))
       let s2 = Seq.append (Seq.map Some s2) (Seq.initInfinite (fun _ -> None))
       Seq.mapi2 (fun i s p -> i,s,p) s1 s2
@@ -31,19 +31,30 @@ module Utils =
 module Expect =
 
     /// Expects the `actual` sequence to equal the `expected` one.
-    let sequenceEqual actual expected message =
-      match Utils.firstDiff actual expected with
-      | _,None,None -> ()
-      | i,Some a, Some e ->
-        failwithf "%s. Sequence does not match at position %i. Expected item: %A, but got %A."
-          message i e a
-      | i,None,Some e ->
-        failwithf "%s. Sequence actual shorter than expected, at pos %i for expected item %A."
-          message i e
-      | i,Some a,None ->
-        failwithf "%s. Sequence actual longer than expected, at pos %i found item %A."
-          message i a
+    let inline private _sequenceEqual message (comparison: int * 'a option * 'a option) =
+        match comparison with
+        | _,None,None -> ()
+        | i,Some a, Some e ->
+            let msg = 
+                sprintf "%s. Sequence does not match at position %i.\n" message i
+                 + sprintf "Expected item: %A\n" e
+                 + sprintf "Actual item: %A\n" a
+            failwith msg
+        | i,None,Some e ->
+            let msg =
+                sprintf "%s. Sequence actual shorter than expected, at pos %i for expected item: \n" message i
+                + sprintf "%A" e
+            failwith msg
+        | i,Some a,None ->
+            let msg =
+                sprintf "%s. Sequence actual longer than expected, at pos %i found item: \n" message i
+                + sprintf "%A" a
+            failwith msg
 
+    let inline sequenceEqual actual expected message =
+        let comp = Utils.firstDiff actual expected
+        _sequenceEqual message comp
+        
     let columnsEqual (actual : FsCell seq seq) (expected : FsCell seq seq) message =     
         let f (cols : FsCell seq seq) = 
             cols
@@ -59,7 +70,31 @@ module Expect =
             failwithf $"{message}. Worksheet names do not match. Expected {expected.Name} but got {actual.Name}"
         Expect.sequenceEqual (f actual) (f expected) $"{message}. Worksheet does not match"
 
-    let isDefaultTestObject (wb: FsWorkbook) = DefaultTestObject.isDefaultTestObject wb
+    let cellSequenceEquals (actual: FsCell seq) (expected: FsCell seq) message =
+        let cellDiff (s1: FsCell seq) (s2: FsCell seq) =
+            let s1 = Seq.append (Seq.map Some s1) (Seq.initInfinite (fun _ -> None))
+            let s2 = Seq.append (Seq.map Some s2) (Seq.initInfinite (fun _ -> None))
+            Seq.mapi2 (fun i s p -> i,s,p) s1 s2
+            |> Seq.find (function |_,Some s,Some p when s.StructurallyEquals(p) -> false |_-> true)
+        let comp = cellDiff actual expected
+        _sequenceEqual message comp
+
+    let isDefaultTestObject (wb: FsWorkbook) = 
+        let worksheets = wb.GetWorksheets()
+        for ws in worksheets do
+            let isTable, expectedRows = Expect.wantSome (DefaultTestObject.valueMap |> Map.tryFind ws.Name) $"ExpectError: Unable to get info for worksheet: {ws.Name}"
+            match isTable with
+            | Some expectedTableName -> 
+                let actualTable = Expect.wantSome (ws.Tables |> Seq.tryFind (fun t -> t.Name = expectedTableName)) $"ExpectError: Unable to get info for worksheet->table: {ws.Name}->{expectedTableName}"
+                let headerRow = Expect.wantSome (actualTable.TryGetHeaderRow(ws.CellCollection)) $"ExpectError: ShowHeaderRow is false for worksheet->table: {ws.Name}->{expectedTableName}"
+                let actualRows = actualTable.GetRows(ws.CellCollection) |> Seq.tail //Seq.tail skips HeaderRow
+                cellSequenceEquals headerRow expectedRows.[0] $"ExpectError: HeaderRow is not equal for worksheet->table: {ws.Name}->{expectedTableName}"
+                for actualRow, expectedRow in Seq.zip actualRows expectedRows.[1..] do
+                    cellSequenceEquals actualRow expectedRow $"ExpectError: Table body rows are not equal for worksheet->table: {ws.Name}->{expectedTableName}"
+            | None ->
+                let actualRows = ws.Rows
+                for actualRow, expectedRow in Seq.zip actualRows expectedRows do
+                    cellSequenceEquals actualRow expectedRow $"ExpectError: Worksheet rows are not equal for worksheet: {ws.Name}"
 
     let inline equal actual expected message = Expect.equal actual expected message
     let notEqual actual expected message = Expect.notEqual actual expected message

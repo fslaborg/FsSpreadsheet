@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="DefaultIO.Tests.fs" />
     <Compile Include="TestObjects.fs" />
     <Compile Include="OpenXml\FsExtensions.fs" />
     <Compile Include="OpenXml\Cell.fs" />
