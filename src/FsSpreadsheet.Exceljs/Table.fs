@@ -14,7 +14,7 @@ module JsTable =
         let fsColumns = fsTable.GetColumns fscellcollection
         let columns = 
             if fsTable.ShowHeaderRow then
-                [| for headerCell in fsTable.HeadersRow().Cells(fscellcollection) do
+                [| for headerCell in fsTable.GetHeaderRow(fscellcollection) do
                     yield TableColumn(headerCell.Value) |]
             else
                 [|

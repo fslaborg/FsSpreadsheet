@@ -27,6 +27,7 @@ type TestFiles =
         | FsSpreadsheet     -> "TestWorkbook_FsSpreadsheet.xlsx"
 
     member this.asRelativePath = $"../TestUtils/{testFolder}/{this.asFileName}"
+    member this.asRelativePathNode = $"./tests/TestUtils/{testFolder}/{this.asFileName}"
 
 module ExpectedRows = 
     let headerRow (range:string) cc = 

@@ -1,6 +1,6 @@
 module Workbook.Tests
 
-open TestUtils.Utils
+open TestingUtils
 open Fable.ExcelJs
 open FsSpreadsheet.Exceljs
 open FsSpreadsheet

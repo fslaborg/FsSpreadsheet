@@ -7,14 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="DefaultIO.Tests.fs" />
     <Compile Include="Workbook.Tests.fs" />
     <Compile Include="Main.fs" />
   </ItemGroup>
-
-	<ItemGroup>
-		<PackageReference Include="Fable.Mocha" Version="[2.16.0]" />
-	</ItemGroup>
-
 	<ItemGroup>
 	  <ProjectReference Include="..\..\src\FsSpreadsheet.Exceljs\FsSpreadsheet.Exceljs.fsproj" />
 	  <ProjectReference Include="..\TestUtils\TestUtils.fsproj" />

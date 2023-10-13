@@ -55,7 +55,11 @@ module JsWorksheet =
                         match t with
                         | ValueType.Boolean -> System.Boolean.Parse(vTemp) |> createFscell DataType.Boolean
                         | ValueType.Number -> float vTemp |> createFscell DataType.Number
-                        | ValueType.Date -> System.DateTime.Parse(vTemp) |> createFscell DataType.Date
+                        | ValueType.Date -> 
+                            let dt = System.DateTime.Parse(vTemp)  
+                            log ("[ACTUAL]", dt)
+                            log ("[EXPECTED]", System.DateTime(2023,10,14))
+                            dt |> createFscell DataType.Date
                         | ValueType.String -> vTemp |> createFscell DataType.String
                         | anyElse -> 
                             let msg = sprintf "ValueType '%A' is not fully implemented in FsSpreadsheet and is handled as string input." anyElse

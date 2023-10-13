@@ -436,9 +436,9 @@ type FsTable (name : string, rangeAddress : FsRangeAddress, ?showTotalsRow : boo
         if this.ShowHeaderRow then
             let oldFieldNames =  _fieldNames
             _fieldNames <- new Dictionary<string, FsTableField>()
-            let headersRow = this.HeadersRow();
+            let headersRow = this.GetHeaderRow(cellsCollection);
             let mutable cellPos = 0
-            for cell in headersRow.Cells(cellsCollection) do
+            for cell in headersRow do
                 let mutable name = cell.Value //GetString();
                 match Dictionary.tryGet name oldFieldNames with
                 | Some tableField ->

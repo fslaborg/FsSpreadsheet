@@ -68,7 +68,7 @@ module Expect =
             |> Seq.map (fun r -> r.Cells |> Seq.map (fun c -> c.Value) |> Seq.reduce (fun a b -> a + b)) 
         if actual.Name <> expected.Name then
             failwithf $"{message}. Worksheet names do not match. Expected {expected.Name} but got {actual.Name}"
-        Expect.sequenceEqual (f actual) (f expected) $"{message}. Worksheet does not match"
+        sequenceEqual (f actual) (f expected) $"{message}. Worksheet does not match"
 
     let cellSequenceEquals (actual: FsCell seq) (expected: FsCell seq) message =
         let cellDiff (s1: FsCell seq) (s2: FsCell seq) =
