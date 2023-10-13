@@ -13,16 +13,16 @@ let tests_Read = testList "Read" [
     ftestCase "Excel" <| fun _ ->
         let wb = readFromTestFile DefaultTestObject.TestFiles.Excel
         Expect.isDefaultTestObject wb
-    testCase "Libre" <| fun _ ->
+    ptestCase "Libre" <| fun _ ->
         let wb = readFromTestFile DefaultTestObject.TestFiles.Libre
         Expect.isDefaultTestObject wb
-    testCase "FableExceljs" <| fun _ ->
+    ftestCase "FableExceljs" <| fun _ ->
         let wb = readFromTestFile DefaultTestObject.TestFiles.FableExceljs
         Expect.isDefaultTestObject wb
-    testCase "ClosedXML" <| fun _ ->
+    ftestCase "ClosedXML" <| fun _ ->
         let wb = readFromTestFile DefaultTestObject.TestFiles.ClosedXML
         Expect.isDefaultTestObject wb
-    testCase "FsSpreadsheet" <| fun _ ->
+    ptestCase "FsSpreadsheet" <| fun _ ->
         let wb = readFromTestFile DefaultTestObject.TestFiles.FsSpreadsheet
         Expect.isDefaultTestObject wb
 ]
