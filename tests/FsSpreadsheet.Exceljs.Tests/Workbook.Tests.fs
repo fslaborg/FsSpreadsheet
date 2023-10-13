@@ -1,6 +1,6 @@
 module Workbook.Tests
 
-open Fable.Mocha
+open TestUtils.Utils
 open Fable.ExcelJs
 open FsSpreadsheet.Exceljs
 open FsSpreadsheet
