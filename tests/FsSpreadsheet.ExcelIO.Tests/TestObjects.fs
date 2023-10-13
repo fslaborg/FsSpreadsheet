@@ -2,6 +2,36 @@
 
 open FsSpreadsheet
 
+module CrossIOTests = 
+    
+    let testFolder = "TestFiles"
+
+    let excelFileName = "TestWorkbook_Excel.xlsx"
+    let libreFileName = "TestWorkbook_Libre.xlsx"
+    let exceljsFileName = "TestWorkbook_ExcelJS.xlsx"
+    let closesXMLFileName = "TestWorkbook_ClosedXML.xlsx"
+    let FsSpreadsheetFileName = "TestWorkbook_FsSpreadsheet.xlsx"
+
+    module Sheet1 = 
+
+        [<Literal>]
+        let sheetName = "WithTable"
+        [<Literal>]
+        let tableName = "MyTable"
+
+    module Sheet2 = 
+
+        [<Literal>]
+        let sheetName = "Tableless"
+
+    module Sheet3 = 
+
+        [<Literal>]
+        let sheetName = "WithTable_Duplicate"
+        [<Literal>]
+        let tableName = "MyOtherTable"
+
+
 let sheet1Name = "MySheet1"
 let sheet2Name = "MySheet2"
 
