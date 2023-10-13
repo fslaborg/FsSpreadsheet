@@ -34,44 +34,49 @@ module ExpectedRows =
         row[1].SetValueAs "Numbers"
         row[2].SetValueAs "Strings"
         row[3].SetValueAs "DateTime"
-        row[4].SetValueAs "ARCtrl Column"
-        row[5].SetValueAs "ARCtrl Column "
+        row[4].SetValueAs "Boolean"
+        row[5].SetValueAs "ARCtrl Column"
+        row[6].SetValueAs "ARCtrl Column "
         row
     let firstRow(range: string) cc = 
         let row = FsRow(FsRangeAddress(range),cc)
         row[1].SetValueAs 1
         row[2].SetValueAs "Hello"
         row[3].SetValueAs (System.DateTime(2023,10,14))
-        row[4].SetValueAs "(A) This is part 1 of 2"
-        row[5].SetValueAs "(A) This is part 2 of 2"
+        row[4].SetValueAs true
+        row[5].SetValueAs "(A) This is part 1 of 2"
+        row[6].SetValueAs "(A) This is part 2 of 2"
         row
     let secondRow(range:string) cc =
         let row = FsRow(FsRangeAddress(range),cc)
         row[1].SetValueAs 2
         row[2].SetValueAs "World"
         row[3].SetValueAs (System.DateTime(2023,10,15))
-        row[5].SetValueAs "Tests if column names with whitespace at end can be unique"
+        row[4].SetValueAs false
+        row[6].SetValueAs "Tests if column names with whitespace at end can be unique"
         row
     let thirdRow(range:string) cc =
         let row = FsRow(FsRangeAddress(range),cc)
         row[1].SetValueAs 3
         row[2].SetValueAs "Bye"
         row[3].SetValueAs (System.DateTime(2023,10,16))
+        row[4].SetValueAs true
         row
     let fourthRow(range:string) cc = 
         let row = FsRow(FsRangeAddress(range),cc)
         row[1].SetValueAs 4
         row[2].SetValueAs "Outer Space"
         row[3].SetValueAs (System.DateTime(2023,10,17))
+        row[4].SetValueAs false
         row
 
     let rowCollectionA1 = 
         let cells = FsCellsCollection() 
-        [|headerRow("A1:E1") ;firstRow("A2:E2") ;secondRow("A3:E3");thirdRow("A4:E4");fourthRow("A5:E5")|] 
+        [|headerRow("A1:F1") ;firstRow("A2:F2") ;secondRow("A3:F3");thirdRow("A4:F4");fourthRow("A5:F5")|] 
         |> Array.map (fun x -> x cells)
     let rowCollectionB4 = 
         let cells = FsCellsCollection() 
-        [|headerRow("B4:E4");firstRow("B5:E5");secondRow("B6:E6");thirdRow("B7:E7");fourthRow("B8:E8")|]
+        [|headerRow("B4:G4");firstRow("B5:G5");secondRow("B6:G6");thirdRow("B7:G7");fourthRow("B8:G8")|]
         |> Array.map (fun x -> x cells)
             
 module Sheet1 = 
