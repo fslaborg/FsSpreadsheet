@@ -12,6 +12,48 @@ module CrossIOTests =
     let closesXMLFileName = "TestWorkbook_ClosedXML.xlsx"
     let FsSpreadsheetFileName = "TestWorkbook_FsSpreadsheet.xlsx"
 
+    module ExpectedRows = 
+        let cells = FsCellsCollection()
+        let headerRow = 
+            let row = FsRow(FsRangeAddress("A1:E1"),cells)
+            row[1].SetValueAs "Numbers"
+            row[2].SetValueAs "Strings"
+            row[3].SetValueAs "DateTime"
+            row[4].SetValueAs "ARCtrl Column"
+            row[5].SetValueAs "ARCtrl Column "
+            row
+        let firstRow = 
+            let row = FsRow(FsRangeAddress("A2:E2"),cells)
+            row[1].SetValueAs 1
+            row[2].SetValueAs "Hello"
+            row[3].SetValueAs (System.DateTime(2023,10,14))
+            row[4].SetValueAs "(A) This is part 1 of 2"
+            row[5].SetValueAs "(A) This is part 2 of 2"
+            row
+        let secondRow =
+            let row = FsRow(FsRangeAddress("A3:E3"),cells)
+            row[1].SetValueAs 2
+            row[2].SetValueAs "World"
+            row[3].SetValueAs (System.DateTime(2023,10,15))
+            row[5].SetValueAs "Tests if column names with whitespace at end can be unique"
+            row
+        let thirdRow =
+            let row = FsRow(FsRangeAddress("A4:E4"),cells)
+            row[1].SetValueAs 3
+            row[2].SetValueAs "Bye"
+            row[3].SetValueAs (System.DateTime(2023,10,16))
+            row
+        let fourthRow = 
+            let row = FsRow(FsRangeAddress("A5:E5"),cells)
+            row[1].SetValueAs 4
+            row[2].SetValueAs "Outer Space"
+            row[3].SetValueAs (System.DateTime(2023,10,17))
+            row
+
+        let rowCollection =
+            {|HeaderRow = headerRow; Body = [|firstRow;secondRow;thirdRow;fourthRow|]|}
+            
+
     module Sheet1 = 
 
         [<Literal>]
@@ -30,6 +72,15 @@ module CrossIOTests =
         let sheetName = "WithTable_Duplicate"
         [<Literal>]
         let tableName = "MyOtherTable"
+
+    let valueMap = 
+
+        [
+            Sheet1.sheetName, (Some Sheet1.tableName, ExpectedRows.rowCollection); 
+            Sheet2.sheetName, (None, ExpectedRows.rowCollection);       
+            Sheet3.sheetName, (Some Sheet3.tableName, ExpectedRows.rowCollection)                  
+        ]
+        |> Map.ofList
 
 
 let sheet1Name = "MySheet1"
