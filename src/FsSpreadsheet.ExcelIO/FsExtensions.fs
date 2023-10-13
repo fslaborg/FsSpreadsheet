@@ -52,6 +52,9 @@ module FsExtensions =
                     v <- System.DateTime.FromOADate(float v).ToString()
                 with 
                     | _ -> ()
+            | Boolean ->
+                // boolean is written as int/float either 0 or null
+                match v with | "1" -> v <- "True" | "0" -> v <- "False" | _ -> ()
             | _ -> ()
             FsCell.createWithDataType dt (int row) (int col) v
 
@@ -194,8 +197,9 @@ module FsExtensions =
                             |> Seq.map (fun c ->
                                 //https://stackoverflow.com/a/13178043/12858021
                                 //https://stackoverflow.com/a/55425719/12858021
-                                // check if styleindex exists
-                                if c.StyleIndex <> null then
+                                // if styleindex is not null and datatype is null we propably have a DateTime field.
+                                // if datatype would not be null it could also be boolean, as far as i tested it ~Kevin F 13.10.2023
+                                if c.StyleIndex <> null && c.DataType = null then
                                     try
                                         // get cellformat from stylesheet
                                         let cellFormat : CellFormat = xlsxWorkbookPart.WorkbookStylesPart.Stylesheet.CellFormats.ChildElements.GetItem (int c.StyleIndex.InnerText) :?> CellFormat
