@@ -52,7 +52,7 @@ module ExpectedRows =
         let row = FsRow(FsRangeAddress(range),cc)
         row[1].SetValueAs 2
         row[2].SetValueAs "World"
-        row[3].SetValueAs (System.DateTime(2023,10,15))
+        row[3].SetValueAs (System.DateTime(2023,10,15, 18,0,0))
         row[4].SetValueAs false
         row[6].SetValueAs "Tests if column names with whitespace at end can be unique"
         row
@@ -60,7 +60,7 @@ module ExpectedRows =
         let row = FsRow(FsRangeAddress(range),cc)
         row[1].SetValueAs 3
         row[2].SetValueAs "Bye"
-        row[3].SetValueAs (System.DateTime(2023,10,16))
+        row[3].SetValueAs (System.DateTime(2023,10,16, 20,0,0))
         row[4].SetValueAs true
         row
     let fourthRow(range:string) cc = 

@@ -135,7 +135,7 @@ let fsExtensionTests =
                     Expect.equal d DataType.String "DataType is not DataType.String"
                 testCase "is equal to dummyFsWorkbook in sheet4, cellA2 value" <| fun _ ->
                     let v = (FsWorksheet.getCellAt 2 1 fsWorksheet4FromStream).Value
-                    Expect.equal v "1" "value is not equal"     // should be "True"... why is it not? Maybe bc. it's stored as "1" in the XML and only Excel converts it to "TRUE" on the screen... TO DO: check that.
+                    Expect.equal v "true" "value is not equal"
                 testCase "is equal to dummyFsWorkbook in sheet4, cellA2 address" <| fun _ ->
                     let a = (FsWorksheet.getCellAt 2 1 fsWorksheet4FromStream).Address.Address
                     Expect.equal a "A2" "address is not equal"
