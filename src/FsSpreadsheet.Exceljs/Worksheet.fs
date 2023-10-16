@@ -53,12 +53,12 @@ module JsWorksheet =
                     let vTemp = string c.value.Value
                     let fscell =
                         match t with
-                        | ValueType.Boolean -> System.Boolean.Parse(vTemp) |> createFscell DataType.Boolean
+                        | ValueType.Boolean -> 
+                            let b = System.Boolean.Parse vTemp
+                            createFscell DataType.Boolean b
                         | ValueType.Number -> float vTemp |> createFscell DataType.Number
                         | ValueType.Date -> 
-                            let dt = System.DateTime.Parse(vTemp)  
-                            log ("[ACTUAL]", dt)
-                            log ("[EXPECTED]", System.DateTime(2023,10,14))
+                            let dt = System.DateTimeOffset.Parse(vTemp).Date
                             dt |> createFscell DataType.Date
                         | ValueType.String -> vTemp |> createFscell DataType.String
                         | anyElse -> 

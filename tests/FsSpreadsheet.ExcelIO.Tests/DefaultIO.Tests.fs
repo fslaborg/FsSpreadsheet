@@ -5,10 +5,12 @@ open TestingUtils
 open FsSpreadsheet
 open FsSpreadsheet.ExcelIO
 
-[<Tests>]
 let tests_Read = testList "Read" [
     let readFromTestFile (testFile: DefaultTestObject.TestFiles) =
-        FsWorkbook.fromXlsxFile(testFile.asRelativePath)
+        try 
+            FsWorkbook.fromXlsxFile(testFile.asRelativePath)
+        with
+            | _ -> FsWorkbook.fromXlsxFile($"{DefaultTestObject.testFolder}/{testFile.asFileName}")
 
     ftestCase "Excel" <| fun _ ->
         let wb = readFromTestFile DefaultTestObject.TestFiles.Excel
@@ -25,5 +27,10 @@ let tests_Read = testList "Read" [
     ptestCase "FsSpreadsheet" <| fun _ ->
         let wb = readFromTestFile DefaultTestObject.TestFiles.FsSpreadsheet
         Expect.isDefaultTestObject wb
+]
+
+[<Tests>]
+let main = testList "DefaultIO" [
+    tests_Read
 ]
 

@@ -21,8 +21,8 @@ type DataType =
         let value = box value
         match value with
         | :? char as c -> DataType.String,c.ToString()
-        | :? bool as true -> DataType.Boolean, "True"
-        | :? bool as false -> DataType.Boolean, "False"
+        | :? bool as true -> DataType.Boolean, "true"
+        | :? bool as false -> DataType.Boolean, "false"
         | :? byte as i -> DataType.Number,i.ToString()
         | :? sbyte as i -> DataType.Number,i.ToString()
         | :? int as i -> DataType.Number,i.ToString()

@@ -15,7 +15,7 @@ let dataType =
             testCase "Correct DataType" <| fun _ ->
                 Expect.isTrue (resultDtTrue = DataType.Boolean) "is not the expected DataType.Boolean"
             testCase "Correct string" <| fun _ ->
-                let expected = "True"
+                let expected = "true"
                 Expect.equal resultStrTrue expected $"resulting string is not correct: {resultStrTrue}"
         ]
         testList "InferCellValue bool = false" [
@@ -24,7 +24,7 @@ let dataType =
             testCase "Correct DataType" <| fun _ ->
                 Expect.isTrue (resultDtFalse = DataType.Boolean) "is not the expected DataType.Boolean"
             testCase "Correct string" <| fun _ ->
-                let expected = "False"
+                let expected = "false"
                 Expect.equal resultStrFalse expected "resulting string is not correct"
         ]
         testList "InferCellValue string = \"test\"" [
@@ -96,16 +96,16 @@ let fsCellData =
                 Expect.equal fscellA1_string.Value "A1" "resulting value is not A1"
             testCase "Value: 1" <| fun _ ->
                 Expect.equal fscellB1_num.Value "1" "resulting value is not 1"
-            testCase "Value: True" <| fun _ ->
-                Expect.equal fscellA2_bool.Value "True" "resulting value is not True"
+            testCase "Value: true" <| fun _ ->
+                Expect.equal fscellA2_bool.Value "true" "resulting value is not true"
         
 
             testCase "Value as string : A1" <| fun _ ->
                 Expect.equal (fscellA1_string.ValueAsString()) "A1" "resulting value is not A1 as string"
             testCase "Value as integer: 1 " <| fun _ ->
                 Expect.equal (fscellB1_num.ValueAsInt()) 1 "resulting value is not 1 as integer"
-            testCase "Value as bool: True" <| fun _ ->
-                Expect.equal (fscellA2_bool.ValueAsBool()) true "resulting value is not True as bool"
+            testCase "Value as bool: true" <| fun _ ->
+                Expect.equal (fscellA2_bool.ValueAsBool()) true "resulting value is not true as bool"
 
         
             testCase "RowNumber: 1 " <| fun _ ->

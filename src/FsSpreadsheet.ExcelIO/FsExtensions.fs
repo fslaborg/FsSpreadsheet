@@ -40,6 +40,7 @@ module FsExtensions =
         /// </summary>
         static member ofXlsxCell (sst : SharedStringTable option) (xlsxCell : Cell) =
             let mutable v =  Cell.getValue sst xlsxCell
+            let setValue x = v <- x
             let col, row = xlsxCell.CellReference.Value |> CellReference.toIndices
             let dt = 
                 try DataType.ofXlsxCellValues xlsxCell.DataType.Value
@@ -49,12 +50,15 @@ module FsExtensions =
                 try 
                     // datetime is written as float counting days since 1900. 
                     // We use the .NET helper because we really do not want to deal with datetime issues.
-                    v <- System.DateTime.FromOADate(float v).ToString()
+                    setValue <| System.DateTime.FromOADate(float v).ToString()
                 with 
                     | _ -> ()
             | Boolean ->
                 // boolean is written as int/float either 0 or null
-                match v with | "1" -> v <- "True" | "0" -> v <- "False" | _ -> ()
+                match v with 
+                | "1" -> setValue "true" 
+                | "0" -> setValue "false" 
+                | _ -> ()
             | _ -> ()
             FsCell.createWithDataType dt (int row) (int col) v
 

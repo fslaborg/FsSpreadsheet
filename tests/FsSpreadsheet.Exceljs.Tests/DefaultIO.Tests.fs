@@ -9,7 +9,7 @@ let tests_Read = testList "Read" [
     let readFromTestFile (testFile: DefaultTestObject.TestFiles) =
         FsWorkbook.fromXlsxFile(testFile.asRelativePathNode)
 
-    ftestCaseAsync "Excel" <| async {
+    testCaseAsync "Excel" <| async {
         let! wb = readFromTestFile DefaultTestObject.TestFiles.Excel |> Async.AwaitPromise
         Expect.isDefaultTestObject wb
     }
@@ -17,11 +17,11 @@ let tests_Read = testList "Read" [
         let! wb = readFromTestFile DefaultTestObject.TestFiles.Libre |> Async.AwaitPromise
         Expect.isDefaultTestObject wb
     }
-    ptestCaseAsync "FableExceljs" <| async {
+    testCaseAsync "FableExceljs" <| async {
         let! wb = readFromTestFile DefaultTestObject.TestFiles.FableExceljs |> Async.AwaitPromise
         Expect.isDefaultTestObject wb
     }
-    ptestCaseAsync "ClosedXML" <| async {
+    testCaseAsync "ClosedXML" <| async {
         let! wb = readFromTestFile DefaultTestObject.TestFiles.ClosedXML |> Async.AwaitPromise
         Expect.isDefaultTestObject wb
     }

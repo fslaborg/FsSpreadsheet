@@ -44,7 +44,7 @@ module ExpectedRows =
         row[1].SetValueAs 1
         row[2].SetValueAs "Hello"
         row[3].SetValueAs (System.DateTime(2023,10,14))
-        row[4].SetValueAs true
+        row[4].SetValueAs<bool> true
         row[5].SetValueAs "(A) This is part 1 of 2"
         row[6].SetValueAs "(A) This is part 2 of 2"
         row
