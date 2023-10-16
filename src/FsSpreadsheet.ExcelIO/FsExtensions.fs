@@ -208,8 +208,10 @@ module FsExtensions =
                                         // get cellformat from stylesheet
                                         let cellFormat : CellFormat = xlsxWorkbookPart.WorkbookStylesPart.Stylesheet.CellFormats.ChildElements.GetItem (int c.StyleIndex.InnerText) :?> CellFormat
                                         if cellFormat <> null then
-                                            // if numberformatid is between 14 and 18 it is date time.
-                                            if cellFormat.NumberFormatId >= UInt32Value(uint32 14) && cellFormat.NumberFormatId <= UInt32Value(uint32 18) then 
+                                            // if numberformatid is between 14 and 18 it is standard date time format.
+                                            // custom formats are given in the range of 164 to 180, all none default date time formats fall in there.
+                                            let dateTimeFormats = [14..22]@[164 .. 180] |> List.map (uint32 >> UInt32Value)
+                                            if List.contains cellFormat.NumberFormatId dateTimeFormats then 
                                                 c.DataType <- CellValues.Date
                                     with
                                         | _ -> ()
