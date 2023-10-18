@@ -92,7 +92,13 @@ module SharedStringTable =
         else
             index
             
-            
+    /// <summary>
+    /// Gets the sharedStringTable of the spreadsheet if it exists, else returns None.
+    /// </summary>
+    let tryGet (spreadsheetDocument : SpreadsheetDocument) =
+        try spreadsheetDocument.WorkbookPart.SharedStringTablePart.SharedStringTable |> Some
+        with | _ -> None
+
 
 
 

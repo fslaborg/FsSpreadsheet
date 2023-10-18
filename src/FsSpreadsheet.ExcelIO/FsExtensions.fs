@@ -17,33 +17,53 @@ module FsExtensions =
         /// <summary>
         /// Converts a given CellValues to the respective DataType.
         /// </summary>
-        static member ofXlsxCellValues (cellValues : CellValues) =
-            match cellValues with
-            | CellValues.Number -> DataType.Number
-            | CellValues.Boolean -> DataType.Boolean
-            | CellValues.Date -> DataType.Date
-            | CellValues.Error -> DataType.Empty
-            | CellValues.InlineString
-            | CellValues.SharedString
-            | CellValues.String 
-            | _ -> DataType.String
+        static member ofXlsXCell (doc : Packaging.SpreadsheetDocument)  (cell : Cell) =
+
+            //https://stackoverflow.com/a/13178043/12858021
+            //https://stackoverflow.com/a/55425719/12858021
+            // if styleindex is not null and datatype is null we propably have a DateTime field.
+            // if datatype would not be null it could also be boolean, as far as i tested it ~Kevin F 13.10.2023
+            if cell.StyleIndex <> null && cell.DataType = null then
+                try
+                    let styleSheet = Stylesheet.get doc 
+                    let cellFormat : CellFormat = Stylesheet.CellFormat.getAt (int cell.StyleIndex.InnerText) styleSheet
+                    if cellFormat <> null then
+                        // if numberformatid is between 14 and 18 it is standard date time format.
+                        // custom formats are given in the range of 164 to 180, all none default date time formats fall in there.
+                        let dateTimeFormats = [14..22]@[164 .. 180] |> List.map (uint32 >> UInt32Value)
+                        if List.contains cellFormat.NumberFormatId dateTimeFormats then 
+                            DataType.Date
+                        else 
+                            DataType.Number
+                    else
+                        DataType.Number
+                with
+                | _ -> DataType.Number
+            else 
+                let cellValues = cell.DataType.Value
+                match cellValues with
+                | CellValues.Number -> DataType.Number
+                | CellValues.Boolean -> DataType.Boolean
+                | CellValues.Date -> DataType.Date
+                | CellValues.Error -> DataType.Empty
+                | CellValues.InlineString
+                | CellValues.SharedString
+                | CellValues.String -> DataType.String
+                | _ -> DataType.Number
 
 
     type FsCell with
-        //member self.ofXlsxCell (sst : Spreadsheet.SharedStringTable option) (xlsxCell:Spreadsheet.Cell) =
-        //    let v =  Cell.getValue sst xlsxCell
-        //    let row,col = xlsxCell.CellReference.Value |> CellReference.toIndices
-        //    FsCell.create (int row) (int col) v
 
         /// <summary>
         /// Creates an FsCell on the basis of an XlsxCell. Uses a SharedStringTable if present to get the XlsxCell's value.
-        /// </summary>
-        static member ofXlsxCell (sst : SharedStringTable option) (xlsxCell : Cell) =
+        /// </summary>   
+        static member ofXlsxCell (doc : Packaging.SpreadsheetDocument) (xlsxCell : Cell) =
+            let sst = Spreadsheet.tryGetSharedStringTable doc
             let mutable v =  Cell.getValue sst xlsxCell
             let setValue x = v <- x
             let col, row = xlsxCell.CellReference.Value |> CellReference.toIndices
             let dt = 
-                try DataType.ofXlsxCellValues xlsxCell.DataType.Value
+                try DataType.ofXlsXCell doc xlsxCell
                 with _ -> DataType.Number // default is number 
             match dt with
             | Date ->
@@ -61,6 +81,9 @@ module FsExtensions =
                 | _ -> ()
             | _ -> ()
             FsCell.createWithDataType dt (int row) (int col) v
+
+        static member toXlsxCell (doc : Packaging.SpreadsheetDocument) (cell : FsCell) =
+            Cell.fromValueWithDataType doc (uint32 cell.ColumnNumber) (uint32 cell.RowNumber) cell.Value cell.DataType
 
     type FsTable with
 
@@ -118,7 +141,7 @@ module FsExtensions =
         /// <summary>
         /// Returns the FsWorksheet in the form of an XlsxSpreadsheet.
         /// </summary>
-        member self.ToXlsxWorksheet() =
+        member self.ToXlsxWorksheet(doc) =
             self.RescanRows()
             let sheet = Worksheet.empty()
             let sheetData =
@@ -134,7 +157,7 @@ module FsExtensions =
                         let cells = 
                             cells
                             |> List.map (fun cell ->
-                                Cell.fromValueWithDataType None (uint32 cell.ColumnNumber) (uint32 cell.RowNumber) (cell.Value) (cell.DataType)
+                                Cell.fromValueWithDataType doc (uint32 cell.ColumnNumber) (uint32 cell.RowNumber) (cell.Value) (cell.DataType)
                             )
                         let row = Row.create (uint32 row.Index) (Row.Spans.fromBoundaries min max) cells
                         SheetData.appendRow row sd |> ignore
@@ -144,8 +167,8 @@ module FsExtensions =
         /// <summary>
         /// Returns an FsWorksheet in the form of an XlsxSpreadsheet.
         /// </summary>
-        static member toXlsxWorksheet (fsWorksheet : FsWorksheet) = 
-            fsWorksheet.ToXlsxWorksheet()
+        static member toXlsxWorksheet (fsWorksheet : FsWorksheet, doc) = 
+            fsWorksheet.ToXlsxWorksheet(doc)
 
         /// <summary>
         /// Appends the FsTables of this FsWorksheet to a given OpenXmlWorksheetPart in an XlsxWorkbookPart.
@@ -198,25 +221,7 @@ module FsExtensions =
                         let sheetId = Sheet.getID xlsxSheet
                         let xlsxCells = 
                             Spreadsheet.getCellsBySheetID sheetId doc
-                            |> Seq.map (fun c ->
-                                //https://stackoverflow.com/a/13178043/12858021
-                                //https://stackoverflow.com/a/55425719/12858021
-                                // if styleindex is not null and datatype is null we propably have a DateTime field.
-                                // if datatype would not be null it could also be boolean, as far as i tested it ~Kevin F 13.10.2023
-                                if c.StyleIndex <> null && c.DataType = null then
-                                    try
-                                        // get cellformat from stylesheet
-                                        let cellFormat : CellFormat = xlsxWorkbookPart.WorkbookStylesPart.Stylesheet.CellFormats.ChildElements.GetItem (int c.StyleIndex.InnerText) :?> CellFormat
-                                        if cellFormat <> null then
-                                            // if numberformatid is between 14 and 18 it is standard date time format.
-                                            // custom formats are given in the range of 164 to 180, all none default date time formats fall in there.
-                                            let dateTimeFormats = [14..22]@[164 .. 180] |> List.map (uint32 >> UInt32Value)
-                                            if List.contains cellFormat.NumberFormatId dateTimeFormats then 
-                                                c.DataType <- CellValues.Date
-                                    with
-                                        | _ -> ()
-                                FsCell.ofXlsxCell sst c
-                            )
+                            |> Seq.map (FsCell.ofXlsxCell doc)
                         let assocXlsxTables = 
                             xlsxTables 
                             |> Seq.tryPick (fun (sid,ts) -> if sid = sheetId then Some ts else None)
@@ -267,20 +272,24 @@ module FsExtensions =
             sr.Close()
             wb
 
+        member self.ToEmptySpreadsheet(doc : Packaging.SpreadsheetDocument) =
+            
+            let workbookPart = Spreadsheet.initWorkbookPart doc
+
+            for worksheet in self.GetWorksheets() do
+                let worksheetPart = 
+                    WorkbookPart.appendWorksheet worksheet.Name (worksheet.ToXlsxWorksheet(doc)) workbookPart
+                    |> WorkbookPart.getOrInitWorksheetPartByName worksheet.Name
+               
+                worksheet.AppendTablesToWorksheetPart(workbookPart,worksheetPart)
+
         /// <summary>
         /// Writes the FsWorkbook into a given MemoryStream.
         /// </summary>
         member self.ToStream(stream : MemoryStream) = 
             let doc = Spreadsheet.initEmptyOnStream stream 
 
-            let workbookPart = Spreadsheet.initWorkbookPart doc
-
-            for worksheet in self.GetWorksheets() do
-                let worksheetPart = 
-                    WorkbookPart.appendWorksheet worksheet.Name (worksheet.ToXlsxWorksheet()) workbookPart
-                    |> WorkbookPart.getOrInitWorksheetPartByName worksheet.Name
-               
-                worksheet.AppendTablesToWorksheetPart(workbookPart,worksheetPart)
+            self.ToEmptySpreadsheet(doc)
                 //Worksheet.setSheetData sheetData sheet |> ignore
                 //WorkbookPart.appendWorksheet worksheet.Name sheet workbookPart |> ignore
 

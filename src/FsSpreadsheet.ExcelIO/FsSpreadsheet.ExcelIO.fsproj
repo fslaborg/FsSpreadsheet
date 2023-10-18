@@ -17,6 +17,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="Stylesheet.fs" />
     <Compile Include="SharedStringTable.fs" />
     <Compile Include="Cell.fs" />
     <Compile Include="CellData.fs" />

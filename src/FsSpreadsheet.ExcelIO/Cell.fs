@@ -37,18 +37,6 @@ module Cell =
         let setValue (value : string) (cellValue : CellValue) =  cellValue.Text <- value
 
     /// <summary>
-    /// Takes a DataType and returns the appropriate CellValue.
-    /// </summary>
-    /// <remarks>DataType is the FsSpreadsheet representation of the CellValue enum in OpenXml.</remarks>
-    let cellValuesFromDataType (dataType : DataType) =
-        match dataType with
-        | String    -> CellValues.String
-        | Boolean   -> CellValues.Boolean
-        | Number    -> CellValues.Number
-        | Date      -> CellValues.Date
-        | Empty     -> CellValues.Error
-
-    /// <summary>
     /// Takes a CellValue and returns the appropriate DataType.
     /// </summary>
     /// <remarks>DataType is the FsSpreadsheet representation of the CellValue enum in OpenXml.</remarks>
@@ -98,6 +86,15 @@ module Cell =
         Cell(CellReference = StringValue.FromString reference, DataType = EnumValue(dataType), CellValue = value)
 
     /// <summary>
+    /// Creates a Cell from a CellValues type case, a "A1" style reference, and a CellValue containing the value string.
+    /// </summary>
+    let createWithFormat doc (dataType : CellValues) (reference : string) (cellFormat : CellFormat) (value : CellValue) = 
+        let styleSheet = Stylesheet.getOrInit doc
+        let i = Stylesheet.CellFormat.count styleSheet
+        Stylesheet.CellFormat.append cellFormat styleSheet |> ignore
+        Cell(StyleIndex = UInt32Value(uint32 i),CellReference = StringValue.FromString reference, DataType = EnumValue(dataType), CellValue = value)
+
+    /// <summary>
     /// Sets the preserve attribute of a Cell.
     /// </summary>
     let setSpacePreserveAttribute (c : Cell) =
@@ -143,20 +140,15 @@ module Cell =
                     setSpacePreserveAttribute c
                 else c
 
-    /// <summary>
-    /// Create a cell using a shared string table, also returns the updated shared string table.
-    /// </summary>
-    let fromValueWithDataType (sharedStringTable : SharedStringTable Option) columnIndex rowIndex (value : string) (dataType : DataType) = 
+    let getCellContent (doc : Packaging.SpreadsheetDocument) (value : string) (dataType : DataType) = 
+        let sharedStringTable = SharedStringTable.tryGet doc
         match dataType with
         | DataType.String when sharedStringTable.IsSome-> 
             let sharedStringTable = sharedStringTable.Value
-            let reference = CellReference.ofIndices columnIndex (rowIndex)
             match SharedStringTable.tryGetIndexByString value sharedStringTable with
             | Some i -> 
                 i
                 |> string
-                |> CellValue.create
-                |> create CellValues.SharedString reference
             | None ->
                 let updatedSharedStringTable = 
                     sharedStringTable
@@ -165,22 +157,30 @@ module Cell =
                 updatedSharedStringTable
                 |> SharedStringTable.count
                 |> string
-                |> CellValue.create
-                |> create CellValues.SharedString reference 
-            |> fun c -> 
+            |> fun v -> {|DataType = CellValues.SharedString; Value = v; Format = None|}
+        | DataType.String ->    {|DataType = CellValues.String; Value = value; Format = None|}
+        | DataType.Boolean ->   {|DataType = CellValues.Boolean; Value = value; Format = None|}
+        | DataType.Number ->    {|DataType = CellValues.Number; Value = value; Format = None|}
+        | DataType.Date ->      
+            let cellFormat = CellFormat(NumberFormatId = UInt32Value 19u, ApplyNumberFormat = BooleanValue true)
+            let value = System.DateTime.Parse(value).ToOADate() |> string
+            {|DataType = CellValues.Number; Value = value; Format = Some cellFormat|}
+        | DataType.Empty ->     {|DataType = CellValues.Number; Value = value; Format = None|}
+
+    /// <summary>
+    /// Create a cell using a shared string table, also returns the updated shared string table.
+    /// </summary>
+    let fromValueWithDataType (doc : Packaging.SpreadsheetDocument) columnIndex rowIndex (value : string) (dataType : DataType) = 
+        let reference = CellReference.ofIndices columnIndex (rowIndex)
+        let cellContent = getCellContent doc value dataType
+        if cellContent.Format.IsSome then
+            createWithFormat doc cellContent.DataType reference cellContent.Format.Value (CellValue.create cellContent.Value)
+        else
+            create cellContent.DataType reference (CellValue.create cellContent.Value)
+        |> fun c -> 
                 if value.EndsWith " " then
                     setSpacePreserveAttribute c
                 else c
-
-        | _  -> 
-           let valType = cellValuesFromDataType dataType
-           let reference = CellReference.ofIndices columnIndex (rowIndex)
-           create valType reference (CellValue.create value)
-           |> fun c ->
-                if value.EndsWith " " then
-                    setSpacePreserveAttribute c
-                else c
-
     /// <summary>
     /// Gets "A1"-style Cell reference.
     /// </summary>
