@@ -17,24 +17,25 @@ module FsExtensions =
         /// <summary>
         /// Converts a given CellValues to the respective DataType.
         /// </summary>
-        static member ofXlsXCell (doc : Packaging.SpreadsheetDocument)  (cell : Cell) =
+        static member ofXlsXCell (doc : Packaging.SpreadsheetDocument) (cell : Cell) =
 
+            if cell.CellFormula <> null then
+                // LibreOffice annotates boolean values as formulas instead of boolean datatypes
+                if cell.CellFormula.InnerText = "TRUE()" || cell.CellFormula.InnerText = "FALSE()" then
+                    DataType.Boolean
+                else
+                    DataType.Number
             //https://stackoverflow.com/a/13178043/12858021
             //https://stackoverflow.com/a/55425719/12858021
             // if styleindex is not null and datatype is null we propably have a DateTime field.
             // if datatype would not be null it could also be boolean, as far as i tested it ~Kevin F 13.10.2023
-            if cell.StyleIndex <> null && cell.DataType = null then
+            elif cell.StyleIndex <> null && (cell.DataType = null || cell.DataType.Value = CellValues.Number) then
                 try
-                    let styleSheet = Stylesheet.get doc 
-                    let cellFormat : CellFormat = Stylesheet.CellFormat.getAt (int cell.StyleIndex.InnerText) styleSheet
-                    if cellFormat <> null then
-                        // if numberformatid is between 14 and 18 it is standard date time format.
-                        // custom formats are given in the range of 164 to 180, all none default date time formats fall in there.
-                        let dateTimeFormats = [14..22]@[164 .. 180] |> List.map (uint32 >> UInt32Value)
-                        if List.contains cellFormat.NumberFormatId dateTimeFormats then 
-                            DataType.Date
-                        else 
-                            DataType.Number
+                    let stylesheet = Stylesheet.get doc 
+                    let cellFormat : CellFormat = Stylesheet.CellFormat.getAt (int cell.StyleIndex.InnerText) stylesheet
+                    if cellFormat <> null && Stylesheet.CellFormat.isDateTime stylesheet cellFormat then
+                        DataType.Date
+                        
                     else
                         DataType.Number
                 with
@@ -253,24 +254,29 @@ module FsExtensions =
         /// Creates an FsWorkbook from a given Stream to an XlsxFile.
         /// </summary>
         static member fromXlsxStream (stream : Stream) =
-            let doc = Spreadsheet.fromStream stream false
-            FsWorkbook.fromSpreadsheetDocument doc
+            if stream.CanWrite && stream.CanSeek then                 
+                let package = Packaging.Package.Open(stream,FileMode.Open,FileAccess.ReadWrite)
+                if Package.isLibrePackage package then
+                    Package.fixLibrePackage package
+                FsWorkbook.fromPackage package
+            else 
+                let package = Packaging.Package.Open(stream)
+                FsWorkbook.fromPackage package
 
         /// <summary>
         /// Creates an FsWorkbook from a given Stream to an XlsxFile.
         /// </summary>
         static member fromBytes (bytes : byte []) =
-            let stream = new MemoryStream(bytes)
+            let stream = new MemoryStream(bytes,writable = true)
             FsWorkbook.fromXlsxStream stream
 
         /// <summary>
         /// Takes the path to an Xlsx file and returns the FsWorkbook based on its content.
         /// </summary>
         static member fromXlsxFile (filePath : string) =
-            let sr = new StreamReader(filePath)
-            let wb = FsWorkbook.fromXlsxStream sr.BaseStream
-            sr.Close()
-            wb
+            let bytes = File.ReadAllBytes filePath
+            FsWorkbook.fromBytes bytes
+
 
         member self.ToEmptySpreadsheet(doc : Packaging.SpreadsheetDocument) =
             

@@ -1,4 +1,8 @@
-#r "nuget: FsSpreadsheet.ExcelIO"
+#r @"..\..\..\FsSpreadsheet.ExcelIO.Tests\bin\Release\net6.0\DocumentFormat.OpenXml.dll"
+#r @"..\..\..\FsSpreadsheet.ExcelIO.Tests\bin\Release\net6.0\FsSpreadsheet.dll"
+#r @"..\..\..\FsSpreadsheet.ExcelIO.Tests\bin\Release\net6.0\FsSpreadsheet.ExcelIO.dll"
+#r @"..\..\..\FsSpreadsheet.ExcelIO.Tests\bin\Release\net6.0\System.IO.Packaging.dll"
+
 
 open FsSpreadsheet
 open FsSpreadsheet.ExcelIO

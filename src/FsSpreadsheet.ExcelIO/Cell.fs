@@ -173,7 +173,7 @@ module Cell =
                 else 
                     Stylesheet.CellFormat.getDefaultDate()
             {|DataType = None; Value = value; Format = Some cellFormat|}
-        | DataType.Empty ->     {|DataType = Some CellValues.Number; Value = value; Format = None|}
+        | DataType.Empty ->     {|DataType = None; Value = value; Format = None|}
 
     /// <summary>
     /// Create a cell using a shared string table, also returns the updated shared string table.

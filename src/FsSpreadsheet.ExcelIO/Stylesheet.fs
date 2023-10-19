@@ -16,8 +16,8 @@ module Stylesheet =
                 FontName = FontName(Val = StringValue("Calibri")),
                 FontFamilyNumbering = FontFamilyNumbering(Val = Int32Value(int32 2)),
                 FontScheme = FontScheme(Val = EnumValue(FontSchemeValues.Minor))
-            )
-            
+            )         
+
         let updateCount (stylesheet : Stylesheet) =
             let newCount = stylesheet.Fonts.Elements<CellFormat>() |> Seq.length
             stylesheet.Fonts.Count <- UInt32Value(uint32 newCount)
@@ -63,8 +63,43 @@ module Stylesheet =
             f.AppendChild(getDefault()) |> ignore
             f
 
+    module NumberingFormat =
+
+        let get (id : int) (stylesheet : Stylesheet) = 
+            stylesheet.NumberingFormats.Elements<NumberingFormat>()
+            |> Seq.find (fun nf -> nf.NumberFormatId.Value = uint32 id)
+
+        let tryGet (id : int) (stylesheet : Stylesheet) = 
+            try 
+                get id stylesheet
+                |> Some 
+            with 
+            | _ -> None
+
+        let getFormatCode (nf : NumberingFormat) = 
+            nf.FormatCode.Value
+
+        // Libre does set default numbers to "General" custom format code, so we need to check for that.
+        let isDateTime (nf : NumberingFormat) = 
+            getFormatCode nf = "General"
+            |> not
+
     module CellFormat = 
         
+        let isDateTime (stylesheet : Stylesheet) (cf : CellFormat) =
+            // if numberformatid is between 14 and 18 it is standard date time format.
+            // custom formats are given in the range of 164 to 180, all none default date time formats fall in there.
+            let dateTimeFormats = [14..22] |> List.map (uint32 >> UInt32Value)
+            let customFormats = [164 .. 180] |> List.map (uint32 >> UInt32Value)
+            if List.contains cf.NumberFormatId dateTimeFormats then 
+                true
+            elif List.contains cf.NumberFormatId customFormats then
+                NumberingFormat.tryGet (cf.NumberFormatId.Value |> int) stylesheet
+                |> Option.map NumberingFormat.isDateTime
+                |> Option.defaultValue true             
+            else 
+                false
+
         let structurallyEquals (cf1 : CellFormat) (cf2 : CellFormat) = 
             cf1.BorderId = cf2.BorderId
             && cf1.FillId = cf2.FillId
