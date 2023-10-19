@@ -6,32 +6,54 @@ open DocumentFormat.OpenXml
 
 module Stylesheet = 
     
-    //module Font = 
+    module Font = 
         
-    //    let getDefault() = Font().Color
+        let getDefault() = 
 
+            Font(
+                FontSize = FontSize(Val = DoubleValue(11.)),
+                Color = Color(Theme = UInt32Value(uint32 1)),
+                FontName = FontName(Val = StringValue("Calibri")),
+                FontFamilyNumbering = FontFamilyNumbering(Val = Int32Value(int32 2)),
+                FontScheme = FontScheme(Val = EnumValue(FontSchemeValues.Minor))
+            )
+            
+        let initDefaultFonts() =
+            Fonts(getDefault(),Count = UInt32Value(1ul))
 
-    let get (doc : SpreadsheetDocument) =
+    module Fill = 
         
-        doc.WorkbookPart.WorkbookStylesPart.Stylesheet
+        let getDefault() = 
+            Fill(
+                PatternFill = PatternFill(PatternType = EnumValue(PatternValues.None))
+            )
 
-    let getOrInit (doc : SpreadsheetDocument) =
+        let initDefaultFills() =
+            Fills(getDefault(),Count = UInt32Value(1ul))
+
+    module Border = 
         
-        match doc.WorkbookPart.WorkbookStylesPart with
-        | null -> 
-            let ssp = doc.WorkbookPart.AddNewPart<WorkbookStylesPart>()
-            ssp.Stylesheet <- new Stylesheet()
-            ssp.Stylesheet.CellFormats <- new CellFormats()
-            ssp.Stylesheet
-        | ssp -> ssp.Stylesheet
+        let getDefault() = 
+            Border(
+                LeftBorder = LeftBorder(),
+                RightBorder = RightBorder(),
+                TopBorder = TopBorder(),
+                BottomBorder = BottomBorder(),
+                DiagonalBorder = DiagonalBorder()
+            )
 
-    let tryGet (doc : SpreadsheetDocument) =
-        match doc.WorkbookPart.WorkbookStylesPart with
-        | null -> None
-        | ssp -> Some(ssp.Stylesheet)
+        let initDefaultBorders() =
+            Borders(getDefault(),Count = UInt32Value(1ul))
 
     module CellFormat = 
         
+        let structurallyEquals (cf1 : CellFormat) (cf2 : CellFormat) = 
+            cf1.BorderId = cf2.BorderId
+            && cf1.FillId = cf2.FillId
+            && cf1.FontId = cf2.FontId
+            && cf1.NumberFormatId = cf2.NumberFormatId
+            && cf1.ApplyNumberFormat = cf2.ApplyNumberFormat
+
         let updateCount (stylesheet : Stylesheet) =
             let newCount = stylesheet.CellFormats.Elements<CellFormat>() |> Seq.length
             stylesheet.CellFormats.Count <- UInt32Value(uint32 newCount)
@@ -40,6 +62,12 @@ module Stylesheet =
             if stylesheet.CellFormats = null then 0
             elif stylesheet.CellFormats.Count = null then 0
             else stylesheet.CellFormats.Count.Value |> int
+
+        let tryGetIndex (cellFormat : CellFormat) (stylesheet : Stylesheet) =
+            if stylesheet.CellFormats = null then None
+            else 
+                stylesheet.CellFormats.Elements<CellFormat>()
+                |> Seq.tryFindIndex (structurallyEquals cellFormat)
 
         let getAt (index : int) (stylesheet : Stylesheet) =
             stylesheet.CellFormats.Elements<CellFormat>() |> Seq.item index
@@ -59,3 +87,65 @@ module Stylesheet =
         let append (cf : CellFormat) (stylesheet : Stylesheet) =
             stylesheet.CellFormats.AppendChild(cf) |> ignore
             updateCount stylesheet
+            
+        let appendOrGetIndex (cf : CellFormat) (stylesheet : Stylesheet) =
+            match tryGetIndex cf stylesheet with
+            | Some i -> i
+            | None ->
+                append cf stylesheet
+                updateCount stylesheet
+                (count stylesheet) - 1
+
+        let getDefault () =
+            CellFormat(
+                NumberFormatId = UInt32Value(0ul),
+                FontId = UInt32Value(0ul),
+                FillId = UInt32Value(0ul),
+                BorderId = UInt32Value(0ul)
+                //FormatId = UInt32Value(0ul)                                   
+            )
+
+        let getDefaultDate () =
+            CellFormat(
+                NumberFormatId = UInt32Value(14ul),
+                FontId = UInt32Value(0ul),
+                FillId = UInt32Value(0ul),
+                BorderId = UInt32Value(0ul),
+                //FormatId = UInt32Value(0ul),
+                ApplyNumberFormat = BooleanValue(true)
+            )
+
+        let getDefaultDateTime () =
+            CellFormat(
+                NumberFormatId = UInt32Value(22ul),
+                FontId = UInt32Value(0ul),
+                FillId = UInt32Value(0ul),
+                BorderId = UInt32Value(0ul),
+                //FormatId = UInt32Value(0ul),
+                ApplyNumberFormat = BooleanValue(true)                                  
+            )
+
+        let initDefaultCellFormats() =
+            CellFormats(getDefault(),Count = UInt32Value(1ul))
+
+    let get (doc : SpreadsheetDocument) =
+        
+        doc.WorkbookPart.WorkbookStylesPart.Stylesheet
+
+    let getOrInit (doc : SpreadsheetDocument) =
+        
+        match doc.WorkbookPart.WorkbookStylesPart with
+        | null -> 
+            let ssp = doc.WorkbookPart.AddNewPart<WorkbookStylesPart>()
+            ssp.Stylesheet <- new Stylesheet()
+            ssp.Stylesheet.CellFormats <- CellFormat.initDefaultCellFormats()
+            ssp.Stylesheet.Borders <- Border.initDefaultBorders()
+            ssp.Stylesheet.Fills <- Fill.initDefaultFills()
+            ssp.Stylesheet.Fonts <- Font.initDefaultFonts()
+            ssp.Stylesheet
+        | ssp -> ssp.Stylesheet
+
+    let tryGet (doc : SpreadsheetDocument) =
+        match doc.WorkbookPart.WorkbookStylesPart with
+        | null -> None
+        | ssp -> Some(ssp.Stylesheet)
