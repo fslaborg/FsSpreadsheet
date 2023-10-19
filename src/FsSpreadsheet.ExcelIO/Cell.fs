@@ -82,17 +82,20 @@ module Cell =
     /// <summary>
     /// Creates a Cell from a CellValues type case, a "A1" style reference, and a CellValue containing the value string.
     /// </summary>
-    let create (dataType : CellValues) (reference : string) (value : CellValue) = 
-        Cell(CellReference = StringValue.FromString reference, DataType = EnumValue(dataType), CellValue = value)
+    let create (dataType : CellValues option) (reference : string) (value : CellValue) = 
+        match dataType with
+        | Some dataType -> Cell(CellReference = StringValue.FromString reference, DataType = EnumValue(dataType), CellValue = value)
+        | None -> Cell(CellReference = StringValue.FromString reference, CellValue = value)
 
     /// <summary>
     /// Creates a Cell from a CellValues type case, a "A1" style reference, and a CellValue containing the value string.
     /// </summary>
-    let createWithFormat doc (dataType : CellValues) (reference : string) (cellFormat : CellFormat) (value : CellValue) = 
+    let createWithFormat doc (dataType : CellValues option) (reference : string) (cellFormat : CellFormat) (value : CellValue) = 
         let styleSheet = Stylesheet.getOrInit doc
-        let i = Stylesheet.CellFormat.count styleSheet
-        Stylesheet.CellFormat.append cellFormat styleSheet |> ignore
-        Cell(StyleIndex = UInt32Value(uint32 i),CellReference = StringValue.FromString reference, DataType = EnumValue(dataType), CellValue = value)
+        let i = Stylesheet.CellFormat.appendOrGetIndex cellFormat styleSheet
+        match dataType with
+        | Some dataType -> Cell(StyleIndex = UInt32Value(uint32 i),CellReference = StringValue.FromString reference, DataType = EnumValue(dataType), CellValue = value)
+        | None -> Cell(StyleIndex = UInt32Value(uint32 i),CellReference = StringValue.FromString reference, CellValue = value)
 
     /// <summary>
     /// Sets the preserve attribute of a Cell.
@@ -115,7 +118,7 @@ module Cell =
                 i
                 |> string
                 |> CellValue.create
-                |> create CellValues.SharedString reference
+                |> create (Some CellValues.SharedString) reference
             | None ->
                 let updatedSharedStringTable = 
                     sharedStringTable
@@ -125,7 +128,7 @@ module Cell =
                 |> SharedStringTable.count
                 |> string
                 |> CellValue.create
-                |> create CellValues.SharedString reference 
+                |> create (Some CellValues.SharedString) reference 
             |> fun c -> 
                 if s.EndsWith " " then
                     setSpacePreserveAttribute c
@@ -134,7 +137,7 @@ module Cell =
         | _  -> 
             let valType,value = inferCellValue value
             let reference = CellReference.ofIndices columnIndex (rowIndex)
-            create valType reference (CellValue.create value)
+            create (Some valType) reference (CellValue.create value)
             |> fun c ->
                 if value.EndsWith " " then
                     setSpacePreserveAttribute c
@@ -157,15 +160,20 @@ module Cell =
                 updatedSharedStringTable
                 |> SharedStringTable.count
                 |> string
-            |> fun v -> {|DataType = CellValues.SharedString; Value = v; Format = None|}
-        | DataType.String ->    {|DataType = CellValues.String; Value = value; Format = None|}
-        | DataType.Boolean ->   {|DataType = CellValues.Boolean; Value = value; Format = None|}
-        | DataType.Number ->    {|DataType = CellValues.Number; Value = value; Format = None|}
+            |> fun v -> {|DataType = Some CellValues.SharedString; Value = v; Format = None|}
+        | DataType.String ->    {|DataType = Some CellValues.String; Value = value; Format = None|}
+        | DataType.Boolean ->   {|DataType = Some CellValues.Boolean; Value = value; Format = None|}
+        | DataType.Number ->    {|DataType = Some CellValues.Number; Value = value; Format = None|}
         | DataType.Date ->      
-            let cellFormat = CellFormat(NumberFormatId = UInt32Value 19u, ApplyNumberFormat = BooleanValue true)
+            //let cellFormat = CellFormat(NumberFormatId = UInt32Value 19u, ApplyNumberFormat = BooleanValue true)
             let value = System.DateTime.Parse(value).ToOADate() |> string
-            {|DataType = CellValues.Number; Value = value; Format = Some cellFormat|}
-        | DataType.Empty ->     {|DataType = CellValues.Number; Value = value; Format = None|}
+            let cellFormat = 
+                if value.Contains(".") then
+                    Stylesheet.CellFormat.getDefaultDateTime()
+                else 
+                    Stylesheet.CellFormat.getDefaultDate()
+            {|DataType = None; Value = value; Format = Some cellFormat|}
+        | DataType.Empty ->     {|DataType = Some CellValues.Number; Value = value; Format = None|}
 
     /// <summary>
     /// Create a cell using a shared string table, also returns the updated shared string table.

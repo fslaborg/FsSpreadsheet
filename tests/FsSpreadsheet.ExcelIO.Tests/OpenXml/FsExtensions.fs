@@ -14,7 +14,7 @@ let dummyDtBoolean = DataType.Boolean
 let dummyDtDate = DataType.Date
 let dummyDtEmpty = DataType.Empty
 
-let dummyXlsxCell = Cell.create CellValues.Number "A1" (CellValue(1.337))
+let dummyXlsxCell = Cell.create (Some CellValues.Number) "A1" (CellValue(1.337))
 
 //let testFilePath = @"C:\Repos\CSBiology\FsSpreadsheet\tests\FsSpreadsheet.ExcelIO.Tests\data\testUnit.xlsx"
 let testFilePath = Path.Combine(__SOURCE_DIRECTORY__, "../data", "testUnit.xlsx")

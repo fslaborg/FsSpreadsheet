@@ -18,8 +18,14 @@ module Stylesheet =
                 FontScheme = FontScheme(Val = EnumValue(FontSchemeValues.Minor))
             )
             
+        let updateCount (stylesheet : Stylesheet) =
+            let newCount = stylesheet.Fonts.Elements<CellFormat>() |> Seq.length
+            stylesheet.Fonts.Count <- UInt32Value(uint32 newCount)
+
         let initDefaultFonts() =
-            Fonts(getDefault(),Count = UInt32Value(1ul))
+            let f = Fonts(Count = UInt32Value(1ul))
+            f.AppendChild(getDefault()) |> ignore
+            f
 
     module Fill = 
         
@@ -28,8 +34,14 @@ module Stylesheet =
                 PatternFill = PatternFill(PatternType = EnumValue(PatternValues.None))
             )
 
+        let updateCount (stylesheet : Stylesheet) =
+            let newCount = stylesheet.Fills.Elements<CellFormat>() |> Seq.length
+            stylesheet.Fills.Count <- UInt32Value(uint32 newCount)
+
         let initDefaultFills() =
-            Fills(getDefault(),Count = UInt32Value(1ul))
+            let f = Fills(Count = UInt32Value(1ul))
+            f.AppendChild(getDefault()) |> ignore
+            f
 
     module Border = 
         
@@ -42,8 +54,14 @@ module Stylesheet =
                 DiagonalBorder = DiagonalBorder()
             )
 
+        let updateCount (stylesheet : Stylesheet) =
+            let newCount = stylesheet.Borders.Elements<CellFormat>() |> Seq.length
+            stylesheet.Borders.Count <- UInt32Value(uint32 newCount)
+
         let initDefaultBorders() =
-            Borders(getDefault(),Count = UInt32Value(1ul))
+            let f = Borders(Count = UInt32Value(1ul))
+            f.AppendChild(getDefault()) |> ignore
+            f
 
     module CellFormat = 
         
@@ -126,7 +144,9 @@ module Stylesheet =
             )
 
         let initDefaultCellFormats() =
-            CellFormats(getDefault(),Count = UInt32Value(1ul))
+            let f = CellFormats(Count = UInt32Value(1ul))
+            f.AppendChild(getDefault()) |> ignore
+            f
 
     let get (doc : SpreadsheetDocument) =
         
