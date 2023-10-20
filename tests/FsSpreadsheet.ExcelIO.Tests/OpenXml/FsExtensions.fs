@@ -86,7 +86,7 @@ let fsExtensionTests =
                 let doc = Spreadsheet.initEmptyOnStream stream
                 let testCell = FsCell.ofXlsxCell doc dummyXlsxCell
                 testCase "is equal in value" <| fun _ ->
-                    Expect.equal testCell.Value dummyXlsxCell.CellValue.Text "values are not equal"
+                    Expect.equal (testCell.ValueAsString()) dummyXlsxCell.CellValue.Text "values are not equal"
                 testCase "is equal in address/reference" <| fun _ ->
                     Expect.equal testCell.Address.Address dummyXlsxCell.CellReference.Value "addresses/references are not equal"
                 testCase "is equal in DataType/CellValues" <| fun _ ->

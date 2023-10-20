@@ -23,7 +23,7 @@ type TestFiles =
         match this with
         | Excel             -> "TestWorkbook_Excel.xlsx"
         | Libre             -> "TestWorkbook_Libre.xlsx"
-        | FableExceljs      -> "TestWorkbook_FableExcelJS.xlsx"
+        | FableExceljs      -> "TestWorkbook_FableExceljs.xlsx"
         | ClosedXML         -> "TestWorkbook_ClosedXML.xlsx"
         | FsSpreadsheetNET  -> "TestWorkbook_FsSpreadsheet.net.xlsx"
         | FsSpreadsheetJS  -> "TestWorkbook_FsSpreadsheet.js.xlsx"
