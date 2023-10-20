@@ -26,7 +26,7 @@ let tests_Read = testList "Read" [
         Expect.isDefaultTestObject wb
     }
     testCaseAsync "FsSpreadsheet" <| async {
-        let! wb = readFromTestFile DefaultTestObject.TestFiles.FsSpreadsheet |> Async.AwaitPromise
+        let! wb = readFromTestFile DefaultTestObject.TestFiles.FsSpreadsheetNET |> Async.AwaitPromise
         Expect.isDefaultTestObject wb
     }
 ]

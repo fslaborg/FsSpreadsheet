@@ -85,8 +85,8 @@ module JsWorksheet =
                                 log msg
                                 anyElse |> createFscell DataType.String
                         | ValueType.Hyperlink ->
-                            log (c.value.Value?text)
-                            vTemp |> createFscell DataType.String
+                            //log (c.value.Value?text)
+                            c.value.Value?hyperlink |> createFscell DataType.String
                         | anyElse ->
                             let msg = sprintf "ValueType `%A` (%s) is not fully implemented in FsSpreadsheet and is handled as string input. In %s: (%i,%i)" anyElse vTemp jsws.name rowIndex columnIndex
                             log msg

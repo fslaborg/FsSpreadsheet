@@ -30,7 +30,7 @@ let tests_Read = testList "Read" [
         let wb = readFromTestFile DefaultTestObject.TestFiles.ClosedXML
         Expect.isDefaultTestObject wb
     testCase "FsSpreadsheet" <| fun _ ->
-        let wb = readFromTestFile DefaultTestObject.TestFiles.FsSpreadsheet
+        let wb = readFromTestFile DefaultTestObject.TestFiles.FsSpreadsheetNET
         Expect.isDefaultTestObject wb
 ]
 

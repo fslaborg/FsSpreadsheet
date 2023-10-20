@@ -16,7 +16,8 @@ type TestFiles =
 | Libre
 | FableExceljs
 | ClosedXML
-| FsSpreadsheet
+| FsSpreadsheetNET
+| FsSpreadsheetJS
 
     member this.asFileName =
         match this with
@@ -24,7 +25,8 @@ type TestFiles =
         | Libre             -> "TestWorkbook_Libre.xlsx"
         | FableExceljs      -> "TestWorkbook_FableExcelJS.xlsx"
         | ClosedXML         -> "TestWorkbook_ClosedXML.xlsx"
-        | FsSpreadsheet     -> "TestWorkbook_FsSpreadsheet.xlsx"
+        | FsSpreadsheetNET  -> "TestWorkbook_FsSpreadsheet.net.xlsx"
+        | FsSpreadsheetJS  -> "TestWorkbook_FsSpreadsheet.js.xlsx"
 
     member this.asRelativePath = $"../TestUtils/{testFolder}/{this.asFileName}"
     member this.asRelativePathNode = $"./tests/TestUtils/{testFolder}/{this.asFileName}"
