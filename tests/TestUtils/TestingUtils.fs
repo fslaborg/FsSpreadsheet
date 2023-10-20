@@ -55,21 +55,6 @@ module Expect =
         let comp = Utils.firstDiff actual expected
         _sequenceEqual message comp
         
-    let columnsEqual (actual : FsCell seq seq) (expected : FsCell seq seq) message =     
-        let f (cols : FsCell seq seq) = 
-            cols
-            |> Seq.map (fun r -> r |> Seq.map (fun c -> c.Value) |> Seq.reduce (fun a b -> a + b)) 
-        sequenceEqual (f actual) (f expected) $"{message}. Columns do not match"
-
-    let workSheetEqual (actual : FsWorksheet) (expected : FsWorksheet) message =
-        let f (ws : FsWorksheet) = 
-            ws.RescanRows()
-            ws.Rows
-            |> Seq.map (fun r -> r.Cells |> Seq.map (fun c -> c.Value) |> Seq.reduce (fun a b -> a + b)) 
-        if actual.Name <> expected.Name then
-            failwithf $"{message}. Worksheet names do not match. Expected {expected.Name} but got {actual.Name}"
-        sequenceEqual (f actual) (f expected) $"{message}. Worksheet does not match"
-
     let cellSequenceEquals (actual: FsCell seq) (expected: FsCell seq) message =
         let cellDiff (s1: FsCell seq) (s2: FsCell seq) =
             let s1 = Seq.append (Seq.map Some s1) (Seq.initInfinite (fun _ -> None))
@@ -78,6 +63,19 @@ module Expect =
             |> Seq.find (function |_,Some s,Some p when s.StructurallyEquals(p) -> false |_-> true)
         let comp = cellDiff actual expected
         _sequenceEqual message comp
+
+    let columnsEqual (actual : FsCell seq seq) (expected : FsCell seq seq) message =     
+        Seq.iteri2 (fun i s1 s2 ->
+            cellSequenceEquals s1 s2 $"{message}. Columns do not match in row {i}."
+        ) actual expected
+
+    let workSheetEqual (actual : FsWorksheet) (expected : FsWorksheet) message =
+        let f (ws : FsWorksheet) = 
+            ws.RescanRows()
+            ws.Rows |> Seq.map (fun r -> r.Cells) 
+        if actual.Name <> expected.Name then
+            failwithf $"{message}. Worksheet names do not match. Expected {expected.Name} but got {actual.Name}"
+        columnsEqual (f actual) (f expected) $"{message}. Worksheet does not match"
 
     let isDefaultTestObject (wb: FsWorkbook) = 
         let worksheets = wb.GetWorksheets()

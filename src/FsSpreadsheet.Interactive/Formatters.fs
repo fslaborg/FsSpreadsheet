@@ -34,7 +34,7 @@ module Formatters =
         let cells =
             worksheet.CellCollection.GetCells()
             |> Seq.map (fun c -> 
-                c.RowNumber - 1, c.ColumnNumber - 1, c.Value
+                c.RowNumber - 1, c.ColumnNumber - 1, c.ValueAsString()
             )
         let matrix = 
             FsSparseMatrix.init 

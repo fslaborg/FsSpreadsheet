@@ -60,31 +60,41 @@ module FsExtensions =
         /// </summary>   
         static member ofXlsxCell (doc : Packaging.SpreadsheetDocument) (xlsxCell : Cell) =
             let sst = Spreadsheet.tryGetSharedStringTable doc
-            let mutable v =  Cell.getValue sst xlsxCell
-            let setValue x = v <- x
+            let cellValueString = Cell.getValue sst xlsxCell
             let col, row = xlsxCell.CellReference.Value |> CellReference.toIndices
             let dt = 
                 try DataType.ofXlsXCell doc xlsxCell
                 with _ -> DataType.Number // default is number 
+            let mutable cellValue : obj = cellValueString
             match dt with
             | Date ->
                 try 
                     // datetime is written as float counting days since 1900. 
                     // We use the .NET helper because we really do not want to deal with datetime issues.
-                    setValue <| System.DateTime.FromOADate(float v).ToString()
+                    cellValue <- System.DateTime.FromOADate(float cellValueString)
                 with 
                     | _ -> ()
             | Boolean ->
                 // boolean is written as int/float either 0 or null
-                match v with 
-                | "1" -> setValue "true" 
-                | "0" -> setValue "false" 
+                match cellValueString.ToLower() with 
+                | "1" | "true" -> cellValue <- true 
+                | "0" | "false" -> cellValue <- false 
                 | _ -> ()
-            | _ -> ()
-            FsCell.createWithDataType dt (int row) (int col) v
+            | Number -> 
+                try 
+                    cellValue <- int cellValueString
+                with 
+                    | _ -> 
+                        try 
+                            cellValue <- float cellValueString
+                        with    
+                            | _ -> ()
+            | Empty | String -> ()
+            //let dt, v = DataType.InferCellValue v
+            FsCell.createWithDataType dt (int row) (int col) (cellValue)
 
         static member toXlsxCell (doc : Packaging.SpreadsheetDocument) (cell : FsCell) =
-            Cell.fromValueWithDataType doc (uint32 cell.ColumnNumber) (uint32 cell.RowNumber) cell.Value cell.DataType
+            Cell.fromValueWithDataType doc (uint32 cell.ColumnNumber) (uint32 cell.RowNumber) (cell.ValueAsString()) cell.DataType
 
     type FsTable with
 
@@ -158,7 +168,7 @@ module FsExtensions =
                         let cells = 
                             cells
                             |> List.map (fun cell ->
-                                Cell.fromValueWithDataType doc (uint32 cell.ColumnNumber) (uint32 cell.RowNumber) (cell.Value) (cell.DataType)
+                                Cell.fromValueWithDataType doc (uint32 cell.ColumnNumber) (uint32 cell.RowNumber) (cell.ValueAsString()) (cell.DataType)
                             )
                         let row = Row.create (uint32 row.Index) (Row.Spans.fromBoundaries min max) cells
                         SheetData.appendRow row sd |> ignore

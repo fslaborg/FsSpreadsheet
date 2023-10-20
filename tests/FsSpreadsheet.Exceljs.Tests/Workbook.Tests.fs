@@ -279,7 +279,7 @@ open Fable.Core
 
 let tests_xlsx = testList "xlsx" [
     testList "read" [
-        testAsync "isa.assay.xlsx" {
+        ftestCaseAsync "isa.assay.xlsx" <| async {
             let! fswb = Xlsx.fromXlsxFile("./tests/JS/TestFiles/isa.assay.xlsx") |> Async.AwaitPromise
             Expect.equal (fswb.GetWorksheets().Count) 5 "Count"
         }

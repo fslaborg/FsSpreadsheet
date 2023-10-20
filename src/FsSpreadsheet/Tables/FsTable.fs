@@ -439,7 +439,7 @@ type FsTable (name : string, rangeAddress : FsRangeAddress, ?showTotalsRow : boo
             let headersRow = this.GetHeaderRow(cellsCollection);
             let mutable cellPos = 0
             for cell in headersRow do
-                let mutable name = cell.Value //GetString();
+                let mutable name = cell.ValueAsString() //GetString();
                 match Dictionary.tryGet name oldFieldNames with
                 | Some tableField ->
                     tableField.Index <- cellPos

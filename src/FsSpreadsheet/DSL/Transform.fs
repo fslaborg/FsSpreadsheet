@@ -72,7 +72,7 @@ module Transform =
                 match col with
                 | [] -> failwith "Empty column"
                 | header :: fields ->
-                    let field = table.Field(snd header, cellCollection)
+                    let field = table.Field(snd >> string <| header, cellCollection)
                     fields
                     |> List.iteri (fun i (dataType,value) ->
                         let cell = field.Column.Cell(i + 2,cellCollection)

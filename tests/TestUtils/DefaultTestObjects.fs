@@ -43,7 +43,7 @@ module ExpectedRows =
         let row = FsRow(FsRangeAddress(range),cc)
         row[1].SetValueAs 1
         row[2].SetValueAs "Hello"
-        row[3].SetValueAs (System.DateTime(2023,10,14))
+        row[3].SetValueAs (System.DateTime(2023,10,14,0,0,0))
         row[4].SetValueAs<bool> true
         row[5].SetValueAs "(A) This is part 1 of 2"
         row[6].SetValueAs "(A) This is part 2 of 2"
@@ -67,7 +67,7 @@ module ExpectedRows =
         let row = FsRow(FsRangeAddress(range),cc)
         row[1].SetValueAs 4
         row[2].SetValueAs "Outer Space"
-        row[3].SetValueAs (System.DateTime(2023,10,17))
+        row[3].SetValueAs (System.DateTime(2023,10,17,0,0,0))
         row[4].SetValueAs false
         row
 

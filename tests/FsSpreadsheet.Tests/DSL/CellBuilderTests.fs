@@ -17,7 +17,7 @@ let main =
                 cell {
                     1
                 }
-            let expected = Value(DataType.Number,"1"),None
+            let expected = Value(DataType.Number,1),None
             Expect.equal cell expected "Cell differs"
         testCase "simple string" <| fun _ ->
             let cell = 

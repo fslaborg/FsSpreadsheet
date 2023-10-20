@@ -15,7 +15,7 @@ module JsTable =
         let columns = 
             if fsTable.ShowHeaderRow then
                 [| for headerCell in fsTable.GetHeaderRow(fscellcollection) do
-                    yield TableColumn(headerCell.Value) |]
+                    yield TableColumn(headerCell.ValueAsString()) |]
             else
                 [|
                     for i in 1 .. Seq.length fsColumns do yield TableColumn(string i)
@@ -52,3 +52,10 @@ module JsTable =
             showRowStripes = true
         |}
         Table(fsTable.Name,fsTable.RangeAddress.Range,columns,rows,fsTable.Name,headerRow = fsTable.ShowHeaderRow, style = defaultStyle)
+
+    let fromJsTable(table:ITableRef) =
+        let table = table.table.Value
+        let tableRef = table.tableRef |> FsRangeAddress
+        let tableName = if isNull table.displayName then table.name else table.displayName
+        let table = FsTable(tableName, tableRef, table.totalsRow, table.headerRow)
+        table

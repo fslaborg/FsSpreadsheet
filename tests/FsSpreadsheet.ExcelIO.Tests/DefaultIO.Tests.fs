@@ -12,6 +12,11 @@ let tests_Read = testList "Read" [
         with
             | _ -> FsWorkbook.fromXlsxFile($"{DefaultTestObject.testFolder}/{testFile.asFileName}")
 
+    testCase "FsCell equality" <| fun _ ->
+        let c1 = FsCell(1, DataType.Number, FsAddress("A2"))
+        let c2 = FsCell(1, DataType.Number, FsAddress("A2"))
+        let isStructEqual = c1.StructurallyEquals(c2)
+        Expect.isTrue isStructEqual ""
     testCase "Excel" <| fun _ ->
         let wb = readFromTestFile DefaultTestObject.TestFiles.Excel
         Expect.isDefaultTestObject wb

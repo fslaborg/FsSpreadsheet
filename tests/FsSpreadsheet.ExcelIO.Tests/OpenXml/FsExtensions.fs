@@ -24,7 +24,7 @@ let dummyFsCells = [
     FsCell.create 1 1 "A1"          // for sheet1 (StringSheet)
     FsCell.create 7 3 "7"           // for sheet2 (NumericSheet)
     FsCell.create 2 10 "B10"        // for sheet3 (TableSheet)
-    FsCell.create 2 1 "True"        // for sheet4 (DataTypeSheet), DataType.Boolean
+    FsCell.create 2 1 "1"        // for sheet4 (DataTypeSheet), DataType.Boolean
     FsCell.create 5 1 "03.13.2023"  // for sheet4 (DataTypeSheet), DataType.DateTime
 ]
 let dummyFsCellsCollection1 = FsCellsCollection()
@@ -120,7 +120,7 @@ let fsExtensionTests =
                     Expect.equal d DataType.String "DataType is not DataType.String"
                 testCase "is equal to dummyFsWorkbook in sheet2, cellC7 value" <| fun _ ->
                     let v = (FsWorksheet.getCellAt 7 3 fsWorksheet2FromStream).Value
-                    Expect.equal v "7" "value is not equal"
+                    Expect.equal v 7 "value is not equal"
                 testCase "is equal to dummyFsWorkbook in sheet2, cellC7 address" <| fun _ ->
                     let a = (FsWorksheet.getCellAt 7 3 fsWorksheet2FromStream).Address.Address
                     Expect.equal a "C7" "address is not equal"
@@ -139,7 +139,7 @@ let fsExtensionTests =
                     Expect.equal d DataType.String "DataType is not DataType.String"
                 testCase "is equal to dummyFsWorkbook in sheet4, cellA2 value" <| fun _ ->
                     let v = (FsWorksheet.getCellAt 2 1 fsWorksheet4FromStream).Value
-                    Expect.equal v "true" "value is not equal"
+                    Expect.equal v true "value is not equal"
                 testCase "is equal to dummyFsWorkbook in sheet4, cellA2 address" <| fun _ ->
                     let a = (FsWorksheet.getCellAt 2 1 fsWorksheet4FromStream).Address.Address
                     Expect.equal a "A2" "address is not equal"

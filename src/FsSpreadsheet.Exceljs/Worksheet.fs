@@ -12,6 +12,9 @@ module JsWorksheet =
     open Fable.ExcelJs
     open Fable.Core.JsInterop
 
+    let boolConverter (bool:bool) =
+        match bool with | true -> "1" | false -> "0"
+
     let addFsWorksheet (wb: Workbook) (fsws:FsWorksheet) : unit =
         fsws.RescanRows()
         let rows = fsws.Rows |> Seq.map (fun x -> x.Cells)
@@ -23,7 +26,7 @@ module JsWorksheet =
                 let c = ws.getCell(cell.Address.Address)
                 match cell.DataType with
                 | Boolean   -> 
-                    c.value <- cell.ValueAsBool() |> box |> Some
+                    c.value <- cell.ValueAsBool() |> boolConverter |> box |> Some
                 | Number    -> 
                     c.value <- cell.ValueAsFloat() |> box |> Some
                 | Date      -> 
@@ -45,7 +48,7 @@ module JsWorksheet =
     let addJsWorksheet (wb: FsWorkbook) (jsws: Worksheet) : unit =
         let fsws = FsWorksheet(jsws.name)
         jsws.eachRow(fun (row, rowIndex) ->
-            row.eachCell(fun (c, rowIndex) ->
+            row.eachCell(fun (c, columnIndex) ->
                 if c.value.IsSome then
                     let t = enum<Unions.ValueType>(c.``type``)
                     let fsadress = FsAddress(c.address)
@@ -54,28 +57,45 @@ module JsWorksheet =
                     let fscell =
                         match t with
                         | ValueType.Boolean -> 
-                            let b = System.Boolean.Parse vTemp
+                            let b = System.Boolean.Parse vTemp |> boolConverter
                             createFscell DataType.Boolean b
                         | ValueType.Number -> float vTemp |> createFscell DataType.Number
                         | ValueType.Date -> 
-                            let dt = System.DateTimeOffset.Parse(vTemp).Date
+                            let dt = System.DateTime.Parse(vTemp).ToUniversalTime()
+                            /// Without this step universal time get changed to local time? Exceljs tests will hit this.
+                            ///
+                            /// Expected item (from test object): C2 : Sat Oct 14 2023 00:00:00 GMT+0200 (Mitteleuropäische Sommerzeit) | Date
+                            ///
+                            /// Actual item (created here): C2 : Sat Oct 14 2023 02:00:00 GMT+0200 (Mitteleuropäische Sommerzeit) | Date
+                            ///
+                            /// But logging hour minute showed that the values were given correctly and needed to be reinitialized.
+                            let dt = System.DateTime(dt.Year,dt.Month,dt.Day,dt.Hour,dt.Minute, dt.Second)
                             dt |> createFscell DataType.Date
                         | ValueType.String -> vTemp |> createFscell DataType.String
-                        | anyElse -> 
-                            let msg = sprintf "ValueType '%A' is not fully implemented in FsSpreadsheet and is handled as string input." anyElse
-                            #if FABLE_COMPILER_JAVASCRIPT
+                        | ValueType.Formula -> 
+                            match c.formula with
+                            | "TRUE()" -> 
+                                let b = true |> boolConverter
+                                createFscell DataType.Boolean b
+                            | "FALSE()" ->
+                                let b = false |> boolConverter
+                                createFscell DataType.Boolean b
+                            | anyElse ->
+                                let msg = sprintf "ValueType 'Format' (%s) is not fully implemented in FsSpreadsheet and is handled as string input. In %s: (%i,%i)" anyElse jsws.name rowIndex columnIndex
+                                log msg
+                                anyElse |> createFscell DataType.String
+                        | ValueType.Hyperlink ->
+                            log (c.value.Value?text)
+                            vTemp |> createFscell DataType.String
+                        | anyElse ->
+                            let msg = sprintf "ValueType `%A` (%s) is not fully implemented in FsSpreadsheet and is handled as string input. In %s: (%i,%i)" anyElse vTemp jsws.name rowIndex columnIndex
                             log msg
-                            #else
-                            printfn "%s" msg
-                            #endif
                             vTemp |> createFscell DataType.String
                     fsws.AddCell(fscell) |> ignore
             )
         )
         for jstableref in jsws.getTables() do
-            let table = jstableref.table.Value
-            let tableRef = table.tableRef |> FsRangeAddress
-            let table = FsTable(table.name, tableRef, table.totalsRow, table.headerRow)
+            let table = JsTable.fromJsTable jstableref
             fsws.AddTable table |> ignore
         fsws.RescanRows()
         wb.AddWorksheet(fsws)

@@ -91,11 +91,11 @@ module SheetBuilder =
                     let headerCell = FsCell.createEmpty()
                     for header in field.HeaderTransformers do ignore (header row headerCell)
 
-
                     let headerString = 
-                        if headerCell.Value = "" then 
+                        if headerCell.ValueAsString() = "" then 
                             field.Hash 
-                        else headerCell.Value
+                        else 
+                            headerCell.ValueAsString()
 
                     let tableField = self.Field(headerString,cells)
 
@@ -152,7 +152,7 @@ module SheetBuilder =
                         let hasHeader, headerString = 
                             if headerCell.Value = "" then 
                                 false, field.Hash 
-                            else true, headerCell.Value
+                            else true, headerCell.ValueAsString() 
 
                         match Dictionary.tryGetValue (headerString) headers with
                         | Some int -> int
