@@ -26,9 +26,22 @@ type TestFiles =
         | FableExceljs      -> "TestWorkbook_FableExceljs.xlsx"
         | ClosedXML         -> "TestWorkbook_ClosedXML.xlsx"
         | FsSpreadsheetNET  -> "TestWorkbook_FsSpreadsheet.net.xlsx"
-        | FsSpreadsheetJS  -> "TestWorkbook_FsSpreadsheet.js.xlsx"
+        | FsSpreadsheetJS   -> "TestWorkbook_FsSpreadsheet.js.xlsx"
 
     member this.asRelativePath = $"../TestUtils/{testFolder}/{this.asFileName}"
+    member this.asRelativePathNode = $"./tests/TestUtils/{testFolder}/{this.asFileName}"
+
+[<AttachMembers>]
+type WriteTestFiles =
+| FsSpreadsheetNET
+| FsSpreadsheetJS
+
+    member this.asFileName =
+        match this with
+        | FsSpreadsheetNET  -> "TestWorkbook_FsSpreadsheet_WRITE.net.xlsx"
+        | FsSpreadsheetJS   -> "TestWorkbook_FsSpreadsheet_WRITE.js.xlsx"
+
+    member this.asRelativePath = $"{testFolder}/{this.asFileName}"
     member this.asRelativePathNode = $"./tests/TestUtils/{testFolder}/{this.asFileName}"
 
 module ExpectedRows = 
@@ -100,6 +113,26 @@ module Sheet3 =
     let sheetName = "WithTable_Duplicate"
     [<Literal>]
     let tableName = "MyOtherTable"
+
+let defaultTestObject() =
+    let wb = new FsWorkbook()
+    let table1 = new FsTable(Sheet1.tableName, FsRangeAddress(FsAddress("A1"),FsAddress("F1")))
+    let sheet1 = wb.InitWorksheet(Sheet1.sheetName)
+    for row in ExpectedRows.rowCollectionA1 do
+        for c in row do
+            sheet1.AddCell c |> ignore
+    sheet1.AddTable table1 |> ignore
+    let sheet2 = wb.InitWorksheet(Sheet2.sheetName)
+    for row in ExpectedRows.rowCollectionA1 do
+        for c in row do
+            sheet2.AddCell c |> ignore
+    let table2 = new FsTable(Sheet3.tableName, FsRangeAddress(FsAddress("B4"),FsAddress("G8")))
+    let sheet3 = wb.InitWorksheet(Sheet3.sheetName)
+    for row in ExpectedRows.rowCollectionB4 do
+        for c in row do
+            sheet3.AddCell c |> ignore
+    sheet3.AddTable(table2) |> ignore
+    wb
 
 let valueMap = 
     [

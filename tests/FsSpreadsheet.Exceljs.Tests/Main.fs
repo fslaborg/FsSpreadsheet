@@ -8,7 +8,7 @@ let all =
     testList "All"
         [
             Workbook.Tests.main
-            DefaultIO.Tests.tests_Read
+            DefaultIO.Tests.main
         ]
 
 [<EntryPoint>]

@@ -5,9 +5,10 @@ open FsSpreadsheet
 open FsSpreadsheet.Exceljs
 open Fable.Core
 
-let tests_Read = testList "Read" [
-    let readFromTestFile (testFile: DefaultTestObject.TestFiles) =
-        FsWorkbook.fromXlsxFile(testFile.asRelativePathNode)
+let private readFromTestFile (testFile: DefaultTestObject.TestFiles) =
+    FsWorkbook.fromXlsxFile(testFile.asRelativePathNode)
+
+let private tests_Read = testList "Read" [
 
     testCaseAsync "Excel" <| async {
         let! wb = readFromTestFile DefaultTestObject.TestFiles.Excel |> Async.AwaitPromise
@@ -33,4 +34,19 @@ let tests_Read = testList "Read" [
         let! wb = readFromTestFile DefaultTestObject.TestFiles.FsSpreadsheetJS |> Async.AwaitPromise
         Expect.isDefaultTestObject wb
     }
+]
+
+let private tests_Write = testList "Write" [
+    testCaseAsync "default" (Async.AwaitPromise <|  promise {
+        let wb = DefaultTestObject.defaultTestObject()
+        let p = DefaultTestObject.WriteTestFiles.FsSpreadsheetJS.asRelativePathNode
+        do! FsWorkbook.toFile p wb
+        let! wb_read = FsWorkbook.fromXlsxFile p
+        Expect.isDefaultTestObject wb_read
+    })
+]
+
+let main = testList "DefaultIO" [
+    tests_Read
+    tests_Write
 ]

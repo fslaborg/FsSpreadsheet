@@ -35,8 +35,19 @@ let tests_Read = testList "Read" [
         Expect.isDefaultTestObject wb
 ]
 
+let private tests_Write = testList "Write" [
+    testCase "default" <| fun _ ->
+        let wb = DefaultTestObject.defaultTestObject()
+        let p = DefaultTestObject.WriteTestFiles.FsSpreadsheetNET.asRelativePath
+        wb.ToFile(p)
+        let wb_read = FsWorkbook.fromXlsxFile p
+        Expect.isDefaultTestObject wb_read
+
+]
+
 [<Tests>]
 let main = testList "DefaultIO" [
     tests_Read
+    tests_Write
 ]
 
