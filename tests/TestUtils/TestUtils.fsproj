@@ -18,9 +18,12 @@
 	<EmbeddedResource Include="TestFiles\TestWorkbook_Libre.xlsx">
 		<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	</EmbeddedResource>
-<EmbeddedResource Include="TestFiles\TestWorkbook_FsSpreadsheet.net.xlsx">
-	<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-</EmbeddedResource>
+	<EmbeddedResource Include="TestFiles\TestWorkbook_FsSpreadsheet.net.xlsx">
+		<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	</EmbeddedResource>
+	<EmbeddedResource Include="TestFiles\TestWorkbook_FsSpreadsheet.js.xlsx">
+		<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	</EmbeddedResource>
     <Compile Include="DefaultTestObjects.fs" />
     <Compile Include="TestingUtils.fs" />
   </ItemGroup>

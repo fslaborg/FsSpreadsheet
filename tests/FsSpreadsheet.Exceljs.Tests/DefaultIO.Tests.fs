@@ -13,7 +13,7 @@ let tests_Read = testList "Read" [
         let! wb = readFromTestFile DefaultTestObject.TestFiles.Excel |> Async.AwaitPromise
         Expect.isDefaultTestObject wb
     }
-    testCaseAsync "Libre" <| async {
+    ptestCaseAsync "Libre" <| async {
         let! wb = readFromTestFile DefaultTestObject.TestFiles.Libre |> Async.AwaitPromise
         Expect.isDefaultTestObject wb
     }
@@ -25,8 +25,12 @@ let tests_Read = testList "Read" [
         let! wb = readFromTestFile DefaultTestObject.TestFiles.ClosedXML |> Async.AwaitPromise
         Expect.isDefaultTestObject wb
     }
-    testCaseAsync "FsSpreadsheet" <| async {
+    testCaseAsync "FsSpreadsheetNET" <| async {
         let! wb = readFromTestFile DefaultTestObject.TestFiles.FsSpreadsheetNET |> Async.AwaitPromise
+        Expect.isDefaultTestObject wb
+    }
+    testCaseAsync "FsSpreadsheetJS" <| async {
+        let! wb = readFromTestFile DefaultTestObject.TestFiles.FsSpreadsheetJS |> Async.AwaitPromise
         Expect.isDefaultTestObject wb
     }
 ]

@@ -82,13 +82,10 @@ module FsExtensions =
                 | _ -> ()
             | Number -> 
                 try 
-                    cellValue <- int cellValueString
+                    cellValue <- float cellValueString
                 with 
                     | _ -> 
-                        try 
-                            cellValue <- float cellValueString
-                        with    
-                            | _ -> ()
+                        ()
             | Empty | String -> ()
             //let dt, v = DataType.InferCellValue v
             FsCell.createWithDataType dt (int row) (int col) (cellValue)
@@ -168,7 +165,7 @@ module FsExtensions =
                         let cells = 
                             cells
                             |> List.map (fun cell ->
-                                Cell.fromValueWithDataType doc (uint32 cell.ColumnNumber) (uint32 cell.RowNumber) (cell.ValueAsString()) (cell.DataType)
+                                FsCell.toXlsxCell doc cell
                             )
                         let row = Row.create (uint32 row.Index) (Row.Spans.fromBoundaries min max) cells
                         SheetData.appendRow row sd |> ignore

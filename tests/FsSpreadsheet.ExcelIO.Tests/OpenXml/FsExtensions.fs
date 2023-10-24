@@ -120,7 +120,7 @@ let fsExtensionTests =
                     Expect.equal d DataType.String "DataType is not DataType.String"
                 testCase "is equal to dummyFsWorkbook in sheet2, cellC7 value" <| fun _ ->
                     let v = (FsWorksheet.getCellAt 7 3 fsWorksheet2FromStream).Value
-                    Expect.equal v 7 "value is not equal"
+                    Expect.equal v 7. "value is not equal"
                 testCase "is equal to dummyFsWorkbook in sheet2, cellC7 address" <| fun _ ->
                     let a = (FsWorksheet.getCellAt 7 3 fsWorksheet2FromStream).Address.Address
                     Expect.equal a "C7" "address is not equal"

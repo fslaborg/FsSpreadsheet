@@ -13,15 +13,15 @@ module JsWorkbook =
     [<Emit("console.log($0)")>]
     let private log (obj:obj) = jsNative
 
-    let toFsWorkbook (jswb: Workbook) =
-        let fswb = new FsWorkbook()
-        for jsws in jswb.worksheets do
-            JsWorksheet.addJsWorksheet fswb jsws
-        fswb
-
-    let fromFsWorkbook (fswb: FsWorkbook) =
+    let writeFromFsWorkbook (fswb: FsWorkbook) =
         let jswb = ExcelJs.Excel.Workbook()
         jswb?_themes <- Aux.theme1
         for fsws in fswb.GetWorksheets() do
-            JsWorksheet.addFsWorksheet jswb fsws 
+            JsWorksheet.writeFromFsWorksheet jswb fsws 
         jswb
+
+    let readToFsWorkbook (jswb: Workbook) =
+        let fswb = new FsWorkbook()
+        for jsws in jswb.worksheets do
+            JsWorksheet.readToFsWorksheet fswb jsws
+        fswb

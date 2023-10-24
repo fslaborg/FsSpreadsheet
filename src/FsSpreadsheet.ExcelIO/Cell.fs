@@ -161,9 +161,12 @@ module Cell =
                 |> SharedStringTable.count
                 |> string
             |> fun v -> {|DataType = Some CellValues.SharedString; Value = v; Format = None|}
-        | DataType.String ->    {|DataType = Some CellValues.String; Value = value; Format = None|}
-        | DataType.Boolean ->   {|DataType = Some CellValues.Boolean; Value = value; Format = None|}
-        | DataType.Number ->    {|DataType = Some CellValues.Number; Value = value; Format = None|}
+        | DataType.String ->    
+            {|DataType = Some CellValues.String; Value = value; Format = None|}
+        | DataType.Boolean ->
+            {|DataType = Some CellValues.Boolean; Value = System.Boolean.Parse value |> FsCellAux.boolConverter; Format = None|}
+        | DataType.Number ->
+            {|DataType = Some CellValues.Number; Value = value; Format = None|}
         | DataType.Date ->      
             //let cellFormat = CellFormat(NumberFormatId = UInt32Value 19u, ApplyNumberFormat = BooleanValue true)
             let value = System.DateTime.Parse(value).ToOADate() |> string

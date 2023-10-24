@@ -54,6 +54,11 @@ type DataType =
 /// Creates an FsCell of `DataType` dataType, with value of type `string`, and `FsAddress` address.
 /// </summary>
 
+module FsCellAux =
+
+    let boolConverter (bool:bool) =
+        match bool with | true -> "1" | false -> "0"
+
 [<AttachMembers>]
 type FsCell (value : obj, ?dataType : DataType, ?address : FsAddress) =
     
@@ -233,8 +238,16 @@ type FsCell (value : obj, ?dataType : DataType, ?address : FsAddress) =
     /// <summary>
     /// Gets the value as string
     /// </summary>
-    member self.ValueAsString() =
-        self.Value.ToString()
+    member self.ValueAsString() : string =
+        let v = self.Value
+        match self.DataType with
+        | DataType.String | DataType.Date | DataType.Boolean | DataType.Empty ->
+            v.ToString()
+        | Number ->
+            // Example: 4.123: 
+            // - (4.123)ToString() will parse floats in germany to "4,123" which is not allowed by Excel.
+            // - string(4.123) will parse floats in germany to "4.123" which is allowed by Excel.
+            string v 
 
     /// <summary>
     /// Gets the value as string
@@ -417,9 +430,6 @@ type FsCell (value : obj, ?dataType : DataType, ?address : FsAddress) =
                 this.RowNumber = other.RowNumber
             |]
             |> Seq.forall (fun x -> x=true)
-        if not r then 
-            printfn "[VALUE] %A, %A" this.Value other.Value
-            printfn "[DATATYPE] %O, %O" this.DataType other.DataType
         r
 
 
