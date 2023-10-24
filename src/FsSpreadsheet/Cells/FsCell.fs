@@ -32,8 +32,8 @@ type DataType =
         match value with
         //| :? Hyperlink as hpl -> DataType.Hyperlink, value
         | :? char as c -> DataType.String, value
-        | :? bool as true -> DataType.Boolean, box true
-        | :? bool as false -> DataType.Boolean, box false
+        | :? bool as true -> DataType.Boolean, true
+        | :? bool as false -> DataType.Boolean, false
         | :? byte as i -> DataType.Number, value
         | :? sbyte as i -> DataType.Number, value
         | :? int as i -> DataType.Number, value
@@ -247,6 +247,7 @@ type FsCell (value : obj, ?dataType : DataType, ?address : FsAddress) =
             // Example: 4.123: 
             // - (4.123)ToString() will parse floats in germany to "4,123" which is not allowed by Excel.
             // - string(4.123) will parse floats in germany to "4.123" which is allowed by Excel.
+            // TODO: Maybe swap to (90.213).ToString(new Globalization.CultureInfo("en-US") ) // val it: string = "90.213"
             string v 
 
     /// <summary>

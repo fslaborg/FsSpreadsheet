@@ -80,9 +80,18 @@ module Stylesheet =
             nf.FormatCode.Value
 
         // Libre does set default numbers to "General" custom format code, so we need to check for that.
+        // Floats for example are set to "0.00", so we need a whitelist for isDateTime instead of a blacklist for any else.
+        // https://stackoverflow.com/a/72012646/12858021
         let isDateTime (nf : NumberingFormat) = 
-            getFormatCode nf = "General"
-            |> not
+            let format = getFormatCode nf 
+            let input = System.DateTime.Now.ToString(format, System.Globalization.CultureInfo.InvariantCulture)
+            let dt = System.DateTime.ParseExact(
+                input, 
+                format, 
+                System.Globalization.CultureInfo.InvariantCulture, 
+                System.Globalization.DateTimeStyles.NoCurrentDateDefault
+            )
+            dt <> Unchecked.defaultof<System.DateTime>
 
     module CellFormat = 
         

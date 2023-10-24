@@ -13,7 +13,7 @@ let tests_Read = testList "Read" [
         let! wb = readFromTestFile DefaultTestObject.TestFiles.Excel |> Async.AwaitPromise
         Expect.isDefaultTestObject wb
     }
-    ptestCaseAsync "Libre" <| async {
+    testCaseAsync "Libre" <| async {
         let! wb = readFromTestFile DefaultTestObject.TestFiles.Libre |> Async.AwaitPromise
         Expect.isDefaultTestObject wb
     }

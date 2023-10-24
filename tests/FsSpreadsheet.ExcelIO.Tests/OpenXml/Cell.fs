@@ -17,7 +17,6 @@ let cbsi1Fox = wsp1Fox.Worksheet.Descendants<Spreadsheet.Cell>() |> Array.ofSeq
 let nullCell = Cell.create (Some Spreadsheet.CellValues.Error) "A1" (Cell.CellValue.create "")
 nullCell.CellValue.Text <- null
 
-
 [<Tests>]
 let cellTests =
     testList "Cell" [

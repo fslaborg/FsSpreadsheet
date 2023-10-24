@@ -20,7 +20,7 @@ let tests_Read = testList "Read" [
     testCase "Excel" <| fun _ ->
         let wb = readFromTestFile DefaultTestObject.TestFiles.Excel
         Expect.isDefaultTestObject wb
-    ptestCase "Libre" <| fun _ ->
+    testCase "Libre" <| fun _ ->
         let wb = readFromTestFile DefaultTestObject.TestFiles.Libre
         Expect.isDefaultTestObject wb
     testCase "FableExceljs" <| fun _ ->
