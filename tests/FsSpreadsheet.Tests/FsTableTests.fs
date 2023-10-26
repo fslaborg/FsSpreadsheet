@@ -66,7 +66,7 @@ let dummyFsTableFields =
             if fsc.RowNumber = headerRowIndex then
                 i <- i + 1
                 FsTableField(
-                    fsc.Value, 
+                    fsc.ValueAsString(),
                     i, 
                     dummyFsRangeColumns |> Seq.find (fun t -> t.RangeAddress.FirstAddress.ColumnNumber = fsc.ColumnNumber), 
                     obj, 

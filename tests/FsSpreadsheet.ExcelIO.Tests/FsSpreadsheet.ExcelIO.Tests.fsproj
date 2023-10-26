@@ -7,7 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="Utils.fs" />
+    <Compile Include="Stylesheet.Tests.fs" />
+    <Compile Include="DefaultIO.Tests.fs" />
     <Compile Include="TestObjects.fs" />
     <Compile Include="OpenXml\FsExtensions.fs" />
     <Compile Include="OpenXml\Cell.fs" />
@@ -20,14 +21,18 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Expecto" Version="10.1.0" />
-    <PackageReference Include="YoloDev.Expecto.TestSdk" Version="0.*" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.*" />
     <ProjectReference Include="..\..\src\FsSpreadsheet.ExcelIO\FsSpreadsheet.ExcelIO.fsproj" />
+    <ProjectReference Include="..\TestUtils\TestUtils.fsproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Update="FSharp.Core" Version="7.0.300" />
+    <PackageReference Include="Expecto" Version="[10.1.0]" />
+    <PackageReference Include="YoloDev.Expecto.TestSdk" Version="[0.14.1]" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.*" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Update="FSharp.Core" Version="7.0.400" />
+  </ItemGroup>
+	
 </Project>

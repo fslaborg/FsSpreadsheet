@@ -14,8 +14,8 @@ let dataType =
             let resultDtTrue, resultStrTrue = DataType.InferCellValue boolValTrue
             testCase "Correct DataType" <| fun _ ->
                 Expect.isTrue (resultDtTrue = DataType.Boolean) "is not the expected DataType.Boolean"
-            testCase "Correct string" <| fun _ ->
-                let expected = "True"
+            testCase "Correct value" <| fun _ ->
+                let expected = true
                 Expect.equal resultStrTrue expected $"resulting string is not correct: {resultStrTrue}"
         ]
         testList "InferCellValue bool = false" [
@@ -23,8 +23,8 @@ let dataType =
             let resultDtFalse, resultStrFalse = DataType.InferCellValue boolValFalse
             testCase "Correct DataType" <| fun _ ->
                 Expect.isTrue (resultDtFalse = DataType.Boolean) "is not the expected DataType.Boolean"
-            testCase "Correct string" <| fun _ ->
-                let expected = "False"
+            testCase "Correct value" <| fun _ ->
+                let expected = false
                 Expect.equal resultStrFalse expected "resulting string is not correct"
         ]
         testList "InferCellValue string = \"test\"" [
@@ -32,7 +32,7 @@ let dataType =
             let resultDtTest, resultStrTest = DataType.InferCellValue stringValTest
             testCase "Correct DataType" <| fun _ ->
                 Expect.isTrue (resultDtTest = DataType.String) "is not the expected DataType.String"
-            testCase "Correct string" <| fun _ ->
+            testCase "Correct value" <| fun _ ->
                 Expect.isTrue (resultStrTest = "test") "resulting string is not correct"
         ]
         testList "InferCellValue string = \"\"" [
@@ -49,15 +49,15 @@ let dataType =
             testCase "Correct DataType" <| fun _ ->
                 Expect.isTrue (resultDtTest = DataType.String) "is not the expected DataType.String"
             testCase "Correct string" <| fun _ ->
-                Expect.isTrue (resultChrTest = "1") "resulting string is not correct"
+                Expect.isTrue (resultChrTest = '1') "resulting string is not correct"
         ]
         testList "InferCellValue byte = 255uy" [
             let byteValTest = 255uy
             let resultDtTest, resultBytTest = DataType.InferCellValue byteValTest
             testCase "Correct DataType" <| fun _ ->
                 Expect.isTrue (resultDtTest = DataType.Number) "is not the expected DataType.Number"
-            testCase "Correct string" <| fun _ ->
-                Expect.equal "255" resultBytTest "resulting string is not correct"
+            testCase "Correct value" <| fun _ ->
+                Expect.equal (box byteValTest) resultBytTest "resulting value is not correct"
         ]
         testList "InferCellValue sbyte = -10y" [
             let sbyteValTest = -10y
@@ -65,7 +65,7 @@ let dataType =
             testCase "Correct DataType" <| fun _ ->
                 Expect.isTrue (resultDtTest = DataType.Number) "is not the expected DataType.Number"
             testCase "Correct string" <| fun _ ->
-                Expect.equal "-10" resultSbyTest "resulting string is not correct"
+                Expect.equal (box -10y) resultSbyTest "resulting is not correct"
         ]
         testList "InferCellValue int = 0" [
             let intValTest = 0
@@ -73,7 +73,7 @@ let dataType =
             testCase "Correct DataType" <| fun _ ->
                 Expect.isTrue (resultDtTest = DataType.Number) "is not the expected DataType.Number"
             testCase "Correct string" <| fun _ ->
-                Expect.equal "0" resultIntTest "resulting string is not correct"
+                Expect.equal (box 0) resultIntTest "resulting is not correct"
         ]
     ]
 
@@ -95,17 +95,17 @@ let fsCellData =
             testCase "Value: A1" <| fun _ ->
                 Expect.equal fscellA1_string.Value "A1" "resulting value is not A1"
             testCase "Value: 1" <| fun _ ->
-                Expect.equal fscellB1_num.Value "1" "resulting value is not 1"
-            testCase "Value: True" <| fun _ ->
-                Expect.equal fscellA2_bool.Value "True" "resulting value is not True"
+                Expect.equal fscellB1_num.Value 1 "resulting value is not 1"
+            testCase "Value: true" <| fun _ ->
+                Expect.equal fscellA2_bool.Value true "resulting value is not true"
         
 
             testCase "Value as string : A1" <| fun _ ->
                 Expect.equal (fscellA1_string.ValueAsString()) "A1" "resulting value is not A1 as string"
             testCase "Value as integer: 1 " <| fun _ ->
                 Expect.equal (fscellB1_num.ValueAsInt()) 1 "resulting value is not 1 as integer"
-            testCase "Value as bool: True" <| fun _ ->
-                Expect.equal (fscellA2_bool.ValueAsBool()) true "resulting value is not True as bool"
+            testCase "Value as bool: true" <| fun _ ->
+                Expect.equal (fscellA2_bool.ValueAsBool()) true "resulting value is not true as bool"
 
         
             testCase "RowNumber: 1 " <| fun _ ->

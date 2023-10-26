@@ -16,7 +16,7 @@ module FsExtensions =
                     cells 
                     |> Seq.tryPick (fun cell ->
                         if cell.ColumnNumber = i then 
-                            Option.Some cell.Value
+                            cell.ValueAsString() |> Some
                         else 
                             None
                     )

@@ -21,6 +21,7 @@
 	    <PackagePath>\</PackagePath>
 	    <Pack>true</Pack>
 	  </None>
+	  <Compile Include="Cell.fs" />
 	  <Compile Include="Table.fs" />
 	  <Compile Include="Worksheet.fs" />
 	  <Compile Include="Workbook.fs" />
@@ -37,9 +38,7 @@
     <ProjectReference Include="..\FsSpreadsheet\FsSpreadsheet.fsproj" />
   </ItemGroup>
 
-	<ItemGroup>
-	<Content Include="*.fsproj; **\*.fs; **\*.fsi" PackagePath="fable\" />
-	</ItemGroup>
+	<ItemGroup />
 
 	<ItemGroup />
 	

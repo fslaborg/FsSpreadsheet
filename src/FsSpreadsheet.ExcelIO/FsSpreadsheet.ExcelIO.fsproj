@@ -17,6 +17,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="Stylesheet.fs" />
     <Compile Include="SharedStringTable.fs" />
     <Compile Include="Cell.fs" />
     <Compile Include="CellData.fs" />
@@ -27,6 +28,7 @@
     <Compile Include="Worksheet.fs" />
     <Compile Include="Workbook.fs" />
     <Compile Include="Spreadsheet.fs" />
+    <Compile Include="Package.fs" />
     <Compile Include="FsExtensions.fs" />
   </ItemGroup>
 

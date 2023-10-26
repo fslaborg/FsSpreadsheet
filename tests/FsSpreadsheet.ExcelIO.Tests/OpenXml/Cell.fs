@@ -14,9 +14,8 @@ let sstFox = sstpFox.SharedStringTable
 let sstFoxInnerText = sstFox.InnerText
 let wsp1Fox = (wbpFox.WorksheetParts |> Array.ofSeq)[0]
 let cbsi1Fox = wsp1Fox.Worksheet.Descendants<Spreadsheet.Cell>() |> Array.ofSeq
-let nullCell = Cell.create Spreadsheet.CellValues.Error "A1" (Cell.CellValue.create "")
+let nullCell = Cell.create (Some Spreadsheet.CellValues.Error) "A1" (Cell.CellValue.create "")
 nullCell.CellValue.Text <- null
-
 
 [<Tests>]
 let cellTests =

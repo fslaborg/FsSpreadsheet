@@ -17,35 +17,81 @@ module FsExtensions =
         /// <summary>
         /// Converts a given CellValues to the respective DataType.
         /// </summary>
-        static member ofXlsxCellValues (cellValues : CellValues) =
-            match cellValues with
-            | CellValues.Number -> DataType.Number
-            | CellValues.Boolean -> DataType.Boolean
-            | CellValues.Date -> DataType.Date
-            | CellValues.Error -> DataType.Empty
-            | CellValues.InlineString
-            | CellValues.SharedString
-            | CellValues.String 
-            | _ -> DataType.String
+        static member ofXlsXCell (doc : Packaging.SpreadsheetDocument) (cell : Cell) =
+
+            if cell.CellFormula <> null then
+                // LibreOffice annotates boolean values as formulas instead of boolean datatypes
+                if cell.CellFormula.InnerText = "TRUE()" || cell.CellFormula.InnerText = "FALSE()" then
+                    DataType.Boolean
+                else
+                    DataType.Number
+            //https://stackoverflow.com/a/13178043/12858021
+            //https://stackoverflow.com/a/55425719/12858021
+            // if styleindex is not null and datatype is null we propably have a DateTime field.
+            // if datatype would not be null it could also be boolean, as far as i tested it ~Kevin F 13.10.2023
+            elif cell.StyleIndex <> null && (cell.DataType = null || cell.DataType.Value = CellValues.Number) then
+                try
+                    let stylesheet = Stylesheet.get doc 
+                    let cellFormat : CellFormat = Stylesheet.CellFormat.getAt (int cell.StyleIndex.InnerText) stylesheet
+                    if cellFormat <> null && Stylesheet.CellFormat.isDateTime stylesheet cellFormat then
+                        DataType.Date
+                        
+                    else
+                        DataType.Number
+                with
+                | _ -> DataType.Number
+            else 
+                let cellValues = cell.DataType.Value
+                match cellValues with
+                | CellValues.Number -> DataType.Number
+                | CellValues.Boolean -> DataType.Boolean
+                | CellValues.Date -> DataType.Date
+                | CellValues.Error -> DataType.Empty
+                | CellValues.InlineString
+                | CellValues.SharedString
+                | CellValues.String -> DataType.String
+                | _ -> DataType.Number
 
 
     type FsCell with
-        //member self.ofXlsxCell (sst : Spreadsheet.SharedStringTable option) (xlsxCell:Spreadsheet.Cell) =
-        //    let v =  Cell.getValue sst xlsxCell
-        //    let row,col = xlsxCell.CellReference.Value |> CellReference.toIndices
-        //    FsCell.create (int row) (int col) v
 
         /// <summary>
         /// Creates an FsCell on the basis of an XlsxCell. Uses a SharedStringTable if present to get the XlsxCell's value.
-        /// </summary>
-        static member ofXlsxCell (sst : SharedStringTable option) (xlsxCell : Cell) =
-            let v =  Cell.getValue sst xlsxCell
+        /// </summary>   
+        static member ofXlsxCell (doc : Packaging.SpreadsheetDocument) (xlsxCell : Cell) =
+            let sst = Spreadsheet.tryGetSharedStringTable doc
+            let cellValueString = Cell.getValue sst xlsxCell
             let col, row = xlsxCell.CellReference.Value |> CellReference.toIndices
             let dt = 
-                try DataType.ofXlsxCellValues xlsxCell.DataType.Value
-                with _ -> DataType.Empty
-            FsCell.createWithDataType dt (int row) (int col) v
+                try DataType.ofXlsXCell doc xlsxCell
+                with _ -> DataType.Number // default is number 
+            let mutable cellValue : obj = cellValueString
+            match dt with
+            | Date ->
+                try 
+                    // datetime is written as float counting days since 1900. 
+                    // We use the .NET helper because we really do not want to deal with datetime issues.
+                    cellValue <- System.DateTime.FromOADate(float cellValueString)
+                with 
+                    | _ -> ()
+            | Boolean ->
+                // boolean is written as int/float either 0 or null
+                match cellValueString.ToLower() with 
+                | "1" | "true" -> cellValue <- true 
+                | "0" | "false" -> cellValue <- false 
+                | _ -> ()
+            | Number -> 
+                try 
+                    cellValue <- float cellValueString
+                with 
+                    | _ -> 
+                        ()
+            | Empty | String -> ()
+            //let dt, v = DataType.InferCellValue v
+            FsCell.createWithDataType dt (int row) (int col) (cellValue)
 
+        static member toXlsxCell (doc : Packaging.SpreadsheetDocument) (cell : FsCell) =
+            Cell.fromValueWithDataType doc (uint32 cell.ColumnNumber) (uint32 cell.RowNumber) (cell.ValueAsString()) cell.DataType
 
     type FsTable with
 
@@ -103,7 +149,7 @@ module FsExtensions =
         /// <summary>
         /// Returns the FsWorksheet in the form of an XlsxSpreadsheet.
         /// </summary>
-        member self.ToXlsxWorksheet() =
+        member self.ToXlsxWorksheet(doc) =
             self.RescanRows()
             let sheet = Worksheet.empty()
             let sheetData =
@@ -119,7 +165,7 @@ module FsExtensions =
                         let cells = 
                             cells
                             |> List.map (fun cell ->
-                                Cell.fromValueWithDataType None (uint32 cell.ColumnNumber) (uint32 cell.RowNumber) (cell.Value) (cell.DataType)
+                                FsCell.toXlsxCell doc cell
                             )
                         let row = Row.create (uint32 row.Index) (Row.Spans.fromBoundaries min max) cells
                         SheetData.appendRow row sd |> ignore
@@ -129,8 +175,8 @@ module FsExtensions =
         /// <summary>
         /// Returns an FsWorksheet in the form of an XlsxSpreadsheet.
         /// </summary>
-        static member toXlsxWorksheet (fsWorksheet : FsWorksheet) = 
-            fsWorksheet.ToXlsxWorksheet()
+        static member toXlsxWorksheet (fsWorksheet : FsWorksheet, doc) = 
+            fsWorksheet.ToXlsxWorksheet(doc)
 
         /// <summary>
         /// Appends the FsTables of this FsWorksheet to a given OpenXmlWorksheetPart in an XlsxWorkbookPart.
@@ -179,11 +225,11 @@ module FsExtensions =
                 xlsxSheets
                 |> Seq.map (
                     fun xlsxSheet ->
-                        let sheetIndex = Sheet.getSheetIndex xlsxSheet
+                        let sheetIndex = Sheet.getSheetIndex xlsxSheet //unused?
                         let sheetId = Sheet.getID xlsxSheet
                         let xlsxCells = 
                             Spreadsheet.getCellsBySheetID sheetId doc
-                            |> Seq.map (FsCell.ofXlsxCell sst)
+                            |> Seq.map (FsCell.ofXlsxCell doc)
                         let assocXlsxTables = 
                             xlsxTables 
                             |> Seq.tryPick (fun (sid,ts) -> if sid = sheetId then Some ts else None)
@@ -215,24 +261,40 @@ module FsExtensions =
         /// Creates an FsWorkbook from a given Stream to an XlsxFile.
         /// </summary>
         static member fromXlsxStream (stream : Stream) =
-            let doc = Spreadsheet.fromStream stream false
-            FsWorkbook.fromSpreadsheetDocument doc
+            if stream.CanWrite && stream.CanSeek then                 
+                let package = Packaging.Package.Open(stream,FileMode.Open,FileAccess.ReadWrite)
+                if Package.isLibrePackage package then
+                    Package.fixLibrePackage package
+                FsWorkbook.fromPackage package
+            else 
+                let package = Packaging.Package.Open(stream)
+                FsWorkbook.fromPackage package
 
         /// <summary>
         /// Creates an FsWorkbook from a given Stream to an XlsxFile.
         /// </summary>
         static member fromBytes (bytes : byte []) =
-            let stream = new MemoryStream(bytes)
+            let stream = new MemoryStream(bytes,writable = true)
             FsWorkbook.fromXlsxStream stream
 
         /// <summary>
         /// Takes the path to an Xlsx file and returns the FsWorkbook based on its content.
         /// </summary>
         static member fromXlsxFile (filePath : string) =
-            let sr = new StreamReader(filePath)
-            let wb = FsWorkbook.fromXlsxStream sr.BaseStream
-            sr.Close()
-            wb
+            let bytes = File.ReadAllBytes filePath
+            FsWorkbook.fromBytes bytes
+
+
+        member self.ToEmptySpreadsheet(doc : Packaging.SpreadsheetDocument) =
+            
+            let workbookPart = Spreadsheet.initWorkbookPart doc
+
+            for worksheet in self.GetWorksheets() do
+                let worksheetPart = 
+                    WorkbookPart.appendWorksheet worksheet.Name (worksheet.ToXlsxWorksheet(doc)) workbookPart
+                    |> WorkbookPart.getOrInitWorksheetPartByName worksheet.Name
+               
+                worksheet.AppendTablesToWorksheetPart(workbookPart,worksheetPart)
 
         /// <summary>
         /// Writes the FsWorkbook into a given MemoryStream.
@@ -240,14 +302,7 @@ module FsExtensions =
         member self.ToStream(stream : MemoryStream) = 
             let doc = Spreadsheet.initEmptyOnStream stream 
 
-            let workbookPart = Spreadsheet.initWorkbookPart doc
-
-            for worksheet in self.GetWorksheets() do
-                let worksheetPart = 
-                    WorkbookPart.appendWorksheet worksheet.Name (worksheet.ToXlsxWorksheet()) workbookPart
-                    |> WorkbookPart.getOrInitWorksheetPartByName worksheet.Name
-               
-                worksheet.AppendTablesToWorksheetPart(workbookPart,worksheetPart)
+            self.ToEmptySpreadsheet(doc)
                 //Worksheet.setSheetData sheetData sheet |> ignore
                 //WorkbookPart.appendWorksheet worksheet.Name sheet workbookPart |> ignore
 

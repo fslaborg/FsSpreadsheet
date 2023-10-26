@@ -4,6 +4,15 @@ open System
 
 open Fable.Core
 
+//type Hyperlink = {
+//    Text: string
+//    Hyperlink: string
+//} with
+//    static member create(text, hyperlink) = {
+//        Text = text
+//        Hyperlink = hyperlink
+//    }
+
 /// <summary>
 /// Possible DataTypes used in a FsCell.
 /// </summary>
@@ -12,6 +21,7 @@ type DataType =
     | Boolean
     | Number
     | Date
+    //| Hyperlink
     | Empty
 
     /// <summary>
@@ -20,34 +30,40 @@ type DataType =
     static member inline InferCellValue (value : 'T) = 
         let value = box value
         match value with
-        | :? char as c -> DataType.String,c.ToString()
-        | :? bool as true -> DataType.Boolean, "True"
-        | :? bool as false -> DataType.Boolean, "False"
-        | :? byte as i -> DataType.Number,i.ToString()
-        | :? sbyte as i -> DataType.Number,i.ToString()
-        | :? int as i -> DataType.Number,i.ToString()
-        | :? int16 as i -> DataType.Number,i.ToString()
-        | :? int64 as i -> DataType.Number,i.ToString()
-        | :? uint as i -> DataType.Number,i.ToString()
-        | :? uint16 as i -> DataType.Number,i.ToString()
-        | :? uint64 as i -> DataType.Number,i.ToString()
-        | :? single as i -> DataType.Number,i.ToString()
-        | :? float as i -> DataType.Number,i.ToString()
-        | :? decimal as i -> DataType.Number,i.ToString()
-        | :? System.DateTime as d -> DataType.Date,d.ToString()
-        | :? string as s -> DataType.String,s.ToString()
-        | _ ->  DataType.String,value.ToString()
+        //| :? Hyperlink as hpl -> DataType.Hyperlink, value
+        | :? char as c -> DataType.String, value
+        | :? bool as true -> DataType.Boolean, true
+        | :? bool as false -> DataType.Boolean, false
+        | :? byte as i -> DataType.Number, value
+        | :? sbyte as i -> DataType.Number, value
+        | :? int as i -> DataType.Number, value
+        | :? int16 as i -> DataType.Number, value
+        | :? int64 as i -> DataType.Number, value
+        | :? uint as i -> DataType.Number, value
+        | :? uint16 as i -> DataType.Number,value
+        | :? uint64 as i -> DataType.Number,value
+        | :? single as i -> DataType.Number,value
+        | :? float as i -> DataType.Number,value
+        | :? decimal as i -> DataType.Number,value
+        | :? System.DateTime as d -> DataType.Date,value
+        | :? string as s -> DataType.String,value
+        | _ ->  DataType.String,value
 
 // Type based on the type XLCell used in ClosedXml
 /// <summary>
 /// Creates an FsCell of `DataType` dataType, with value of type `string`, and `FsAddress` address.
 /// </summary>
 
+module FsCellAux =
+
+    let boolConverter (bool:bool) =
+        match bool with | true -> "1" | false -> "0"
+
 [<AttachMembers>]
-type FsCell (value : IConvertible, ?dataType : DataType, ?address : FsAddress) =
+type FsCell (value : obj, ?dataType : DataType, ?address : FsAddress) =
     
     // TODO: Maybe save as IConvertible
-    let mutable _cellValue = string value
+    let mutable _cellValue : obj = value
     let mutable _dataType = dataType |> Option.defaultValue DataType.String
     let mutable _comment  = ""
     let mutable _hyperlink = ""
@@ -58,9 +74,9 @@ type FsCell (value : IConvertible, ?dataType : DataType, ?address : FsAddress) =
     let mutable _rowIndex : int = address |> Option.map (fun a -> a.RowNumber) |> Option.defaultValue 0
     let mutable _columnIndex : int = address |> Option.map (fun a -> a.ColumnNumber) |> Option.defaultValue 0
 
-
+    new(value: IConvertible, ?dataType : DataType, ?address : FsAddress) = FsCell(box value, ?dataType = dataType, ?address = address)
     /// Creates an empty FsCell, set at row 0, column 0 (1-based).
-    static member empty () = FsCell ("", DataType.Empty, FsAddress(0,0))
+    static member inline empty () = FsCell ("", DataType.Empty, FsAddress(0,0))
 
     ///// Creates an FsCell of `DataType` `Number`, with the given value, set at row 1, column 1 (1-based).
     //new (value : int) = FsCell (string value, DataType.Number, FsAddress(0,0))
@@ -158,8 +174,8 @@ type FsCell (value : IConvertible, ?dataType : DataType, ?address : FsAddress) =
     /// <summary>
     /// Creates an FsCell with the given DataType, rowNumber, colNumber, and value.
     /// </summary>
-    static member createWithDataType (dataType : DataType) (rowNumber : int) (colNumber : int) value =
-        FsCell(value, dataType, FsAddress(rowNumber, colNumber))
+    static member createWithDataType (dataType : DataType) (rowNumber : int) (colNumber : int) (value: obj) =
+            FsCell(value, dataType, FsAddress(rowNumber, colNumber))
 
     //how 2:
     //return (format.ToUpper()) switch
@@ -222,8 +238,17 @@ type FsCell (value : IConvertible, ?dataType : DataType, ?address : FsAddress) =
     /// <summary>
     /// Gets the value as string
     /// </summary>
-    member self.ValueAsString() =
-        self.Value
+    member self.ValueAsString() : string =
+        let v = self.Value
+        match self.DataType with
+        | DataType.String | DataType.Date | DataType.Boolean | DataType.Empty ->
+            v.ToString()
+        | Number ->
+            // Example: 4.123: 
+            // - (4.123)ToString() will parse floats in germany to "4,123" which is not allowed by Excel.
+            // - string(4.123) will parse floats in germany to "4.123" which is allowed by Excel.
+            // TODO: Maybe swap to (90.213).ToString(new Globalization.CultureInfo("en-US") ) // val it: string = "90.213"
+            string v 
 
     /// <summary>
     /// Gets the value as string
@@ -235,7 +260,10 @@ type FsCell (value : IConvertible, ?dataType : DataType, ?address : FsAddress) =
     /// Gets the value as bool
     /// </summary>
     member self.ValueAsBool() =
-        bool.Parse (self.Value)
+        match (string self.Value).ToLower() with
+        | "1" | "true" | "true()" -> true
+        | "0" | "false" | "false()" -> false
+        | anyElse -> raise (System.FormatException($"String '{anyElse}' was not recognized as a valid Boolean"))
 
     /// <summary>
     /// Gets the value as bool
@@ -247,7 +275,7 @@ type FsCell (value : IConvertible, ?dataType : DataType, ?address : FsAddress) =
     /// Gets the value as float
     /// </summary>
     member self.ValueAsFloat() =
-        Double.Parse (self.Value)
+        Double.Parse (string self.Value)
 
     /// <summary>
     /// Gets the value as float
@@ -259,7 +287,7 @@ type FsCell (value : IConvertible, ?dataType : DataType, ?address : FsAddress) =
     /// Gets the value as int
     /// </summary>
     member self.ValueAsInt() =
-        Int32.Parse (self.Value)
+        Int32.Parse (string self.Value)
 
     /// <summary>
     /// Gets the value as int
@@ -271,7 +299,7 @@ type FsCell (value : IConvertible, ?dataType : DataType, ?address : FsAddress) =
     /// Gets the value as uint
     /// </summary>
     member self.ValueAsUInt() =
-        UInt32.Parse (self.Value)
+        UInt32.Parse (string self.Value)
 
     /// <summary>
     /// Gets the value as uint
@@ -283,7 +311,7 @@ type FsCell (value : IConvertible, ?dataType : DataType, ?address : FsAddress) =
     /// Gets the value as long
     /// </summary>
     member self.ValueAsLong() =
-        Int64.Parse (self.Value)
+        Int64.Parse (string self.Value)
 
     /// <summary>
     /// Gets the value as long
@@ -295,7 +323,7 @@ type FsCell (value : IConvertible, ?dataType : DataType, ?address : FsAddress) =
     /// Gets the value as ulong
     /// </summary>
     member self.ValueAsULong() =
-        UInt64.Parse (self.Value)
+        UInt64.Parse (string self.Value)
 
     /// <summary>
     /// Gets the value as ulong
@@ -307,7 +335,7 @@ type FsCell (value : IConvertible, ?dataType : DataType, ?address : FsAddress) =
     /// Gets the value as double
     /// </summary>
     member self.ValueAsDouble() =
-        Double.Parse (self.Value)
+        Double.Parse (string self.Value)
 
     /// <summary>
     /// Gets the value as double
@@ -319,7 +347,7 @@ type FsCell (value : IConvertible, ?dataType : DataType, ?address : FsAddress) =
     /// Gets the value as decimal
     /// </summary>
     member self.ValueAsDecimal() =
-        Decimal.Parse (self.Value)
+        Decimal.Parse (string self.Value)
 
     /// <summary>
     /// Gets the value as decimal
@@ -331,7 +359,7 @@ type FsCell (value : IConvertible, ?dataType : DataType, ?address : FsAddress) =
     /// Gets the value as DateTime
     /// </summary>
     member self.ValueAsDateTime() =
-        DateTime.Parse (self.Value)
+        DateTime.Parse (string self.Value)
 
     /// <summary>
     /// Gets the value as DateTime
@@ -343,7 +371,7 @@ type FsCell (value : IConvertible, ?dataType : DataType, ?address : FsAddress) =
     /// Gets the value as Guid
     /// </summary>
     member self.ValueAsGuid() =
-        Guid.Parse (self.Value)
+        Guid.Parse (string self.Value)
 
     /// <summary>
     /// Gets the value as Guid
@@ -355,7 +383,7 @@ type FsCell (value : IConvertible, ?dataType : DataType, ?address : FsAddress) =
     /// Gets the value as char
     /// </summary>
     member self.ValueAsChar() =
-        Char.Parse (self.Value)
+        Char.Parse (string self.Value)
 
     /// <summary>
     /// Gets the value as char
@@ -385,3 +413,24 @@ type FsCell (value : IConvertible, ?dataType : DataType, ?address : FsAddress) =
     static member setValueAs<'T> value (cell : FsCell)= 
         cell.SetValueAs<'T>(value)
         cell
+
+    member this.StructurallyEquals (other: FsCell) =
+        let r = 
+            [|
+                this.Value = other.Value
+                this.DataType = other.DataType
+                [|
+                    this.Address.Address = other.Address.Address
+                    this.Address.ColumnNumber = other.Address.ColumnNumber
+                    this.Address.RowNumber = other.Address.RowNumber
+                    this.Address.FixedColumn = other.Address.FixedColumn
+                    this.Address.FixedRow = other.Address.FixedRow
+                |]
+                |> Seq.forall (fun x -> x=true)
+                this.ColumnNumber = other.ColumnNumber
+                this.RowNumber = other.RowNumber
+            |]
+            |> Seq.forall (fun x -> x=true)
+        r
+
+

@@ -26,15 +26,15 @@ let sheet1() =
 let sheet2() =
     let ws = new FsWorksheet(sheet2Name)
     [
-        FsCell.createWithDataType DataType.Number 1 1 1
-        FsCell.createWithDataType DataType.Number 1 2 2
-        FsCell.createWithDataType DataType.Number 1 3 3
-        FsCell.createWithDataType DataType.Number 1 4 4
+        FsCell.createWithDataType DataType.Number 1 1 1.
+        FsCell.createWithDataType DataType.Number 1 2 2.
+        FsCell.createWithDataType DataType.Number 1 3 3.
+        FsCell.createWithDataType DataType.Number 1 4 4.
 
-        FsCell.createWithDataType DataType.Number 2 1 5
-        FsCell.createWithDataType DataType.Number 2 2 6
-        FsCell.createWithDataType DataType.Number 2 3 7
-        FsCell.createWithDataType DataType.Number 2 4 8     
+        FsCell.createWithDataType DataType.Number 2 1 5.
+        FsCell.createWithDataType DataType.Number 2 2 6.
+        FsCell.createWithDataType DataType.Number 2 3 7.
+        FsCell.createWithDataType DataType.Number 2 4 8.    
     ]
     |> List.iter (fun c -> ws.Row(c.RowNumber).[c.ColumnNumber].SetValueAs c.Value)
     ws

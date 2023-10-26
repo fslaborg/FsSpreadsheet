@@ -117,6 +117,7 @@ type FsRow (rangeAddress : FsRangeAddress, cells : FsCellsCollection)=
     /// Checks if there is an FsCell at given column index of a given FsRow.
     /// </summary>
     /// <param name="colIndex">The number of the column where the presence of an FsCell shall be checked.</param>
+    /// <param name="row"></param>
     static member hasCellAt colIndex (row : FsRow) =
         row.HasCellAt colIndex
 
@@ -145,6 +146,7 @@ type FsRow (rangeAddress : FsRangeAddress, cells : FsCellsCollection)=
     /// Returns the FsCell at the given columnIndex if it exists in the given FsRow. Else returns None.
     /// </summary>
     /// <param name="colIndex">The number of the column where the FsCell shall be retrieved.</param>
+    /// <param name="row"></param>
     static member tryItem colIndex (row : FsRow) =
         row.TryItem colIndex
 

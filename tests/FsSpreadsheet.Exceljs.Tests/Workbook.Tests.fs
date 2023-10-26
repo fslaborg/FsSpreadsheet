@@ -1,9 +1,11 @@
 module Workbook.Tests
 
-open Fable.Mocha
+open TestingUtils
 open Fable.ExcelJs
 open FsSpreadsheet.Exceljs
 open FsSpreadsheet
+
+open Fable.Core
 
 module Helper =
 
@@ -18,7 +20,7 @@ let private tests_toFsWorkbook = testList "toFsWorkbook" [
     testCase "empty" <| fun _ ->
         let jswb = ExcelJs.Excel.Workbook()
         Expect.passWithMsg "Create jswb"
-        let fswb = JsWorkbook.toFsWorkbook jswb
+        let fswb = JsWorkbook.readToFsWorkbook jswb
         Expect.passWithMsg "Convert to fswb"
         let fswsList = fswb.GetWorksheets()
         let jswsList = jswb.worksheets
@@ -27,7 +29,7 @@ let private tests_toFsWorkbook = testList "toFsWorkbook" [
         let jswb = ExcelJs.Excel.Workbook()
         let _ = jswb.addWorksheet("My Awesome Worksheet")
         Expect.passWithMsg "Create jswb"
-        let fswb = JsWorkbook.toFsWorkbook jswb
+        let fswb = JsWorkbook.readToFsWorkbook jswb
         Expect.passWithMsg "Convert to fswb"
         let jswsList = jswb.worksheets
         let fswsList = fswb.GetWorksheets()
@@ -39,7 +41,7 @@ let private tests_toFsWorkbook = testList "toFsWorkbook" [
         let _ = jswb.addWorksheet("My Best Worksheet")
         let _ = jswb.addWorksheet("My Nice Worksheet")
         Expect.passWithMsg "Create jswb"
-        let fswb = JsWorkbook.toFsWorkbook jswb
+        let fswb = JsWorkbook.readToFsWorkbook jswb
         Expect.passWithMsg "Convert to fswb"
         let jswsList = jswb.worksheets
         let fswsList = fswb.GetWorksheets()
@@ -57,7 +59,7 @@ let private tests_toFsWorkbook = testList "toFsWorkbook" [
         let table = Table("My_Awesome_Table", "B1", tableColumns, [||])
         let _ = jsws.addTable(table)
         Expect.passWithMsg "Create jswb"
-        let fswb = JsWorkbook.toFsWorkbook jswb
+        let fswb = JsWorkbook.readToFsWorkbook jswb
         Expect.passWithMsg "Convert to fswb"
         let fsTables_a = fswb.GetWorksheets().[0].Tables
         let fsTables_b = fswb.GetTables()        
@@ -87,7 +89,7 @@ let private tests_toFsWorkbook = testList "toFsWorkbook" [
         let table = Table("My_Awesome_Table", "B1", tableColumns, rows)
         let _ = jsws.addTable(table)
         Expect.passWithMsg "Create jswb"
-        let fswb = JsWorkbook.toFsWorkbook jswb
+        let fswb = JsWorkbook.readToFsWorkbook jswb
         Expect.passWithMsg "Convert to fswb"
         let fsTables = fswb.GetTables()        
         Expect.hasLength (jsws.getTables()) 1 "js table count"
@@ -107,7 +109,7 @@ let private tests_toFsWorkbook = testList "toFsWorkbook" [
         let table = Table("My_Awesome_Table", "B1", tableColumns, rows)
         let _ = jsws.addTable(table)
         Expect.passWithMsg "Create jswb"
-        let fswb = JsWorkbook.toFsWorkbook jswb  
+        let fswb = JsWorkbook.readToFsWorkbook jswb  
         let getCellValue (address: string) = 
             let ws = fswb.GetWorksheetAt 1
             let range = FsAddress(address)
@@ -132,7 +134,7 @@ let tests_toJsWorkbook = testList "toJsWorkbook" [
     testCase "empty" <| fun _ ->
         let fswb = new FsWorkbook()
         Expect.passWithMsg "Create fswb"
-        let jswb = JsWorkbook.fromFsWorkbook fswb
+        let jswb = JsWorkbook.writeFromFsWorkbook fswb
         Expect.passWithMsg "Convert to jswb"
         let fswsList = fswb.GetWorksheets()
         let jswsList = jswb.worksheets
@@ -141,7 +143,7 @@ let tests_toJsWorkbook = testList "toJsWorkbook" [
         let fswb = new FsWorkbook()
         let _ = fswb.InitWorksheet("My Awesome Worksheet")
         Expect.passWithMsg "Create fswb"
-        let jswb = JsWorkbook.fromFsWorkbook fswb
+        let jswb = JsWorkbook.writeFromFsWorkbook fswb
         Expect.passWithMsg "Convert to jswb"
         let fswsList = fswb.GetWorksheets()
         let jswsList = jswb.worksheets
@@ -154,7 +156,7 @@ let tests_toJsWorkbook = testList "toJsWorkbook" [
         let _ = fswb.InitWorksheet("My cool Worksheet")
         let _ = fswb.InitWorksheet("My wow Worksheet")
         Expect.passWithMsg "Create fswb"
-        let jswb = JsWorkbook.fromFsWorkbook fswb
+        let jswb = JsWorkbook.writeFromFsWorkbook fswb
         Expect.passWithMsg "Convert to jswb"
         let fswsList = fswb.GetWorksheets()
         let jswsList = jswb.worksheets
@@ -171,7 +173,7 @@ let tests_toJsWorkbook = testList "toJsWorkbook" [
         let t = FsTable("My_New_Table", FsRangeAddress("B1:C1"))
         let _ = fsws.AddTable(t)
         Expect.passWithMsg "Create jswb"
-        let jswb = JsWorkbook.fromFsWorkbook fswb
+        let jswb = JsWorkbook.writeFromFsWorkbook fswb
         Expect.passWithMsg "Convert to fswb"
         let jsws = jswb.worksheets.[0]
         Expect.equal jsws.name "My Awesome Worksheet" "ws name"
@@ -198,7 +200,7 @@ let tests_toJsWorkbook = testList "toJsWorkbook" [
         let t = FsTable("My_New_Table", FsRangeAddress("B1:D3"))
         let _ = fsws.AddTable(t)
         Expect.passWithMsg "Create jswb"
-        let jswb = JsWorkbook.fromFsWorkbook fswb
+        let jswb = JsWorkbook.writeFromFsWorkbook fswb
         Expect.passWithMsg "Convert to fswb"
         let jsws = jswb.worksheets.[0]
         Expect.equal jsws.name "My Awesome Worksheet" "ws name"
@@ -227,7 +229,7 @@ let tests_toJsWorkbook = testList "toJsWorkbook" [
         let _ = fsws.AddTable(t)
         fsws.RescanRows()
         Expect.passWithMsg "Create jswb"
-        let jswb = JsWorkbook.fromFsWorkbook fswb
+        let jswb = JsWorkbook.writeFromFsWorkbook fswb
         let jstable = jswb.worksheets.[0].getTables().[0].table.Value
         let row0 = jstable.rows.[0]
         let row1 = jstable.rows.[1]
@@ -279,7 +281,7 @@ open Fable.Core
 
 let tests_xlsx = testList "xlsx" [
     testList "read" [
-        testAsync "isa.assay.xlsx" {
+        testCaseAsync "isa.assay.xlsx" <| async {
             let! fswb = Xlsx.fromXlsxFile("./tests/JS/TestFiles/isa.assay.xlsx") |> Async.AwaitPromise
             Expect.equal (fswb.GetWorksheets().Count) 5 "Count"
         }

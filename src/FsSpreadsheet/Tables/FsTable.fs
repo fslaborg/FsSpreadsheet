@@ -59,10 +59,26 @@ type FsTable (name : string, rangeAddress : FsRangeAddress, ?showTotalsRow : boo
     /// <summary>
     /// Returns the header row as FsRangeRow. Scans for new fieldnames.
     /// </summary>
+    [<System.ObsoleteAttribute("Obsolete after `4.0.0`. Use TryGetHeaderRow or GetHeaderRow instead!")>]
     member this.HeadersRow() = 
         if (not this.ShowHeaderRow) then null;        
         else 
-            FsRange(base.RangeAddress).FirstRow();
+            FsRange(base.RangeAddress).FirstRow()
+
+    member this.TryGetHeaderRow(cellsCollection) =
+        match this.ShowHeaderRow with
+        | false -> None
+        | true -> 
+            let rowIndex = this.RangeAddress.FirstAddress.RowNumber 
+            let firstAddress = FsAddress(rowIndex, this.RangeAddress.FirstAddress.ColumnNumber)
+            let lastAddress = FsAddress(rowIndex, this.RangeAddress.LastAddress.ColumnNumber)
+            let range = FsRangeAddress (firstAddress, lastAddress)
+            FsRow(range, cellsCollection) |> Some
+
+    member this.GetHeaderRow(cellsCollection) =
+        match this.TryGetHeaderRow(cellsCollection) with
+        | Some hr -> hr
+        | None -> failwith $"""Error. Unable to get header row for table "{this.Name}" as `ShowHeaderRow` is set to `false`."""
 
     /// <summary>
     /// Returns the FsColumns from the FsTable.
@@ -420,10 +436,10 @@ type FsTable (name : string, rangeAddress : FsRangeAddress, ?showTotalsRow : boo
         if this.ShowHeaderRow then
             let oldFieldNames =  _fieldNames
             _fieldNames <- new Dictionary<string, FsTableField>()
-            let headersRow = this.HeadersRow();
+            let headersRow = this.GetHeaderRow(cellsCollection);
             let mutable cellPos = 0
-            for cell in headersRow.Cells(cellsCollection) do
-                let mutable name = cell.Value //GetString();
+            for cell in headersRow do
+                let mutable name = cell.ValueAsString() //GetString();
                 match Dictionary.tryGet name oldFieldNames with
                 | Some tableField ->
                     tableField.Index <- cellPos

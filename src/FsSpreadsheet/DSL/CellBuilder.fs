@@ -14,6 +14,7 @@ type ReduceOperation =
             values 
             |> List.map (snd >> string)
             |> List.reduce (fun a b -> $"{a}{separator}{b}")
+            |> box
 
 type CellBuilder() =
 

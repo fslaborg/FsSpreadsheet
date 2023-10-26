@@ -95,7 +95,7 @@ module SheetEntityExtensions =
                 failwith $"SheetEntity of type {typeof<'T>.Name} does not contain Value: \n\t{appendedMessages}"
                 #endif
 
-type Value = DataType * string
+type Value = DataType * obj
 
 type CellElement = Value * int option
 
