@@ -1,3 +1,57 @@
+### 5.0.0+62ff8ec (Released 2023-10-26)
+* Additions:
+    * [[#62ff8ec](https://github.com/CSBiology/FsSpreadsheet/commit/62ff8ec966cf618a4231e281fcc4f23447e3e9b3)] Merge pull request #76 from fslaborg/io_tests
+    * [[#db263ed](https://github.com/CSBiology/FsSpreadsheet/commit/db263edea5bd8ecd9e6e8023fdae6a396fa01cec)] Start implementing logic for auto update, but push to backlog for now
+    * [[#c5bf348](https://github.com/CSBiology/FsSpreadsheet/commit/c5bf34808d105723738dde53e6cb778a2b97da3e)] Finish io tests :heavy_check_mark:
+    * [[#80f7632](https://github.com/CSBiology/FsSpreadsheet/commit/80f7632b2a4865951f144fc271e02a2ee4f6989c)] Improve DateTime numberFormat recognition
+    * [[#baa88ce](https://github.com/CSBiology/FsSpreadsheet/commit/baa88ceb185c43302c8e7742ba8fe1afab893739)] update libre test file
+    * [[#9805811](https://github.com/CSBiology/FsSpreadsheet/commit/980581193cdcceaa80cd87f91e86121726c1046f)] Setup current FsSpreadsheet.Exceljs write for defaultio tests :construction:
+    * [[#05e0ca4](https://github.com/CSBiology/FsSpreadsheet/commit/05e0ca492e3ae54cdaf6fdec4c19c1296614e565)] update gitignore
+    * [[#2b99506](https://github.com/CSBiology/FsSpreadsheet/commit/2b99506e9abafd7d579d8e3f09fb59d7e20a8398)] Further work on #71 change FsCell.Value to obj :boom:
+    * [[#546e029](https://github.com/CSBiology/FsSpreadsheet/commit/546e02962c5d18127e143d85705523a4163d63c2)] add stylesheet helper functions
+    * [[#47615d7](https://github.com/CSBiology/FsSpreadsheet/commit/47615d7cfba7b19eb53815ac500c2dfd45a02d3a)] add preliminary stylesheet functionality for cell datetime writing (wip)
+    * [[#1a71e96](https://github.com/CSBiology/FsSpreadsheet/commit/1a71e9688f02d5d35e89f3cacf380f99d5049195)] Update files correctly
+    * [[#326cbba](https://github.com/CSBiology/FsSpreadsheet/commit/326cbbafda241edc6ecd85b46247969b100cc56d)] Make first tests pass :heavy_check_mark:
+    * [[#085418f](https://github.com/CSBiology/FsSpreadsheet/commit/085418fa77844685613e55e5542f91d95d7ace85)] Add FsSpreadsheet tests and update testFile to include Time in DateTime
+    * [[#4d7c27f](https://github.com/CSBiology/FsSpreadsheet/commit/4d7c27f78917a445cd826fdd6bde03211d8ea636)] Add boolean column to Default TestWorkbook
+    * [[#371808c](https://github.com/CSBiology/FsSpreadsheet/commit/371808cecb3f5255fb58dae4b2f3bf317090753e)] Make ExcelIO FableExceljs and OpenXML tests pass :heavy_check_mark:
+    * [[#759c7a0](https://github.com/CSBiology/FsSpreadsheet/commit/759c7a0ccfbe7f742cb6d3fdf87717e084c29329)] Update files from TestWorkbook_Excel
+    * [[#58736f3](https://github.com/CSBiology/FsSpreadsheet/commit/58736f384a1fa98254ede83e643c67ce2d239cbd)] make ExcelIO-Excel test pass :heavy_check_mark:
+    * [[#f468fd0](https://github.com/CSBiology/FsSpreadsheet/commit/f468fd04e5de0761ea376e6e4ca9708aa321b194)] Parse correct DataType from OpenXML #73
+    * [[#1ad6c9d](https://github.com/CSBiology/FsSpreadsheet/commit/1ad6c9d960701b4f565a0abd210ea8fd3845e49f)] Move TestFiles and setup Utility project #71
+    * [[#4cc9c25](https://github.com/CSBiology/FsSpreadsheet/commit/4cc9c25522be978283d2bacbd16dd19bcdf6f509)] Improve HeaderRow functions #72
+    * [[#b8a51bf](https://github.com/CSBiology/FsSpreadsheet/commit/b8a51bf7eedf08e48460a302c25954e4807daa27)] add testFile info
+    * [[#88cffd2](https://github.com/CSBiology/FsSpreadsheet/commit/88cffd2ad2e6d05e213c9426f1a812e78b10843d)] Add io helper scripts
+    * [[#0811a1d](https://github.com/CSBiology/FsSpreadsheet/commit/0811a1d0b211c34cb8bbd65cf13f3df5f574b706)] update xlsx file
+    * [[#cfdb888](https://github.com/CSBiology/FsSpreadsheet/commit/cfdb888b02e2a3d357e6bf70434ba97180532016)] add excel testTable
+    * [[#eedf32f](https://github.com/CSBiology/FsSpreadsheet/commit/eedf32f1e05d2ccba3b259bc92d908187b48ae25)] Merge pull request #70 from fslaborg/issue_69
+    * [[#858d6d8](https://github.com/CSBiology/FsSpreadsheet/commit/858d6d83f08c3d70db017c3c0964e4fd6aae01a3)] add correct extensions to native js tests
+    * [[#a54d874](https://github.com/CSBiology/FsSpreadsheet/commit/a54d874f1345117dcf0e335e522b74780619053f)] Set correct default for showHeaderRow = false #69
+    * [[#e0b42c7](https://github.com/CSBiology/FsSpreadsheet/commit/e0b42c7ac4394c19105997b8892c2966e5f584ee)] Merge pull request #68 from fslaborg/ioExtension
+    * [[#e903e76](https://github.com/CSBiology/FsSpreadsheet/commit/e903e767c1d1e22f000778b849ade4c4587cfe68)] add additional xlsx readers variants
+    * [[#a4cd326](https://github.com/CSBiology/FsSpreadsheet/commit/a4cd326f7166dcd7b59a56f2f83cadf020339114)] Merge branch 'main' of https://github.com/CSBiology/FsSpreadsheet
+    * [[#c69f787](https://github.com/CSBiology/FsSpreadsheet/commit/c69f7877f9cb8c96ad995a879e6d3a310407635a)] Merge pull request #66 from fslaborg/npmRelease
+    * [[#63498a9](https://github.com/CSBiology/FsSpreadsheet/commit/63498a9350d9f46c356c6bf73c98c1b30ec1fb95)] Add tasks for npm release
+    * [[#9c7ab69](https://github.com/CSBiology/FsSpreadsheet/commit/9c7ab691b4aca6c0b16d0c2c7fd374b8d36e14e9)] Add test to verify correct parsing of old ClosedXml
+    * [[#02d92c2](https://github.com/CSBiology/FsSpreadsheet/commit/02d92c299e2e1358a201f1617d2853e0f885cb86)] Update exceljs dependency
+    * [[#9eb94ea](https://github.com/CSBiology/FsSpreadsheet/commit/9eb94eabf3c91d1bb7390e40c11e41dc65906893)] Update package.json: Mocha timeout for Exceljs JS tests
+    * [[#f105a75](https://github.com/CSBiology/FsSpreadsheet/commit/f105a75079f14bc3408984d46b5bc69d420a038d)] Merge pull request #64 from CSBiology/feature-moreFsColumnFun-#63
+    * [[#36a72a2](https://github.com/CSBiology/FsSpreadsheet/commit/36a72a26b5f865031a31e9ef1fc47d6216ed1935)] Update package.json, update and rewrite Release Notes for v4.0.0
+    * [[#d501225](https://github.com/CSBiology/FsSpreadsheet/commit/d50122572e9310d1fbab0b971e8922a884775f38)] Add unit tests for newly added functions
+* Bugfixes:
+    * [[#56d533f](https://github.com/CSBiology/FsSpreadsheet/commit/56d533fd3279f8d6c7e6f56a489e1b734abcb166)] Fix ExcelIO: bool & float write. Fix exceljs: table postion write, cell value type read and write, confusing naming. Add scripts for fsspreadsheet write. :sparkles:🤡
+    * [[#6fe7f89](https://github.com/CSBiology/FsSpreadsheet/commit/6fe7f891644934b427ea56620fa8983befc25b10)] Fix ci
+    * [[#17a9cf8](https://github.com/CSBiology/FsSpreadsheet/commit/17a9cf8e51a8b1f3fa7e11461f923bddff1ca220)] Fix embedded ressource path
+    * [[#26c574d](https://github.com/CSBiology/FsSpreadsheet/commit/26c574dd29e0908d00cdb8e33c87d8e142052361)] fix libre file parsing and update test files
+    * [[#47e696b](https://github.com/CSBiology/FsSpreadsheet/commit/47e696ba6e25f1b02e3d520bc0c77e7df834a3df)] update spreadsheet file and final fixes for dotnet reader
+    * [[#5f6c8da](https://github.com/CSBiology/FsSpreadsheet/commit/5f6c8da5c438458d8838fab48612b691db6ddd23)] Fix DateTime format :bug:
+    * [[#d6e85cb](https://github.com/CSBiology/FsSpreadsheet/commit/d6e85cba08422c17bf323577b4ccea729bbe97a7)] Fix DateTime and paths for build chain
+    * [[#3a60e29](https://github.com/CSBiology/FsSpreadsheet/commit/3a60e29268d2f65646d751088d8ca09f841125aa)] Fix paths, but exceljs parses DateTime differently :construction:
+    * [[#77b722d](https://github.com/CSBiology/FsSpreadsheet/commit/77b722d2dd6c15836ef23645e9c3958861d69309)] Fix read in for boolean type `DataType` :bug:
+    * [[#c7b88b6](https://github.com/CSBiology/FsSpreadsheet/commit/c7b88b6a909700da7fa2c481462435930fc2e62f)] try fix CI
+    * [[#116962e](https://github.com/CSBiology/FsSpreadsheet/commit/116962e42a2b8e52128d4d039dc50d86dd4588ab)] Fix error in fsspreadsheet not writing table.name only displayname
+    * [[#2ea7401](https://github.com/CSBiology/FsSpreadsheet/commit/2ea7401b78d91a4f75a9cb77a033142610de21d5)] fix package.json publish bug :bug:
+
 ### 4.0.0+5d5067f (Released 2023-8-11)
 * Additions:
     * [[#19bd2a8](https://github.com/CSBiology/FsSpreadsheet/commit/19bd2a8817940d4f8725a85ebfa595faa214a24d)] Add `MinRowIndex` and `MinColIndex` to FsColumn
@@ -9,7 +63,7 @@
     * [[#05f19ae](https://github.com/CSBiology/FsSpreadsheet/commit/05f19ae60db21031fb0ee527ef94431d199bee6e)] Add `GetRowCount` functionality to FsRangeBase
     * [[#aa4938c](https://github.com/CSBiology/FsSpreadsheet/commit/aa4938cb7dff34e84cf4d15d7325fd60ed1ebd85)] Add `GetRows` functionality to FsTable
     * [[#2a29cfe](https://github.com/CSBiology/FsSpreadsheet/commit/2a29cfe16f4360ad0f0fbb213ccc0abcbb653087)] Add FsRow members: `TryItem`, `ToDenseRow`, `HasCellAt`, `MinColIndex`, `MaxColIndex`
-	* [[#c228e7f](https://github.com/CSBiology/FsSpreadsheet/commit/c228e7f3799d87d34e44fb96500fe4f360d6454e)] Change npm dependency to exceljs fork
+    * 	* [[#c228e7f](https://github.com/CSBiology/FsSpreadsheet/commit/c228e7f3799d87d34e44fb96500fe4f360d6454e)] Change npm dependency to exceljs fork
     * [[#5625b33](https://github.com/CSBiology/FsSpreadsheet/commit/5625b3310a5918a5396d49a7bef1e6654d50d295)] Update more tests
     * [[#4378808](https://github.com/CSBiology/FsSpreadsheet/commit/4378808c13d3250b90ac2311fd127b999498b2c4)] Update gitignore
     * [[#cb35186](https://github.com/CSBiology/FsSpreadsheet/commit/cb3518609e9fe42e05789441906dc148a4b8d53e)] Update and clean up RELEASE_NOTES.md
