@@ -3,9 +3,9 @@
 
 <head>
     <meta charset="utf-8">
-    <title>WorkbookElement (FsSpreadsheet)</title>
+    <title>JsCell (FsSpreadsheet)</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="author" content="Heinrich Lukas Weil, Oliver Maus, Kevin Schneider, Kevin Frey, Timo Mühlhaus">
+    <meta name="author" content="Kevin Frey, Heinrich Lukas Weil, Oliver Maus, Kevin Schneider, Timo Mühlhaus">
     <link rel="shortcut icon" type="image/x-icon" href="/FsSpreadsheet//img/favicon.ico">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
@@ -73,27 +73,17 @@
                 <div class="container" id="fsdocs-content">
                     <div>
   <h2>
-    WorkbookElement Type
+    JsCell Module
   </h2>
   <dl class="fsdocs-metadata">
     <dt>
       Namespace: 
-      <a href="/FsSpreadsheet/reference/fsspreadsheet-dsl.html">
-        FsSpreadsheet.DSL
+      <a href="/FsSpreadsheet/reference/fsspreadsheet-exceljs.html">
+        FsSpreadsheet.Exceljs
       </a>
     </dt>
     <dt>
-      Assembly: FsSpreadsheet.dll
-    </dt>
-    <dt>
-      Base Type: 
-      <code>obj</code>
-    </dt>
-    <dt>
-      All Interfaces: 
-      <code><span><a href="https://docs.microsoft.com/dotnet/api/system.iequatable-1">IEquatable</a>&lt;<a href="/FsSpreadsheet/reference/fsspreadsheet-dsl-workbookelement.html">WorkbookElement</a>&gt;</span></code>
-      , 
-      <code><a href="https://docs.microsoft.com/dotnet/api/system.collections.istructuralequatable">IStructuralEquatable</a></code>
+      Assembly: FsSpreadsheet.Exceljs.dll
     </dt>
   </dl>
   <div class="fsdocs-xmldoc">
@@ -103,18 +93,15 @@
       </p>
     </div>
   </div>
-  <div></div>
-  <div></div>
-  <div></div>
   <div>
     <h3>
-      Union cases
+      Functions and values
     </h3>
     <table class="table outer-list fsdocs-member-list">
       <thead>
         <tr>
           <td class="fsdocs-member-list-header">
-            Union case
+            Function or value
           </td>
           <td class="fsdocs-member-list-header">
             Description
@@ -125,40 +112,69 @@
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '984', 984)" onmouseover="showTip(event, '984', 984)">
+              <code onmouseout="hideTip(event, '397', 397)" onmouseover="showTip(event, '397', 397)">
                 <p>
-                  <a id="NamedSheet">
-                    <a href="#NamedSheet">
-                      <code><span>NamedSheet(<span>string,&#32;<span><a href="/FsSpreadsheet/reference/fsspreadsheet-dsl-sheetelement.html">SheetElement</a>&#32;list</span></span>)</span></code>
+                  <a id="readToFsCell">
+                    <a href="#readToFsCell">
+                      <code><span>readToFsCell&#32;<span>worksheetName&#32;rowIndex&#32;columnIndex&#32;jsCell</span></span></code>
                     </a>
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="984">
+              <div class="fsdocs-tip" id="397">
                 <div class="member-tooltip">
                   Full Usage: 
-                  <code><span>NamedSheet(<span>string,&#32;<span><a href="/FsSpreadsheet/reference/fsspreadsheet-dsl-sheetelement.html">SheetElement</a>&#32;list</span></span>)</span></code>
+                  <code><span>readToFsCell&#32;<span>worksheetName&#32;rowIndex&#32;columnIndex&#32;jsCell</span></span></code>
                   <br/>
                   <br/>
                   Parameters: 
                   <ul>
                     <span>
                       <b>
-                        Item1
+                        worksheetName
                       </b>
                       :
                       <code>string</code>
+                       - 
+                      
                     </span>
                     <br/>
                     <span>
                       <b>
-                        Item2
+                        rowIndex
                       </b>
                       :
-                      <code><span><a href="/FsSpreadsheet/reference/fsspreadsheet-dsl-sheetelement.html">SheetElement</a>&#32;list</span></code>
+                      <code>int</code>
+                       - 
+                      
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        columnIndex
+                      </b>
+                      :
+                      <code>int</code>
+                       - 
+                      
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        jsCell
+                      </b>
+                      :
+                      <code><a href="https://docs.microsoft.com/dotnet/api/fable.exceljs.cell.cell">Cell</a></code>
+                       - 
+                      
                     </span>
                     <br/>
                   </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fscell.html">FsCell</a></code>
+                  </span>
                   <br/>
                 </div>
               </div>
@@ -166,63 +182,119 @@
           </td>
           <td class="fsdocs-member-xmldoc">
             <div class="fsdocs-summary">
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/DSL/Types.fs#L148-148" class="fsdocs-source-link" title="Source on GitHub">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Exceljs.JsCell.readToFsCell`')">
+                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Exceljs.JsCell.readToFsCell\'/>')">
+                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Exceljs/Cell.fs#L44-44" class="fsdocs-source-link" title="Source on GitHub">
                 <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
               </a>
               <p class="fsdocs-summary">
                 
+ `worksheetName`, `rowIndex` and `columnIndex` are only used for debugging.
+ 
               </p>
             </div>
             <dl class="fsdocs-params">
               <dt class="fsdocs-param">
                 <span class="fsdocs-param-name">
-                  Item1
+                  worksheetName
                 </span>
                 :
                 <code>string</code>
               </dt>
-              <dd class="fsdocs-param-docs"></dd>
+              <dd class="fsdocs-param-docs">
+                <p>
+                  
+                </p>
+              </dd>
               <dt class="fsdocs-param">
                 <span class="fsdocs-param-name">
-                  Item2
+                  rowIndex
                 </span>
                 :
-                <code><span><a href="/FsSpreadsheet/reference/fsspreadsheet-dsl-sheetelement.html">SheetElement</a>&#32;list</span></code>
+                <code>int</code>
               </dt>
-              <dd class="fsdocs-param-docs"></dd>
+              <dd class="fsdocs-param-docs">
+                <p>
+                  
+                </p>
+              </dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  columnIndex
+                </span>
+                :
+                <code>int</code>
+              </dt>
+              <dd class="fsdocs-param-docs">
+                <p>
+                  
+                </p>
+              </dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  jsCell
+                </span>
+                :
+                <code><a href="https://docs.microsoft.com/dotnet/api/fable.exceljs.cell.cell">Cell</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs">
+                <p>
+                  
+                </p>
+              </dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fscell.html">FsCell</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
             </dl>
           </td>
         </tr>
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '985', 985)" onmouseover="showTip(event, '985', 985)">
+              <code onmouseout="hideTip(event, '398', 398)" onmouseover="showTip(event, '398', 398)">
                 <p>
-                  <a id="UnnamedSheet">
-                    <a href="#UnnamedSheet">
-                      <code><span>UnnamedSheet&#32;<span><a href="/FsSpreadsheet/reference/fsspreadsheet-dsl-sheetelement.html">SheetElement</a>&#32;list</span></span></code>
+                  <a id="writeFromFsCell">
+                    <a href="#writeFromFsCell">
+                      <code><span>writeFromFsCell&#32;<span>fsCell</span></span></code>
                     </a>
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="985">
+              <div class="fsdocs-tip" id="398">
                 <div class="member-tooltip">
                   Full Usage: 
-                  <code><span>UnnamedSheet&#32;<span><a href="/FsSpreadsheet/reference/fsspreadsheet-dsl-sheetelement.html">SheetElement</a>&#32;list</span></span></code>
+                  <code><span>writeFromFsCell&#32;<span>fsCell</span></span></code>
                   <br/>
                   <br/>
                   Parameters: 
                   <ul>
                     <span>
                       <b>
-                        Item
+                        fsCell
                       </b>
                       :
-                      <code><span><a href="/FsSpreadsheet/reference/fsspreadsheet-dsl-sheetelement.html">SheetElement</a>&#32;list</span></code>
+                      <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fscell.html">FsCell</a></code>
                     </span>
                     <br/>
                   </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span>obj&#32;option</span></code>
+                  </span>
                   <br/>
                 </div>
               </div>
@@ -230,7 +302,15 @@
           </td>
           <td class="fsdocs-member-xmldoc">
             <div class="fsdocs-summary">
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/DSL/Types.fs#L147-147" class="fsdocs-source-link" title="Source on GitHub">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Exceljs.JsCell.writeFromFsCell`')">
+                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Exceljs.JsCell.writeFromFsCell\'/>')">
+                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Exceljs/Cell.fs#L14-14" class="fsdocs-source-link" title="Source on GitHub">
                 <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
               </a>
@@ -241,18 +321,30 @@
             <dl class="fsdocs-params">
               <dt class="fsdocs-param">
                 <span class="fsdocs-param-name">
-                  Item
+                  fsCell
                 </span>
                 :
-                <code><span><a href="/FsSpreadsheet/reference/fsspreadsheet-dsl-sheetelement.html">SheetElement</a>&#32;list</span></code>
+                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fscell.html">FsCell</a></code>
               </dt>
               <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span>obj&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
             </dl>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
+  <div></div>
+  <div></div>
+  <div></div>
   <div></div>
   <div></div>
   <div></div>
