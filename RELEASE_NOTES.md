@@ -1,3 +1,8 @@
+### 5.0.1+2958cd9 (Released 2023-10-28)
+* Additions:
+    * [[#2958cd9](https://github.com/CSBiology/FsSpreadsheet/commit/2958cd951db833c5d469875d03ad175e496f07ae)] update references from major 3 to major 5
+    * [[#dff1bf3](https://github.com/CSBiology/FsSpreadsheet/commit/dff1bf35cafa238fbe3604524259684aa90f3520)] Update version and release npm
+
 ### 5.0.0+62ff8ec (Released 2023-10-26)
 * Additions:
     * [[#62ff8ec](https://github.com/CSBiology/FsSpreadsheet/commit/62ff8ec966cf618a4231e281fcc4f23447e3e9b3)] Merge pull request #76 from fslaborg/io_tests
