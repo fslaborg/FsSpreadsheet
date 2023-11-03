@@ -1,3 +1,7 @@
+### 5.0.2+41eca2f (Released 2023-11-3)
+* Bugfixes:
+    * [[#b45db41](https://github.com/CSBiology/FsSpreadsheet/commit/b45db41a89e78576999afd28a2d7b1e087caf335)] Fxi critical bug in fable compatibility
+
 ### 5.0.1+2958cd9 (Released 2023-10-28)
 * Additions:
     * [[#2958cd9](https://github.com/CSBiology/FsSpreadsheet/commit/2958cd951db833c5d469875d03ad175e496f07ae)] update references from major 3 to major 5
@@ -5,7 +9,6 @@
 
 ### 5.0.0+62ff8ec (Released 2023-10-26)
 * Additions:
-    * [[#62ff8ec](https://github.com/CSBiology/FsSpreadsheet/commit/62ff8ec966cf618a4231e281fcc4f23447e3e9b3)] Merge pull request #76 from fslaborg/io_tests
     * [[#db263ed](https://github.com/CSBiology/FsSpreadsheet/commit/db263edea5bd8ecd9e6e8023fdae6a396fa01cec)] Start implementing logic for auto update, but push to backlog for now
     * [[#c5bf348](https://github.com/CSBiology/FsSpreadsheet/commit/c5bf34808d105723738dde53e6cb778a2b97da3e)] Finish io tests :heavy_check_mark:
     * [[#80f7632](https://github.com/CSBiology/FsSpreadsheet/commit/80f7632b2a4865951f144fc271e02a2ee4f6989c)] Improve DateTime numberFormat recognition
