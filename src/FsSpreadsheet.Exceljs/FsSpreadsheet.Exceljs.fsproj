@@ -12,7 +12,7 @@
 	</PropertyGroup>
 
 	<PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
@@ -37,15 +37,14 @@
   <ItemGroup>
     <ProjectReference Include="..\FsSpreadsheet\FsSpreadsheet.fsproj" />
   </ItemGroup>
-
-	<ItemGroup />
-
-	<ItemGroup />
+<ItemGroup>
+	<Content Include="*.fsproj; **\*.fs; **\*.fsi" PackagePath="fable\" />
+</ItemGroup>
 	
-	<PropertyGroup>
-		<NpmDependencies>
-			<NpmPackage Name="@nfdi4plants/exceljs" Version="gte 0.1.0 lt 1.0.0" ResolutionStrategy="Max" />
-		</NpmDependencies>
-	</PropertyGroup>
+<PropertyGroup>
+	<NpmDependencies>
+		<NpmPackage Name="@nfdi4plants/exceljs" Version="gte 0.1.0 lt 1.0.0" ResolutionStrategy="Max" />
+	</NpmDependencies>
+</PropertyGroup>
 
 </Project>
