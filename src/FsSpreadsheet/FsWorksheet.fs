@@ -144,10 +144,19 @@ type FsWorksheet (name, ?fsRows, ?fsTables, ?fsCellsCollection) =
     /// <summary>
     /// Returns the FsRow at the given FsRangeAddress. If it does not exist, it is created and appended first.
     /// </summary>
-    member self.RowWithRange(rangeAddress : FsRangeAddress) = 
+    member self.RowWithRange(rangeAddress : FsRangeAddress, ?SkipSearch) = 
+        let skipSearch = defaultArg SkipSearch false
         if rangeAddress.FirstAddress.RowNumber <> rangeAddress.LastAddress.RowNumber then
             failwithf "Row may not have a range address spanning over different row indices"
-        self.Row(rangeAddress.FirstAddress.RowNumber).RangeAddress <- rangeAddress
+        if skipSearch then
+            let row = FsRow.createAt(rangeAddress.FirstAddress.RowNumber,self.CellCollection) 
+            row.RangeAddress <- rangeAddress
+            _rows.Add row
+            row
+        else
+            let row = self.Row(rangeAddress.FirstAddress.RowNumber) 
+            row.RangeAddress <- rangeAddress
+            row
 
     /// <summary>
     /// Appends an FsRow to an FsWorksheet if the rowIndex is not already taken.
@@ -361,7 +370,7 @@ type FsWorksheet (name, ?fsRows, ?fsTables, ?fsCellsCollection) =
             | Some row -> 
                 row.RangeAddress <- newRange
             | None ->
-                self.RowWithRange(newRange)
+                self.RowWithRange(newRange,true) |> ignore
         )
 
 

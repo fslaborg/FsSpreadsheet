@@ -14,7 +14,7 @@ open Fable.Core
 /// <remarks>The FsCellsCollection must only cover 1 row!</remarks>
 /// <exception cref="System.Exception">if given FsCellsCollection has more than 1 row.</exception>
 [<AttachMembers>]
-type FsRow (rangeAddress : FsRangeAddress, cells : FsCellsCollection)= 
+type FsRow (rangeAddress : FsRangeAddress, cells : FsCellsCollection) = 
 
     inherit FsRangeBase(rangeAddress)
 
