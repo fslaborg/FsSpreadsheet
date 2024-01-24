@@ -29,6 +29,9 @@
     <PackageReference Include="Expecto" Version="[10.1.0]" />
     <PackageReference Include="YoloDev.Expecto.TestSdk" Version="[0.14.1]" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.*" />
+    <EmbeddedResource Include="TestFiles/BigFile.xlsx" >
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>

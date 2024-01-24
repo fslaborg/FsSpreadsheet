@@ -1,6 +1,8 @@
 ﻿module TestingUtils
 
 open FsSpreadsheet
+open Fable.Core
+
 #if FABLE_COMPILER
 open Fable.Mocha
 #else
@@ -140,3 +142,19 @@ module Test =
 
 
     let testList = testList
+
+open System
+
+[<AttachMembers>]
+type Stopwatch() =
+    member val StartTime: DateTime option = None with get, set
+    member val StopTime: DateTime option = None with get, set
+    member this.Start() = this.StartTime <- Some DateTime.Now
+    member this.Stop() = 
+        match this.StartTime with
+        | Some _ -> this.StopTime <- Some DateTime.Now
+        | None -> failwith "Error. Unable to call `Stop` before `Start`."
+    member this.Elapsed : TimeSpan = 
+        match this.StartTime, this.StopTime with
+        | Some start, Some stop -> stop - start
+        | _, _ -> failwith "Error. Unable to call `Elapsed` without calling `Start` and `Stop` before."

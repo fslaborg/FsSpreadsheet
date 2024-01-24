@@ -144,6 +144,7 @@ type FsWorksheet (name, ?fsRows, ?fsTables, ?fsCellsCollection) =
     /// <summary>
     /// Returns the FsRow at the given FsRangeAddress. If it does not exist, it is created and appended first.
     /// </summary>
+    /// <param name="SkipSearch">If true, the FsRow is created and appended without checking if it already exists.</param>
     member self.RowWithRange(rangeAddress : FsRangeAddress, ?SkipSearch) = 
         let skipSearch = defaultArg SkipSearch false
         if rangeAddress.FirstAddress.RowNumber <> rangeAddress.LastAddress.RowNumber then
@@ -370,6 +371,7 @@ type FsWorksheet (name, ?fsRows, ?fsTables, ?fsCellsCollection) =
             | Some row -> 
                 row.RangeAddress <- newRange
             | None ->
+                // Use SkipSearch flag to avoid checking if row already exists with linear speed, as this is already done in the tryFind above
                 self.RowWithRange(newRange,true) |> ignore
         )
 
