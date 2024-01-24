@@ -18,6 +18,7 @@ type TestFiles =
 | ClosedXML
 | FsSpreadsheetNET
 | FsSpreadsheetJS
+| BigFile
 
     member this.asFileName =
         match this with
@@ -27,6 +28,7 @@ type TestFiles =
         | ClosedXML         -> "TestWorkbook_ClosedXML.xlsx"
         | FsSpreadsheetNET  -> "TestWorkbook_FsSpreadsheet.net.xlsx"
         | FsSpreadsheetJS   -> "TestWorkbook_FsSpreadsheet.js.xlsx"
+        | BigFile           -> "BigFile.xlsx"
 
     member this.asRelativePath = $"../TestUtils/{testFolder}/{this.asFileName}"
     member this.asRelativePathNode = $"./tests/TestUtils/{testFolder}/{this.asFileName}"

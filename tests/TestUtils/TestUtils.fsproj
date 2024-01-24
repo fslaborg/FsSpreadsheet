@@ -6,24 +6,27 @@
   </PropertyGroup>
 
   <ItemGroup>
-	<EmbeddedResource Include="TestFiles\TestWorkbook_ClosedXML.xlsx">
-		<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	</EmbeddedResource>
-	<EmbeddedResource Include="TestFiles\TestWorkbook_Excel.xlsx">
-		<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	</EmbeddedResource>
-	<EmbeddedResource Include="TestFiles\TestWorkbook_FableExceljs.xlsx">
-		<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	</EmbeddedResource>
-	<EmbeddedResource Include="TestFiles\TestWorkbook_Libre.xlsx">
-		<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	</EmbeddedResource>
-	<EmbeddedResource Include="TestFiles\TestWorkbook_FsSpreadsheet.net.xlsx">
-		<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	</EmbeddedResource>
-	<EmbeddedResource Include="TestFiles\TestWorkbook_FsSpreadsheet.js.xlsx">
-		<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	</EmbeddedResource>
+		<EmbeddedResource Include="TestFiles\TestWorkbook_ClosedXML.xlsx">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</EmbeddedResource>
+		<EmbeddedResource Include="TestFiles\TestWorkbook_Excel.xlsx">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</EmbeddedResource>
+		<EmbeddedResource Include="TestFiles\TestWorkbook_FableExceljs.xlsx">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</EmbeddedResource>
+		<EmbeddedResource Include="TestFiles\TestWorkbook_Libre.xlsx">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</EmbeddedResource>
+		<EmbeddedResource Include="TestFiles\TestWorkbook_FsSpreadsheet.net.xlsx">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</EmbeddedResource>
+		<EmbeddedResource Include="TestFiles\TestWorkbook_FsSpreadsheet.js.xlsx">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</EmbeddedResource>
+    <EmbeddedResource Include="TestFiles\BigFile.xlsx" >
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <Compile Include="DefaultTestObjects.fs" />
     <Compile Include="TestingUtils.fs" />
   </ItemGroup>

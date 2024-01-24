@@ -225,7 +225,6 @@ module FsExtensions =
                 xlsxSheets
                 |> Seq.map (
                     fun xlsxSheet ->
-                        let sheetIndex = Sheet.getSheetIndex xlsxSheet //unused?
                         let sheetId = Sheet.getID xlsxSheet
                         let xlsxCells = 
                             Spreadsheet.getCellsBySheetID sheetId doc

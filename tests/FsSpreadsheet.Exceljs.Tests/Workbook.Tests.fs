@@ -288,9 +288,24 @@ let tests_xlsx = testList "xlsx" [
     ]
 ]
 
+let performance =
+    testList "Performace" [
+        testCaseAsync "ReadBigFile" <| async {
+            let sw = Stopwatch()        
+            let p = DefaultTestObject.BigFile.asRelativePathNode
+            sw.Start()
+            let! wb = FsWorkbook.fromXlsxFile(p) |> Async.AwaitPromise
+            sw.Stop()
+            let ms = sw.Elapsed.Milliseconds
+            Expect.isTrue (ms < 2000)  $"Elapsed time should be less than 2000ms but was {ms}ms"
+            Expect.equal (wb.GetWorksheetAt(1).Rows.Count) 153991 "Row count should be 153991"
+        }
+    ]
+
 let main = testList "JsWorkbook<->FsWorkbook" [
     tests_toFsWorkbook
     tests_toJsWorkbook
     tests_xlsx
+    performance
 ]
 

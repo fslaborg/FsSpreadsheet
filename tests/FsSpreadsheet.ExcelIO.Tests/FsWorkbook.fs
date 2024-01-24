@@ -65,10 +65,23 @@ let writeAndReadBytes =
         )
     ]
 
+let performance =
+    testList "Performace" [
+        testCase "ReadBigFile" (fun () -> 
+            let sw = Stopwatch()        
+            let p = "./TestFiles/BigFile.xlsx"
+            sw.Start()
+            let wb = FsWorkbook.fromXlsxFile(p)
+            sw.Stop()
+            Expect.isLessThan sw.Elapsed.Milliseconds 2000  "Elapsed time should be less than 2000ms"
+            Expect.equal (wb.GetWorksheetAt(1).Rows.Count) 153991 "Row count should be 153991"
 
+        )
+    ]
 
 [<Tests>]
 let tests =
     testList "FsWorkbook" [
         writeAndReadBytes
+        performance
     ]
