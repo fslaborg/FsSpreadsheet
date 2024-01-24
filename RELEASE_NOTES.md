@@ -1,3 +1,10 @@
+### 5.1.0+4732d22 (Released 2024-1-24)
+* Additions:
+    * Increase Parser speed
+    * [[#4732d22](https://github.com/CSBiology/FsSpreadsheet/commit/4732d22e6acbf70b284355149fd4d06932023783)] include parse speed test in js
+    * [[#9aa368f](https://github.com/CSBiology/FsSpreadsheet/commit/9aa368f3cefeaa50c9eb4c13865bb952a57a273c)] add speedtest for excel file reader
+    * [[#f401c96](https://github.com/CSBiology/FsSpreadsheet/commit/f401c9618bfd66648688cfbb8b99e51f46b14bdd)] make RescanRows speed linear
+
 ### 5.0.2+41eca2f (Released 2023-11-3)
 * Bugfixes:
     * [[#b45db41](https://github.com/CSBiology/FsSpreadsheet/commit/b45db41a89e78576999afd28a2d7b1e087caf335)] Fxi critical bug in fable compatibility
