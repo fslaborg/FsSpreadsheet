@@ -31,6 +31,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\FsSpreadsheet\FsSpreadsheet.fsproj" />
+    <ProjectReference Include="..\TestUtils\TestUtils.fsproj" />
   </ItemGroup>
 
   <ItemGroup>
