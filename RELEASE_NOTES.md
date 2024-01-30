@@ -1,3 +1,9 @@
+### 5.1.2+21fd6e8 (Released 2024-1-30)
+* Additions:
+    * [[#21fd6e8](https://github.com/CSBiology/FsSpreadsheet/commit/21fd6e82f6d9eab48b4197a56a5c9b9f06b51b0e)] improve reader speed by adjusting sharedStringTable usage
+* Bugfixes:
+    * [[#66b6713](https://github.com/CSBiology/FsSpreadsheet/commit/66b6713381be3f133c58db7ca78fd36bd63c0ad1)] fix npm publish target
+
 ### 5.1.1+e7cc638 (Released 2024-1-26)
 * Additions:
     * [[#e7cc638](https://github.com/CSBiology/FsSpreadsheet/commit/e7cc638b170c570005b6cd8378d1e0ac31075be7)] improve rowWithRange SkipSearch performance
