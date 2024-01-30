@@ -120,19 +120,19 @@ module SheetData =
 
     
     /// Gets the string value of the cell at the given 1-based column and rowIndex, if it exists, else returns None.
-    let tryGetRowValuesAt (sst : SharedStringTable Option) rowIndex (sheet : SheetData) =
+    let tryGetRowValuesAt (sst : SST Option) rowIndex (sheet : SheetData) =
         sheet 
         |> tryGetRowAt rowIndex
         |> Option.map (Row.getRowValues sst)       
 
     /// Gets the string values of the row at the given 1-based rowIndex.
-    let getRowValuesAt (sst : SharedStringTable Option) rowIndex (sheet : SheetData) =
+    let getRowValuesAt (sst : SST Option) rowIndex (sheet : SheetData) =
         sheet
         |> getRowAt rowIndex
         |> Row.getRowValues sst
 
     /// Maps the cells of the given row to tuples of 1-based column indices and the value strings using a sharedStringTable, if it exists, else returns None.
-    let tryGetIndexedRowValuesAt (sst : SharedStringTable Option) rowIndex (sheet : SheetData) =
+    let tryGetIndexedRowValuesAt (sst : SST Option) rowIndex (sheet : SheetData) =
         sheet
         |> tryGetRowAt rowIndex
         |> Option.map (Row.getIndexedValues sst)
@@ -214,13 +214,13 @@ module SheetData =
         |> Row.getCellAt columnIndex
 
     /// Gets the string value of the cell at the given 1-based column- and rowIndex using a sharedStringTable.
-    let getCellValueAt (sst : SharedStringTable Option) (rowIndex : uint32) (columnIndex : uint32) (sheetData : SheetData) = 
+    let getCellValueAt (sst : SST Option) (rowIndex : uint32) (columnIndex : uint32) (sheetData : SheetData) = 
         sheetData 
         |> getCellAt rowIndex columnIndex
         |> Cell.getValue sst
 
     /// Gets the string value of the cell at the given 1-based column- and rowIndex using a sharedStringTable if it exists. Else returns None.
-    let tryGetCellValueAt (sst : SharedStringTable Option) (rowIndex: uint32) (columnIndex : uint32) (sheetData:SheetData) = 
+    let tryGetCellValueAt (sst : SST Option) (rowIndex: uint32) (columnIndex : uint32) (sheetData:SheetData) = 
         sheetData 
         |> tryGetCellAt rowIndex columnIndex
         |> Option.bind (Cell.tryGetValue sst)
@@ -279,7 +279,7 @@ module SheetData =
             sheet
 
     /// Includes a value from sharedStringTable in the cells of the rows of the sheetData
-    let includeSharedStringValue (sharedStringTable : SharedStringTable) (sheetData : SheetData) =
+    let includeSharedStringValue (sharedStringTable : SST) (sheetData : SheetData) =
         sheetData
         |> mapRows (Row.includeSharedStringValue sharedStringTable)
 
@@ -288,7 +288,7 @@ module SheetData =
 //----------------------------------------------------------------------------------------------------------------------
 
     /// Reads the values of all cells from a sheetData and a sharedStringTable and converts them into a sparse matrix. Values are stored sparsely in a dictionary, with the key being a row index and column index tuple.
-    let toSparseValueMatrix (sst : SharedStringTable) sheetData =
+    let toSparseValueMatrix (sst : SST) sheetData =
         let rows = getRows sheetData
         let noOfRows = countRows sheetData
         let noOfCols = 

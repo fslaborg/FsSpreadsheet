@@ -58,8 +58,7 @@ module FsExtensions =
         /// <summary>
         /// Creates an FsCell on the basis of an XlsxCell. Uses a SharedStringTable if present to get the XlsxCell's value.
         /// </summary>   
-        static member ofXlsxCell (doc : Packaging.SpreadsheetDocument) (xlsxCell : Cell) =
-            let sst = Spreadsheet.tryGetSharedStringTable doc
+        static member ofXlsxCell (doc : Packaging.SpreadsheetDocument) (sst : SST option) (xlsxCell : Cell) =
             let cellValueString = Cell.getValue sst xlsxCell
             let col, row = xlsxCell.CellReference.Value |> CellReference.toIndices
             let dt = 
@@ -201,7 +200,7 @@ module FsExtensions =
         /// Creates an FsWorkbook from a given SpreadsheetDocument.
         /// </summary>
         static member fromSpreadsheetDocument (doc : Packaging.SpreadsheetDocument) =
-            let sst = Spreadsheet.tryGetSharedStringTable doc
+            let sst = Spreadsheet.tryGetSharedStringTable doc |> Option.map SharedStringTable.toSST
             let xlsxWorkbookPart = Spreadsheet.getWorkbookPart doc        
             let xlsxSheets = 
                 try
@@ -228,7 +227,8 @@ module FsExtensions =
                         let sheetId = Sheet.getID xlsxSheet
                         let xlsxCells = 
                             Spreadsheet.getCellsBySheetID sheetId doc
-                            |> Seq.map (FsCell.ofXlsxCell doc)
+                            |> Seq.toArray
+                            |> Array.map (FsCell.ofXlsxCell doc sst)
                         let assocXlsxTables = 
                             xlsxTables 
                             |> Seq.tryPick (fun (sid,ts) -> if sid = sheetId then Some ts else None)

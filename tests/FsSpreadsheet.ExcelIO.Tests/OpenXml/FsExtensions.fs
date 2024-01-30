@@ -84,7 +84,8 @@ let fsExtensionTests =
             testList "ofXlsxCell" [
                 let stream = new MemoryStream()
                 let doc = Spreadsheet.initEmptyOnStream stream
-                let testCell = FsCell.ofXlsxCell doc dummyXlsxCell
+                let sst = SharedStringTable.tryGet doc |> Option.map SharedStringTable.toSST
+                let testCell = FsCell.ofXlsxCell doc sst dummyXlsxCell
                 testCase "is equal in value" <| fun _ ->
                     Expect.equal (testCell.ValueAsString()) dummyXlsxCell.CellValue.Text "values are not equal"
                 testCase "is equal in address/reference" <| fun _ ->

@@ -174,6 +174,7 @@ module Spreadsheet =
             let workbookPart = spreadsheetDocument.WorkbookPart
             let worksheetPart = Worksheet.WorksheetPart.getByID sheet.Id.Value workbookPart     
             let stringTablePart = getOrInitSharedStringTablePart spreadsheetDocument
+            let sst = SharedStringTable.toSST stringTablePart.SharedStringTable
             seq {
             use reader = OpenXmlReader.Create(worksheetPart)
       
@@ -183,7 +184,7 @@ module Spreadsheet =
                     row.Elements()
                     |> Seq.iter (fun item -> 
                         let cell = item :?> Cell
-                        Cell.includeSharedStringValue stringTablePart.SharedStringTable cell |> ignore
+                        Cell.includeSharedStringValue sst cell |> ignore
                         )
                     yield row 
             }
@@ -195,9 +196,12 @@ module Spreadsheet =
     let getCellsBySheet (sheet : Sheet) (spreadsheetDocument : SpreadsheetDocument) =
         let workbookPart = spreadsheetDocument.WorkbookPart
         let worksheetPart = Worksheet.WorksheetPart.getByID sheet.Id.Value workbookPart
+        
         let includeSSV = 
             match tryGetSharedStringTable spreadsheetDocument with 
-            | Some sst -> Cell.includeSharedStringValue sst
+            | Some sst -> 
+                let sstArray = sst |> SharedStringTable.toSST
+                Cell.includeSharedStringValue sstArray
             | None -> id
         seq {
         use reader = OpenXmlReader.Create(worksheetPart)
