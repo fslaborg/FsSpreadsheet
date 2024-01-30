@@ -132,7 +132,13 @@ type FsWorksheet (name, ?fsRows, ?fsTables, ?fsCellsCollection) =
     /// <summary>
     /// Returns the FsRow at the given index. If it does not exist, it is created and appended first.
     /// </summary>
-    member self.Row(rowIndex) = 
+    member self.Row(rowIndex, ?SkipSearch) = 
+        let skipSearch = defaultArg SkipSearch false
+        if skipSearch then
+            let row = FsRow.createAt(rowIndex,self.CellCollection) 
+            _rows.Add row
+            row
+        else
         match _rows |> Seq.tryFind (fun row -> row.Index = rowIndex) with
         | Some row ->
             row
@@ -150,7 +156,7 @@ type FsWorksheet (name, ?fsRows, ?fsTables, ?fsCellsCollection) =
         if rangeAddress.FirstAddress.RowNumber <> rangeAddress.LastAddress.RowNumber then
             failwithf "Row may not have a range address spanning over different row indices"
         if skipSearch then
-            let row = FsRow.createAt(rangeAddress.FirstAddress.RowNumber,self.CellCollection) 
+            let row = FsRow (rangeAddress, self.CellCollection)
             row.RangeAddress <- rangeAddress
             _rows.Add row
             row

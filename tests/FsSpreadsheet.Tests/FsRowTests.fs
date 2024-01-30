@@ -1,6 +1,6 @@
 ﻿module FsRow
 
-
+open TestingUtils
 #if FABLE_COMPILER
 open Fable.Mocha
 #else
@@ -17,7 +17,27 @@ let getDummyWorkSheet() =
     worksheet.RescanRows()
     worksheet
 
-let main =
+
+let performace =
+    testList "performance" [
+        testCase "FrowFromRange-SkipSearch" (fun () ->
+            let rowCount= 100000
+            let ws = FsWorksheet.init("MyWorksheet")
+            let timer = Stopwatch()
+            timer.Start()
+            for i = 1 to rowCount do
+                let address = FsRangeAddress(FsAddress(i,1), FsAddress(i,1))
+                ws.RowWithRange(address,true) |> ignore
+            timer.Stop()
+            let runtime = timer.Elapsed.Milliseconds
+            let expected = 50 // this is too high and should be reduced
+
+            Expect.equal ws.Rows.Count rowCount "Row count"
+            Expect.isTrue (runtime <= expected) $"Expected conversion to be finished in under {expected}, but it took {runtime}"
+        )
+    ]
+
+let rowOperations =
     testList "rowOperations" [
         testList "Prerequisites" [
             let dummyWorkSheet = getDummyWorkSheet()
@@ -116,4 +136,10 @@ let main =
                 let maxColIndex = row.MaxColIndex
                 Expect.equal maxColIndex 1 "Incorrect index"
         ]
+    ]
+
+let main =
+    testList "FsRow" [
+        rowOperations
+        performace
     ]

@@ -62,7 +62,7 @@ let publishNPM = BuildTask.create "PublishNPM" [clean; build; runTests; packJS] 
     let msg = sprintf "[NPM] release package with version %s?" stableVersionTag
     if promptYesNo msg then
         let apikey = Environment.environVarOrNone "NPM_KEY" 
-        let otp = if apikey.IsSome then $" --otp + {apikey.Value}" else ""
+        let otp = if apikey.IsSome then $" --otp {apikey.Value}" else ""
         run npm $"publish --access public{otp}" ProjectInfo.npmPkgDir
     else failwith "aborted"
 }

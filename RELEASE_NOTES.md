@@ -1,3 +1,7 @@
+### 5.1.1+e7cc638 (Released 2024-1-26)
+* Additions:
+    * [[#e7cc638](https://github.com/CSBiology/FsSpreadsheet/commit/e7cc638b170c570005b6cd8378d1e0ac31075be7)] improve rowWithRange SkipSearch performance
+
 ### 5.1.0+4732d22 (Released 2024-1-24)
 * Additions:
     * Increase Parser speed
