@@ -264,7 +264,7 @@ module Cell =
     /// </summary>
     let getValue (sharedStringTable : SST Option) (cell : Cell) =
         match cell |> tryGetType with
-        | Some (CellValues.SharedString) when sharedStringTable.IsSome->
+        | Some (CellValues.SharedString) when sharedStringTable.IsSome ->
             let sharedStringTable = sharedStringTable.Value
             let sharedStringTableIndex = 
                 cell

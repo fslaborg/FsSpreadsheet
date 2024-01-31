@@ -63,7 +63,7 @@ let spreadsheetTests =
                 Expect.equal wbp wbpFox "Differs"
         ]
         testList "getCellsBySheetIndex" [
-            let cbsi1 = Spreadsheet.getCellsBySheetIndex 1u ssd |> Array.ofSeq
+            let cbsi1 = Spreadsheet.getCellsBySheetIndex 1u ssd false |> Array.ofSeq
             // not applicable since Cell arrays and Cells always differ from each other (even if you compare the same cell, e.g. `cell1 = cell1`)
             //testCase "is equal to cbsi1Fox" <| fun _ ->
             //    Expect.equal cbsi1 cbsi1Fox "Differs"
