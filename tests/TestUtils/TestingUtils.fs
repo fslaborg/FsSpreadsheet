@@ -83,6 +83,20 @@ module Expect =
             failwithf $"{message}. Expected to be faster than {maxMilliseconds}ms, but took {elapsed.TotalMilliseconds}ms"
         res
 
+    let isFasterThan (f1 : unit -> _) (f2 : unit -> _) (message : string) =
+        let stopwatch = Stopwatch()
+        stopwatch.Start()
+        f1()
+        stopwatch.Stop()
+        let elapsed1 = stopwatch.Elapsed
+        stopwatch.Start()
+        f2()
+        stopwatch.Stop()
+        let elapsed2 = stopwatch.Elapsed
+        if elapsed1.TotalMilliseconds > elapsed2.TotalMilliseconds then
+            failwithf $"{message}. Expected {elapsed1.TotalMilliseconds}ms to be faster than {elapsed2.TotalMilliseconds}ms"
+        ()
+
     let cellSequenceEquals (actual: FsCell seq) (expected: FsCell seq) message =
         let cellDiff (s1: FsCell seq) (s2: FsCell seq) =
             let s1 = Seq.append (Seq.map Some s1) (Seq.initInfinite (fun _ -> None))

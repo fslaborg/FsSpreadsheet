@@ -27,11 +27,13 @@ let main argv =
         let readAssay() = ZipArchiveReader.FsWorkbook.fromFile assayPath
         let readStudy() = ZipArchiveReader.FsWorkbook.fromFile studyPath
         let readInvestigation() = ZipArchiveReader.FsWorkbook.fromFile investigationPath
+        let bigFile() = ZipArchiveReader.FsWorkbook.fromFile @"C:\Users\HLWei\source\repos\IO\FsSpreadsheet\tests\TestUtils\TestFiles\BigFile.xlsx"
+
 
         readInvestigation() |> ignore
         readAssay() |> ignore
         readStudy() |> ignore
-
+        bigFile() |> ignore
 
     let closedXML() =
         

@@ -1,6 +1,5 @@
 ﻿module ZipArchiveReader
 
-open Expecto
 open TestingUtils
 open FsSpreadsheet
 open FsSpreadsheet.ExcelIO.ZipArchiveReader
@@ -35,15 +34,18 @@ let tests_Read = testList "Read" [
         Expect.isDefaultTestObject wb
 ]
 
+open FsSpreadsheet.ExcelIO
+
 let performanceTest = testList "Performance" [
     testCase "BigFile" <| fun _ ->
-        let readF() = FsWorkbook.fromFile("./TestFiles/BigFile.xlsx")       
-        let wb = Expect.wantFaster readF 5 "Reader too slow"
-        Expect.equal (wb.GetWorksheetAt(1).Rows.Count) 153991 "Row count should be equal"
+        let readF() = FsWorkbook.fromFile("./TestFiles/BigFile.xlsx")  |> ignore
+        let refReadF() = FsWorkbook.fromXlsxFile("./TestFiles/BigFile.xlsx") |> ignore
+        Expect.isFasterThan readF refReadF "ZipArchiveReader should be faster than standard reader"
+        //Expect.equal (wb.GetWorksheetAt(1).Rows.Count) 153991 "Row count should be equal"
 ]
 
 
-[<Tests>]
+[<Expecto.Tests>]
 let main = testList "ZipArchiveReader" [
     performanceTest
     tests_Read

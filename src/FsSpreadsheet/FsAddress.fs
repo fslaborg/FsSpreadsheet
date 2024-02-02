@@ -37,13 +37,12 @@ module CellReference =
     let ofIndices column (row : uint32) = 
         sprintf "%s%i" (indexToColAdress column) row
 
-    let private charPart = System.Text.StringBuilder()
-    let private numPart = System.Text.StringBuilder()
+    
 
     /// Maps a "A1" style excel cell reference to a column * row index tuple (1 Based indices).
     let toIndices (reference : string) = 
-        let charPart = charPart.Clear()
-        let numPart = numPart.Clear()
+        let charPart = System.Text.StringBuilder()
+        let numPart = System.Text.StringBuilder()
         
         reference
         |> Seq.iter (fun c -> 
