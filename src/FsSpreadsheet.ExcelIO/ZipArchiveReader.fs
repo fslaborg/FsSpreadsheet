@@ -43,6 +43,10 @@ type SharedStrings = string []
 
 type Relationships = Map<string,Relationship>
 
+let dateTimeFormats = Set.ofList [14..22] 
+let customFormats = Set.ofList [164 .. 180] 
+
+
 type NumberFormat =
     { Id : int
       FormatCode : string }
@@ -64,15 +68,12 @@ and CellFormat =
         ApllyNumberFormat : bool
     }
 
-    static member dateTimeFormats = Set.ofList [14..22] 
-    static member customFormats = Set.ofList [164 .. 180] 
-
     static member isDateTime (styles : Styles) (cf : CellFormat) =
             // if numberformatid is between 14 and 18 it is standard date time format.
             // custom formats are given in the range of 164 to 180, all none default date time formats fall in there.
-            if Set.contains cf.NumberFormatId CellFormat.dateTimeFormats then 
+            if Set.contains cf.NumberFormatId dateTimeFormats then 
                 true
-            elif Set.contains cf.NumberFormatId CellFormat.customFormats then   
+            elif Set.contains cf.NumberFormatId customFormats then   
                 styles.NumberFormats.TryFind cf.NumberFormatId
                 |> Option.map NumberFormat.isDateTime
                 |> Option.defaultValue true             
@@ -92,8 +93,8 @@ module XmlReader =
 
 let parseRelationsships (relationships : ZipArchiveEntry) : Relationships =
     try 
-        let relationshipsStream = relationships.Open()
-        let relationshipsReader = System.Xml.XmlReader.Create(relationshipsStream)
+        use relationshipsStream = relationships.Open()
+        use relationshipsReader = System.Xml.XmlReader.Create(relationshipsStream)
         let mutable rels = [||]
         while relationshipsReader.Read() do
             if XmlReader.isElemWithName relationshipsReader "Relationship" then
@@ -123,12 +124,12 @@ let getSharedStrings (wb : WorkBook) : SharedStrings =
     try
 
         let sharedStrings = wb.GetEntry("xl/sharedStrings.xml")
-        let sharedStringsStream = sharedStrings.Open()
-        let sharedStringsReader = System.Xml.XmlReader.Create(sharedStringsStream)
+        use sharedStringsStream = sharedStrings.Open()
+        use sharedStringsReader = System.Xml.XmlReader.Create(sharedStringsStream)
         [|
         while sharedStringsReader.Read() do
             if XmlReader.isElemWithName sharedStringsReader "si" then
-                let subReader = sharedStringsReader.ReadSubtree()
+                use subReader = sharedStringsReader.ReadSubtree()
                 while subReader.Read() do
                     if XmlReader.isElemWithName subReader "t" then
                         yield subReader.ReadElementContentAsString()
@@ -138,13 +139,13 @@ let getSharedStrings (wb : WorkBook) : SharedStrings =
 
 let getStyles (wb : WorkBook) =
     let styles = wb.GetEntry("xl/styles.xml")
-    let stylesStream = styles.Open()
-    let stylesReader = System.Xml.XmlReader.Create(stylesStream)
+    use stylesStream = styles.Open()
+    use stylesReader = System.Xml.XmlReader.Create(stylesStream)
     let mutable numberFormats = Map.empty
     let mutable cellFormats = Array.empty
     while stylesReader.Read() do
         if XmlReader.isElemWithName stylesReader "numFmts" then
-            let subReader = stylesReader.ReadSubtree()
+            use subReader = stylesReader.ReadSubtree()
             let numFmts = 
                 [|
                     while subReader.Read() do
@@ -155,7 +156,7 @@ let getStyles (wb : WorkBook) =
                 |]
             numberFormats <- Map.ofArray numFmts
         if XmlReader.isElemWithName stylesReader "cellXfs" then
-            let subReader = stylesReader.ReadSubtree()
+            use subReader = stylesReader.ReadSubtree()
             let cellFmts = 
                 [|
                     while subReader.Read() do
@@ -170,8 +171,8 @@ let getStyles (wb : WorkBook) =
        
 let parseTable (sheet : ZipArchiveEntry) =
     try
-        let stream = sheet.Open()
-        let reader = System.Xml.XmlReader.Create(stream)
+        use stream = sheet.Open()
+        use reader = System.Xml.XmlReader.Create(stream)
         let mutable t = None
         while reader.Read() do
             if XmlReader.isElemWithName reader "table" then
@@ -263,9 +264,9 @@ let parseCell (sst : SharedStrings) (styles : Styles) (value : string) (dataType
 let parseWorksheet (name : string) (styles : Styles) (sharedStrings : SharedStrings) (sheet : ZipArchiveEntry) (wb : WorkBook) =
     try 
         let ws = FsWorksheet(name)
-        let stream = sheet.Open()
-        let reader = System.Xml.XmlReader.Create(stream)
         let relationships = getWsRelationships sheet.FullName wb
+        use stream = sheet.Open()
+        use reader = System.Xml.XmlReader.Create(stream)
         while reader.Read() do
             if XmlReader.isElemWithName reader "c" then
                 let r = reader.GetAttribute("r")
@@ -274,7 +275,7 @@ let parseWorksheet (name : string) (styles : Styles) (sharedStrings : SharedStri
             
                 let mutable v = null
                 let mutable f = null
-                let cellReader = reader.ReadSubtree()
+                use cellReader = reader.ReadSubtree()
                 while cellReader.Read() do
                     if XmlReader.isElemWithName cellReader "v" then
                         v <- cellReader.ReadElementContentAsString()
@@ -303,8 +304,8 @@ let parseWorkbook (wb : ZipArchive) =
     //let tables = getTables wb
     let relationships = getWbRelationships wb
     let wbPart = wb.GetEntry("xl/workbook.xml")
-    let wbStream = wbPart.Open()
-    let wbReader = System.Xml.XmlReader.Create(wbStream)
+    use wbStream = wbPart.Open()
+    use wbReader = System.Xml.XmlReader.Create(wbStream)
     while wbReader.Read() do
         if XmlReader.isElemWithName wbReader "sheet" then
             let name = wbReader.GetAttribute("name")

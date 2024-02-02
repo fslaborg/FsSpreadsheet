@@ -35,8 +35,16 @@ let tests_Read = testList "Read" [
         Expect.isDefaultTestObject wb
 ]
 
+let performanceTest = testList "Performance" [
+    testCase "BigFile" <| fun _ ->
+        let readF() = FsWorkbook.fromFile("./TestFiles/BigFile.xlsx")       
+        let wb = Expect.wantFaster readF 5 "Reader too slow"
+        Expect.equal (wb.GetWorksheetAt(1).Rows.Count) 153991 "Row count should be equal"
+]
+
 
 [<Tests>]
 let main = testList "ZipArchiveReader" [
+    performanceTest
     tests_Read
 ]

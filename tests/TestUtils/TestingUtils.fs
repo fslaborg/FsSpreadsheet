@@ -29,6 +29,22 @@ module Utils =
       Seq.mapi2 (fun i s p -> i,s,p) s1 s2
       |> Seq.find (function |_,Some s,Some p when s=p -> false |_-> true)
 
+open System
+
+[<AttachMembers>]
+type Stopwatch() =
+    member val StartTime: DateTime option = None with get, set
+    member val StopTime: DateTime option = None with get, set
+    member this.Start() = this.StartTime <- Some DateTime.Now
+    member this.Stop() = 
+        match this.StartTime with
+        | Some _ -> this.StopTime <- Some DateTime.Now
+        | None -> failwith "Error. Unable to call `Stop` before `Start`."
+    member this.Elapsed : TimeSpan = 
+        match this.StartTime, this.StopTime with
+        | Some start, Some stop -> stop - start
+        | _, _ -> failwith "Error. Unable to call `Elapsed` without calling `Start` and `Stop` before."
+
 /// Fable compatible Expecto/Mocha unification
 module Expect =
 
@@ -57,6 +73,16 @@ module Expect =
         let comp = Utils.firstDiff actual expected
         _sequenceEqual message comp
         
+    let wantFaster (f : unit -> 'T) (maxMilliseconds : int) (message : string) = 
+        let stopwatch = Stopwatch()
+        stopwatch.Start()
+        let res = f()
+        stopwatch.Stop()
+        let elapsed = stopwatch.Elapsed
+        if elapsed.TotalMilliseconds > float maxMilliseconds then
+            failwithf $"{message}. Expected to be faster than {maxMilliseconds}ms, but took {elapsed.TotalMilliseconds}ms"
+        res
+
     let cellSequenceEquals (actual: FsCell seq) (expected: FsCell seq) message =
         let cellDiff (s1: FsCell seq) (s2: FsCell seq) =
             let s1 = Seq.append (Seq.map Some s1) (Seq.initInfinite (fun _ -> None))
@@ -143,18 +169,3 @@ module Test =
 
     let testList = testList
 
-open System
-
-[<AttachMembers>]
-type Stopwatch() =
-    member val StartTime: DateTime option = None with get, set
-    member val StopTime: DateTime option = None with get, set
-    member this.Start() = this.StartTime <- Some DateTime.Now
-    member this.Stop() = 
-        match this.StartTime with
-        | Some _ -> this.StopTime <- Some DateTime.Now
-        | None -> failwith "Error. Unable to call `Stop` before `Start`."
-    member this.Elapsed : TimeSpan = 
-        match this.StartTime, this.StopTime with
-        | Some start, Some stop -> stop - start
-        | _, _ -> failwith "Error. Unable to call `Elapsed` without calling `Start` and `Stop` before."

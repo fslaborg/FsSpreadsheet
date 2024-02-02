@@ -21,6 +21,18 @@ let main argv =
         readStudy() |> ignore
         readInvestigation() |> ignore
 
+    let zipArchiveReader() = 
+
+
+        let readAssay() = ZipArchiveReader.FsWorkbook.fromFile assayPath
+        let readStudy() = ZipArchiveReader.FsWorkbook.fromFile studyPath
+        let readInvestigation() = ZipArchiveReader.FsWorkbook.fromFile investigationPath
+
+        readInvestigation() |> ignore
+        readAssay() |> ignore
+        readStudy() |> ignore
+
+
     let closedXML() =
         
         // Read xlsx file using closedxml
@@ -32,8 +44,36 @@ let main argv =
         readStudy() |> ignore
         readInvestigation() |> ignore
     
+    let randomReadArchives () =
 
-    fsSpreadsheet()
+        let readArchive(p : string) = 
+            let zip = System.IO.Compression.ZipFile.OpenRead(p)
+            let e1 = zip.GetEntry("xl/worksheets/sheet1.xml")
+            use stream1 = e1.Open()
+            use reader1 = System.Xml.XmlReader.Create(stream1)
+            while reader1.Read() do
+                ()
+            let e2 = zip.GetEntry("xl/worksheets/sheet2.xml")
+            use stream2 = e2.Open()
+            use reader2 = System.Xml.XmlReader.Create(stream2)
+            while reader2.Read() do
+                ()
+            let e3 = zip.GetEntry("xl/worksheets/sheet3.xml")
+            use stream3 = e3.Open()
+            use reader3 = System.Xml.XmlReader.Create(stream3)
+            while reader3.Read() do
+                ()
+
+        let readAssay() = readArchive(assayPath)
+        let readStudy() = readArchive(studyPath)
+        let readInvestigation() = readArchive(investigationPath)
+
+        readAssay() |> ignore
+        readStudy() |> ignore
+        readInvestigation() |> ignore
+
     closedXML()
-
+    fsSpreadsheet()
+    zipArchiveReader()
+    //randomReadArchives ()
     1
