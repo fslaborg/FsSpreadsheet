@@ -58,8 +58,7 @@ module FsExtensions =
         /// <summary>
         /// Creates an FsCell on the basis of an XlsxCell. Uses a SharedStringTable if present to get the XlsxCell's value.
         /// </summary>   
-        static member ofXlsxCell (doc : Packaging.SpreadsheetDocument) (xlsxCell : Cell) =
-            let sst = Spreadsheet.tryGetSharedStringTable doc
+        static member ofXlsxCell (doc : Packaging.SpreadsheetDocument) (sst : SST option) (xlsxCell : Cell) =
             let cellValueString = Cell.getValue sst xlsxCell
             let col, row = xlsxCell.CellReference.Value |> CellReference.toIndices
             let dt = 
@@ -89,6 +88,42 @@ module FsExtensions =
             | Empty | String -> ()
             //let dt, v = DataType.InferCellValue v
             FsCell.createWithDataType dt (int row) (int col) (cellValue)
+
+        /// <summary>
+        /// Creates an FsCell on the basis of an XlsxCell. Uses a SharedStringTable if present to get the XlsxCell's value.
+        /// </summary>   
+        static member tryOfXlsxCell (doc : Packaging.SpreadsheetDocument) (sst : SST option) (xlsxCell : Cell) =
+            Cell.tryGetValue sst xlsxCell
+            |> Option.map (fun cellValueString ->
+                let col, row = xlsxCell.CellReference.Value |> CellReference.toIndices
+                let dt = 
+                    try DataType.ofXlsXCell doc xlsxCell
+                    with _ -> DataType.Number // default is number 
+                let mutable cellValue : obj = cellValueString
+                match dt with
+                | Date ->
+                    try 
+                        // datetime is written as float counting days since 1900. 
+                        // We use the .NET helper because we really do not want to deal with datetime issues.
+                        cellValue <- System.DateTime.FromOADate(float cellValueString)
+                    with 
+                        | _ -> ()
+                | Boolean ->
+                    // boolean is written as int/float either 0 or null
+                    match cellValueString.ToLower() with 
+                    | "1" | "true" -> cellValue <- true 
+                    | "0" | "false" -> cellValue <- false 
+                    | _ -> ()
+                | Number -> 
+                    try 
+                        cellValue <- float cellValueString
+                    with 
+                        | _ -> 
+                            ()
+                | Empty | String -> ()
+                //let dt, v = DataType.InferCellValue v
+                FsCell.createWithDataType dt (int row) (int col) (cellValue)
+            )
 
         static member toXlsxCell (doc : Packaging.SpreadsheetDocument) (cell : FsCell) =
             Cell.fromValueWithDataType doc (uint32 cell.ColumnNumber) (uint32 cell.RowNumber) (cell.ValueAsString()) cell.DataType
@@ -201,7 +236,7 @@ module FsExtensions =
         /// Creates an FsWorkbook from a given SpreadsheetDocument.
         /// </summary>
         static member fromSpreadsheetDocument (doc : Packaging.SpreadsheetDocument) =
-            let sst = Spreadsheet.tryGetSharedStringTable doc
+            let sst = Spreadsheet.tryGetSharedStringTable doc |> Option.map SharedStringTable.toSST
             let xlsxWorkbookPart = Spreadsheet.getWorkbookPart doc        
             let xlsxSheets = 
                 try
@@ -227,8 +262,9 @@ module FsExtensions =
                     fun xlsxSheet ->
                         let sheetId = Sheet.getID xlsxSheet
                         let xlsxCells = 
-                            Spreadsheet.getCellsBySheetID sheetId doc
-                            |> Seq.map (FsCell.ofXlsxCell doc)
+                            Spreadsheet.getCellsBySheetID sheetId doc true
+                            |> Seq.toArray
+                            |> Array.choose (FsCell.tryOfXlsxCell doc sst)
                         let assocXlsxTables = 
                             xlsxTables 
                             |> Seq.tryPick (fun (sid,ts) -> if sid = sheetId then Some ts else None)

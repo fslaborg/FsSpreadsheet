@@ -5,6 +5,8 @@ open DocumentFormat.OpenXml.Packaging
 open DocumentFormat.OpenXml
 
 
+type SST = string []
+
 /// Functions for working with SharedStringTables.
 module SharedStringTable = 
 
@@ -99,6 +101,9 @@ module SharedStringTable =
         try spreadsheetDocument.WorkbookPart.SharedStringTablePart.SharedStringTable |> Some
         with | _ -> None
 
-
+    let toSST (sst : SharedStringTable) =
+       sst.Elements<SharedStringItem>()
+       |> Seq.toArray
+       |> Array.map SharedStringItem.getText
 
 

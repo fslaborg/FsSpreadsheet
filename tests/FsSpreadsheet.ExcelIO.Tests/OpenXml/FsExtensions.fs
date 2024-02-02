@@ -81,18 +81,16 @@ let fsExtensionTests =
         //    ]
         //]
         testList "FsCell" [
-            testList "ofXlsxCell" [
+            testCase "ofXlsxCell" (fun () ->
                 let stream = new MemoryStream()
                 let doc = Spreadsheet.initEmptyOnStream stream
-                let testCell = FsCell.ofXlsxCell doc dummyXlsxCell
-                testCase "is equal in value" <| fun _ ->
-                    Expect.equal (testCell.ValueAsString()) dummyXlsxCell.CellValue.Text "values are not equal"
-                testCase "is equal in address/reference" <| fun _ ->
-                    Expect.equal testCell.Address.Address dummyXlsxCell.CellReference.Value "addresses/references are not equal"
-                testCase "is equal in DataType/CellValues" <| fun _ ->
-                    let dtOfCvs = DataType.ofXlsXCell doc dummyXlsxCell
-                    Expect.equal testCell.DataType dtOfCvs "addresses/references are not equal"
-            ]
+                let sst = SharedStringTable.tryGet doc |> Option.map SharedStringTable.toSST
+                let testCell = FsCell.ofXlsxCell doc sst dummyXlsxCell
+                Expect.equal (testCell.ValueAsString()) dummyXlsxCell.CellValue.Text "values are not equal"
+                Expect.equal testCell.Address.Address dummyXlsxCell.CellReference.Value "addresses/references are not equal"
+                let dtOfCvs = DataType.ofXlsXCell doc dummyXlsxCell
+                Expect.equal testCell.DataType dtOfCvs "addresses/references are not equal"
+            )
         ]
         testList "FsTable" [
             testList "GetWorksheetOfTable" [

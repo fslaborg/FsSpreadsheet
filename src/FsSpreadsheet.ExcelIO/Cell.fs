@@ -242,7 +242,7 @@ module Cell =
     /// <summary>
     /// Maps a Cell to the value string using a shared string table.
     /// </summary>
-    let tryGetValue (sharedStringTable:SharedStringTable Option) (cell:Cell) =
+    let tryGetValue (sharedStringTable:SST Option) (cell:Cell) =
         match cell |> tryGetType with
         | Some (CellValues.SharedString) when sharedStringTable.IsSome->
             let sharedStringTable = sharedStringTable.Value
@@ -251,8 +251,7 @@ module Cell =
             |> Option.map (
                 CellValue.getValue 
                 >> int
-                >> fun i -> SharedStringTable.getText i sharedStringTable
-                >> SharedStringTable.SharedStringItem.getText                   
+                >> fun i -> sharedStringTable.[i]          
             )
     
         | _ ->
@@ -263,9 +262,9 @@ module Cell =
     /// <summary>
     /// Maps a Cell to the value string using a sharedStringTable.
     /// </summary>
-    let getValue (sharedStringTable : SharedStringTable Option) (cell : Cell) =
+    let getValue (sharedStringTable : SST Option) (cell : Cell) =
         match cell |> tryGetType with
-        | Some (CellValues.SharedString) when sharedStringTable.IsSome->
+        | Some (CellValues.SharedString) when sharedStringTable.IsSome ->
             let sharedStringTable = sharedStringTable.Value
             let sharedStringTableIndex = 
                 cell
@@ -273,9 +272,7 @@ module Cell =
                 |> CellValue.getValue
                 |> int
 
-            sharedStringTable
-            |> SharedStringTable.getText sharedStringTableIndex
-            |> SharedStringTable.SharedStringItem.getText
+            sharedStringTable.[sharedStringTableIndex]
         | _ ->
             cell
             |> getCellValue
@@ -291,15 +288,15 @@ module Cell =
     /// <summary>
     /// Includes a value from the sharedStringTable in Cell.CellValue.Text.
     /// </summary>
-    let includeSharedStringValue (sharedStringTable:SharedStringTable) (cell:Cell) =
+    let includeSharedStringValue (sharedStringTable:SST) (cell:Cell) =
         if not (isNull cell.DataType) then  
             match cell |> tryGetType with
             | Some (CellValues.SharedString) ->
                 let index = int cell.InnerText
-                match sharedStringTable |> Seq.tryItem index with 
+                match sharedStringTable |> Array.tryItem index with 
                 | Some value -> 
                     cell.DataType <- EnumValue(CellValues.String)
-                    cell.CellValue.Text <- value.InnerText
+                    cell.CellValue.Text <- value
                 | None ->
                     cell.CellValue.Text <- cell.InnerText
                 cell  

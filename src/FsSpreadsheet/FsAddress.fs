@@ -4,6 +4,13 @@
 /// Module containing functions to work with "A1" style excel cell references.
 module CellReference =
     
+    [<Literal>]
+    let indexPattern = 
+        "([A-Z]*)(\d*)"
+
+    let indexRegex = 
+        System.Text.RegularExpressions.Regex(indexPattern)
+
     /// Transforms excel column string indices (e.g. A, B, Z, AA, CD) to index number (starting with A = 1).
     let colAdressToIndex (columnAdress : string) =
         let length = columnAdress.Length
@@ -33,8 +40,7 @@ module CellReference =
     /// Maps a "A1" style excel cell reference to a column * row index tuple (1 Based indices).
     let toIndices (reference : string) = 
         let inp = reference.ToUpper()
-        let pattern = "([A-Z]*)(\d*)"
-        let regex = System.Text.RegularExpressions.Regex.Match(inp,pattern)
+        let regex = indexRegex.Match(inp)
         
         if regex.Success then
             regex.Groups

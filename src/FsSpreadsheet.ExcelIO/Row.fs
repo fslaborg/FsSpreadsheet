@@ -192,7 +192,7 @@ module Row =
             row)
 
     /// If the row contains a value at the given index, returns it. Returns none if not.
-    let tryGetValueAt (sst : SharedStringTable Option) index (row : Row) =
+    let tryGetValueAt (sst : SST Option) index (row : Row) =
         row
         |> tryGetCellAt index
         |> Option.bind (Cell.tryGetValue sst)
@@ -257,7 +257,7 @@ module Row =
         |> extendSpanRight offset
 
     /// Maps the cells of the given row to tuples of 1-based column indices and the value strings using a sharedStringTable.
-    let getIndexedValues (sst : SharedStringTable Option) (row : Row) =
+    let getIndexedValues (sst : SST Option) (row : Row) =
         row
         |> toCellSeq
         |> Seq.choose (fun cell -> 
@@ -273,18 +273,18 @@ module Row =
 
 
     /// Maps the cells of the given row to the value strings.
-    let getRowValues (sst : SharedStringTable Option) (row : Row)  =
+    let getRowValues (sst : SST Option) (row : Row)  =
         row
         |> toCellSeq
         |> Seq.choose (Cell.tryGetValue sst)
 
     /// Maps each cell of the given row to each respective value strings if it exists, else returns None.
-    let tryGetRowValues (sst : SharedStringTable option) (row : Row) =
+    let tryGetRowValues (sst : SST option) (row : Row) =
         toCellSeq row
         |> Seq.map (Cell.tryGetValue sst)
 
     /// Maps the cells of the given row to the value strings for all existing cells.
-    let getPresentRowValues (sst : SharedStringTable option) (row : Row) =
+    let getPresentRowValues (sst : SST option) (row : Row) =
         toCellSeq row
         |> Seq.choose (Cell.tryGetValue sst)
 
@@ -369,6 +369,6 @@ module Row =
             |> appendCell cell
 
     /// Includes a value from a sharedStringTable in the cells of the row.
-    let includeSharedStringValue (sst : SharedStringTable) (row : Row) =
+    let includeSharedStringValue (sst : SST) (row : Row) =
         row
         |> mapCells (Cell.includeSharedStringValue sst)

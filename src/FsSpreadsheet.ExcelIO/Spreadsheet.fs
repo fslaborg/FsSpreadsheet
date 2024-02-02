@@ -174,6 +174,7 @@ module Spreadsheet =
             let workbookPart = spreadsheetDocument.WorkbookPart
             let worksheetPart = Worksheet.WorksheetPart.getByID sheet.Id.Value workbookPart     
             let stringTablePart = getOrInitSharedStringTablePart spreadsheetDocument
+            let sst = SharedStringTable.toSST stringTablePart.SharedStringTable
             seq {
             use reader = OpenXmlReader.Create(worksheetPart)
       
@@ -183,7 +184,7 @@ module Spreadsheet =
                     row.Elements()
                     |> Seq.iter (fun item -> 
                         let cell = item :?> Cell
-                        Cell.includeSharedStringValue stringTablePart.SharedStringTable cell |> ignore
+                        Cell.includeSharedStringValue sst cell |> ignore
                         )
                     yield row 
             }
@@ -192,12 +193,17 @@ module Spreadsheet =
     /// <summary>
     /// Returns a 1D-sequence of Cells for the given Sheet of the given SpreadsheetDocument.
     /// </summary>
-    let getCellsBySheet (sheet : Sheet) (spreadsheetDocument : SpreadsheetDocument) =
+    let getCellsBySheet (sheet : Sheet) (spreadsheetDocument : SpreadsheetDocument) (skipSST : bool) =
         let workbookPart = spreadsheetDocument.WorkbookPart
         let worksheetPart = Worksheet.WorksheetPart.getByID sheet.Id.Value workbookPart
+        
         let includeSSV = 
+            if skipSST then id
+            else
             match tryGetSharedStringTable spreadsheetDocument with 
-            | Some sst -> Cell.includeSharedStringValue sst
+            | Some sst -> 
+                let sstArray = sst |> SharedStringTable.toSST
+                Cell.includeSharedStringValue sstArray
             | None -> id
         seq {
         use reader = OpenXmlReader.Create(worksheetPart)
@@ -213,18 +219,18 @@ module Spreadsheet =
     /// Returns a 1D-sequence of Cells for the given sheetIndex of the given SpreadsheetDocument.
     /// </summary>
     /// <remarks>SheetIndices are 1-based.</remarks>
-    let getCellsBySheetIndex (sheetIndex : uint) (spreadsheetDocument : SpreadsheetDocument) =
+    let getCellsBySheetIndex (sheetIndex : uint) (spreadsheetDocument : SpreadsheetDocument) (skipSST : bool) =
         match Sheet.tryItem sheetIndex spreadsheetDocument with
-        | Some sheet -> getCellsBySheet sheet spreadsheetDocument
+        | Some sheet -> getCellsBySheet sheet spreadsheetDocument skipSST
         | None -> seq {()}
 
     /// <summary>
     /// Returns a 1D-sequence of Cells for the given sheetIndex of the given SpreadsheetDocument.
     /// </summary>
     /// <remarks>SheetIndices are 1-based.</remarks>
-    let getCellsBySheetID (sheetID : string) (spreadsheetDocument : SpreadsheetDocument) =
+    let getCellsBySheetID (sheetID : string) (spreadsheetDocument : SpreadsheetDocument) (skipSST : bool) =
         match Sheet.tryGetById sheetID spreadsheetDocument with
-        | Some sheet -> getCellsBySheet sheet spreadsheetDocument
+        | Some sheet -> getCellsBySheet sheet spreadsheetDocument skipSST
         | None -> seq {()}
 
     //----------------------------------------------------------------------------------------------------------------------

@@ -73,7 +73,8 @@ let performance =
             sw.Start()
             let wb = FsWorkbook.fromXlsxFile(p)
             sw.Stop()
-            Expect.isLessThan sw.Elapsed.Milliseconds 2000  "Elapsed time should be less than 2000ms"
+            let elapsed = sw.Elapsed.Milliseconds
+            Expect.isLessThan elapsed 2000 $"Elapsed time should be less than 2000ms, but was {elapsed}ms"
             Expect.equal (wb.GetWorksheetAt(1).Rows.Count) 153991 "Row count should be 153991"
 
         )

@@ -352,6 +352,7 @@ MigrationBackup/
 pkg/
 
 tmp/
+output/
 .fsdocs/
 /tests/FsSpreadsheet.JsNativeTests/fable/**/*.js
 /tests/FsSpreadsheet.ExcelIO.Tests/TestFiles/WRITE_*.xlsx

@@ -263,7 +263,7 @@ module Table =
         worksheetPart
 
     /// Create a table object by an area. If the first row of this area contains values in the given sheet, these are chosen as headers for the table and a table is returned.
-    let tryCreateWithExistingHeaders (sst : SharedStringTable Option) sheetData name area =
+    let tryCreateWithExistingHeaders (sst : SST Option) sheetData name area =
         if Area.isCorrect area then
             try 
                 let columns = 
@@ -301,7 +301,7 @@ module Table =
         |> Seq.tryFind (TableColumn.getName >> (=) name)
 
     /// If a column with the given header exists in the table, returns its values. Else returns None.
-    let tryGetColumnValuesByColumnHeader (sst : SharedStringTable Option) sheetData columnHeader (table : Table) =
+    let tryGetColumnValuesByColumnHeader (sst : SST Option) sheetData columnHeader (table : Table) =
         let area = getArea table
         table.TableColumns
         |> TableColumns.getTableColumns
@@ -313,7 +313,7 @@ module Table =
         )
      
     /// If a column with the given header exists in the table, returns its indexed values. Else returns None.
-    let tryGetIndexedColumnValuesByColumnHeader (sst : SharedStringTable Option) sheetData columnHeader (table : Table) =
+    let tryGetIndexedColumnValuesByColumnHeader (sst : SST Option) sheetData columnHeader (table : Table) =
         let area = getArea table
         table.TableColumns
         |> TableColumns.getTableColumns
@@ -330,7 +330,7 @@ module Table =
         )
 
     /// If a key column and a value with the given header exist in the table, returns a tuple list of keys and values (else returns None). Missing values get replaced with the given default value.
-    let tryGetKeyValuesByColumnHeaders (sst : SharedStringTable Option) sheetData keyColHeader valColHeader defaultValue (table : Table) =
+    let tryGetKeyValuesByColumnHeaders (sst : SST Option) sheetData keyColHeader valColHeader defaultValue (table : Table) =
         let area = getArea table
         let tableCols = 
             table.TableColumns
@@ -349,7 +349,7 @@ module Table =
         | _ -> None
 
     /// Reads a complete table. Values are stored sparsely in a dictionary, with the key being a row index and column header tuple.
-    let toSparseValueMatrix (sst : SharedStringTable Option) sheetData (table : Table) =
+    let toSparseValueMatrix (sst : SST Option) sheetData (table : Table) =
         let area = getArea table
         let dictionary = System.Collections.Generic.Dictionary<int*string,string>()
         [Area.leftBoundary area .. Area.rightBoundary area]
