@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="ZipArchiveReader.fs" />
     <Compile Include="Stylesheet.Tests.fs" />
     <Compile Include="DefaultIO.Tests.fs" />
     <Compile Include="TestObjects.fs" />

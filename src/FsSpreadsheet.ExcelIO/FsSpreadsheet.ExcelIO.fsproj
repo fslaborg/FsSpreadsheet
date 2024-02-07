@@ -29,6 +29,7 @@
     <Compile Include="Workbook.fs" />
     <Compile Include="Spreadsheet.fs" />
     <Compile Include="Package.fs" />
+    <Compile Include="ZipArchiveReader.fs" />
     <Compile Include="FsExtensions.fs" />
   </ItemGroup>
 

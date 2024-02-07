@@ -38,9 +38,22 @@ let tests_SortRows = testList "SortRows" [
         Utils.Expect.mySequenceEqual ws.Rows rows "equal"
 ]
 
+let tests_rescanRows = testList "RescanRows" [
+     testCase "empty" <| fun _ ->
+          dummySheet1.RescanRows()
+          Expect.hasLength dummySheet1.Rows 0 "row count"
+     testCase "rows" <| fun _ ->
+          let ws = createBigDummySheet()
+          let rows = ResizeArray(ws.Rows) // create copy
+          ws.RescanRows()
+          Utils.Expect.mySequenceEqual ws.Rows rows "equal"
+]
+
+
 let main =
     testSequenced <| testList "FsWorksheet" [
         tests_SortRows
+        tests_rescanRows
         testList "FsCell data" [
             // TO DO: Ask TM: useful? or was that a mistake? (since the same test is seen in FsCell.fs)
             testList "Data | DataType | Adress" [

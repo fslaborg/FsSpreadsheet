@@ -37,16 +37,24 @@ module CellReference =
     let ofIndices column (row : uint32) = 
         sprintf "%s%i" (indexToColAdress column) row
 
+    
+
     /// Maps a "A1" style excel cell reference to a column * row index tuple (1 Based indices).
     let toIndices (reference : string) = 
-        let inp = reference.ToUpper()
-        let regex = indexRegex.Match(inp)
+        let charPart = System.Text.StringBuilder()
+        let numPart = System.Text.StringBuilder()
         
-        if regex.Success then
-            regex.Groups
-            |> fun a -> colAdressToIndex a.[1].Value, uint32 a.[2].Value
-        else 
-            failwithf "Reference %s does not match Excel A1-style" reference
+        reference
+        |> Seq.iter (fun c -> 
+            if System.Char.IsLetter c then
+                charPart.Append c |> ignore
+            elif System.Char.IsDigit c then
+                numPart.Append c |> ignore
+            else
+                failwithf "Reference %s does not match Excel A1-style" reference
+        )
+        colAdressToIndex (charPart.ToString()), uint32 (numPart.ToString())
+
 
     /// Maps a "A1" style excel cell reference to a column (1 Based indices).
     let toColIndex (reference : string) = 

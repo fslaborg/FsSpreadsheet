@@ -366,13 +366,19 @@ type FsWorksheet (name, ?fsRows, ?fsTables, ?fsCellsCollection) =
         _cells.GetCells()
         |> Seq.groupBy (fun c -> c.RowNumber)
         |> Seq.iter (fun (rowIndex,cells) -> 
+            let mutable min = 1
+            let mutable max = 1
+            cells
+            |> Seq.iter (fun c -> 
+                let cn = c.ColumnNumber
+                if cn < min then min <- cn
+                if cn > max then max <- cn
+            )
             let newRange = 
-                cells
-                |> Seq.sortBy (fun c -> c.ColumnNumber)
-                |> fun cells ->
-                    FsAddress(rowIndex,Seq.head cells |> fun c -> c.ColumnNumber),
-                    FsAddress(rowIndex,Seq.last cells |> fun c -> c.ColumnNumber)
-                |> FsRangeAddress
+                FsRangeAddress(
+                    FsAddress(rowIndex,min),
+                    FsAddress(rowIndex,max)
+                )
             match Map.tryFind rowIndex rows with
             | Some row -> 
                 row.RangeAddress <- newRange
