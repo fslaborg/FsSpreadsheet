@@ -358,6 +358,8 @@ output/
 /tests/FsSpreadsheet.ExcelIO.Tests/TestFiles/WRITE_*.xlsx
 /tests/JS/TestFiles/WRITE_*.xlsx
 /js
+**/py/**
+/.venv
 /tests/FsSpreadsheet.Tests/js
 /tests/JS/fable
 /tests/JS/FsSpreadsheet.Exceljs

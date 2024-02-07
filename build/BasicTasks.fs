@@ -94,6 +94,8 @@ module Helper =
 
         createProcess npmPath
 
+    let python = createProcess @".\.venv\Scripts\python.exe"
+
     let run proc arg dir =
         proc arg dir
         |> Proc.run
