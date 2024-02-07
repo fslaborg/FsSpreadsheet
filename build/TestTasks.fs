@@ -42,17 +42,22 @@ module RunTests =
         run npm "run testjs" ""
     }
 
+    let runTestsPy = BuildTask.create "runTestsPy" [clean; build] {
+        let testProjectsPy = 
+            [
+                "tests/FsSpreadsheet.Tests"
+            ]
+        for path in testProjectsPy do
+            //transpile py files from fsharp code
+            run dotnet $"fable {path} -o {path}/py --lang python" ""
+            // run pyxpecto in target path to execute tests in python
+            run python $"{path}/py/main.py" ""
+    }
+
     let runTestsDotnet = BuildTask.create "runTestsDotnet" [clean; build] {
         testProjects
         |> Seq.iter (fun testProject ->
-            Fake.DotNet.DotNet.test(fun testParams ->
-                {
-                    testParams with
-                        Logger = Some "console;verbosity=detailed"
-                        Configuration = DotNet.BuildConfiguration.fromString configuration
-                        NoBuild = true
-                }
-            ) testProject
+            run dotnet $"run" testProject
         )
     }
 

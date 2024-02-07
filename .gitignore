@@ -357,6 +357,8 @@ output/
 /tests/FsSpreadsheet.JsNativeTests/fable/**/*.js
 **/TestFiles/WRITE_*.xlsx
 /js
+**/py/**
+/.venv
 /tests/FsSpreadsheet.Tests/js
 /tests/JS/fable
 /tests/JS/FsSpreadsheet.Exceljs
