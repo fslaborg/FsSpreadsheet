@@ -1,11 +1,9 @@
 ﻿module FsSpreadsheet.Tests
-#if FABLE_COMPILER
-open Fable.Mocha
-#else
-open Expecto
 
-[<Tests>]
-#endif
+open Fable.Pyxpecto
+
+
+
 let all =
     testList "All"
         [
@@ -18,20 +16,18 @@ let all =
             FsCellsCollection.main
             FsCell.main
             FsAddress.main
-
             DSL.CellBuilder.main
         ]
 
-[<EntryPoint>]
-let main argv = 
-    #if FABLE_COMPILER
-    Mocha.runTests all
-    #else
-    Tests.runTestsWithCLIArgs [] argv all
-    #endif
-
-#if FABLE_COMPILER
-open Fable.Mocha
-#else
-open Expecto
+// This is possibly the most magic used to make this work. 
+// Js and ts cannot use `Async.RunSynchronously`, instead they use `Async.StartAsPromise`.
+// Here we need the transpiler not to worry about the output type.
+#if !FABLE_COMPILER_JAVASCRIPT && !FABLE_COMPILER_TYPESCRIPT
+let (!!) (any: 'a) = any
 #endif
+#if FABLE_COMPILER_JAVASCRIPT || FABLE_COMPILER_TYPESCRIPT
+open Fable.Core.JsInterop
+#endif
+
+[<EntryPoint>]
+let main argv = !!Pyxpecto.runTests [||] all

@@ -3,11 +3,8 @@
 open FsSpreadsheet
 open Fable.Core
 
-#if FABLE_COMPILER
-open Fable.Mocha
-#else
-open Expecto
-#endif
+open Fable.Pyxpecto
+
 
 [<RequireQualifiedAccess>]
 module Utils = 

@@ -6,11 +6,11 @@
   "main": "Xlsx.js",
   "scripts": {
     "pretest": "dotnet fable tests/FsSpreadsheet.Tests --noCache -o tests/FsSpreadsheet.Tests/js",
-    "test": "mocha tests/FsSpreadsheet.Tests/js",
+    "test": "node tests/FsSpreadsheet.Tests/js/Main.js",
     "pretestexceljs": "dotnet fable tests/FsSpreadsheet.Exceljs.Tests --noCache -o tests/FsSpreadsheet.Exceljs.Tests/js",
-    "testexceljs": "mocha tests/FsSpreadsheet.Exceljs.Tests/js --timeout 20000",
+    "testexceljs": "node tests/FsSpreadsheet.Exceljs.Tests/js/Main.js",
     "pretestjs": "dotnet fable src/FsSpreadsheet.Exceljs --noCache -o tests/JS/FsSpreadsheet.Exceljs",
-    "testjs": "mocha tests/JS --timeout 20000",
+    "testjs": "mocha tests/JS",
     "prebundle": "mkdir dist & dotnet fable clean --extension .js --yes -o dist",
     "bundle": "dotnet fable src/FsSpreadsheet.Exceljs -o dist"
   },

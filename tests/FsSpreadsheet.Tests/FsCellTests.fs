@@ -1,11 +1,7 @@
 ﻿module FsCell
 
-#if FABLE_COMPILER
-open Fable.Mocha
-#else
-open Expecto
-#endif
 open FsSpreadsheet
+open Fable.Pyxpecto
 
 let dataType =
     testList "DataType" [

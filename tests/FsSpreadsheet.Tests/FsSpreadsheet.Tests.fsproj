@@ -23,8 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Expecto" Version="[10.1.0]" />
-    <PackageReference Include="Fable.Mocha" Version="[2.16.0]" />
+    <PackageReference Include="Fable.Pyxpecto" Version="1.0.1" />
     <PackageReference Include="YoloDev.Expecto.TestSdk" Version="[0.14.1]" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.*" />
   </ItemGroup>
