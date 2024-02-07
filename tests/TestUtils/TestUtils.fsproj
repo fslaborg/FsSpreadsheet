@@ -32,9 +32,7 @@
   </ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Expecto" Version="10.1.0" />
-		<PackageReference Include="YoloDev.Expecto.TestSdk" Version="0.*" />
-		<PackageReference Include="Fable.Mocha" Version="2.17.0" />
+		<PackageReference Include="Fable.Pyxpecto" Version="1.0.1" />
 	</ItemGroup>
 
 	<ItemGroup>

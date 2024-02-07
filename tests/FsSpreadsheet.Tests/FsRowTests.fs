@@ -1,11 +1,8 @@
 ﻿module FsRow
 
 open TestingUtils
-#if FABLE_COMPILER
-open Fable.Mocha
-#else
-open Expecto
-#endif
+open Fable.Pyxpecto
+
 open FsSpreadsheet
 
 
@@ -20,7 +17,7 @@ let getDummyWorkSheet() =
 
 let performace =
     testList "performance" [
-        testCase "FrowFromRange-SkipSearch" (fun () ->
+        ptestCase "FrowFromRange-SkipSearch" (fun () ->
             let rowCount= 100000
             let ws = FsWorksheet.init("MyWorksheet")
             let timer = Stopwatch()
