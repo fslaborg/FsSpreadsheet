@@ -3,9 +3,9 @@
 
 <head>
     <meta charset="utf-8">
-    <title>CellElement (FsSpreadsheet)</title>
+    <title>Styles (FsSpreadsheet)</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="author" content="Heinrich Lukas Weil, Oliver Maus, Kevin Schneider, Kevin Frey, Timo Mühlhaus">
+    <meta name="author" content="Heinrich Lukas Weil, Oliver Maus, Kevin Schneider, Timo Mühlhaus">
     <link rel="shortcut icon" type="image/x-icon" href="/FsSpreadsheet//img/favicon.ico">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
@@ -73,21 +73,23 @@
                 <div class="container" id="fsdocs-content">
                     <div>
   <h2>
-    CellElement Type
+    Styles Type
   </h2>
   <dl class="fsdocs-metadata">
     <dt>
       Namespace: 
-      <a href="/FsSpreadsheet/reference/fsspreadsheet-dsl.html">
-        FsSpreadsheet.DSL
+      <a href="/FsSpreadsheet/reference/fsspreadsheet-excelio.html">
+        FsSpreadsheet.ExcelIO
       </a>
     </dt>
     <dt>
-      Assembly: FsSpreadsheet.dll
+      Assembly: FsSpreadsheet.ExcelIO.dll
     </dt>
     <dt>
-      Abbreviation For: 
-      <code><span><a href="/FsSpreadsheet/reference/fsspreadsheet-dsl-value.html">Value</a>&#32;*&#32;<span>int&#32;option</span></span></code>
+      Parent Module: 
+      <a href="/FsSpreadsheet/reference/fsspreadsheet-excelio-ziparchivereader.html">
+        ZipArchiveReader
+      </a>
     </dt>
     <dt>
       Base Type: 
@@ -95,13 +97,15 @@
     </dt>
     <dt>
       All Interfaces: 
-      <code><a href="https://docs.microsoft.com/dotnet/api/system.collections.istructuralcomparable">IStructuralComparable</a></code>
+      <code><span><a href="https://docs.microsoft.com/dotnet/api/system.iequatable-1">IEquatable</a>&lt;<a href="/FsSpreadsheet/reference/fsspreadsheet-excelio-ziparchivereader-styles.html">Styles</a>&gt;</span></code>
       , 
       <code><a href="https://docs.microsoft.com/dotnet/api/system.collections.istructuralequatable">IStructuralEquatable</a></code>
       , 
+      <code><span><a href="https://docs.microsoft.com/dotnet/api/system.icomparable-1">IComparable</a>&lt;<a href="/FsSpreadsheet/reference/fsspreadsheet-excelio-ziparchivereader-styles.html">Styles</a>&gt;</span></code>
+      , 
       <code><a href="https://docs.microsoft.com/dotnet/api/system.icomparable">IComparable</a></code>
       , 
-      <code><a href="https://docs.microsoft.com/dotnet/api/system.runtime.compilerservices.ituple">ITuple</a></code>
+      <code><a href="https://docs.microsoft.com/dotnet/api/system.collections.istructuralcomparable">IStructuralComparable</a></code>
     </dt>
   </dl>
   <div class="fsdocs-xmldoc">
@@ -115,18 +119,15 @@
   <div></div>
   <div></div>
   <div></div>
-  <div></div>
-  <div></div>
-  <div></div>
   <div>
     <h3>
-      Instance members
+      Record fields
     </h3>
     <table class="table outer-list fsdocs-member-list">
       <thead>
         <tr>
           <td class="fsdocs-member-list-header">
-            Instance member
+            Record Field
           </td>
           <td class="fsdocs-member-list-header">
             Description
@@ -137,24 +138,24 @@
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '833', 833)" onmouseover="showTip(event, '833', 833)">
+              <code onmouseout="hideTip(event, '1042', 1042)" onmouseover="showTip(event, '1042', 1042)">
                 <p>
-                  <a id="Item1">
-                    <a href="#Item1">
-                      <code><span>this.Item1</span></code>
+                  <a id="CellFormats">
+                    <a href="#CellFormats">
+                      <code>CellFormats</code>
                     </a>
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="833">
+              <div class="fsdocs-tip" id="1042">
                 <div class="member-tooltip">
                   Full Usage: 
-                  <code><span>this.Item1</span></code>
+                  <code>CellFormats</code>
                   <br/>
                   <br/>
                   <span>
-                    Returns: 
-                    <code><a href="/FsSpreadsheet/reference/fsspreadsheet-dsl-value.html">Value</a></code>
+                    Field type: 
+                    <code><span><a href="/FsSpreadsheet/reference/fsspreadsheet-excelio-ziparchivereader-cellformat.html">CellFormat</a>[]</span></code>
                   </span>
                   <br/>
                 </div>
@@ -163,14 +164,10 @@
           </td>
           <td class="fsdocs-member-xmldoc">
             <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('``cref:P:System.Tuple`2.Item1``')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'P:System.Tuple`2.Item1\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.ExcelIO/ZipArchiveReader.fs#L86-86" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
+              </a>
               <p class="fsdocs-summary">
                 
               </p>
@@ -178,9 +175,9 @@
             <dl class="fsdocs-returns">
               <dt>
                 <span class="fsdocs-return-name">
-                  Returns: 
+                  Field type: 
                 </span>
-                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-dsl-value.html">Value</a></code>
+                <code><span><a href="/FsSpreadsheet/reference/fsspreadsheet-excelio-ziparchivereader-cellformat.html">CellFormat</a>[]</span></code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -189,24 +186,24 @@
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '834', 834)" onmouseover="showTip(event, '834', 834)">
+              <code onmouseout="hideTip(event, '1043', 1043)" onmouseover="showTip(event, '1043', 1043)">
                 <p>
-                  <a id="Item2">
-                    <a href="#Item2">
-                      <code><span>this.Item2</span></code>
+                  <a id="NumberFormats">
+                    <a href="#NumberFormats">
+                      <code>NumberFormats</code>
                     </a>
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="834">
+              <div class="fsdocs-tip" id="1043">
                 <div class="member-tooltip">
                   Full Usage: 
-                  <code><span>this.Item2</span></code>
+                  <code>NumberFormats</code>
                   <br/>
                   <br/>
                   <span>
-                    Returns: 
-                    <code><span>int&#32;option</span></code>
+                    Field type: 
+                    <code><span><a href="https://fsharp.github.io/fsharp-core-docs/reference/fsharp-collections-fsharpmap-2">Map</a>&lt;<span>int,&#32;<a href="/FsSpreadsheet/reference/fsspreadsheet-excelio-ziparchivereader-numberformat.html">NumberFormat</a></span>&gt;</span></code>
                   </span>
                   <br/>
                 </div>
@@ -215,14 +212,10 @@
           </td>
           <td class="fsdocs-member-xmldoc">
             <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('``cref:P:System.Tuple`2.Item2``')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'P:System.Tuple`2.Item2\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.ExcelIO/ZipArchiveReader.fs#L85-85" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
+              </a>
               <p class="fsdocs-summary">
                 
               </p>
@@ -230,9 +223,9 @@
             <dl class="fsdocs-returns">
               <dt>
                 <span class="fsdocs-return-name">
-                  Returns: 
+                  Field type: 
                 </span>
-                <code><span>int&#32;option</span></code>
+                <code><span><a href="https://fsharp.github.io/fsharp-core-docs/reference/fsharp-collections-fsharpmap-2">Map</a>&lt;<span>int,&#32;<a href="/FsSpreadsheet/reference/fsspreadsheet-excelio-ziparchivereader-numberformat.html">NumberFormat</a></span>&gt;</span></code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -241,6 +234,9 @@
       </tbody>
     </table>
   </div>
+  <div></div>
+  <div></div>
+  <div></div>
   <div></div>
 </div>
                 </div>

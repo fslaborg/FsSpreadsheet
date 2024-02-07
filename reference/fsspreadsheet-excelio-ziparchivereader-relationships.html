@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>CellError (FsSpreadsheet)</title>
+    <title>Relationships (FsSpreadsheet)</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="author" content="Heinrich Lukas Weil, Oliver Maus, Kevin Schneider, Timo Mühlhaus">
     <link rel="shortcut icon" type="image/x-icon" href="/FsSpreadsheet//img/favicon.ico">
@@ -73,7 +73,7 @@
                 <div class="container" id="fsdocs-content">
                     <div>
   <h2>
-    CellError Type
+    Relationships Type
   </h2>
   <dl class="fsdocs-metadata">
     <dt>
@@ -87,27 +87,33 @@
     </dt>
     <dt>
       Parent Module: 
-      <a href="/FsSpreadsheet/reference/fsspreadsheet-excelio-celldata.html">
-        CellData
+      <a href="/FsSpreadsheet/reference/fsspreadsheet-excelio-ziparchivereader.html">
+        ZipArchiveReader
       </a>
     </dt>
     <dt>
+      Abbreviation For: 
+      <code><span><a href="https://fsharp.github.io/fsharp-core-docs/reference/fsharp-collections-fsharpmap-2">Map</a>&lt;<span>string,&#32;<a href="/FsSpreadsheet/reference/fsspreadsheet-excelio-ziparchivereader-relationship.html">Relationship</a></span>&gt;</span></code>
+    </dt>
+    <dt>
       Base Type: 
-      <code><a href="https://docs.microsoft.com/dotnet/api/system.enum">Enum</a></code>
+      <code>obj</code>
     </dt>
     <dt>
       All Interfaces: 
+      <code><span><a href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ireadonlydictionary-2">IReadOnlyDictionary</a>&lt;<span>string,&#32;<a href="/FsSpreadsheet/reference/fsspreadsheet-excelio-ziparchivereader-relationship.html">Relationship</a></span>&gt;</span></code>
+      , 
+      <code><span><a href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1">IReadOnlyCollection</a>&lt;<span><a href="https://docs.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2">KeyValuePair</a>&lt;<span>string,&#32;<a href="/FsSpreadsheet/reference/fsspreadsheet-excelio-ziparchivereader-relationship.html">Relationship</a></span>&gt;</span>&gt;</span></code>
+      , 
       <code><a href="https://docs.microsoft.com/dotnet/api/system.icomparable">IComparable</a></code>
       , 
-      <code><a href="https://docs.microsoft.com/dotnet/api/system.iconvertible">IConvertible</a></code>
+      <code><span><a href="https://docs.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<span>string,&#32;<a href="/FsSpreadsheet/reference/fsspreadsheet-excelio-ziparchivereader-relationship.html">Relationship</a></span>&gt;</span></code>
       , 
-      <code><a href="https://docs.microsoft.com/dotnet/api/system.iformattable">IFormattable</a></code>
-    </dt>
-    <dt>
-      Kind: Struct
-    </dt>
-    <dt>
-      This is an enum type definition
+      <code><span><a href="https://docs.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<span><a href="https://docs.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2">KeyValuePair</a>&lt;<span>string,&#32;<a href="/FsSpreadsheet/reference/fsspreadsheet-excelio-ziparchivereader-relationship.html">Relationship</a></span>&gt;</span>&gt;</span></code>
+      , 
+      <code><span><a href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<span><a href="https://docs.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2">KeyValuePair</a>&lt;<span>string,&#32;<a href="/FsSpreadsheet/reference/fsspreadsheet-excelio-ziparchivereader-relationship.html">Relationship</a></span>&gt;</span>&gt;</span></code>
+      , 
+      <code><a href="https://docs.microsoft.com/dotnet/api/system.collections.ienumerable">IEnumerable</a></code>
     </dt>
   </dl>
   <div class="fsdocs-xmldoc">
@@ -121,15 +127,18 @@
   <div></div>
   <div></div>
   <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
   <div>
     <h3>
-      Record fields
+      Instance members
     </h3>
     <table class="table outer-list fsdocs-member-list">
       <thead>
         <tr>
           <td class="fsdocs-member-list-header">
-            Record Field
+            Instance member
           </td>
           <td class="fsdocs-member-list-header">
             Description
@@ -140,28 +149,25 @@
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '1020', 1020)" onmouseover="showTip(event, '1020', 1020)">
+              <code onmouseout="hideTip(event, '1037', 1037)" onmouseover="showTip(event, '1037', 1037)">
                 <p>
-                  <a id="DIV0">
-                    <a href="#DIV0">
-                      <code>DIV0</code>
+                  <a id="Count">
+                    <a href="#Count">
+                      <code><span>this.Count</span></code>
                     </a>
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="1020">
+              <div class="fsdocs-tip" id="1037">
                 <div class="member-tooltip">
                   Full Usage: 
-                  <code>DIV0</code>
+                  <code><span>this.Count</span></code>
                   <br/>
                   <br/>
                   <span>
-                    Field type: 
-                    <code><a href="/FsSpreadsheet/reference/fsspreadsheet-excelio-celldata-cellerror.html">CellError</a></code>
+                    Returns: 
+                    <code>int</code>
                   </span>
-                  <br/>
-                  Modifiers: 
-                  static
                   <br/>
                 </div>
               </div>
@@ -169,7 +175,15 @@
           </td>
           <td class="fsdocs-member-xmldoc">
             <div class="fsdocs-summary">
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.ExcelIO/CellData.fs#L14-14" class="fsdocs-source-link" title="Source on GitHub">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('``cref:P:Microsoft.FSharp.Collections.FSharpMap`2.Count``')">
+                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'P:Microsoft.FSharp.Collections.FSharpMap`2.Count\'/>')">
+                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/D:/a/_work/1/s/src/FSharp.Core/map.fs#L810-810" class="fsdocs-source-link" title="Source on GitHub">
                 <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
               </a>
@@ -180,9 +194,9 @@
             <dl class="fsdocs-returns">
               <dt>
                 <span class="fsdocs-return-name">
-                  Field type: 
+                  Returns: 
                 </span>
-                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-excelio-celldata-cellerror.html">CellError</a></code>
+                <code>int</code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -191,28 +205,25 @@
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '1021', 1021)" onmouseover="showTip(event, '1021', 1021)">
+              <code onmouseout="hideTip(event, '1038', 1038)" onmouseover="showTip(event, '1038', 1038)">
                 <p>
-                  <a id="GettingDATA">
-                    <a href="#GettingDATA">
-                      <code>GettingDATA</code>
+                  <a id="IsEmpty">
+                    <a href="#IsEmpty">
+                      <code><span>this.IsEmpty</span></code>
                     </a>
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="1021">
+              <div class="fsdocs-tip" id="1038">
                 <div class="member-tooltip">
                   Full Usage: 
-                  <code>GettingDATA</code>
+                  <code><span>this.IsEmpty</span></code>
                   <br/>
                   <br/>
                   <span>
-                    Field type: 
-                    <code><a href="/FsSpreadsheet/reference/fsspreadsheet-excelio-celldata-cellerror.html">CellError</a></code>
+                    Returns: 
+                    <code>bool</code>
                   </span>
-                  <br/>
-                  Modifiers: 
-                  static
                   <br/>
                 </div>
               </div>
@@ -220,7 +231,15 @@
           </td>
           <td class="fsdocs-member-xmldoc">
             <div class="fsdocs-summary">
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.ExcelIO/CellData.fs#L26-26" class="fsdocs-source-link" title="Source on GitHub">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('``cref:P:Microsoft.FSharp.Collections.FSharpMap`2.IsEmpty``')">
+                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'P:Microsoft.FSharp.Collections.FSharpMap`2.IsEmpty\'/>')">
+                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/D:/a/_work/1/s/src/FSharp.Core/map.fs#L768-768" class="fsdocs-source-link" title="Source on GitHub">
                 <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
               </a>
@@ -231,9 +250,9 @@
             <dl class="fsdocs-returns">
               <dt>
                 <span class="fsdocs-return-name">
-                  Field type: 
+                  Returns: 
                 </span>
-                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-excelio-celldata-cellerror.html">CellError</a></code>
+                <code>bool</code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -242,28 +261,37 @@
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '1022', 1022)" onmouseover="showTip(event, '1022', 1022)">
+              <code onmouseout="hideTip(event, '1039', 1039)" onmouseover="showTip(event, '1039', 1039)">
                 <p>
-                  <a id="NA">
-                    <a href="#NA">
-                      <code>NA</code>
+                  <a id="Item">
+                    <a href="#Item">
+                      <code><span>this[<span>key</span>]</span></code>
                     </a>
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="1022">
+              <div class="fsdocs-tip" id="1039">
                 <div class="member-tooltip">
                   Full Usage: 
-                  <code>NA</code>
+                  <code><span>this[<span>key</span>]</span></code>
                   <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        key
+                      </b>
+                      :
+                      <code>string</code>
+                    </span>
+                    <br/>
+                  </ul>
                   <br/>
                   <span>
-                    Field type: 
-                    <code><a href="/FsSpreadsheet/reference/fsspreadsheet-excelio-celldata-cellerror.html">CellError</a></code>
+                    Returns: 
+                    <code><a href="/FsSpreadsheet/reference/fsspreadsheet-excelio-ziparchivereader-relationship.html">Relationship</a></code>
                   </span>
-                  <br/>
-                  Modifiers: 
-                  static
                   <br/>
                 </div>
               </div>
@@ -271,7 +299,15 @@
           </td>
           <td class="fsdocs-member-xmldoc">
             <div class="fsdocs-summary">
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.ExcelIO/CellData.fs#L24-24" class="fsdocs-source-link" title="Source on GitHub">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('``cref:P:Microsoft.FSharp.Collections.FSharpMap`2.Item``')">
+                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'P:Microsoft.FSharp.Collections.FSharpMap`2.Item\'/>')">
+                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/D:/a/_work/1/s/src/FSharp.Core/map.fs#L770-770" class="fsdocs-source-link" title="Source on GitHub">
                 <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
               </a>
@@ -279,12 +315,22 @@
                 
               </p>
             </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  key
+                </span>
+                :
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
             <dl class="fsdocs-returns">
               <dt>
                 <span class="fsdocs-return-name">
-                  Field type: 
+                  Returns: 
                 </span>
-                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-excelio-celldata-cellerror.html">CellError</a></code>
+                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-excelio-ziparchivereader-relationship.html">Relationship</a></code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -293,28 +339,25 @@
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '1023', 1023)" onmouseover="showTip(event, '1023', 1023)">
+              <code onmouseout="hideTip(event, '1040', 1040)" onmouseover="showTip(event, '1040', 1040)">
                 <p>
-                  <a id="NAME">
-                    <a href="#NAME">
-                      <code>NAME</code>
+                  <a id="Keys">
+                    <a href="#Keys">
+                      <code><span>this.Keys</span></code>
                     </a>
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="1023">
+              <div class="fsdocs-tip" id="1040">
                 <div class="member-tooltip">
                   Full Usage: 
-                  <code>NAME</code>
+                  <code><span>this.Keys</span></code>
                   <br/>
                   <br/>
                   <span>
-                    Field type: 
-                    <code><a href="/FsSpreadsheet/reference/fsspreadsheet-excelio-celldata-cellerror.html">CellError</a></code>
+                    Returns: 
+                    <code><span><a href="https://docs.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;string&gt;</span></code>
                   </span>
-                  <br/>
-                  Modifiers: 
-                  static
                   <br/>
                 </div>
               </div>
@@ -322,7 +365,15 @@
           </td>
           <td class="fsdocs-member-xmldoc">
             <div class="fsdocs-summary">
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.ExcelIO/CellData.fs#L20-20" class="fsdocs-source-link" title="Source on GitHub">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('``cref:P:Microsoft.FSharp.Collections.FSharpMap`2.Keys``')">
+                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'P:Microsoft.FSharp.Collections.FSharpMap`2.Keys\'/>')">
+                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/D:/a/_work/1/s/src/FSharp.Core/map.fs#L840-840" class="fsdocs-source-link" title="Source on GitHub">
                 <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
               </a>
@@ -333,9 +384,9 @@
             <dl class="fsdocs-returns">
               <dt>
                 <span class="fsdocs-return-name">
-                  Field type: 
+                  Returns: 
                 </span>
-                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-excelio-celldata-cellerror.html">CellError</a></code>
+                <code><span><a href="https://docs.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;string&gt;</span></code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -344,28 +395,25 @@
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '1024', 1024)" onmouseover="showTip(event, '1024', 1024)">
+              <code onmouseout="hideTip(event, '1041', 1041)" onmouseover="showTip(event, '1041', 1041)">
                 <p>
-                  <a id="NUM">
-                    <a href="#NUM">
-                      <code>NUM</code>
+                  <a id="Values">
+                    <a href="#Values">
+                      <code><span>this.Values</span></code>
                     </a>
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="1024">
+              <div class="fsdocs-tip" id="1041">
                 <div class="member-tooltip">
                   Full Usage: 
-                  <code>NUM</code>
+                  <code><span>this.Values</span></code>
                   <br/>
                   <br/>
                   <span>
-                    Field type: 
-                    <code><a href="/FsSpreadsheet/reference/fsspreadsheet-excelio-celldata-cellerror.html">CellError</a></code>
+                    Returns: 
+                    <code><span><a href="https://docs.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a href="/FsSpreadsheet/reference/fsspreadsheet-excelio-ziparchivereader-relationship.html">Relationship</a>&gt;</span></code>
                   </span>
-                  <br/>
-                  Modifiers: 
-                  static
                   <br/>
                 </div>
               </div>
@@ -373,7 +421,15 @@
           </td>
           <td class="fsdocs-member-xmldoc">
             <div class="fsdocs-summary">
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.ExcelIO/CellData.fs#L22-22" class="fsdocs-source-link" title="Source on GitHub">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('``cref:P:Microsoft.FSharp.Collections.FSharpMap`2.Values``')">
+                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'P:Microsoft.FSharp.Collections.FSharpMap`2.Values\'/>')">
+                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/D:/a/_work/1/s/src/FSharp.Core/map.fs#L842-842" class="fsdocs-source-link" title="Source on GitHub">
                 <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
               </a>
@@ -384,162 +440,9 @@
             <dl class="fsdocs-returns">
               <dt>
                 <span class="fsdocs-return-name">
-                  Field type: 
+                  Returns: 
                 </span>
-                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-excelio-celldata-cellerror.html">CellError</a></code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
-          </td>
-        </tr>
-        <tr>
-          <td class="fsdocs-member-usage">
-            <div>
-              <code onmouseout="hideTip(event, '1025', 1025)" onmouseover="showTip(event, '1025', 1025)">
-                <p>
-                  <a id="Null">
-                    <a href="#Null">
-                      <code>Null</code>
-                    </a>
-                  </a>
-                </p>
-              </code>
-              <div class="fsdocs-tip" id="1025">
-                <div class="member-tooltip">
-                  Full Usage: 
-                  <code>Null</code>
-                  <br/>
-                  <br/>
-                  <span>
-                    Field type: 
-                    <code><a href="/FsSpreadsheet/reference/fsspreadsheet-excelio-celldata-cellerror.html">CellError</a></code>
-                  </span>
-                  <br/>
-                  Modifiers: 
-                  static
-                  <br/>
-                </div>
-              </div>
-            </div>
-          </td>
-          <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.ExcelIO/CellData.fs#L12-12" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
-              </p>
-            </div>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Field type: 
-                </span>
-                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-excelio-celldata-cellerror.html">CellError</a></code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
-          </td>
-        </tr>
-        <tr>
-          <td class="fsdocs-member-usage">
-            <div>
-              <code onmouseout="hideTip(event, '1026', 1026)" onmouseover="showTip(event, '1026', 1026)">
-                <p>
-                  <a id="REF">
-                    <a href="#REF">
-                      <code>REF</code>
-                    </a>
-                  </a>
-                </p>
-              </code>
-              <div class="fsdocs-tip" id="1026">
-                <div class="member-tooltip">
-                  Full Usage: 
-                  <code>REF</code>
-                  <br/>
-                  <br/>
-                  <span>
-                    Field type: 
-                    <code><a href="/FsSpreadsheet/reference/fsspreadsheet-excelio-celldata-cellerror.html">CellError</a></code>
-                  </span>
-                  <br/>
-                  Modifiers: 
-                  static
-                  <br/>
-                </div>
-              </div>
-            </div>
-          </td>
-          <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.ExcelIO/CellData.fs#L18-18" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
-              </p>
-            </div>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Field type: 
-                </span>
-                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-excelio-celldata-cellerror.html">CellError</a></code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
-          </td>
-        </tr>
-        <tr>
-          <td class="fsdocs-member-usage">
-            <div>
-              <code onmouseout="hideTip(event, '1027', 1027)" onmouseover="showTip(event, '1027', 1027)">
-                <p>
-                  <a id="VALUE">
-                    <a href="#VALUE">
-                      <code>VALUE</code>
-                    </a>
-                  </a>
-                </p>
-              </code>
-              <div class="fsdocs-tip" id="1027">
-                <div class="member-tooltip">
-                  Full Usage: 
-                  <code>VALUE</code>
-                  <br/>
-                  <br/>
-                  <span>
-                    Field type: 
-                    <code><a href="/FsSpreadsheet/reference/fsspreadsheet-excelio-celldata-cellerror.html">CellError</a></code>
-                  </span>
-                  <br/>
-                  Modifiers: 
-                  static
-                  <br/>
-                </div>
-              </div>
-            </div>
-          </td>
-          <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.ExcelIO/CellData.fs#L16-16" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
-              </p>
-            </div>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Field type: 
-                </span>
-                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-excelio-celldata-cellerror.html">CellError</a></code>
+                <code><span><a href="https://docs.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a href="/FsSpreadsheet/reference/fsspreadsheet-excelio-ziparchivereader-relationship.html">Relationship</a>&gt;</span></code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -548,9 +451,6 @@
       </tbody>
     </table>
   </div>
-  <div></div>
-  <div></div>
-  <div></div>
   <div></div>
 </div>
                 </div>

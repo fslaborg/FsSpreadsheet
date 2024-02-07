@@ -3,9 +3,9 @@
 
 <head>
     <meta charset="utf-8">
-    <title>FsRangeBase (FsSpreadsheet)</title>
+    <title>DType (FsSpreadsheet)</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="author" content="Heinrich Lukas Weil, Oliver Maus, Kevin Schneider, Kevin Frey, Timo Mühlhaus">
+    <meta name="author" content="Heinrich Lukas Weil, Oliver Maus, Kevin Schneider, Timo Mühlhaus">
     <link rel="shortcut icon" type="image/x-icon" href="/FsSpreadsheet//img/favicon.ico">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
@@ -73,21 +73,23 @@
                 <div class="container" id="fsdocs-content">
                     <div>
   <h2>
-    FsRangeBase Type
+    DType Module
   </h2>
   <dl class="fsdocs-metadata">
     <dt>
       Namespace: 
-      <a href="/FsSpreadsheet/reference/fsspreadsheet.html">
-        FsSpreadsheet
+      <a href="/FsSpreadsheet/reference/fsspreadsheet-excelio.html">
+        FsSpreadsheet.ExcelIO
       </a>
     </dt>
     <dt>
-      Assembly: FsSpreadsheet.dll
+      Assembly: FsSpreadsheet.ExcelIO.dll
     </dt>
     <dt>
-      Base Type: 
-      <code>obj</code>
+      Parent Module: 
+      <a href="/FsSpreadsheet/reference/fsspreadsheet-excelio-ziparchivereader.html">
+        ZipArchiveReader
+      </a>
     </dt>
   </dl>
   <div class="fsdocs-xmldoc">
@@ -97,21 +99,15 @@
       </p>
     </div>
   </div>
-  <div></div>
-  <div></div>
-  <div></div>
-  <div></div>
-  <div></div>
-  <div></div>
   <div>
     <h3>
-      Constructors
+      Functions and values
     </h3>
     <table class="table outer-list fsdocs-member-list">
       <thead>
         <tr>
           <td class="fsdocs-member-list-header">
-            Constructor
+            Function or value
           </td>
           <td class="fsdocs-member-list-header">
             Description
@@ -122,36 +118,24 @@
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '601', 601)" onmouseover="showTip(event, '601', 601)">
+              <code onmouseout="hideTip(event, '405', 405)" onmouseover="showTip(event, '405', 405)">
                 <p>
-                  <a id="``.ctor``">
-                    <a href="#``.ctor``">
-                      <code><span>FsRangeBase<span><span>(<span>rangeAddress</span>)</span></span></span></code>
+                  <a id="boolean">
+                    <a href="#boolean">
+                      <code><span>boolean&#32;<span></span></span></code>
                     </a>
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="601">
+              <div class="fsdocs-tip" id="405">
                 <div class="member-tooltip">
                   Full Usage: 
-                  <code><span>FsRangeBase<span><span>(<span>rangeAddress</span>)</span></span></span></code>
+                  <code><span>boolean&#32;<span></span></span></code>
                   <br/>
-                  <br/>
-                  Parameters: 
-                  <ul>
-                    <span>
-                      <b>
-                        rangeAddress
-                      </b>
-                      :
-                      <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsrangeaddress.html">FsRangeAddress</a></code>
-                    </span>
-                    <br/>
-                  </ul>
                   <br/>
                   <span>
                     Returns: 
-                    <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsrangebase.html">FsRangeBase</a></code>
+                    <code>string</code>
                   </span>
                   <br/>
                 </div>
@@ -160,15 +144,15 @@
           </td>
           <td class="fsdocs-member-xmldoc">
             <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.FsRangeBase.#ctor`')">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:P:FsSpreadsheet.ExcelIO.ZipArchiveReader.DType.boolean`')">
                 <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
               </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.FsRangeBase.#ctor\'/>')">
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'P:FsSpreadsheet.ExcelIO.ZipArchiveReader.DType.boolean\'/>')">
                 <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Ranges/FsRangeBase.fs#L5-5" class="fsdocs-source-link" title="Source on GitHub">
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.ExcelIO/ZipArchiveReader.fs#L21-21" class="fsdocs-source-link" title="Source on GitHub">
                 <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
               </a>
@@ -176,22 +160,348 @@
                 
               </p>
             </div>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  rangeAddress
-                </span>
-                :
-                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsrangeaddress.html">FsRangeAddress</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
             <dl class="fsdocs-returns">
               <dt>
                 <span class="fsdocs-return-name">
                   Returns: 
                 </span>
-                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsrangebase.html">FsRangeBase</a></code>
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '406', 406)" onmouseover="showTip(event, '406', 406)">
+                <p>
+                  <a id="date">
+                    <a href="#date">
+                      <code><span>date&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="406">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>date&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>string</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:P:FsSpreadsheet.ExcelIO.ZipArchiveReader.DType.date`')">
+                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'P:FsSpreadsheet.ExcelIO.ZipArchiveReader.DType.date\'/>')">
+                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.ExcelIO/ZipArchiveReader.fs#L33-33" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '407', 407)" onmouseover="showTip(event, '407', 407)">
+                <p>
+                  <a id="error">
+                    <a href="#error">
+                      <code><span>error&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="407">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>error&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>string</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:P:FsSpreadsheet.ExcelIO.ZipArchiveReader.DType.error`')">
+                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'P:FsSpreadsheet.ExcelIO.ZipArchiveReader.DType.error\'/>')">
+                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.ExcelIO/ZipArchiveReader.fs#L25-25" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '408', 408)" onmouseover="showTip(event, '408', 408)">
+                <p>
+                  <a id="inlineString">
+                    <a href="#inlineString">
+                      <code><span>inlineString&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="408">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>inlineString&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>string</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:P:FsSpreadsheet.ExcelIO.ZipArchiveReader.DType.inlineString`')">
+                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'P:FsSpreadsheet.ExcelIO.ZipArchiveReader.DType.inlineString\'/>')">
+                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.ExcelIO/ZipArchiveReader.fs#L31-31" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '409', 409)" onmouseover="showTip(event, '409', 409)">
+                <p>
+                  <a id="number">
+                    <a href="#number">
+                      <code><span>number&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="409">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>number&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>string</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:P:FsSpreadsheet.ExcelIO.ZipArchiveReader.DType.number`')">
+                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'P:FsSpreadsheet.ExcelIO.ZipArchiveReader.DType.number\'/>')">
+                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.ExcelIO/ZipArchiveReader.fs#L23-23" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '410', 410)" onmouseover="showTip(event, '410', 410)">
+                <p>
+                  <a id="sharedString">
+                    <a href="#sharedString">
+                      <code><span>sharedString&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="410">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>sharedString&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>string</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:P:FsSpreadsheet.ExcelIO.ZipArchiveReader.DType.sharedString`')">
+                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'P:FsSpreadsheet.ExcelIO.ZipArchiveReader.DType.sharedString\'/>')">
+                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.ExcelIO/ZipArchiveReader.fs#L27-27" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '411', 411)" onmouseover="showTip(event, '411', 411)">
+                <p>
+                  <a id="string">
+                    <a href="#string">
+                      <code><span>string&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="411">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>string&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>string</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:P:FsSpreadsheet.ExcelIO.ZipArchiveReader.DType.string`')">
+                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'P:FsSpreadsheet.ExcelIO.ZipArchiveReader.DType.string\'/>')">
+                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.ExcelIO/ZipArchiveReader.fs#L29-29" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code>string</code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -200,427 +510,13 @@
       </tbody>
     </table>
   </div>
-  <div>
-    <h3>
-      Instance members
-    </h3>
-    <table class="table outer-list fsdocs-member-list">
-      <thead>
-        <tr>
-          <td class="fsdocs-member-list-header">
-            Instance member
-          </td>
-          <td class="fsdocs-member-list-header">
-            Description
-          </td>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="fsdocs-member-usage">
-            <div>
-              <code onmouseout="hideTip(event, '602', 602)" onmouseover="showTip(event, '602', 602)">
-                <p>
-                  <a id="Cell">
-                    <a href="#Cell">
-                      <code><span>this.Cell</span></code>
-                    </a>
-                  </a>
-                </p>
-              </code>
-              <div class="fsdocs-tip" id="602">
-                <div class="member-tooltip">
-                  Full Usage: 
-                  <code><span>this.Cell</span></code>
-                  <br/>
-                  <br/>
-                  Parameters: 
-                  <ul>
-                    <span>
-                      <b>
-                        cellAddressInRange
-                      </b>
-                      :
-                      <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsaddress.html">FsAddress</a></code>
-                    </span>
-                    <br/>
-                    <span>
-                      <b>
-                        cells
-                      </b>
-                      :
-                      <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fscellscollection.html">FsCellsCollection</a></code>
-                    </span>
-                    <br/>
-                  </ul>
-                  <br/>
-                  <span>
-                    Returns: 
-                    <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fscell.html">FsCell</a></code>
-                  </span>
-                  <br/>
-                </div>
-              </div>
-            </div>
-          </td>
-          <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.FsRangeBase.Cell`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.FsRangeBase.Cell\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Ranges/FsRangeBase.fs#L36-36" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
-              </p>
-            </div>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  cellAddressInRange
-                </span>
-                :
-                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsaddress.html">FsAddress</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  cells
-                </span>
-                :
-                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fscellscollection.html">FsCellsCollection</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
-                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fscell.html">FsCell</a></code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
-          </td>
-        </tr>
-        <tr>
-          <td class="fsdocs-member-usage">
-            <div>
-              <code onmouseout="hideTip(event, '603', 603)" onmouseover="showTip(event, '603', 603)">
-                <p>
-                  <a id="Cells">
-                    <a href="#Cells">
-                      <code><span>this.Cells</span></code>
-                    </a>
-                  </a>
-                </p>
-              </code>
-              <div class="fsdocs-tip" id="603">
-                <div class="member-tooltip">
-                  Full Usage: 
-                  <code><span>this.Cells</span></code>
-                  <br/>
-                  <br/>
-                  Parameters: 
-                  <ul>
-                    <span>
-                      <b>
-                        cells
-                      </b>
-                      :
-                      <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fscellscollection.html">FsCellsCollection</a></code>
-                       - 
-                      The FsCellsCollection where the FsCells are retrieved from.
-                    </span>
-                    <br/>
-                  </ul>
-                  <br/>
-                  <span>
-                    Returns: 
-                    <code><span>seq&lt;<a href="/FsSpreadsheet/reference/fsspreadsheet-fscell.html">FsCell</a>&gt;</span></code>
-                  </span>
-                  <br/>
-                </div>
-              </div>
-            </div>
-          </td>
-          <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.FsRangeBase.Cells`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.FsRangeBase.Cells\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Ranges/FsRangeBase.fs#L80-80" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- Returns the FsCells of this FsRangeBase with the given FsCellsCollection.
- 
-              </p>
-            </div>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  cells
-                </span>
-                :
-                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fscellscollection.html">FsCellsCollection</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs">
-                <p>
-                  The FsCellsCollection where the FsCells are retrieved from.
-                </p>
-              </dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
-                <code><span>seq&lt;<a href="/FsSpreadsheet/reference/fsspreadsheet-fscell.html">FsCell</a>&gt;</span></code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
-          </td>
-        </tr>
-        <tr>
-          <td class="fsdocs-member-usage">
-            <div>
-              <code onmouseout="hideTip(event, '604', 604)" onmouseover="showTip(event, '604', 604)">
-                <p>
-                  <a id="ColumnCount">
-                    <a href="#ColumnCount">
-                      <code><span>this.ColumnCount</span></code>
-                    </a>
-                  </a>
-                </p>
-              </code>
-              <div class="fsdocs-tip" id="604">
-                <div class="member-tooltip">
-                  Full Usage: 
-                  <code><span>this.ColumnCount</span></code>
-                  <br/>
-                  <br/>
-                  <span>
-                    Returns: 
-                    <code>int</code>
-                  </span>
-                  <br/>
-                </div>
-              </div>
-            </div>
-          </td>
-          <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.FsRangeBase.ColumnCount`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.FsRangeBase.ColumnCount\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Ranges/FsRangeBase.fs#L86-86" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- The number of columns in the FsRangeBase.
- 
-              </p>
-            </div>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
-                <code>int</code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
-          </td>
-        </tr>
-        <tr>
-          <td class="fsdocs-member-usage">
-            <div>
-              <code onmouseout="hideTip(event, '605', 605)" onmouseover="showTip(event, '605', 605)">
-                <p>
-                  <a id="Extend">
-                    <a href="#Extend">
-                      <code><span>this.Extend</span></code>
-                    </a>
-                  </a>
-                </p>
-              </code>
-              <div class="fsdocs-tip" id="605">
-                <div class="member-tooltip">
-                  Full Usage: 
-                  <code><span>this.Extend</span></code>
-                  <br/>
-                  <br/>
-                  Parameters: 
-                  <ul>
-                    <span>
-                      <b>
-                        address
-                      </b>
-                      :
-                      <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsaddress.html">FsAddress</a></code>
-                    </span>
-                    <br/>
-                  </ul>
-                  <br/>
-                </div>
-              </div>
-            </div>
-          </td>
-          <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.FsRangeBase.Extend`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.FsRangeBase.Extend\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Ranges/FsRangeBase.fs#L25-25" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
-              </p>
-            </div>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  address
-                </span>
-                :
-                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsaddress.html">FsAddress</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-          </td>
-        </tr>
-        <tr>
-          <td class="fsdocs-member-usage">
-            <div>
-              <code onmouseout="hideTip(event, '606', 606)" onmouseover="showTip(event, '606', 606)">
-                <p>
-                  <a id="RangeAddress">
-                    <a href="#RangeAddress">
-                      <code><span>this.RangeAddress</span></code>
-                    </a>
-                  </a>
-                </p>
-              </code>
-              <div class="fsdocs-tip" id="606">
-                <div class="member-tooltip">
-                  Full Usage: 
-                  <code><span>this.RangeAddress</span></code>
-                  <br/>
-                  <br/>
-                </div>
-              </div>
-            </div>
-          </td>
-          <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:P:FsSpreadsheet.FsRangeBase.RangeAddress`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'P:FsSpreadsheet.FsRangeBase.RangeAddress\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Ranges/FsRangeBase.fs#L27-27" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
-              </p>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td class="fsdocs-member-usage">
-            <div>
-              <code onmouseout="hideTip(event, '607', 607)" onmouseover="showTip(event, '607', 607)">
-                <p>
-                  <a id="RowCount">
-                    <a href="#RowCount">
-                      <code><span>this.RowCount</span></code>
-                    </a>
-                  </a>
-                </p>
-              </code>
-              <div class="fsdocs-tip" id="607">
-                <div class="member-tooltip">
-                  Full Usage: 
-                  <code><span>this.RowCount</span></code>
-                  <br/>
-                  <br/>
-                  <span>
-                    Returns: 
-                    <code>int</code>
-                  </span>
-                  <br/>
-                </div>
-              </div>
-            </div>
-          </td>
-          <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.FsRangeBase.RowCount`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.FsRangeBase.RowCount\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Ranges/FsRangeBase.fs#L92-92" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- The number of rows in the FsRangeBase.
- 
-              </p>
-            </div>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
-                <code>int</code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
   <div></div>
 </div>
                 </div>
