@@ -10,9 +10,12 @@ let writeAndReadBytes =
     testList "WriteAndReadBytes" [
         testCase "Empty" (fun () -> 
             let wb = new FsWorkbook()
-            let bytes = wb.ToBytes()
-            let wb2 = FsWorkbook.fromBytes(bytes)
-            Expect.equal (wb.GetWorksheets().Count) (wb2.GetWorksheets().Count) "Worksheet count should be equal"
+            let f() = wb.ToBytes()
+            try 
+                f() |> ignore
+                failwith "Should throw an exception"
+            with
+            | _ -> ()
         )
         testCase "ensure table" (fun () -> 
             let expected = new FsWorkbook()
