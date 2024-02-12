@@ -335,8 +335,10 @@ module FsExtensions =
         /// Writes the FsWorkbook into a given MemoryStream.
         /// </summary>
         member self.ToStream(stream : MemoryStream) = 
+            if self.GetWorksheets() |> Seq.isEmpty then
+                failwith "Cannot write an empty workbook to a stream. Workbook did not contain any Worksheets."
             let doc = Spreadsheet.initEmptyOnStream stream 
-
+            
             self.ToEmptySpreadsheet(doc)
                 //Worksheet.setSheetData sheetData sheet |> ignore
                 //WorkbookPart.appendWorksheet worksheet.Name sheet workbookPart |> ignore
