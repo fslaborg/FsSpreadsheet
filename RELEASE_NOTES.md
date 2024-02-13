@@ -1,3 +1,15 @@
+### 5.1.3+a260549 (Released 2024-2-13)
+* Additions:
+    * [[#a260549](https://github.com/CSBiology/FsSpreadsheet/commit/a26054928881975896f2c07926261091979216a4)] update tests to change in empty workbook handling
+    * [[#4eaf806](https://github.com/CSBiology/FsSpreadsheet/commit/4eaf806c4e64bcabc762517e07001886efde4611)] add fail for writing empty workbook #38
+    * [[#6cc4d8d](https://github.com/CSBiology/FsSpreadsheet/commit/6cc4d8dfaa91832d6e28fdffe638600570c4e6fd)] Merge pull request #84 from fslaborg/speed
+    * [[#c9d00fb](https://github.com/CSBiology/FsSpreadsheet/commit/c9d00fb5203377447c25ef475d85e74c428cb6a9)] some speed improvements to xlsx reading
+    * [[#bd9b64b](https://github.com/CSBiology/FsSpreadsheet/commit/bd9b64be581a772513391b1758cfa1e78ab01473)] first draft of experimental ziparchive xlsx reader
+    * [[#2b88258](https://github.com/CSBiology/FsSpreadsheet/commit/2b882586b12aae0500eaad98d01603521dfee26f)] small speed improvement of reader by skipping sst include on opendocument cell
+* Bugfixes:
+    * [[#8da67c9](https://github.com/CSBiology/FsSpreadsheet/commit/8da67c9c0ac537ba184d22b16f86d2d1b18f17ab)] small fixes and adjustments to xlsx reader and tests
+    * [[#886dcf2](https://github.com/CSBiology/FsSpreadsheet/commit/886dcf2ef7459096bf1a35a4fc6173e33f424758)] fix zipArchiveReader against default tests
+
 ### 5.1.2+21fd6e8 (Released 2024-1-30)
 * Additions:
     * [[#21fd6e8](https://github.com/CSBiology/FsSpreadsheet/commit/21fd6e82f6d9eab48b4197a56a5c9b9f06b51b0e)] improve reader speed by adjusting sharedStringTable usage

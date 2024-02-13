@@ -40,8 +40,8 @@ type WriteTestFiles =
 
     member this.asFileName =
         match this with
-        | FsSpreadsheetNET  -> "TestWorkbook_FsSpreadsheet_WRITE.net.xlsx"
-        | FsSpreadsheetJS   -> "TestWorkbook_FsSpreadsheet_WRITE.js.xlsx"
+        | FsSpreadsheetNET  -> "WRITE_TestWorkbook_FsSpreadsheet.net.xlsx"
+        | FsSpreadsheetJS   -> "WRITE_TestWorkbook_FsSpreadsheet.js.xlsx"
 
     member this.asRelativePath = $"{testFolder}/{this.asFileName}"
     member this.asRelativePathNode = $"./tests/TestUtils/{testFolder}/{this.asFileName}"
