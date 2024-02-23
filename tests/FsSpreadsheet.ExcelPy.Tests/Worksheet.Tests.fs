@@ -34,7 +34,7 @@ let fromFsWorksheet = testList "fromFsWorksheet" [
 let toFsWorksheet = testList "toFsWorksheet" [
     testCase "Empty" <| fun _ ->
         let wb = Workbook.create()
-        let pyWS = PyWorksheet.Worksheet.create(wb,wsName)
+        let pyWS = wb.create_sheet(wsName)
         let fsWS = PyWorksheet.toFsWorksheet pyWS
         Expect.equal fsWS.Name wsName "Name did not match"
         Expect.equal (fsWS.CellCollection.GetCells() |> Seq.length) 0 "Cells did not match"

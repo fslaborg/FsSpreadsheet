@@ -162,6 +162,13 @@ module Expect =
 
     let passWithMsg (message: string) = equal true true message
 
+    let fails (f : unit -> unit) message = 
+        try
+            f()
+            failwith $"Function should have failed but did not: {message}"
+        with
+        | _ -> ()
+
 /// Fable compatible Expecto/Mocha unification
 [<AutoOpen>]
 module Test =

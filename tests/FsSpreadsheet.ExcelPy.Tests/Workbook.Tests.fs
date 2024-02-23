@@ -122,10 +122,9 @@ let private tests_toFsWorkbook = testList "toFsWorkbook" [
 
 let tests_toPyWorkbook = testList "toPyWorkbook" [
     testCase "empty" <| fun _ ->
+        
         let fsWB = new FsWorkbook()
-        let pyWB = PyWorkbook.fromFsWorkbook fsWB
-        let jswslist = pyWB?worksheets |> Array.length
-        Expect.equal jswslist 0 "both no worksheet"
+        Expect.fails (fun () -> PyWorkbook.fromFsWorkbook fsWB |> ignore) "no worksheet given"
     testCase "worksheet" <| fun _ ->
         let fsWB = new FsWorkbook()
         let _ = fsWB.InitWorksheet("my awesome worksheet")
