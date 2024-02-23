@@ -355,7 +355,9 @@ tmp/
 output/
 .fsdocs/
 /tests/FsSpreadsheet.JsNativeTests/fable/**/*.js
-**/TestFiles/WRITE_*.xlsx
+/tests/FsSpreadsheet.ExcelIO.Tests/TestFiles/WRITE_*.xlsx
+/tests/JS/TestFiles/WRITE_*.xlsx
+/tests/TestUtils/TestFiles/TestWorkbook_FsSpreadsheet_WRITE.*.xlsx
 /js
 **/py/**
 /.venv
