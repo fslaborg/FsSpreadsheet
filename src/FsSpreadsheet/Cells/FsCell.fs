@@ -35,7 +35,6 @@ type DataType =
         | :? bool as true -> DataType.Boolean, true
         | :? bool as false -> DataType.Boolean, false
         | :? byte as i -> DataType.Number, value
-        | :? uint8 as i -> DataType.Number, value
         | :? sbyte as i -> DataType.Number, value
         | :? int as i -> DataType.Number, value
         | :? int16 as i -> DataType.Number, value
