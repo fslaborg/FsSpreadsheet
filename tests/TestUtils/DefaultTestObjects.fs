@@ -117,7 +117,7 @@ module Sheet3 =
 
 let defaultTestObject() =
     let wb = new FsWorkbook()
-    let table1 = new FsTable(Sheet1.tableName, FsRangeAddress(FsAddress("A1"),FsAddress("F1")))
+    let table1 = new FsTable(Sheet1.tableName, FsRangeAddress(FsAddress("A1"),FsAddress("F5")))
     let sheet1 = wb.InitWorksheet(Sheet1.sheetName)
     for row in ExpectedRows.rowCollectionA1 do
         for c in row do

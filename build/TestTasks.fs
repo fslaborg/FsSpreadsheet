@@ -62,6 +62,6 @@ module RunTests =
         )
     }
 
-let runTests = BuildTask.create "RunTests" [clean; build; RunTests.runTestsJs; RunTests.runTestsDotnet] { 
+let runTests = BuildTask.create "RunTests" [clean; build; RunTests.runTestsJs; RunTests.runTestsDotnet; RunTests.runTestsPy] { 
     ()
 }

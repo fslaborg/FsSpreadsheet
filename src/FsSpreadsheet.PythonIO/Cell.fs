@@ -3,9 +3,26 @@
 module PyCell =
 
     open Fable.Core
-    open Fable.Core.JsInterop
+    open Fable.Core.PyInterop
     open FsSpreadsheet
     open Fable.Openpyxl
+
+    // Currently in Fable, a created datetime object will contain a timezone. This is not allowed in python xlsx, so we need to remove it.
+    // Unfortunately, the timezone object in python is read-only, so we need to create a new datetime object without timezone.
+    // For this, we use the fromtimestamp method of the datetime module and convert the timestamp to a new datetime object without timezone.
+    type datetime =
+        abstract member decoy: unit -> unit
+    type DateTimeStatic =
+        [<Emit("$0.fromtimestamp(timestamp=$1)")>]
+        abstract member fromTimeStamp: timestamp:float -> datetime
+    [<Import("datetime", "datetime")>]
+    let DateTime : DateTimeStatic = nativeOnly
+
+
+    let toUniversalTimePy (dt:System.DateTime) = 
+        
+        dt.ToUniversalTime()?timestamp()
+        |> DateTime.fromTimeStamp
 
     let fromFsCell (fsCell: FsCell) = 
         match fsCell.DataType with
@@ -19,7 +36,10 @@ module PyCell =
             ///// Therefore we add offset and it should work.
             //let dt = dt.ToUniversalTime() + dt.Offset |> box |> Some
             //dt
-            fsCell.ValueAsDateTime().ToUniversalTime() |> box |> Some
+            let dt = fsCell.ValueAsDateTime() |> toUniversalTimePy |> box
+            //dt?tzinfo <- None
+            dt
+            |> Some
         | String    -> 
             fsCell.Value |> Some
         | anyElse ->
