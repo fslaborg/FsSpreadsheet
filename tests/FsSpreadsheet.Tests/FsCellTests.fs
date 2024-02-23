@@ -50,8 +50,8 @@ let dataType =
         testList "InferCellValue byte = 255uy" [
             let byteValTest = 255uy
             let resultDtTest, resultBytTest = DataType.InferCellValue byteValTest
-            testCase "Correct DataType" <| fun _ ->
-                Expect.isTrue (resultDtTest = DataType.Number) "is not the expected DataType.Number"
+            ptestCase "Correct DataType" <| fun _ ->
+                Expect.equal resultDtTest DataType.Number "is not the expected DataType.Number"
             testCase "Correct value" <| fun _ ->
                 Expect.equal (box byteValTest) resultBytTest "resulting value is not correct"
         ]
