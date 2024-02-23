@@ -33,7 +33,7 @@ let packDotNet = BuildTask.create "PackDotNet" [clean; build; runTests] {
                 {
                     p with 
                         MSBuildParams = msBuildParams
-                        OutputPath = Some pkgDir
+                        OutputPath = Some netPkgDir
                 }
             ))
     else failwith "aborted"
@@ -55,7 +55,7 @@ let packDotNetPrerelease = BuildTask.create "PackDotNetPrerelease" [setPrereleas
                 {
                     p with 
                         VersionSuffix = Some prereleaseSuffix
-                        OutputPath = Some pkgDir
+                        OutputPath = Some netPkgDir
                         MSBuildParams = msBuildParams
                 }
             ))
