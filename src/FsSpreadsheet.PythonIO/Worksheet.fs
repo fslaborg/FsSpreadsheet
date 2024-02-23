@@ -7,15 +7,8 @@ module PyWorksheet =
     open Fable.Openpyxl
     open Fable.Core.PyInterop
     
-    type WorksheetStatic =
-        [<Emit("new $0(parent=$1, title=$2)")>]
-        abstract member create: parent:Workbook * title:string -> Worksheet
-
-    [<Import("Worksheet", "openpyxl.worksheet.worksheet")>]
-    let Worksheet : WorksheetStatic = nativeOnly
-
-    let fromFsWorksheet (parent : Workbook) (fsWS: FsWorksheet) : Worksheet =
-        let pyWS = Worksheet.create(parent,fsWS.Name)
+    let fromFsWorksheet (parent : Workbook) (fsWS: FsWorksheet) : Worksheet =     
+        let pyWS = parent.create_sheet(fsWS.Name)
         fsWS.Tables
         |> Seq.iter (fun table -> 
             let pyTable = PyTable.fromFsTable table
@@ -37,8 +30,9 @@ module PyWorksheet =
         )
         pyWS.rows |> Array.iteri (fun rowIndex row -> 
             row |> Array.iteri (fun colIndex cell -> 
-                let c = PyCell.toFsCell pyWS.title rowIndex colIndex cell
-                fsWS.AddCell(c) |> ignore
+                if cell.cellType <> "NoneType" then
+                    let c = PyCell.toFsCell pyWS.title (rowIndex + 1) (colIndex + 1) cell
+                    fsWS.AddCell(c) |> ignore
             )
         )
         fsWS
