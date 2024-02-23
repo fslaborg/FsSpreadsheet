@@ -1,3 +1,15 @@
+### 5.2.0+bbba6d4 (Released 2024-2-23)
+* Additions:
+    * [[#bbba6d4](https://github.com/CSBiology/FsSpreadsheet/commit/bbba6d4ab819900f5188af3b5663d4744061991a)] start setup of python package
+    * [[#80dd1b6](https://github.com/CSBiology/FsSpreadsheet/commit/80dd1b608e46e7cda7646ea7c39619c0c7738f8e)] add tests for python xlsx io
+    * [[#992fa5a](https://github.com/CSBiology/FsSpreadsheet/commit/992fa5ac485313efc71285347b156b83614585d0)] add python xlsx io support
+    * [[#ddcc16d](https://github.com/CSBiology/FsSpreadsheet/commit/ddcc16dbdc51da516f53cbc3192d114584bd73fb)] add runtestspy target
+    * [[#d69288a](https://github.com/CSBiology/FsSpreadsheet/commit/d69288a33f1a259987cf4c229671723eaaf5beb2)] switch to pyxpecto for testing
+    * [[#2b88258](https://github.com/CSBiology/FsSpreadsheet/commit/2b882586b12aae0500eaad98d01603521dfee26f)] small speed improvement of reader by skipping sst include on opendocument cell
+* Bugfixes:
+    * [[#b35f309](https://github.com/CSBiology/FsSpreadsheet/commit/b35f30908a4a68d8e3870c30cb8ace2dde748a7b)] finalize python xlsx io test and fixes
+    * [[#a55336e](https://github.com/CSBiology/FsSpreadsheet/commit/a55336ec03d5d2f1a254d2908d06d9b5381c7d55)] fix python xlsx io for default formats
+
 ### 5.1.3+a260549 (Released 2024-2-13)
 * Additions:
     * [[#a260549](https://github.com/CSBiology/FsSpreadsheet/commit/a26054928881975896f2c07926261091979216a4)] update tests to change in empty workbook handling

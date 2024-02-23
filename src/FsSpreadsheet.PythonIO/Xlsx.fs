@@ -1,4 +1,4 @@
-﻿module FsSpreadsheet.ExcelPy
+﻿namespace FsSpreadsheet.ExcelPy
 
 
 open FsSpreadsheet

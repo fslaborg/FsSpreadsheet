@@ -20,6 +20,7 @@ let private replaceCommitLink input =
 let packDotNet = BuildTask.create "PackDotNet" [clean; build; runTests] {
     if promptYesNo (sprintf "[.NET] creating stable package with version %s OK?" stableVersionTag ) 
         then
+            System.IO.Directory.CreateDirectory(ProjectInfo.netPkgDir) |> ignore
             !! "src/**/*.*proj"
             -- "src/bin/*"
             |> Seq.iter (Fake.DotNet.DotNet.pack (fun p ->
@@ -42,6 +43,7 @@ let packDotNet = BuildTask.create "PackDotNet" [clean; build; runTests] {
 let packDotNetPrerelease = BuildTask.create "PackDotNetPrerelease" [setPrereleaseTag; clean; build; runTests] {
     if promptYesNo (sprintf "[.NET] creating prerelease package with version %s OK?" prereleaseTag )
         then 
+            System.IO.Directory.CreateDirectory(ProjectInfo.netPkgDir) |> ignore
             !! "src/**/*.*proj"
             -- "src/bin/*"
             |> Seq.iter (Fake.DotNet.DotNet.pack (fun p ->
@@ -65,6 +67,7 @@ let packDotNetPrerelease = BuildTask.create "PackDotNetPrerelease" [setPrereleas
 
 module BundleJs =
     let bundle (versionTag) =
+        System.IO.Directory.CreateDirectory(ProjectInfo.npmPkgDir) |> ignore
         run npm "run bundle" ""
         Fake.IO.File.readAsString "package.json"
         |> fun t ->
