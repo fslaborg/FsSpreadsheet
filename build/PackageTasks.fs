@@ -1,7 +1,5 @@
 ﻿module PackageTasks
 
-open ProjectInfo
-
 open MessagePrompts
 open BasicTasks
 open TestTasks
@@ -27,14 +25,14 @@ module BundleDotNet =
                 {p.MSBuildParams with 
                     Properties = ([
                         "Version",versionTag
-                        "PackageReleaseNotes",  (release.Notes |> List.map replaceCommitLink |> String.toLines )
+                        "PackageReleaseNotes",  (ProjectInfo.release.Notes |> List.map replaceCommitLink |> String.toLines )
                     ] @ p.MSBuildParams.Properties)
                 }
             {
                 p with 
                     VersionSuffix = versionSuffix
                     MSBuildParams = msBuildParams
-                    OutputPath = Some netPkgDir
+                    OutputPath = Some ProjectInfo.netPkgDir
             }
         ))
 
