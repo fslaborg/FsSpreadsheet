@@ -76,6 +76,18 @@ let publishNPMPrerelease = BuildTask.create "PublishNPMPrerelease" [clean; build
     else failwith "aborted"
 }
 
+let publishPyPi = BuildTask.create "PublishPyPi" [packPy] {
+    let msg = sprintf "[PyPi] release package with version %s?" stableVersionTag
+    if promptYesNo msg then
+        let apikey = Environment.environVarOrNone "PYPI_KEY"
+        match apikey with
+        | Some key -> 
+            run python $"-m poetry config pypi-token.pypi {key}" ProjectInfo.pyPkgDir
+        | None -> ()
+        run python "-m poetry publish" ProjectInfo.pyPkgDir
+    else failwith "aborted"
+}
+
 let releaseDocs =  BuildTask.create "ReleaseDocs" [buildDocs] {
     let msg = sprintf "release docs for version %s?" stableVersionTag
     if promptYesNo msg then

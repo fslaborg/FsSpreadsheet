@@ -22,7 +22,7 @@ open ReleaseTasks
 let _release = 
     BuildTask.createEmpty 
         "Release" 
-        [clean; build; runTests; pack; buildDocs; createTag; publishNuget; publishNPM; releaseDocs]
+        [clean; build; runTests; pack; buildDocs; createTag; publishNuget; publishNPM; publishPyPi; releaseDocs]
 
 /// Full release of nuget package, git tag, and documentation for the prerelease version.
 let _preRelease = 

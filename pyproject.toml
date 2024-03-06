@@ -1,14 +1,17 @@
 [tool.poetry]
 name = "fsspreadsheet"
-version = "0.9.0"
-description = "Fable library for Python"
-authors = ["Heinrich Lukas Weil <weil@rptu.de>","Kevin Frey <>", "Oliver Maus <>"]
+version = "5.2.0"
+description = "Fable library for Spreadsheet creation and manipulation"
+authors = ["Heinrich Lukas Weil <hlweil@outlook.de>"]
+maintainers = ["Kevin Frey", "Oliver Maus"]
 license = "MIT License"
 readme = "README.md"
 homepage = "https://fslab.org/FsSpreadsheet/"
+repository = "https://github.com/fslaborg/FsSpreadsheet"
+documentation = "https://fslab.org/FsSpreadsheet/"
 
 [tool.poetry.dependencies]
-python = ">= 3.10, < 4.0"
+python = ">= 3.11, < 4.0"
 openpyxl = ">=3.1.2"
 et-xmlfile = ">=1.1.0"
 

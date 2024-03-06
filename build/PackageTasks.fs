@@ -17,52 +17,33 @@ let private replaceCommitLink input =
     let commitLinkPattern = @"\[\[#[a-z0-9]*\]\(.*\)\] "
     Regex.Replace(input,commitLinkPattern,"")
 
-let packDotNet = BuildTask.create "PackDotNet" [clean; build; runTests] {
-    if promptYesNo (sprintf "[.NET] creating stable package with version %s OK?" stableVersionTag ) 
-        then
-            System.IO.Directory.CreateDirectory(ProjectInfo.netPkgDir) |> ignore
-            !! "src/**/*.*proj"
-            -- "src/bin/*"
-            |> Seq.iter (Fake.DotNet.DotNet.pack (fun p ->
-                let msBuildParams =
-                    {p.MSBuildParams with 
-                        Properties = ([
-                            "Version",stableVersionTag
-                            "PackageReleaseNotes",  (release.Notes |> List.map replaceCommitLink |> String.concat "\r\n" )
-                        ] @ p.MSBuildParams.Properties)
-                    }
-                {
-                    p with 
-                        MSBuildParams = msBuildParams
-                        OutputPath = Some netPkgDir
+module BundleDotNet =
+    let bundle (versionTag : string) (versionSuffix : string option) =
+        System.IO.Directory.CreateDirectory(ProjectInfo.netPkgDir) |> ignore
+        !! "src/**/*.*proj"
+        -- "src/bin/*"
+        |> Seq.iter (Fake.DotNet.DotNet.pack (fun p ->
+            let msBuildParams =
+                {p.MSBuildParams with 
+                    Properties = ([
+                        "Version",versionTag
+                        "PackageReleaseNotes",  (release.Notes |> List.map replaceCommitLink |> String.toLines )
+                    ] @ p.MSBuildParams.Properties)
                 }
-            ))
-    else failwith "aborted"
+            {
+                p with 
+                    VersionSuffix = versionSuffix
+                    MSBuildParams = msBuildParams
+                    OutputPath = Some netPkgDir
+            }
+        ))
+
+let packDotNet = BuildTask.create "PackDotNet" [clean; build; runTests] {
+    BundleDotNet.bundle ProjectInfo.stableVersionTag None
 }
 
 let packDotNetPrerelease = BuildTask.create "PackDotNetPrerelease" [setPrereleaseTag; clean; build; runTests] {
-    if promptYesNo (sprintf "[.NET] creating prerelease package with version %s OK?" prereleaseTag )
-        then 
-            System.IO.Directory.CreateDirectory(ProjectInfo.netPkgDir) |> ignore
-            !! "src/**/*.*proj"
-            -- "src/bin/*"
-            |> Seq.iter (Fake.DotNet.DotNet.pack (fun p ->
-                let msBuildParams =
-                    {p.MSBuildParams with 
-                        Properties = ([
-                            "Version", prereleaseTag
-                            "PackageReleaseNotes",  (release.Notes |> List.map replaceCommitLink  |> String.toLines )
-                        ] @ p.MSBuildParams.Properties)
-                    }
-                {
-                    p with 
-                        VersionSuffix = Some prereleaseSuffix
-                        OutputPath = Some netPkgDir
-                        MSBuildParams = msBuildParams
-                }
-            ))
-    else
-        failwith "aborted"
+    BundleDotNet.bundle ProjectInfo.prereleaseTag (Some ProjectInfo.prereleaseTag)
 }
 
 module BundleJs =
@@ -77,17 +58,34 @@ module BundleJs =
         |> Fake.IO.File.writeString false $"{ProjectInfo.npmPkgDir}/fable_modules/.npmignore"
 
 let packJS = BuildTask.create "PackJS" [clean; build; runTests] {
-    if promptYesNo (sprintf "[NPM] creating stable package with version %s OK?" ProjectInfo.stableVersionTag ) 
-        then
-            BundleJs.bundle ProjectInfo.stableVersionTag
-    else failwith "aborted"
+    BundleJs.bundle ProjectInfo.stableVersionTag
 }
 
 let packJSPrerelease = BuildTask.create "PackJSPrerelease" [setPrereleaseTag; clean; build; runTests] {
-    if promptYesNo (sprintf "[NPM] creating prerelease package with version %s OK?" ProjectInfo.prereleaseTag ) then
-        BundleJs.bundle ProjectInfo.prereleaseTag
-    else failwith "aborted"
+    BundleJs.bundle ProjectInfo.prereleaseTag
     }
-let pack = BuildTask.createEmpty "Pack" [packDotNet; packJS]
 
-let packPrerelease = BuildTask.createEmpty "PackPrerelease" [packDotNetPrerelease;packJSPrerelease]
+module BundlePy =
+    let bundle (versionTag: string) =
+        
+        run dotnet $"fable src/FsSpreadsheet.ExcelPy -o {ProjectInfo.pyPkgDir}/fsspreadsheet --lang python" ""
+        run python "-m poetry install --no-root" ProjectInfo.pyPkgDir
+        //GenerateIndexPy.ARCtrl_generate (ProjectInfo.pyPkgDir + "/arctrl")
+
+        Fake.IO.File.readAsString "pyproject.toml"
+        |> fun t ->
+            let t = t.Replace(ProjectInfo.stableVersionTag, versionTag)
+            Fake.IO.File.writeString false $"{ProjectInfo.pyPkgDir}/pyproject.toml" t
+
+        Fake.IO.File.readAsString "README.md"
+        |> Fake.IO.File.writeString false $"{ProjectInfo.pyPkgDir}/README.md"
+
+        run python "-m poetry build" ProjectInfo.pyPkgDir //Remove "-o ." because not compatible with publish 
+        
+let packPy = BuildTask.create "PackPy" [clean; build; runTests] {
+    BundlePy.bundle ProjectInfo.stableVersionTag
+}
+
+let pack = BuildTask.createEmpty "Pack" [packDotNet; packJS; packPy]
+
+let packPrerelease = BuildTask.createEmpty "PackPrerelease" [packDotNetPrerelease; packJSPrerelease]
