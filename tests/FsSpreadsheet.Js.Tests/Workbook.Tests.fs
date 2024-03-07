@@ -2,7 +2,7 @@ module Workbook.Tests
 
 open TestingUtils
 open Fable.ExcelJs
-open FsSpreadsheet.Exceljs
+open FsSpreadsheet.Js
 open FsSpreadsheet
 
 open Fable.Core

@@ -7,12 +7,12 @@
   "scripts": {
     "pretest": "dotnet fable tests/FsSpreadsheet.Tests --noCache -o tests/FsSpreadsheet.Tests/js",
     "test": "node tests/FsSpreadsheet.Tests/js/Main.js",
-    "pretestexceljs": "dotnet fable tests/FsSpreadsheet.Exceljs.Tests --noCache -o tests/FsSpreadsheet.Exceljs.Tests/js",
-    "testexceljs": "node tests/FsSpreadsheet.Exceljs.Tests/js/Main.js",
-    "pretestjs": "dotnet fable src/FsSpreadsheet.Exceljs --noCache -o tests/JS/FsSpreadsheet.Exceljs",
+    "pretestexceljs": "dotnet fable tests/FsSpreadsheet.Js.Tests --noCache -o tests/FsSpreadsheet.Js.Tests/js",
+    "testexceljs": "node tests/FsSpreadsheet.Js.Tests/js/Main.js",
+    "pretestjs": "dotnet fable src/FsSpreadsheet.Js --noCache -o tests/JS/FsSpreadsheet.Js",
     "testjs": "mocha tests/JS",
     "prebundle": "mkdir dist/js & dotnet fable clean --extension .js --yes -o dist/js",
-    "bundle": "dotnet fable src/FsSpreadsheet.Exceljs -o dist/js"
+    "bundle": "dotnet fable src/FsSpreadsheet.Js -o dist/js"
   },
   "repository": {
     "type": "git",

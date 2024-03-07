@@ -2,7 +2,7 @@
 
 open TestingUtils
 open FsSpreadsheet
-open FsSpreadsheet.Exceljs
+open FsSpreadsheet.Js
 open Fable.Core
 
 

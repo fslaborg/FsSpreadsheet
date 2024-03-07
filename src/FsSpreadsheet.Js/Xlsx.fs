@@ -1,4 +1,4 @@
-﻿namespace FsSpreadsheet.Exceljs
+﻿namespace FsSpreadsheet.Js
 
 open FsSpreadsheet
 open Fable.ExcelJs

@@ -7,7 +7,7 @@ let project = "FsSpreadsheet"
 let testProjects = 
     [
         "tests/FsSpreadsheet.Tests"
-        "tests/FsSpreadsheet.ExcelIO.Tests"
+        "tests/FsSpreadsheet.Net.Tests"
         "tests/FsSpreadsheet.Interactive.Tests"
     ]
 

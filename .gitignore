@@ -355,7 +355,7 @@ tmp/
 output/
 .fsdocs/
 /tests/FsSpreadsheet.JsNativeTests/fable/**/*.js
-/tests/FsSpreadsheet.ExcelIO.Tests/TestFiles/WRITE_*.xlsx
+/tests/FsSpreadsheet.Net.Tests/TestFiles/WRITE_*.xlsx
 /tests/JS/TestFiles/WRITE_*.xlsx
 /tests/TestUtils/TestFiles/TestWorkbook_FsSpreadsheet_WRITE.*.xlsx
 /js
@@ -363,7 +363,7 @@ output/
 /.venv
 /tests/FsSpreadsheet.Tests/js
 /tests/JS/fable
-/tests/JS/FsSpreadsheet.Exceljs
-/tests/FsSpreadsheet.Exceljs.Tests/js
+/tests/JS/FsSpreadsheet.Js
+/tests/FsSpreadsheet.Js.Tests/js
 /dist
 /tests/TestUtils/TestFiles/Scripts/fable

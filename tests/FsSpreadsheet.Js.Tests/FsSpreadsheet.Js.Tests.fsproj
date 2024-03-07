@@ -12,8 +12,9 @@
     <Compile Include="Main.fs" />
   </ItemGroup>
 	<ItemGroup>
-	  <ProjectReference Include="..\..\src\FsSpreadsheet.Exceljs\FsSpreadsheet.Exceljs.fsproj" />
+	  <ProjectReference Include="..\..\src\FsSpreadsheet.Js\FsSpreadsheet.Js.fsproj" />
 	  <ProjectReference Include="..\TestUtils\TestUtils.fsproj" />
+	  <PackageReference Include="Fable.Pyxpecto" Version="1.0.1" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -46,7 +46,7 @@ module RunTests =
         let testProjectsPy = 
             [
                 "tests/FsSpreadsheet.Tests"
-                "tests/FsSpreadsheet.ExcelPy.Tests"
+                "tests/FsSpreadsheet.Py.Tests"
             ]
         for path in testProjectsPy do
             //transpile py files from fsharp code

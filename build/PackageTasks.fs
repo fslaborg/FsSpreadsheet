@@ -66,7 +66,7 @@ let packJSPrerelease = BuildTask.create "PackJSPrerelease" [setPrereleaseTag; cl
 module BundlePy =
     let bundle (versionTag: string) =
         
-        run dotnet $"fable src/FsSpreadsheet.ExcelPy -o {ProjectInfo.pyPkgDir}/fsspreadsheet --lang python" ""
+        run dotnet $"fable src/FsSpreadsheet.Py -o {ProjectInfo.pyPkgDir}/fsspreadsheet --lang python" ""
         run python "-m poetry install --no-root" ProjectInfo.pyPkgDir
         //GenerateIndexPy.ARCtrl_generate (ProjectInfo.pyPkgDir + "/arctrl")
 

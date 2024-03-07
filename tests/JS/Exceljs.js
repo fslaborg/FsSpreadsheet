@@ -1,11 +1,11 @@
 import { equal } from 'assert';
-import { Xlsx } from './FsSpreadsheet.Exceljs/Xlsx.js';
-import { FsWorkbook } from "./FsSpreadsheet.Exceljs/FsSpreadsheet/FsWorkbook.js";
-import { FsRangeAddress_$ctor_Z721C83C5, FsRangeAddress__get_Range } from "./FsSpreadsheet.Exceljs/FsSpreadsheet/Ranges/FsRangeAddress.js";
-import { FsTable } from "./FsSpreadsheet.Exceljs/FsSpreadsheet/Tables/FsTable.js";
-import { writeFromFsWorkbook, readToFsWorkbook } from "./FsSpreadsheet.Exceljs/Workbook.js";
+import { Xlsx } from './FsSpreadsheet.Js/Xlsx.js';
+import { FsWorkbook } from "./FsSpreadsheet.Js/FsSpreadsheet/FsWorkbook.js";
+import { FsRangeAddress_$ctor_Z721C83C5, FsRangeAddress__get_Range } from "./FsSpreadsheet.Js/FsSpreadsheet/Ranges/FsRangeAddress.js";
+import { FsTable } from "./FsSpreadsheet.Js/FsSpreadsheet/Tables/FsTable.js";
+import { writeFromFsWorkbook, readToFsWorkbook } from "./FsSpreadsheet.Js/Workbook.js";
 
-describe('FsSpreadsheet.Exceljs', function () {
+describe('FsSpreadsheet.Js', function () {
     describe('read', function () {
         it('values', async () => {
             const path = "tests/JS/TestFiles/ReadTable.xlsx"; // path always from package.json 

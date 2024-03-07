@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\FsSpreadsheet.ExcelIO\FsSpreadsheet.ExcelIO.fsproj" />
+    <ProjectReference Include="..\..\src\FsSpreadsheet.Net\FsSpreadsheet.Net.fsproj" />
     <ProjectReference Include="..\TestUtils\TestUtils.fsproj" />
   </ItemGroup>
 

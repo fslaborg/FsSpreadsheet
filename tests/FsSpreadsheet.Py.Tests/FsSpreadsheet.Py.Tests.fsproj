@@ -7,12 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="DefaultIO.Tests.fs" />
+    <Compile Include="Cell.fs" />
+    <Compile Include="Table.fs" />
+    <Compile Include="Worksheet.Tests.fs" />
     <Compile Include="Workbook.Tests.fs" />
+    <Compile Include="DefaultIO.Tests.fs" />
     <Compile Include="Main.fs" />
   </ItemGroup>
 	<ItemGroup>
-	  <ProjectReference Include="..\..\src\FsSpreadsheet.Exceljs\FsSpreadsheet.Exceljs.fsproj" />
+	  <ProjectReference Include="..\..\src\FsSpreadsheet.Py\FsSpreadsheet.Py.fsproj" />
 	  <ProjectReference Include="..\TestUtils\TestUtils.fsproj" />
 	  <PackageReference Include="Fable.Pyxpecto" Version="1.0.1" />
 	</ItemGroup>

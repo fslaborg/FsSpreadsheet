@@ -1,4 +1,4 @@
-﻿module FsSpreadsheet.Exceljs.Tests
+﻿module FsSpreadsheet.Js.Tests
 
 open Fable.Core.JsInterop
 open Fable.Pyxpecto
