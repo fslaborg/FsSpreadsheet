@@ -60,7 +60,7 @@ let writeAndReadBytes =
             wb.AddWorksheet(TestObjects.sheet2())
             System.IO.Directory.CreateDirectory("./TestFiles") |> ignore
             let p = "./TestFiles/WRITE_Roundabout.xlsx"
-            wb.ToFile(p)
+            wb.ToXlsxFile(p)
             let wb2 = FsWorkbook.fromXlsxFile(p)
             Expect.equal (wb.GetWorksheets().Count) (wb2.GetWorksheets().Count) "Worksheet count should be equal"
             Expect.workSheetEqual (wb.GetWorksheetByName(TestObjects.sheet1Name)) (wb2.GetWorksheetByName(TestObjects.sheet1Name)) "First Worksheet did not match"
