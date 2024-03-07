@@ -43,7 +43,7 @@
                         </figure>
                     </a>
                     <h2 class="title has-text-centered has-text-white">FsSpreadsheet</h2>
-                    <h5 class="has-text-centered has-text-white pb-4">Documentation for 6.0.0</h5>
+                    <h5 class="has-text-centered has-text-white pb-4">Documentation for 6.0.1</h5>
                 </div>
                 <div class="content">
                     <!-- BEGIN SEARCH BOX: this adds support for the search box -->
@@ -81,12 +81,82 @@
             <div class="section pt-4">
                 <div class="container" id="fsdocs-content">
                     <h1><a name="FsSpreadsheet-Documentation" class="anchor" href="#FsSpreadsheet-Documentation">FsSpreadsheet Documentation</a></h1>
-<p>(soon tm)</p>
+<p>FsSpreadsheet is a library for reading and writing spreadsheets in F#, Javascript and Python using Fable. It is a wrapper of the Python library openpyxl (<a href="https://openpyxl.readthedocs.io/en/stable/)">https://openpyxl.readthedocs.io/en/stable/)</a> and the Javascript library exceljs (<a href="https://www.npmjs.com/package/@nfdi4plants/exceljs).">https://www.npmjs.com/package/@nfdi4plants/exceljs).</a></p>
+<h2><a name="Installation" class="anchor" href="#Installation">Installation</a></h2>
+<h3><a name="F" class="anchor" href="#F">F#</a></h3>
+<p>Project</p>
+<table class="pre"><tr><td class="snippet"><pre class="fssnip"><code lang="shell">dotnet add package FsSpreadsheet.Net
+</code></pre></td></tr></table>
+<p>Script</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="pp">#r</span> <span class="s">&quot;nuget: FsSpreadsheet.Net&quot;</span>
+
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="id">FsSpreadsheet</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 2)" onmouseover="showTip(event, 'fs1', 2)" class="id">FsSpreadsheet</span><span class="pn">.</span><span class="id">Net</span>
+</code></pre>
+<h3><a name="Javascript" class="anchor" href="#Javascript">Javascript</a></h3>
+<table class="pre"><tr><td class="snippet"><pre class="fssnip"><code lang="shell">npm install @fslab/fsspreadsheet
+</code></pre></td></tr></table>
+<h3><a name="Python" class="anchor" href="#Python">Python</a></h3>
+<table class="pre"><tr><td class="snippet"><pre class="fssnip"><code lang="shell">pip install fsspreadsheet
+</code></pre></td></tr></table>
+<h2><a name="Usage_IO" class="anchor" href="#Usage_IO">Usage_IO</a></h2>
+<h3><a name="F-1" class="anchor" href="#F-1">F#</a></h3>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 3)" onmouseover="showTip(event, 'fs1', 3)" class="id">FsSpreadsheet</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 4)" onmouseover="showTip(event, 'fs1', 4)" class="id">FsSpreadsheet</span><span class="pn">.</span><span class="id">Net</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs2', 5)" onmouseover="showTip(event, 'fs2', 5)" class="id">path</span> <span class="o">=</span> <span class="s">&quot;path/to/spreadsheet.xlsx&quot;</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs3', 6)" onmouseover="showTip(event, 'fs3', 6)" class="id">wb</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 7)" onmouseover="showTip(event, 'fs4', 7)" class="id">FsWorkbook</span><span class="pn">.</span><span class="id">fromXlsxFile</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs2', 8)" onmouseover="showTip(event, 'fs2', 8)" class="id">path</span><span class="pn">)</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs5', 9)" onmouseover="showTip(event, 'fs5', 9)" class="id">newPath</span> <span class="o">=</span> <span class="s">&quot;path/to/new/spreadsheet.xlsx&quot;</span>
+
+<span onmouseout="hideTip(event, 'fs3', 10)" onmouseover="showTip(event, 'fs3', 10)" class="id">wb</span><span class="pn">.</span><span class="id">ToXlsxFile</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs5', 11)" onmouseover="showTip(event, 'fs5', 11)" class="id">newPath</span><span class="pn">)</span>
+</code></pre>
+<h3><a name="Javascript-1" class="anchor" href="#Javascript-1">Javascript</a></h3>
+<table class="pre"><tr><td class="snippet"><pre class="fssnip highlighted"><code lang="javascript">import { Xlsx } from <span class="s">'@fslab/fsspreadsheet/Xlsx.js'</span>;
+
+<span class="k">const</span> path <span class="o">=</span> <span class="s">"path/to/spreadsheet.xlsx"</span>
+
+<span class="k">const</span> wb <span class="o">=</span> Xlsx.fromXlsxFile(path)
+
+<span class="k">const</span> newPath <span class="o">=</span> <span class="s">"path/to/new/spreadsheet.xlsx"</span>
+
+Xlsx.toFile(newPath,wb)
+</code></pre></td></tr></table>
+<h3><a name="Python-1" class="anchor" href="#Python-1">Python</a></h3>
+<table class="pre"><tr><td class="snippet"><pre class="fssnip"><code lang="python">from fsspreadsheet.xlsx import Xlsx
+
+path = "path/to/spreadsheet.xlsx"
+
+wb = Xlsx.fromXlsxFile(path)
+
+newPath = "path/to/new/spreadsheet.xlsx"
+
+Xlsx.to_file(newPath,wb)
+</code></pre></td></tr></table>
 
                 </div>
             </div>
         </div>
-        
+        <div class="fsdocs-tip" id="fs1">namespace FsSpreadsheet</div>
+<div class="fsdocs-tip" id="fs2">val path: string</div>
+<div class="fsdocs-tip" id="fs3">val wb: &#39;a</div>
+<div class="fsdocs-tip" id="fs4">Multiple items<br />type FsWorkbook =
+  interface IDisposable
+  new: unit -&gt; FsWorkbook
+  member AddWorksheet: sheet: FsWorksheet -&gt; unit
+  member AddWorksheets: sheets: seq&lt;FsWorksheet&gt; -&gt; unit
+  member Copy: unit -&gt; FsWorkbook
+  member GetTables: unit -&gt; FsTable[]
+  member GetWorksheetAt: index: int -&gt; FsWorksheet
+  member GetWorksheetByName: sheetName: string -&gt; FsWorksheet
+  member GetWorksheets: unit -&gt; ResizeArray&lt;FsWorksheet&gt;
+  member InitWorksheet: name: string -&gt; FsWorksheet
+  ...<br /><em>&lt;summary&gt;
+ Creates an empty FsWorkbook.
+ &lt;/summary&gt;</em><br /><br />--------------------<br />new: unit -&gt; FsWorkbook</div>
+<div class="fsdocs-tip" id="fs5">val newPath: string</div>
+
     </div>
 
     <!-- BEGIN SEARCH BOX: this adds support for the search box -->
