@@ -9,11 +9,8 @@ module Helpers =
         Seq.mapi2 (fun i s p -> i,s,p) s1 s2
         |> Seq.find (function |_,Some s,Some p when s=p -> false |_-> true)
 
-#if FABLE_COMPILER
-open Fable.Mocha
-#else
-open Expecto
-#endif
+open Fable.Pyxpecto
+
 
 module Expect =
 

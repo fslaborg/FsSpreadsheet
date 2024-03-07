@@ -1,4 +1,4 @@
-﻿namespace FsSpreadsheet.Exceljs
+﻿namespace FsSpreadsheet.Js
 
 
 module JsWorksheet =

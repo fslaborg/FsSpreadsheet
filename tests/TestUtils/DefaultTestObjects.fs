@@ -2,11 +2,8 @@
 
 open FsSpreadsheet
 open Fable.Core
-#if FABLE_COMPILER
-open Fable.Mocha
-#else
-open Expecto
-#endif
+open Fable.Pyxpecto
+
 
 let [<Literal>] testFolder = "TestFiles"
 
@@ -37,11 +34,13 @@ type TestFiles =
 type WriteTestFiles =
 | FsSpreadsheetNET
 | FsSpreadsheetJS
+| FsSpreadsheetPY
 
     member this.asFileName =
         match this with
-        | FsSpreadsheetNET  -> "WRITE_TestWorkbook_FsSpreadsheet.net.xlsx"
-        | FsSpreadsheetJS   -> "WRITE_TestWorkbook_FsSpreadsheet.js.xlsx"
+        | FsSpreadsheetNET  -> "TestWorkbook_FsSpreadsheet_WRITE.net.xlsx"
+        | FsSpreadsheetJS   -> "TestWorkbook_FsSpreadsheet_WRITE.js.xlsx"
+        | FsSpreadsheetPY   -> "TestWorkbook_FsSpreadsheet_WRITE.py.xlsx"
 
     member this.asRelativePath = $"{testFolder}/{this.asFileName}"
     member this.asRelativePathNode = $"./tests/TestUtils/{testFolder}/{this.asFileName}"
@@ -118,7 +117,7 @@ module Sheet3 =
 
 let defaultTestObject() =
     let wb = new FsWorkbook()
-    let table1 = new FsTable(Sheet1.tableName, FsRangeAddress(FsAddress("A1"),FsAddress("F1")))
+    let table1 = new FsTable(Sheet1.tableName, FsRangeAddress(FsAddress("A1"),FsAddress("F5")))
     let sheet1 = wb.InitWorksheet(Sheet1.sheetName)
     for row in ExpectedRows.rowCollectionA1 do
         for c in row do

@@ -7,7 +7,7 @@ let project = "FsSpreadsheet"
 let testProjects = 
     [
         "tests/FsSpreadsheet.Tests"
-        "tests/FsSpreadsheet.ExcelIO.Tests"
+        "tests/FsSpreadsheet.Net.Tests"
         "tests/FsSpreadsheet.Interactive.Tests"
     ]
 
@@ -21,8 +21,9 @@ let gitHome = $"https://github.com/{gitOwner}"
 
 let projectRepo = $"https://github.com/{gitOwner}/{project}"
 
-let pkgDir = "pkg"
-let npmPkgDir = "dist"
+let netPkgDir = "dist/net"
+let npmPkgDir = "dist/js"
+let pyPkgDir = "dist/py"
 
 // Create RELEASE_NOTES.md if not existing. Or "release" would throw an error.
 Fake.Extensions.Release.ReleaseNotes.ensure()

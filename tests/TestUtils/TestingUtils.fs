@@ -3,11 +3,8 @@
 open FsSpreadsheet
 open Fable.Core
 
-#if FABLE_COMPILER
-open Fable.Mocha
-#else
-open Expecto
-#endif
+open Fable.Pyxpecto
+
 
 [<RequireQualifiedAccess>]
 module Utils = 
@@ -164,6 +161,13 @@ module Expect =
     let containsAll actual expected message = Expect.containsAll actual expected message
 
     let passWithMsg (message: string) = equal true true message
+
+    let fails (f : unit -> unit) message = 
+        try
+            f()
+            failwith $"Function should have failed but did not: {message}"
+        with
+        | _ -> ()
 
 /// Fable compatible Expecto/Mocha unification
 [<AutoOpen>]

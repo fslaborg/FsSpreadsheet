@@ -1,10 +1,6 @@
 ﻿module FsCellsCollection
 
-#if FABLE_COMPILER
-open Fable.Mocha
-#else
-open Expecto
-#endif
+open Fable.Pyxpecto
 open FsSpreadsheet
 
 let dummyFsCells =

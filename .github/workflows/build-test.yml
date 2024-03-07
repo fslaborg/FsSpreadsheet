@@ -7,48 +7,63 @@ on:
     branches: [ main ]
 
 jobs:
-  build-and-test-linux:
+  test:
 
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+
+    runs-on: ${{ matrix.os }}
 
     steps:
     - uses: actions/checkout@v3
+  
+    # SETUP .NET
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 6.x.x
     - name: Restore fable
       run: dotnet tool restore
+
+    # SETUP NODE
     - name: Setup Node.js environment
       uses: actions/setup-node@v3
       with:
           node-version: 16
     - name: install node modules
-      run: npm install
+      working-directory: ./
+      run: npm install --ignore-scripts
+
+    # SETUP PYTHON
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+    - name: Setup Virtual Environment
+      run: python -m venv .venv
+    - name: Setup Poetry Windows
+      if: matrix.os == 'windows-latest'
+      run: |
+          .\.venv\Scripts\python.exe -m pip install -U pip setuptools
+          .\.venv\Scripts\python.exe -m pip install poetry
+          .\.venv\Scripts\python.exe -m poetry install --no-root
+    - name: Setup Poetry Unix
+      if: matrix.os == 'ubuntu-latest'
+      run: |
+          ./.venv/bin/python -m pip install -U pip setuptools
+          ./.venv/bin/python -m pip install poetry
+          ./.venv/bin/python -m poetry install --no-root
+
+    # BUILD
     - name: make script executable
+      if: matrix.os == 'ubuntu-latest'
       run: chmod u+x build.sh
-    - name: Build and test dotnet
+    - name: Test (Unix)
+      if: matrix.os == 'ubuntu-latest'
       working-directory: ./
       run: ./build.sh runtests
-
-  build-and-test-windows:
-    
-    runs-on: windows-latest
-
-    steps:
-    - uses: actions/checkout@v3
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: 6.x.x
-    - name: Restore fable
-      run: dotnet tool restore
-    - name: Setup Node.js environment
-      uses: actions/setup-node@v3
-      with:
-          node-version: 16
-    - name: install node modules
-      run: npm install
-    - name: Build and test dotnet
-      working-directory: ./
-      run: ./build.cmd runtests
+    - name: Test (Windows)
+      if: matrix.os == 'windows-latest'
+      run: .\build.cmd runtests

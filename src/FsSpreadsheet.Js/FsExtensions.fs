@@ -1,8 +1,8 @@
 ﻿[<AutoOpenAttribute>]
-module FsSpreadsheet.Exceljs.FsSpreadsheet
+module FsSpreadsheet.Js.FsSpreadsheet
 
 open FsSpreadsheet
-open FsSpreadsheet.Exceljs
+open FsSpreadsheet.Js
 open Fable.Core
 open Fable.Core.JS
 open Fable.Core.JsInterop

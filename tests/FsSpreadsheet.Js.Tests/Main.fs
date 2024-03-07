@@ -1,22 +1,14 @@
-﻿module FsSpreadsheet.Tests
+﻿module FsSpreadsheet.Js.Tests
 
+open Fable.Core.JsInterop
 open Fable.Pyxpecto
-
-
+open TestingUtils
 
 let all =
     testList "All"
         [
-            FsWorkbook.main
-            FsWorkSheet.main
-            FsTable.main
-            FsTableField.main
-            FsColumn.main
-            FsRow.main
-            FsCellsCollection.main
-            FsCell.main
-            FsAddress.main
-            DSL.CellBuilder.main
+            Workbook.Tests.main
+            DefaultIO.Tests.main
         ]
 
 // This is possibly the most magic used to make this work. 

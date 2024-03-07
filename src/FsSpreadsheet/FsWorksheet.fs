@@ -150,6 +150,7 @@ type FsWorksheet (name, ?fsRows, ?fsTables, ?fsCellsCollection) =
     /// <summary>
     /// Returns the FsRow at the given FsRangeAddress. If it does not exist, it is created and appended first.
     /// </summary>
+    /// <param name="rangeAddress">The range address of the FsRow.</param>
     /// <param name="SkipSearch">If true, the FsRow is created and appended without checking if it already exists.</param>
     member self.RowWithRange(rangeAddress : FsRangeAddress, ?SkipSearch) = 
         let skipSearch = defaultArg SkipSearch false

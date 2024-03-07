@@ -1,3 +1,15 @@
+### 5.2.0+bbba6d4 (Released 2024-2-23)
+* Additions:
+    * [[#bbba6d4](https://github.com/CSBiology/FsSpreadsheet/commit/bbba6d4ab819900f5188af3b5663d4744061991a)] start setup of python package
+    * [[#80dd1b6](https://github.com/CSBiology/FsSpreadsheet/commit/80dd1b608e46e7cda7646ea7c39619c0c7738f8e)] add tests for python xlsx io
+    * [[#992fa5a](https://github.com/CSBiology/FsSpreadsheet/commit/992fa5ac485313efc71285347b156b83614585d0)] add python xlsx io support
+    * [[#ddcc16d](https://github.com/CSBiology/FsSpreadsheet/commit/ddcc16dbdc51da516f53cbc3192d114584bd73fb)] add runtestspy target
+    * [[#d69288a](https://github.com/CSBiology/FsSpreadsheet/commit/d69288a33f1a259987cf4c229671723eaaf5beb2)] switch to pyxpecto for testing
+    * [[#2b88258](https://github.com/CSBiology/FsSpreadsheet/commit/2b882586b12aae0500eaad98d01603521dfee26f)] small speed improvement of reader by skipping sst include on opendocument cell
+* Bugfixes:
+    * [[#b35f309](https://github.com/CSBiology/FsSpreadsheet/commit/b35f30908a4a68d8e3870c30cb8ace2dde748a7b)] finalize python xlsx io test and fixes
+    * [[#a55336e](https://github.com/CSBiology/FsSpreadsheet/commit/a55336ec03d5d2f1a254d2908d06d9b5381c7d55)] fix python xlsx io for default formats
+
 ### 5.1.3+a260549 (Released 2024-2-13)
 * Additions:
     * [[#a260549](https://github.com/CSBiology/FsSpreadsheet/commit/a26054928881975896f2c07926261091979216a4)] update tests to change in empty workbook handling
@@ -42,7 +54,7 @@
     * [[#c5bf348](https://github.com/CSBiology/FsSpreadsheet/commit/c5bf34808d105723738dde53e6cb778a2b97da3e)] Finish io tests :heavy_check_mark:
     * [[#80f7632](https://github.com/CSBiology/FsSpreadsheet/commit/80f7632b2a4865951f144fc271e02a2ee4f6989c)] Improve DateTime numberFormat recognition
     * [[#baa88ce](https://github.com/CSBiology/FsSpreadsheet/commit/baa88ceb185c43302c8e7742ba8fe1afab893739)] update libre test file
-    * [[#9805811](https://github.com/CSBiology/FsSpreadsheet/commit/980581193cdcceaa80cd87f91e86121726c1046f)] Setup current FsSpreadsheet.Exceljs write for defaultio tests :construction:
+    * [[#9805811](https://github.com/CSBiology/FsSpreadsheet/commit/980581193cdcceaa80cd87f91e86121726c1046f)] Setup current FsSpreadsheet.Js write for defaultio tests :construction:
     * [[#05e0ca4](https://github.com/CSBiology/FsSpreadsheet/commit/05e0ca492e3ae54cdaf6fdec4c19c1296614e565)] update gitignore
     * [[#2b99506](https://github.com/CSBiology/FsSpreadsheet/commit/2b99506e9abafd7d579d8e3f09fb59d7e20a8398)] Further work on #71 change FsCell.Value to obj :boom:
     * [[#546e029](https://github.com/CSBiology/FsSpreadsheet/commit/546e02962c5d18127e143d85705523a4163d63c2)] add stylesheet helper functions
@@ -112,11 +124,11 @@
     * [[#95c5d16](https://github.com/CSBiology/FsSpreadsheet/commit/95c5d167403cb5a3323782b2e6895c66c9f1ebd8)] Push WIP state
     * [[#58b57ae](https://github.com/CSBiology/FsSpreadsheet/commit/58b57ae74d7d5d98e6146c75ce31eb819c0ed5d9)] Start refactoring to resizeArray :hammer:#53
     * [[#5ed3752](https://github.com/CSBiology/FsSpreadsheet/commit/5ed37521a61683dfb6f6240a1c807474f50b9574)] Specify code snippet
-    * [[#4a9ff2e](https://github.com/CSBiology/FsSpreadsheet/commit/4a9ff2e91cf16c3d7d5587937f9c97d0c348e967)] Initiate test setup for FsSpreadsheet.Exceljs
+    * [[#4a9ff2e](https://github.com/CSBiology/FsSpreadsheet/commit/4a9ff2e91cf16c3d7d5587937f9c97d0c348e967)] Initiate test setup for FsSpreadsheet.Js
     * [[#d785795](https://github.com/CSBiology/FsSpreadsheet/commit/d785795061967c0206855983eebf49f1f182fe86)] Finish Api for both f# fable access and js native :sparkles:
     * [[#1456337](https://github.com/CSBiology/FsSpreadsheet/commit/1456337f88c8af863fb24bf134a93580ef5ed8b6)] update gitignore
     * [[#97f712c](https://github.com/CSBiology/FsSpreadsheet/commit/97f712cfe1d8422835a50c0186e28fc5cd2fcc4a)] setup msbuild
-    * [[#efa9815](https://github.com/CSBiology/FsSpreadsheet/commit/efa981573a24015d110a70c2e306e2678a5a36d5)] Init FsSpreadsheet.Exceljs and add Fable.Exceljs dependency
+    * [[#efa9815](https://github.com/CSBiology/FsSpreadsheet/commit/efa981573a24015d110a70c2e306e2678a5a36d5)] Init FsSpreadsheet.Js and add Fable.Exceljs dependency
     * [[#c4fdce6](https://github.com/CSBiology/FsSpreadsheet/commit/c4fdce69ea59a6a7da12fd190249a8e2f8d43136)] improve testsuit
     * [[#33eb847](https://github.com/CSBiology/FsSpreadsheet/commit/33eb84701d24d145cef5801966bf25844a8a7931)] cleanup test tasks
     * [[#3116aae](https://github.com/CSBiology/FsSpreadsheet/commit/3116aae6831fddcccc552d9d68b1bf4a565578ec)] Add dotnet tool femto

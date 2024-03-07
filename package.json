@@ -1,18 +1,18 @@
 {
   "name": "@fslab/fsspreadsheet",
-  "version": "5.1.3",
+  "version": "5.2.0",
   "description": "Minimal spreadsheet creation and manipulation using exceljs io.",
   "type": "module",
   "main": "Xlsx.js",
   "scripts": {
     "pretest": "dotnet fable tests/FsSpreadsheet.Tests --noCache -o tests/FsSpreadsheet.Tests/js",
-    "test": "mocha tests/FsSpreadsheet.Tests/js",
-    "pretestexceljs": "dotnet fable tests/FsSpreadsheet.Exceljs.Tests --noCache -o tests/FsSpreadsheet.Exceljs.Tests/js",
-    "testexceljs": "mocha tests/FsSpreadsheet.Exceljs.Tests/js --timeout 20000",
-    "pretestjs": "dotnet fable src/FsSpreadsheet.Exceljs --noCache -o tests/JS/FsSpreadsheet.Exceljs",
-    "testjs": "mocha tests/JS --timeout 20000",
-    "prebundle": "mkdir dist & dotnet fable clean --extension .js --yes -o dist",
-    "bundle": "dotnet fable src/FsSpreadsheet.Exceljs -o dist"
+    "test": "node tests/FsSpreadsheet.Tests/js/Main.js",
+    "pretestexceljs": "dotnet fable tests/FsSpreadsheet.Js.Tests --noCache -o tests/FsSpreadsheet.Js.Tests/js",
+    "testexceljs": "node tests/FsSpreadsheet.Js.Tests/js/Main.js",
+    "pretestjs": "dotnet fable src/FsSpreadsheet.Js --noCache -o tests/JS/FsSpreadsheet.Js",
+    "testjs": "mocha tests/JS",
+    "prebundle": "mkdir dist/js & dotnet fable clean --extension .js --yes -o dist/js",
+    "bundle": "dotnet fable src/FsSpreadsheet.Js -o dist/js"
   },
   "repository": {
     "type": "git",

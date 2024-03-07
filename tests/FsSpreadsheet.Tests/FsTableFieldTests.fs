@@ -1,11 +1,7 @@
 ﻿module FsTableField
 
 open FsSpreadsheet
-#if FABLE_COMPILER
-open Fable.Mocha
-#else
-open Expecto
-#endif
+open Fable.Pyxpecto
 
 let dummyFsRangeAddress = FsRangeAddress("C1:C3")
 let dummyFsRangeColumn = FsRangeColumn(dummyFsRangeAddress)

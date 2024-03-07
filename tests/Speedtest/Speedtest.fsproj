@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FsSpreadsheet.ExcelIO.Tests\FsSpreadsheet.ExcelIO.Tests.fsproj" />
+    <ProjectReference Include="..\..\src\FsSpreadsheet.Net\FsSpreadsheet.Net.fsproj" />
   </ItemGroup>
 
   <ItemGroup>
