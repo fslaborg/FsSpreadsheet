@@ -48,13 +48,6 @@ module PyCell =
             
             fsCell.Value |> box |> Some 
 
-    /// <summary>
-    /// `worksheetName`, `rowIndex` and `columnIndex` are only used for debugging.
-    /// </summary>
-    /// <param name="worksheetName"></param>
-    /// <param name="rowIndex"></param>
-    /// <param name="columnIndex"></param>
-    /// <param name="jsCell"></param>
     let toFsCell worksheetName rowIndex columnIndex (pyCell: Cell) =
         //printfn "toFsCell worksheetName: %s, rowIndex: %i, columnIndex: %i, %A" worksheetName rowIndex columnIndex (pyCell.value, pyCell.cellType)
         let fsadress = FsAddress(rowIndex,columnIndex)

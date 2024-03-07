@@ -2,8 +2,8 @@
 name = "fsspreadsheet"
 version = "5.2.0"
 description = "Fable library for Spreadsheet creation and manipulation"
-authors = ["Heinrich Lukas Weil <hlweil@outlook.de>"]
-maintainers = ["Kevin Frey", "Oliver Maus"]
+authors = ["Heinrich Lukas Weil <hlweil@outlook.de>", "Kevin Frey <freymaurer@gmx.de>"]
+maintainers = ["Oliver Maus"]
 license = "MIT License"
 readme = "README.md"
 homepage = "https://fslab.org/FsSpreadsheet/"
