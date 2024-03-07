@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>JsWorksheet (FsSpreadsheet)</title>
+    <title>JsWorkbook (FsSpreadsheet)</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="author" content="Kevin Frey, Heinrich Lukas Weil, Oliver Maus, Kevin Schneider, Timo Mühlhaus">
     <link rel="shortcut icon" type="image/x-icon" href="/FsSpreadsheet//img/favicon.ico">
@@ -73,17 +73,17 @@
                 <div class="container" id="fsdocs-content">
                     <div>
   <h2>
-    JsWorksheet Module
+    JsWorkbook Module
   </h2>
   <dl class="fsdocs-metadata">
     <dt>
       Namespace: 
-      <a href="/FsSpreadsheet/reference/fsspreadsheet-exceljs.html">
-        FsSpreadsheet.Exceljs
+      <a href="/FsSpreadsheet/reference/fsspreadsheet-js.html">
+        FsSpreadsheet.Js
       </a>
     </dt>
     <dt>
-      Assembly: FsSpreadsheet.Exceljs.dll
+      Assembly: FsSpreadsheet.Js.dll
     </dt>
   </dl>
   <div class="fsdocs-xmldoc">
@@ -112,40 +112,37 @@
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '428', 428)" onmouseover="showTip(event, '428', 428)">
+              <code onmouseout="hideTip(event, '453', 453)" onmouseover="showTip(event, '453', 453)">
                 <p>
-                  <a id="readToFsWorksheet">
-                    <a href="#readToFsWorksheet">
-                      <code><span>readToFsWorksheet&#32;<span>wb&#32;jsws</span></span></code>
+                  <a id="readToFsWorkbook">
+                    <a href="#readToFsWorkbook">
+                      <code><span>readToFsWorkbook&#32;<span>jswb</span></span></code>
                     </a>
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="428">
+              <div class="fsdocs-tip" id="453">
                 <div class="member-tooltip">
                   Full Usage: 
-                  <code><span>readToFsWorksheet&#32;<span>wb&#32;jsws</span></span></code>
+                  <code><span>readToFsWorkbook&#32;<span>jswb</span></span></code>
                   <br/>
                   <br/>
                   Parameters: 
                   <ul>
                     <span>
                       <b>
-                        wb
+                        jswb
                       </b>
                       :
-                      <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
-                    </span>
-                    <br/>
-                    <span>
-                      <b>
-                        jsws
-                      </b>
-                      :
-                      <code><a href="https://docs.microsoft.com/dotnet/api/fable.exceljs.worksheet.worksheet">Worksheet</a></code>
+                      <code><a href="https://docs.microsoft.com/dotnet/api/fable.exceljs.workbook.workbook">Workbook</a></code>
                     </span>
                     <br/>
                   </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
+                  </span>
                   <br/>
                 </div>
               </div>
@@ -153,15 +150,15 @@
           </td>
           <td class="fsdocs-member-xmldoc">
             <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Exceljs.JsWorksheet.readToFsWorksheet`')">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Js.JsWorkbook.readToFsWorkbook`')">
                 <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
               </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Exceljs.JsWorksheet.readToFsWorksheet\'/>')">
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Js.JsWorkbook.readToFsWorkbook\'/>')">
                 <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Exceljs/Worksheet.fs#L28-28" class="fsdocs-source-link" title="Source on GitHub">
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Js/Workbook.fs#L23-23" class="fsdocs-source-link" title="Source on GitHub">
                 <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
               </a>
@@ -172,60 +169,58 @@
             <dl class="fsdocs-params">
               <dt class="fsdocs-param">
                 <span class="fsdocs-param-name">
-                  wb
+                  jswb
                 </span>
                 :
+                <code><a href="https://docs.microsoft.com/dotnet/api/fable.exceljs.workbook.workbook">Workbook</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
                 <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
               </dt>
-              <dd class="fsdocs-param-docs"></dd>
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  jsws
-                </span>
-                :
-                <code><a href="https://docs.microsoft.com/dotnet/api/fable.exceljs.worksheet.worksheet">Worksheet</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
+              <dd class="fsdocs-return-docs"></dd>
             </dl>
           </td>
         </tr>
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '429', 429)" onmouseover="showTip(event, '429', 429)">
+              <code onmouseout="hideTip(event, '454', 454)" onmouseover="showTip(event, '454', 454)">
                 <p>
-                  <a id="writeFromFsWorksheet">
-                    <a href="#writeFromFsWorksheet">
-                      <code><span>writeFromFsWorksheet&#32;<span>wb&#32;fsws</span></span></code>
+                  <a id="writeFromFsWorkbook">
+                    <a href="#writeFromFsWorkbook">
+                      <code><span>writeFromFsWorkbook&#32;<span>fswb</span></span></code>
                     </a>
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="429">
+              <div class="fsdocs-tip" id="454">
                 <div class="member-tooltip">
                   Full Usage: 
-                  <code><span>writeFromFsWorksheet&#32;<span>wb&#32;fsws</span></span></code>
+                  <code><span>writeFromFsWorkbook&#32;<span>fswb</span></span></code>
                   <br/>
                   <br/>
                   Parameters: 
                   <ul>
                     <span>
                       <b>
-                        wb
+                        fswb
                       </b>
                       :
-                      <code><a href="https://docs.microsoft.com/dotnet/api/fable.exceljs.workbook.workbook">Workbook</a></code>
-                    </span>
-                    <br/>
-                    <span>
-                      <b>
-                        fsws
-                      </b>
-                      :
-                      <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworksheet.html">FsWorksheet</a></code>
+                      <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
                     </span>
                     <br/>
                   </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="https://docs.microsoft.com/dotnet/api/fable.exceljs.workbook.workbook">Workbook</a></code>
+                  </span>
                   <br/>
                 </div>
               </div>
@@ -233,15 +228,15 @@
           </td>
           <td class="fsdocs-member-xmldoc">
             <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Exceljs.JsWorksheet.writeFromFsWorksheet`')">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Js.JsWorkbook.writeFromFsWorkbook`')">
                 <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
               </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Exceljs.JsWorksheet.writeFromFsWorksheet\'/>')">
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Js.JsWorkbook.writeFromFsWorkbook\'/>')">
                 <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Exceljs/Worksheet.fs#L14-14" class="fsdocs-source-link" title="Source on GitHub">
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Js/Workbook.fs#L16-16" class="fsdocs-source-link" title="Source on GitHub">
                 <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
               </a>
@@ -252,20 +247,21 @@
             <dl class="fsdocs-params">
               <dt class="fsdocs-param">
                 <span class="fsdocs-param-name">
-                  wb
+                  fswb
                 </span>
                 :
+                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
                 <code><a href="https://docs.microsoft.com/dotnet/api/fable.exceljs.workbook.workbook">Workbook</a></code>
               </dt>
-              <dd class="fsdocs-param-docs"></dd>
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  fsws
-                </span>
-                :
-                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworksheet.html">FsWorksheet</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
+              <dd class="fsdocs-return-docs"></dd>
             </dl>
           </td>
         </tr>
