@@ -3,7 +3,7 @@
 open Expecto
 open TestingUtils
 open FsSpreadsheet
-open FsSpreadsheet.ExcelIO
+open FsSpreadsheet.Net
 
 let tests_Read = testList "Read" [
     let readFromTestFile (testFile: DefaultTestObject.TestFiles) =

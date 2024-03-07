@@ -1,4 +1,4 @@
-﻿module FsSpreadsheet.ExcelIO.ZipArchiveReader
+﻿module FsSpreadsheet.Net.ZipArchiveReader
 
 open System.IO.Compression
 open System.Xml

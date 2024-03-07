@@ -2,7 +2,7 @@
 
 open Expecto
 open FsSpreadsheet
-open FsSpreadsheet.ExcelIO
+open FsSpreadsheet.Net
 open DocumentFormat.OpenXml
 open TestingUtils
 
@@ -10,7 +10,7 @@ open TestingUtils
 let transformTable =
     testList "transformTable" [
         testCase "handleNullFields" (fun () ->
-            let table = FsSpreadsheet.ExcelIO.Table.create "TestTable" (StringValue ("A1:D4")) []
+            let table = FsSpreadsheet.Net.Table.create "TestTable" (StringValue ("A1:D4")) []
             Expect.isTrue (table.TotalsRowShown = null) "Check that field of interest is None"
             FsTable.fromXlsxTable table |> ignore
             )

@@ -1,4 +1,4 @@
-﻿module FsSpreadsheet.ExcelIO.Tests
+﻿module FsSpreadsheet.Net.Tests
 open Expecto
 
 [<EntryPoint>]

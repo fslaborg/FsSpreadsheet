@@ -2,7 +2,7 @@
 
 open Expecto
 open FsSpreadsheet
-open FsSpreadsheet.ExcelIO
+open FsSpreadsheet.Net
 
 open TestingUtils
 

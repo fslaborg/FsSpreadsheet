@@ -1,7 +1,7 @@
 ﻿module Worksheet.Tests
 
 open TestingUtils
-open FsSpreadsheet.ExcelPy
+open FsSpreadsheet.Py
 open FsSpreadsheet
 open Fable.Openpyxl
 open Fable.Core.PyInterop

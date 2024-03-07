@@ -2,7 +2,7 @@
 
 open TestingUtils
 open FsSpreadsheet
-open FsSpreadsheet.ExcelPy
+open FsSpreadsheet.Py
 open Fable.Openpyxl
 
 

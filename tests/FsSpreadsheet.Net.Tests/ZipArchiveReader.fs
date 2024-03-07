@@ -2,7 +2,7 @@
 
 open TestingUtils
 open FsSpreadsheet
-open FsSpreadsheet.ExcelIO.ZipArchiveReader
+open FsSpreadsheet.Net.ZipArchiveReader
 
 let tests_Read = testList "Read" [
     let readFromTestFile (testFile: DefaultTestObject.TestFiles) =
@@ -34,7 +34,7 @@ let tests_Read = testList "Read" [
         Expect.isDefaultTestObject wb
 ]
 
-open FsSpreadsheet.ExcelIO
+open FsSpreadsheet.Net
 
 let performanceTest = testList "Performance" [
     testCase "BigFile" <| fun _ ->
