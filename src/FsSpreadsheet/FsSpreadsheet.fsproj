@@ -33,6 +33,11 @@
     <Compile Include="DSL\SheetBuilder.fs" />
     <Compile Include="DSL\WorkbookBuilder.fs" />
     <Compile Include="DSL\DSL.fs" />
+    <Compile Include="Json\Value.fs" />
+    <Compile Include="Json\Cell.fs" />
+    <Compile Include="Json\Row.fs" />
+    <Compile Include="Json\Worksheet.fs" />
+    <Compile Include="Json\Workbook.fs" />
     <None Include="..\..\docs\img\logo.png" Pack="true" PackagePath="\" />
   </ItemGroup>
 
@@ -48,11 +53,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-	<Content Include="*.fsproj; **\*.fs; **\*.fsi" PackagePath="fable\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Fable.Core" Version="4.0.0" />
+    <PackageReference Include="Thoth.Json.Core" Version="0.2.1" />
   </ItemGroup>
 
 </Project>
