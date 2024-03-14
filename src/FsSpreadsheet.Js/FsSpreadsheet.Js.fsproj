@@ -26,20 +26,20 @@
 	  <Compile Include="Worksheet.fs" />
 	  <Compile Include="Workbook.fs" />
 	  <Compile Include="Xlsx.fs" />
+    <Compile Include="Json.fs" />
 	  <Compile Include="FsExtensions.fs" />
 	</ItemGroup>
 
   <ItemGroup>   
     <PackageReference Include="Fable.Exceljs" Version="1.6.0" />
     <PackageReference Include="Fable.Promise" Version="3.2.0" />
+    <PackageReference Include="Thoth.Json.JavaScript" Version="0.1.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\FsSpreadsheet\FsSpreadsheet.fsproj" />
   </ItemGroup>
-<ItemGroup>
-	<Content Include="*.fsproj; **\*.fs; **\*.fsi" PackagePath="fable\" />
-</ItemGroup>
+<ItemGroup />
 	
 <PropertyGroup>
 	<NpmDependencies>

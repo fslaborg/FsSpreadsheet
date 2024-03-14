@@ -64,7 +64,7 @@ module FsExtensions =
             |> streamWriter.Write
             streamWriter.Flush()
 
-        member self.ToBytes(?Separator : char) =
+        member self.ToXlsxBytes(?Separator : char) =
             use memoryStream = new System.IO.MemoryStream()
             match Separator with
             | Some s -> self.ToStream(memoryStream,s)
@@ -73,8 +73,8 @@ module FsExtensions =
 
         member self.ToFile(path,?Separator : char) =
             match Separator with
-            | Some s -> self.ToBytes(s)
-            | None -> self.ToBytes()
+            | Some s -> self.ToXlsxBytes(s)
+            | None -> self.ToXlsxBytes()
             |> fun bytes -> System.IO.File.WriteAllBytes (path, bytes)
 
         static member toStream(stream : System.IO.MemoryStream,workbook : FsWorkbook,?Separator : char) =
@@ -83,12 +83,12 @@ module FsExtensions =
             | None -> workbook.ToStream(stream)
             workbook.ToStream(stream)
 
-        static member toBytes(workbook: FsWorkbook,?Separator : char) =
+        static member toXlsxBytes(workbook: FsWorkbook,?Separator : char) =
             match Separator with
-            | Some s -> workbook.ToBytes(s)
-            | None -> workbook.ToBytes()
+            | Some s -> workbook.ToXlsxBytes(s)
+            | None -> workbook.ToXlsxBytes()
 
-        static member toFile(path,workbook: FsWorkbook,?Separator : char) =
+        static member toXlsxFile(path,workbook: FsWorkbook,?Separator : char) =
             match Separator with
             | Some s -> workbook.ToFile(path,s)
             | None -> workbook.ToFile(path)
@@ -101,10 +101,10 @@ type Writer =
         | None -> workbook.ToStream(stream)
         workbook.ToStream(stream)
 
-    static member toBytes(workbook: FsWorkbook,?Separator : char) =
+    static member toXlsxBytes(workbook: FsWorkbook,?Separator : char) =
         match Separator with
-        | Some s -> workbook.ToBytes(s)
-        | None -> workbook.ToBytes()
+        | Some s -> workbook.ToXlsxBytes(s)
+        | None -> workbook.ToXlsxBytes()
 
     static member toFile(path,workbook: FsWorkbook,?Separator : char) =
         match Separator with

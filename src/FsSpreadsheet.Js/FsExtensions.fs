@@ -17,23 +17,43 @@ type FsWorkbook with
     static member fromXlsxStream(stream:System.IO.Stream) : Promise<FsWorkbook> =
         Xlsx.fromXlsxStream stream
 
-    static member fromBytes(bytes: byte []) : Promise<FsWorkbook> =
-        Xlsx.fromBytes bytes
+    static member fromXlsxBytes(bytes: byte []) : Promise<FsWorkbook> =
+        Xlsx.fromXlsxBytes bytes
 
-    static member toFile(path: string) (wb:FsWorkbook) : Promise<unit> =
-        Xlsx.toFile path wb
+    static member toXlsxFile(path: string) (wb:FsWorkbook) : Promise<unit> =
+        Xlsx.toXlsxFile path wb
 
-    static member toStream(stream: System.IO.Stream) (wb:FsWorkbook) : Promise<unit> =
-        Xlsx.toStream stream wb
+    static member toXlsxStream(stream: System.IO.Stream) (wb:FsWorkbook) : Promise<unit> =
+        Xlsx.toXlsxStream stream wb
 
-    static member toBytes(wb:FsWorkbook) : Promise<byte []> =
-        Xlsx.toBytes wb
+    static member toXlsxBytes(wb:FsWorkbook) : Promise<byte []> =
+        Xlsx.toXlsxBytes wb
 
-    member this.ToFile(path: string) : Promise<unit> =
-        FsWorkbook.toFile path this
+    member this.ToXlsxFile(path: string) : Promise<unit> =
+        FsWorkbook.toXlsxFile path this
 
-    member this.ToStream(stream: System.IO.Stream) : Promise<unit> =
-        FsWorkbook.toStream stream this
+    member this.ToXlsxStream(stream: System.IO.Stream) : Promise<unit> =
+        FsWorkbook.toXlsxStream stream this
 
-    member this.ToBytes() : Promise<byte []> =
-        FsWorkbook.toBytes this
+    member this.ToXlsxBytes() : Promise<byte []> =
+        FsWorkbook.toXlsxBytes this
+
+     
+
+    static member fromJsonString (json:string) : FsWorkbook =
+        Json.fromJsonString json
+
+    static member toJsonString (wb:FsWorkbook) : string =
+        Json.toJsonString wb
+
+    //static member fromJsonFile (path:string) : Promise<FsWorkbook> =
+    //    Json.fromJsonFile path
+
+    //static member toJsonFile (path:string) (wb:FsWorkbook) : Promise<unit> = 
+    //    Json.toJsonFile path wb
+
+    //member this.ToJsonFile(path: string) : Promise<unit> =
+    //    FsWorkbook.toJsonFile path this
+
+    member this.ToJsonString() : string =
+        FsWorkbook.toJsonString this

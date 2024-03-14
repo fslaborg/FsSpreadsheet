@@ -25,7 +25,7 @@ type Xlsx =
             return JsWorkbook.readToFsWorkbook wb
         }
 
-    static member fromBytes (bytes: byte []) : Promise<FsWorkbook> =
+    static member fromXlsxBytes (bytes: byte []) : Promise<FsWorkbook> =
         promise {
             let wb = ExcelJs.Excel.Workbook()
             let uint8 = Fable.Core.JS.Constructors.Uint8Array.Create bytes
@@ -33,15 +33,15 @@ type Xlsx =
             return JsWorkbook.readToFsWorkbook wb
         }
 
-    static member toFile (path: string) (wb:FsWorkbook) : Promise<unit> =
+    static member toXlsxFile (path: string) (wb:FsWorkbook) : Promise<unit> =
         let jswb = JsWorkbook.writeFromFsWorkbook wb
         jswb.xlsx.writeFile(path)
 
-    static member toStream (stream: System.IO.Stream) (wb:FsWorkbook) : Promise<unit> =
+    static member toXlsxStream (stream: System.IO.Stream) (wb:FsWorkbook) : Promise<unit> =
         let jswb = JsWorkbook.writeFromFsWorkbook wb
         jswb.xlsx.write(stream)
 
-    static member toBytes (wb:FsWorkbook) : Promise<byte []> =
+    static member toXlsxBytes (wb:FsWorkbook) : Promise<byte []> =
         promise {
             let jswb = JsWorkbook.writeFromFsWorkbook wb
             let buffer = jswb.xlsx.writeBuffer()

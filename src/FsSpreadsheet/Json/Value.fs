@@ -8,6 +8,7 @@ let encode (value : obj) =
     | :? int as i -> Encode.int i
     | :? float as f -> Encode.float f
     | :? bool as b -> Encode.bool b
+    | :? System.DateTime as d -> Encode.datetime d
     | _ -> Encode.nil
 
 let decode : Decoder<obj> =
@@ -16,4 +17,5 @@ let decode : Decoder<obj> =
         Decode.int |> Decode.map (fun i -> i :> obj)
         Decode.float |> Decode.map (fun f -> f :> obj)
         Decode.bool |> Decode.map (fun b -> b :> obj)
+        Decode.datetimeLocal |> Decode.map (fun d -> d :> obj)
     ]

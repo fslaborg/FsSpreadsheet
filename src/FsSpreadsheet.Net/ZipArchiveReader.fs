@@ -329,7 +329,7 @@ module FsWorkbook =
         use zip = new ZipArchive(stream)
         fromZipArchive zip
 
-    let fromBytes (bytes : byte []) = 
+    let fromXlsxBytes (bytes : byte []) = 
         use ms = new MemoryStream(bytes)
         fromStream ms
 
