@@ -1,8 +1,8 @@
-﻿namespace FsSpreadsheet.ExcelPy
+﻿namespace FsSpreadsheet.Py
 
 
 open FsSpreadsheet
-open FsSpreadsheet.ExcelPy
+open FsSpreadsheet.Py
 open Fable.Core
 open Fable.Openpyxl
 

@@ -1,4 +1,21 @@
-### 5.2.0+bbba6d4 (Released 2024-2-23)
+### 6.0.1+360ee6f (Released 2024-3-7)
+* Additions:
+    * Hotfix because of erroneous namespace names
+    * [[#c6aa628](https://github.com/CSBiology/FsSpreadsheet/commit/c6aa6281c0adbc7436227f99db69b19aa25d8707)] bump to 6.0.0
+    * [[#c7b4972](https://github.com/CSBiology/FsSpreadsheet/commit/c7b4972ce5921c259d18bbc7a4ee8adc7139cdca)] updated namespace names according to project name unification
+    * [[#360ee6f](https://github.com/CSBiology/FsSpreadsheet/commit/360ee6f12867663c4984d8d730389a830d99bc2e)] add minimal documentation
+
+### 6.0.0+b85ca85 (Released 2024-3-7)
+* Additions:
+    * Added release for python
+    * Renamed xlsx io packages
+    * [[#9572480](https://github.com/CSBiology/FsSpreadsheet/commit/9572480de9ae43591714e0cff6ee92a00b0541b0)] rename excelpy folder
+    * [[#491ed1e](https://github.com/CSBiology/FsSpreadsheet/commit/491ed1ee1bc3cafdfc4538e98dd965aaf8a3dad0)] update CI and add Python build targets
+    * [[#9525665](https://github.com/CSBiology/FsSpreadsheet/commit/95256651d8930ffd7645edeacf2cd731a64ab276)] update readme with developer info
+    * [[#181fc70](https://github.com/CSBiology/FsSpreadsheet/commit/181fc703db651864d84295648a1db9fa3bae1e19)] unify test project names
+    * [[#b85ca85](https://github.com/CSBiology/FsSpreadsheet/commit/b85ca85ca290076d21ae6af01ab3aab0cd52205a)] small changes to reduce warnings
+
+### 5.2.0+c6f526ad (Released 2024-2-23)
 * Additions:
     * [[#bbba6d4](https://github.com/CSBiology/FsSpreadsheet/commit/bbba6d4ab819900f5188af3b5663d4744061991a)] start setup of python package
     * [[#80dd1b6](https://github.com/CSBiology/FsSpreadsheet/commit/80dd1b608e46e7cda7646ea7c39619c0c7738f8e)] add tests for python xlsx io

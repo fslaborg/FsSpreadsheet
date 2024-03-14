@@ -31,9 +31,9 @@ let spreadsheet = dslTree.Value.Parse()
 
 ```fsharp
 
-#r "nuget: FsSpreadsheet.ExcelIO"
+#r "nuget: FsSpreadsheet.Net"
 
-open FsSpreadsheet.ExcelIO
+open FsSpreadsheet.Net
 
 spreadsheet.ToFile(excelFilePath)
 

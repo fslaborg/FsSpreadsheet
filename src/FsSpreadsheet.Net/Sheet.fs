@@ -1,4 +1,4 @@
-﻿namespace FsSpreadsheet.ExcelIO
+﻿namespace FsSpreadsheet.Net
 
 open DocumentFormat.OpenXml
 open DocumentFormat.OpenXml.Spreadsheet

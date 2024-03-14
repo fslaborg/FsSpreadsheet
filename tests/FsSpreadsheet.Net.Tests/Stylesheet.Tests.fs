@@ -2,7 +2,7 @@
 
 open Expecto
 open FsSpreadsheet
-open FsSpreadsheet.ExcelIO
+open FsSpreadsheet.Net
 open DocumentFormat.OpenXml.Spreadsheet
 open DocumentFormat.OpenXml.Packaging
 open DocumentFormat.OpenXml

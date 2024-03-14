@@ -1,8 +1,8 @@
 ﻿[<AutoOpenAttribute>]
-module FsSpreadsheet.ExcelPy.FsSpreadsheet
+module FsSpreadsheet.Py.FsSpreadsheet
 
 open FsSpreadsheet
-open FsSpreadsheet.ExcelPy
+open FsSpreadsheet.Py
 open Fable.Core
 
 // This is mainly used for fsharp based access in a fable environment. 

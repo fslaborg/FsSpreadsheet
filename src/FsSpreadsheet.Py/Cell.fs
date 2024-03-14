@@ -1,4 +1,4 @@
-﻿namespace FsSpreadsheet.ExcelPy
+﻿namespace FsSpreadsheet.Py
 
 module PyCell =
 

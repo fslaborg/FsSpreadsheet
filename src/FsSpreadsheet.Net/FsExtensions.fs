@@ -1,4 +1,4 @@
-﻿namespace FsSpreadsheet.ExcelIO
+﻿namespace FsSpreadsheet.Net
 
 open DocumentFormat.OpenXml
 open DocumentFormat.OpenXml.Spreadsheet
@@ -368,15 +368,15 @@ module FsExtensions =
         /// <summary>
         /// Writes the FsWorkbook into a binary file at the given path.
         /// </summary>
-        member self.ToFile(path) =
+        member self.ToXlsxFile(path) =
             self.ToBytes()
             |> fun bytes -> File.WriteAllBytes (path, bytes)
 
         /// <summary>
         /// Writes an FsWorkbook into a binary file at the given path.
         /// </summary>
-        static member toFile path (workbook : FsWorkbook) =
-            workbook.ToFile(path)
+        static member toXlsxFile path (workbook : FsWorkbook) =
+            workbook.ToXlsxFile(path)
 
 
 type Writer =
@@ -399,4 +399,4 @@ type Writer =
     /// Writes an FsWorkbook into a binary file at the given path.
     /// </summary>
     static member toFile(path,workbook: FsWorkbook) =
-        workbook.ToFile(path)
+        workbook.ToXlsxFile(path)

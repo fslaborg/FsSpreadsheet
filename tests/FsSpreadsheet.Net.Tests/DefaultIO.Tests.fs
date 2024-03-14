@@ -3,7 +3,7 @@
 open Expecto
 open TestingUtils
 open FsSpreadsheet
-open FsSpreadsheet.ExcelIO
+open FsSpreadsheet.Net
 
 let tests_Read = testList "Read" [
     let readFromTestFile (testFile: DefaultTestObject.TestFiles) =
@@ -39,7 +39,7 @@ let private tests_Write = testList "Write" [
     testCase "default" <| fun _ ->
         let wb = DefaultTestObject.defaultTestObject()
         let p = DefaultTestObject.WriteTestFiles.FsSpreadsheetNET.asRelativePath
-        wb.ToFile(p)
+        wb.ToXlsxFile(p)
         let wb_read = FsWorkbook.fromXlsxFile p
         Expect.isDefaultTestObject wb_read
 

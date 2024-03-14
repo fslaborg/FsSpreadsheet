@@ -3,19 +3,19 @@ open System.IO
 Directory.GetCurrentDirectory()
 //File.Copy("src/FsSpreadsheet/bin/Debug/netstandard2.0/FsSpreadsheet.dll", "src/FsSpreadsheet/bin/Debug/netstandard2.0/FsSpreadsheet_Copy.dll", true)
 //File.Copy("src/FsSpreadsheet.CsvIO/bin/Debug/netstandard2.0/FsSpreadsheet.CsvIO.dll", "src/FsSpreadsheet.CsvIO/bin/Debug/netstandard2.0/FsSpreadsheet.CsvIO_Copy.dll", true)
-//File.Copy("src/FsSpreadsheet.ExcelIO/bin/Debug/netstandard2.0/FsSpreadsheet.ExcelIO.dll", "src/FsSpreadsheet.ExcelIO/bin/Debug/netstandard2.0/FsSpreadsheet.ExcelIO_Copy.dll", true)
+//File.Copy("src/FsSpreadsheet.Net/bin/Debug/netstandard2.0/FsSpreadsheet.Net.dll", "src/FsSpreadsheet.Net/bin/Debug/netstandard2.0/FsSpreadsheet.Net_Copy.dll", true)
 
 #I "src/FsSpreadsheet/bin/Debug/netstandard2.0/"
 #r "FsSpreadsheet.dll"
-#I "src/FsSpreadsheet.ExcelIO/bin/Debug/netstandard2.0/"
-#r "FsSpreadsheet.ExcelIO.dll"
+#I "src/FsSpreadsheet.Net/bin/Debug/netstandard2.0/"
+#r "FsSpreadsheet.Net.dll"
 
 #r "nuget: DocumentFormat.OpenXml"
 #r "nuget: Fable.Core, 4.0.0"
 
 
 open FsSpreadsheet
-open FsSpreadsheet.ExcelIO
+open FsSpreadsheet.Net
 open FsSpreadsheet.DSL
 
 open DocumentFormat.OpenXml
@@ -243,7 +243,7 @@ ws.CellCollection.RemoveCellAt(1, 1)
 
 //// inb4 unit tests
 
-//let unitTestFilePath = @"C:\Repos\CSBiology\FsSpreadsheet\tests\FsSpreadsheet.ExcelIO.Tests\data\testUnit.xlsx"
+//let unitTestFilePath = @"C:\Repos\CSBiology\FsSpreadsheet\tests\FsSpreadsheet.Net.Tests\data\testUnit.xlsx"
 //let sr = new StreamReader(unitTestFilePath)
 //let fsWorkbookFromStream = FsWorkbook.fromXlsxStream sr.BaseStream
 //sr.Close()

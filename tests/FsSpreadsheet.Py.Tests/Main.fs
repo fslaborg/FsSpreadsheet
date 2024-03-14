@@ -1,4 +1,4 @@
-﻿module FsSpreadsheet.ExcelPy.Tests
+﻿module FsSpreadsheet.Py.Tests
 
 open Fable.Pyxpecto
 open TestingUtils

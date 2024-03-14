@@ -1,5 +1,5 @@
 ﻿open FsSpreadsheet
-open FsSpreadsheet.ExcelIO
+open FsSpreadsheet.Net
 
 open ClosedXML.Excel
 
