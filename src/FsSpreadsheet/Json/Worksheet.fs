@@ -13,6 +13,7 @@ let rows = "rows"
 let tables = "tables"
 
 let encode (sheet:FsWorksheet) =
+    sheet.RescanRows()
     Encode.object [
         name, Encode.string sheet.Name
         if Seq.isEmpty sheet.Tables |> not then        
@@ -28,11 +29,13 @@ let decode : Decoder<FsWorksheet> =
         let rs = builder.Required.Field rows (Decode.seq Row.decode)
         let sheet = new FsWorksheet(n)
         rs
-        |> Seq.iteri (fun rowI cells -> 
-            let r = sheet.Row(rowI + 1)
+        |> Seq.iter (fun (rowI,cells) -> 
+            let r = sheet.Row(rowI)
             cells 
-            |> Seq.iteri (fun coli cell ->
-                r[coli + 1].Value <- cell.Value
+            |> Seq.iter (fun cell ->
+                let c = r[cell.ColumnNumber]
+                c.Value <- cell.Value
+                c.DataType <- cell.DataType
             )
         )
         match ts with

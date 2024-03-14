@@ -1,11 +1,8 @@
 ﻿module Stylesheet
 
-open Expecto
-open FsSpreadsheet
+open TestingUtils
 open FsSpreadsheet.Net
 open DocumentFormat.OpenXml.Spreadsheet
-open DocumentFormat.OpenXml.Packaging
-open DocumentFormat.OpenXml
 
 let private tests_NumberingFormat = testList "NumberingFormat" [
     testList "isDateTime" [
@@ -29,7 +26,6 @@ let private tests_NumberingFormat = testList "NumberingFormat" [
     ]
 ]
 
-[<Tests>]
 let main = testList "Stylesheet" [
     tests_NumberingFormat
 ]

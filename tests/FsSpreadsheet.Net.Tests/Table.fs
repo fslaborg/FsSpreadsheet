@@ -1,6 +1,5 @@
-﻿module FsTableTests
+﻿module Table.Tests
 
-open Expecto
 open FsSpreadsheet
 open FsSpreadsheet.Net
 open DocumentFormat.OpenXml
@@ -69,7 +68,6 @@ let transformTable =
     ]
     
 
-[<Tests>]
 let main =
     testList "FsTable" [
         transformTable

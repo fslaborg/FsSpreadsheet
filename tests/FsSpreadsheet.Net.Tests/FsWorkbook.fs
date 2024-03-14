@@ -1,6 +1,4 @@
-﻿module FsWorkbookTests
-
-open Expecto
+﻿module FsWorkbook.Tests
 open FsSpreadsheet
 open FsSpreadsheet.Net
 
@@ -72,19 +70,17 @@ let performance =
     testList "Performace" [
         testCase "ReadBigFile" (fun () -> 
             let sw = Stopwatch()        
-            let p = "./TestFiles/BigFile.xlsx"
-            sw.Start()
-            let wb = FsWorkbook.fromXlsxFile(p)
+            sw.Start()          
+            let wb = FsWorkbook.fromXlsxFile(DefaultTestObject.BigFile.asRelativePath)
             sw.Stop()
             let elapsed = sw.Elapsed.Milliseconds
-            Expect.isLessThan elapsed 2000 $"Elapsed time should be less than 2000ms, but was {elapsed}ms"
+            Expect.isTrue (elapsed < 2000) $"Elapsed time should be less than 2000ms, but was {elapsed}ms"
             Expect.equal (wb.GetWorksheetAt(1).Rows.Count) 153991 "Row count should be 153991"
 
         )
     ]
 
-[<Tests>]
-let tests =
+let main =
     testList "FsWorkbook" [
         writeAndReadBytes
         performance

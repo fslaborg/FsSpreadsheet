@@ -1,6 +1,5 @@
 ﻿module DefaultIO
 
-open Expecto
 open TestingUtils
 open FsSpreadsheet
 open FsSpreadsheet.Net
@@ -45,7 +44,6 @@ let private tests_Write = testList "Write" [
 
 ]
 
-[<Tests>]
 let main = testList "DefaultIO" [
     tests_Read
     tests_Write

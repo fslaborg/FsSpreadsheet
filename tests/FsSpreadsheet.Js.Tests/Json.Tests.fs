@@ -12,9 +12,6 @@ let defaultTestObject =
             let s = dto.ToJsonString()
             let dto2 = FsWorkbook.fromJsonString(s)
             TestingUtils.Expect.isDefaultTestObject dto2
-
-        testCase "Should Fail" <| fun _ ->
-            Expect.isTrue false "is not the expected DataType.Boolean"
     ]
 
 let main = testList "Json" [

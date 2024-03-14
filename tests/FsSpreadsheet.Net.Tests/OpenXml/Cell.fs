@@ -1,6 +1,6 @@
-﻿module Cell
+﻿module Cell.Tests
 
-open Expecto
+open TestingUtils
 open FsSpreadsheet.Net
 open DocumentFormat.OpenXml
 
@@ -17,7 +17,6 @@ let cbsi1Fox = wsp1Fox.Worksheet.Descendants<Spreadsheet.Cell>() |> Array.ofSeq
 let nullCell = Cell.create (Some Spreadsheet.CellValues.Error) "A1" (Cell.CellValue.create "")
 nullCell.CellValue.Text <- null
 
-[<Tests>]
 let cellTests =
     testList "Cell" [
         testList "includeSharedStringValue" [
@@ -29,3 +28,5 @@ let cellTests =
                 Expect.notEqual cissv1_0.CellValue.Text cissvNull.CellValue.Text "Does not differ"
         ]
     ]
+
+let main = cellTests
