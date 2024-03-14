@@ -11,6 +11,7 @@ let all =
             Worksheet.Tests.main
             Workbook.Tests.main
             DefaultIO.Tests.main
+            Json.Tests.main
         ]
 
 //// This is possibly the most magic used to make this work. 

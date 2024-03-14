@@ -12,6 +12,7 @@
     <Compile Include="Worksheet.Tests.fs" />
     <Compile Include="Workbook.Tests.fs" />
     <Compile Include="DefaultIO.Tests.fs" />
+    <Compile Include="Json.Tests.fs" />
     <Compile Include="Main.fs" />
   </ItemGroup>
 	<ItemGroup>

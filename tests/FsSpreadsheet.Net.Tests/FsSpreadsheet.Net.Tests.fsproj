@@ -18,6 +18,7 @@
     <Compile Include="OpenXml\Spreadsheet.fs" />
     <Compile Include="Table.fs" />
     <Compile Include="FsWorkbook.fs" />
+    <Compile Include="Json.Tests.fs" />
     <Compile Include="Main.fs" />
   </ItemGroup>
 

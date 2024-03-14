@@ -41,7 +41,7 @@ let private tests_Write = testList "Write" [
     testCase "default" <|  fun _ ->
         let wb = DefaultTestObject.defaultTestObject()
         let p = DefaultTestObject.WriteTestFiles.FsSpreadsheetPY.asRelativePathNode
-        do FsWorkbook.toFile p wb
+        do FsWorkbook.toXlsxFile p wb
         let wb_read = FsWorkbook.fromXlsxFile p
         Expect.isDefaultTestObject wb_read
     
