@@ -91,7 +91,7 @@
 <pre class="fssnip highlighted"><code lang="fsharp"><span class="pp">#r</span> <span class="s">&quot;nuget: FsSpreadsheet.Net&quot;</span>
 
 <span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="id">FsSpreadsheet</span>
-<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 2)" onmouseover="showTip(event, 'fs1', 2)" class="id">FsSpreadsheet</span><span class="pn">.</span><span class="id">Net</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 2)" onmouseover="showTip(event, 'fs1', 2)" class="id">FsSpreadsheet</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs2', 3)" onmouseover="showTip(event, 'fs2', 3)" class="id">Net</span>
 </code></pre>
 <h3><a name="Javascript" class="anchor" href="#Javascript">Javascript</a></h3>
 <table class="pre"><tr><td class="snippet"><pre class="fssnip"><code lang="shell">npm install @fslab/fsspreadsheet
@@ -101,16 +101,16 @@
 </code></pre></td></tr></table>
 <h2><a name="Usage_IO" class="anchor" href="#Usage_IO">Usage_IO</a></h2>
 <h3><a name="F-1" class="anchor" href="#F-1">F#</a></h3>
-<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 3)" onmouseover="showTip(event, 'fs1', 3)" class="id">FsSpreadsheet</span>
-<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 4)" onmouseover="showTip(event, 'fs1', 4)" class="id">FsSpreadsheet</span><span class="pn">.</span><span class="id">Net</span>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 4)" onmouseover="showTip(event, 'fs1', 4)" class="id">FsSpreadsheet</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 5)" onmouseover="showTip(event, 'fs1', 5)" class="id">FsSpreadsheet</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs2', 6)" onmouseover="showTip(event, 'fs2', 6)" class="id">Net</span>
 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs2', 5)" onmouseover="showTip(event, 'fs2', 5)" class="id">path</span> <span class="o">=</span> <span class="s">&quot;path/to/spreadsheet.xlsx&quot;</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs3', 7)" onmouseover="showTip(event, 'fs3', 7)" class="id">path</span> <span class="o">=</span> <span class="s">&quot;path/to/spreadsheet.xlsx&quot;</span>
 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs3', 6)" onmouseover="showTip(event, 'fs3', 6)" class="id">wb</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 7)" onmouseover="showTip(event, 'fs4', 7)" class="id">FsWorkbook</span><span class="pn">.</span><span class="id">fromXlsxFile</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs2', 8)" onmouseover="showTip(event, 'fs2', 8)" class="id">path</span><span class="pn">)</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs4', 8)" onmouseover="showTip(event, 'fs4', 8)" class="d">wb</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs5', 9)" onmouseover="showTip(event, 'fs5', 9)" class="d">FsWorkbook</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs6', 10)" onmouseover="showTip(event, 'fs6', 10)" class="id">fromXlsxFile</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs3', 11)" onmouseover="showTip(event, 'fs3', 11)" class="id">path</span><span class="pn">)</span>
 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs5', 9)" onmouseover="showTip(event, 'fs5', 9)" class="id">newPath</span> <span class="o">=</span> <span class="s">&quot;path/to/new/spreadsheet.xlsx&quot;</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs7', 12)" onmouseover="showTip(event, 'fs7', 12)" class="id">newPath</span> <span class="o">=</span> <span class="s">&quot;path/to/new/spreadsheet.xlsx&quot;</span>
 
-<span onmouseout="hideTip(event, 'fs3', 10)" onmouseover="showTip(event, 'fs3', 10)" class="id">wb</span><span class="pn">.</span><span class="id">ToXlsxFile</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs5', 11)" onmouseover="showTip(event, 'fs5', 11)" class="id">newPath</span><span class="pn">)</span>
+<span onmouseout="hideTip(event, 'fs4', 13)" onmouseover="showTip(event, 'fs4', 13)" class="d">wb</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs8', 14)" onmouseover="showTip(event, 'fs8', 14)" class="id">ToXlsxFile</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs7', 15)" onmouseover="showTip(event, 'fs7', 15)" class="id">newPath</span><span class="pn">)</span>
 </code></pre>
 <h3><a name="Javascript-1" class="anchor" href="#Javascript-1">Javascript</a></h3>
 <table class="pre"><tr><td class="snippet"><pre class="fssnip highlighted"><code lang="javascript">import { Xlsx } from <span class="s">'@fslab/fsspreadsheet/Xlsx.js'</span>;
@@ -139,9 +139,10 @@ Xlsx.to_file(newPath,wb)
             </div>
         </div>
         <div class="fsdocs-tip" id="fs1">namespace FsSpreadsheet</div>
-<div class="fsdocs-tip" id="fs2">val path: string</div>
-<div class="fsdocs-tip" id="fs3">val wb: &#39;a</div>
-<div class="fsdocs-tip" id="fs4">Multiple items<br />type FsWorkbook =
+<div class="fsdocs-tip" id="fs2">namespace FsSpreadsheet.Net</div>
+<div class="fsdocs-tip" id="fs3">val path: string</div>
+<div class="fsdocs-tip" id="fs4">val wb: FsWorkbook</div>
+<div class="fsdocs-tip" id="fs5">Multiple items<br />type FsWorkbook =
   interface IDisposable
   new: unit -&gt; FsWorkbook
   member AddWorksheet: sheet: FsWorksheet -&gt; unit
@@ -155,7 +156,9 @@ Xlsx.to_file(newPath,wb)
   ...<br /><em>&lt;summary&gt;
  Creates an empty FsWorkbook.
  &lt;/summary&gt;</em><br /><br />--------------------<br />new: unit -&gt; FsWorkbook</div>
-<div class="fsdocs-tip" id="fs5">val newPath: string</div>
+<div class="fsdocs-tip" id="fs6">static member FsWorkbook.fromXlsxFile: filePath: string -&gt; FsWorkbook</div>
+<div class="fsdocs-tip" id="fs7">val newPath: string</div>
+<div class="fsdocs-tip" id="fs8">member FsWorkbook.ToXlsxFile: path: string -&gt; unit</div>
 
     </div>
 
