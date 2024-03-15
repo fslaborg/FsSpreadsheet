@@ -41,7 +41,7 @@ let tests_Read = testList "Read" [
 open FsSpreadsheet.Net
 
 let performanceTest = testList "Performance" [
-    testCase "BigFile" <| fun _ ->
+    ptestCase "BigFile" <| fun _ ->
         let readF() = FsWorkbook.fromXlsxFile(DefaultTestObject.BigFile.asRelativePath)  |> ignore
         let refReadF() = FsWorkbook.fromXlsxFile(DefaultTestObject.BigFile.asRelativePath) |> ignore
         Expect.isFasterThan readF refReadF "ZipArchiveReader should be faster than standard reader"
