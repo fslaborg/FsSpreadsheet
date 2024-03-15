@@ -325,14 +325,14 @@ module FsWorkbook =
     let fromZipArchive (wb : ZipArchive) = 
         parseWorkbook wb
 
-    let fromStream (stream : Stream) = 
+    let fromXlsxStream (stream : Stream) = 
         use zip = new ZipArchive(stream)
         fromZipArchive zip
 
     let fromXlsxBytes (bytes : byte []) = 
         use ms = new MemoryStream(bytes)
-        fromStream ms
+        fromXlsxStream ms
 
-    let fromFile (path : string) =
+    let fromXlsxFile (path : string) =
        use fs = File.OpenRead(path)
-       fromStream fs
+       fromXlsxStream fs

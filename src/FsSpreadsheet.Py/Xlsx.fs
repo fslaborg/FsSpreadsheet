@@ -27,7 +27,7 @@ type Xlsx =
         PyWorkbook.fromFsWorkbook wb
         |> fun wb -> Xlsx.writeFile(wb,path)
 
-    //static member toStream(stream: System.IO.Stream) (wb:FsWorkbook) : Promise<unit> =
+    //static member toXlsxStream(stream: System.IO.Stream) (wb:FsWorkbook) : Promise<unit> =
     //    PyWorkbook.fromFsWorkbook wb
     //    |> fun wb -> Xlsx.writeBuffer(wb,stream)
 

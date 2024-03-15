@@ -20,7 +20,7 @@ type FsWorkbook with
     static member toXlsxFile(path: string) (wb:FsWorkbook) : unit =
         Xlsx.toXlsxFile path wb
 
-    //static member toStream(stream: System.IO.Stream) (wb:FsWorkbook) : Promise<unit> =
+    //static member toXlsxStream(stream: System.IO.Stream) (wb:FsWorkbook) : Promise<unit> =
     //    PyWorkbook.fromFsWorkbook wb
     //    |> fun wb -> Xlsx.writeBuffer(wb,stream)
 
@@ -30,8 +30,8 @@ type FsWorkbook with
     member this.ToXlsxFile(path: string) : unit =
         FsWorkbook.toXlsxFile path this
 
-    //member this.ToStream(stream: System.IO.Stream) : unit =
-    //    FsWorkbook.toStream stream this
+    //member this.ToXlsxStream(stream: System.IO.Stream) : unit =
+    //    FsWorkbook.toXlsxStream stream this
 
     member this.ToXlsxBytes() : byte [] =
         FsWorkbook.toXlsxBytes this

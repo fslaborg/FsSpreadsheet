@@ -8,12 +8,12 @@ let tests_Read = testList "Read" [
     let readFromTestFile (testFile: DefaultTestObject.TestFiles) =
         try 
             let p = testFile.asRelativePath
-            FsWorkbook.fromFile(p)
+            FsWorkbook.fromXlsxFile(p)
         with
         | err -> 
             printfn "Could not read file from default path: %s" err.Message
             let p = $"{DefaultTestObject.testFolder}/{testFile.asFileName}"
-            FsWorkbook.fromFile(p)
+            FsWorkbook.fromXlsxFile(p)
 
     testCase "FsCell equality" <| fun _ ->
         let c1 = FsCell(1, DataType.Number, FsAddress("A2"))
@@ -42,7 +42,7 @@ open FsSpreadsheet.Net
 
 let performanceTest = testList "Performance" [
     testCase "BigFile" <| fun _ ->
-        let readF() = FsWorkbook.fromFile(DefaultTestObject.BigFile.asRelativePath)  |> ignore
+        let readF() = FsWorkbook.fromXlsxFile(DefaultTestObject.BigFile.asRelativePath)  |> ignore
         let refReadF() = FsWorkbook.fromXlsxFile(DefaultTestObject.BigFile.asRelativePath) |> ignore
         Expect.isFasterThan readF refReadF "ZipArchiveReader should be faster than standard reader"
         //Expect.equal (wb.GetWorksheetAt(1).Rows.Count) 153991 "Row count should be equal"
