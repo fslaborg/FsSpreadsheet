@@ -18,12 +18,20 @@ type Xlsx =
             return fswb
         }
 
+    [<System.Obsolete("Use fromXlsxFile instead")>]
+    static member fromFile (path:string) : Promise<FsWorkbook> =
+        Xlsx.fromXlsxFile path
+
     static member fromXlsxStream (stream:System.IO.Stream) : Promise<FsWorkbook> =
         promise {
             let wb = ExcelJs.Excel.Workbook()
             do! wb.xlsx.read stream
             return JsWorkbook.readToFsWorkbook wb
         }
+
+    [<System.Obsolete("Use fromXlsxStream instead")>]
+    static member fromStream (stream:System.IO.Stream) : Promise<FsWorkbook> =
+        Xlsx.fromXlsxStream stream
 
     static member fromXlsxBytes (bytes: byte []) : Promise<FsWorkbook> =
         promise {
@@ -33,13 +41,25 @@ type Xlsx =
             return JsWorkbook.readToFsWorkbook wb
         }
 
+    [<System.Obsolete("Use fromXlsxBytes instead")>]
+    static member fromBytes (bytes: byte []) : Promise<FsWorkbook> =
+        Xlsx.fromXlsxBytes bytes
+
     static member toXlsxFile (path: string) (wb:FsWorkbook) : Promise<unit> =
         let jswb = JsWorkbook.writeFromFsWorkbook wb
         jswb.xlsx.writeFile(path)
 
+    [<System.Obsolete("Use toXlsxFile instead")>]
+    static member toFile (path: string) (wb:FsWorkbook) : Promise<unit> =
+        Xlsx.toXlsxFile path wb
+
     static member toXlsxStream (stream: System.IO.Stream) (wb:FsWorkbook) : Promise<unit> =
         let jswb = JsWorkbook.writeFromFsWorkbook wb
         jswb.xlsx.write(stream)
+
+    [<System.Obsolete("Use toXlsxStream instead")>]
+    static member toStream (stream: System.IO.Stream) (wb:FsWorkbook) : Promise<unit> =
+        Xlsx.toXlsxStream stream wb
 
     static member toXlsxBytes (wb:FsWorkbook) : Promise<byte []> =
         promise {
@@ -48,4 +68,7 @@ type Xlsx =
             return !!buffer
         }
             
+    [<System.Obsolete("Use toXlsxBytes instead")>]
+    static member toBytes (wb:FsWorkbook) : Promise<byte []> =
+        Xlsx.toXlsxBytes wb
             

@@ -319,6 +319,14 @@ module FsExtensions =
             let bytes = File.ReadAllBytes filePath
             FsWorkbook.fromXlsxBytes bytes
 
+        /// <summary>
+        /// Takes the path to an Xlsx file and returns the FsWorkbook based on its content.
+        /// </summary>
+        [<System.Obsolete("Use fromXlsxFile")>]
+        static member fromFile (filePath : string) =
+            let bytes = File.ReadAllBytes filePath
+            FsWorkbook.fromXlsxBytes bytes
+
         static member fromJsonString (json : string) =
             match Thoth.Json.Newtonsoft.Decode.fromString FsSpreadsheet.Json.Workbook.decode json with
             | Ok wb -> wb
@@ -382,9 +390,24 @@ module FsExtensions =
             |> fun bytes -> File.WriteAllBytes (path, bytes)
 
         /// <summary>
+        /// Writes the FsWorkbook into a binary file at the given path.
+        /// </summary>
+        [<System.Obsolete("Use ToXlsxFile")>]
+        member self.ToFile(path) =
+            self.ToXlsxBytes()
+            |> fun bytes -> File.WriteAllBytes (path, bytes)
+
+        /// <summary>
         /// Writes an FsWorkbook into a binary file at the given path.
         /// </summary>
         static member toXlsxFile path (workbook : FsWorkbook) =
+            workbook.ToXlsxFile(path)
+
+        /// <summary>
+        /// Takes the path to an Xlsx file and returns the FsWorkbook based on its content.
+        /// </summary>
+        [<System.Obsolete("Use toXlsxFile")>]
+        static member toFile (filePath : string) path (workbook : FsWorkbook) =
             workbook.ToXlsxFile(path)
 
         static member toJsonString (workbook : FsWorkbook, ?spaces) =
@@ -426,6 +449,12 @@ type Writer =
     static member toXlsxFile(path,workbook: FsWorkbook) =
         workbook.ToXlsxFile(path)
 
+    /// <summary>
+    /// Writes an FsWorkbook into a binary file at the given path.
+    /// </summary>
+    [<System.Obsolete("Use toXlsxFile")>]
+    static member toFile(path,workbook: FsWorkbook) =
+        workbook.ToXlsxFile(path)
 
     static member toJsonString (workbook : FsWorkbook, ?spaces) =
         FsWorkbook.toJsonString(workbook, ?spaces = spaces)
