@@ -327,12 +327,30 @@ module FsExtensions =
             let bytes = File.ReadAllBytes filePath
             FsWorkbook.fromXlsxBytes bytes
 
+        /// <summary>
+        /// Takes a json string and returns the FsWorkbook based on its content.
+        /// </summary>
+        static member tryFromJsonString (json : string) =
+            Thoth.Json.Newtonsoft.Decode.fromString FsSpreadsheet.Json.Workbook.decode json
+
+        /// <summary>
+        /// Takes a json string and returns the FsWorkbook based on its content.
+        /// </summary>
         static member fromJsonString (json : string) =
-            match Thoth.Json.Newtonsoft.Decode.fromString FsSpreadsheet.Json.Workbook.decode json with
+            match FsWorkbook.tryFromJsonString json with
             | Ok wb -> wb
             | Error e -> failwithf "Could not deserialize json Workbook: \n%s" e
             
-            
+        /// <summary>
+        /// Takes the path to an json file and returns the FsWorkbook based on its content.
+        /// </summary>
+        static member tryFromJsonFile (filePath : string) =
+            let json = File.ReadAllText filePath
+            FsWorkbook.tryFromJsonString json
+
+        /// <summary>
+        /// Takes the path to an json file and returns the FsWorkbook based on its content.
+        /// </summary>
         static member fromJsonFile (filePath : string) =
             let json = File.ReadAllText filePath
             FsWorkbook.fromJsonString json

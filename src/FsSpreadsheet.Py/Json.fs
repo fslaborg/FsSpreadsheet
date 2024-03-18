@@ -15,8 +15,11 @@ open Thoth.Json.Python
 [<AttachMembers>]
 type Json =
     
+    static member tryFromJsonString (json:string) : Result<FsWorkbook, string> =
+        Decode.fromString FsSpreadsheet.Json.Workbook.decode json
+
     static member fromJsonString (json:string) : FsWorkbook =
-        match Decode.fromString FsSpreadsheet.Json.Workbook.decode json with
+        match Json.tryFromJsonString json with
         | Ok wb -> wb
         | Error e -> failwithf "Could not deserialize json Workbook: \n%s" e
         

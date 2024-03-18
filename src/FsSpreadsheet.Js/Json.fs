@@ -16,11 +16,16 @@ open Thoth.Json.JavaScript
 [<AttachMembers>]
 type Json =
     
-    static member fromJsonString (json:string) : FsWorkbook =
+    static member tryFromJsonString (json:string) : Result<FsWorkbook, string> =
         match Thoth.Json.JavaScript.Decode.fromString FsSpreadsheet.Json.Workbook.decode json with
+        | Ok wb -> Ok wb
+        | Error e -> Error e
+
+    static member fromJsonString (json:string) : FsWorkbook =
+        match Json.tryFromJsonString json with
         | Ok wb -> wb
-        | Error e -> failwithf "Could not deserialize json Workbook: \n%s" e
-        
+        | Error e -> failwithf "Could not deserialize json Workbook: \n%s" e    
+
     static member toJsonString (wb:FsWorkbook, ?spaces) : string =
         let spaces = defaultArg spaces 2
         FsSpreadsheet.Json.Workbook.encode wb
