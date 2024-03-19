@@ -1,3 +1,15 @@
+### 6.1.0+ed6795c (Released 2024-3-19)
+* Additions:
+    * [[#3f1fb55](https://github.com/CSBiology/FsSpreadsheet/commit/3f1fb55e75d2ea56dec8787f0e6dfceccfd19ef5)] start working on json writing
+    * [[#13dbca2](https://github.com/CSBiology/FsSpreadsheet/commit/13dbca29d9082d91a47df04c468c89fe1315e405)] finish first version of json io functions
+    * [[#514c204](https://github.com/CSBiology/FsSpreadsheet/commit/514c20456a6b49c2c66d35533a728d60e7d2faa2)] add json io tests
+    * [[#02baf70](https://github.com/CSBiology/FsSpreadsheet/commit/02baf70c27534b670d1c1d41d744c8ecb0adecec)] naming adjustments and docs update
+    * [[#a6c882c](https://github.com/CSBiology/FsSpreadsheet/commit/a6c882ca9ee2b0155aa9894599900f52488e48ac)] set ziparchivereader performance test to pending
+    * [[#9ceda1e](https://github.com/CSBiology/FsSpreadsheet/commit/9ceda1e6ba9705b13d4a9f65f90eb89eeeb8cc27)] add old xlsx IO functions with deprecation attribute
+    * [[#5e71fb9](https://github.com/CSBiology/FsSpreadsheet/commit/5e71fb9bbd549e2a06371d10e9213a740ec096c4)] add try json parse functions
+* Bugfixes:
+    * [[#1586c5a](https://github.com/CSBiology/FsSpreadsheet/commit/1586c5a04bd35dfb0532801bcde2b1e2ca714a8b)] fix json io datetime issues
+
 ### 6.0.1+360ee6f (Released 2024-3-7)
 * Additions:
     * Hotfix because of erroneous namespace names
