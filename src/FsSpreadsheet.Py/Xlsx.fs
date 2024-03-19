@@ -19,18 +19,18 @@ type Xlsx =
         Xlsx.load stream
         |> PyWorkbook.toFsWorkbook
 
-    static member fromBytes(bytes: byte []) : FsWorkbook =
+    static member fromXlsxBytes(bytes: byte []) : FsWorkbook =
         Xlsx.read bytes
         |> PyWorkbook.toFsWorkbook
 
-    static member toFile(path: string) (wb:FsWorkbook) : unit =
+    static member toXlsxFile(path: string) (wb:FsWorkbook) : unit =
         PyWorkbook.fromFsWorkbook wb
         |> fun wb -> Xlsx.writeFile(wb,path)
 
-    //static member toStream(stream: System.IO.Stream) (wb:FsWorkbook) : Promise<unit> =
+    //static member toXlsxStream(stream: System.IO.Stream) (wb:FsWorkbook) : Promise<unit> =
     //    PyWorkbook.fromFsWorkbook wb
     //    |> fun wb -> Xlsx.writeBuffer(wb,stream)
 
-    static member toBytes(wb:FsWorkbook) : byte [] =
+    static member toXlsxBytes(wb:FsWorkbook) : byte [] =
         PyWorkbook.fromFsWorkbook wb
         |> fun wb -> Xlsx.write(wb)

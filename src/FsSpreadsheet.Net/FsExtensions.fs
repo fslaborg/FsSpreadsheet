@@ -308,7 +308,7 @@ module FsExtensions =
         /// <summary>
         /// Creates an FsWorkbook from a given Stream to an XlsxFile.
         /// </summary>
-        static member fromBytes (bytes : byte []) =
+        static member fromXlsxBytes (bytes : byte []) =
             let stream = new MemoryStream(bytes,writable = true)
             FsWorkbook.fromXlsxStream stream
 
@@ -317,8 +317,43 @@ module FsExtensions =
         /// </summary>
         static member fromXlsxFile (filePath : string) =
             let bytes = File.ReadAllBytes filePath
-            FsWorkbook.fromBytes bytes
+            FsWorkbook.fromXlsxBytes bytes
 
+        /// <summary>
+        /// Takes the path to an Xlsx file and returns the FsWorkbook based on its content.
+        /// </summary>
+        [<System.Obsolete("Use fromXlsxFile")>]
+        static member fromFile (filePath : string) =
+            let bytes = File.ReadAllBytes filePath
+            FsWorkbook.fromXlsxBytes bytes
+
+        /// <summary>
+        /// Takes a json string and returns the FsWorkbook based on its content.
+        /// </summary>
+        static member tryFromJsonString (json : string) =
+            Thoth.Json.Newtonsoft.Decode.fromString FsSpreadsheet.Json.Workbook.decode json
+
+        /// <summary>
+        /// Takes a json string and returns the FsWorkbook based on its content.
+        /// </summary>
+        static member fromJsonString (json : string) =
+            match FsWorkbook.tryFromJsonString json with
+            | Ok wb -> wb
+            | Error e -> failwithf "Could not deserialize json Workbook: \n%s" e
+            
+        /// <summary>
+        /// Takes the path to an json file and returns the FsWorkbook based on its content.
+        /// </summary>
+        static member tryFromJsonFile (filePath : string) =
+            let json = File.ReadAllText filePath
+            FsWorkbook.tryFromJsonString json
+
+        /// <summary>
+        /// Takes the path to an json file and returns the FsWorkbook based on its content.
+        /// </summary>
+        static member fromJsonFile (filePath : string) =
+            let json = File.ReadAllText filePath
+            FsWorkbook.fromJsonString json
 
         member self.ToEmptySpreadsheet(doc : Packaging.SpreadsheetDocument) =
             
@@ -334,7 +369,7 @@ module FsExtensions =
         /// <summary>
         /// Writes the FsWorkbook into a given MemoryStream.
         /// </summary>
-        member self.ToStream(stream : MemoryStream) = 
+        member self.ToXlsxStream(stream : MemoryStream) = 
             if self.GetWorksheets() |> Seq.isEmpty then
                 failwith "Cannot write an empty workbook to a stream. Workbook did not contain any Worksheets."
             let doc = Spreadsheet.initEmptyOnStream stream 
@@ -348,28 +383,36 @@ module FsExtensions =
         /// <summary>
         /// Writes an FsWorkbook into a given MemoryStream.
         /// </summary>
-        static member toStream stream (workbook : FsWorkbook) =
-            workbook.ToStream stream
+        static member toXlsxStream stream (workbook : FsWorkbook) =
+            workbook.ToXlsxStream stream
 
         /// <summary>
         /// Returns the FsWorkbook in the form of a byte array.
         /// </summary>
-        member self.ToBytes() =
+        member self.ToXlsxBytes() =
             use memoryStream = new MemoryStream()
-            self.ToStream(memoryStream)
+            self.ToXlsxStream(memoryStream)
             memoryStream.ToArray()
 
         /// <summary>
         /// Returns an FsWorkbook in the form of a byte array.
         /// </summary>
-        static member toBytes (workbook: FsWorkbook) =
-            workbook.ToBytes()
+        static member toXlsxBytes (workbook: FsWorkbook) =
+            workbook.ToXlsxBytes()
 
         /// <summary>
         /// Writes the FsWorkbook into a binary file at the given path.
         /// </summary>
         member self.ToXlsxFile(path) =
-            self.ToBytes()
+            self.ToXlsxBytes()
+            |> fun bytes -> File.WriteAllBytes (path, bytes)
+
+        /// <summary>
+        /// Writes the FsWorkbook into a binary file at the given path.
+        /// </summary>
+        [<System.Obsolete("Use ToXlsxFile")>]
+        member self.ToFile(path) =
+            self.ToXlsxBytes()
             |> fun bytes -> File.WriteAllBytes (path, bytes)
 
         /// <summary>
@@ -378,25 +421,61 @@ module FsExtensions =
         static member toXlsxFile path (workbook : FsWorkbook) =
             workbook.ToXlsxFile(path)
 
+        /// <summary>
+        /// Takes the path to an Xlsx file and returns the FsWorkbook based on its content.
+        /// </summary>
+        [<System.Obsolete("Use toXlsxFile")>]
+        static member toFile (filePath : string) path (workbook : FsWorkbook) =
+            workbook.ToXlsxFile(path)
+
+        static member toJsonString (workbook : FsWorkbook, ?spaces) =
+            let spaces = defaultArg spaces 2
+            FsSpreadsheet.Json.Workbook.encode workbook
+            |> Thoth.Json.Newtonsoft.Encode.toString spaces
+
+        static member toJsonFile (path, ?spaces) =
+            fun workbook -> 
+                let json = FsWorkbook.toJsonString (workbook,?spaces = spaces)
+                File.WriteAllText(path,json)
+
+        member this.ToJsonString(?spaces) =
+            FsWorkbook.toJsonString(this, ?spaces = spaces)
+
+        member this.ToJsonFile(path: string, ?spaces) =
+            FsWorkbook.toJsonFile(path, ?spaces = spaces) this
 
 type Writer =
+
 
     /// <summary>
     /// Writes an FsWorkbook into a given MemoryStream.
     /// </summary>
-    static member toStream(stream : MemoryStream, workbook : FsWorkbook) =
-        workbook.ToStream(stream)
+    static member toXlsxStream(stream : MemoryStream, workbook : FsWorkbook) =
+        workbook.ToXlsxStream(stream)
 
     
     /// <summary>
     /// Returns an FsWorkbook in the form of a byte array.
     /// </summary>
-    static member toBytes(workbook: FsWorkbook) =
-        workbook.ToBytes()
+    static member toXlsxBytes(workbook: FsWorkbook) =
+        workbook.ToXlsxBytes()
 
 
     /// <summary>
     /// Writes an FsWorkbook into a binary file at the given path.
     /// </summary>
+    static member toXlsxFile(path,workbook: FsWorkbook) =
+        workbook.ToXlsxFile(path)
+
+    /// <summary>
+    /// Writes an FsWorkbook into a binary file at the given path.
+    /// </summary>
+    [<System.Obsolete("Use toXlsxFile")>]
     static member toFile(path,workbook: FsWorkbook) =
         workbook.ToXlsxFile(path)
+
+    static member toJsonString (workbook : FsWorkbook, ?spaces) =
+        FsWorkbook.toJsonString(workbook, ?spaces = spaces)
+
+    static member toJsonFile (path, ?spaces)  =
+        fun workbook -> FsWorkbook.toJsonFile (path, ?spaces = spaces) workbook

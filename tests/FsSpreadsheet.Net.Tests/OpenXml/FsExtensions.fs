@@ -1,6 +1,6 @@
-﻿module FsExtension
+﻿module FsExtension.Tests
 
-open Expecto
+open TestingUtils
 open FsSpreadsheet
 open FsSpreadsheet.Net
 open DocumentFormat.OpenXml
@@ -50,7 +50,6 @@ dummyFsWorkbook.AddWorksheet(dummyFsWorksheet4) |> ignore
 let testFile2Path = Path.Combine(__SOURCE_DIRECTORY__, "../data", "2EXT02_Protein.xlsx")
 
 
-[<Tests>]
 let fsExtensionTests =
     testList "FsExtensions" [
         //testList "DataType" [
@@ -163,7 +162,9 @@ let fsExtensionTests =
                     Expect.equal v "Id" "value is not equal"
                 testCase "Worksheet SwateTemplateMetadata from 2EXT02_Protein has FsRows" <| fun _ ->
                     let rows = tf2Worksheet.Value.Rows
-                    Expect.isGreaterThan rows.Count 0 "Worksheet SwateTemplateMetadata from 2EXT02_Protein has no FsRows"
+                    Expect.notEqual rows.Count 0 "Worksheet SwateTemplateMetadata from 2EXT02_Protein has no FsRows"
             ]
         ]
     ]
+
+let main = fsExtensionTests

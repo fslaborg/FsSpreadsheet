@@ -1,6 +1,6 @@
-﻿module Sheet
+﻿module Sheet.Tests
 
-open Expecto
+open TestingUtils
 open FsSpreadsheet.Net
 open DocumentFormat.OpenXml
 
@@ -13,7 +13,6 @@ let shtsFox = wbFox.Sheets
 let shtssFox = shtsFox.Descendants<Spreadsheet.Sheet>() |> Array.ofSeq      // array is needed since seqs cannot be compared
 
 
-[<Tests>]
 let sheetsTests =
     testList "Sheets" [
         testList "get" [
@@ -27,3 +26,5 @@ let sheetsTests =
                 Expect.equal shtss shtssFox "Differs"
         ]
     ]
+
+let main = sheetsTests

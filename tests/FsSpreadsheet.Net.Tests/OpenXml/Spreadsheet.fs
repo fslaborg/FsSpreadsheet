@@ -1,6 +1,6 @@
-﻿module Spreadsheet
+﻿module Spreadsheet.Tests
 
-open Expecto
+open TestingUtils
 open FsSpreadsheet.Net
 open DocumentFormat.OpenXml
 
@@ -36,9 +36,6 @@ let cbsi1Fox =      // get the Cells, but with their real values (inferred from 
 //testSsdFox = testDoc
 //testSsdFox = testSsdFox2
 
-
-
-[<Tests>]
 let spreadsheetTests =
     testList "Spreadsheet" [
         let ssd = Spreadsheet.fromFile testFilePath false
@@ -90,5 +87,4 @@ let spreadsheetTests =
 
 
 
-
-//testSsdFox.Close()
+let main = spreadsheetTests

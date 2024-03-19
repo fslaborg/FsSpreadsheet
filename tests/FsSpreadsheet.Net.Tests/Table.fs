@@ -1,6 +1,5 @@
-﻿module FsTable
+﻿module Table.Tests
 
-open Expecto
 open FsSpreadsheet
 open FsSpreadsheet.Net
 open DocumentFormat.OpenXml
@@ -31,7 +30,7 @@ let transformTable =
 
             // --- Function of interest ---
 
-            let bytes = wb.ToBytes()
+            let bytes = wb.ToXlsxBytes()
 
             // --- Get Tables ---
 
@@ -69,7 +68,6 @@ let transformTable =
     ]
     
 
-[<Tests>]
 let main =
     testList "FsTable" [
         transformTable

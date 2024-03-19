@@ -58,55 +58,55 @@ module FsExtensions =
 
     type FsWorkbook with
 
-        member self.ToStream(stream : System.IO.MemoryStream,?Separator : char) = 
+        member self.ToCsvStream(stream : System.IO.MemoryStream,?Separator : char) = 
             let streamWriter = new System.IO.StreamWriter(stream)
             self.GetWorksheets().[0].ToTableString(Separator)
             |> streamWriter.Write
             streamWriter.Flush()
 
-        member self.ToBytes(?Separator : char) =
+        member self.ToCsvBytes(?Separator : char) =
             use memoryStream = new System.IO.MemoryStream()
             match Separator with
-            | Some s -> self.ToStream(memoryStream,s)
-            | None -> self.ToStream(memoryStream)
+            | Some s -> self.ToCsvStream(memoryStream,s)
+            | None -> self.ToCsvStream(memoryStream)
             memoryStream.ToArray()
 
-        member self.ToFile(path,?Separator : char) =
+        member self.ToCsvFile(path,?Separator : char) =
             match Separator with
-            | Some s -> self.ToBytes(s)
-            | None -> self.ToBytes()
+            | Some s -> self.ToCsvBytes(s)
+            | None -> self.ToCsvBytes()
             |> fun bytes -> System.IO.File.WriteAllBytes (path, bytes)
 
-        static member toStream(stream : System.IO.MemoryStream,workbook : FsWorkbook,?Separator : char) =
+        static member toCsvStream(stream : System.IO.MemoryStream,workbook : FsWorkbook,?Separator : char) =
             match Separator with
-            | Some s -> workbook.ToStream(stream,s)
-            | None -> workbook.ToStream(stream)
-            workbook.ToStream(stream)
+            | Some s -> workbook.ToCsvStream(stream,s)
+            | None -> workbook.ToCsvStream(stream)
+            workbook.ToCsvStream(stream)
 
-        static member toBytes(workbook: FsWorkbook,?Separator : char) =
+        static member toCsvBytes(workbook: FsWorkbook,?Separator : char) =
             match Separator with
-            | Some s -> workbook.ToBytes(s)
-            | None -> workbook.ToBytes()
+            | Some s -> workbook.ToCsvBytes(s)
+            | None -> workbook.ToCsvBytes()
 
-        static member toFile(path,workbook: FsWorkbook,?Separator : char) =
+        static member toCsvFile(path,workbook: FsWorkbook,?Separator : char) =
             match Separator with
-            | Some s -> workbook.ToFile(path,s)
-            | None -> workbook.ToFile(path)
+            | Some s -> workbook.ToCsvFile(path,s)
+            | None -> workbook.ToCsvFile(path)
 
 type Writer =
     
-    static member toStream(stream : System.IO.MemoryStream,workbook : FsWorkbook,?Separator : char) =
+    static member toCsvStream(stream : System.IO.MemoryStream,workbook : FsWorkbook,?Separator : char) =
         match Separator with
-        | Some s -> workbook.ToStream(stream,s)
-        | None -> workbook.ToStream(stream)
-        workbook.ToStream(stream)
+        | Some s -> workbook.ToCsvStream(stream,s)
+        | None -> workbook.ToCsvStream(stream)
+        workbook.ToCsvStream(stream)
 
-    static member toBytes(workbook: FsWorkbook,?Separator : char) =
+    static member toCsvBytes(workbook: FsWorkbook,?Separator : char) =
         match Separator with
-        | Some s -> workbook.ToBytes(s)
-        | None -> workbook.ToBytes()
+        | Some s -> workbook.ToCsvBytes(s)
+        | None -> workbook.ToCsvBytes()
 
-    static member toFile(path,workbook: FsWorkbook,?Separator : char) =
+    static member toCsvFile(path,workbook: FsWorkbook,?Separator : char) =
         match Separator with
-        | Some s -> workbook.ToFile(path,s)
-        | None -> workbook.ToFile(path)
+        | Some s -> workbook.ToCsvFile(path,s)
+        | None -> workbook.ToCsvFile(path)

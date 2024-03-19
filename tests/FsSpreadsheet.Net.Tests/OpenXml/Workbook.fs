@@ -1,6 +1,6 @@
-﻿module Workbook
+﻿module Workbook.Tests
 
-open Expecto
+open TestingUtils
 open FsSpreadsheet.Net
 open DocumentFormat.OpenXml
 
@@ -11,7 +11,6 @@ let wbpFox = ssdFox.WorkbookPart
 let wbFox = wbpFox.Workbook
 
 
-[<Tests>]
 let workbookTests =
     testList "Workbook" [
         testList "get" [
@@ -20,3 +19,5 @@ let workbookTests =
                 Expect.equal wb wbFox "Differs"
         ]
     ]
+
+let main = workbookTests

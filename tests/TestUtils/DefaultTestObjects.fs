@@ -35,14 +35,16 @@ type WriteTestFiles =
 | FsSpreadsheetNET
 | FsSpreadsheetJS
 | FsSpreadsheetPY
+| FsSpreadsheetJSON
 
     member this.asFileName =
         match this with
+        | FsSpreadsheetJSON -> "TestWorkbook_FsSpreadsheet_WRITE.json"
         | FsSpreadsheetNET  -> "TestWorkbook_FsSpreadsheet_WRITE.net.xlsx"
         | FsSpreadsheetJS   -> "TestWorkbook_FsSpreadsheet_WRITE.js.xlsx"
         | FsSpreadsheetPY   -> "TestWorkbook_FsSpreadsheet_WRITE.py.xlsx"
 
-    member this.asRelativePath = $"{testFolder}/{this.asFileName}"
+    member this.asRelativePath = $"../TestUtils/{testFolder}/{this.asFileName}"
     member this.asRelativePathNode = $"./tests/TestUtils/{testFolder}/{this.asFileName}"
 
 module ExpectedRows = 

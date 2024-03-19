@@ -97,7 +97,7 @@ describe('FsSpreadsheet.Js', function () {
             const table = new FsTable("MyNewTable", FsRangeAddress_$ctor_Z721C83C5("B1:D3"));
             fsws.AddTable(table);
             fsws.RescanRows()
-            await Xlsx.toFile(path, fswb)
+            await Xlsx.toXlsxFile(path, fswb)
             const readfswb = await Xlsx.fromXlsxFile(path)
             equal(readfswb.GetWorksheets().length, fswb.GetWorksheets().length)
             equal(readfswb.GetWorksheets()[0].Name, "My Awesome Worksheet")
@@ -121,7 +121,7 @@ describe('FsSpreadsheet.Js', function () {
             equal(table.Name, "annotationTableStupidQuail41", "table.Name")
             equal(table.ShowHeaderRow, true, "table.ShowHeaderRow") // issue #69
             const outoutPath = "tests/JS/TestFiles/WRITE_TestAssayExcel.xlsx"
-            await Xlsx.toFile(outoutPath, fswb)
+            await Xlsx.toXlsxFile(outoutPath, fswb)
             const fswb2 = await Xlsx.fromXlsxFile(outoutPath)
             equal(fswb2.GetWorksheets().length, 5) // test correct read
         })

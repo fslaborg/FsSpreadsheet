@@ -24,10 +24,10 @@ let main argv =
     let zipArchiveReader() = 
 
 
-        let readAssay() = ZipArchiveReader.FsWorkbook.fromFile assayPath
-        let readStudy() = ZipArchiveReader.FsWorkbook.fromFile studyPath
-        let readInvestigation() = ZipArchiveReader.FsWorkbook.fromFile investigationPath
-        let bigFile() = ZipArchiveReader.FsWorkbook.fromFile @"C:\Users\HLWei\source\repos\IO\FsSpreadsheet\tests\TestUtils\TestFiles\BigFile.xlsx"
+        let readAssay() = ZipArchiveReader.FsWorkbook.fromXlsxFile assayPath
+        let readStudy() = ZipArchiveReader.FsWorkbook.fromXlsxFile studyPath
+        let readInvestigation() = ZipArchiveReader.FsWorkbook.fromXlsxFile investigationPath
+        let bigFile() = ZipArchiveReader.FsWorkbook.fromXlsxFile @"C:\Users\HLWei\source\repos\IO\FsSpreadsheet\tests\TestUtils\TestFiles\BigFile.xlsx"
 
 
         readInvestigation() |> ignore

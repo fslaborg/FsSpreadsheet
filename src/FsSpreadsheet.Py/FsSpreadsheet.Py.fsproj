@@ -12,17 +12,17 @@
     <Compile Include="Worksheet.fs" />
     <Compile Include="Workbook.fs" />
     <Compile Include="Xlsx.fs" />
+    <Compile Include="Json.fs" />
     <Compile Include="FsExtension.fs" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Fable.Openpyxl" Version="0.2.0" />
+    <PackageReference Include="Thoth.Json.Python" Version="0.1.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\FsSpreadsheet\FsSpreadsheet.fsproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="*.fsproj; **\*.fs; **\*.fsi" PackagePath="fable\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>

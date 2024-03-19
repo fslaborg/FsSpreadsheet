@@ -31,7 +31,7 @@ npm install @fslab/fsspreadsheet
 pip install fsspreadsheet
 ```
 
-## Usage_IO
+## Usage_Xlsx_IO
 
 ### F#
 
@@ -59,7 +59,7 @@ const wb = Xlsx.fromXlsxFile(path)
 
 const newPath = "path/to/new/spreadsheet.xlsx"
 
-Xlsx.toFile(newPath,wb)
+Xlsx.toXlsxFile(newPath,wb)
 ```
 
 ### Python
@@ -69,9 +69,55 @@ from fsspreadsheet.xlsx import Xlsx
 
 path = "path/to/spreadsheet.xlsx"
 
-wb = Xlsx.fromXlsxFile(path)
+wb = Xlsx.from_xlsx_file(path)
 
 newPath = "path/to/new/spreadsheet.xlsx"
 
-Xlsx.to_file(newPath,wb)
+Xlsx.to_xlsx_file(newPath,wb)
+```
+
+
+## Usage_Json_IO
+
+### F#
+
+```fsharp
+open FsSpreadsheet
+open FsSpreadsheet.Net
+
+let path = "path/to/spreadsheet.json"
+
+let wb = FsWorkbook.fromJsonFile(path)
+
+let newPath = "path/to/new/spreadsheet.json"
+
+wb.ToJsonFile(newPath)
+```
+
+### Javascript
+
+```javascript
+import { Json } from '@fslab/fsspreadsheet/Json.js';
+
+const path = "path/to/spreadsheet.json"
+
+const wb = Json.fromJsonFile(path)
+
+const newPath = "path/to/new/spreadsheet.json"
+
+Json.toJsonFile(newPath,wb)
+```
+
+### Python
+
+```python
+from fsspreadsheet.json import Json
+
+path = "path/to/spreadsheet.json"
+
+wb = Json.from_json_file(path)
+
+newPath = "path/to/new/spreadsheet.json"
+
+Json.to_json_file(newPath,wb)
 ```

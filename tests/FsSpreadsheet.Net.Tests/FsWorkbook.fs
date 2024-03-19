@@ -1,6 +1,4 @@
-﻿module FsWorkbook
-
-open Expecto
+﻿module FsWorkbook.Tests
 open FsSpreadsheet
 open FsSpreadsheet.Net
 
@@ -10,7 +8,7 @@ let writeAndReadBytes =
     testList "WriteAndReadBytes" [
         testCase "Empty" (fun () -> 
             let wb = new FsWorkbook()
-            let f() = wb.ToBytes()
+            let f() = wb.ToXlsxBytes()
             try 
                 f() |> ignore
                 failwith "Should throw an exception"
@@ -35,8 +33,8 @@ let writeAndReadBytes =
             let expected = new FsWorkbook()
             let ws = TestObjects.sheet1()
             expected.AddWorksheet(ws)
-            let bytes = expected.ToBytes()
-            let actual = FsWorkbook.fromBytes(bytes)
+            let bytes = expected.ToXlsxBytes()
+            let actual = FsWorkbook.fromXlsxBytes(bytes)
             Expect.equal (expected.GetWorksheets().Count) (actual.GetWorksheets().Count) "Worksheet count should be equal"
             Expect.equal (expected.GetWorksheetByName(TestObjects.sheet1Name).Name) TestObjects.sheet1Name "excpected sheetname"
             Expect.equal (actual.GetWorksheetByName(TestObjects.sheet1Name).Name) TestObjects.sheet1Name "actual sheetname"
@@ -46,8 +44,8 @@ let writeAndReadBytes =
             let wb = new FsWorkbook()
             wb.AddWorksheet(TestObjects.sheet1())
             wb.AddWorksheet(TestObjects.sheet2())
-            let bytes = wb.ToBytes()
-            let wb2 = FsWorkbook.fromBytes(bytes)
+            let bytes = wb.ToXlsxBytes()
+            let wb2 = FsWorkbook.fromXlsxBytes(bytes)
             Expect.equal (wb.GetWorksheets().Count) (wb2.GetWorksheets().Count) "Worksheet count should be equal"
             Expect.workSheetEqual (wb.GetWorksheetByName(TestObjects.sheet1Name)) (wb2.GetWorksheetByName(TestObjects.sheet1Name)) "First Worksheet did not match"
             Expect.workSheetEqual (wb.GetWorksheetByName(TestObjects.sheet2Name)) (wb2.GetWorksheetByName(TestObjects.sheet2Name)) "Second Worksheet did not match"
@@ -72,19 +70,17 @@ let performance =
     testList "Performace" [
         testCase "ReadBigFile" (fun () -> 
             let sw = Stopwatch()        
-            let p = "./TestFiles/BigFile.xlsx"
-            sw.Start()
-            let wb = FsWorkbook.fromXlsxFile(p)
+            sw.Start()          
+            let wb = FsWorkbook.fromXlsxFile(DefaultTestObject.BigFile.asRelativePath)
             sw.Stop()
             let elapsed = sw.Elapsed.Milliseconds
-            Expect.isLessThan elapsed 2000 $"Elapsed time should be less than 2000ms, but was {elapsed}ms"
+            Expect.isTrue (elapsed < 2000) $"Elapsed time should be less than 2000ms, but was {elapsed}ms"
             Expect.equal (wb.GetWorksheetAt(1).Rows.Count) 153991 "Row count should be 153991"
 
         )
     ]
 
-[<Tests>]
-let tests =
+let main =
     testList "FsWorkbook" [
         writeAndReadBytes
         performance
