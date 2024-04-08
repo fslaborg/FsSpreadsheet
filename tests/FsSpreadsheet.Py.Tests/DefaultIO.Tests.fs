@@ -11,6 +11,10 @@ let private readFromTestFile (testFile: DefaultTestObject.TestFiles) =
 
 let private tests_Read = testList "Read" [
 
+    testCase "ExcelRowCount" <| fun _ ->
+        let wb = readFromTestFile DefaultTestObject.TestFiles.Excel
+        Expect.isTrue (wb.GetWorksheetAt(1).Rows.Count > 0) "ExcelRowCount"
+
     testCase "Excel" <| fun _ ->
         let wb = readFromTestFile DefaultTestObject.TestFiles.Excel
         Expect.isDefaultTestObject wb
