@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FsSpreadsheet\FsSpreadsheet.fsproj" PackageVersion="[5.0.0, 6.0.0)" />
+    <ProjectReference Include="..\FsSpreadsheet\FsSpreadsheet.fsproj" PackageVersion="[6.0.0, 7.0.0)" />
   </ItemGroup>
 
   <Target Name="UseExplicitPackageVersions" BeforeTargets="GenerateNuspec">
