@@ -25,6 +25,7 @@ module PyWorkbook =
         pyWB.worksheets |> Array.iter (fun (ws : Worksheet) -> 
             if ws.title <> "Sheet" && ws.values.Length <> 0 then
                 let w = PyWorksheet.toFsWorksheet ws
+                w.RescanRows()
                 fsWB.AddWorksheet(w) |> ignore
         )
         fsWB
