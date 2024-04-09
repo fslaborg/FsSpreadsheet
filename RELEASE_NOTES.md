@@ -1,3 +1,9 @@
+### 6.1.1+0f0535a (Released 2024-4-8)
+* Additions:
+    * [[#0d578e2](https://github.com/CSBiology/FsSpreadsheet/commit/0d578e27d65179857267c0f4601bc75a22327b9a)] bump to 6.1.0
+* Bugfixes:
+    * [[#0f0535a](https://github.com/CSBiology/FsSpreadsheet/commit/0f0535a4afbc44e5980c89e608334b96e38a4a7d)] check and fix py xlsx reader rescanning rows
+
 ### 6.1.0+ed6795c (Released 2024-3-19)
 * Additions:
     * [[#3f1fb55](https://github.com/CSBiology/FsSpreadsheet/commit/3f1fb55e75d2ea56dec8787f0e6dfceccfd19ef5)] start working on json writing
