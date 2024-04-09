@@ -1,3 +1,7 @@
+### 6.1.2+62db5ab (Released 2024-4-9)
+* Additions:
+    * [[#62db5ab](https://github.com/CSBiology/FsSpreadsheet/commit/62db5abb62cfd411355f5e4b6a466aeb622e448e)] update project dependenices on FsSpreadsheet.Core
+
 ### 6.1.1+0f0535a (Released 2024-4-8)
 * Additions:
     * [[#0d578e2](https://github.com/CSBiology/FsSpreadsheet/commit/0d578e27d65179857267c0f4601bc75a22327b9a)] bump to 6.1.0
