@@ -1,6 +1,102 @@
 ﻿# FsSpreadsheet
 Spreadsheet creation and manipulation in FSharp
 
+<table>
+  <thead>
+    <tr>
+      <th>Latest Release</th>
+      <th>Downloads</th>
+      <th>Target</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <a href="https://pypi.org/project/fsspreadsheet/">
+          <img src="https://img.shields.io/pypi/v/fsspreadsheet?logo=pypi" alt="latest release" />
+        </a>
+      </td>
+      <td>
+        <a href="https://pepy.tech/project/siren-dsl">
+          <img alt="Pepy Total Downlods" src="https://img.shields.io/pepy/dt/siren-dsl?label=fsspreadsheet&color=blue" />
+        </a>
+      </td>
+      <td>Python</td>
+    </tr>
+    <!-- js package -->
+    <tr>
+      <td>
+        <a href="https://www.npmjs.com/package/@fslab/fsspreadsheet">
+          <img src="https://img.shields.io/npm/v/@fslab/fsspreadsheet?logo=npm" alt="latest release" />
+        </a>
+      </td>
+      <td>
+        <a href="https://www.npmjs.com/package/@fslab/fsspreadsheet">
+          <img src="https://img.shields.io/npm/dt/@fslab/fsspreadsheet?label=@fslab/fsspreadsheet" alt="downloads" />
+        </a>
+      </td>
+      <td>JavaScript</td>
+    </tr>
+    <!-- f# nuget package core -->
+    <tr>
+      <td>
+        <a href="https://www.nuget.org/packages/FsSpreadsheet/">
+          <img src="https://img.shields.io/nuget/v/FsSpreadsheet?logo=nuget" alt="latest release" />
+        </a>
+      </td>
+      <td>
+        <a href="https://www.nuget.org/packages/FsSpreadsheet/">
+          <img src="https://img.shields.io/nuget/dt/FsSpreadsheet?label=FsSpreadsheet" alt="downloads" />
+        </a>
+      </td>
+      <td></td>
+    </tr>
+    <!-- f# nuget package net -->
+    <tr>
+      <td>
+        <a href="https://www.nuget.org/packages/FsSpreadsheet.Net/">
+          <img src="https://img.shields.io/nuget/v/FsSpreadsheet.Net?logo=nuget" alt="latest release" />
+        </a>
+      </td>
+      <td>
+        <a href="https://www.nuget.org/packages/FsSpreadsheet.Net/">
+          <img src="https://img.shields.io/nuget/dt/FsSpreadsheet.Net?label=FsSpreadsheet.Net" alt="downloads" />
+        </a>
+      </td>
+      <td>.NET</td>
+    </tr>
+    <!-- f# nuget package js -->
+    <tr>
+      <td>
+        <a href="https://www.nuget.org/packages/FsSpreadsheet.Js/">
+          <img src="https://img.shields.io/nuget/v/FsSpreadsheet.Js?logo=nuget" alt="latest release" />
+        </a>
+      </td>
+      <td>
+        <a href="https://www.nuget.org/packages/FsSpreadsheet.Js/">
+          <img src="https://img.shields.io/nuget/dt/FsSpreadsheet.Js?label=FsSpreadsheet.Js" alt="downloads" />
+        </a>
+      </td>
+      <td>Fable JavaScript</td>
+    </tr>
+    <!-- f# nuget package py -->
+    <tr>
+      <td>
+        <a href="https://www.nuget.org/packages/FsSpreadsheet.Py/">
+          <img src="https://img.shields.io/nuget/v/FsSpreadsheet.Py?logo=nuget" alt="latest release" />
+        </a>
+      </td>
+      <td>
+        <a href="https://www.nuget.org/packages/FsSpreadsheet.Py/">
+          <img src="https://img.shields.io/nuget/dt/FsSpreadsheet.Py?label=FsSpreadsheet.Py" alt="downloads" />
+        </a>
+      </td>
+      <td>Fable Python</td>
+    </tr>
+  </tbody>
+
+</table>
+
 ## DSL 
 ```fsharp
 #r "nuget: FsSpreadsheet"

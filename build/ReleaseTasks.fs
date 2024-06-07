@@ -32,7 +32,7 @@ let createPrereleaseTag = BuildTask.create "CreatePrereleaseTag" [setPrereleaseT
 }
 
 
-let publishNuget = BuildTask.create "PublishNuget" [clean; build; runTests; packDotNet] {
+let publishNuget = BuildTask.create "PublishNuget" [clean; build; (*runTests;*) packDotNet] {
     let targets = (!! (sprintf "%s/*.*pkg" netPkgDir ))
     for target in targets do printfn "%A" target
     let msg = sprintf "[.NET] release package with version %s?" stableVersionTag

@@ -1,3 +1,11 @@
+### 6.1.3+3ba93ef (Released 2024-6-7)
+* Additions:
+    * [[#9c30d63](https://github.com/CSBiology/FsSpreadsheet/commit/9c30d637eabfb6eca070a105bd39bf9d177d423b)] add manage-issues workflow :green_heart:
+    * [[#1ab4da0](https://github.com/CSBiology/FsSpreadsheet/commit/1ab4da0a7abf1b724230a75f108a6d71a06a739f)] Merge pull request #89 from fslaborg/pythonWorkbookReading
+    * [[#7fe1c6a](https://github.com/CSBiology/FsSpreadsheet/commit/7fe1c6ac6fd2d31c3278dfee498828d8c03a9833)] bump to 6.1.2
+* Bugfixes:
+    * [[#3ba93ef](https://github.com/CSBiology/FsSpreadsheet/commit/3ba93efadde0aa73184d52bf38405f82d97ecfa5)] Fix missing fable includes #90
+
 ### 6.1.2+62db5ab (Released 2024-4-9)
 * Additions:
     * [[#62db5ab](https://github.com/CSBiology/FsSpreadsheet/commit/62db5abb62cfd411355f5e4b6a466aeb622e448e)] update project dependenices on FsSpreadsheet.Core
