@@ -1,34 +1,34 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup>
-		<Authors>Kevin Frey, Heinrich Lukas Weil, Oliver Maus, Kevin Schneider, Timo Mühlhaus</Authors>
-		<Description>Excel IO Extensions for the FsSpreadsheet Datamodel in js environments using exceljs.</Description>
-		<Summary>Spreadsheet creation and manipulation in FSharp</Summary>
-		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<PackageIcon>logo.png</PackageIcon>
-		<PackageTags>F# FSharp spreadsheet Excel xlsx datascience fable fable-library fable-javascript</PackageTags>
-		<RepositoryUrl>https://github.com/CSBiology/FsSpreadsheet</RepositoryUrl>
-		<RepositoryType>git</RepositoryType>
-	</PropertyGroup>
+  <PropertyGroup>
+    <Authors>Kevin Frey, Heinrich Lukas Weil, Oliver Maus, Kevin Schneider, Timo Mühlhaus</Authors>
+    <Description>Excel IO Extensions for the FsSpreadsheet Datamodel in js environments using exceljs.</Description>
+    <Summary>Spreadsheet creation and manipulation in FSharp</Summary>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIcon>logo.png</PackageIcon>
+    <PackageTags>F# FSharp spreadsheet Excel xlsx datascience fable fable-library fable-javascript</PackageTags>
+    <RepositoryUrl>https://github.com/CSBiology/FsSpreadsheet</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
 
 	<PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
-	<ItemGroup>
-	  <None Include="..\..\docs\img\logo.png" Link="logo.png">
-	    <PackagePath>\</PackagePath>
-	    <Pack>true</Pack>
-	  </None>
-	  <Compile Include="Cell.fs" />
-	  <Compile Include="Table.fs" />
-	  <Compile Include="Worksheet.fs" />
-	  <Compile Include="Workbook.fs" />
-	  <Compile Include="Xlsx.fs" />
+  <ItemGroup>
+    <None Include="..\..\docs\img\logo.png" Link="logo.png">
+      <PackagePath>\</PackagePath>
+      <Pack>true</Pack>
+    </None>
+    <Compile Include="Cell.fs" />
+    <Compile Include="Table.fs" />
+    <Compile Include="Worksheet.fs" />
+    <Compile Include="Workbook.fs" />
+    <Compile Include="Xlsx.fs" />
     <Compile Include="Json.fs" />
-	  <Compile Include="FsExtensions.fs" />
-	</ItemGroup>
+    <Compile Include="FsExtensions.fs" />
+  </ItemGroup>
 
   <ItemGroup>   
     <PackageReference Include="Fable.Exceljs" Version="1.6.0" />
@@ -36,15 +36,22 @@
     <PackageReference Include="Thoth.Json.JavaScript" Version="0.1.0" />
   </ItemGroup>
 
+  <!-- Add source files to "fable" folder in Nuget package -->
+  <ItemGroup>
+    <!-- Include all files that are compiled with this project -->
+    <Content Include="@(Compile)" Pack="true" PackagePath="fable/%(RelativeDir)%(Filename)%(Extension)" />
+    <!-- Include the project file itself as well -->
+    <Content Include="$(MSBuildThisFileFullPath)" Pack="true" PackagePath="fable/" />
+  </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\FsSpreadsheet\FsSpreadsheet.fsproj" />
   </ItemGroup>
-<ItemGroup />
 	
-<PropertyGroup>
-	<NpmDependencies>
-		<NpmPackage Name="@nfdi4plants/exceljs" Version="gte 0.1.0 lt 1.0.0" ResolutionStrategy="Max" />
-	</NpmDependencies>
-</PropertyGroup>
+  <PropertyGroup>
+    <NpmDependencies>
+      <NpmPackage Name="@nfdi4plants/exceljs" Version="gte 0.1.0 lt 1.0.0" ResolutionStrategy="Max" />
+    </NpmDependencies>
+  </PropertyGroup>
 
 </Project>
