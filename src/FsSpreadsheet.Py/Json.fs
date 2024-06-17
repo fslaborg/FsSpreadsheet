@@ -15,15 +15,28 @@ open Thoth.Json.Python
 [<AttachMembers>]
 type Json =
     
-    static member tryFromJsonString (json:string) : Result<FsWorkbook, string> =
-        Decode.fromString FsSpreadsheet.Json.Workbook.decode json
+    static member tryFromRowsJsonString (json:string) : Result<FsWorkbook, string> =
+        Decode.fromString FsSpreadsheet.Json.Workbook.decodeRows json
 
-    static member fromJsonString (json:string) : FsWorkbook =
-        match Json.tryFromJsonString json with
+    static member fromRowsJsonString (json:string) : FsWorkbook =
+        match Json.tryFromRowsJsonString json with
         | Ok wb -> wb
         | Error e -> failwithf "Could not deserialize json Workbook: \n%s" e
         
-    static member toJsonString (wb:FsWorkbook, ?spaces) : string =
+    static member toRowsJsonString (wb:FsWorkbook, ?spaces) : string =
         let spaces = defaultArg spaces 2
-        FsSpreadsheet.Json.Workbook.encode wb
+        FsSpreadsheet.Json.Workbook.encodeRows wb
+        |> Encode.toString spaces
+
+    static member tryFromColumnsJsonString (json:string) : Result<FsWorkbook, string> =
+        Decode.fromString FsSpreadsheet.Json.Workbook.decodeColumns json
+
+    static member fromColumnsJsonString (json:string) : FsWorkbook =
+        match Json.tryFromColumnsJsonString json with
+        | Ok wb -> wb
+        | Error e -> failwithf "Could not deserialize json Workbook: \n%s" e
+
+    static member toColumnsJsonString (wb:FsWorkbook, ?spaces) : string =
+        let spaces = defaultArg spaces 2
+        FsSpreadsheet.Json.Workbook.encodeColumns wb
         |> Encode.toString spaces

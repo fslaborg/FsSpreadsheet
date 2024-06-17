@@ -5,17 +5,29 @@ open FsSpreadsheet
 open FsSpreadsheet.Net
 open Fable.Pyxpecto
 
-let defaultTestObject =
-    testList "defaultTestObject" [
+let rows =
+    testList "Rows" [
 
         testCase "Read-Write DefaultTestObject" <| fun _ ->
             let dto = DefaultTestObject.defaultTestObject()
-            let s = dto.ToJsonString()
+            let s = dto.ToRowsJsonString()
             System.IO.File.WriteAllText(DefaultTestObject.FsSpreadsheetJSON.asRelativePath,s)
-            let dto2 = FsWorkbook.fromJsonString(s)
-            TestingUtils.Expect.isDefaultTestObject dto2
+            let dto2 = FsWorkbook.fromRowsJsonFile(DefaultTestObject.FsSpreadsheetJSON.asRelativePath)
+            Expect.isDefaultTestObject dto2
+    ]
+
+let columns =
+    testList "Columns" [
+
+        testCase "Read-Write DefaultTestObject" <| fun _ ->
+            let dto = DefaultTestObject.defaultTestObject()
+            let s = dto.ToColumnsJsonString()
+            System.IO.File.WriteAllText(DefaultTestObject.FsSpreadsheetJSON.asRelativePath,s)
+            let dto2 = FsWorkbook.fromColumnsJsonFile(DefaultTestObject.FsSpreadsheetJSON.asRelativePath)
+            Expect.isDefaultTestObject dto2
     ]
 
 let main = testList "Json" [
-    defaultTestObject
+    rows
+    columns
 ]

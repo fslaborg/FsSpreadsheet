@@ -16,19 +16,34 @@ open Thoth.Json.JavaScript
 [<AttachMembers>]
 type Json =
     
-    static member tryFromJsonString (json:string) : Result<FsWorkbook, string> =
-        match Thoth.Json.JavaScript.Decode.fromString FsSpreadsheet.Json.Workbook.decode json with
+    static member tryFromRowsJsonString (json:string) : Result<FsWorkbook, string> =
+        match Thoth.Json.JavaScript.Decode.fromString FsSpreadsheet.Json.Workbook.decodeRows json with
         | Ok wb -> Ok wb
         | Error e -> Error e
 
-    static member fromJsonString (json:string) : FsWorkbook =
-        match Json.tryFromJsonString json with
+    static member fromRowsJsonString (json:string) : FsWorkbook =
+        match Json.tryFromRowsJsonString json with
         | Ok wb -> wb
         | Error e -> failwithf "Could not deserialize json Workbook: \n%s" e    
 
-    static member toJsonString (wb:FsWorkbook, ?spaces) : string =
+    static member toRowsJsonString (wb:FsWorkbook, ?spaces) : string =
         let spaces = defaultArg spaces 2
-        FsSpreadsheet.Json.Workbook.encode wb
+        FsSpreadsheet.Json.Workbook.encodeRows wb
+        |> Thoth.Json.JavaScript.Encode.toString spaces
+
+    static member tryFromColumnsJsonString (json:string) : Result<FsWorkbook, string> =
+        match Thoth.Json.JavaScript.Decode.fromString FsSpreadsheet.Json.Workbook.decodeColumns json with
+        | Ok wb -> Ok wb
+        | Error e -> Error e
+
+    static member fromColumnsJsonString (json:string) : FsWorkbook =
+        match Json.tryFromColumnsJsonString json with
+        | Ok wb -> wb
+        | Error e -> failwithf "Could not deserialize json Workbook: \n%s" e
+
+    static member toColumnsJsonString (wb:FsWorkbook, ?spaces) : string =
+        let spaces = defaultArg spaces 2
+        FsSpreadsheet.Json.Workbook.encodeColumns wb
         |> Thoth.Json.JavaScript.Encode.toString spaces
 
     //static member fromJsonFile (path:string) : Promise<FsWorkbook> =

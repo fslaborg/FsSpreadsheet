@@ -36,11 +36,11 @@ type FsWorkbook with
     member this.ToXlsxBytes() : byte [] =
         FsWorkbook.toXlsxBytes this
 
-    static member fromJsonString (json:string) : FsWorkbook =
-        Json.fromJsonString json
+    static member fromRowsJsonString (json:string) : FsWorkbook =
+        Json.fromRowsJsonString json
 
-    static member toJsonString (wb:FsWorkbook) : string =
-        Json.toJsonString wb
+    static member toRowsJsonString (wb:FsWorkbook) : string =
+        Json.toRowsJsonString wb
 
     //static member fromJsonFile (path:string) : Promise<FsWorkbook> =
     //    Json.fromJsonFile path
@@ -51,5 +51,15 @@ type FsWorkbook with
     //member this.ToJsonFile(path: string) : Promise<unit> =
     //    FsWorkbook.toJsonFile path this
 
-    member this.ToJsonString() : string =
-        FsWorkbook.toJsonString this
+    member this.ToRowsJsonString() : string =
+        FsWorkbook.toRowsJsonString this
+
+    static member fromColumnsJsonString (json:string) : FsWorkbook =
+        Json.fromColumnsJsonString json
+
+    static member toColumnsJsonString (wb:FsWorkbook) : string =
+        Json.toColumnsJsonString wb
+
+    member this.ToColumnsJsonString() : string =
+        FsWorkbook.toColumnsJsonString this
+            

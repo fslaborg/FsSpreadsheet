@@ -7,17 +7,34 @@ open Thoth.Json.Core
 let column = "column"
 
 [<Literal>]
+let row = "row"
+
+[<Literal>]
 let value = "value"
 
-let encode (cell:FsCell) =
+let encodeRows (cell:FsCell) =
     Encode.object [
         column, Encode.int cell.ColumnNumber
         value, Value.encode cell.Value
     ]
 
-let decode rowNumber : Decoder<FsCell> =
+let decodeRows rowNumber : Decoder<FsCell> =
     Decode.object (fun builder ->
         let v,dt = builder.Required.Field value (Value.decode)
         let c = builder.Required.Field column Decode.int
         new FsCell(v,dt,FsAddress(rowNumber,c))
+    )
+
+
+let encodeCols (cell:FsCell) =
+    Encode.object [
+        row, Encode.int cell.RowNumber
+        value, Value.encode cell.Value
+    ]
+
+let decodeCols colNumber : Decoder<FsCell> =
+    Decode.object (fun builder ->
+        let v,dt = builder.Required.Field value (Value.decode)
+        let r = builder.Required.Field row Decode.int
+        new FsCell(v,dt,FsAddress(r,colNumber))
     )

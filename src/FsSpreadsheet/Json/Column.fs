@@ -1,4 +1,4 @@
-﻿module FsSpreadsheet.Json.Row
+﻿module FsSpreadsheet.Json.Column
 
 open FsSpreadsheet
 open Thoth.Json.Core
@@ -9,15 +9,15 @@ let cells = "cells"
 [<Literal>]
 let number = "number"
 
-let encode (row:FsRow) =
+let encode (col:FsColumn) =
     Encode.object [
-        number, Encode.int row.Index
-        cells, Encode.seq (row.Cells |> Seq.map Cell.encodeRows)
+        number, Encode.int col.Index
+        cells, Encode.seq (col.Cells |> Seq.map Cell.encodeCols)
     ]
 
 let decode : Decoder<int*FsCell seq> =
     Decode.object (fun builder ->
         let n = builder.Required.Field number Decode.int
-        let cs = builder.Required.Field cells (Decode.seq (Cell.decodeRows n))
+        let cs = builder.Required.Field cells (Decode.seq (Cell.decodeCols n))
         n,cs
     )
