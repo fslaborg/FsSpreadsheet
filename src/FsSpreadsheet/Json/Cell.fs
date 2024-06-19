@@ -20,9 +20,9 @@ let encodeRows (cell:FsCell) =
 
 let decodeRows rowNumber : Decoder<FsCell> =
     Decode.object (fun builder ->
-        let v,dt = builder.Required.Field value (Value.decode)
-        let c = builder.Required.Field column Decode.int
-        new FsCell(v,dt,FsAddress(rowNumber,c))
+        let v,dt = builder.Optional.Field value (Value.decode) |> Option.defaultValue ("", DataType.Empty)
+        let c = builder.Optional.Field column Decode.int |> Option.defaultValue 0
+        new FsCell(v,dt,FsAddress(Option.defaultValue 0 rowNumber,c))
     )
 
 

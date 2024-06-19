@@ -27,16 +27,29 @@ let encodeRows (sheet:FsWorksheet) =
 
 let decodeRows : Decoder<FsWorksheet> =
     Decode.object (fun builder ->
+        let mutable rowIndex = 0
+        
         let n = builder.Required.Field name Decode.string
         let ts = builder.Optional.Field tables (Decode.seq Table.decode)
-        let rs = builder.Required.Field rows (Decode.seq Row.decode)
+        let rs = builder.Optional.Field rows (Decode.seq Row.decode) |> Option.defaultValue Seq.empty
         let sheet = new FsWorksheet(n)
         rs
         |> Seq.iter (fun (rowI,cells) -> 
+            let mutable colIndex = 0
+            let rowI = 
+                match rowI with
+                | Some i -> i
+                | None -> rowIndex + 1
+            rowIndex <- rowI
             let r = sheet.Row(rowI)
             cells 
             |> Seq.iter (fun cell ->
-                let c = r[cell.ColumnNumber]
+                let colI = 
+                    match cell.ColumnNumber with
+                    | 0 -> colIndex + 1
+                    | i -> i
+                colIndex <- colI
+                let c = r[colI]
                 c.Value <- cell.Value
                 c.DataType <- cell.DataType
             )
