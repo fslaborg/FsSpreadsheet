@@ -330,30 +330,59 @@ module FsExtensions =
         /// <summary>
         /// Takes a json string and returns the FsWorkbook based on its content.
         /// </summary>
-        static member tryFromJsonString (json : string) =
-            Thoth.Json.Newtonsoft.Decode.fromString FsSpreadsheet.Json.Workbook.decode json
+        static member tryFromRowsJsonString (json : string) =
+            Thoth.Json.Newtonsoft.Decode.fromString FsSpreadsheet.Json.Workbook.decodeRows json
 
         /// <summary>
         /// Takes a json string and returns the FsWorkbook based on its content.
         /// </summary>
-        static member fromJsonString (json : string) =
-            match FsWorkbook.tryFromJsonString json with
+        static member fromRowsJsonString (json : string) =
+            match FsWorkbook.tryFromRowsJsonString json with
             | Ok wb -> wb
             | Error e -> failwithf "Could not deserialize json Workbook: \n%s" e
             
         /// <summary>
         /// Takes the path to an json file and returns the FsWorkbook based on its content.
         /// </summary>
-        static member tryFromJsonFile (filePath : string) =
+        static member tryFromRowsJsonFile (filePath : string) =
             let json = File.ReadAllText filePath
-            FsWorkbook.tryFromJsonString json
+            FsWorkbook.tryFromRowsJsonString json
 
         /// <summary>
         /// Takes the path to an json file and returns the FsWorkbook based on its content.
         /// </summary>
-        static member fromJsonFile (filePath : string) =
+        static member fromRowsJsonFile (filePath : string) =
             let json = File.ReadAllText filePath
-            FsWorkbook.fromJsonString json
+            FsWorkbook.fromRowsJsonString json
+
+        /// <summary>
+        /// Takes a json string and returns the FsWorkbook based on its content.
+        /// </summary>
+        static member tryFromColumnsJsonString (json : string) =
+            Thoth.Json.Newtonsoft.Decode.fromString FsSpreadsheet.Json.Workbook.decodeColumns json
+
+        /// <summary>
+        /// Takes a json string and returns the FsWorkbook based on its content.
+        /// </summary>
+        static member fromColumnsJsonString (json : string) =
+            match FsWorkbook.tryFromColumnsJsonString json with
+            | Ok wb -> wb
+            | Error e -> failwithf "Could not deserialize json Workbook: \n%s" e
+
+        /// <summary>
+        /// Takes the path to an json file and returns the FsWorkbook based on its content.
+        /// </summary>
+        static member tryFromColumnsJsonFile (filePath : string) =
+            let json = File.ReadAllText filePath
+            FsWorkbook.tryFromColumnsJsonString json
+
+        /// <summary>
+        /// Takes the path to an json file and returns the FsWorkbook based on its content.
+        /// </summary>
+        static member fromColumnsJsonFile (filePath : string) =
+            let json = File.ReadAllText filePath
+            FsWorkbook.fromColumnsJsonString json
+
 
         member self.ToEmptySpreadsheet(doc : Packaging.SpreadsheetDocument) =
             
@@ -428,21 +457,37 @@ module FsExtensions =
         static member toFile (filePath : string) path (workbook : FsWorkbook) =
             workbook.ToXlsxFile(path)
 
-        static member toJsonString (workbook : FsWorkbook, ?spaces) =
+        static member toRowsJsonString (workbook : FsWorkbook, ?spaces) =
             let spaces = defaultArg spaces 2
-            FsSpreadsheet.Json.Workbook.encode workbook
+            FsSpreadsheet.Json.Workbook.encodeRows workbook
             |> Thoth.Json.Newtonsoft.Encode.toString spaces
 
-        static member toJsonFile (path, ?spaces) =
+        static member toRowsJsonFile (path, ?spaces) =
             fun workbook -> 
-                let json = FsWorkbook.toJsonString (workbook,?spaces = spaces)
+                let json = FsWorkbook.toRowsJsonString (workbook,?spaces = spaces)
                 File.WriteAllText(path,json)
 
-        member this.ToJsonString(?spaces) =
-            FsWorkbook.toJsonString(this, ?spaces = spaces)
+        member this.ToRowsJsonString(?spaces) =
+            FsWorkbook.toRowsJsonString(this, ?spaces = spaces)
 
-        member this.ToJsonFile(path: string, ?spaces) =
-            FsWorkbook.toJsonFile(path, ?spaces = spaces) this
+        member this.ToRowsJsonFile(path: string, ?spaces) =
+            FsWorkbook.toRowsJsonFile(path, ?spaces = spaces) this
+
+        static member toColumnsJsonString (workbook : FsWorkbook, ?spaces) =
+            let spaces = defaultArg spaces 2
+            FsSpreadsheet.Json.Workbook.encodeColumns workbook
+            |> Thoth.Json.Newtonsoft.Encode.toString spaces
+
+        static member toColumnsJsonFile (path, ?spaces) =
+            fun workbook -> 
+                let json = FsWorkbook.toColumnsJsonString (workbook,?spaces = spaces)
+                File.WriteAllText(path,json)
+
+        member this.ToColumnsJsonString(?spaces) =
+            FsWorkbook.toColumnsJsonString(this, ?spaces = spaces)
+
+        member this.ToColumnsJsonFile(path: string, ?spaces) =
+            FsWorkbook.toColumnsJsonFile(path, ?spaces = spaces) this
 
 type Writer =
 
@@ -474,8 +519,8 @@ type Writer =
     static member toFile(path,workbook: FsWorkbook) =
         workbook.ToXlsxFile(path)
 
-    static member toJsonString (workbook : FsWorkbook, ?spaces) =
-        FsWorkbook.toJsonString(workbook, ?spaces = spaces)
+    static member toRowsJsonString (workbook : FsWorkbook, ?spaces) =
+        FsWorkbook.toRowsJsonString(workbook, ?spaces = spaces)
 
-    static member toJsonFile (path, ?spaces)  =
-        fun workbook -> FsWorkbook.toJsonFile (path, ?spaces = spaces) workbook
+    static member toRowsJsonFile (path, ?spaces)  =
+        fun workbook -> FsWorkbook.toRowsJsonFile (path, ?spaces = spaces) workbook

@@ -36,6 +36,7 @@
     <Compile Include="Json\Value.fs" />
     <Compile Include="Json\Cell.fs" />
     <Compile Include="Json\Row.fs" />
+    <Compile Include="Json\Column.fs" />
     <Compile Include="Json\Table.fs" />
     <Compile Include="Json\Worksheet.fs" />
     <Compile Include="Json\Workbook.fs" />
