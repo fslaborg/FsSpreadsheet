@@ -12,6 +12,11 @@ let row = "row"
 [<Literal>]
 let value = "value"
 
+let encodeNoNumber (cell:FsCell) =
+    Encode.object [
+        value, Value.encode cell.Value
+    ]
+
 let encodeRows (cell:FsCell) =
     Encode.object [
         column, Encode.int cell.ColumnNumber

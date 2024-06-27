@@ -43,8 +43,8 @@ type FsWorkbook with
     static member fromRowsJsonString (json:string) : FsWorkbook =
         Json.fromRowsJsonString json
 
-    static member toRowsJsonString (wb:FsWorkbook) : string =
-        Json.toRowsJsonString wb
+    static member toRowsJsonString (wb:FsWorkbook,?spaces, ?noNumbering) : string =
+        Json.toRowsJsonString(wb, ?spaces = spaces, ?noNumbering = noNumbering)
 
     //static member fromJsonFile (path:string) : Promise<FsWorkbook> =
     //    Json.fromJsonFile path
@@ -55,15 +55,15 @@ type FsWorkbook with
     //member this.ToJsonFile(path: string) : Promise<unit> =
     //    FsWorkbook.toJsonFile path this
 
-    member this.ToRowsJsonString() : string =
-        FsWorkbook.toRowsJsonString this
+    member this.ToRowsJsonString(?spaces, ?noNumbering) : string =
+        FsWorkbook.toRowsJsonString(this, ?spaces = spaces, ?noNumbering = noNumbering)
 
 
     static member fromColumnsJsonString (json:string) : FsWorkbook =
         Json.fromColumnsJsonString json
 
-    static member toColumnsJsonString (wb:FsWorkbook) : string =
-        Json.toColumnsJsonString wb
+    static member toColumnsJsonString (wb:FsWorkbook,?spaces, ?noNumbering) : string =
+        Json.toColumnsJsonString(wb, ?spaces = spaces, ?noNumbering = noNumbering)
 
-    member this.ToColumnsJsonString() : string =
-        FsWorkbook.toColumnsJsonString this
+    member this.ToColumnsJsonString(?spaces, ?noNumbering) : string =
+        FsWorkbook.toColumnsJsonString(this, ?spaces = spaces, ?noNumbering = noNumbering)

@@ -320,14 +320,6 @@ module FsExtensions =
             FsWorkbook.fromXlsxBytes bytes
 
         /// <summary>
-        /// Takes the path to an Xlsx file and returns the FsWorkbook based on its content.
-        /// </summary>
-        [<System.Obsolete("Use fromXlsxFile")>]
-        static member fromFile (filePath : string) =
-            let bytes = File.ReadAllBytes filePath
-            FsWorkbook.fromXlsxBytes bytes
-
-        /// <summary>
         /// Takes a json string and returns the FsWorkbook based on its content.
         /// </summary>
         static member tryFromRowsJsonString (json : string) =
@@ -437,57 +429,44 @@ module FsExtensions =
             |> fun bytes -> File.WriteAllBytes (path, bytes)
 
         /// <summary>
-        /// Writes the FsWorkbook into a binary file at the given path.
-        /// </summary>
-        [<System.Obsolete("Use ToXlsxFile")>]
-        member self.ToFile(path) =
-            self.ToXlsxBytes()
-            |> fun bytes -> File.WriteAllBytes (path, bytes)
-
-        /// <summary>
         /// Writes an FsWorkbook into a binary file at the given path.
         /// </summary>
         static member toXlsxFile path (workbook : FsWorkbook) =
             workbook.ToXlsxFile(path)
 
-        /// <summary>
-        /// Takes the path to an Xlsx file and returns the FsWorkbook based on its content.
-        /// </summary>
-        [<System.Obsolete("Use toXlsxFile")>]
-        static member toFile (filePath : string) path (workbook : FsWorkbook) =
-            workbook.ToXlsxFile(path)
-
-        static member toRowsJsonString (workbook : FsWorkbook, ?spaces) =
+        static member toRowsJsonString (workbook : FsWorkbook, ?spaces, ?noNumbering) =
             let spaces = defaultArg spaces 2
-            FsSpreadsheet.Json.Workbook.encodeRows workbook
+            let noNumbering = defaultArg noNumbering false
+            FsSpreadsheet.Json.Workbook.encodeRows noNumbering workbook
             |> Thoth.Json.Newtonsoft.Encode.toString spaces
 
-        static member toRowsJsonFile (path, ?spaces) =
+        static member toRowsJsonFile (path, ?spaces, ?noNumbering) =
             fun workbook -> 
-                let json = FsWorkbook.toRowsJsonString (workbook,?spaces = spaces)
+                let json = FsWorkbook.toRowsJsonString (workbook,?spaces = spaces, ?noNumbering = noNumbering)
                 File.WriteAllText(path,json)
 
-        member this.ToRowsJsonString(?spaces) =
-            FsWorkbook.toRowsJsonString(this, ?spaces = spaces)
+        member this.ToRowsJsonString(?spaces, ?noNumbering) =
+            FsWorkbook.toRowsJsonString(this, ?spaces = spaces, ?noNumbering = noNumbering)
 
-        member this.ToRowsJsonFile(path: string, ?spaces) =
-            FsWorkbook.toRowsJsonFile(path, ?spaces = spaces) this
+        member this.ToRowsJsonFile(path: string, ?spaces, ?noNumbering) =
+            FsWorkbook.toRowsJsonFile(path, ?spaces = spaces, ?noNumbering = noNumbering) this
 
-        static member toColumnsJsonString (workbook : FsWorkbook, ?spaces) =
+        static member toColumnsJsonString (workbook : FsWorkbook, ?spaces, ?noNumbering) =
+            let noNumbering = defaultArg noNumbering false
             let spaces = defaultArg spaces 2
-            FsSpreadsheet.Json.Workbook.encodeColumns workbook
+            FsSpreadsheet.Json.Workbook.encodeColumns noNumbering workbook
             |> Thoth.Json.Newtonsoft.Encode.toString spaces
 
-        static member toColumnsJsonFile (path, ?spaces) =
+        static member toColumnsJsonFile (path, ?spaces, ?noNumbering) =
             fun workbook -> 
-                let json = FsWorkbook.toColumnsJsonString (workbook,?spaces = spaces)
+                let json = FsWorkbook.toColumnsJsonString (workbook,?spaces = spaces, ?noNumbering = noNumbering)
                 File.WriteAllText(path,json)
 
-        member this.ToColumnsJsonString(?spaces) =
-            FsWorkbook.toColumnsJsonString(this, ?spaces = spaces)
+        member this.ToColumnsJsonString(?spaces, ?noNumbering) =
+            FsWorkbook.toColumnsJsonString(this, ?spaces = spaces, ?noNumbering = noNumbering)
 
-        member this.ToColumnsJsonFile(path: string, ?spaces) =
-            FsWorkbook.toColumnsJsonFile(path, ?spaces = spaces) this
+        member this.ToColumnsJsonFile(path: string, ?spaces, ?noNumbering) =
+            FsWorkbook.toColumnsJsonFile(path, ?spaces = spaces, ?noNumbering = noNumbering) this
 
 type Writer =
 
