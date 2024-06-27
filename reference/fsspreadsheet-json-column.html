@@ -3,9 +3,9 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Font (FsSpreadsheet)</title>
+    <title>Column (FsSpreadsheet)</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="author" content="Heinrich Lukas Weil, Oliver Maus, Kevin Schneider, Timo Mühlhaus">
+    <meta name="author" content="Heinrich Lukas Weil, Oliver Maus, Kevin Schneider, Kevin Frey, Timo Mühlhaus">
     <link rel="shortcut icon" type="image/x-icon" href="/FsSpreadsheet//img/favicon.ico">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
@@ -73,23 +73,17 @@
                 <div class="container" id="fsdocs-content">
                     <div>
   <h2>
-    Font Module
+    Column Module
   </h2>
   <dl class="fsdocs-metadata">
     <dt>
       Namespace: 
-      <a href="/FsSpreadsheet/reference/fsspreadsheet-net.html">
-        FsSpreadsheet.Net
+      <a href="/FsSpreadsheet/reference/fsspreadsheet-json.html">
+        FsSpreadsheet.Json
       </a>
     </dt>
     <dt>
-      Assembly: FsSpreadsheet.Net.dll
-    </dt>
-    <dt>
-      Parent Module: 
-      <a href="/FsSpreadsheet/reference/fsspreadsheet-net-stylesheet.html">
-        Stylesheet
-      </a>
+      Assembly: FsSpreadsheet.dll
     </dt>
   </dl>
   <div class="fsdocs-xmldoc">
@@ -118,36 +112,24 @@
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '374', 374)" onmouseover="showTip(event, '374', 374)">
+              <code onmouseout="hideTip(event, '103', 103)" onmouseover="showTip(event, '103', 103)">
                 <p>
-                  <a id="getDefault">
-                    <a href="#getDefault">
-                      <code><span>getDefault&#32;<span>()</span></span></code>
+                  <a id="cells">
+                    <a href="#cells">
+                      <code><span>cells&#32;<span></span></span></code>
                     </a>
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="374">
+              <div class="fsdocs-tip" id="103">
                 <div class="member-tooltip">
                   Full Usage: 
-                  <code><span>getDefault&#32;<span>()</span></span></code>
+                  <code><span>cells&#32;<span></span></span></code>
                   <br/>
-                  <br/>
-                  Parameters: 
-                  <ul>
-                    <span>
-                      <b>
-                        ()
-                      </b>
-                      :
-                      <code>unit</code>
-                    </span>
-                    <br/>
-                  </ul>
                   <br/>
                   <span>
                     Returns: 
-                    <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.font">Font</a></code>
+                    <code>string</code>
                   </span>
                   <br/>
                 </div>
@@ -156,15 +138,15 @@
           </td>
           <td class="fsdocs-member-xmldoc">
             <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.Stylesheet.Font.getDefault`')">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:P:FsSpreadsheet.Json.Column.cells`')">
                 <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
               </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.Stylesheet.Font.getDefault\'/>')">
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'P:FsSpreadsheet.Json.Column.cells\'/>')">
                 <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/Stylesheet.fs#L11-11" class="fsdocs-source-link" title="Source on GitHub">
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Json/Column.fs#L7-7" class="fsdocs-source-link" title="Source on GitHub">
                 <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
               </a>
@@ -172,22 +154,12 @@
                 
               </p>
             </div>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  ()
-                </span>
-                :
-                <code>unit</code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
             <dl class="fsdocs-returns">
               <dt>
                 <span class="fsdocs-return-name">
                   Returns: 
                 </span>
-                <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.font">Font</a></code>
+                <code>string</code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -196,36 +168,24 @@
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '375', 375)" onmouseover="showTip(event, '375', 375)">
+              <code onmouseout="hideTip(event, '104', 104)" onmouseover="showTip(event, '104', 104)">
                 <p>
-                  <a id="initDefaultFonts">
-                    <a href="#initDefaultFonts">
-                      <code><span>initDefaultFonts&#32;<span>()</span></span></code>
+                  <a id="decode">
+                    <a href="#decode">
+                      <code><span>decode&#32;<span></span></span></code>
                     </a>
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="375">
+              <div class="fsdocs-tip" id="104">
                 <div class="member-tooltip">
                   Full Usage: 
-                  <code><span>initDefaultFonts&#32;<span>()</span></span></code>
+                  <code><span>decode&#32;<span></span></span></code>
                   <br/>
-                  <br/>
-                  Parameters: 
-                  <ul>
-                    <span>
-                      <b>
-                        ()
-                      </b>
-                      :
-                      <code>unit</code>
-                    </span>
-                    <br/>
-                  </ul>
                   <br/>
                   <span>
                     Returns: 
-                    <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.fonts">Fonts</a></code>
+                    <code><span><a href="https://docs.microsoft.com/dotnet/api/thoth.json.core.decoder-1">Decoder</a>&lt;<span>int&#32;*&#32;<span>seq&lt;<a href="/FsSpreadsheet/reference/fsspreadsheet-fscell.html">FsCell</a>&gt;</span></span>&gt;</span></code>
                   </span>
                   <br/>
                 </div>
@@ -234,15 +194,15 @@
           </td>
           <td class="fsdocs-member-xmldoc">
             <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.Stylesheet.Font.initDefaultFonts`')">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:P:FsSpreadsheet.Json.Column.decode`')">
                 <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
               </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.Stylesheet.Font.initDefaultFonts\'/>')">
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'P:FsSpreadsheet.Json.Column.decode\'/>')">
                 <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/Stylesheet.fs#L25-25" class="fsdocs-source-link" title="Source on GitHub">
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Json/Column.fs#L18-18" class="fsdocs-source-link" title="Source on GitHub">
                 <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
               </a>
@@ -250,22 +210,12 @@
                 
               </p>
             </div>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  ()
-                </span>
-                :
-                <code>unit</code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
             <dl class="fsdocs-returns">
               <dt>
                 <span class="fsdocs-return-name">
                   Returns: 
                 </span>
-                <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.fonts">Fonts</a></code>
+                <code><span><a href="https://docs.microsoft.com/dotnet/api/thoth.json.core.decoder-1">Decoder</a>&lt;<span>int&#32;*&#32;<span>seq&lt;<a href="/FsSpreadsheet/reference/fsspreadsheet-fscell.html">FsCell</a>&gt;</span></span>&gt;</span></code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -274,32 +224,37 @@
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '376', 376)" onmouseover="showTip(event, '376', 376)">
+              <code onmouseout="hideTip(event, '105', 105)" onmouseover="showTip(event, '105', 105)">
                 <p>
-                  <a id="updateCount">
-                    <a href="#updateCount">
-                      <code><span>updateCount&#32;<span>stylesheet</span></span></code>
+                  <a id="encode">
+                    <a href="#encode">
+                      <code><span>encode&#32;<span>col</span></span></code>
                     </a>
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="376">
+              <div class="fsdocs-tip" id="105">
                 <div class="member-tooltip">
                   Full Usage: 
-                  <code><span>updateCount&#32;<span>stylesheet</span></span></code>
+                  <code><span>encode&#32;<span>col</span></span></code>
                   <br/>
                   <br/>
                   Parameters: 
                   <ul>
                     <span>
                       <b>
-                        stylesheet
+                        col
                       </b>
                       :
-                      <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.stylesheet">Stylesheet</a></code>
+                      <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fscolumn.html">FsColumn</a></code>
                     </span>
                     <br/>
                   </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="https://docs.microsoft.com/dotnet/api/thoth.json.core.json">Json</a></code>
+                  </span>
                   <br/>
                 </div>
               </div>
@@ -307,15 +262,15 @@
           </td>
           <td class="fsdocs-member-xmldoc">
             <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.Stylesheet.Font.updateCount`')">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Json.Column.encode`')">
                 <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
               </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.Stylesheet.Font.updateCount\'/>')">
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Json.Column.encode\'/>')">
                 <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/Stylesheet.fs#L21-21" class="fsdocs-source-link" title="Source on GitHub">
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Json/Column.fs#L12-12" class="fsdocs-source-link" title="Source on GitHub">
                 <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
               </a>
@@ -326,12 +281,77 @@
             <dl class="fsdocs-params">
               <dt class="fsdocs-param">
                 <span class="fsdocs-param-name">
-                  stylesheet
+                  col
                 </span>
                 :
-                <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.stylesheet">Stylesheet</a></code>
+                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fscolumn.html">FsColumn</a></code>
               </dt>
               <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="https://docs.microsoft.com/dotnet/api/thoth.json.core.json">Json</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '106', 106)" onmouseover="showTip(event, '106', 106)">
+                <p>
+                  <a id="number">
+                    <a href="#number">
+                      <code><span>number&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="106">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>number&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>string</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:P:FsSpreadsheet.Json.Column.number`')">
+                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'P:FsSpreadsheet.Json.Column.number\'/>')">
+                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Json/Column.fs#L10-10" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
             </dl>
           </td>
         </tr>
