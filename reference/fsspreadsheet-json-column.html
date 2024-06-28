@@ -112,7 +112,7 @@
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '103', 103)" onmouseover="showTip(event, '103', 103)">
+              <code onmouseout="hideTip(event, '104', 104)" onmouseover="showTip(event, '104', 104)">
                 <p>
                   <a id="cells">
                     <a href="#cells">
@@ -121,7 +121,7 @@
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="103">
+              <div class="fsdocs-tip" id="104">
                 <div class="member-tooltip">
                   Full Usage: 
                   <code><span>cells&#32;<span></span></span></code>
@@ -168,7 +168,7 @@
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '104', 104)" onmouseover="showTip(event, '104', 104)">
+              <code onmouseout="hideTip(event, '105', 105)" onmouseover="showTip(event, '105', 105)">
                 <p>
                   <a id="decode">
                     <a href="#decode">
@@ -177,7 +177,7 @@
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="104">
+              <div class="fsdocs-tip" id="105">
                 <div class="member-tooltip">
                   Full Usage: 
                   <code><span>decode&#32;<span></span></span></code>
@@ -185,7 +185,7 @@
                   <br/>
                   <span>
                     Returns: 
-                    <code><span><a href="https://docs.microsoft.com/dotnet/api/thoth.json.core.decoder-1">Decoder</a>&lt;<span>int&#32;*&#32;<span>seq&lt;<a href="/FsSpreadsheet/reference/fsspreadsheet-fscell.html">FsCell</a>&gt;</span></span>&gt;</span></code>
+                    <code><span><a href="https://docs.microsoft.com/dotnet/api/thoth.json.core.decoder-1">Decoder</a>&lt;<span><span>int&#32;option</span>&#32;*&#32;<span>seq&lt;<a href="/FsSpreadsheet/reference/fsspreadsheet-fscell.html">FsCell</a>&gt;</span></span>&gt;</span></code>
                   </span>
                   <br/>
                 </div>
@@ -202,7 +202,7 @@
                 <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Json/Column.fs#L18-18" class="fsdocs-source-link" title="Source on GitHub">
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Json/Column.fs#L23-23" class="fsdocs-source-link" title="Source on GitHub">
                 <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
                 <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
               </a>
@@ -215,7 +215,7 @@
                 <span class="fsdocs-return-name">
                   Returns: 
                 </span>
-                <code><span><a href="https://docs.microsoft.com/dotnet/api/thoth.json.core.decoder-1">Decoder</a>&lt;<span>int&#32;*&#32;<span>seq&lt;<a href="/FsSpreadsheet/reference/fsspreadsheet-fscell.html">FsCell</a>&gt;</span></span>&gt;</span></code>
+                <code><span><a href="https://docs.microsoft.com/dotnet/api/thoth.json.core.decoder-1">Decoder</a>&lt;<span><span>int&#32;option</span>&#32;*&#32;<span>seq&lt;<a href="/FsSpreadsheet/reference/fsspreadsheet-fscell.html">FsCell</a>&gt;</span></span>&gt;</span></code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -224,7 +224,7 @@
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '105', 105)" onmouseover="showTip(event, '105', 105)">
+              <code onmouseout="hideTip(event, '106', 106)" onmouseover="showTip(event, '106', 106)">
                 <p>
                   <a id="encode">
                     <a href="#encode">
@@ -233,7 +233,7 @@
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="105">
+              <div class="fsdocs-tip" id="106">
                 <div class="member-tooltip">
                   Full Usage: 
                   <code><span>encode&#32;<span>col</span></span></code>
@@ -302,7 +302,85 @@
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '106', 106)" onmouseover="showTip(event, '106', 106)">
+              <code onmouseout="hideTip(event, '107', 107)" onmouseover="showTip(event, '107', 107)">
+                <p>
+                  <a id="encodeNoNumbers">
+                    <a href="#encodeNoNumbers">
+                      <code><span>encodeNoNumbers&#32;<span>col</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="107">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>encodeNoNumbers&#32;<span>col</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        col
+                      </b>
+                      :
+                      <code><span>seq&lt;<a href="/FsSpreadsheet/reference/fsspreadsheet-fscell.html">FsCell</a>&gt;</span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="https://docs.microsoft.com/dotnet/api/thoth.json.core.json">Json</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Json.Column.encodeNoNumbers`')">
+                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Json.Column.encodeNoNumbers\'/>')">
+                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet/Json/Column.fs#L18-18" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
+                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  col
+                </span>
+                :
+                <code><span>seq&lt;<a href="/FsSpreadsheet/reference/fsspreadsheet-fscell.html">FsCell</a>&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="https://docs.microsoft.com/dotnet/api/thoth.json.core.json">Json</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '108', 108)" onmouseover="showTip(event, '108', 108)">
                 <p>
                   <a id="number">
                     <a href="#number">
@@ -311,7 +389,7 @@
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="106">
+              <div class="fsdocs-tip" id="108">
                 <div class="member-tooltip">
                   Full Usage: 
                   <code><span>number&#32;<span></span></span></code>
