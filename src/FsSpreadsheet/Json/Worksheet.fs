@@ -15,13 +15,31 @@ let columns = "columns"
 [<Literal>]
 let tables = "tables"
 
-let encodeRows (sheet:FsWorksheet) =
+let encodeRows noNumbering (sheet:FsWorksheet) =
+    
     sheet.RescanRows()
+    let jRows = 
+        if noNumbering then
+            [
+                for r = 1 to sheet.MaxRowIndex do
+                    [
+                        for c = 1 to sheet.MaxColumnIndex do
+                            match sheet.CellCollection.TryGetCell(r,c) with
+                            | Some cell -> cell
+                            | None -> new FsCell("")
+
+                    ]
+                    |> Row.encodeNoNumbers
+            ]
+            |> Encode.seq
+        else 
+            Encode.seq (sheet.Rows |> Seq.map Row.encode)
+
     Encode.object [
         name, Encode.string sheet.Name
         if Seq.isEmpty sheet.Tables |> not then        
             tables, Encode.seq (sheet.Tables |> Seq.map Table.encode)
-        rows, Encode.seq (sheet.Rows |> Seq.map Row.encode)
+        rows, jRows
 
     ]
 
@@ -64,27 +82,57 @@ let decodeRows : Decoder<FsWorksheet> =
         sheet
     )
 
-let encodeColumns (sheet:FsWorksheet) =
+let encodeColumns noNumbering (sheet:FsWorksheet) =
     sheet.RescanRows()
+
+    let jColumns = 
+        if noNumbering then
+            [
+                for c = 1 to sheet.MaxColumnIndex do
+                    [
+                        for r = 1 to sheet.MaxRowIndex do
+                            match sheet.CellCollection.TryGetCell(r,c) with
+                            | Some cell -> cell
+                            | None -> new FsCell("")
+
+                    ]
+                    |> Column.encodeNoNumbers
+            ]
+            |> Encode.seq
+        else 
+            Encode.seq (sheet.Columns |> Seq.map Column.encode)
+
     Encode.object [
         name, Encode.string sheet.Name
         if Seq.isEmpty sheet.Tables |> not then        
             tables, Encode.seq (sheet.Tables |> Seq.map Table.encode)
-        columns, Encode.seq (sheet.Columns |> Seq.map Column.encode)
+        columns, jColumns
     ]
 
 let decodeColumns : Decoder<FsWorksheet> =
     Decode.object (fun builder ->
+        let mutable colIndex = 0
         let n = builder.Required.Field name Decode.string
         let ts = builder.Optional.Field tables (Decode.seq Table.decode)
         let cs = builder.Required.Field columns (Decode.seq Column.decode)
         let sheet = new FsWorksheet(n)
         cs
         |> Seq.iter (fun (colI,cells) -> 
+            let mutable rowIndex = 0
+            let colI = 
+                match colI with
+                | Some i -> i
+                | None -> colIndex + 1
+            colIndex <- colI
             let col = sheet.Column(colI)
             cells 
-            |> Seq.iter (fun cell ->        
-                let c = col[cell.RowNumber]
+            |> Seq.iter (fun cell ->    
+                let rowI = 
+                    match cell.RowNumber with
+                    | 0 -> rowIndex + 1
+                    | i -> i
+                rowIndex <- rowI
+                let c = col[rowIndex]
                 c.Value <- cell.Value
                 c.DataType <- cell.DataType
             )

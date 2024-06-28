@@ -6,9 +6,9 @@ open Thoth.Json.Core
 [<Literal>]
 let sheets = "sheets"
 
-let encodeRows (wb:FsWorkbook) =
+let encodeRows noNumbering (wb:FsWorkbook) =
     Encode.object [
-        sheets, Encode.seq (wb.GetWorksheets() |> Seq.map Worksheet.encodeRows)
+        sheets, Encode.seq (wb.GetWorksheets() |> Seq.map (Worksheet.encodeRows noNumbering))
     ]
 
 let decodeRows : Decoder<FsWorkbook> =
@@ -19,9 +19,9 @@ let decodeRows : Decoder<FsWorkbook> =
         wb
     )
 
-let encodeColumns (wb:FsWorkbook) =
+let encodeColumns noNumbering (wb:FsWorkbook) =
     Encode.object [
-        sheets, Encode.seq (wb.GetWorksheets() |> Seq.map Worksheet.encodeColumns)
+        sheets, Encode.seq (wb.GetWorksheets() |> Seq.map (Worksheet.encodeColumns noNumbering))
     ]
 
 let decodeColumns : Decoder<FsWorkbook> =

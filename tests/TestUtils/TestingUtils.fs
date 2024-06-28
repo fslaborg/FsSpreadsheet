@@ -6,6 +6,29 @@ open Fable.Core
 open Fable.Pyxpecto
 
 
+module Fable =
+    
+    module JS =
+
+        [<Emit("process.stdout.write($0)")>]
+        let print (s:string) : unit = nativeOnly
+
+    module Py =
+
+        [<Emit("print($0, end = \"\")")>]
+        let print (s:string) : unit = nativeOnly
+
+    let fprint(s: string) =
+        #if FABLE_COMPILER_JAVASCRIPT
+        JS.print(s)
+        #endif
+        #if FABLE_COMPILER_PYTHON
+        Py.print(s)
+        #endif
+        #if !FABLE_COMPILER
+        printf "%s" s
+        #endif
+
 [<RequireQualifiedAccess>]
 module Utils = 
 
@@ -44,6 +67,33 @@ type Stopwatch() =
 
 /// Fable compatible Expecto/Mocha unification
 module Expect =
+
+    let inline equal actual expected message = Expect.equal actual expected message
+    let notEqual actual expected message = Expect.notEqual actual expected message
+
+    /// <summary>
+    /// This function only verifies non-whitespace characters
+    /// </summary>
+    let stringEqual actual expected message =
+        let pattern = @"\s+"
+        let regex = System.Text.RegularExpressions.Regex(pattern, Text.RegularExpressions.RegexOptions.Singleline)
+        let actual = regex.Replace(actual, "")
+        let expected = regex.Replace(expected, "")
+        let mutable isSame = true
+        Seq.iter2 
+            (fun s1 s2 -> 
+                if isSame && s1 = s2 then 
+                    ()
+                elif isSame && s1 <> s2 then
+                    isSame <- false
+                    Fable.fprint (sprintf "%s" (string s1))
+                else
+                    Fable.fprint (sprintf "%s" (string s1))
+            ) 
+            actual 
+            expected
+        equal actual expected message
+
 
     /// Expects the `actual` sequence to equal the `expected` one.
     let inline private _sequenceEqual message (comparison: int * 'a option * 'a option) =
@@ -111,7 +161,7 @@ module Expect =
     let workSheetEqual (actual : FsWorksheet) (expected : FsWorksheet) message =
         let f (ws : FsWorksheet) = 
             ws.RescanRows()
-            ws.Rows |> Seq.map (fun r -> r.Cells) 
+            ws.Rows |> Seq.map (fun r -> r.Cells |> Seq.filter (fun c -> c.Value <> ""))
         if actual.Name <> expected.Name then
             failwithf $"{message}. Worksheet names do not match. Expected {expected.Name} but got {actual.Name}"
         columnsEqual (f actual) (f expected) $"{message}. Worksheet does not match"
@@ -132,9 +182,6 @@ module Expect =
                 let actualRows = ws.Rows
                 for actualRow, expectedRow in Seq.zip actualRows expectedRows do
                     cellSequenceEquals actualRow expectedRow $"ExpectError: Worksheet rows are not equal for worksheet: {ws.Name}"
-
-    let inline equal actual expected message = Expect.equal actual expected message
-    let notEqual actual expected message = Expect.notEqual actual expected message
 
     let isNull actual message = Expect.isNull actual message 
     let isNotNull actual message = Expect.isNotNull actual message 

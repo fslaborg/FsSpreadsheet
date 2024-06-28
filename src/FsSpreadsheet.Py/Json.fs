@@ -23,9 +23,10 @@ type Json =
         | Ok wb -> wb
         | Error e -> failwithf "Could not deserialize json Workbook: \n%s" e
         
-    static member toRowsJsonString (wb:FsWorkbook, ?spaces) : string =
+    static member toRowsJsonString (wb:FsWorkbook, ?spaces, ?noNumbering) : string =
+        let noNumbering = defaultArg noNumbering false
         let spaces = defaultArg spaces 2
-        FsSpreadsheet.Json.Workbook.encodeRows wb
+        FsSpreadsheet.Json.Workbook.encodeRows noNumbering wb
         |> Encode.toString spaces
 
     static member tryFromColumnsJsonString (json:string) : Result<FsWorkbook, string> =
@@ -36,7 +37,8 @@ type Json =
         | Ok wb -> wb
         | Error e -> failwithf "Could not deserialize json Workbook: \n%s" e
 
-    static member toColumnsJsonString (wb:FsWorkbook, ?spaces) : string =
+    static member toColumnsJsonString (wb:FsWorkbook, ?spaces, ?noNumbering) : string =
         let spaces = defaultArg spaces 2
-        FsSpreadsheet.Json.Workbook.encodeColumns wb
+        let noNumbering = defaultArg noNumbering false
+        FsSpreadsheet.Json.Workbook.encodeColumns noNumbering wb
         |> Encode.toString spaces

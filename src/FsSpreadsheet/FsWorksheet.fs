@@ -81,6 +81,10 @@ type FsWorksheet (name, ?fsRows, ?fsTables, ?fsCellsCollection) =
                 FsColumn(newRange,self.CellCollection)
             )
 
+    member this.MaxRowIndex = this.CellCollection.MaxRowNumber
+
+    member this.MaxColumnIndex = this.CellCollection.MaxColumnNumber
+
     // -------
     // METHODS
     // -------

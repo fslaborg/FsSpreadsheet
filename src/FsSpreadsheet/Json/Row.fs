@@ -15,6 +15,11 @@ let encode (row:FsRow) =
         cells, Encode.seq (row.Cells |> Seq.map Cell.encodeRows)
     ]
 
+let encodeNoNumbers (row: FsCell seq) =
+    Encode.object [
+        cells, Encode.seq (row |> Seq.map Cell.encodeNoNumber)
+    ]
+
 let decode : Decoder<int option*FsCell seq> =
     Decode.object (fun builder ->
         let n = builder.Optional.Field number Decode.int

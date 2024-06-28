@@ -5,6 +5,17 @@ open FsSpreadsheet
 open FsSpreadsheet.Net
 open Fable.Pyxpecto
 
+let getFilledTestWb() =
+    let wb = new FsWorkbook()
+    let ws = FsWorkbook.initWorksheet "MySheet" wb
+    let r1 = ws.Row(1)
+    r1.[1].SetValueAs "A1"
+    r1.[2].SetValueAs "B1"
+    let r2 = ws.Row(2)
+    r2.[1].SetValueAs "A2"
+    r2.[2].SetValueAs "B2"
+    wb
+
 let rows =
     testList "Rows" [
         testCase "Read Standard" <| fun _ -> 
@@ -53,7 +64,53 @@ let rows =
             Expect.isTrue (row2.HasCellAt 1) "Row 7 cell"
             Expect.equal (row2.[1].Value) "Line 7" "Row 7 cell value"
 
-        testCase "Read-Write DefaultTestObject" <| fun _ ->
+        testCase "NoNumber Filled Write" <| fun _ ->
+            let wb = getFilledTestWb()
+            let expectedString = """{
+  "sheets": [
+    {
+      "name": "MySheet",
+      "rows": [
+        {
+          "cells": [
+            {
+              "value": "A1"
+            },
+            {
+              "value": "B1"
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "value": "A2"
+            },
+            {
+              "value": "B2"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}"""
+            let s = wb.ToRowsJsonString(noNumbering = true)
+            Expect.stringEqual s expectedString "NoNumber Filled Write-Read"
+            
+        testCase "NoNumber Filled Write-Read" <| fun _ ->
+            let wb = getFilledTestWb()
+            let s = wb.ToRowsJsonString(noNumbering = true)
+            let wb2 = FsWorkbook.fromRowsJsonString(s)
+            Expect.workSheetEqual (wb2.GetWorksheetAt(1)) (wb.GetWorksheetAt(1)) "NoNumber Filled Write-Read"
+
+        testCase "NoNumber DefaultTestObject Write-Read_Success" <| fun _ -> 
+            let dto = DefaultTestObject.defaultTestObject()
+            let s = dto.ToRowsJsonString(noNumbering = true)
+            let dto2 = FsWorkbook.fromRowsJsonString(s)
+            ()
+
+        testCase "Write-Read DefaultTestObject" <| fun _ ->
             let dto = DefaultTestObject.defaultTestObject()
             let s = dto.ToRowsJsonString()
             System.IO.File.WriteAllText(DefaultTestObject.FsSpreadsheetJSON.asRelativePath,s)
@@ -64,7 +121,53 @@ let rows =
 let columns =
     testList "Columns" [
 
-        testCase "Read-Write DefaultTestObject" <| fun _ ->
+        testCase "NoNumber Filled Write" <| fun _ ->
+            let wb = getFilledTestWb()
+            let expectedString = """{
+  "sheets": [
+    {
+      "name": "MySheet",
+      "columns": [
+        {
+          "cells": [
+            {
+              "value": "A1"
+            },
+            {
+              "value": "A2"
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "value": "B1"
+            },
+            {
+              "value": "B2"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}"""
+            let s = wb.ToColumnsJsonString(noNumbering = true)
+            Expect.stringEqual s expectedString "NoNumber Filled Write-Read"
+            
+        testCase "NoNumber Filled Write-Read" <| fun _ ->
+            let wb = getFilledTestWb()
+            let s = wb.ToColumnsJsonString(noNumbering = true)
+            let wb2 = FsWorkbook.fromColumnsJsonString(s)
+            Expect.workSheetEqual (wb2.GetWorksheetAt(1)) (wb.GetWorksheetAt(1)) "NoNumber Filled Write-Read"
+
+        testCase "NoNumber DefaultTestObject Write-Read_Success" <| fun _ ->
+            let dto = DefaultTestObject.defaultTestObject()
+            let s = dto.ToColumnsJsonString(noNumbering = true)
+            let dto2 = FsWorkbook.fromColumnsJsonString(s)
+            ()
+
+        testCase "DefaultTestObject Write-Read" <| fun _ ->
             let dto = DefaultTestObject.defaultTestObject()
             let s = dto.ToColumnsJsonString()
             System.IO.File.WriteAllText(DefaultTestObject.FsSpreadsheetJSON.asRelativePath,s)
