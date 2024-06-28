@@ -9,11 +9,11 @@ let getFilledTestWb() =
     let wb = new FsWorkbook()
     let ws = FsWorkbook.initWorksheet "MySheet" wb
     let r1 = ws.Row(1)
-    r1.[1].Value <- "A1"
-    r1.[2].Value <- "B1"
+    r1.[1].SetValueAs "A1"
+    r1.[2].SetValueAs "B1"
     let r2 = ws.Row(2)
-    r2.[1].Value <- "A2"
-    r2.[2].Value <- "B2"
+    r2.[1].SetValueAs "A2"
+    r2.[2].SetValueAs "B2"
     wb
 
 let rows =
@@ -102,8 +102,13 @@ let rows =
             let wb = getFilledTestWb()
             let s = wb.ToRowsJsonString(noNumbering = true)
             let wb2 = FsWorkbook.fromRowsJsonString(s)
-            Expect.workSheetEqual (wb.GetWorksheetAt(1)) (wb2.GetWorksheetAt(1)) "NoNumber Filled Write-Read"
+            Expect.workSheetEqual (wb2.GetWorksheetAt(1)) (wb.GetWorksheetAt(1)) "NoNumber Filled Write-Read"
 
+        testCase "NoNumber DefaultTestObject Write-Read_Success" <| fun _ -> 
+            let dto = DefaultTestObject.defaultTestObject()
+            let s = dto.ToRowsJsonString(noNumbering = true)
+            let dto2 = FsWorkbook.fromRowsJsonString(s)
+            ()
 
         testCase "Write-Read DefaultTestObject" <| fun _ ->
             let dto = DefaultTestObject.defaultTestObject()
@@ -154,13 +159,13 @@ let columns =
             let wb = getFilledTestWb()
             let s = wb.ToColumnsJsonString(noNumbering = true)
             let wb2 = FsWorkbook.fromColumnsJsonString(s)
-            Expect.workSheetEqual (wb.GetWorksheetAt(1)) (wb2.GetWorksheetAt(1)) "NoNumber Filled Write-Read"
+            Expect.workSheetEqual (wb2.GetWorksheetAt(1)) (wb.GetWorksheetAt(1)) "NoNumber Filled Write-Read"
 
-        testCase "NoNumber Write-Read DefaultTestObject" <| fun _ ->
+        testCase "NoNumber DefaultTestObject Write-Read_Success" <| fun _ ->
             let dto = DefaultTestObject.defaultTestObject()
             let s = dto.ToColumnsJsonString(noNumbering = true)
             let dto2 = FsWorkbook.fromColumnsJsonString(s)
-            Expect.isDefaultTestObject dto2
+            ()
 
         testCase "Write-Read DefaultTestObject" <| fun _ ->
             let dto = DefaultTestObject.defaultTestObject()

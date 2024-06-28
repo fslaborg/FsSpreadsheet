@@ -39,7 +39,7 @@ let encodeCols (cell:FsCell) =
 
 let decodeCols colNumber : Decoder<FsCell> =
     Decode.object (fun builder ->
-        let v,dt = builder.Required.Field value (Value.decode)
-        let r = builder.Required.Field row Decode.int
-        new FsCell(v,dt,FsAddress(r,colNumber))
+        let v,dt = builder.Optional.Field value (Value.decode) |> Option.defaultValue ("", DataType.Empty)
+        let r = builder.Optional.Field row Decode.int |> Option.defaultValue 0
+        new FsCell(v,dt,FsAddress(r,Option.defaultValue 0 colNumber))
     )

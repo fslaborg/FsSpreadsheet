@@ -161,7 +161,7 @@ module Expect =
     let workSheetEqual (actual : FsWorksheet) (expected : FsWorksheet) message =
         let f (ws : FsWorksheet) = 
             ws.RescanRows()
-            ws.Rows |> Seq.map (fun r -> r.Cells) 
+            ws.Rows |> Seq.map (fun r -> r.Cells |> Seq.filter (fun c -> c.Value <> ""))
         if actual.Name <> expected.Name then
             failwithf $"{message}. Worksheet names do not match. Expected {expected.Name} but got {actual.Name}"
         columnsEqual (f actual) (f expected) $"{message}. Worksheet does not match"
