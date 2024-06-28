@@ -167,7 +167,7 @@ let columns =
             let dto2 = FsWorkbook.fromColumnsJsonString(s)
             ()
 
-        testCase "Write-Read DefaultTestObject" <| fun _ ->
+        testCase "DefaultTestObject Write-Read" <| fun _ ->
             let dto = DefaultTestObject.defaultTestObject()
             let s = dto.ToColumnsJsonString()
             System.IO.File.WriteAllText(DefaultTestObject.FsSpreadsheetJSON.asRelativePath,s)

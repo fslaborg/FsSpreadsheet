@@ -111,16 +111,13 @@ let encodeColumns noNumbering (sheet:FsWorksheet) =
 
 let decodeColumns : Decoder<FsWorksheet> =
     Decode.object (fun builder ->
-        printfn "Decode Worksheet"
         let mutable colIndex = 0
         let n = builder.Required.Field name Decode.string
         let ts = builder.Optional.Field tables (Decode.seq Table.decode)
         let cs = builder.Required.Field columns (Decode.seq Column.decode)
         let sheet = new FsWorksheet(n)
-        printfn "Start columning"
         cs
         |> Seq.iter (fun (colI,cells) -> 
-            printfn "\tColumn: %OcolI" colI
             let mutable rowIndex = 0
             let colI = 
                 match colI with
@@ -130,12 +127,10 @@ let decodeColumns : Decoder<FsWorksheet> =
             let col = sheet.Column(colI)
             cells 
             |> Seq.iter (fun cell ->    
-                printfn "\t\tstart Cell: %O" cell
                 let rowI = 
                     match cell.RowNumber with
                     | 0 -> rowIndex + 1
                     | i -> i
-                printfn "\t\trow: %i" rowI
                 rowIndex <- rowI
                 let c = col[rowIndex]
                 c.Value <- cell.Value
