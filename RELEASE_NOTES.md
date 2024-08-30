@@ -1,3 +1,15 @@
+### 6.2.0+ecd768c (Released 2024-6-28)
+* Additions:
+    * [[#302d69a](https://github.com/CSBiology/FsSpreadsheet/commit/302d69a0fe53ed5bd95c2e184bd5ce8c017a7008)] copy new tests from dotnet to js and py
+    * [[#09c017e](https://github.com/CSBiology/FsSpreadsheet/commit/09c017e5f1c596574015b1bf2aca390ff77ffafc)] start working on index-less json parsing tests
+    * [[#34af66f](https://github.com/CSBiology/FsSpreadsheet/commit/34af66fc8d9a4217d7add8e3aa0f7ac5ddad630d)] add index-less json writing
+    * [[#8ccd58f](https://github.com/CSBiology/FsSpreadsheet/commit/8ccd58f2ec4c7dc072dce423de3562866ebd2df0)] make json rowwise parsing more robust
+    * [[#0933e09](https://github.com/CSBiology/FsSpreadsheet/commit/0933e0966c4133df11eba7c8b43dc1e23fc35b00)] Reinclude fable folder inclusion in FsSpreadsheet core project
+    * [[#6080912](https://github.com/CSBiology/FsSpreadsheet/commit/60809125569ed9acc427cded73ad5e561107e347)] add json column representation
+    * [[#3652c9a](https://github.com/CSBiology/FsSpreadsheet/commit/3652c9a71126574a040fa94567b20238feff84ab)] Update version and README.md :books:
+* Bugfixes:
+    * [[#0b64894](https://github.com/CSBiology/FsSpreadsheet/commit/0b64894fd6b5f0b3f25e9c9a7352240eb265a3f7)] fix json column reader for numberless json
+
 ### 6.1.3+3ba93ef (Released 2024-6-7)
 * Additions:
     * [[#9c30d63](https://github.com/CSBiology/FsSpreadsheet/commit/9c30d637eabfb6eca070a105bd39bf9d177d423b)] add manage-issues workflow :green_heart:
