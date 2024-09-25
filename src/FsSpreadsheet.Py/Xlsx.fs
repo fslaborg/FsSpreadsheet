@@ -1,5 +1,6 @@
 ﻿namespace FsSpreadsheet.Py
 
+#if FABLE_COMPILER_PYTHON || !FABLE_COMPILER
 
 open FsSpreadsheet
 open FsSpreadsheet.Py
@@ -34,3 +35,5 @@ type Xlsx =
     static member toXlsxBytes(wb:FsWorkbook) : byte [] =
         PyWorkbook.fromFsWorkbook wb
         |> fun wb -> Xlsx.write(wb)
+
+#endif

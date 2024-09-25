@@ -1,5 +1,7 @@
 ﻿namespace FsSpreadsheet.Js
 
+#if FABLE_COMPILER_JAVASCRIPT || FABLE_COMPILER_TYPESCRIPT || !FABLE_COMPILER
+
 open FsSpreadsheet
 open Fable.ExcelJs
 open Fable.Core
@@ -71,4 +73,5 @@ type Xlsx =
     [<System.Obsolete("Use toXlsxBytes instead")>]
     static member toBytes (wb:FsWorkbook) : Promise<byte []> =
         Xlsx.toXlsxBytes wb
-            
+        
+#endif

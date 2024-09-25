@@ -1,5 +1,7 @@
 ﻿namespace FsSpreadsheet.Py
 
+#if FABLE_COMPILER_PYTHON || !FABLE_COMPILER
+
 module PyWorkbook =
 
     open Fable.Core
@@ -29,3 +31,4 @@ module PyWorkbook =
                 fsWB.AddWorksheet(w) |> ignore
         )
         fsWB
+#endif

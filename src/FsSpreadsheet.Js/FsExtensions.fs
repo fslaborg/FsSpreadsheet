@@ -1,6 +1,9 @@
 ﻿[<AutoOpenAttribute>]
 module FsSpreadsheet.Js.FsSpreadsheet
 
+#if FABLE_COMPILER_JAVASCRIPT || FABLE_COMPILER_TYPESCRIPT || !FABLE_COMPILER
+
+
 open FsSpreadsheet
 open FsSpreadsheet.Js
 open Fable.Core
@@ -67,3 +70,5 @@ type FsWorkbook with
 
     member this.ToColumnsJsonString(?spaces, ?noNumbering) : string =
         FsWorkbook.toColumnsJsonString(this, ?spaces = spaces, ?noNumbering = noNumbering)
+
+#endif

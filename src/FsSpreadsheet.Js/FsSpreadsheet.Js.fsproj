@@ -21,6 +21,11 @@
       <PackagePath>\</PackagePath>
       <Pack>true</Pack>
     </None>
+    <Compile Include="Thoth.Json.Javascript/Decode.fs" />
+    <Compile Include="Thoth.Json.Javascript/Encode.fs" />
+    <Compile Include="Fable.Promise/Promise.fs" />
+    <Compile Include="Fable.Promise/AsyncIterable.fs" />
+    <Compile Include="Fable.Promise/PromiseImpl.fs" />
     <Compile Include="Cell.fs" />
     <Compile Include="Table.fs" />
     <Compile Include="Worksheet.fs" />
@@ -31,9 +36,9 @@
   </ItemGroup>
 
   <ItemGroup>   
-    <PackageReference Include="Fable.Exceljs" Version="1.6.0" />
-    <PackageReference Include="Fable.Promise" Version="3.2.0" />
-    <PackageReference Include="Thoth.Json.JavaScript" Version="0.1.0" />
+    <PackageReference Include="Fable.Exceljs" Version="2.0.0" />
+    <!--<PackageReference Include="Fable.Promise" Version="3.2.0" />-->
+    <!--<PackageReference Include="Thoth.Json.JavaScript" Version="0.1.0" />-->
   </ItemGroup>
 
   <!-- Add source files to "fable" folder in Nuget package -->

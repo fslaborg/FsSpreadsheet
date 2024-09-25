@@ -1,6 +1,9 @@
 ﻿[<AutoOpenAttribute>]
 module FsSpreadsheet.Py.FsSpreadsheet
 
+
+#if FABLE_COMPILER_PYTHON || !FABLE_COMPILER
+
 open FsSpreadsheet
 open FsSpreadsheet.Py
 
@@ -62,4 +65,5 @@ type FsWorkbook with
 
     member this.ToColumnsJsonString(?spaces,?noNumbering) : string =
         FsWorkbook.toColumnsJsonString(this, ?spaces = spaces, ?noNumbering = noNumbering)
-            
+   
+#endif

@@ -1,5 +1,6 @@
 ﻿namespace FsSpreadsheet.Js
 
+#if FABLE_COMPILER_JAVASCRIPT || FABLE_COMPILER_TYPESCRIPT || !FABLE_COMPILER
 
 module JsCell =
 
@@ -86,3 +87,5 @@ module JsCell =
         fscell
 
 
+
+#endif

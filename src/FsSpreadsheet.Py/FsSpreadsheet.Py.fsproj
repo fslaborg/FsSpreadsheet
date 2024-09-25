@@ -6,6 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="Thoth.Json.Python/Python.fs" />
+    <Compile Include="Thoth.Json.Python/Decode.fs" />
+    <Compile Include="Thoth.Json.Python/Encode.fs" />
     <Compile Include="CellType.fs" />
     <Compile Include="Cell.fs" />
     <Compile Include="Table.fs" />
@@ -17,8 +20,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Fable.Openpyxl" Version="0.2.0" />
-    <PackageReference Include="Thoth.Json.Python" Version="0.1.0" />
+    <PackageReference Include="Fable.Openpyxl" Version="1.0.0-alpha.1" />
+    <!--<PackageReference Include="Thoth.Json.Python" Version="0.1.0" />-->
+    <PackageReference Include="Fable.Python" Version="4.6.1" />
   </ItemGroup>
 
   <ItemGroup>
