@@ -1,6 +1,7 @@
-#if FABLE_COMPILER_JAVASCRIPT || FABLE_COMPILER_TYPESCRIPT || !FABLE_COMPILER
 [<RequireQualifiedAccess>]
 module AsyncIterable
+
+#if FABLE_COMPILER_JAVASCRIPT || FABLE_COMPILER_TYPESCRIPT || !FABLE_COMPILER
 
 open Fable.Core
 open Fable.Core.JsInterop

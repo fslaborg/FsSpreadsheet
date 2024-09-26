@@ -28,5 +28,9 @@
   <ItemGroup>
     <ProjectReference Include="..\FsSpreadsheet\FsSpreadsheet.fsproj" />
   </ItemGroup>
-  <ItemGroup />
+
+  <ItemGroup>
+    <Content Include="*.fsproj; **\*.fs; **\*.fsi" PackagePath="fable\" />
+  </ItemGroup>
+  
 </Project>
