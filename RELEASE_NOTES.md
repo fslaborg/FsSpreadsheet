@@ -1,3 +1,8 @@
+### 6.3.0+d90873d (Released 2024-9-25)
+* Additions:
+    * [[#d90873d](https://github.com/CSBiology/FsSpreadsheet/commit/d90873d5419a555c8a82734a33b19a935f7a4020)] include Fable dependency source files and add compiler directives
+    * [[#cee3a72](https://github.com/CSBiology/FsSpreadsheet/commit/cee3a72bdeb8df1d889ddc44e06e6df012c24fbb)] bump to 6.2.0
+
 ### 6.2.0+ecd768c (Released 2024-6-28)
 * Additions:
     * [[#302d69a](https://github.com/CSBiology/FsSpreadsheet/commit/302d69a0fe53ed5bd95c2e184bd5ce8c017a7008)] copy new tests from dotnet to js and py
