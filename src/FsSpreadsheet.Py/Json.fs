@@ -8,8 +8,6 @@ open Fable.Core.JS
 open Thoth.Json.Python
 
 
-
-
 /// This does currently not correctly work if you want to use this from js
 /// https://github.com/fable-compiler/Fable/issues/3498
 [<AttachMembers>]

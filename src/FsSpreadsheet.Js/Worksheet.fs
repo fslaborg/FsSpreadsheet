@@ -1,6 +1,5 @@
 ﻿namespace FsSpreadsheet.Js
 
-
 module JsWorksheet =
 
     open Fable.Core

@@ -71,4 +71,3 @@ type Xlsx =
     [<System.Obsolete("Use toXlsxBytes instead")>]
     static member toBytes (wb:FsWorkbook) : Promise<byte []> =
         Xlsx.toXlsxBytes wb
-            

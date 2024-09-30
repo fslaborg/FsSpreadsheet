@@ -62,4 +62,3 @@ type FsWorkbook with
 
     member this.ToColumnsJsonString(?spaces,?noNumbering) : string =
         FsWorkbook.toColumnsJsonString(this, ?spaces = spaces, ?noNumbering = noNumbering)
-            

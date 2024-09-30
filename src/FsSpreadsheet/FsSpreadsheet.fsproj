@@ -3,6 +3,8 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <FablePackageType>library</FablePackageType>
+    <PackageTags>fable-dotnet;fable-python;fable-javascript</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
@@ -55,11 +57,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Thoth.Json.Core" Version="0.2.1" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <PackageReference Include="Thoth.Json.Core" Version="0.4.0" />
+    <PackageReference Include="Fable.Package.SDK" Version="1.0.0" />
     <Content Include="*.fsproj; **\*.fs; **\*.fsi" PackagePath="fable\" />
   </ItemGroup>
-  
+
 </Project>

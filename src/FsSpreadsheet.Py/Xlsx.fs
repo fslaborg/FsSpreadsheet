@@ -1,6 +1,5 @@
 ﻿namespace FsSpreadsheet.Py
 
-
 open FsSpreadsheet
 open FsSpreadsheet.Py
 open Fable.Core

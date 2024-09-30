@@ -1,6 +1,5 @@
 ﻿namespace FsSpreadsheet.Js
 
-
 module JsCell =
 
     open Fable.Core
@@ -84,5 +83,3 @@ module JsCell =
                 log msg
                 vTemp |> createFscell DataType.String
         fscell
-
-
