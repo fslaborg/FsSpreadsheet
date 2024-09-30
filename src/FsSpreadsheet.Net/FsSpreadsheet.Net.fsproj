@@ -14,6 +14,8 @@
     <PackageTags>F# FSharp spreadsheet xlsx datascience</PackageTags>
     <RepositoryUrl>https://github.com/CSBiology/FsSpreadsheet</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <FablePackageType>library</FablePackageType>
+    <PackageTags>fable-dotnet</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
@@ -36,26 +38,13 @@
   <ItemGroup>
     <PackageReference Include="DocumentFormat.OpenXml" Version="2.16.0" />
     <PackageReference Include="Thoth.Json.Newtonsoft" Version="0.2.0" />
+    <PackageReference Include="Fable.Package.SDK" Version="1.0.0" />
     <None Include="..\..\docs\img\logo.png" Pack="true" PackagePath="\" />
+    <Content Include="*.fsproj; **\*.fs; **\*.fsi" PackagePath="fable\" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\FsSpreadsheet\FsSpreadsheet.fsproj" PackageVersion="[6.0.0, 7.0.0)" />
   </ItemGroup>
-
-  <Target Name="UseExplicitPackageVersions" BeforeTargets="GenerateNuspec">
-    <ItemGroup>
-      <_ProjectReferenceWithExplicitPackageVersion Include="@(ProjectReference->'%(FullPath)')" Condition="'%(ProjectReference.PackageVersion)' != ''" />
-      <_ProjectReferenceWithExactPackageVersion Include="@(ProjectReference->'%(FullPath)')" Condition="'%(ProjectReference.ExactVersion)' == 'true'" />
-      <_ProjectReferenceWithReassignedVersion Include="@(_ProjectReferencesWithVersions)" Condition="'%(Identity)' != '' And '@(_ProjectReferenceWithExplicitPackageVersion)' == '@(_ProjectReferencesWithVersions)'">
-        <ProjectVersion>@(_ProjectReferenceWithExplicitPackageVersion->'%(PackageVersion)')</ProjectVersion>
-      </_ProjectReferenceWithReassignedVersion>
-      <_ProjectReferenceWithReassignedVersion Include="@(_ProjectReferencesWithVersions)" Condition="'%(Identity)' != '' And '@(_ProjectReferenceWithExactPackageVersion)' == '@(_ProjectReferencesWithVersions)'">
-        <ProjectVersion>[@(_ProjectReferencesWithVersions->'%(ProjectVersion)')]</ProjectVersion>
-      </_ProjectReferenceWithReassignedVersion>
-      <_ProjectReferencesWithVersions Remove="@(_ProjectReferenceWithReassignedVersion)" />
-      <_ProjectReferencesWithVersions Include="@(_ProjectReferenceWithReassignedVersion)" />
-    </ItemGroup>
-  </Target>
 
 </Project>

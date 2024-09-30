@@ -1,7 +1,5 @@
 ﻿namespace FsSpreadsheet.Py
 
-#if FABLE_COMPILER_PYTHON || !FABLE_COMPILER
-
 module PyWorksheet =
 
     open Fable.Core
@@ -38,5 +36,3 @@ module PyWorksheet =
             )
         )
         fsWS
-
-#endif

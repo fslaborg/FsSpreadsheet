@@ -1,7 +1,5 @@
 ﻿namespace FsSpreadsheet.Js
 
-#if FABLE_COMPILER_JAVASCRIPT || FABLE_COMPILER_TYPESCRIPT || !FABLE_COMPILER
-
 module JsWorksheet =
 
     open Fable.Core
@@ -40,5 +38,3 @@ module JsWorksheet =
             fsws.AddTable table |> ignore
         fsws.RescanRows()
         wb.AddWorksheet(fsws)
-
-#endif

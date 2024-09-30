@@ -1,7 +1,5 @@
 ﻿namespace FsSpreadsheet.Py
 
-#if FABLE_COMPILER_PYTHON || !FABLE_COMPILER
-
 module PyTable =
 
     open Fable.Core
@@ -35,5 +33,3 @@ module PyTable =
         let name = if isNull table.displayName then table.name else table.displayName
         let ref = table.ref
         FsTable(name,FsRangeAddress(ref))
-
-#endif

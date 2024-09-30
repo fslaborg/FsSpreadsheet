@@ -1,7 +1,5 @@
 ﻿namespace FsSpreadsheet.Py
 
-#if FABLE_COMPILER_PYTHON || !FABLE_COMPILER
-
 module PyCellType =
 
     open Fable.Core
@@ -31,5 +29,3 @@ module PyCellType =
             let msg = sprintf "ValueType '%A' is not fully implemented in FsSpreadsheet and is handled as string input." anyElse         
             printfn "%s" msg
             DataType.String
-
-#endif

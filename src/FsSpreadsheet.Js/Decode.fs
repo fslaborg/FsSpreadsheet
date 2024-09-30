@@ -1,7 +1,5 @@
 namespace Thoth.Json.JavaScript
 
-#if FABLE_COMPILER_JAVASCRIPT || FABLE_COMPILER_TYPESCRIPT || !FABLE_COMPILER
-
 open Fable.Core
 open Fable.Core.JsInterop
 open Thoth.Json.Core
@@ -88,5 +86,3 @@ return JSON.stringify($0, null, 4) + ''
             match fromString decoder value with
             | Ok x -> x
             | Error msg -> failwith msg
-
-#endif

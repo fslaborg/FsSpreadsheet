@@ -1,7 +1,5 @@
 ﻿namespace FsSpreadsheet.Py
 
-#if FABLE_COMPILER_PYTHON || !FABLE_COMPILER
-
 module PyCell =
 
     open Fable.Core
@@ -62,5 +60,4 @@ module PyCell =
             else
                 dt,v
         FsCell(v,dt,address = fsadress)
-        
-#endif
+       

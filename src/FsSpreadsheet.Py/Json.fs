@@ -8,8 +8,6 @@ open Fable.Core.JS
 open Thoth.Json.Python
 
 
-#if FABLE_COMPILER_PYTHON || !FABLE_COMPILER
-
 /// This does currently not correctly work if you want to use this from js
 /// https://github.com/fable-compiler/Fable/issues/3498
 [<AttachMembers>]
@@ -42,5 +40,3 @@ type Json =
         let noNumbering = defaultArg noNumbering false
         FsSpreadsheet.Json.Workbook.encodeColumns noNumbering wb
         |> Encode.toString spaces
-
-#endif

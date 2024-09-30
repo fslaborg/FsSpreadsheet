@@ -1,7 +1,5 @@
 ﻿namespace FsSpreadsheet.Js
 
-#if FABLE_COMPILER_JAVASCRIPT || FABLE_COMPILER_TYPESCRIPT || !FABLE_COMPILER
-
 module JsWorkbook =
     open FsSpreadsheet
     open Fable.ExcelJs
@@ -27,5 +25,3 @@ module JsWorkbook =
         for jsws in jswb.worksheets do
             JsWorksheet.readToFsWorksheet fswb jsws
         fswb
-        
-#endif

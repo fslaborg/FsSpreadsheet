@@ -1,7 +1,5 @@
 ﻿namespace FsSpreadsheet.Js
 
-#if FABLE_COMPILER_JAVASCRIPT || FABLE_COMPILER_TYPESCRIPT || !FABLE_COMPILER
-
 module JsTable =
 
     open Fable.Core
@@ -50,5 +48,3 @@ module JsTable =
         let tableName = if isNull table.displayName then table.name else table.displayName
         let table = FsTable(tableName, tableRef, table.totalsRow, table.headerRow)
         table
-
-#endif
