@@ -11,7 +11,7 @@
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
-	<PropertyGroup>
+  <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
@@ -47,7 +47,7 @@
   <ItemGroup>
     <ProjectReference Include="..\FsSpreadsheet\FsSpreadsheet.fsproj" />
   </ItemGroup>
-	
+
   <PropertyGroup>
     <NpmDependencies>
       <NpmPackage Name="@nfdi4plants/exceljs" Version="gte 0.1.0 lt 1.0.0" ResolutionStrategy="Max" />
