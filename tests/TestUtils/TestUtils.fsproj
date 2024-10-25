@@ -1,29 +1,29 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
-		<EmbeddedResource Include="TestFiles\TestWorkbook_ClosedXML.xlsx">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</EmbeddedResource>
-		<EmbeddedResource Include="TestFiles\TestWorkbook_Excel.xlsx">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</EmbeddedResource>
-		<EmbeddedResource Include="TestFiles\TestWorkbook_FableExceljs.xlsx">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</EmbeddedResource>
-		<EmbeddedResource Include="TestFiles\TestWorkbook_Libre.xlsx">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</EmbeddedResource>
-		<EmbeddedResource Include="TestFiles\TestWorkbook_FsSpreadsheet.net.xlsx">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</EmbeddedResource>
-		<EmbeddedResource Include="TestFiles\TestWorkbook_FsSpreadsheet.js.xlsx">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</EmbeddedResource>
+    <EmbeddedResource Include="TestFiles\TestWorkbook_ClosedXML.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestFiles\TestWorkbook_Excel.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestFiles\TestWorkbook_FableExceljs.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestFiles\TestWorkbook_Libre.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestFiles\TestWorkbook_FsSpreadsheet.net.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestFiles\TestWorkbook_FsSpreadsheet.js.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="TestFiles\BigFile.xlsx" >
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -31,17 +31,11 @@
     <Compile Include="TestingUtils.fs" />
   </ItemGroup>
 
-	<ItemGroup>
-		<PackageReference Include="Fable.Pyxpecto" Version="1.0.1" />
-	</ItemGroup>
-
-	<ItemGroup>
-    <ProjectReference Include="..\..\src\FsSpreadsheet\FsSpreadsheet.fsproj" />
+  <ItemGroup>
+    <PackageReference Include="Fable.Pyxpecto" Version="1.0.1" />
   </ItemGroup>
 
-	<ItemGroup>
-	  <PackageReference Update="FSharp.Core" Version="7.0.200" />
-	</ItemGroup>
-
-	
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\FsSpreadsheet\FsSpreadsheet.fsproj" />
+  </ItemGroup>
 </Project>
