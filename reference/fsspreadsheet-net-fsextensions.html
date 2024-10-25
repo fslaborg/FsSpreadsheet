@@ -1,62 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" data-root="/FsSpreadsheet/">
 <head>
-    <meta charset="utf-8">
-    <title>FsExtensions (FsSpreadsheet)</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="author" content="Heinrich Lukas Weil, Oliver Maus, Kevin Schneider, Timo Mühlhaus">
-    <link rel="shortcut icon" type="image/x-icon" href="/FsSpreadsheet//img/favicon.ico">
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
-
-    <link type="text/css" rel="stylesheet" href="/FsSpreadsheet/content/fsdocs-default.css" />
-    <link type="text/css" rel="stylesheet" href="/FsSpreadsheet/content/fsdocs-custom.css" />
-    <script type="text/javascript" src="/FsSpreadsheet/content/fsdocs-tips.js"></script>
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
-    <!-- END SEARCH BOX: this adds support for the search box -->
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Heinrich Lukas Weil, Oliver Maus, Kevin Schneider, Timo Mühlhaus" name="author">
+    <!-- Opengraph properties (https://ogp.me/) -->
+    <meta property="og:site_name" content="FsSpreadsheet">
+    <meta property="og:title" content="FsExtensions (FsSpreadsheet)" />
+    <meta property="og:url" content="/FsSpreadsheet/{{fsdocs-source-basename}}.html">
+    <meta property="og:type" content="website" />
+    <!-- Twitter cards (https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/summary-card-with-large-image) -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="/FsSpreadsheet/">
+    <meta name="twitter:title" content="FsExtensions (FsSpreadsheet)">
     
-</head> 
-
-<body>
-    <div class="columns is-fullheight m-0">
-        <div id="fsdocs-menu" class="column is-2 is-paddingless">
-            <aside class="menu">
-                <div class="container is-paddingless is-marginless has-background-dark">
-                    <a href="/FsSpreadsheet/">
-                        <figure class="image is-128x128 container">
-                            <img src="/FsSpreadsheet/img/logo.png">
-                        </figure>
-                    </a>
-                    <h2 class="title has-text-centered has-text-white">FsSpreadsheet</h2>
-                    <h5 class="has-text-centered has-text-white pb-4">Documentation for 6.3.0-alpha.4</h5>
-                </div>
-                <div class="content">
-                    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
-                    <div id="header">
-                        <div class="searchbox" id="fsdocs-searchbox">
-                            <label for="search-by">
-                                <i class="fas fa-search"></i>
-                            </label>
-                            <input data-search-input="" id="search-by" type="search" placeholder="Search..." class="input"/>
-                            <span data-search-clear="">
-                                <i class="fas fa-times"></i>
-                            </span>
-                        </div>
-                    </div>
-                    <!-- END SEARCH BOX: this adds support for the search box -->
-                    <ul class="navbar-nav">
-                        <li class="nav-header">Links</li>
-                        <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="https://github.com/CSBiology/FsSpreadsheet/blob/master/LICENSE.md">License (MIT)</a></li>
-                        <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="https://github.com/CSBiology/FsSpreadsheet/blob/master/RELEASE_NOTES.md">Release Notes</a></li>
-                        <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="https://github.com/CSBiology/FsSpreadsheet/">Source Repository</a></li>
-                        <li class="nav-header">
+    <title>FsExtensions (FsSpreadsheet) | FsSpreadsheet</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link href="/FsSpreadsheet/img/favicon.ico" rel="icon" sizes="32x32" type="image/png"/>
+    <script type="application/javascript" src="/FsSpreadsheet/content/fsdocs-theme-set-dark.js"></script>
+    <link href="/FsSpreadsheet/content/fsdocs-default.css" rel="stylesheet" type="text/css"/>
+    <link href="/FsSpreadsheet/content/fsdocs-theme.css" rel="stylesheet" type="text/css"/>
+    
+    
+</head>
+<body class="api-docs">
+<header>
+    <div class="start">
+        <div id="menu-toggle">
+            <iconify-icon class="icon closed" height="22" icon="eva:menu-fill" width="22"></iconify-icon>
+            <iconify-icon class="icon open" height="22" icon="mi:close" width="22"></iconify-icon>
+            <input type="checkbox" name="mobile-menu" />
+            <ul class="menu">
+                <li class="nav-header">Links</li>
+                <li class="nav-item"><a class="nav-link" href="https://github.com/CSBiology/FsSpreadsheet/blob/master/LICENSE.md">License</a>
+                </li>
+                <li class="nav-item"><a class="nav-link"
+                                        href="https://github.com/CSBiology/FsSpreadsheet/blob/master/RELEASE_NOTES.md">Release
+                    Notes</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://github.com/CSBiology/FsSpreadsheet/">Source
+                    Repository</a></li>
+                
+                <li class="nav-header">
   API Reference
 </li>             
 <li class="nav-item">
@@ -64,14 +52,45 @@
     All Namespaces
   </a>
 </li>
-                    </ul>
-                </div>
-            </aside>
+            </ul>
         </div>
-        <div class="column is-10 is-paddingless">
-            <div class="section pt-4">
-                <div class="container" id="fsdocs-content">
-                    <div>
+        <a href="/FsSpreadsheet/">
+            <img alt="Header menu logo" src="/FsSpreadsheet/img/logo.png">
+            <strong>FsSpreadsheet</strong>
+        </a>
+    </div>
+    <div class="end">
+        <a href="https://github.com/CSBiology/FsSpreadsheet/" target="_blank">
+            <iconify-icon icon="uil:github" width="26" height="26"></iconify-icon>
+        </a>
+        <iconify-icon id="search-btn" icon="carbon:search" class="search" width="24" height="24"></iconify-icon>
+        <fsdocs-theme-toggle></fsdocs-theme-toggle>
+    </div>
+</header>
+<aside id="fsdocs-main-menu">
+    <ul class="menu">
+        <li class="nav-header">Links</li>
+        <li class="nav-item"><a class="nav-link" href="https://github.com/CSBiology/FsSpreadsheet/blob/master/LICENSE.md">License</a>
+        </li>
+        <li class="nav-item"><a class="nav-link"
+                                href="https://github.com/CSBiology/FsSpreadsheet/blob/master/RELEASE_NOTES.md">Release
+            Notes</a></li>
+        <li class="nav-item"><a class="nav-link" href="https://github.com/CSBiology/FsSpreadsheet/">Source
+            Repository</a></li>
+        
+        <li class="nav-header">
+  API Reference
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/FsSpreadsheet/reference/index.html">
+    All Namespaces
+  </a>
+</li>
+    </ul>
+</aside>
+<main>
+    <div id="content">
+        <div>
   <h2>
     FsExtensions Module
   </h2>
@@ -89,9 +108,7 @@
   <div class="fsdocs-xmldoc">
     <div>
       <p class="fsdocs-summary">
-        
- Classes that extend the core FsSpreadsheet library with IO functionalities.
- 
+         Classes that extend the core FsSpreadsheet library with IO functionalities.
       </p>
     </div>
   </div>
@@ -137,7 +154,7 @@
                         xlsxlWorkbookPart
                       </b>
                       :
-                      <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.packaging.workbookpart">WorkbookPart</a></code>
+                      <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.packaging.workbookpart">WorkbookPart</a></code>
                     </span>
                     <br/>
                     <span>
@@ -145,7 +162,7 @@
                         xlsxWorksheetPart
                       </b>
                       :
-                      <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.packaging.worksheetpart">WorksheetPart</a></code>
+                      <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.packaging.worksheetpart">WorksheetPart</a></code>
                     </span>
                     <br/>
                   </ul>
@@ -155,47 +172,46 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsWorksheet.AppendTablesToWorksheetPart`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsWorksheet.AppendTablesToWorksheetPart\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L219-219" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- Appends the FsTables of this FsWorksheet to a given OpenXmlWorksheetPart in an XlsxWorkbookPart.
- 
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsWorksheet.AppendTablesToWorksheetPart`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsWorksheet.AppendTablesToWorksheetPart\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L219-219" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Appends the FsTables of this FsWorksheet to a given OpenXmlWorksheetPart in an XlsxWorkbookPart.
+                  </p>
+                </div>
+              </summary>
+              <p>
+                Extended Type: 
+                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworksheet.html">FsWorksheet</a></code>
               </p>
-            </div>
-            <p>
-              Extended Type: 
-              <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworksheet.html">FsWorksheet</a></code>
-            </p>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  xlsxlWorkbookPart
-                </span>
-                :
-                <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.packaging.workbookpart">WorkbookPart</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  xlsxWorksheetPart
-                </span>
-                :
-                <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.packaging.worksheetpart">WorksheetPart</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    xlsxlWorkbookPart
+                  </span>
+                  :
+                  <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.packaging.workbookpart">WorkbookPart</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    xlsxWorksheetPart
+                  </span>
+                  :
+                  <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.packaging.worksheetpart">WorksheetPart</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+            </details>
           </td>
         </tr>
         <tr>
@@ -238,48 +254,47 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsTable.GetWorksheetOfTable`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsTable.GetWorksheetOfTable\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L167-167" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- Returns the FsWorksheet associated with the FsTable in a given FsWorkbook.
- 
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsTable.GetWorksheetOfTable`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsTable.GetWorksheetOfTable\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L167-167" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Returns the FsWorksheet associated with the FsTable in a given FsWorkbook.
+                  </p>
+                </div>
+              </summary>
+              <p>
+                Extended Type: 
+                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fstable.html">FsTable</a></code>
               </p>
-            </div>
-            <p>
-              Extended Type: 
-              <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fstable.html">FsTable</a></code>
-            </p>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  workbook
-                </span>
-                :
-                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
-                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworksheet.html">FsWorksheet</a></code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    workbook
+                  </span>
+                  :
+                  <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworksheet.html">FsWorksheet</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
           </td>
         </tr>
         <tr>
@@ -333,23 +348,6 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.ToColumnsJsonFile`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.ToColumnsJsonFile\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L468-468" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
-              </p>
-            </div>
             <p>
               Extended Type: 
               <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
@@ -430,23 +428,6 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.ToColumnsJsonString`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.ToColumnsJsonString\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L465-465" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
-              </p>
-            </div>
             <p>
               Extended Type: 
               <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
@@ -505,7 +486,7 @@
                         doc
                       </b>
                       :
-                      <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.packaging.spreadsheetdocument">SpreadsheetDocument</a></code>
+                      <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.packaging.spreadsheetdocument">SpreadsheetDocument</a></code>
                     </span>
                     <br/>
                   </ul>
@@ -515,23 +496,6 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.ToEmptySpreadsheet`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.ToEmptySpreadsheet\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L379-379" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
-              </p>
-            </div>
             <p>
               Extended Type: 
               <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
@@ -542,7 +506,7 @@
                   doc
                 </span>
                 :
-                <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.packaging.spreadsheetdocument">SpreadsheetDocument</a></code>
+                <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.packaging.spreadsheetdocument">SpreadsheetDocument</a></code>
               </dt>
               <dd class="fsdocs-param-docs"></dd>
             </dl>
@@ -599,23 +563,6 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.ToRowsJsonFile`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.ToRowsJsonFile\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L451-451" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
-              </p>
-            </div>
             <p>
               Extended Type: 
               <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
@@ -696,23 +643,6 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.ToRowsJsonString`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.ToRowsJsonString\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L448-448" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
-              </p>
-            </div>
             <p>
               Extended Type: 
               <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
@@ -786,48 +716,47 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.ToXlsxBytes`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.ToXlsxBytes\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L413-413" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- Returns the FsWorkbook in the form of a byte array.
- 
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.ToXlsxBytes`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.ToXlsxBytes\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L413-413" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Returns the FsWorkbook in the form of a byte array.
+                  </p>
+                </div>
+              </summary>
+              <p>
+                Extended Type: 
+                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
               </p>
-            </div>
-            <p>
-              Extended Type: 
-              <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
-            </p>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  ()
-                </span>
-                :
-                <code>unit</code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
-                <code><span>byte[]</span></code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ()
+                  </span>
+                  :
+                  <code>unit</code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><span>byte[]</span></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
           </td>
         </tr>
         <tr>
@@ -865,39 +794,38 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.ToXlsxFile`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.ToXlsxFile\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L427-427" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- Writes the FsWorkbook into a binary file at the given path.
- 
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.ToXlsxFile`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.ToXlsxFile\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L427-427" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Writes the FsWorkbook into a binary file at the given path.
+                  </p>
+                </div>
+              </summary>
+              <p>
+                Extended Type: 
+                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
               </p>
-            </div>
-            <p>
-              Extended Type: 
-              <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
-            </p>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  path
-                </span>
-                :
-                <code>string</code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    path
+                  </span>
+                  :
+                  <code>string</code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+            </details>
           </td>
         </tr>
         <tr>
@@ -925,7 +853,7 @@
                         stream
                       </b>
                       :
-                      <code><a href="https://docs.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></code>
+                      <code><a href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></code>
                     </span>
                     <br/>
                   </ul>
@@ -935,39 +863,38 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.ToXlsxStream`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.ToXlsxStream\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L393-393" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- Writes the FsWorkbook into a given MemoryStream.
- 
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.ToXlsxStream`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.ToXlsxStream\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L393-393" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Writes the FsWorkbook into a given MemoryStream.
+                  </p>
+                </div>
+              </summary>
+              <p>
+                Extended Type: 
+                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
               </p>
-            </div>
-            <p>
-              Extended Type: 
-              <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
-            </p>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  stream
-                </span>
-                :
-                <code><a href="https://docs.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    stream
+                  </span>
+                  :
+                  <code><a href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+            </details>
           </td>
         </tr>
         <tr>
@@ -1002,7 +929,7 @@
                   <br/>
                   <span>
                     Returns: 
-                    <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.table">Table</a></code>
+                    <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.table">Table</a></code>
                   </span>
                   <br/>
                 </div>
@@ -1010,48 +937,47 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsTable.ToXlsxTable`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsTable.ToXlsxTable\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L136-136" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- Returns the FsTable with given FsCellsCollection in the form of an XlsxTable.
- 
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsTable.ToXlsxTable`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsTable.ToXlsxTable\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L136-136" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Returns the FsTable with given FsCellsCollection in the form of an XlsxTable.
+                  </p>
+                </div>
+              </summary>
+              <p>
+                Extended Type: 
+                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fstable.html">FsTable</a></code>
               </p>
-            </div>
-            <p>
-              Extended Type: 
-              <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fstable.html">FsTable</a></code>
-            </p>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  cells
-                </span>
-                :
-                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fscellscollection.html">FsCellsCollection</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
-                <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.table">Table</a></code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    cells
+                  </span>
+                  :
+                  <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fscellscollection.html">FsCellsCollection</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.table">Table</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
           </td>
         </tr>
         <tr>
@@ -1079,14 +1005,14 @@
                         doc
                       </b>
                       :
-                      <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.packaging.spreadsheetdocument">SpreadsheetDocument</a></code>
+                      <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.packaging.spreadsheetdocument">SpreadsheetDocument</a></code>
                     </span>
                     <br/>
                   </ul>
                   <br/>
                   <span>
                     Returns: 
-                    <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.worksheet">Worksheet</a></code>
+                    <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.worksheet">Worksheet</a></code>
                   </span>
                   <br/>
                 </div>
@@ -1094,48 +1020,47 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsWorksheet.ToXlsxWorksheet`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsWorksheet.ToXlsxWorksheet\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L187-187" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- Returns the FsWorksheet in the form of an XlsxSpreadsheet.
- 
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsWorksheet.ToXlsxWorksheet`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsWorksheet.ToXlsxWorksheet\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L187-187" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Returns the FsWorksheet in the form of an XlsxSpreadsheet.
+                  </p>
+                </div>
+              </summary>
+              <p>
+                Extended Type: 
+                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworksheet.html">FsWorksheet</a></code>
               </p>
-            </div>
-            <p>
-              Extended Type: 
-              <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworksheet.html">FsWorksheet</a></code>
-            </p>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  doc
-                </span>
-                :
-                <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.packaging.spreadsheetdocument">SpreadsheetDocument</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
-                <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.worksheet">Worksheet</a></code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    doc
+                  </span>
+                  :
+                  <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.packaging.spreadsheetdocument">SpreadsheetDocument</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.worksheet">Worksheet</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
           </td>
         </tr>
         <tr>
@@ -1163,7 +1088,7 @@
                         xlsxWorkbookPart
                       </b>
                       :
-                      <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.packaging.workbookpart">WorkbookPart</a></code>
+                      <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.packaging.workbookpart">WorkbookPart</a></code>
                     </span>
                     <br/>
                     <span>
@@ -1171,7 +1096,7 @@
                         xlsxWorksheetPart
                       </b>
                       :
-                      <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.packaging.worksheetpart">WorksheetPart</a></code>
+                      <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.packaging.worksheetpart">WorksheetPart</a></code>
                     </span>
                     <br/>
                     <span>
@@ -1189,55 +1114,54 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsWorksheet.appendTablesToWorksheetPart.Static`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsWorksheet.appendTablesToWorksheetPart.Static\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L229-229" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- Appends the FsTables of an FsWorksheet to a given OpenXmlWorksheetPart in an XlsxWorkbookPart.
- 
-              </p>
-            </div>
-            <p>
-              Extended Type: 
-              <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworksheet.html">FsWorksheet</a></code>
-            </p>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  xlsxWorkbookPart
-                </span>
-                :
-                <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.packaging.workbookpart">WorkbookPart</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  xlsxWorksheetPart
-                </span>
-                :
-                <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.packaging.worksheetpart">WorksheetPart</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  fsWorksheet
-                </span>
-                :
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsWorksheet.appendTablesToWorksheetPart.Static`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsWorksheet.appendTablesToWorksheetPart.Static\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L229-229" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Appends the FsTables of an FsWorksheet to a given OpenXmlWorksheetPart in an XlsxWorkbookPart.
+                  </p>
+                </div>
+              </summary>
+              <p>
+                Extended Type: 
                 <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworksheet.html">FsWorksheet</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
+              </p>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    xlsxWorkbookPart
+                  </span>
+                  :
+                  <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.packaging.workbookpart">WorkbookPart</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    xlsxWorksheetPart
+                  </span>
+                  :
+                  <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.packaging.worksheetpart">WorksheetPart</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    fsWorksheet
+                  </span>
+                  :
+                  <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworksheet.html">FsWorksheet</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+            </details>
           </td>
         </tr>
         <tr>
@@ -1280,48 +1204,47 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.fromColumnsJsonFile.Static`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.fromColumnsJsonFile.Static\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L374-374" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- Takes the path to an json file and returns the FsWorkbook based on its content.
- 
-              </p>
-            </div>
-            <p>
-              Extended Type: 
-              <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
-            </p>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  filePath
-                </span>
-                :
-                <code>string</code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.fromColumnsJsonFile.Static`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.fromColumnsJsonFile.Static\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L374-374" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Takes the path to an json file and returns the FsWorkbook based on its content.
+                  </p>
+                </div>
+              </summary>
+              <p>
+                Extended Type: 
                 <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
+              </p>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    filePath
+                  </span>
+                  :
+                  <code>string</code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
           </td>
         </tr>
         <tr>
@@ -1364,48 +1287,47 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.fromColumnsJsonString.Static`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.fromColumnsJsonString.Static\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L359-359" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- Takes a json string and returns the FsWorkbook based on its content.
- 
-              </p>
-            </div>
-            <p>
-              Extended Type: 
-              <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
-            </p>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  json
-                </span>
-                :
-                <code>string</code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.fromColumnsJsonString.Static`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.fromColumnsJsonString.Static\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L359-359" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Takes a json string and returns the FsWorkbook based on its content.
+                  </p>
+                </div>
+              </summary>
+              <p>
+                Extended Type: 
                 <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
+              </p>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    json
+                  </span>
+                  :
+                  <code>string</code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
           </td>
         </tr>
         <tr>
@@ -1433,7 +1355,7 @@
                         package
                       </b>
                       :
-                      <code><a href="https://docs.microsoft.com/dotnet/api/system.io.packaging.package">Package</a></code>
+                      <code><a href="https://learn.microsoft.com/dotnet/api/system.io.packaging.package">Package</a></code>
                     </span>
                     <br/>
                   </ul>
@@ -1448,48 +1370,47 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.fromPackage.Static`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.fromPackage.Static\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L291-291" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- Creates an FsWorkbook from a given Packaging.Package xlsx package.
- 
-              </p>
-            </div>
-            <p>
-              Extended Type: 
-              <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
-            </p>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  package
-                </span>
-                :
-                <code><a href="https://docs.microsoft.com/dotnet/api/system.io.packaging.package">Package</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.fromPackage.Static`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.fromPackage.Static\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L291-291" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Creates an FsWorkbook from a given Packaging.Package xlsx package.
+                  </p>
+                </div>
+              </summary>
+              <p>
+                Extended Type: 
                 <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
+              </p>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    package
+                  </span>
+                  :
+                  <code><a href="https://learn.microsoft.com/dotnet/api/system.io.packaging.package">Package</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
           </td>
         </tr>
         <tr>
@@ -1532,48 +1453,47 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.fromRowsJsonFile.Static`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.fromRowsJsonFile.Static\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L346-346" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- Takes the path to an json file and returns the FsWorkbook based on its content.
- 
-              </p>
-            </div>
-            <p>
-              Extended Type: 
-              <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
-            </p>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  filePath
-                </span>
-                :
-                <code>string</code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.fromRowsJsonFile.Static`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.fromRowsJsonFile.Static\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L346-346" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Takes the path to an json file and returns the FsWorkbook based on its content.
+                  </p>
+                </div>
+              </summary>
+              <p>
+                Extended Type: 
                 <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
+              </p>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    filePath
+                  </span>
+                  :
+                  <code>string</code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
           </td>
         </tr>
         <tr>
@@ -1616,48 +1536,47 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.fromRowsJsonString.Static`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.fromRowsJsonString.Static\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L331-331" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- Takes a json string and returns the FsWorkbook based on its content.
- 
-              </p>
-            </div>
-            <p>
-              Extended Type: 
-              <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
-            </p>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  json
-                </span>
-                :
-                <code>string</code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.fromRowsJsonString.Static`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.fromRowsJsonString.Static\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L331-331" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Takes a json string and returns the FsWorkbook based on its content.
+                  </p>
+                </div>
+              </summary>
+              <p>
+                Extended Type: 
                 <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
+              </p>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    json
+                  </span>
+                  :
+                  <code>string</code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
           </td>
         </tr>
         <tr>
@@ -1685,7 +1604,7 @@
                         doc
                       </b>
                       :
-                      <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.packaging.spreadsheetdocument">SpreadsheetDocument</a></code>
+                      <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.packaging.spreadsheetdocument">SpreadsheetDocument</a></code>
                     </span>
                     <br/>
                   </ul>
@@ -1700,48 +1619,47 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.fromSpreadsheetDocument.Static`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.fromSpreadsheetDocument.Static\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L238-238" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- Creates an FsWorkbook from a given SpreadsheetDocument.
- 
-              </p>
-            </div>
-            <p>
-              Extended Type: 
-              <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
-            </p>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  doc
-                </span>
-                :
-                <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.packaging.spreadsheetdocument">SpreadsheetDocument</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.fromSpreadsheetDocument.Static`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.fromSpreadsheetDocument.Static\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L238-238" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Creates an FsWorkbook from a given SpreadsheetDocument.
+                  </p>
+                </div>
+              </summary>
+              <p>
+                Extended Type: 
                 <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
+              </p>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    doc
+                  </span>
+                  :
+                  <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.packaging.spreadsheetdocument">SpreadsheetDocument</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
           </td>
         </tr>
         <tr>
@@ -1784,48 +1702,47 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.fromXlsxBytes.Static`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.fromXlsxBytes.Static\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L311-311" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- Creates an FsWorkbook from a given Stream to an XlsxFile.
- 
-              </p>
-            </div>
-            <p>
-              Extended Type: 
-              <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
-            </p>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  bytes
-                </span>
-                :
-                <code><span>byte[]</span></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.fromXlsxBytes.Static`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.fromXlsxBytes.Static\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L311-311" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Creates an FsWorkbook from a given Stream to an XlsxFile.
+                  </p>
+                </div>
+              </summary>
+              <p>
+                Extended Type: 
                 <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
+              </p>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    bytes
+                  </span>
+                  :
+                  <code><span>byte[]</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
           </td>
         </tr>
         <tr>
@@ -1868,48 +1785,47 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.fromXlsxFile.Static`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.fromXlsxFile.Static\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L318-318" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- Takes the path to an Xlsx file and returns the FsWorkbook based on its content.
- 
-              </p>
-            </div>
-            <p>
-              Extended Type: 
-              <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
-            </p>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  filePath
-                </span>
-                :
-                <code>string</code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.fromXlsxFile.Static`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.fromXlsxFile.Static\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L318-318" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Takes the path to an Xlsx file and returns the FsWorkbook based on its content.
+                  </p>
+                </div>
+              </summary>
+              <p>
+                Extended Type: 
                 <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
+              </p>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    filePath
+                  </span>
+                  :
+                  <code>string</code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
           </td>
         </tr>
         <tr>
@@ -1937,7 +1853,7 @@
                         stream
                       </b>
                       :
-                      <code><a href="https://docs.microsoft.com/dotnet/api/system.io.stream">Stream</a></code>
+                      <code><a href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a></code>
                     </span>
                     <br/>
                   </ul>
@@ -1952,48 +1868,47 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.fromXlsxStream.Static`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.fromXlsxStream.Static\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L298-298" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- Creates an FsWorkbook from a given Stream to an XlsxFile.
- 
-              </p>
-            </div>
-            <p>
-              Extended Type: 
-              <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
-            </p>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  stream
-                </span>
-                :
-                <code><a href="https://docs.microsoft.com/dotnet/api/system.io.stream">Stream</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.fromXlsxStream.Static`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.fromXlsxStream.Static\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L298-298" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Creates an FsWorkbook from a given Stream to an XlsxFile.
+                  </p>
+                </div>
+              </summary>
+              <p>
+                Extended Type: 
                 <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
+              </p>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    stream
+                  </span>
+                  :
+                  <code><a href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
           </td>
         </tr>
         <tr>
@@ -2021,7 +1936,7 @@
                         table
                       </b>
                       :
-                      <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.table">Table</a></code>
+                      <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.table">Table</a></code>
                     </span>
                     <br/>
                   </ul>
@@ -2036,48 +1951,47 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsTable.fromXlsxTable.Static`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsTable.fromXlsxTable.Static\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L158-158" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- Takes an XlsxTable and returns an FsTable.
- 
-              </p>
-            </div>
-            <p>
-              Extended Type: 
-              <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fstable.html">FsTable</a></code>
-            </p>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  table
-                </span>
-                :
-                <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.table">Table</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsTable.fromXlsxTable.Static`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsTable.fromXlsxTable.Static\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L158-158" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Takes an XlsxTable and returns an FsTable.
+                  </p>
+                </div>
+              </summary>
+              <p>
+                Extended Type: 
                 <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fstable.html">FsTable</a></code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
+              </p>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    table
+                  </span>
+                  :
+                  <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.table">Table</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fstable.html">FsTable</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
           </td>
         </tr>
         <tr>
@@ -2128,56 +2042,55 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsTable.getWorksheetOfTable.Static`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsTable.getWorksheetOfTable.Static\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L178-178" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- Returns the FsWorksheet associated with a given FsTable in an FsWorkbook.
- 
-              </p>
-            </div>
-            <p>
-              Extended Type: 
-              <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fstable.html">FsTable</a></code>
-            </p>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  workbook
-                </span>
-                :
-                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  table
-                </span>
-                :
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsTable.getWorksheetOfTable.Static`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsTable.getWorksheetOfTable.Static\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L178-178" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Returns the FsWorksheet associated with a given FsTable in an FsWorkbook.
+                  </p>
+                </div>
+              </summary>
+              <p>
+                Extended Type: 
                 <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fstable.html">FsTable</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
-                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworksheet.html">FsWorksheet</a></code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
+              </p>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    workbook
+                  </span>
+                  :
+                  <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    table
+                  </span>
+                  :
+                  <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fstable.html">FsTable</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworksheet.html">FsWorksheet</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
           </td>
         </tr>
         <tr>
@@ -2205,7 +2118,7 @@
                         doc
                       </b>
                       :
-                      <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.packaging.spreadsheetdocument">SpreadsheetDocument</a></code>
+                      <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.packaging.spreadsheetdocument">SpreadsheetDocument</a></code>
                     </span>
                     <br/>
                     <span>
@@ -2213,7 +2126,7 @@
                         cell
                       </b>
                       :
-                      <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
+                      <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
                     </span>
                     <br/>
                   </ul>
@@ -2228,56 +2141,55 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.DataType.ofXlsXCell.Static`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.DataType.ofXlsXCell.Static\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L20-20" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- Converts a given CellValues to the respective DataType.
- 
-              </p>
-            </div>
-            <p>
-              Extended Type: 
-              <code><a href="/FsSpreadsheet/reference/fsspreadsheet-datatype.html">DataType</a></code>
-            </p>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  doc
-                </span>
-                :
-                <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.packaging.spreadsheetdocument">SpreadsheetDocument</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  cell
-                </span>
-                :
-                <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.DataType.ofXlsXCell.Static`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.DataType.ofXlsXCell.Static\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L20-20" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Converts a given CellValues to the respective DataType.
+                  </p>
+                </div>
+              </summary>
+              <p>
+                Extended Type: 
                 <code><a href="/FsSpreadsheet/reference/fsspreadsheet-datatype.html">DataType</a></code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
+              </p>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    doc
+                  </span>
+                  :
+                  <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.packaging.spreadsheetdocument">SpreadsheetDocument</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    cell
+                  </span>
+                  :
+                  <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="/FsSpreadsheet/reference/fsspreadsheet-datatype.html">DataType</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
           </td>
         </tr>
         <tr>
@@ -2305,7 +2217,7 @@
                         doc
                       </b>
                       :
-                      <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.packaging.spreadsheetdocument">SpreadsheetDocument</a></code>
+                      <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.packaging.spreadsheetdocument">SpreadsheetDocument</a></code>
                     </span>
                     <br/>
                     <span>
@@ -2321,7 +2233,7 @@
                         xlsxCell
                       </b>
                       :
-                      <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
+                      <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
                     </span>
                     <br/>
                   </ul>
@@ -2336,64 +2248,63 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsCell.ofXlsxCell.Static`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsCell.ofXlsxCell.Static\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L61-61" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- Creates an FsCell on the basis of an XlsxCell. Uses a SharedStringTable if present to get the XlsxCell's value.
- 
-              </p>
-            </div>
-            <p>
-              Extended Type: 
-              <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fscell.html">FsCell</a></code>
-            </p>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  doc
-                </span>
-                :
-                <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.packaging.spreadsheetdocument">SpreadsheetDocument</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  sst
-                </span>
-                :
-                <code><span><a href="/FsSpreadsheet/reference/fsspreadsheet-net-sst.html">SST</a>&#32;option</span></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  xlsxCell
-                </span>
-                :
-                <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsCell.ofXlsxCell.Static`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsCell.ofXlsxCell.Static\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L61-61" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Creates an FsCell on the basis of an XlsxCell. Uses a SharedStringTable if present to get the XlsxCell's value.
+                  </p>
+                </div>
+              </summary>
+              <p>
+                Extended Type: 
                 <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fscell.html">FsCell</a></code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
+              </p>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    doc
+                  </span>
+                  :
+                  <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.packaging.spreadsheetdocument">SpreadsheetDocument</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    sst
+                  </span>
+                  :
+                  <code><span><a href="/FsSpreadsheet/reference/fsspreadsheet-net-sst.html">SST</a>&#32;option</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    xlsxCell
+                  </span>
+                  :
+                  <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fscell.html">FsCell</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
           </td>
         </tr>
         <tr>
@@ -2452,23 +2363,6 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.toColumnsJsonFile.Static`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.toColumnsJsonFile.Static\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L460-460" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
-              </p>
-            </div>
             <p>
               Extended Type: 
               <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
@@ -2566,23 +2460,6 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.toColumnsJsonString.Static`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.toColumnsJsonString.Static\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L454-454" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
-              </p>
-            </div>
             <p>
               Extended Type: 
               <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
@@ -2680,23 +2557,6 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.toRowsJsonFile.Static`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.toRowsJsonFile.Static\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L443-443" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
-              </p>
-            </div>
             <p>
               Extended Type: 
               <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
@@ -2794,23 +2654,6 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.toRowsJsonString.Static`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.toRowsJsonString.Static\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L437-437" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
-              </p>
-            </div>
             <p>
               Extended Type: 
               <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
@@ -2892,48 +2735,47 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.toXlsxBytes.Static`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.toXlsxBytes.Static\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L421-421" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- Returns an FsWorkbook in the form of a byte array.
- 
-              </p>
-            </div>
-            <p>
-              Extended Type: 
-              <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
-            </p>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  workbook
-                </span>
-                :
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.toXlsxBytes.Static`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.toXlsxBytes.Static\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L421-421" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Returns an FsWorkbook in the form of a byte array.
+                  </p>
+                </div>
+              </summary>
+              <p>
+                Extended Type: 
                 <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
-                <code><span>byte[]</span></code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
+              </p>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    workbook
+                  </span>
+                  :
+                  <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><span>byte[]</span></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
           </td>
         </tr>
         <tr>
@@ -2961,7 +2803,7 @@
                         doc
                       </b>
                       :
-                      <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.packaging.spreadsheetdocument">SpreadsheetDocument</a></code>
+                      <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.packaging.spreadsheetdocument">SpreadsheetDocument</a></code>
                     </span>
                     <br/>
                     <span>
@@ -2976,7 +2818,7 @@
                   <br/>
                   <span>
                     Returns: 
-                    <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
+                    <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
                   </span>
                   <br/>
                 </div>
@@ -2984,23 +2826,6 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsCell.toXlsxCell.Static`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsCell.toXlsxCell.Static\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L128-128" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
-              </p>
-            </div>
             <p>
               Extended Type: 
               <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fscell.html">FsCell</a></code>
@@ -3011,7 +2836,7 @@
                   doc
                 </span>
                 :
-                <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.packaging.spreadsheetdocument">SpreadsheetDocument</a></code>
+                <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.packaging.spreadsheetdocument">SpreadsheetDocument</a></code>
               </dt>
               <dd class="fsdocs-param-docs"></dd>
               <dt class="fsdocs-param">
@@ -3028,7 +2853,7 @@
                 <span class="fsdocs-return-name">
                   Returns: 
                 </span>
-                <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
+                <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -3077,47 +2902,46 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.toXlsxFile.Static`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.toXlsxFile.Static\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L434-434" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- Writes an FsWorkbook into a binary file at the given path.
- 
-              </p>
-            </div>
-            <p>
-              Extended Type: 
-              <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
-            </p>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  path
-                </span>
-                :
-                <code>string</code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  workbook
-                </span>
-                :
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.toXlsxFile.Static`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.toXlsxFile.Static\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L434-434" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Writes an FsWorkbook into a binary file at the given path.
+                  </p>
+                </div>
+              </summary>
+              <p>
+                Extended Type: 
                 <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
+              </p>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    path
+                  </span>
+                  :
+                  <code>string</code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    workbook
+                  </span>
+                  :
+                  <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+            </details>
           </td>
         </tr>
         <tr>
@@ -3145,7 +2969,7 @@
                         stream
                       </b>
                       :
-                      <code><a href="https://docs.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></code>
+                      <code><a href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></code>
                     </span>
                     <br/>
                     <span>
@@ -3163,47 +2987,46 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.toXlsxStream.Static`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.toXlsxStream.Static\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L407-407" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- Writes an FsWorkbook into a given MemoryStream.
- 
-              </p>
-            </div>
-            <p>
-              Extended Type: 
-              <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
-            </p>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  stream
-                </span>
-                :
-                <code><a href="https://docs.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  workbook
-                </span>
-                :
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.toXlsxStream.Static`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.toXlsxStream.Static\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L407-407" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Writes an FsWorkbook into a given MemoryStream.
+                  </p>
+                </div>
+              </summary>
+              <p>
+                Extended Type: 
                 <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
+              </p>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    stream
+                  </span>
+                  :
+                  <code><a href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    workbook
+                  </span>
+                  :
+                  <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+            </details>
           </td>
         </tr>
         <tr>
@@ -3246,7 +3069,7 @@
                   <br/>
                   <span>
                     Returns: 
-                    <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.table">Table</a></code>
+                    <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.table">Table</a></code>
                   </span>
                   <br/>
                 </div>
@@ -3254,56 +3077,55 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsTable.toXlsxTable.Static`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsTable.toXlsxTable.Static\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L148-148" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- Returns an FsTable with given FsCellsCollection in the form of an XlsxTable.
- 
-              </p>
-            </div>
-            <p>
-              Extended Type: 
-              <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fstable.html">FsTable</a></code>
-            </p>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  cellsCollection
-                </span>
-                :
-                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fscellscollection.html">FsCellsCollection</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  table
-                </span>
-                :
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsTable.toXlsxTable.Static`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsTable.toXlsxTable.Static\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L148-148" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Returns an FsTable with given FsCellsCollection in the form of an XlsxTable.
+                  </p>
+                </div>
+              </summary>
+              <p>
+                Extended Type: 
                 <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fstable.html">FsTable</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
-                <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.table">Table</a></code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
+              </p>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    cellsCollection
+                  </span>
+                  :
+                  <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fscellscollection.html">FsCellsCollection</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    table
+                  </span>
+                  :
+                  <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fstable.html">FsTable</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.table">Table</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
           </td>
         </tr>
         <tr>
@@ -3339,14 +3161,14 @@
                         doc
                       </b>
                       :
-                      <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.packaging.spreadsheetdocument">SpreadsheetDocument</a></code>
+                      <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.packaging.spreadsheetdocument">SpreadsheetDocument</a></code>
                     </span>
                     <br/>
                   </ul>
                   <br/>
                   <span>
                     Returns: 
-                    <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.worksheet">Worksheet</a></code>
+                    <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.worksheet">Worksheet</a></code>
                   </span>
                   <br/>
                 </div>
@@ -3354,56 +3176,55 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsWorksheet.toXlsxWorksheet.Static`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsWorksheet.toXlsxWorksheet.Static\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L213-213" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- Returns an FsWorksheet in the form of an XlsxSpreadsheet.
- 
-              </p>
-            </div>
-            <p>
-              Extended Type: 
-              <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworksheet.html">FsWorksheet</a></code>
-            </p>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  fsWorksheet
-                </span>
-                :
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsWorksheet.toXlsxWorksheet.Static`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsWorksheet.toXlsxWorksheet.Static\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L213-213" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Returns an FsWorksheet in the form of an XlsxSpreadsheet.
+                  </p>
+                </div>
+              </summary>
+              <p>
+                Extended Type: 
                 <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworksheet.html">FsWorksheet</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  doc
-                </span>
-                :
-                <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.packaging.spreadsheetdocument">SpreadsheetDocument</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
-                <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.worksheet">Worksheet</a></code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
+              </p>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    fsWorksheet
+                  </span>
+                  :
+                  <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworksheet.html">FsWorksheet</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    doc
+                  </span>
+                  :
+                  <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.packaging.spreadsheetdocument">SpreadsheetDocument</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.worksheet">Worksheet</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
           </td>
         </tr>
         <tr>
@@ -3446,48 +3267,47 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.tryFromColumnsJsonFile.Static`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.tryFromColumnsJsonFile.Static\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L367-367" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- Takes the path to an json file and returns the FsWorkbook based on its content.
- 
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.tryFromColumnsJsonFile.Static`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.tryFromColumnsJsonFile.Static\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L367-367" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Takes the path to an json file and returns the FsWorkbook based on its content.
+                  </p>
+                </div>
+              </summary>
+              <p>
+                Extended Type: 
+                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
               </p>
-            </div>
-            <p>
-              Extended Type: 
-              <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
-            </p>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  filePath
-                </span>
-                :
-                <code>string</code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
-                <code><span><a href="https://fsharp.github.io/fsharp-core-docs/reference/fsharp-core-fsharpresult-2">Result</a>&lt;<span><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a>,&#32;string</span>&gt;</span></code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    filePath
+                  </span>
+                  :
+                  <code>string</code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><span><a href="https://fsharp.github.io/fsharp-core-docs/reference/fsharp-core-fsharpresult-2">Result</a>&lt;<span><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a>,&#32;string</span>&gt;</span></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
           </td>
         </tr>
         <tr>
@@ -3530,48 +3350,47 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.tryFromColumnsJsonString.Static`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.tryFromColumnsJsonString.Static\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L353-353" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- Takes a json string and returns the FsWorkbook based on its content.
- 
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.tryFromColumnsJsonString.Static`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.tryFromColumnsJsonString.Static\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L353-353" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Takes a json string and returns the FsWorkbook based on its content.
+                  </p>
+                </div>
+              </summary>
+              <p>
+                Extended Type: 
+                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
               </p>
-            </div>
-            <p>
-              Extended Type: 
-              <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
-            </p>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  json
-                </span>
-                :
-                <code>string</code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
-                <code><span><a href="https://fsharp.github.io/fsharp-core-docs/reference/fsharp-core-fsharpresult-2">Result</a>&lt;<span><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a>,&#32;string</span>&gt;</span></code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    json
+                  </span>
+                  :
+                  <code>string</code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><span><a href="https://fsharp.github.io/fsharp-core-docs/reference/fsharp-core-fsharpresult-2">Result</a>&lt;<span><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a>,&#32;string</span>&gt;</span></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
           </td>
         </tr>
         <tr>
@@ -3614,48 +3433,47 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.tryFromRowsJsonFile.Static`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.tryFromRowsJsonFile.Static\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L339-339" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- Takes the path to an json file and returns the FsWorkbook based on its content.
- 
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.tryFromRowsJsonFile.Static`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.tryFromRowsJsonFile.Static\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L339-339" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Takes the path to an json file and returns the FsWorkbook based on its content.
+                  </p>
+                </div>
+              </summary>
+              <p>
+                Extended Type: 
+                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
               </p>
-            </div>
-            <p>
-              Extended Type: 
-              <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
-            </p>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  filePath
-                </span>
-                :
-                <code>string</code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
-                <code><span><a href="https://fsharp.github.io/fsharp-core-docs/reference/fsharp-core-fsharpresult-2">Result</a>&lt;<span><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a>,&#32;string</span>&gt;</span></code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    filePath
+                  </span>
+                  :
+                  <code>string</code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><span><a href="https://fsharp.github.io/fsharp-core-docs/reference/fsharp-core-fsharpresult-2">Result</a>&lt;<span><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a>,&#32;string</span>&gt;</span></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
           </td>
         </tr>
         <tr>
@@ -3698,48 +3516,47 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.tryFromRowsJsonString.Static`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.tryFromRowsJsonString.Static\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L325-325" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- Takes a json string and returns the FsWorkbook based on its content.
- 
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.tryFromRowsJsonString.Static`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsWorkbook.tryFromRowsJsonString.Static\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L325-325" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Takes a json string and returns the FsWorkbook based on its content.
+                  </p>
+                </div>
+              </summary>
+              <p>
+                Extended Type: 
+                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
               </p>
-            </div>
-            <p>
-              Extended Type: 
-              <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a></code>
-            </p>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  json
-                </span>
-                :
-                <code>string</code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
-                <code><span><a href="https://fsharp.github.io/fsharp-core-docs/reference/fsharp-core-fsharpresult-2">Result</a>&lt;<span><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a>,&#32;string</span>&gt;</span></code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    json
+                  </span>
+                  :
+                  <code>string</code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><span><a href="https://fsharp.github.io/fsharp-core-docs/reference/fsharp-core-fsharpresult-2">Result</a>&lt;<span><a href="/FsSpreadsheet/reference/fsspreadsheet-fsworkbook.html">FsWorkbook</a>,&#32;string</span>&gt;</span></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
           </td>
         </tr>
         <tr>
@@ -3767,7 +3584,7 @@
                         doc
                       </b>
                       :
-                      <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.packaging.spreadsheetdocument">SpreadsheetDocument</a></code>
+                      <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.packaging.spreadsheetdocument">SpreadsheetDocument</a></code>
                     </span>
                     <br/>
                     <span>
@@ -3783,7 +3600,7 @@
                         xlsxCell
                       </b>
                       :
-                      <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
+                      <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
                     </span>
                     <br/>
                   </ul>
@@ -3798,64 +3615,63 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsCell.tryOfXlsxCell.Static`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsCell.tryOfXlsxCell.Static\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L95-95" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- Creates an FsCell on the basis of an XlsxCell. Uses a SharedStringTable if present to get the XlsxCell's value.
- 
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.FsExtensions.FsCell.tryOfXlsxCell.Static`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.FsExtensions.FsCell.tryOfXlsxCell.Static\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/FsExtensions.fs#L95-95" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Creates an FsCell on the basis of an XlsxCell. Uses a SharedStringTable if present to get the XlsxCell's value.
+                  </p>
+                </div>
+              </summary>
+              <p>
+                Extended Type: 
+                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fscell.html">FsCell</a></code>
               </p>
-            </div>
-            <p>
-              Extended Type: 
-              <code><a href="/FsSpreadsheet/reference/fsspreadsheet-fscell.html">FsCell</a></code>
-            </p>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  doc
-                </span>
-                :
-                <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.packaging.spreadsheetdocument">SpreadsheetDocument</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  sst
-                </span>
-                :
-                <code><span><a href="/FsSpreadsheet/reference/fsspreadsheet-net-sst.html">SST</a>&#32;option</span></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  xlsxCell
-                </span>
-                :
-                <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
-                <code><span><a href="/FsSpreadsheet/reference/fsspreadsheet-fscell.html">FsCell</a>&#32;option</span></code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    doc
+                  </span>
+                  :
+                  <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.packaging.spreadsheetdocument">SpreadsheetDocument</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    sst
+                  </span>
+                  :
+                  <code><span><a href="/FsSpreadsheet/reference/fsspreadsheet-net-sst.html">SST</a>&#32;option</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    xlsxCell
+                  </span>
+                  :
+                  <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><span><a href="/FsSpreadsheet/reference/fsspreadsheet-fscell.html">FsCell</a>&#32;option</span></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
           </td>
         </tr>
       </tbody>
@@ -3869,19 +3685,24 @@
   <div></div>
   <div></div>
 </div>
-                </div>
-            </div>
-        </div>
         
     </div>
+</main>
+<aside id="fsdocs-page-menu">
+    <p id="on-this-page">On this page</p>
+    <div class="empty"></div>
+</aside>
+<dialog>
+    <input type="search" placeholder="Search docs" />
+    <div class="results">
+        <ul></ul>
+        <p class="empty">Type something to start searching.</p>
+    </div>
+</dialog>
+<script type="module" src="/FsSpreadsheet/content/fsdocs-tips.js"></script>
+<script type="module" src="/FsSpreadsheet/content/fsdocs-theme-toggle.js"></script>
+<script type="module" src="/FsSpreadsheet/content/fsdocs-theme.js"></script>
+<script type="module" src="/FsSpreadsheet/content/fsdocs-search.js"></script>
 
-    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
-    <script type="text/javascript">var fsdocs_search_baseurl = '/FsSpreadsheet/'</script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
-    <script type="text/javascript" src="/FsSpreadsheet/content/fsdocs-search.js"></script>
-    <!-- END SEARCH BOX: this adds support for the search box -->
 </body>
-
 </html>

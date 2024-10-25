@@ -1,71 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" data-root="/FsSpreadsheet/">
 <head>
-    <meta charset="utf-8">
-    <title>FsSpreadsheet Documentation
-</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="author" content="Heinrich Lukas Weil, Oliver Maus, Kevin Schneider, Kevin Frey, Timo Mühlhaus">
-
-    <!--Opengraph properties (https://ogp.me/)-->
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Heinrich Lukas Weil, Oliver Maus, Kevin Schneider, Kevin Frey, Timo Mühlhaus" name="author">
+    <!-- Opengraph properties (https://ogp.me/) -->
+    <meta property="og:site_name" content="FsSpreadsheet">
     <meta property="og:title" content="FsSpreadsheet Documentation
 " />
+    <meta property="og:url" content="/FsSpreadsheet/index.html">
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="FsSpreadsheet" />
-
-    <link rel="shortcut icon" type="image/x-icon" href="/FsSpreadsheet//img/favicon.ico">
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script> MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } }; </script>
-    <script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-svg.js"></script>
-
-    <link type="text/css" rel="stylesheet" href="/FsSpreadsheet/content/fsdocs-default.css" />
-    <link type="text/css" rel="stylesheet" href="/FsSpreadsheet/content/fsdocs-custom.css" />
-    <script type="text/javascript" src="/FsSpreadsheet/content/fsdocs-tips.js"></script>
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
-    <!-- END SEARCH BOX: this adds support for the search box -->
+    <!-- Twitter cards (https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/summary-card-with-large-image) -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="/FsSpreadsheet/">
+    <meta name="twitter:title" content="FsSpreadsheet Documentation
+">
     
-</head> 
-
-<body>
-    <div class="columns is-fullheight m-0">
-        <div id="fsdocs-menu" class="column is-2 is-paddingless">
-            <aside class="menu">
-                <div class="container is-paddingless is-marginless has-background-dark">
-                    <a href="/FsSpreadsheet/">
-                        <figure class="image is-128x128 container">
-                            <img src="/FsSpreadsheet/img/logo.png">
-                        </figure>
-                    </a>
-                    <h2 class="title has-text-centered has-text-white">FsSpreadsheet</h2>
-                    <h5 class="has-text-centered has-text-white pb-4">Documentation for 6.3.0-alpha.4</h5>
-                </div>
-                <div class="content">
-                    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
-                    <div id="header">
-                        <div class="searchbox" id="fsdocs-searchbox">
-                            <label for="search-by">
-                                <i class="fas fa-search"></i>
-                            </label>
-                            <input data-search-input="" id="search-by" type="search" placeholder="Search..." class="input"/>
-                            <span data-search-clear="">
-                                <i class="fas fa-times"></i>
-                            </span>
-                        </div>
-                    </div>
-                    <!-- END SEARCH BOX: this adds support for the search box -->
-                    <ul class="navbar-nav">
-                        <li class="nav-header">Links</li>
-                        <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="https://github.com/CSBiology/FsSpreadsheet/blob/master/LICENSE.md">License (MIT)</a></li>
-                        <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="https://github.com/CSBiology/FsSpreadsheet/blob/master/RELEASE_NOTES.md">Release Notes</a></li>
-                        <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="https://github.com/CSBiology/FsSpreadsheet/">Source Repository</a></li>
-                        
-                        <li class="nav-header">
+    <title>FsSpreadsheet Documentation
+ | FsSpreadsheet</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link href="/FsSpreadsheet/img/favicon.ico" rel="icon" sizes="32x32" type="image/png"/>
+    <script type="application/javascript" src="/FsSpreadsheet/content/fsdocs-theme-set-dark.js"></script>
+    <link href="/FsSpreadsheet/content/fsdocs-default.css" rel="stylesheet" type="text/css"/>
+    <link href="/FsSpreadsheet/content/fsdocs-theme.css" rel="stylesheet" type="text/css"/>
+    
+    
+</head>
+<body class="content">
+<header>
+    <div class="start">
+        <div id="menu-toggle">
+            <iconify-icon class="icon closed" height="22" icon="eva:menu-fill" width="22"></iconify-icon>
+            <iconify-icon class="icon open" height="22" icon="mi:close" width="22"></iconify-icon>
+            <input type="checkbox" name="mobile-menu" />
+            <ul class="menu">
+                <li class="nav-header">Links</li>
+                <li class="nav-item"><a class="nav-link" href="https://github.com/CSBiology/FsSpreadsheet/blob/master/LICENSE.md">License</a>
+                </li>
+                <li class="nav-item"><a class="nav-link"
+                                        href="https://github.com/CSBiology/FsSpreadsheet/blob/master/RELEASE_NOTES.md">Release
+                    Notes</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://github.com/CSBiology/FsSpreadsheet/">Source
+                    Repository</a></li>
+                
+                <li class="nav-header">
   API Reference
 </li>             
 <li class="nav-item">
@@ -73,14 +55,45 @@
     All Namespaces
   </a>
 </li>
-                    </ul>
-                </div>
-            </aside>
+            </ul>
         </div>
-        <div class="column is-10 is-paddingless">
-            <div class="section pt-4">
-                <div class="container" id="fsdocs-content">
-                    <h1><a name="FsSpreadsheet-Documentation" class="anchor" href="#FsSpreadsheet-Documentation">FsSpreadsheet Documentation</a></h1>
+        <a href="/FsSpreadsheet/">
+            <img alt="Header menu logo" src="/FsSpreadsheet/img/logo.png">
+            <strong>FsSpreadsheet</strong>
+        </a>
+    </div>
+    <div class="end">
+        <a href="https://github.com/CSBiology/FsSpreadsheet/" target="_blank">
+            <iconify-icon icon="uil:github" width="26" height="26"></iconify-icon>
+        </a>
+        <iconify-icon id="search-btn" icon="carbon:search" class="search" width="24" height="24"></iconify-icon>
+        <fsdocs-theme-toggle></fsdocs-theme-toggle>
+    </div>
+</header>
+<aside id="fsdocs-main-menu">
+    <ul class="menu">
+        <li class="nav-header">Links</li>
+        <li class="nav-item"><a class="nav-link" href="https://github.com/CSBiology/FsSpreadsheet/blob/master/LICENSE.md">License</a>
+        </li>
+        <li class="nav-item"><a class="nav-link"
+                                href="https://github.com/CSBiology/FsSpreadsheet/blob/master/RELEASE_NOTES.md">Release
+            Notes</a></li>
+        <li class="nav-item"><a class="nav-link" href="https://github.com/CSBiology/FsSpreadsheet/">Source
+            Repository</a></li>
+        
+        <li class="nav-header">
+  API Reference
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/FsSpreadsheet/reference/index.html">
+    All Namespaces
+  </a>
+</li>
+    </ul>
+</aside>
+<main>
+    <div id="content">
+        <h1><a name="FsSpreadsheet-Documentation" class="anchor" href="#FsSpreadsheet-Documentation">FsSpreadsheet Documentation</a></h1>
 <p>FsSpreadsheet is a library for reading and writing spreadsheets in F#, Javascript and Python using Fable. It is a wrapper of the Python library openpyxl (<a href="https://openpyxl.readthedocs.io/en/stable/)">https://openpyxl.readthedocs.io/en/stable/)</a> and the Javascript library exceljs (<a href="https://www.npmjs.com/package/@nfdi4plants/exceljs).">https://www.npmjs.com/package/@nfdi4plants/exceljs).</a></p>
 <h2><a name="Installation" class="anchor" href="#Installation">Installation</a></h2>
 <h3><a name="F" class="anchor" href="#F">F#</a></h3>
@@ -170,9 +183,6 @@ newPath = "path/to/new/spreadsheet.json"
 Json.to_json_file(newPath,wb)
 </code></pre></td></tr></table>
 
-                </div>
-            </div>
-        </div>
         <div class="fsdocs-tip" id="fs1">namespace FsSpreadsheet</div>
 <div class="fsdocs-tip" id="fs2">namespace FsSpreadsheet.Net</div>
 <div class="fsdocs-tip" id="fs3">val path: string</div>
@@ -181,9 +191,9 @@ Json.to_json_file(newPath,wb)
   interface IDisposable
   new: unit -&gt; FsWorkbook
   member AddWorksheet: sheet: FsWorksheet -&gt; unit
-  member AddWorksheets: sheets: seq&lt;FsWorksheet&gt; -&gt; unit
+  member AddWorksheets: sheets: FsWorksheet seq -&gt; unit
   member Copy: unit -&gt; FsWorkbook
-  member GetTables: unit -&gt; FsTable[]
+  member GetTables: unit -&gt; FsTable array
   member GetWorksheetAt: index: int -&gt; FsWorksheet
   member GetWorksheetByName: sheetName: string -&gt; FsWorksheet
   member GetWorksheets: unit -&gt; ResizeArray&lt;FsWorksheet&gt;
@@ -196,14 +206,88 @@ Json.to_json_file(newPath,wb)
 <div class="fsdocs-tip" id="fs8">member FsWorkbook.ToXlsxFile: path: string -&gt; unit</div>
 
     </div>
+</main>
+<aside id="fsdocs-page-menu">
+    <p id="on-this-page">On this page</p>
+    <ul>
+  <li class="level-1">
+    <a href="#FsSpreadsheet-Documentation">
+      FsSpreadsheet Documentation
+    </a>
+  </li>
+  <li class="level-2">
+    <a href="#Installation">
+      Installation
+    </a>
+  </li>
+  <li class="level-3">
+    <a href="#F">
+      F#
+    </a>
+  </li>
+  <li class="level-3">
+    <a href="#Javascript">
+      Javascript
+    </a>
+  </li>
+  <li class="level-3">
+    <a href="#Python">
+      Python
+    </a>
+  </li>
+  <li class="level-2">
+    <a href="#Usage_Xlsx_IO">
+      Usage_Xlsx_IO
+    </a>
+  </li>
+  <li class="level-3">
+    <a href="#F-1">
+      F#
+    </a>
+  </li>
+  <li class="level-3">
+    <a href="#Javascript-1">
+      Javascript
+    </a>
+  </li>
+  <li class="level-3">
+    <a href="#Python-1">
+      Python
+    </a>
+  </li>
+  <li class="level-2">
+    <a href="#Usage_Json_IO">
+      Usage_Json_IO
+    </a>
+  </li>
+  <li class="level-3">
+    <a href="#F-2">
+      F#
+    </a>
+  </li>
+  <li class="level-3">
+    <a href="#Javascript-2">
+      Javascript
+    </a>
+  </li>
+  <li class="level-3">
+    <a href="#Python-2">
+      Python
+    </a>
+  </li>
+</ul>
+</aside>
+<dialog>
+    <input type="search" placeholder="Search docs" />
+    <div class="results">
+        <ul></ul>
+        <p class="empty">Type something to start searching.</p>
+    </div>
+</dialog>
+<script type="module" src="/FsSpreadsheet/content/fsdocs-tips.js"></script>
+<script type="module" src="/FsSpreadsheet/content/fsdocs-theme-toggle.js"></script>
+<script type="module" src="/FsSpreadsheet/content/fsdocs-theme.js"></script>
+<script type="module" src="/FsSpreadsheet/content/fsdocs-search.js"></script>
 
-    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
-    <script type="text/javascript">var fsdocs_search_baseurl = '/FsSpreadsheet/'</script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
-    <script type="text/javascript" src="/FsSpreadsheet/content/fsdocs-search.js"></script>
-    <!-- END SEARCH BOX: this adds support for the search box -->
 </body>
-
 </html>

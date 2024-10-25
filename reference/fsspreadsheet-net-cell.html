@@ -1,62 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" data-root="/FsSpreadsheet/">
 <head>
-    <meta charset="utf-8">
-    <title>Cell (FsSpreadsheet)</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="author" content="Heinrich Lukas Weil, Oliver Maus, Kevin Schneider, Timo Mühlhaus">
-    <link rel="shortcut icon" type="image/x-icon" href="/FsSpreadsheet//img/favicon.ico">
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
-
-    <link type="text/css" rel="stylesheet" href="/FsSpreadsheet/content/fsdocs-default.css" />
-    <link type="text/css" rel="stylesheet" href="/FsSpreadsheet/content/fsdocs-custom.css" />
-    <script type="text/javascript" src="/FsSpreadsheet/content/fsdocs-tips.js"></script>
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
-    <!-- END SEARCH BOX: this adds support for the search box -->
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Heinrich Lukas Weil, Oliver Maus, Kevin Schneider, Timo Mühlhaus" name="author">
+    <!-- Opengraph properties (https://ogp.me/) -->
+    <meta property="og:site_name" content="FsSpreadsheet">
+    <meta property="og:title" content="Cell (FsSpreadsheet)" />
+    <meta property="og:url" content="/FsSpreadsheet/{{fsdocs-source-basename}}.html">
+    <meta property="og:type" content="website" />
+    <!-- Twitter cards (https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/summary-card-with-large-image) -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="/FsSpreadsheet/">
+    <meta name="twitter:title" content="Cell (FsSpreadsheet)">
     
-</head> 
-
-<body>
-    <div class="columns is-fullheight m-0">
-        <div id="fsdocs-menu" class="column is-2 is-paddingless">
-            <aside class="menu">
-                <div class="container is-paddingless is-marginless has-background-dark">
-                    <a href="/FsSpreadsheet/">
-                        <figure class="image is-128x128 container">
-                            <img src="/FsSpreadsheet/img/logo.png">
-                        </figure>
-                    </a>
-                    <h2 class="title has-text-centered has-text-white">FsSpreadsheet</h2>
-                    <h5 class="has-text-centered has-text-white pb-4">Documentation for 6.3.0-alpha.4</h5>
-                </div>
-                <div class="content">
-                    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
-                    <div id="header">
-                        <div class="searchbox" id="fsdocs-searchbox">
-                            <label for="search-by">
-                                <i class="fas fa-search"></i>
-                            </label>
-                            <input data-search-input="" id="search-by" type="search" placeholder="Search..." class="input"/>
-                            <span data-search-clear="">
-                                <i class="fas fa-times"></i>
-                            </span>
-                        </div>
-                    </div>
-                    <!-- END SEARCH BOX: this adds support for the search box -->
-                    <ul class="navbar-nav">
-                        <li class="nav-header">Links</li>
-                        <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="https://github.com/CSBiology/FsSpreadsheet/blob/master/LICENSE.md">License (MIT)</a></li>
-                        <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="https://github.com/CSBiology/FsSpreadsheet/blob/master/RELEASE_NOTES.md">Release Notes</a></li>
-                        <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="https://github.com/CSBiology/FsSpreadsheet/">Source Repository</a></li>
-                        <li class="nav-header">
+    <title>Cell (FsSpreadsheet) | FsSpreadsheet</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link href="/FsSpreadsheet/img/favicon.ico" rel="icon" sizes="32x32" type="image/png"/>
+    <script type="application/javascript" src="/FsSpreadsheet/content/fsdocs-theme-set-dark.js"></script>
+    <link href="/FsSpreadsheet/content/fsdocs-default.css" rel="stylesheet" type="text/css"/>
+    <link href="/FsSpreadsheet/content/fsdocs-theme.css" rel="stylesheet" type="text/css"/>
+    
+    
+</head>
+<body class="api-docs">
+<header>
+    <div class="start">
+        <div id="menu-toggle">
+            <iconify-icon class="icon closed" height="22" icon="eva:menu-fill" width="22"></iconify-icon>
+            <iconify-icon class="icon open" height="22" icon="mi:close" width="22"></iconify-icon>
+            <input type="checkbox" name="mobile-menu" />
+            <ul class="menu">
+                <li class="nav-header">Links</li>
+                <li class="nav-item"><a class="nav-link" href="https://github.com/CSBiology/FsSpreadsheet/blob/master/LICENSE.md">License</a>
+                </li>
+                <li class="nav-item"><a class="nav-link"
+                                        href="https://github.com/CSBiology/FsSpreadsheet/blob/master/RELEASE_NOTES.md">Release
+                    Notes</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://github.com/CSBiology/FsSpreadsheet/">Source
+                    Repository</a></li>
+                
+                <li class="nav-header">
   API Reference
 </li>             
 <li class="nav-item">
@@ -64,14 +52,45 @@
     All Namespaces
   </a>
 </li>
-                    </ul>
-                </div>
-            </aside>
+            </ul>
         </div>
-        <div class="column is-10 is-paddingless">
-            <div class="section pt-4">
-                <div class="container" id="fsdocs-content">
-                    <div>
+        <a href="/FsSpreadsheet/">
+            <img alt="Header menu logo" src="/FsSpreadsheet/img/logo.png">
+            <strong>FsSpreadsheet</strong>
+        </a>
+    </div>
+    <div class="end">
+        <a href="https://github.com/CSBiology/FsSpreadsheet/" target="_blank">
+            <iconify-icon icon="uil:github" width="26" height="26"></iconify-icon>
+        </a>
+        <iconify-icon id="search-btn" icon="carbon:search" class="search" width="24" height="24"></iconify-icon>
+        <fsdocs-theme-toggle></fsdocs-theme-toggle>
+    </div>
+</header>
+<aside id="fsdocs-main-menu">
+    <ul class="menu">
+        <li class="nav-header">Links</li>
+        <li class="nav-item"><a class="nav-link" href="https://github.com/CSBiology/FsSpreadsheet/blob/master/LICENSE.md">License</a>
+        </li>
+        <li class="nav-item"><a class="nav-link"
+                                href="https://github.com/CSBiology/FsSpreadsheet/blob/master/RELEASE_NOTES.md">Release
+            Notes</a></li>
+        <li class="nav-item"><a class="nav-link" href="https://github.com/CSBiology/FsSpreadsheet/">Source
+            Repository</a></li>
+        
+        <li class="nav-header">
+  API Reference
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/FsSpreadsheet/reference/index.html">
+    All Namespaces
+  </a>
+</li>
+    </ul>
+</aside>
+<main>
+    <div id="content">
+        <div>
   <h2>
     Cell Module
   </h2>
@@ -89,9 +108,7 @@
   <div class="fsdocs-xmldoc">
     <div>
       <p class="fsdocs-summary">
-        
- Functions for creating and manipulating Cells.
- 
+         Functions for creating and manipulating Cells.
       </p>
     </div>
   </div>
@@ -124,21 +141,16 @@
           <td class="fsdocs-entity-xmldoc">
             <div>
               <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:FsSpreadsheet.Net.Cell.CellValue`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
+                <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
               </div>
               <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:FsSpreadsheet.Net.Cell.CellValue\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
+                <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
               </div>
               <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/Cell.fs#L17-17" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
+                <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
               </a>
               <p class="fsdocs-summary">
-                
- Functions for manipulating CellValues.
- 
+                 Functions for manipulating CellValues.
               </p>
             </div>
           </td>
@@ -187,7 +199,7 @@
                         cellValue
                       </b>
                       :
-                      <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cellvalues">CellValues</a></code>
+                      <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cellvalues">CellValues</a></code>
                     </span>
                     <br/>
                   </ul>
@@ -202,47 +214,48 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.Cell.cellValuesToDataType`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.Cell.cellValuesToDataType\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/Cell.fs#L43-43" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.Cell.cellValuesToDataType`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.Cell.cellValuesToDataType\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/Cell.fs#L43-43" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                    
  Takes a CellValue and returns the appropriate DataType.
  
+                  </p>
+                </div>
+              </summary>
+              <p class="fsdocs-remarks">
+                DataType is the FsSpreadsheet representation of the CellValue enum in OpenXml.
               </p>
-            </div>
-            <p class="fsdocs-remarks">
-              DataType is the FsSpreadsheet representation of the CellValue enum in OpenXml.
-            </p>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  cellValue
-                </span>
-                :
-                <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cellvalues">CellValues</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
-                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-datatype.html">DataType</a></code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    cellValue
+                  </span>
+                  :
+                  <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cellvalues">CellValues</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="/FsSpreadsheet/reference/fsspreadsheet-datatype.html">DataType</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
           </td>
         </tr>
         <tr>
@@ -270,7 +283,7 @@
                         dataType
                       </b>
                       :
-                      <code><span><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cellvalues">CellValues</a>&#32;option</span></code>
+                      <code><span><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cellvalues">CellValues</a>&#32;option</span></code>
                     </span>
                     <br/>
                     <span>
@@ -286,14 +299,14 @@
                         value
                       </b>
                       :
-                      <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cellvalue">CellValue</a></code>
+                      <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cellvalue">CellValue</a></code>
                     </span>
                     <br/>
                   </ul>
                   <br/>
                   <span>
                     Returns: 
-                    <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
+                    <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
                   </span>
                   <br/>
                 </div>
@@ -301,60 +314,59 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.Cell.create`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.Cell.create\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/Cell.fs#L85-85" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- Creates a Cell from a CellValues type case, a "A1" style reference, and a CellValue containing the value string.
- 
-              </p>
-            </div>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  dataType
-                </span>
-                :
-                <code><span><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cellvalues">CellValues</a>&#32;option</span></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  reference
-                </span>
-                :
-                <code>string</code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  value
-                </span>
-                :
-                <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cellvalue">CellValue</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
-                <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.Cell.create`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.Cell.create\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/Cell.fs#L85-85" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Creates a Cell from a CellValues type case, a "A1" style reference, and a CellValue containing the value string.
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    dataType
+                  </span>
+                  :
+                  <code><span><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cellvalues">CellValues</a>&#32;option</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    reference
+                  </span>
+                  :
+                  <code>string</code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    value
+                  </span>
+                  :
+                  <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cellvalue">CellValue</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
           </td>
         </tr>
         <tr>
@@ -382,7 +394,7 @@
                         doc
                       </b>
                       :
-                      <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.packaging.spreadsheetdocument">SpreadsheetDocument</a></code>
+                      <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.packaging.spreadsheetdocument">SpreadsheetDocument</a></code>
                     </span>
                     <br/>
                     <span>
@@ -390,7 +402,7 @@
                         dataType
                       </b>
                       :
-                      <code><span><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cellvalues">CellValues</a>&#32;option</span></code>
+                      <code><span><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cellvalues">CellValues</a>&#32;option</span></code>
                     </span>
                     <br/>
                     <span>
@@ -406,7 +418,7 @@
                         cellFormat
                       </b>
                       :
-                      <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cellformat">CellFormat</a></code>
+                      <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cellformat">CellFormat</a></code>
                     </span>
                     <br/>
                     <span>
@@ -414,14 +426,14 @@
                         value
                       </b>
                       :
-                      <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cellvalue">CellValue</a></code>
+                      <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cellvalue">CellValue</a></code>
                     </span>
                     <br/>
                   </ul>
                   <br/>
                   <span>
                     Returns: 
-                    <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
+                    <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
                   </span>
                   <br/>
                 </div>
@@ -429,76 +441,75 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.Cell.createWithFormat`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.Cell.createWithFormat\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/Cell.fs#L93-93" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- Creates a Cell from a CellValues type case, a "A1" style reference, and a CellValue containing the value string.
- 
-              </p>
-            </div>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  doc
-                </span>
-                :
-                <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.packaging.spreadsheetdocument">SpreadsheetDocument</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  dataType
-                </span>
-                :
-                <code><span><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cellvalues">CellValues</a>&#32;option</span></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  reference
-                </span>
-                :
-                <code>string</code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  cellFormat
-                </span>
-                :
-                <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cellformat">CellFormat</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  value
-                </span>
-                :
-                <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cellvalue">CellValue</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
-                <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.Cell.createWithFormat`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.Cell.createWithFormat\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/Cell.fs#L93-93" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Creates a Cell from a CellValues type case, a "A1" style reference, and a CellValue containing the value string.
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    doc
+                  </span>
+                  :
+                  <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.packaging.spreadsheetdocument">SpreadsheetDocument</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    dataType
+                  </span>
+                  :
+                  <code><span><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cellvalues">CellValues</a>&#32;option</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    reference
+                  </span>
+                  :
+                  <code>string</code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    cellFormat
+                  </span>
+                  :
+                  <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cellformat">CellFormat</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    value
+                  </span>
+                  :
+                  <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cellvalue">CellValue</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
           </td>
         </tr>
         <tr>
@@ -533,7 +544,7 @@
                   <br/>
                   <span>
                     Returns: 
-                    <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
+                    <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
                   </span>
                   <br/>
                 </div>
@@ -541,44 +552,43 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.Cell.empty`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.Cell.empty\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/Cell.fs#L57-57" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- Creates an empty Cell.
- 
-              </p>
-            </div>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  ()
-                </span>
-                :
-                <code>unit</code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
-                <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.Cell.empty`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.Cell.empty\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/Cell.fs#L57-57" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Creates an empty Cell.
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ()
+                  </span>
+                  :
+                  <code>unit</code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
           </td>
         </tr>
         <tr>
@@ -606,7 +616,7 @@
                         sharedStringTable
                       </b>
                       :
-                      <code><span><a href="https://fsharp.github.io/fsharp-core-docs/reference/fsharp-core-fsharpoption-1">Option</a>&lt;<a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.sharedstringtable">SharedStringTable</a>&gt;</span></code>
+                      <code><span><a href="https://fsharp.github.io/fsharp-core-docs/reference/fsharp-core-fsharpoption-1">Option</a>&lt;<a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.sharedstringtable">SharedStringTable</a>&gt;</span></code>
                     </span>
                     <br/>
                     <span>
@@ -637,7 +647,7 @@
                   <br/>
                   <span>
                     Returns: 
-                    <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
+                    <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
                   </span>
                   <br/>
                 </div>
@@ -645,68 +655,67 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('```cref:M:FsSpreadsheet.Net.Cell.fromValue``1```')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.Cell.fromValue``1\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/Cell.fs#L110-110" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- Create a cell using a shared string table, also returns the updated shared string table.
- 
-              </p>
-            </div>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  sharedStringTable
-                </span>
-                :
-                <code><span><a href="https://fsharp.github.io/fsharp-core-docs/reference/fsharp-core-fsharpoption-1">Option</a>&lt;<a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.sharedstringtable">SharedStringTable</a>&gt;</span></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  columnIndex
-                </span>
-                :
-                <code>uint32</code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  rowIndex
-                </span>
-                :
-                <code>uint32</code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  value
-                </span>
-                :
-                <code>'T</code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
-                <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('```cref:M:FsSpreadsheet.Net.Cell.fromValue``1```')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.Cell.fromValue``1\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/Cell.fs#L110-110" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Create a cell using a shared string table, also returns the updated shared string table.
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    sharedStringTable
+                  </span>
+                  :
+                  <code><span><a href="https://fsharp.github.io/fsharp-core-docs/reference/fsharp-core-fsharpoption-1">Option</a>&lt;<a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.sharedstringtable">SharedStringTable</a>&gt;</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    columnIndex
+                  </span>
+                  :
+                  <code>uint32</code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    rowIndex
+                  </span>
+                  :
+                  <code>uint32</code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    value
+                  </span>
+                  :
+                  <code>'T</code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
           </td>
         </tr>
         <tr>
@@ -734,7 +743,7 @@
                         doc
                       </b>
                       :
-                      <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.packaging.spreadsheetdocument">SpreadsheetDocument</a></code>
+                      <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.packaging.spreadsheetdocument">SpreadsheetDocument</a></code>
                     </span>
                     <br/>
                     <span>
@@ -773,7 +782,7 @@
                   <br/>
                   <span>
                     Returns: 
-                    <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
+                    <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
                   </span>
                   <br/>
                 </div>
@@ -781,76 +790,75 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.Cell.fromValueWithDataType`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.Cell.fromValueWithDataType\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/Cell.fs#L184-184" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- Create a cell using a shared string table, also returns the updated shared string table.
- 
-              </p>
-            </div>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  doc
-                </span>
-                :
-                <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.packaging.spreadsheetdocument">SpreadsheetDocument</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  columnIndex
-                </span>
-                :
-                <code>uint32</code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  rowIndex
-                </span>
-                :
-                <code>uint32</code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  value
-                </span>
-                :
-                <code>string</code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  dataType
-                </span>
-                :
-                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-datatype.html">DataType</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
-                <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.Cell.fromValueWithDataType`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.Cell.fromValueWithDataType\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/Cell.fs#L184-184" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Create a cell using a shared string table, also returns the updated shared string table.
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    doc
+                  </span>
+                  :
+                  <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.packaging.spreadsheetdocument">SpreadsheetDocument</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    columnIndex
+                  </span>
+                  :
+                  <code>uint32</code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    rowIndex
+                  </span>
+                  :
+                  <code>uint32</code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    value
+                  </span>
+                  :
+                  <code>string</code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    dataType
+                  </span>
+                  :
+                  <code><a href="/FsSpreadsheet/reference/fsspreadsheet-datatype.html">DataType</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
           </td>
         </tr>
         <tr>
@@ -878,7 +886,7 @@
                         doc
                       </b>
                       :
-                      <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.packaging.spreadsheetdocument">SpreadsheetDocument</a></code>
+                      <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.packaging.spreadsheetdocument">SpreadsheetDocument</a></code>
                     </span>
                     <br/>
                     <span>
@@ -909,30 +917,13 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.Cell.getCellContent`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.Cell.getCellContent\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/Cell.fs#L146-146" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
-              </p>
-            </div>
             <dl class="fsdocs-params">
               <dt class="fsdocs-param">
                 <span class="fsdocs-param-name">
                   doc
                 </span>
                 :
-                <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.packaging.spreadsheetdocument">SpreadsheetDocument</a></code>
+                <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.packaging.spreadsheetdocument">SpreadsheetDocument</a></code>
               </dt>
               <dd class="fsdocs-param-docs"></dd>
               <dt class="fsdocs-param">
@@ -988,14 +979,14 @@
                         cell
                       </b>
                       :
-                      <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
+                      <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
                     </span>
                     <br/>
                   </ul>
                   <br/>
                   <span>
                     Returns: 
-                    <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cellvalue">CellValue</a></code>
+                    <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cellvalue">CellValue</a></code>
                   </span>
                   <br/>
                 </div>
@@ -1003,44 +994,43 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.Cell.getCellValue`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.Cell.getCellValue\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/Cell.fs#L240-240" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- Gets the CellValue.
- 
-              </p>
-            </div>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  cell
-                </span>
-                :
-                <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
-                <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cellvalue">CellValue</a></code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.Cell.getCellValue`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.Cell.getCellValue\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/Cell.fs#L240-240" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Gets the CellValue.
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    cell
+                  </span>
+                  :
+                  <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cellvalue">CellValue</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
           </td>
         </tr>
         <tr>
@@ -1068,7 +1058,7 @@
                         cell
                       </b>
                       :
-                      <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
+                      <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
                     </span>
                     <br/>
                   </ul>
@@ -1083,44 +1073,43 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.Cell.getReference`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.Cell.getReference\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/Cell.fs#L198-198" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- Gets "A1"-style Cell reference.
- 
-              </p>
-            </div>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  cell
-                </span>
-                :
-                <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
-                <code>string</code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.Cell.getReference`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.Cell.getReference\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/Cell.fs#L198-198" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Gets "A1"-style Cell reference.
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    cell
+                  </span>
+                  :
+                  <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code>string</code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
           </td>
         </tr>
         <tr>
@@ -1148,14 +1137,14 @@
                         cell
                       </b>
                       :
-                      <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
+                      <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
                     </span>
                     <br/>
                   </ul>
                   <br/>
                   <span>
                     Returns: 
-                    <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cellvalues">CellValues</a></code>
+                    <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cellvalues">CellValues</a></code>
                   </span>
                   <br/>
                 </div>
@@ -1163,44 +1152,43 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.Cell.getType`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.Cell.getType\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/Cell.fs#L219-219" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- Gets a Cell type.
- 
-              </p>
-            </div>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  cell
-                </span>
-                :
-                <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
-                <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cellvalues">CellValues</a></code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.Cell.getType`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.Cell.getType\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/Cell.fs#L219-219" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Gets a Cell type.
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    cell
+                  </span>
+                  :
+                  <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cellvalues">CellValues</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
           </td>
         </tr>
         <tr>
@@ -1236,7 +1224,7 @@
                         cell
                       </b>
                       :
-                      <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
+                      <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
                     </span>
                     <br/>
                   </ul>
@@ -1251,52 +1239,51 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.Cell.getValue`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.Cell.getValue\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/Cell.fs#L265-265" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- Maps a Cell to the value string using a sharedStringTable.
- 
-              </p>
-            </div>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  sharedStringTable
-                </span>
-                :
-                <code><span><a href="https://fsharp.github.io/fsharp-core-docs/reference/fsharp-core-fsharpoption-1">Option</a>&lt;<a href="/FsSpreadsheet/reference/fsspreadsheet-net-sst.html">SST</a>&gt;</span></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  cell
-                </span>
-                :
-                <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
-                <code>string</code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.Cell.getValue`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.Cell.getValue\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/Cell.fs#L265-265" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Maps a Cell to the value string using a sharedStringTable.
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    sharedStringTable
+                  </span>
+                  :
+                  <code><span><a href="https://fsharp.github.io/fsharp-core-docs/reference/fsharp-core-fsharpoption-1">Option</a>&lt;<a href="/FsSpreadsheet/reference/fsspreadsheet-net-sst.html">SST</a>&gt;</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    cell
+                  </span>
+                  :
+                  <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code>string</code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
           </td>
         </tr>
         <tr>
@@ -1332,14 +1319,14 @@
                         cell
                       </b>
                       :
-                      <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
+                      <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
                     </span>
                     <br/>
                   </ul>
                   <br/>
                   <span>
                     Returns: 
-                    <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
+                    <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
                   </span>
                   <br/>
                 </div>
@@ -1347,52 +1334,51 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.Cell.includeSharedStringValue`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.Cell.includeSharedStringValue\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/Cell.fs#L291-291" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- Includes a value from the sharedStringTable in Cell.CellValue.Text.
- 
-              </p>
-            </div>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  sharedStringTable
-                </span>
-                :
-                <code><a href="/FsSpreadsheet/reference/fsspreadsheet-net-sst.html">SST</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  cell
-                </span>
-                :
-                <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
-                <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.Cell.includeSharedStringValue`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.Cell.includeSharedStringValue\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/Cell.fs#L291-291" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Includes a value from the sharedStringTable in Cell.CellValue.Text.
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    sharedStringTable
+                  </span>
+                  :
+                  <code><a href="/FsSpreadsheet/reference/fsspreadsheet-net-sst.html">SST</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    cell
+                  </span>
+                  :
+                  <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
           </td>
         </tr>
         <tr>
@@ -1427,7 +1413,7 @@
                   <br/>
                   <span>
                     Returns: 
-                    <code><span><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cellvalues">CellValues</a>&#32;*&#32;string</span></code>
+                    <code><span><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cellvalues">CellValues</a>&#32;*&#32;string</span></code>
                   </span>
                   <br/>
                 </div>
@@ -1435,44 +1421,43 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('```cref:M:FsSpreadsheet.Net.Cell.inferCellValue``1```')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.Cell.inferCellValue``1\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/Cell.fs#L62-62" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- Returns the proper CellValues case for the given value.
- 
-              </p>
-            </div>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  value
-                </span>
-                :
-                <code>'T</code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
-                <code><span><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cellvalues">CellValues</a>&#32;*&#32;string</span></code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('```cref:M:FsSpreadsheet.Net.Cell.inferCellValue``1```')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.Cell.inferCellValue``1\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/Cell.fs#L62-62" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Returns the proper CellValues case for the given value.
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    value
+                  </span>
+                  :
+                  <code>'T</code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><span><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cellvalues">CellValues</a>&#32;*&#32;string</span></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
           </td>
         </tr>
         <tr>
@@ -1508,14 +1493,14 @@
                         cell
                       </b>
                       :
-                      <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
+                      <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
                     </span>
                     <br/>
                   </ul>
                   <br/>
                   <span>
                     Returns: 
-                    <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
+                    <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
                   </span>
                   <br/>
                 </div>
@@ -1523,52 +1508,51 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.Cell.setReference`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.Cell.setReference\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/Cell.fs#L203-203" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- Sets "A1"-style Cell reference.
- 
-              </p>
-            </div>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  reference
-                </span>
-                :
-                <code>string</code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  cell
-                </span>
-                :
-                <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
-                <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.Cell.setReference`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.Cell.setReference\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/Cell.fs#L203-203" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Sets "A1"-style Cell reference.
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    reference
+                  </span>
+                  :
+                  <code>string</code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    cell
+                  </span>
+                  :
+                  <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
           </td>
         </tr>
         <tr>
@@ -1596,14 +1580,14 @@
                         c
                       </b>
                       :
-                      <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
+                      <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
                     </span>
                     <br/>
                   </ul>
                   <br/>
                   <span>
                     Returns: 
-                    <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
+                    <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
                   </span>
                   <br/>
                 </div>
@@ -1611,44 +1595,43 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.Cell.setSpacePreserveAttribute`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.Cell.setSpacePreserveAttribute\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/Cell.fs#L103-103" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- Sets the preserve attribute of a Cell.
- 
-              </p>
-            </div>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  c
-                </span>
-                :
-                <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
-                <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.Cell.setSpacePreserveAttribute`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.Cell.setSpacePreserveAttribute\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/Cell.fs#L103-103" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Sets the preserve attribute of a Cell.
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    c
+                  </span>
+                  :
+                  <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
           </td>
         </tr>
         <tr>
@@ -1676,7 +1659,7 @@
                         dataType
                       </b>
                       :
-                      <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cellvalues">CellValues</a></code>
+                      <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cellvalues">CellValues</a></code>
                     </span>
                     <br/>
                     <span>
@@ -1684,14 +1667,14 @@
                         cell
                       </b>
                       :
-                      <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
+                      <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
                     </span>
                     <br/>
                   </ul>
                   <br/>
                   <span>
                     Returns: 
-                    <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
+                    <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
                   </span>
                   <br/>
                 </div>
@@ -1699,52 +1682,51 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.Cell.setType`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.Cell.setType\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/Cell.fs#L224-224" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- Sets a Cell type.
- 
-              </p>
-            </div>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  dataType
-                </span>
-                :
-                <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cellvalues">CellValues</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  cell
-                </span>
-                :
-                <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
-                <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.Cell.setType`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.Cell.setType\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/Cell.fs#L224-224" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Sets a Cell type.
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    dataType
+                  </span>
+                  :
+                  <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cellvalues">CellValues</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    cell
+                  </span>
+                  :
+                  <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
           </td>
         </tr>
         <tr>
@@ -1772,7 +1754,7 @@
                         value
                       </b>
                       :
-                      <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cellvalue">CellValue</a></code>
+                      <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cellvalue">CellValue</a></code>
                     </span>
                     <br/>
                     <span>
@@ -1780,14 +1762,14 @@
                         cell
                       </b>
                       :
-                      <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
+                      <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
                     </span>
                     <br/>
                   </ul>
                   <br/>
                   <span>
                     Returns: 
-                    <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
+                    <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
                   </span>
                   <br/>
                 </div>
@@ -1795,52 +1777,51 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.Cell.setValue`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.Cell.setValue\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/Cell.fs#L284-284" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- Sets a CellValue.
- 
-              </p>
-            </div>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  value
-                </span>
-                :
-                <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cellvalue">CellValue</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  cell
-                </span>
-                :
-                <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
-                <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.Cell.setValue`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.Cell.setValue\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/Cell.fs#L284-284" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Sets a CellValue.
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    value
+                  </span>
+                  :
+                  <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cellvalue">CellValue</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    cell
+                  </span>
+                  :
+                  <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
           </td>
         </tr>
         <tr>
@@ -1868,14 +1849,14 @@
                         cell
                       </b>
                       :
-                      <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
+                      <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
                     </span>
                     <br/>
                   </ul>
                   <br/>
                   <span>
                     Returns: 
-                    <code><span><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cellvalue">CellValue</a>&#32;option</span></code>
+                    <code><span><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cellvalue">CellValue</a>&#32;option</span></code>
                   </span>
                   <br/>
                 </div>
@@ -1883,44 +1864,43 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.Cell.tryGetCellValue`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.Cell.tryGetCellValue\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/Cell.fs#L231-231" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- Gets Some CellValue if cellValue is existent. Else returns None.
- 
-              </p>
-            </div>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  cell
-                </span>
-                :
-                <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
-                <code><span><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cellvalue">CellValue</a>&#32;option</span></code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.Cell.tryGetCellValue`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.Cell.tryGetCellValue\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/Cell.fs#L231-231" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Gets Some CellValue if cellValue is existent. Else returns None.
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    cell
+                  </span>
+                  :
+                  <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><span><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cellvalue">CellValue</a>&#32;option</span></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
           </td>
         </tr>
         <tr>
@@ -1948,14 +1928,14 @@
                         cell
                       </b>
                       :
-                      <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
+                      <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
                     </span>
                     <br/>
                   </ul>
                   <br/>
                   <span>
                     Returns: 
-                    <code><span><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cellvalues">CellValues</a>&#32;option</span></code>
+                    <code><span><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cellvalues">CellValues</a>&#32;option</span></code>
                   </span>
                   <br/>
                 </div>
@@ -1963,44 +1943,43 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.Cell.tryGetType`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.Cell.tryGetType\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/Cell.fs#L210-210" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- Gets Some type if existent. Else returns None.
- 
-              </p>
-            </div>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  cell
-                </span>
-                :
-                <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
-                <code><span><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cellvalues">CellValues</a>&#32;option</span></code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.Cell.tryGetType`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.Cell.tryGetType\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/Cell.fs#L210-210" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Gets Some type if existent. Else returns None.
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    cell
+                  </span>
+                  :
+                  <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><span><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cellvalues">CellValues</a>&#32;option</span></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
           </td>
         </tr>
         <tr>
@@ -2036,7 +2015,7 @@
                         cell
                       </b>
                       :
-                      <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
+                      <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
                     </span>
                     <br/>
                   </ul>
@@ -2051,52 +2030,51 @@
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.Cell.tryGetValue`')">
-                <img src="/FsSpreadsheet/content/img/copy-md.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-md-hover.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.Cell.tryGetValue\'/>')">
-                <img src="/FsSpreadsheet/content/img/copy-xml.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/copy-xml-hover.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/Cell.fs#L245-245" class="fsdocs-source-link" title="Source on GitHub">
-                <img src="/FsSpreadsheet/content/img/github.png" class="normal"/>
-                <img src="/FsSpreadsheet/content/img/github-hover.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
- Maps a Cell to the value string using a shared string table.
- 
-              </p>
-            </div>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  sharedStringTable
-                </span>
-                :
-                <code><span><a href="https://fsharp.github.io/fsharp-core-docs/reference/fsharp-core-fsharpoption-1">Option</a>&lt;<a href="/FsSpreadsheet/reference/fsspreadsheet-net-sst.html">SST</a>&gt;</span></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  cell
-                </span>
-                :
-                <code><a href="https://docs.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
-                <code><span>string&#32;option</span></code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsSpreadsheet.Net.Cell.tryGetValue`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsSpreadsheet.Net.Cell.tryGetValue\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/CSBiology/FsSpreadsheet/tree/master/src/FsSpreadsheet.Net/Cell.fs#L245-245" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Maps a Cell to the value string using a shared string table.
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    sharedStringTable
+                  </span>
+                  :
+                  <code><span><a href="https://fsharp.github.io/fsharp-core-docs/reference/fsharp-core-fsharpoption-1">Option</a>&lt;<a href="/FsSpreadsheet/reference/fsspreadsheet-net-sst.html">SST</a>&gt;</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    cell
+                  </span>
+                  :
+                  <code><a href="https://learn.microsoft.com/dotnet/api/documentformat.openxml.spreadsheet.cell">Cell</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><span>string&#32;option</span></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
           </td>
         </tr>
       </tbody>
@@ -2111,19 +2089,24 @@
   <div></div>
   <div></div>
 </div>
-                </div>
-            </div>
-        </div>
         
     </div>
+</main>
+<aside id="fsdocs-page-menu">
+    <p id="on-this-page">On this page</p>
+    <div class="empty"></div>
+</aside>
+<dialog>
+    <input type="search" placeholder="Search docs" />
+    <div class="results">
+        <ul></ul>
+        <p class="empty">Type something to start searching.</p>
+    </div>
+</dialog>
+<script type="module" src="/FsSpreadsheet/content/fsdocs-tips.js"></script>
+<script type="module" src="/FsSpreadsheet/content/fsdocs-theme-toggle.js"></script>
+<script type="module" src="/FsSpreadsheet/content/fsdocs-theme.js"></script>
+<script type="module" src="/FsSpreadsheet/content/fsdocs-search.js"></script>
 
-    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
-    <script type="text/javascript">var fsdocs_search_baseurl = '/FsSpreadsheet/'</script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
-    <script type="text/javascript" src="/FsSpreadsheet/content/fsdocs-search.js"></script>
-    <!-- END SEARCH BOX: this adds support for the search box -->
 </body>
-
 </html>
