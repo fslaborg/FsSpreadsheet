@@ -1,3 +1,10 @@
+### 6.3.0+76b48dd (Released 2024-11-28)
+* Update to .net8
+
+* Deletions:
+    * [[#27d1d6f](https://github.com/CSBiology/FsSpreadsheet/commit/27d1d6f5e2593a14f34b56139290ff8ef122df92)] update to .net8 and update other deps: - globally use .net 8 - use node v20 in CI - remove explicit F# deps - update build project - remove unnecessary test sdk deps
+    * [[#76b48dd](https://github.com/CSBiology/FsSpreadsheet/commit/76b48dd0375d944024f802692e2d2b7260c0713a)] remove warning
+
 ### 6.2.0+ecd768c (Released 2024-6-28)
 * Additions:
     * [[#302d69a](https://github.com/CSBiology/FsSpreadsheet/commit/302d69a0fe53ed5bd95c2e184bd5ce8c017a7008)] copy new tests from dotnet to js and py

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "fsspreadsheet"
-version = "6.2.0"
+version = "6.3.0"
 description = "Fable library for Spreadsheet creation and manipulation"
 authors = ["Heinrich Lukas Weil <hlweil@outlook.de>", "Kevin Frey <freymaurer@gmx.de>"]
 maintainers = ["Oliver Maus"]
