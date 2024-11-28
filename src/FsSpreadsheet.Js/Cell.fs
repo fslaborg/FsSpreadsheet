@@ -26,12 +26,12 @@ module JsCell =
         | String    -> 
             fsCell.Value |> Some
         | anyElse ->
-            let msg = sprintf "ValueType '%A' is not fully implemented in FsSpreadsheet and is handled as string input." anyElse
-            #if FABLE_COMPILER_JAVASCRIPT
-            log msg
-            #else
-            printfn "%s" msg
-            #endif
+            //let msg = sprintf "ValueType '%A' is not fully implemented in FsSpreadsheet and is handled as string input." anyElse
+            //#if FABLE_COMPILER_JAVASCRIPT
+            //log msg
+            //#else
+            //printfn "%s" msg
+            //#endif
             fsCell.Value |> box |> Some 
 
     /// <summary>
