@@ -1,6 +1,9 @@
-### 6.3.0+76b48dd (Released 2024-11-28)
-* Update to .net8
+### 6.3.1+b8c476a (Released 2024-11-29)
+* Additions:
+    * [[#b8c476a](https://github.com/CSBiology/FsSpreadsheet/commit/b8c476a81e3988e280c5e313c40b881625f57d24)] reinclude source files in fable folder of py package
 
+### 6.3.0+76b48dd (Released 2024-11-28)
+    * Update to .net8
 * Deletions:
     * [[#27d1d6f](https://github.com/CSBiology/FsSpreadsheet/commit/27d1d6f5e2593a14f34b56139290ff8ef122df92)] update to .net8 and update other deps: - globally use .net 8 - use node v20 in CI - remove explicit F# deps - update build project - remove unnecessary test sdk deps
     * [[#76b48dd](https://github.com/CSBiology/FsSpreadsheet/commit/76b48dd0375d944024f802692e2d2b7260c0713a)] remove warning
