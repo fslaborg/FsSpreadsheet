@@ -21,6 +21,14 @@
     <PackageReference Include="Thoth.Json.Python" Version="0.1.0" />
   </ItemGroup>
 
+  <!-- Add source files to "fable" folder in Nuget package -->
+  <ItemGroup>
+    <!-- Include all files that are compiled with this project -->
+    <Content Include="@(Compile)" Pack="true" PackagePath="fable/%(RelativeDir)%(Filename)%(Extension)" />
+    <!-- Include the project file itself as well -->
+    <Content Include="$(MSBuildThisFileFullPath)" Pack="true" PackagePath="fable/" />
+  </ItemGroup>  
+  
   <ItemGroup>
     <ProjectReference Include="..\FsSpreadsheet\FsSpreadsheet.fsproj" />
   </ItemGroup>
