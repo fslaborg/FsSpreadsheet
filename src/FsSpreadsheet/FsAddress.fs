@@ -1,5 +1,6 @@
 ﻿namespace FsSpreadsheet
 
+open System
 
 /// Module containing functions to work with "A1" style excel cell references.
 module CellReference =
@@ -12,14 +13,13 @@ module CellReference =
         System.Text.RegularExpressions.Regex(indexPattern)
 
     /// Transforms excel column string indices (e.g. A, B, Z, AA, CD) to index number (starting with A = 1).
-    let colAdressToIndex (columnAdress : string) =
-        let length = columnAdress.Length
-        let mutable sum = 0u
-        for i=0 to length-1 do
-            let c = columnAdress.[length-1-i] |> System.Char.ToUpper
-            let factor = 26. ** (float i) |> uint
-            sum <- sum + ((uint c - 64u) * factor)
-        sum
+    let colAddressToIndex (s: string) =
+        let mutable acc = 0u
+        for i in 0 .. s.Length - 1 do
+            let c = s.[i]
+            let v = uint32 c - uint32 'A' + 1u
+            acc <- acc * 26u + v
+        acc
 
     /// Transforms number index to excel column string indices (e.g. A, B, Z, AA, CD) (starting with A = 1).
     let indexToColAdress i =
@@ -41,19 +41,23 @@ module CellReference =
 
     /// Maps a "A1" style excel cell reference to a column * row index tuple (1 Based indices).
     let toIndices (reference : string) = 
-        let charPart = System.Text.StringBuilder()
-        let numPart = System.Text.StringBuilder()
-        
-        reference
-        |> Seq.iter (fun c -> 
-            if System.Char.IsLetter c then
-                charPart.Append c |> ignore
-            elif System.Char.IsDigit c then
-                numPart.Append c |> ignore
-            else
-                failwithf "Reference %s does not match Excel A1-style" reference
-        )
-        colAdressToIndex (charPart.ToString()), uint32 (numPart.ToString())
+        let len = reference.Length
+        let mutable split = 0
+
+        // Find the index where digits start
+        while split < len && Char.IsLetter(reference.[split]) do
+            split <- split + 1
+
+        if split = 0 || split = len then
+            failwithf "Reference %s does not match Excel A1-style" reference
+
+        let colPart = reference.Substring(0, split).ToUpperInvariant()
+        let rowPart = reference.Substring(split)
+
+        let colIndex = colAddressToIndex colPart
+        let rowIndex = uint32 rowPart
+
+        colIndex, rowIndex
 
 
     /// Maps a "A1" style excel cell reference to a column (1 Based indices).
@@ -101,7 +105,7 @@ type FsAddress(rowNumber : int, columnNumber : int, fixedRow : bool, fixedColumn
     // ----------------------
 
     new (rowNumber : int, columnLetter : string, fixedRow : bool, fixedColumn : bool) =
-        FsAddress(rowNumber,CellReference.colAdressToIndex columnLetter |> int,fixedRow,fixedColumn)
+        FsAddress(rowNumber,CellReference.colAddressToIndex columnLetter |> int,fixedRow,fixedColumn)
 
     new (rowNumber : int, columnNumber : int) =
         FsAddress(rowNumber,columnNumber,false,false)
