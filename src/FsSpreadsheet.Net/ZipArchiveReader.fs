@@ -86,16 +86,18 @@ and Styles =
         CellFormats : CellFormat []
     }
 
+    static member createEmpty () =
+        { NumberFormats = Map.empty; CellFormats = [||] }
 
 module XmlReader =
     let isElemWithName (reader : System.Xml.XmlReader) (name : string) =
-        reader.NodeType = XmlNodeType.Element && (reader.Name = name || reader.Name = "x:" + name)
+        reader.NodeType = XmlNodeType.Element && name = reader.LocalName
 
 let parseRelationsships (relationships : ZipArchiveEntry) : Relationships =
     try 
         use relationshipsStream = relationships.Open()
         use relationshipsReader = System.Xml.XmlReader.Create(relationshipsStream)
-        let mutable rels = [||]
+        let rels = ResizeArray()
         while relationshipsReader.Read() do
             if XmlReader.isElemWithName relationshipsReader "Relationship" then
                 let id = relationshipsReader.GetAttribute("Id")
@@ -106,9 +108,9 @@ let parseRelationsships (relationships : ZipArchiveEntry) : Relationships =
                     elif t.StartsWith "/xl/" then t.Replace("/xl/","xl/")
                     elif t.StartsWith "../" then t.Replace("../","xl/")
                     else "xl/" + t
-                rels <- Array.append rels [|{Id = id; Type = typ; Target = target}|]
+                rels.Add {Id = id; Type = typ; Target = target}
         rels
-        |> Array.map (fun r -> r.Id, r) |> Map.ofArray
+        |> Seq.map (fun r -> r.Id, r) |> Map.ofSeq
     with
     | _ -> Map.empty
 
@@ -139,6 +141,9 @@ let getSharedStrings (wb : WorkBook) : SharedStrings =
 
 let getStyles (wb : WorkBook) =
     let styles = wb.GetEntry("xl/styles.xml")
+    if styles = null then
+        Styles.createEmpty()
+    else
     use stylesStream = styles.Open()
     use stylesReader = System.Xml.XmlReader.Create(stylesStream)
     let mutable numberFormats = Map.empty
@@ -237,8 +242,8 @@ let parseCell (sst : SharedStrings) (styles : Styles) (value : string) (dataType
             match dataType with
             | DType.boolean -> 
                 match cellValueString.ToLower() with 
-                | "1" | "true" -> true 
-                | "0" | "false" -> false 
+                | v when v = "1" || v.Equals("true", System.StringComparison.OrdinalIgnoreCase) -> true 
+                | v when v = "0" || v.Equals("false", System.StringComparison.OrdinalIgnoreCase) -> false 
                 | _ -> cellValueString
                 ,
                 DataType.Boolean

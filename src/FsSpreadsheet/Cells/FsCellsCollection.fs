@@ -177,7 +177,7 @@ type FsCellsCollection() =
     /// </summary>
     /// <remarks>Derives row- and columnIndex from the FsAddress of the FsCell.</remarks>
     member this.Add(cell : FsCell) =
-        this.Add(cell.Address.RowNumber, cell.Address.ColumnNumber, cell)
+        this.Add(cell.RowNumber, cell.ColumnNumber, cell)
 
     /// <summary>
     /// Adds an FsCell to an FsCellsCollection.
