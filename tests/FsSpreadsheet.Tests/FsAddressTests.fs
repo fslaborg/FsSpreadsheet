@@ -82,13 +82,29 @@ let main =
             ]
         ]
         testList "Compare" [
-            testList "address" [
-                testCase "testAddress1 vs testAddress2" <| fun _ ->
-                    let result = testAddress1.Compare testAddress2
-                    Expect.isFalse result "Addresses do not differ"
-                testCase "testAddress1 vs testAddress6" <| fun _ ->
-                    let result = testAddress1.Compare testAddress6
-                    Expect.isTrue result "Addresses differ"
-            ]
+            testCase "testAddress1 vs testAddress2" <| fun _ ->
+                let result = testAddress1.Compare testAddress2
+                Expect.isFalse result "Addresses do not differ"
+            testCase "testAddress1 vs testAddress6" <| fun _ ->
+                let result = testAddress1.Compare testAddress6
+                Expect.isTrue result "Addresses differ"
+        ]
+        testList "Equals" [
+            testCase "testAddress1 vs testAddress2" <| fun _ ->
+                let result = testAddress1.Equals testAddress2
+                Expect.isFalse result "Addresses do not differ"
+            testCase "testAddress1 vs testAddress6" <| fun _ ->
+                let result = testAddress1.Equals testAddress6
+                Expect.isTrue result "Addresses differ"
+        ]
+        testList "GetHashCode" [
+            testCase "testAddress1 vs testAddress2" <| fun _ ->
+                let hash1 = testAddress1.GetHashCode()
+                let hash2 = testAddress2.GetHashCode()
+                Expect.isFalse (hash1 = hash2) "Hash codes do not differ"
+            testCase "testAddress1 vs testAddress6" <| fun _ ->
+                let hash1 = testAddress1.GetHashCode()
+                let hash2 = testAddress6.GetHashCode()
+                Expect.isTrue (hash1 = hash2) "Hash codes differ"      
         ]
     ]

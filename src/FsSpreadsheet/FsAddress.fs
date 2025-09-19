@@ -189,3 +189,15 @@ type FsAddress(rowNumber : int, columnNumber : int, fixedRow : bool, fixedColumn
     /// <summary>Checks if 2 FsAddresses are equal.</summary>
     static member compare (address1 : FsAddress) (address2 : FsAddress) =
         address1.Compare address2
+
+    override this.GetHashCode (): int = 
+        this.Address.GetHashCode()
+        |> HashCodes.mergeHashes this.ColumnNumber
+        |> HashCodes.mergeHashes this.RowNumber
+        |> HashCodes.mergeHashes (this.FixedColumn.GetHashCode())
+        |> HashCodes.mergeHashes (this.FixedRow.GetHashCode())
+
+    override this.Equals(other: obj) =
+        match other with
+        | :? FsAddress as other -> this.Compare other
+        | _ -> false
