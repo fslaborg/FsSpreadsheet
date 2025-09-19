@@ -73,15 +73,15 @@ module JsCell =
                     let b = false
                     createFscell DataType.Boolean b
                 | anyElse ->
-                    let msg = sprintf "ValueType 'Format' (%s) is not fully implemented in FsSpreadsheet and is handled as string input. In %s: (%i,%i)" anyElse worksheetName rowIndex columnIndex
-                    log msg
+                    //let msg = sprintf "ValueType 'Format' (%s) is not fully implemented in FsSpreadsheet and is handled as string input. In %s: (%i,%i)" anyElse worksheetName rowIndex columnIndex
+                    //log msg
                     anyElse |> createFscell DataType.String
             | ValueType.Hyperlink ->
                 //log (c.value.Value?text)
                 jsCell.value.Value?hyperlink |> createFscell DataType.String
             | anyElse ->
-                let msg = sprintf "ValueType `%A` (%s) is not fully implemented in FsSpreadsheet and is handled as string input. In %s: (%i,%i)" anyElse vTemp worksheetName rowIndex columnIndex
-                log msg
+                //let msg = sprintf "ValueType `%A` (%s) is not fully implemented in FsSpreadsheet and is handled as string input. In %s: (%i,%i)" anyElse vTemp worksheetName rowIndex columnIndex
+                //log msg
                 vTemp |> createFscell DataType.String
         fscell
 

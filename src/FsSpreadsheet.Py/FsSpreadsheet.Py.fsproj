@@ -18,7 +18,7 @@
 
   <ItemGroup>
     <PackageReference Include="Fable.Openpyxl" Version="0.2.0" />
-    <PackageReference Include="Thoth.Json.Python" Version="0.1.0" />
+    <PackageReference Include="Thoth.Json.Python" Version="0.5.1" />
   </ItemGroup>
 
   <!-- Add source files to "fable" folder in Nuget package -->
