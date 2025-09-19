@@ -88,7 +88,7 @@ type FsColumn (rangeAddress : FsRangeAddress, cells : FsCellsCollection)=
         let ra = this.RangeAddress.Copy()
         let cells = this.Cells |> Seq.map (fun c -> c.Copy())
         let fcc = FsCellsCollection()
-        fcc.Add cells
+        fcc.AddMany cells
         FsColumn(ra, fcc)
 
     /// <summary>

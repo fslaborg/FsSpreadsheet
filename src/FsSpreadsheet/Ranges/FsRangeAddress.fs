@@ -151,22 +151,21 @@ module Range =
             printfn "Area \"%s\" could not be parsed: %s" area err.Message
             false
 
-[<AllowNullLiteral>]
+[<AllowNullLiteral>][<AttachMembers>]
 type FsRangeAddress(firstAddress : FsAddress, lastAddress : FsAddress) =
 
     let mutable _firstAddress = firstAddress
     let mutable _lastAddress = lastAddress
 
-
-    new(rangeAddress) =
-        let firstAdress,lastAddress = Range.toBoundaries rangeAddress
-        FsRangeAddress(FsAddress(firstAdress),FsAddress(lastAddress))
+    static member fromString (rangeAddress : string) =
+        let firstAdress, lastAddress = Range.toBoundaries rangeAddress
+        FsRangeAddress(FsAddress.fromString(firstAdress),FsAddress.fromString(lastAddress))
 
     /// <summary>
     /// Creates a deep copy of this FsRangeAddress.
     /// </summary>
     member self.Copy() =
-        FsRangeAddress(self.Range)
+        FsRangeAddress.fromString (self.Range)
 
     /// <summary>
     /// Returns a deep copy of a given FsRangeAddress.
@@ -203,11 +202,11 @@ type FsRangeAddress(firstAddress : FsAddress, lastAddress : FsAddress) =
         _lastAddress <- FsAddress(lastRow,lastColumn)
 
     member self.Range 
-        with get() = Range.ofBoundaries _firstAddress.Address _lastAddress.Address
+        with get() : string = Range.ofBoundaries _firstAddress.Address _lastAddress.Address
         and set(address) = 
             let firstAdress, lastAdress = Range.toBoundaries address            
-            _firstAddress <- FsAddress (firstAdress)
-            _lastAddress <- FsAddress (lastAdress)
+            _firstAddress <- FsAddress.fromString (firstAdress)
+            _lastAddress <- FsAddress.fromString (lastAdress)
 
     override self.ToString() =
         self.Range

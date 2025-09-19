@@ -4,11 +4,11 @@ open Fable.Pyxpecto
 open FsSpreadsheet
 
 
-let testAddress1 = FsAddress("B5")
+let testAddress1 = FsAddress.fromString("B5")
 let testAddress2 = FsAddress(3, 2)
 let testAddress3 = FsAddress(4, 8, true, true)
-let testAddress4 = FsAddress(2, "D", true, true)
-let testAddress5 = FsAddress("Z69")
+let testAddress4 = FsAddress.fromString("D2", true, true)
+let testAddress5 = FsAddress.fromString("Z69")
 let testAddress6 = FsAddress(5, 2)
 
 let main = 

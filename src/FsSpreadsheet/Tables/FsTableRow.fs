@@ -1,6 +1,8 @@
 ﻿namespace FsSpreadsheet
 
-[<AllowNullLiteral>]
+open Fable.Core
+
+[<AllowNullLiteral>][<AttachMembers>]
 type FsTableRow (rangeAddress : FsRangeAddress) = 
 
     inherit FsRangeRow(rangeAddress)

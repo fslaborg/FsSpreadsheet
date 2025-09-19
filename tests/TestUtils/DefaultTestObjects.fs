@@ -49,7 +49,7 @@ type WriteTestFiles =
 
 module ExpectedRows = 
     let headerRow (range:string) cc = 
-        let row = FsRow(FsRangeAddress(range),cc)
+        let row = FsRow(FsRangeAddress.fromString(range),cc)
         row[1].SetValueAs "Numbers"
         row[2].SetValueAs "Strings"
         row[3].SetValueAs "DateTime"
@@ -58,7 +58,7 @@ module ExpectedRows =
         row[6].SetValueAs "ARCtrl Column "
         row
     let firstRow(range: string) cc = 
-        let row = FsRow(FsRangeAddress(range),cc)
+        let row = FsRow(FsRangeAddress.fromString(range),cc)
         row[1].SetValueAs 1.
         row[2].SetValueAs "Hello"
         row[3].SetValueAs (System.DateTime(2023,10,14,0,0,0))
@@ -67,7 +67,7 @@ module ExpectedRows =
         row[6].SetValueAs "(A) This is part 2 of 2"
         row
     let secondRow(range:string) cc =
-        let row = FsRow(FsRangeAddress(range),cc)
+        let row = FsRow(FsRangeAddress.fromString(range),cc)
         row[1].SetValueAs 2.
         row[2].SetValueAs "World"
         row[3].SetValueAs (System.DateTime(2023,10,15, 18,0,0))
@@ -75,14 +75,14 @@ module ExpectedRows =
         row[6].SetValueAs "Tests if column names with whitespace at end can be unique"
         row
     let thirdRow(range:string) cc =
-        let row = FsRow(FsRangeAddress(range),cc)
+        let row = FsRow(FsRangeAddress.fromString(range),cc)
         row[1].SetValueAs 3.
         row[2].SetValueAs "Bye"
         row[3].SetValueAs (System.DateTime(2023,10,16, 20,0,0))
         row[4].SetValueAs true
         row
     let fourthRow(range:string) cc = 
-        let row = FsRow(FsRangeAddress(range),cc)
+        let row = FsRow(FsRangeAddress.fromString(range),cc)
         row[1].SetValueAs 4.269
         row[2].SetValueAs "Outer Space"
         row[3].SetValueAs (System.DateTime(2023,10,17,0,0,0))
@@ -119,7 +119,7 @@ module Sheet3 =
 
 let defaultTestObject() =
     let wb = new FsWorkbook()
-    let table1 = new FsTable(Sheet1.tableName, FsRangeAddress(FsAddress("A1"),FsAddress("F5")))
+    let table1 = new FsTable(Sheet1.tableName, FsRangeAddress(FsAddress.fromString("A1"),FsAddress.fromString("F5")))
     let sheet1 = wb.InitWorksheet(Sheet1.sheetName)
     for row in ExpectedRows.rowCollectionA1 do
         for c in row do
@@ -129,7 +129,7 @@ let defaultTestObject() =
     for row in ExpectedRows.rowCollectionA1 do
         for c in row do
             sheet2.AddCell c |> ignore
-    let table2 = new FsTable(Sheet3.tableName, FsRangeAddress(FsAddress("B4"),FsAddress("G8")))
+    let table2 = new FsTable(Sheet3.tableName, FsRangeAddress(FsAddress.fromString("B4"),FsAddress.fromString("G8")))
     let sheet3 = wb.InitWorksheet(Sheet3.sheetName)
     for row in ExpectedRows.rowCollectionB4 do
         for c in row do

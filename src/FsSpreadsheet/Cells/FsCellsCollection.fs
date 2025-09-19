@@ -1,6 +1,7 @@
 ﻿namespace FsSpreadsheet
 
 open System.Collections.Generic
+open Fable.Core
 
 module Dictionary = 
 
@@ -13,6 +14,7 @@ module Dictionary =
 /// <summary>
 ///
 /// </summary>
+[<AttachMembers>]
 type FsCellsCollection() =
 
     // ---------
@@ -98,7 +100,7 @@ type FsCellsCollection() =
     /// <remarks>Derives row- and columnIndices from the FsAddress of the FsCells.</remarks>
     static member createFromCells (cells : seq<FsCell>) =
         let fcc = FsCellsCollection()
-        fcc.Add cells
+        fcc.AddMany cells
         fcc
 
     // TO DO: Must create deep copy methods for ALL other objects in it first, and call them here.
@@ -107,7 +109,7 @@ type FsCellsCollection() =
     //    let newCellsColl = FsCellsCollection()
     //    let oldCells : seq<FsCell> = this.GetCells()
     //    let newCells = // create deep copy here
-    //    newCellsColl.Add cells
+    //    newCellsColl.AddMany cells
 
     ///// <summary>
     ///// Creates and returns a deep copy of an FsCellsCollection.
@@ -138,10 +140,12 @@ type FsCellsCollection() =
     /// <summary>
     /// Adds an FsCell of given rowIndex and columnIndex to the FsCellsCollection.
     /// </summary>
-    member this.Add(row : int32, column : int32, cell : FsCell) = 
+    member this.Add(cell : FsCell, ?row : int32, ?column : int32) = 
 
-        cell.RowNumber <- row
-        cell.ColumnNumber <- column
+        if row.IsSome then cell.RowNumber <- row.Value
+        if column.IsSome then cell.ColumnNumber <- column.Value
+        let row = cell.RowNumber
+        let column = cell.ColumnNumber
         _count <- _count + 1
 
         FsCellsCollection.IncrementUsage(_rowsUsed, row);
@@ -170,14 +174,7 @@ type FsCellsCollection() =
     /// Adds an FsCell of given rowIndex and columnIndex to an FsCellsCollection.
     /// </summary>
     static member addCellWithIndeces rowIndex colIndex (cell : FsCell) (cellsCollection : FsCellsCollection) = 
-        cellsCollection.Add(rowIndex, colIndex, cell)
-
-    /// <summary>
-    /// Adds an FsCell to the FsCellsCollection.
-    /// </summary>
-    /// <remarks>Derives row- and columnIndex from the FsAddress of the FsCell.</remarks>
-    member this.Add(cell : FsCell) =
-        this.Add(cell.Address.RowNumber, cell.Address.ColumnNumber, cell)
+        cellsCollection.Add(cell, rowIndex, colIndex)
 
     /// <summary>
     /// Adds an FsCell to an FsCellsCollection.
@@ -191,7 +188,7 @@ type FsCellsCollection() =
     /// Adds FsCells to the FsCellsCollection.
     /// </summary>
     /// <remarks>Derives row- and columnIndeces from the FsAddress of the FsCells.</remarks>
-    member this.Add(cells : seq<FsCell>) =
+    member this.AddMany(cells : seq<FsCell>) =
         cells |> Seq.iter (this.Add >> ignore)
 
     /// <summary>
@@ -199,7 +196,7 @@ type FsCellsCollection() =
     /// </summary>
     /// <remarks>Derives row- and columnIndeces from the FsAddress of the FsCells.</remarks>
     static member addCells (cells : seq<FsCell>) (cellsCollection : FsCellsCollection) =
-        cellsCollection.Add cells
+        cellsCollection.AddMany cells
         cellsCollection
 
     /// <summary>
@@ -326,7 +323,7 @@ type FsCellsCollection() =
     /// <summary>
     /// Returns the FsCells from given rowStart to rowEnd and columnStart to columnEnd and fulfilling the predicate.
     /// </summary>
-    member this.GetCells(rowStart : int32, columnStart : int32, rowEnd : int32, columnEnd : int32, predicate : FsCell -> bool) = 
+    member this.GetCellsInRangeBy(rowStart : int32, columnStart : int32, rowEnd : int32, columnEnd : int32, predicate : FsCell -> bool) = 
 
         let finalRow = if rowEnd > _maxRowUsed then _maxRowUsed else rowEnd
         let finalColumn = if columnEnd > _maxColumnUsed then _maxColumnUsed else columnEnd
@@ -347,25 +344,25 @@ type FsCellsCollection() =
     /// Returns the FsCells from an FsCellsCollection with given rowStart to rowEnd and columnStart to columnEnd and fulfilling the predicate.
     /// </summary>
     static member filterCellsFromTo rowStart columnStart rowEnd columnEnd (predicate : FsCell -> bool) (cellsCollection : FsCellsCollection) = 
-        cellsCollection.GetCells(rowStart, columnStart, rowEnd, columnEnd, predicate)
+        cellsCollection.GetCellsInRangeBy(rowStart, columnStart, rowEnd, columnEnd, predicate)
 
     /// <summary>
     /// Returns the FsCells from given startAddress to lastAddress and fulfilling the predicate.
     /// </summary>
-    member this.GetCells(startAddress : FsAddress, lastAddress : FsAddress, predicate : FsCell -> bool) =
-        this.GetCells(startAddress.RowNumber,startAddress.ColumnNumber,lastAddress.RowNumber,lastAddress.ColumnNumber, predicate)
+    member this.GetCellsInStringRangeBy(startAddress : FsAddress, lastAddress : FsAddress, predicate : FsCell -> bool) =
+        this.GetCellsInRangeBy(startAddress.RowNumber,startAddress.ColumnNumber,lastAddress.RowNumber,lastAddress.ColumnNumber, predicate)
 
     
     /// <summary>
     /// Returns the FsCells from an FsCellsCollection with given startAddress to lastAddress and fulfilling the predicate.
     /// </summary>
     static member filterCellsFromToAddress startAddress lastAddress (predicate : FsCell -> bool) (cellsCollection : FsCellsCollection) =
-        cellsCollection.GetCells(startAddress, lastAddress, predicate)
+        cellsCollection.GetCellsInStringRangeBy(startAddress, lastAddress, predicate)
 
     /// <summary>
     /// Returns the FsCells from given rowStart to rowEnd and columnStart to columnEnd.
     /// </summary>
-    member this.GetCells(rowStart : int32, columnStart : int32, rowEnd : int32, columnEnd : int32) = 
+    member this.GetCellsInRange(rowStart : int32, columnStart : int32, rowEnd : int32, columnEnd : int32) = 
         let finalRow = if rowEnd > _maxRowUsed then _maxRowUsed else rowEnd
         let finalColumn = if columnEnd > _maxColumnUsed then _maxColumnUsed else columnEnd
         seq {
@@ -385,19 +382,19 @@ type FsCellsCollection() =
     /// Returns the FsCells from an FsCellsCollection with given rowStart to rowEnd and columnStart to columnEnd.
     /// </summary>
     static member getCellsFromTo rowStart columnStart rowEnd columnEnd (cellsCollection : FsCellsCollection) = 
-        cellsCollection.GetCells(rowStart, columnStart, rowEnd, columnEnd)
+        cellsCollection.GetCellsInRange(rowStart, columnStart, rowEnd, columnEnd)
 
     /// <summary>
     /// Returns the FsCells from given startAddress to lastAddress.
     /// </summary>
-    member this.GetCells(startAddress : FsAddress, lastAddress : FsAddress) =
-        this.GetCells(startAddress.RowNumber,startAddress.ColumnNumber,lastAddress.RowNumber,lastAddress.ColumnNumber)
+    member this.GetCellsInStringRange(startAddress : FsAddress, lastAddress : FsAddress) =
+        this.GetCellsInRange(startAddress.RowNumber,startAddress.ColumnNumber,lastAddress.RowNumber,lastAddress.ColumnNumber)
 
     /// <summary>
     /// Returns the FsCells from an FsCellsCollection with given startAddress to lastAddress.
     /// </summary>
     static member getCellsFromToAddress startAddress lastAddress (cellsCollection : FsCellsCollection) =
-        cellsCollection.GetCells(startAddress, lastAddress)
+        cellsCollection.GetCellsInStringRange(startAddress, lastAddress)
 
     //public int FirstRowUsed(int rowStart, int columnStart, int rowEnd, int columnEnd, XLCellsUsedOptions options,
     //    Func<IXLCell, Boolean> predicate = null)
@@ -670,7 +667,7 @@ type FsCellsCollection() =
     /// Returns all FsCells in the given columnIndex.
     /// </summary>
     member this.GetCellsInColumn(colIndex) =
-        this.GetCells(1, colIndex, _maxRowUsed, colIndex)
+        this.GetCellsInRange(1, colIndex, _maxRowUsed, colIndex)
 
     /// <summary>
     /// Returns all FsCells in an FsCellsCollection with the given columnIndex.
@@ -682,7 +679,7 @@ type FsCellsCollection() =
     /// Returns all FsCells in the given rowIndex.
     /// </summary>
     member this.GetCellsInRow(rowIndex) =
-        this.GetCells(rowIndex, 1, rowIndex, _maxColumnUsed)
+        this.GetCellsInRange(rowIndex, 1, rowIndex, _maxColumnUsed)
 
     /// <summary>
     /// Returns all FsCells in an FsCellsCollection with the given rowIndex.

@@ -46,7 +46,7 @@ let dummyFsRangeColumns =
         >> FsRangeColumn
     )
 let dummyFsCellsCollection = FsCellsCollection()
-dummyFsCellsCollection.Add dummyFsCells |> ignore
+dummyFsCellsCollection.AddMany dummyFsCells |> ignore
 let dummyFsCellsCollectionFirstAddress = dummyFsCellsCollection.GetFirstAddress()
 let dummyFsCellsCollectionLastAddress = dummyFsCellsCollection.GetLastAddress()
 let dummyFsTable = FsTable("dummyFsTable", FsRangeAddress(dummyFsCellsCollectionFirstAddress, dummyFsCellsCollectionLastAddress))

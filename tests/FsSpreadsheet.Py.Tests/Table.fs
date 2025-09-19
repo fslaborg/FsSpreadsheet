@@ -11,7 +11,7 @@ open Fable.Core
 let fromFsTable = testList "fromFsTable" [
     testCase "Table" <| fun _ ->
         let rangeString = "A1:E5"
-        let fsTable = FsTable("MyTable", FsRangeAddress(rangeString))
+        let fsTable = FsTable("MyTable", FsRangeAddress.fromString(rangeString))
         let pyTable = PyTable.fromFsTable fsTable
         let expected = Table.create("MyTable", rangeString)
 
@@ -25,7 +25,7 @@ let toFsTable = testList "toFsTable" [
     testCase "Table" <| fun _ ->
         let pyTable = Table.create("MyTable", "A1:E5")
         let fsTable = PyTable.toFsTable pyTable
-        let expected = FsTable("MyTable", FsRangeAddress("A1:E5"))
+        let expected = FsTable("MyTable", FsRangeAddress.fromString("A1:E5"))
         Expect.equal fsTable.Name expected.Name ""
         Expect.equal fsTable.RangeAddress.Range expected.RangeAddress.Range ""
 

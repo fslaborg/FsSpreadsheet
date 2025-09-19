@@ -43,7 +43,7 @@ module JsCell =
     /// <param name="jsCell"></param>
     let readToFsCell worksheetName rowIndex columnIndex (jsCell: Cell) =
         let t = enum<Unions.ValueType>(jsCell.``type``)
-        let fsadress = FsAddress(jsCell.address)
+        let fsadress = FsAddress.fromString(jsCell.address)
         let createFscell = fun dt v -> FsCell(v,dt,address = fsadress)
         let vTemp = string jsCell.value.Value
         let fscell =

@@ -19,12 +19,12 @@ let main =
         ]
         testList "ColumnFromRange" [
             let dummyWorkSheet = getDummyWorkSheet()
-            let range = FsRangeAddress("B1:B3")
+            let range = FsRangeAddress.fromString("B1:B3")
             let column = FsColumn(range, dummyWorkSheet.CellCollection)
             testCase "CorrectIndex" <| fun _ ->
                 Expect.equal column.Index 2 "Column index is not correct"
             testCase "CorrectRange" <| fun _ ->
-                let expectedRange = FsRangeAddress("B1:B3")
+                let expectedRange = FsRangeAddress.fromString("B1:B3")
                 Expect.equal column.RangeAddress.Range expectedRange.Range "Column index is not correct"
             testCase "CorrectCellCount" <| fun _ ->
                 Expect.equal (column.Cells |> Seq.length) 3 "Column length is not correct"
@@ -39,7 +39,7 @@ let main =
             testCase "CorrectIndex" <| fun _ ->
                 Expect.equal column.Index 2 "Column index is not correct"
             testCase "CorrectRange" <| fun _ ->
-                let expectedRange = FsRangeAddress("B1:B3")
+                let expectedRange = FsRangeAddress.fromString("B1:B3")
                 Expect.equal column.RangeAddress.Range expectedRange.Range "Column index is not correct"
             testCase "CorrectCellCount" <| fun _ ->
                 Expect.equal (column.Cells |> Seq.length) 3 "Column length is not correct"
@@ -74,12 +74,12 @@ let main =
         testList "ToDenseColumn" [
             testCase "is correct" (fun _ ->
                 let cellsCollWithEmpty = FsCellsCollection()
-                cellsCollWithEmpty.Add [
+                cellsCollWithEmpty.AddMany [
                     FsCell.create 1 1 "Kevin"
-                    FsCell.createEmptyWithAdress(FsAddress("A2"))
+                    FsCell.createEmptyWithAdress(FsAddress.fromString("A2"))
                     FsCell.create 3 1 "Schneider"
                 ]
-                let column = FsColumn(FsRangeAddress("A1:A3"), cellsCollWithEmpty)
+                let column = FsColumn(FsRangeAddress.fromString("A1:A3"), cellsCollWithEmpty)
                 let actual = FsColumn.toDenseColumn column |> Seq.map FsCell.getValueAsString |> Seq.toList
                 let expected = ["Kevin"; ""; "Schneider"]
                 Expect.mySequenceEqual actual expected "Column values differ"
@@ -89,7 +89,7 @@ let main =
             testCase "can be retrieved" <| fun _ ->
                 let cellsColl = FsCellsCollection()
                 cellsColl.Add (FsCell.create 1 1 "Kevin")
-                let column = FsColumn(FsRangeAddress("A1:A1"), cellsColl)
+                let column = FsColumn(FsRangeAddress.fromString("A1:A1"), cellsColl)
                 let firstCell = column.Cells |> Seq.head
                 Expect.equal (FsCell.getValueAsString firstCell) "Kevin" "Did not retrieve"
         ]
@@ -97,7 +97,7 @@ let main =
             testCase "can be retrieved" <| fun _ ->
                 let cellsColl = FsCellsCollection()
                 cellsColl.Add (FsCell.create 1 1 "Kevin")
-                let column = FsColumn(FsRangeAddress("A1:A1"), cellsColl)
+                let column = FsColumn(FsRangeAddress.fromString("A1:A1"), cellsColl)
                 let minRowIndex = column.MinRowIndex
                 Expect.equal minRowIndex 1 "Incorrect index"
         ]
@@ -105,7 +105,7 @@ let main =
             testCase "can be retrieved" <| fun _ ->
                 let cellsColl = FsCellsCollection()
                 cellsColl.Add (FsCell.create 1 1 "Kevin")
-                let column = FsColumn(FsRangeAddress("A1:A1"), cellsColl)
+                let column = FsColumn(FsRangeAddress.fromString("A1:A1"), cellsColl)
                 let maxRowIndex = column.MaxRowIndex
                 Expect.equal maxRowIndex 1 "Incorrect index"
         ]

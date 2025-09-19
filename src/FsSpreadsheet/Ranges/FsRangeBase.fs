@@ -1,7 +1,8 @@
 ﻿namespace FsSpreadsheet
 
+open Fable.Core
 
-[<AbstractClass>][<AllowNullLiteral>]
+[<AbstractClass>][<AllowNullLiteral>][<AttachMembers>]
 type FsRangeBase (rangeAddress : FsRangeAddress) = 
     //: XLStylizedBase, IXLRangeBase, IXLStylized
 
@@ -70,7 +71,7 @@ type FsRangeBase (rangeAddress : FsRangeAddress) =
 
             this.Extend(absoluteAddress)
 
-            cells.Add(absRow, absColumn, newCell) |> ignore
+            cells.Add(newCell, absRow, absColumn) |> ignore
             newCell
 
     /// <summary>
@@ -78,7 +79,7 @@ type FsRangeBase (rangeAddress : FsRangeAddress) =
     /// </summary>
     /// <param name="cells">The FsCellsCollection where the FsCells are retrieved from.</param>
     member this.Cells(cells : FsCellsCollection) = 
-        cells.GetCells(this.RangeAddress.FirstAddress, this.RangeAddress.LastAddress)
+        cells.GetCellsInStringRange(this.RangeAddress.FirstAddress, this.RangeAddress.LastAddress)
 
     /// <summary>
     /// The number of columns in the FsRangeBase.

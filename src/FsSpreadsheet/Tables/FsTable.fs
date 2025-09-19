@@ -164,7 +164,7 @@ type FsTable (name : string, rangeAddress : FsRangeAddress, ?showTotalsRow : boo
         fieldNames
         |> Seq.iteri (
             fun i fn ->
-                let tableField = FsTableField(fn, i, FsRangeColumn i)
+                let tableField = FsTableField(fn, i, FsRangeColumn.fromIndex i)
                 _fieldNames.Add(fn, tableField)
         )
 

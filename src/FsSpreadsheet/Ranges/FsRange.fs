@@ -1,12 +1,13 @@
 ﻿namespace FsSpreadsheet
 
+open Fable.Core
 
-type FsRange(rangeAddress : FsRangeAddress, styleValue) = 
+[<AttachMembers>]
+type FsRange(rangeAddress : FsRangeAddress, ?styleValue) = 
 
     inherit FsRangeBase(rangeAddress)
 
-    new (rangeAddress : FsRangeAddress) = FsRange(rangeAddress, null)
-    new (rangeBase : FsRangeBase) = FsRange(rangeBase.RangeAddress, null)
+    static member fromRangeBase (rangeBase : FsRangeBase) = FsRange(rangeBase.RangeAddress, null)
 
     member self.Row(row : int32) = 
         if (row <= 0 || row + base.RangeAddress.FirstAddress.RowNumber - 1 > 1048576 ) then

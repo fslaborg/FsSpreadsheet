@@ -157,7 +157,7 @@ module FsExtensions =
         /// </summary>
         static member fromXlsxTable table = 
             let topLeftBoundary, bottomRightBoundary = Table.getArea table |> Table.Area.toBoundaries
-            let ra = FsRangeAddress(FsAddress(topLeftBoundary), FsAddress(bottomRightBoundary))
+            let ra = FsRangeAddress(FsAddress.fromString(topLeftBoundary), FsAddress.fromString(bottomRightBoundary))
             let totalsRowShown = if table.TotalsRowShown = null then false else table.TotalsRowShown.Value
             FsTable(table.DisplayName, ra, totalsRowShown, true)
 

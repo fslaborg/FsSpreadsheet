@@ -165,7 +165,7 @@ ws.CellCollection.RemoveCellAt(1, 1)
 
 //let cellSeq = List.init 2 (fun i -> FsCell.create (i + 1) 1 "v")
 //let testFCC = FsCellsCollection()
-//testFCC.Add cellSeq
+//testFCC.AddMany cellseq
 //testFCC.GetCells()
 //let testCells = testFCC.GetCells() |> Seq.map (fun c -> c.Copy())
 //let testFCC2 = FsCellsCollection()
@@ -224,7 +224,7 @@ ws.CellCollection.RemoveCellAt(1, 1)
 //let copy (this : FsCellsCollection) =
 //    let newCellsColl = FsCellsCollection()
 //    let cells : seq<FsCell> = this.GetCells()
-//    newCellsColl.Add cells
+//    newCellsColl.AddMany cells
 
 //let testCell = FsCell.create 1 1 "Hallo"
 //let dummyFsCellsCollection4 = FsCellsCollection().Add testCell

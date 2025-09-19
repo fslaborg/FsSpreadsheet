@@ -5,8 +5,8 @@ open Fable.Pyxpecto
 open FsSpreadsheet
 
 let dummyCellsColl = FsCellsCollection()
-let dummyTable1 = FsTable("dummyTable1", FsRangeAddress("A1:B2"))
-let dummyTable2 = FsTable("dummyTable2", FsRangeAddress("D1:F3"))
+let dummyTable1 = FsTable("dummyTable1", FsRangeAddress.fromString("A1:B2"))
+let dummyTable2 = FsTable("dummyTable2", FsRangeAddress.fromString("D1:F3"))
 let dummySheet1 = FsWorksheet("dummySheet1", ResizeArray(), ResizeArray(), dummyCellsColl)
 let dummySheet2 = FsWorksheet("dummySheet2", ResizeArray(), ResizeArray([dummyTable1; dummyTable2]), dummyCellsColl)
 let bigDummySheetName = "My Awesome Worksheet"

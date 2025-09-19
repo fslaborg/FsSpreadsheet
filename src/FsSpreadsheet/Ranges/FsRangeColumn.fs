@@ -1,6 +1,8 @@
 ﻿namespace FsSpreadsheet
 
-[<AllowNullLiteral>]
+open Fable.Core
+
+[<AllowNullLiteral>][<AttachMembers>]
 type FsRangeColumn(rangeAddress) =
 
     inherit FsRangeBase(rangeAddress)
@@ -9,7 +11,7 @@ type FsRangeColumn(rangeAddress) =
     //    let range = FsRangeAddress(FsAddress(0,0),FsAddress(0,0))
     //    FsRangeColumn(range)
     
-    new(index) = FsRangeColumn(FsRangeAddress(FsAddress(0, index), FsAddress(0, index)))
+    static member fromIndex (index) = FsRangeColumn(FsRangeAddress(FsAddress(0, index), FsAddress(0, index)))
 
     //new(rangeAddress) = FsRangeColumn()
 

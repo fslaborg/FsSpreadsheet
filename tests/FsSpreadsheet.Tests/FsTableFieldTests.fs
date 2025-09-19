@@ -3,7 +3,7 @@
 open FsSpreadsheet
 open Fable.Pyxpecto
 
-let dummyFsRangeAddress = FsRangeAddress("C1:C3")
+let dummyFsRangeAddress = FsRangeAddress.fromString("C1:C3")
 let dummyFsRangeColumn = FsRangeColumn(dummyFsRangeAddress)
 let dummyFsTableField = FsTableField("dummyFsTableField", 0, dummyFsRangeColumn, obj, obj)
 let dummyFsCells = [
@@ -15,13 +15,13 @@ let dummyFsCells = [
     FsCell.createWithDataType DataType.String 3 4 "second data cell in B col"
 ]
 let dummyFsCellsCollection = FsCellsCollection()
-dummyFsCellsCollection.Add dummyFsCells |> ignore
+dummyFsCellsCollection.AddMany dummyFsCells |> ignore
 
 let main =
     testList "FsTableField" [
         testList "Constructors" [
             testList "unit" [
-                let testFsTableField = FsTableField()
+                let testFsTableField = FsTableField("")
                 testCase "Index is 0" <| fun _ ->
                     Expect.equal testFsTableField.Index 0 "Index is not 0"
                 testCase "Name is empty" <| fun _ ->
@@ -51,7 +51,7 @@ let main =
                 // TO DO: add testCases for totalsRowLabel & totalsRowFunction as soon as they are implemented
             ]
             testList "name : string, index : int, column : FsRangeColumn" [
-                let testFsRangeAddress = FsRangeAddress("C1:C3")
+                let testFsRangeAddress = FsRangeAddress.fromString("C1:C3")
                 let testFsRangeColumn = FsRangeColumn testFsRangeAddress
                 let testFsTableField = FsTableField("testName", 3, testFsRangeColumn)
                 testCase "Index is 3" <| fun _ ->
@@ -73,7 +73,7 @@ let main =
                         testFsTableField.Index <- 4
                         Expect.equal testFsTableField.Index 4 "Index is not 4"
                     testCase "Sets column index correctly" <| fun _ ->
-                        let testFsRangeAddress = FsRangeAddress("C1:C3")
+                        let testFsRangeAddress = FsRangeAddress.fromString("C1:C3")
                         let testFsRangeColumn = FsRangeColumn testFsRangeAddress
                         let testFsTableField = FsTableField("testName", 3, testFsRangeColumn)
                         testFsTableField.Index <- 4
@@ -82,10 +82,10 @@ let main =
             ]
             testList "Column" [
                 testList "Setter" [
-                    let testFsRangeAddress = FsRangeAddress("C1:C3")
+                    let testFsRangeAddress = FsRangeAddress.fromString("C1:C3")
                     let testFsRangeColumn = FsRangeColumn testFsRangeAddress
                     let testFsTableField = FsTableField("testName", 3, testFsRangeColumn)
-                    let testFsRangeAddress = FsRangeAddress "B1:B3"
+                    let testFsRangeAddress = FsRangeAddress.fromString "B1:B3"
                     let testFsRangeColumn = FsRangeColumn testFsRangeAddress
                     testFsTableField.Column <- testFsRangeColumn
                     testCase "Sets Column correctly, check Index" <| fun _ ->
@@ -97,7 +97,7 @@ let main =
         ]
         testList "Methods" [
             testList "HeaderCell" [
-                let testFsRangeAddress = FsRangeAddress("C1:C3")
+                let testFsRangeAddress = FsRangeAddress.fromString("C1:C3")
                 let testFsRangeColumn = FsRangeColumn testFsRangeAddress
                 let testFsTableField = FsTableField("testName", 3, testFsRangeColumn)
                 let testFsCellsCollection = FsCellsCollection()
@@ -106,13 +106,13 @@ let main =
                     |> List.map (
                         fun c -> FsCell.createWithDataType c.DataType c.RowNumber c.ColumnNumber c.Value
                     )
-                testFsCellsCollection.Add testFsCells |> ignore
+                testFsCellsCollection.AddMany testFsCells |> ignore
                 let headerCell = testFsTableField.HeaderCell(testFsCellsCollection, true)
                 testCase "Gets correct header cell" <| fun _ ->
                     Expect.equal headerCell.Value "I am the Header!" "Value is not I am the Header!"
             ]
             testList "SetName" [
-                let testFsRangeAddress = FsRangeAddress("C1:C3")
+                let testFsRangeAddress = FsRangeAddress.fromString("C1:C3")
                 let testFsRangeColumn = FsRangeColumn testFsRangeAddress
                 let testFsTableField = FsTableField("testName", 3, testFsRangeColumn)
                 let testFsCellsCollection = FsCellsCollection()
@@ -121,7 +121,7 @@ let main =
                     |> List.map (
                         fun c -> FsCell.createWithDataType c.DataType c.RowNumber c.ColumnNumber c.Value
                     )
-                testFsCellsCollection.Add testFsCells |> ignore
+                testFsCellsCollection.AddMany testFsCells |> ignore
                 testCase "Sets fieldname correctly" <| fun _ ->
                     testFsTableField.SetName("testName2", testFsCellsCollection, true)
                     Expect.equal testFsTableField.Name "testName2" "Name is not testName2"
@@ -131,7 +131,7 @@ let main =
                     Expect.equal headerCell.Value "testName2" "Value is not testName2"
             ]
             testList "DataCells" [
-                let testFsRangeAddress = FsRangeAddress("C1:C3")
+                let testFsRangeAddress = FsRangeAddress.fromString("C1:C3")
                 let testFsRangeColumn = FsRangeColumn testFsRangeAddress
                 let testFsTableField = FsTableField("testName", 3, testFsRangeColumn)
                 let testFsCellsCollection = FsCellsCollection()
@@ -140,7 +140,7 @@ let main =
                     |> List.map (
                         fun c -> FsCell.createWithDataType c.DataType c.RowNumber c.ColumnNumber c.Value
                     )
-                testFsCellsCollection.Add testFsCells |> ignore
+                testFsCellsCollection.AddMany testFsCells |> ignore
                 testList "showHeaderRow = true" [
                     testCase "Returns correct data cells" <| fun _ ->
                         let dataCells = testFsTableField.DataCells(testFsCellsCollection)

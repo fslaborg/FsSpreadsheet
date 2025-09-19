@@ -36,7 +36,7 @@ dummyFsCellsCollection3.Add dummyFsCells[2] |> ignore
 let dummyFsCellsCollection4 = FsCellsCollection()
 dummyFsCellsCollection4.Add dummyFsCells[3] |> ignore
 dummyFsCellsCollection4.Add dummyFsCells[4] |> ignore
-let dummyFsTable = FsTable("Table2", FsRangeAddress("A1:D13"))
+let dummyFsTable = FsTable("Table2", FsRangeAddress.fromString("A1:D13"))
 let dummyFsWorksheet1 = FsWorksheet("StringSheet",      ResizeArray(), ResizeArray(),             dummyFsCellsCollection1)
 let dummyFsWorksheet2 = FsWorksheet("NumericSheet",     ResizeArray(), ResizeArray(),             dummyFsCellsCollection2)
 let dummyFsWorksheet3 = FsWorksheet("TableSheet",       ResizeArray(), ResizeArray([dummyFsTable]), dummyFsCellsCollection3)
