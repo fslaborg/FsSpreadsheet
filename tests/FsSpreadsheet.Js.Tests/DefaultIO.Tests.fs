@@ -19,6 +19,10 @@ let private tests_Read = testList "Read" [
         let! wb = readFromTestFile DefaultTestObject.TestFiles.Libre |> Async.AwaitPromise
         Expect.isDefaultTestObject wb
     }
+    testCaseAsync "Pandas" <| async {
+        let! wb = readFromTestFile DefaultTestObject.TestFiles.Pandas |> Async.AwaitPromise
+        Expect.isDefaultTestObject wb
+    }
     testCaseAsync "FableExceljs" <| async {
         let! wb = readFromTestFile DefaultTestObject.TestFiles.FableExceljs |> Async.AwaitPromise
         Expect.isDefaultTestObject wb

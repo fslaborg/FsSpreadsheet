@@ -11,6 +11,7 @@ let [<Literal>] testFolder = "TestFiles"
 type TestFiles =
 | Excel
 | Libre
+| Pandas
 | FableExceljs
 | ClosedXML
 | FsSpreadsheetNET
@@ -21,6 +22,7 @@ type TestFiles =
         match this with
         | Excel             -> "TestWorkbook_Excel.xlsx"
         | Libre             -> "TestWorkbook_Libre.xlsx"
+        | Pandas            -> "TestWorkbook_Pandas.xlsx"
         | FableExceljs      -> "TestWorkbook_FableExceljs.xlsx"
         | ClosedXML         -> "TestWorkbook_ClosedXML.xlsx"
         | FsSpreadsheetNET  -> "TestWorkbook_FsSpreadsheet.net.xlsx"
