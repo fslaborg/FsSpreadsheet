@@ -30,6 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="README.md" Pack="true" />
     <Compile Include="FsSparseMatrix.fs" />
     <Compile Include="Formatters.fs" />
     <Compile Include="Extension.fs" />
