@@ -3,30 +3,42 @@
 open Fable.Pyxpecto
 open FsSpreadsheet
 
+let dummyRow1 = 
+    [   // single cells in row
+        FsCell.createWithDataType DataType.String 2 2 "Name"
+        FsCell.createWithDataType DataType.String 2 3 "Age"
+        FsCell.createWithDataType DataType.String 2 4 "Location"
+    ]
+let dummyRow2 = 
+    [   // single cells in row
+        FsCell.createWithDataType DataType.String 3 2 "John Doe"
+        FsCell.createWithDataType DataType.Number 3 3 "69"
+        FsCell.createWithDataType DataType.String 3 4 "Springfield"
+    ]
+
+let dummyRow3 = 
+    [   // single cells in row
+        FsCell.createWithDataType DataType.String 4 2 "Jane Doe"
+        FsCell.createWithDataType DataType.Number 4 3 "23"
+        FsCell.createWithDataType DataType.String 4 4 "Springfield"
+    ]
+
+let dummyRow4 = 
+    [   // single cells in row
+        FsCell.createWithDataType DataType.String 5 2 "Jack Doe"
+        FsCell.createWithDataType DataType.Number 5 3 "4"
+        FsCell.createWithDataType DataType.String 5 4 "Newville"
+    ]
+
 let dummyFsCells = 
     [   // rows
-        [   // single cells in row
-            FsCell.createWithDataType DataType.String 2 2 "Name"
-            FsCell.createWithDataType DataType.String 2 3 "Age"
-            FsCell.createWithDataType DataType.String 2 4 "Location"
-        ]
-        [
-            FsCell.createWithDataType DataType.String 3 2 "John Doe"
-            FsCell.createWithDataType DataType.Number 3 3 "69"
-            FsCell.createWithDataType DataType.String 3 4 "Springfield"
-        ]
-        [
-            FsCell.createWithDataType DataType.String 4 2 "Jane Doe"
-            FsCell.createWithDataType DataType.Number 4 3 "23"
-            FsCell.createWithDataType DataType.String 4 4 "Springfield"
-        ]
-        [
-            FsCell.createWithDataType DataType.String 5 2 "Jack Doe"
-            FsCell.createWithDataType DataType.Number 5 3 "4"
-            FsCell.createWithDataType DataType.String 5 4 "Newville"
-        ]
+        dummyRow1
+        dummyRow2
+        dummyRow3
+        dummyRow4
     ]
     |> Seq.concat
+
 let dummyFsRangeColumns =
     dummyFsCells
     |> Seq.groupBy (fun t -> t.ColumnNumber)
@@ -160,5 +172,66 @@ let main =
                     let actualCells = dummyFsCells |> Seq.filter (fun c -> c.ColumnNumber = 2 && c.RowNumber > minRowNo)
                     Expect.mySequenceEqual (testDataCells |> Seq.map (fun c -> c.Value)) (actualCells |> Seq.map (fun c -> c.Value)) "FsCells are incorrect in value"
             ]
+        ]
+        testList "GetRows" [
+            testCase "Headerless" <| fun _ ->
+                let t = FsTable("testFsTable", FsRangeAddress(dummyFsCellsCollectionFirstAddress, dummyFsCellsCollectionLastAddress), showHeaderRow = false)
+                let rows = t.GetRows(dummyFsCellsCollection) |> Seq.toArray
+                Expect.hasLength rows 4 "There should be 4 rows"
+                Expect.mySequenceEqual rows[0] dummyRow1 "Row 1 is not equal"
+                Expect.mySequenceEqual rows[1] dummyRow2 "Row 2 is not equal"
+                Expect.mySequenceEqual rows[2] dummyRow3 "Row 3 is not equal"
+                Expect.mySequenceEqual rows[3] dummyRow4 "Row 4 is not equal"      
+            testCase "HeadersShown" <| fun _ ->
+                let t = FsTable("testFsTable", FsRangeAddress(dummyFsCellsCollectionFirstAddress, dummyFsCellsCollectionLastAddress), showHeaderRow = true)
+                let rows = t.GetRows(dummyFsCellsCollection) |> Seq.toArray
+                Expect.hasLength rows 4 "There should be 4 rows"
+                Expect.mySequenceEqual rows[0] dummyRow1 "Row 1 is not equal"
+                Expect.mySequenceEqual rows[1] dummyRow2 "Row 2 is not equal"
+                Expect.mySequenceEqual rows[2] dummyRow3 "Row 3 is not equal"
+                Expect.mySequenceEqual rows[3] dummyRow4 "Row 4 is not equal"     
+        ]
+        testList "GetHeaderRow" [
+            testCase "HeadersShown" <| fun _ ->
+                let t = FsTable("testFsTable", FsRangeAddress(dummyFsCellsCollectionFirstAddress, dummyFsCellsCollectionLastAddress), showHeaderRow = true)
+                let headerRow = t.GetHeaderRow(dummyFsCellsCollection) 
+                Expect.mySequenceEqual headerRow dummyRow1 "Header row is not equal"              
+        ]
+        testList "GetBodyRows" [
+            testCase "HeadersShown" <| fun _ ->
+                let t = FsTable("testFsTable", FsRangeAddress(dummyFsCellsCollectionFirstAddress, dummyFsCellsCollectionLastAddress), showHeaderRow = true)
+                let bodyRows = t.GetBodyRows(dummyFsCellsCollection) |> Seq.toArray
+                Expect.hasLength bodyRows 3 "There should be 3 body rows"
+                Expect.mySequenceEqual bodyRows[0] dummyRow2 "Body Row 1 is not equal"
+                Expect.mySequenceEqual bodyRows[1] dummyRow3 "Body Row 2 is not equal"
+                Expect.mySequenceEqual bodyRows[2] dummyRow4 "Body Row 3 is not equal"       
+            testCase "Headerless" <| fun _ ->
+                let t = FsTable("testFsTable", FsRangeAddress(dummyFsCellsCollectionFirstAddress, dummyFsCellsCollectionLastAddress), showHeaderRow = false)
+                let bodyRows = t.GetBodyRows(dummyFsCellsCollection) |> Seq.toArray
+                Expect.hasLength bodyRows 4 "There should be 4 body rows"
+                Expect.mySequenceEqual bodyRows[0] dummyRow1 "Body Row 1 is not equal"
+                Expect.mySequenceEqual bodyRows[1] dummyRow2 "Body Row 2 is not equal"
+                Expect.mySequenceEqual bodyRows[2] dummyRow3 "Body Row 3 is not equal"       
+                Expect.mySequenceEqual bodyRows[3] dummyRow4 "Body Row 4 is not equal"
+        ]
+        testList "GetRowAt" [
+            testCase "HeadersShown" <| fun _ ->
+                let t = FsTable("testFsTable", FsRangeAddress(dummyFsCellsCollectionFirstAddress, dummyFsCellsCollectionLastAddress), showHeaderRow = true)
+                let row2 = t.GetRowAt(2, dummyFsCellsCollection) 
+                Expect.mySequenceEqual row2 dummyRow2 "Row 2 is not equal"
+            testCase "Headerless" <| fun _ ->
+                let t = FsTable("testFsTable", FsRangeAddress(dummyFsCellsCollectionFirstAddress, dummyFsCellsCollectionLastAddress), showHeaderRow = false)
+                let row2 = t.GetRowAt(2, dummyFsCellsCollection) 
+                Expect.mySequenceEqual row2 dummyRow2 "Row 2 is not equal"
+        ]
+        testList "GetBodyRowAt" [
+            testCase "HeadersShown" <| fun _ ->
+                let t = FsTable("testFsTable", FsRangeAddress(dummyFsCellsCollectionFirstAddress, dummyFsCellsCollectionLastAddress), showHeaderRow = true)
+                let bodyRow1 = t.GetBodyRowAt(1, dummyFsCellsCollection) 
+                Expect.mySequenceEqual bodyRow1 dummyRow2 "Body Row 1 is not equal"
+            testCase "Headerless" <| fun _ ->
+                let t = FsTable("testFsTable", FsRangeAddress(dummyFsCellsCollectionFirstAddress, dummyFsCellsCollectionLastAddress), showHeaderRow = false)
+                let bodyRow1 = t.GetBodyRowAt(1, dummyFsCellsCollection) 
+                Expect.mySequenceEqual bodyRow1 dummyRow1 "Body Row 1 is not equal"
         ]
     ]

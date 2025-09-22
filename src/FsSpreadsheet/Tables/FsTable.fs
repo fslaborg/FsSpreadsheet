@@ -94,7 +94,7 @@ type FsTable (name : string, rangeAddress : FsRangeAddress, ?showTotalsRow : boo
         }
 
     /// <summary>
-    /// Returns the FsRows from the FsTable.
+    /// Returns the FsRows from the FsTable, including HeaderRows if present. If only the body rows are needed, use GetBodyRows.
     /// </summary>
     /// <param name="cellsCollection">The FsCellsCollection associated with this FsTable.</param>
     member this.GetRows(cellsCollection : FsCellsCollection) =
@@ -105,6 +105,43 @@ type FsTable (name : string, rangeAddress : FsRangeAddress, ?showTotalsRow : boo
                 let range = FsRangeAddress (firstAddress, lastAddress)
                 FsRow(range, cellsCollection)
         }
+
+    /// <summary>
+    /// Returns the body rows from the FsTable, i.e. all rows except the header row (if shown).
+    /// </summary>
+    /// <param name="cellsCollection">The FsCellsCollection associated with this FsTable.</param>
+    member this.GetBodyRows(cellsCollection : FsCellsCollection) =
+        let firstRowIndex = if this.ShowHeaderRow then this.RangeAddress.FirstAddress.RowNumber + 1 else this.RangeAddress.FirstAddress.RowNumber
+        seq {
+            for i = firstRowIndex to this.RangeAddress.LastAddress.RowNumber do 
+                let firstAddress = FsAddress(i, this.RangeAddress.FirstAddress.ColumnNumber)
+                let lastAddress = FsAddress(i, this.RangeAddress.LastAddress.ColumnNumber)
+                let range = FsRangeAddress (firstAddress, lastAddress)
+                FsRow(range, cellsCollection)
+        }
+
+    /// <summary>
+    /// Returns the FsRow at the given index from the FsTable.
+    /// </summary>
+    /// <param name="index">The index of the row in the FsTable, starting with 1.</param>
+    member this.GetRowAt(index : int32, cellsCollection : FsCellsCollection) =
+        if (index <= 0 || index > base.RowCount()) then
+            raise (new System.ArgumentOutOfRangeException(string index,sprintf "Row index must be between 1 and %i" (base.RowCount())))
+        let rowI = this.RangeAddress.FirstAddress.RowNumber + index - 1
+        let firstAddress = FsAddress(rowI, this.RangeAddress.FirstAddress.ColumnNumber)
+        let lastAddress = FsAddress(rowI, this.RangeAddress.LastAddress.ColumnNumber)
+        let range = FsRangeAddress (firstAddress, lastAddress)
+        FsRow(range, cellsCollection)
+
+    /// <summary>
+    /// Returns the body FsRow at the given index from the FsTable, i.e. all rows except the header row (if shown).
+    /// </summary>
+    /// <param name="index">The index of the body row in the FsTable, starting with 1.</param>
+    member this.GetBodyRowAt(index : int32, cellsCollection : FsCellsCollection) =
+        if this.ShowHeaderRow then 
+            this.GetRowAt(index + 1, cellsCollection)
+        else
+            this.GetRowAt(index, cellsCollection)
 
     /// <summary>
     /// Updates the FsRangeAddress of the FsTable according to the FsTableFields associated.
