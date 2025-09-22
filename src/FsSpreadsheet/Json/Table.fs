@@ -20,5 +20,5 @@ let decode : Decoder<FsTable> =
     Decode.object (fun builder ->
         let n = builder.Required.Field name Decode.string
         let r = builder.Required.Field range Decode.string
-        FsTable(n, FsRangeAddress(r))
+        FsTable(n, FsRangeAddress.fromString(r))
     )

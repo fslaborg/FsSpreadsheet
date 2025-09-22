@@ -32,4 +32,4 @@ module PyTable =
     let toFsTable(table:Table) =
         let name = if isNull table.displayName then table.name else table.displayName
         let ref = table.ref
-        FsTable(name,FsRangeAddress(ref))
+        FsTable(name,FsRangeAddress.fromString(ref))

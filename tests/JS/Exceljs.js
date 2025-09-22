@@ -1,7 +1,7 @@
 import { equal } from 'assert';
 import { Xlsx } from './FsSpreadsheet.Js/Xlsx.js';
 import { FsWorkbook } from "./FsSpreadsheet.Js/FsSpreadsheet/FsWorkbook.js";
-import { FsRangeAddress_$ctor_Z721C83C5, FsRangeAddress__get_Range } from "./FsSpreadsheet.Js/FsSpreadsheet/Ranges/FsRangeAddress.js";
+import { FsRangeAddress } from "./FsSpreadsheet.Js/FsSpreadsheet/Ranges/FsRangeAddress.js";
 import { FsTable } from "./FsSpreadsheet.Js/FsSpreadsheet/Tables/FsTable.js";
 import { writeFromFsWorkbook, readToFsWorkbook } from "./FsSpreadsheet.Js/Workbook.js";
 
@@ -94,7 +94,7 @@ describe('FsSpreadsheet.Js', function () {
             fsws.Row(1).Item(4).SetValueAs("My Column 3");
             fsws.Row(2).Item(4).SetValueAs(true);
             fsws.Row(3).Item(4).SetValueAs(false);
-            const table = new FsTable("MyNewTable", FsRangeAddress_$ctor_Z721C83C5("B1:D3"));
+            const table = new FsTable("MyNewTable", FsRangeAddress.fromString("B1:D3"));
             fsws.AddTable(table);
             fsws.RescanRows()
             await Xlsx.toXlsxFile(path, fswb)

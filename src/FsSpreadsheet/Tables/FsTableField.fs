@@ -1,36 +1,18 @@
 ﻿namespace FsSpreadsheet
 
+open Fable.Core
+
 /// <summary>
 /// Creates an FsTableFiled with given name, index, FsRangeColumn, totalRowLabel, and the totalsRowFunction.
 /// </summary>
-[<AllowNullLiteral>]
-type FsTableField (name : string, index : int, column : FsRangeColumn, totalsRowLabel, totalsRowFunction) = 
+[<AllowNullLiteral>][<AttachMembers>]
+type FsTableField (name : string, ?index : int, ?column : FsRangeColumn, ?totalsRowLabel, ?totalsRowFunction) = 
 
-    let mutable _totalsRowsFunction = totalsRowFunction
-    let mutable _totalsRowLabel = totalsRowLabel
-    let mutable _column = column
-    let mutable _index = index
+    let mutable _totalsRowsFunction = totalsRowFunction |> Option.defaultValue null
+    let mutable _totalsRowLabel = totalsRowLabel |> Option.defaultValue null
+    let mutable _column = column |> Option.defaultValue null
+    let mutable _index = index |> Option.defaultValue 0
     let mutable _name = name
-
-    /// <summary>
-    /// Creates an empty FsTableField.
-    /// </summary>
-    new() = FsTableField("", 0, null, null, null)
-
-    /// <summary>
-    /// Creates an FsTableField with the given name.
-    /// </summary>
-    new(name : string) = FsTableField(name, 0, null, null, null)
-
-    /// <summary>
-    /// Creates an FsTableField with the given name and index.
-    /// </summary>
-    new(name : string, index : int) = FsTableField(name, index, null, null, null)
-
-    /// <summary>
-    /// Creates an FsTableField with the given name, index, and FsRangeColumn.
-    /// </summary>
-    new(name, index, column) = FsTableField(name, index, column, null, null)
 
     /// <summary>
     /// Gets or sets the FsRangeColumn of this FsTableField.

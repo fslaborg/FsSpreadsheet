@@ -537,17 +537,8 @@ type FsWorksheet (name, ?fsRows, ?fsTables, ?fsCellsCollection) =
     /// Adds a sequence of FsCells to the FsWorksheet. !Exception if cell address already exists!
     /// </summary>
     member self.AddCells (cells:seq<FsCell>) =
-        self.CellCollection.Add cells |> ignore
+        self.CellCollection.AddMany cells |> ignore
         self    
-
-    /// <summary>
-    /// Adds a value at the given row- and columnIndex to the FsWorksheet.
-    ///
-    /// If a cell exists at the given postion, it is shoved to the right.
-    /// </summary>
-    member self.InsertValueAt(value : System.IConvertible, rowIndex, colIndex)=
-        let cell = FsCell(value)
-        self.CellCollection.Add(int32 rowIndex, int32 colIndex, cell)
 
     /// <summary>
     /// Adds a value at the given row- and columnIndex to the FsWorksheet.
@@ -556,7 +547,7 @@ type FsWorksheet (name, ?fsRows, ?fsTables, ?fsCellsCollection) =
     /// </summary>
     member self.InsertValueAt(value : obj, rowIndex, colIndex)=
         let cell = FsCell(value)
-        self.CellCollection.Add(int32 rowIndex, int32 colIndex, cell)
+        self.CellCollection.Add(cell, int32 rowIndex, int32 colIndex)
 
     /// <summary>
     /// Adds a value at the given row- and columnIndex to a given FsWorksheet.
@@ -577,7 +568,7 @@ type FsWorksheet (name, ?fsRows, ?fsTables, ?fsCellsCollection) =
             c.SetValueAs value |> ignore
             self
         | None -> 
-            self.CellCollection.Add(rowIndex, colIndex, value) |> ignore
+            self.CellCollection.Add(value, rowIndex, colIndex) |> ignore
             self
 
     /// <summary>

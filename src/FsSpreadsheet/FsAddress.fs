@@ -1,5 +1,6 @@
 ﻿namespace FsSpreadsheet
 
+open Fable.Core
 
 /// Module containing functions to work with "A1" style excel cell references.
 module CellReference =
@@ -86,11 +87,11 @@ module CellReference =
         |> fun (c,r) -> c, (int64 r) + (int64 amount) |> uint32
         ||> ofIndices
 
+[<AttachMembers>]
+type FsAddress(rowNumber : int, columnNumber : int, ?fixedRow : bool, ?fixedColumn : bool) =
 
-type FsAddress(rowNumber : int, columnNumber : int, fixedRow : bool, fixedColumn : bool) =
-
-    let mutable _fixedRow     = fixedRow
-    let mutable _fixedColumn  = fixedColumn
+    let mutable _fixedRow     = if fixedRow.IsSome then fixedRow.Value else false
+    let mutable _fixedColumn  = if fixedColumn.IsSome then fixedColumn.Value else false
     let mutable _rowNumber    = rowNumber
     let mutable _columnNumber = columnNumber
 
@@ -100,15 +101,9 @@ type FsAddress(rowNumber : int, columnNumber : int, fixedRow : bool, fixedColumn
     // ALTERNATE CONSTRUCTORS
     // ----------------------
 
-    new (rowNumber : int, columnLetter : string, fixedRow : bool, fixedColumn : bool) =
-        FsAddress(rowNumber,CellReference.colAdressToIndex columnLetter |> int,fixedRow,fixedColumn)
-
-    new (rowNumber : int, columnNumber : int) =
-        FsAddress(rowNumber,columnNumber,false,false)
-
-    new (cellAddressString : string) =
+    static member fromString (cellAddressString : string, ?fixedRow, ?fixedColumn) =
         let colIndex,rowIndex = CellReference.toIndices cellAddressString
-        FsAddress(int rowIndex,int colIndex)
+        FsAddress(int rowIndex,int colIndex, ?fixedRow = fixedRow, ?fixedColumn = fixedColumn)
 
     // ----------
     // PROPERTIES
@@ -189,3 +184,15 @@ type FsAddress(rowNumber : int, columnNumber : int, fixedRow : bool, fixedColumn
     /// <summary>Checks if 2 FsAddresses are equal.</summary>
     static member compare (address1 : FsAddress) (address2 : FsAddress) =
         address1.Compare address2
+
+    override this.GetHashCode (): int = 
+        this.Address.GetHashCode()
+        |> HashCodes.mergeHashes this.ColumnNumber
+        |> HashCodes.mergeHashes this.RowNumber
+        |> HashCodes.mergeHashes (this.FixedColumn.GetHashCode())
+        |> HashCodes.mergeHashes (this.FixedRow.GetHashCode())
+
+    override this.Equals(other: obj) =
+        match other with
+        | :? FsAddress as other -> this.Compare other
+        | _ -> false

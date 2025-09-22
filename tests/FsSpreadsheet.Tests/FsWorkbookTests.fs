@@ -9,8 +9,8 @@ let dummyWorksheet1 = FsWorksheet("dummyWorksheet1")
 let dummyWorksheet2 = FsWorksheet("dummyWorksheet2")
 let dummyWorksheetList = [dummyWorksheet1; dummyWorksheet2]
 let dummyTables = [|
-    FsTable("dummyTable1", FsRangeAddress("A1:B2"))
-    FsTable("dummyTable2", FsRangeAddress("C3:F5"))
+    FsTable("dummyTable1", FsRangeAddress.fromString("A1:B2"))
+    FsTable("dummyTable2", FsRangeAddress.fromString("C3:F5"))
 |]
 dummyWorkbook.AddWorksheet dummyWorksheet1 |> ignore
 dummyWorkbook.AddWorksheet dummyWorksheet2 |> ignore

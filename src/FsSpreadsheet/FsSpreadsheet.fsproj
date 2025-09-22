@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="HashCodes.fs" />
     <Compile Include="FsAddress.fs" />
     <Compile Include="Cells\FsCell.fs" />
     <Compile Include="Cells\FsCellsCollection.fs" />
@@ -55,7 +56,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Thoth.Json.Core" Version="0.2.1" />
+    <PackageReference Include="Thoth.Json.Core" Version="0.7.0" />
   </ItemGroup>
 
   <ItemGroup>

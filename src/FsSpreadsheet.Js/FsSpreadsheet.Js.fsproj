@@ -17,6 +17,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="CONTRIBUTING.md" />
     <None Include="..\..\docs\img\logo.png" Link="logo.png">
       <PackagePath>\</PackagePath>
       <Pack>true</Pack>
@@ -33,7 +34,7 @@
   <ItemGroup>   
     <PackageReference Include="Fable.Exceljs" Version="1.6.0" />
     <PackageReference Include="Fable.Promise" Version="3.2.0" />
-    <PackageReference Include="Thoth.Json.JavaScript" Version="0.1.0" />
+    <PackageReference Include="Thoth.Json.JavaScript" Version="0.4.1" />
   </ItemGroup>
 
   <!-- Add source files to "fable" folder in Nuget package -->

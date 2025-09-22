@@ -20,7 +20,7 @@ let fromFsWorksheet = testList "fromFsWorksheet" [
     testCase "Simple" <| fun _ ->
         let wb = Workbook.create()
         let fsWS = FsWorksheet(wsName)
-        let cell = FsCell("Hello", address = FsAddress("A1"))
+        let cell = FsCell("Hello", address = FsAddress.fromString("A1"))
         fsWS.AddCell(cell) |> ignore
         let pyWS = PyWorksheet.fromFsWorksheet wb fsWS
 

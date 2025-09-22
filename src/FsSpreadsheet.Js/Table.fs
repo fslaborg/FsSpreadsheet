@@ -44,7 +44,7 @@ module JsTable =
 
     let readToFsTable(table:ITableRef) =
         let table = table.table.Value
-        let tableRef = table.tableRef |> FsRangeAddress
+        let tableRef = table.tableRef |> FsRangeAddress.fromString
         let tableName = if isNull table.displayName then table.name else table.displayName
         let table = FsTable(tableName, tableRef, table.totalsRow, table.headerRow)
         table

@@ -27,7 +27,7 @@ let private tests_Read = testList "Read" [
         let! wb = readFromTestFile DefaultTestObject.TestFiles.FableExceljs |> Async.AwaitPromise
         Expect.isDefaultTestObject wb
     }
-    ptestCaseAsync "ClosedXML" <| async {
+    testCaseAsync "ClosedXML" <| async {
         let! wb = readFromTestFile DefaultTestObject.TestFiles.ClosedXML |> Async.AwaitPromise
         Expect.isDefaultTestObject wb
     }

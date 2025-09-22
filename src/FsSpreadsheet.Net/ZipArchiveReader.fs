@@ -177,7 +177,7 @@ let parseTable (sheet : ZipArchiveEntry) =
         while reader.Read() do
             if XmlReader.isElemWithName reader "table" then
                 let area = reader.GetAttribute("ref")
-                let ra = FsRangeAddress(area)    
+                let ra = FsRangeAddress.fromString(area)    
                 let totalsRowShown = 
                     let attribute = reader.GetAttribute("totalsRowShown")
                     match attribute with
@@ -283,7 +283,7 @@ let parseWorksheet (name : string) (styles : Styles) (sharedStrings : SharedStri
                         f <- cellReader.ReadElementContentAsString()
                 if v <> null && v <> "" || f <> null then
                     let cellValue,dataType = parseCell sharedStrings styles v t s f
-                    let cell = FsCell(cellValue,dataType = dataType,address = FsAddress(r))
+                    let cell = FsCell(cellValue,dataType = dataType,address = FsAddress.fromString(r))
                     ws.AddCell(cell) |> ignore
             if XmlReader.isElemWithName reader "tablePart" then
                 let id = reader.GetAttribute("r:id")

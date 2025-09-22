@@ -22,9 +22,9 @@ let transformTable =
 
             let columnNames = [|"My Column 1";"My Column 2"|]
 
-            ws.AddCell(FsCell(columnNames.[0],address=FsAddress("B1"))) |> ignore
-            ws.AddCell(FsCell(columnNames.[1],address=FsAddress("C1"))) |> ignore
-            let t = FsTable("My_New_Table", FsRangeAddress("B1:C2"))
+            ws.AddCell(FsCell(columnNames.[0],address=FsAddress.fromString("B1"))) |> ignore
+            ws.AddCell(FsCell(columnNames.[1],address=FsAddress.fromString("C1"))) |> ignore
+            let t = FsTable("My_New_Table", FsRangeAddress.fromString("B1:C2"))
 
             ws.AddTable(t) |> ignore
 

@@ -16,8 +16,8 @@ let tests_Read = testList "Read" [
             FsWorkbook.fromXlsxFile(p)
 
     testCase "FsCell equality" <| fun _ ->
-        let c1 = FsCell(1, DataType.Number, FsAddress("A2"))
-        let c2 = FsCell(1, DataType.Number, FsAddress("A2"))
+        let c1 = FsCell(1, DataType.Number, FsAddress.fromString("A2"))
+        let c2 = FsCell(1, DataType.Number, FsAddress.fromString("A2"))
         let isStructEqual = c1.StructurallyEquals(c2)
         Expect.isTrue isStructEqual ""
     testCase "Excel" <| fun _ ->

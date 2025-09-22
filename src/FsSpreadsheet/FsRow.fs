@@ -90,7 +90,7 @@ type FsRow (rangeAddress : FsRangeAddress, cells : FsCellsCollection) =
         let ra = this.RangeAddress.Copy()
         let cells = this.Cells |> Seq.map (fun c -> c.Copy())
         let fcc = FsCellsCollection()
-        fcc.Add cells
+        fcc.AddMany cells
         FsRow(ra, fcc)
 
     /// <summary>
@@ -155,7 +155,7 @@ type FsRow (rangeAddress : FsRangeAddress, cells : FsCellsCollection) =
     /// </summary>
     member this.InsertValueAt(colIndex, (value : 'a)) =
         let cell = FsCell(value)
-        cells.Add(int32 this.Index, int32 colIndex, cell)
+        cells.Add(cell, int32 this.Index, int32 colIndex)
 
     /// <summary>
     /// Adds a value at the given row- and columnIndex to FsRow using.

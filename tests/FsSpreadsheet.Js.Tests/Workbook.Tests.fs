@@ -72,7 +72,7 @@ let private tests_toFsWorkbook = testList "toFsWorkbook" [
         Expect.equal (fsTable.RangeAddress.Range) ("B1:C1") "RangeAddress"
         let getCellValue (address: string) = 
             let ws = fswb.GetWorksheetAt 1
-            let range = FsAddress(address)
+            let range = FsAddress.fromString(address)
             ws.GetCellAt(range.RowNumber, range.ColumnNumber).Value
             //fsTable.Cell(FsAddress(address), (fswb.GetWorksheetAt 1).CellCollection).Value //bugged in FsSpreadsheet v3.1.1
         Expect.equal (getCellValue "B1") "Column 1 nice" "B1"
@@ -112,7 +112,7 @@ let private tests_toFsWorkbook = testList "toFsWorkbook" [
         let fswb = JsWorkbook.readToFsWorkbook jswb  
         let getCellValue (address: string) = 
             let ws = fswb.GetWorksheetAt 1
-            let range = FsAddress(address)
+            let range = FsAddress.fromString(address)
             ws.GetCellAt(range.RowNumber, range.ColumnNumber)
             //fsTable.Cell(FsAddress(address), (fswb.GetWorksheetAt 1).CellCollection).Value //bugged in FsSpreadsheet v3.1.1
         let inline expectCellValue (address: string) (getas: FsCell -> 'A) (expectedValue: 'A) =
@@ -168,9 +168,9 @@ let tests_toJsWorkbook = testList "toJsWorkbook" [
     testCase "table, no body" <| fun _ ->
         let fswb = new FsWorkbook()
         let fsws = fswb.InitWorksheet("My Awesome Worksheet")
-        let _ = fsws.AddCell(FsCell("My Column 1",address=FsAddress("B1")))
-        let _ = fsws.AddCell(FsCell("My Column 2",address=FsAddress("C1")))
-        let t = FsTable("My_New_Table", FsRangeAddress("B1:C1"))
+        let _ = fsws.AddCell(FsCell("My Column 1",address=FsAddress.fromString("B1")))
+        let _ = fsws.AddCell(FsCell("My Column 2",address=FsAddress.fromString("C1")))
+        let t = FsTable("My_New_Table", FsRangeAddress.fromString("B1:C1"))
         let _ = fsws.AddTable(t)
         Expect.passWithMsg "Create jswb"
         let jswb = JsWorkbook.writeFromFsWorkbook fswb
@@ -188,16 +188,16 @@ let tests_toJsWorkbook = testList "toJsWorkbook" [
     testCase "table, with body" <| fun _ ->
         let fswb = new FsWorkbook()
         let fsws = fswb.InitWorksheet("My Awesome Worksheet")
-        let _ = fsws.AddCell(FsCell("My Column 1",address=FsAddress("B1")))
-        let _ = fsws.AddCell(FsCell(2,address=FsAddress("B2")))
-        let _ = fsws.AddCell(FsCell(20,address=FsAddress("B3")))
-        let _ = fsws.AddCell(FsCell("My Column 2",address=FsAddress("C1")))
-        let _ = fsws.AddCell(FsCell("row2",address=FsAddress("C2")))
-        let _ = fsws.AddCell(FsCell("row20",address=FsAddress("C3")))
-        let _ = fsws.AddCell(FsCell("My Column 3",address=FsAddress("D1")))
-        let _ = fsws.AddCell(FsCell(true,address=FsAddress("D2")))
-        let _ = fsws.AddCell(FsCell(false,address=FsAddress("D3")))
-        let t = FsTable("My_New_Table", FsRangeAddress("B1:D3"))
+        let _ = fsws.AddCell(FsCell("My Column 1",address=FsAddress.fromString("B1")))
+        let _ = fsws.AddCell(FsCell(2,address=FsAddress.fromString("B2")))
+        let _ = fsws.AddCell(FsCell(20,address=FsAddress.fromString("B3")))
+        let _ = fsws.AddCell(FsCell("My Column 2",address=FsAddress.fromString("C1")))
+        let _ = fsws.AddCell(FsCell("row2",address=FsAddress.fromString("C2")))
+        let _ = fsws.AddCell(FsCell("row20",address=FsAddress.fromString("C3")))
+        let _ = fsws.AddCell(FsCell("My Column 3",address=FsAddress.fromString("D1")))
+        let _ = fsws.AddCell(FsCell(true,address=FsAddress.fromString("D2")))
+        let _ = fsws.AddCell(FsCell(false,address=FsAddress.fromString("D3")))
+        let t = FsTable("My_New_Table", FsRangeAddress.fromString("B1:D3"))
         let _ = fsws.AddTable(t)
         Expect.passWithMsg "Create jswb"
         let jswb = JsWorkbook.writeFromFsWorkbook fswb
@@ -216,16 +216,16 @@ let tests_toJsWorkbook = testList "toJsWorkbook" [
     testCase "table, with body, check cells" <| fun _ ->
         let fswb = new FsWorkbook()
         let fsws = fswb.InitWorksheet("My Awesome Worksheet")
-        let _ = fsws.AddCell(FsCell("My Column 1",address=FsAddress("B1")))
-        let _ = fsws.AddCell(FsCell(2,DataType.Number,address=FsAddress("B2")))
-        let _ = fsws.AddCell(FsCell(20,DataType.Number,address=FsAddress("B3")))
-        let _ = fsws.AddCell(FsCell("My Column 2",address=FsAddress("C1")))
-        let _ = fsws.AddCell(FsCell("row2",address=FsAddress("C2")))
-        let _ = fsws.AddCell(FsCell("row20",address=FsAddress("C3")))
-        let _ = fsws.AddCell(FsCell("My Column 3",address=FsAddress("D1")))
-        let _ = fsws.AddCell(FsCell(true, DataType.Boolean, address=FsAddress("D2")))
-        let _ = fsws.AddCell(FsCell(false, DataType.Boolean, address=FsAddress("D3")))
-        let t = FsTable("My_New_Table", FsRangeAddress("B1:D3"))
+        let _ = fsws.AddCell(FsCell("My Column 1",address=FsAddress.fromString("B1")))
+        let _ = fsws.AddCell(FsCell(2,DataType.Number,address=FsAddress.fromString("B2")))
+        let _ = fsws.AddCell(FsCell(20,DataType.Number,address=FsAddress.fromString("B3")))
+        let _ = fsws.AddCell(FsCell("My Column 2",address=FsAddress.fromString("C1")))
+        let _ = fsws.AddCell(FsCell("row2",address=FsAddress.fromString("C2")))
+        let _ = fsws.AddCell(FsCell("row20",address=FsAddress.fromString("C3")))
+        let _ = fsws.AddCell(FsCell("My Column 3",address=FsAddress.fromString("D1")))
+        let _ = fsws.AddCell(FsCell(true, DataType.Boolean, address=FsAddress.fromString("D2")))
+        let _ = fsws.AddCell(FsCell(false, DataType.Boolean, address=FsAddress.fromString("D3")))
+        let t = FsTable("My_New_Table", FsRangeAddress.fromString("B1:D3"))
         let _ = fsws.AddTable(t)
         fsws.RescanRows()
         Expect.passWithMsg "Create jswb"
@@ -244,16 +244,16 @@ let tests_toJsWorkbook = testList "toJsWorkbook" [
     testCase "table ColumnCount()" <| fun _ ->
         let fswb = new FsWorkbook()
         let fsws = fswb.InitWorksheet("My Awesome Worksheet")
-        let _ = fsws.AddCell(FsCell("My Column 1",address=FsAddress("B1")))
-        let _ = fsws.AddCell(FsCell(2,DataType.Number,address=FsAddress("B2")))
-        let _ = fsws.AddCell(FsCell(20,DataType.Number,address=FsAddress("B3")))
-        let _ = fsws.AddCell(FsCell("My Column 2",address=FsAddress("C1")))
-        let _ = fsws.AddCell(FsCell("row2",address=FsAddress("C2")))
-        let _ = fsws.AddCell(FsCell("row20",address=FsAddress("C3")))
-        let _ = fsws.AddCell(FsCell("My Column 3",address=FsAddress("D1")))
-        let _ = fsws.AddCell(FsCell(true, DataType.Boolean, address=FsAddress("D2")))
-        let _ = fsws.AddCell(FsCell(false, DataType.Boolean, address=FsAddress("D3")))
-        let t = FsTable("My_New_Table", FsRangeAddress("B1:D3"))
+        let _ = fsws.AddCell(FsCell("My Column 1",address=FsAddress.fromString("B1")))
+        let _ = fsws.AddCell(FsCell(2,DataType.Number,address=FsAddress.fromString("B2")))
+        let _ = fsws.AddCell(FsCell(20,DataType.Number,address=FsAddress.fromString("B3")))
+        let _ = fsws.AddCell(FsCell("My Column 2",address=FsAddress.fromString("C1")))
+        let _ = fsws.AddCell(FsCell("row2",address=FsAddress.fromString("C2")))
+        let _ = fsws.AddCell(FsCell("row20",address=FsAddress.fromString("C3")))
+        let _ = fsws.AddCell(FsCell("My Column 3",address=FsAddress.fromString("D1")))
+        let _ = fsws.AddCell(FsCell(true, DataType.Boolean, address=FsAddress.fromString("D2")))
+        let _ = fsws.AddCell(FsCell(false, DataType.Boolean, address=FsAddress.fromString("D3")))
+        let t = FsTable("My_New_Table", FsRangeAddress.fromString("B1:D3"))
         let _ = fsws.AddTable(t)
         fsws.RescanRows()
         let table = fsws.Tables.[0]
@@ -270,7 +270,7 @@ let tests_toJsWorkbook = testList "toJsWorkbook" [
         fsws.Row(1).[4].SetValueAs "My Column 2"
         fsws.Row(2).[4].SetValueAs true
         fsws.Row(3).[4].SetValueAs false
-        let t = FsTable("My New Table", FsRangeAddress("B1:D3"))
+        let t = FsTable("My New Table", FsRangeAddress.fromString("B1:D3"))
         let _ = fsws.AddTable(t)
         fsws.RescanRows()
         let table = fsws.Tables.[0]
