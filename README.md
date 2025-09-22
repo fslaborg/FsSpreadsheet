@@ -209,3 +209,19 @@ Verify correct setup with `./build.cmd runtests`
   	- `watchdocs` to create docs and run them locally
   	- `watchdocsprelease` to create prerelease docs and run them locally
     - `release` to create a NuGet, NPM, PyPI and GitHub release 
+
+### Contribution guidelines
+
+- Make sure that all contributions run on all three languages: F#, Javascript and Python
+- Please add failing tests prior to fixing a bug against which to code
+  - If applicable, include issue number in test name as such: `"worksOnFilledTable (issue #100)"`
+- Make use of [XML tags](https://github.com/fslaborg/FsSpreadsheet/issues/10) to comment your code as such:
+   ```fsharp
+   /// <summary>
+   /// Checks if there is an FsCell at given column index of a given FsRow.
+   /// </summary>
+   /// <param name="colIndex">The number of the column where the presence of an FsCell shall be checked.</param>
+   /// <param name="row"></param>
+   static member hasCellAt colIndex (row : FsRow) =
+	  row.HasCellAt colIndex
+   ```
