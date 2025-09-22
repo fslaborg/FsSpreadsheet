@@ -181,3 +181,11 @@ type FsWorkbook() =
     /// </summary>
     static member getTables (workbook : FsWorkbook) =
         workbook.GetTables()
+
+
+    static member validateForWrite (workbook : FsWorkbook) =
+        try 
+            workbook.GetWorksheets()
+            |> Seq.iter (fun ws -> FsWorksheet.validateForWrite ws)
+        with 
+        | ex -> failwith $"FsWorkbook could not be validated for write: {ex.Message}"

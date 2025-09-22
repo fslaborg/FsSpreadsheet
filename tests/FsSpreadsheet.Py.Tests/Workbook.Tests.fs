@@ -132,6 +132,23 @@ let tests_toPyWorkbook = testList "toPyWorkbook" [
         Expect.passWithMsg "convert to jswb"
         let pyWsList = pyWB?worksheets
         Expect.equal (pyWsList |> Array.length) 1 "worksheet count"
+    testCase "worksOnFilledTable (issue #100)" <| fun _ ->
+        let fsWB = new FsWorkbook()
+        let ws = fsWB.InitWorksheet("my awesome worksheet")
+        ws.AddCell(FsCell.createWithAdress(FsAddress.fromString("b1")) "my column 1") |> ignore
+        ws.AddCell(FsCell.createWithAdress(FsAddress.fromString("c1")) "my column 2") |> ignore
+        ws.AddCell(FsCell.createWithAdress(FsAddress.fromString("b2")) 2) |> ignore
+        ws.AddCell(FsCell.createWithAdress(FsAddress.fromString("c2")) "row2") |> ignore
+        ws.AddTable(FsTable("my_new_table", FsRangeAddress.fromString("b1:c2"))) |> ignore
+        PyWorkbook.fromFsWorkbook fsWB |> ignore
+    testCase "failsOnEmptyTable (issue #100)" <| fun _ ->
+        let fsWB = new FsWorkbook()
+        let ws = fsWB.InitWorksheet("my awesome worksheet")
+        ws.AddCell(FsCell.createWithAdress(FsAddress.fromString("b1")) "my column 1") |> ignore
+        ws.AddCell(FsCell.createWithAdress(FsAddress.fromString("c1")) "my column 2") |> ignore
+        ws.AddTable(FsTable("my_new_table", FsRangeAddress.fromString("b1:c1"))) |> ignore
+        Expect.throws (fun () -> PyWorkbook.fromFsWorkbook fsWB |> ignore) "no body in table"
+        
         //pyWB?worksheets
         //|> List.map (fun (ws : FsWorksheet) -> ws.Name = "my awesome worksheet")
 

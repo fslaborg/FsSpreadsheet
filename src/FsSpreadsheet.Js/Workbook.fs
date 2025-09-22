@@ -14,6 +14,7 @@ module JsWorkbook =
     let private log (obj:obj) = jsNative
 
     let writeFromFsWorkbook (fswb: FsWorkbook) =
+        FsWorkbook.validateForWrite fswb
         let jswb = ExcelJs.Excel.Workbook()
         jswb?_themes <- Aux.theme1
         for fsws in fswb.GetWorksheets() do

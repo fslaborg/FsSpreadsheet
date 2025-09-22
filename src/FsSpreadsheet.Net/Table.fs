@@ -25,8 +25,11 @@ module Table =
 
         /// Given a "A1:A1"-style area, returns A1-based cell start and end cellReferences.
         let toBoundaries (area : StringValue) = 
-            area.Value.Split ':'
-            |> fun a -> a.[0], a.[1]
+            if area.Value.Contains ":" then
+                area.Value.Split ':'
+                |> fun a -> a.[0], a.[1]
+            else 
+                area.Value, area.Value
 
         /// Gets the right boundary of the area.
         let rightBoundary (area : StringValue) = 
