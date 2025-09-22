@@ -34,6 +34,6 @@
     "mocha": "^10.2.0"
   },
   "dependencies": {
-    "@nfdi4plants/exceljs": "^0.3.0"
+    "@nfdi4plants/exceljs": "^0.4.0"
   }
 }

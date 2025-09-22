@@ -17,6 +17,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="CONTRIBUTING.md" />
     <None Include="..\..\docs\img\logo.png" Link="logo.png">
       <PackagePath>\</PackagePath>
       <Pack>true</Pack>
