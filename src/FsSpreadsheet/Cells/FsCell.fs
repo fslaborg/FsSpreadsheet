@@ -71,8 +71,8 @@ type FsCell (value : obj, ?dataType : DataType, ?address : FsAddress) =
     let mutable _formulaA1 = ""
     let mutable _formulaR1C1 = ""
 
-    let mutable _rowIndex : int = address |> Option.map (fun a -> a.RowNumber) |> Option.defaultValue 0
-    let mutable _columnIndex : int = address |> Option.map (fun a -> a.ColumnNumber) |> Option.defaultValue 0
+    let mutable _rowIndex : int = address |> Option.map (fun a -> a.RowNumber) |> Option.defaultValue 1
+    let mutable _columnIndex : int = address |> Option.map (fun a -> a.ColumnNumber) |> Option.defaultValue 1
 
     //new(value: IConvertible, ?dataType : DataType, ?address : FsAddress) = FsCell(box value, ?dataType = dataType, ?address = address)
     /// Creates an empty FsCell, set at row 0, column 0 (1-based).
