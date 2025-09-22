@@ -545,15 +545,6 @@ type FsWorksheet (name, ?fsRows, ?fsTables, ?fsCellsCollection) =
     ///
     /// If a cell exists at the given postion, it is shoved to the right.
     /// </summary>
-    member self.InsertValueAt(value : System.IConvertible, rowIndex, colIndex)=
-        let cell = FsCell(value)
-        self.CellCollection.Add(cell, int32 rowIndex, int32 colIndex)
-
-    /// <summary>
-    /// Adds a value at the given row- and columnIndex to the FsWorksheet.
-    ///
-    /// If a cell exists at the given postion, it is shoved to the right.
-    /// </summary>
     member self.InsertValueAt(value : obj, rowIndex, colIndex)=
         let cell = FsCell(value)
         self.CellCollection.Add(cell, int32 rowIndex, int32 colIndex)
