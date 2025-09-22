@@ -1,3 +1,26 @@
+### 7.0.0+2838fbd (Released 2025-9-22)
+* Additions:
+    * [[#34fbafb](https://github.com/CSBiology/FsSpreadsheet/commit/34fbafb23e5f5268a849b46211d7a4a55a922fc8)] added python testfile edited with pandas
+    * [[#feb2572](https://github.com/CSBiology/FsSpreadsheet/commit/feb25721b8a60ee38f060c8041131555159971ff)] renamed test file
+    * [[#916f6a8](https://github.com/CSBiology/FsSpreadsheet/commit/916f6a8742565cd28cbd60dd607fba6f6c38817a)] Updated excel testfile to default values
+    * [[#d36866c](https://github.com/CSBiology/FsSpreadsheet/commit/d36866cce7658b394333c6cebb10d6529c75e68d)] include Pandas testfile in standard IO tests
+    * [[#1c15038](https://github.com/CSBiology/FsSpreadsheet/commit/1c15038f400d638a5d7cf226a33afc0d431ae963)] override address equality #29
+    * [[#8b42156](https://github.com/CSBiology/FsSpreadsheet/commit/8b42156c5ae40cb8e8e5eba768cd395c9710e66d)] update thoth.json dependencies
+    * [[#2110998](https://github.com/CSBiology/FsSpreadsheet/commit/211099810c00de43dc95bf080c48ef63fa200843)] add FsSpreadsheet.Interactive README
+    * [[#0c2c91a](https://github.com/CSBiology/FsSpreadsheet/commit/0c2c91aa972eafb14222a5e6a685f1492c74d772)] Add usage image to FsSpreadsheet.Interactive README
+    * [[#dc4b525](https://github.com/CSBiology/FsSpreadsheet/commit/dc4b5256f35732cc75378db15c3bc93f61db18f5)] cells are initialized at index 1 by default #39
+    * [[#3b57653](https://github.com/CSBiology/FsSpreadsheet/commit/3b576532ec315d8f69e1a5e1f53a0fab3fa8c2a4)] add some table row access functions and add tests #45
+    * [[#0e2b0b5](https://github.com/CSBiology/FsSpreadsheet/commit/0e2b0b572ddb63eec91e5a7c3fe2f5da20794350)] writing to xlsx files fails now if table object does not contain any body row
+    * [[#2838fbd](https://github.com/CSBiology/FsSpreadsheet/commit/2838fbde85a3a25180d86a91409dffd6814eae42)] Enhance README with contribution guidelines and formatting
+* Deletions:
+    * [[#f275844](https://github.com/CSBiology/FsSpreadsheet/commit/f275844884298ba7280b3b0d05fdbbe7d5272378)] remove unnecessary warnings
+    * [[#d1b33e9](https://github.com/CSBiology/FsSpreadsheet/commit/d1b33e9e62b735dbeb5a2bd6acf2836bb41d05e7)] remove all alternative constructors and overloads and make types use AttachMembers attribute
+    * [[#46832f7](https://github.com/CSBiology/FsSpreadsheet/commit/46832f7c064c91c080176fbb8cb31d35ce7055e3)] remove InsertValueAt overload in worksheet.fs
+* Bugfixes:
+    * [[#d50728a](https://github.com/CSBiology/FsSpreadsheet/commit/d50728a1a4579cce6b0950a9e0c5e01d12d7c3e0)] fix pandas output string cells not being parseable in dotnet
+    * [[#42cb0b6](https://github.com/CSBiology/FsSpreadsheet/commit/42cb0b604864e7a30fbed1c83c3adddff90fad91)] update excel js dependency to fix reading ClosedXML
+    * [[#c420042](https://github.com/CSBiology/FsSpreadsheet/commit/c4200425e2a5f277b15cdbcf1d6eb5c84f51b19f)] fix dotnet parser failing reading headerless tables #44
+
 ### 6.3.1+b8c476a (Released 2024-11-29)
 * Additions:
     * [[#b8c476a](https://github.com/CSBiology/FsSpreadsheet/commit/b8c476a81e3988e280c5e313c40b881625f57d24)] reinclude source files in fable folder of py package
