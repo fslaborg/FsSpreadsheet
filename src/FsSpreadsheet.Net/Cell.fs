@@ -239,6 +239,12 @@ module Cell =
     /// </summary>
     let getCellValue (cell : Cell) = cell.CellValue
     
+    let tryGetInnerText (cell : Cell) = 
+        if cell.HasChildren then
+            Some cell.InnerText
+        else 
+            None
+
     /// <summary>
     /// Maps a Cell to the value string using a shared string table.
     /// </summary>
@@ -253,7 +259,9 @@ module Cell =
                 >> int
                 >> fun i -> sharedStringTable.[i]          
             )
-    
+        | Some CellValues.InlineString ->
+            cell
+            |> tryGetInnerText
         | _ ->
             cell
             |> tryGetCellValue

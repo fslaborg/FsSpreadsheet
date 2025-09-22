@@ -23,6 +23,10 @@ let private tests_Read = testList "Read" [
         let wb = readFromTestFile DefaultTestObject.TestFiles.Libre
         Expect.isDefaultTestObject wb
     
+    testCase "Pandas" <| fun _ ->
+        let wb = readFromTestFile DefaultTestObject.TestFiles.Pandas
+        Expect.isDefaultTestObject wb
+
     testCase "FableExceljs" <| fun _ ->
         let wb = readFromTestFile DefaultTestObject.TestFiles.FableExceljs
         Expect.isDefaultTestObject wb

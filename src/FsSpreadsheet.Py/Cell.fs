@@ -42,11 +42,8 @@ module PyCell =
             |> Some
         | String    -> 
             fsCell.Value |> Some
-        | anyElse ->
-            let msg = sprintf "ValueType '%A' is not fully implemented in FsSpreadsheet and is handled as string input." anyElse         
-            printfn "%s" msg
-            
-            fsCell.Value |> box |> Some 
+        | Empty -> 
+            fsCell.Value |> box |> Some                       
 
     let toFsCell worksheetName rowIndex columnIndex (pyCell: Cell) =
         //printfn "toFsCell worksheetName: %s, rowIndex: %i, columnIndex: %i, %A" worksheetName rowIndex columnIndex (pyCell.value, pyCell.cellType)
