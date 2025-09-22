@@ -165,7 +165,8 @@ let tests_toJsWorkbook = testList "toJsWorkbook" [
         Expect.equal jswsList.[0].name "My Awesome Worksheet" "1 worksheet name"
         Expect.equal jswsList.[1].name "My cool Worksheet" "2 worksheet name"
         Expect.equal jswsList.[2].name "My wow Worksheet" "3 worksheet name"
-    testCase "table, no body" <| fun _ ->
+    // Set to pending in the context of (https://github.com/fslaborg/FsSpreadsheet/issues/100)
+    ptestCase "table, no body" <| fun _ ->
         let fswb = new FsWorkbook()
         let fsws = fswb.InitWorksheet("My Awesome Worksheet")
         let _ = fsws.AddCell(FsCell("My Column 1",address=FsAddress.fromString("B1")))
@@ -275,6 +276,24 @@ let tests_toJsWorkbook = testList "toJsWorkbook" [
         fsws.RescanRows()
         let table = fsws.Tables.[0]
         Expect.equal (table.ColumnCount()) 3 "column count"
+
+    testCase "worksOnFilledTable (issue #100)" <| fun _ ->
+        let fsWB = new FsWorkbook()
+        let ws = fsWB.InitWorksheet("my awesome worksheet")
+        ws.AddCell(FsCell.createWithAdress(FsAddress.fromString("b1")) "my column 1") |> ignore
+        ws.AddCell(FsCell.createWithAdress(FsAddress.fromString("c1")) "my column 2") |> ignore
+        ws.AddCell(FsCell.createWithAdress(FsAddress.fromString("b2")) 2) |> ignore
+        ws.AddCell(FsCell.createWithAdress(FsAddress.fromString("c2")) "row2") |> ignore
+        ws.AddTable(FsTable("my_new_table", FsRangeAddress.fromString("B1:C2"))) |> ignore
+        JsWorkbook.writeFromFsWorkbook fsWB |> ignore
+
+    testCase "failsOnEmptyTable (issue #100)" <| fun _ ->
+        let fsWB = new FsWorkbook()
+        let ws = fsWB.InitWorksheet("my awesome worksheet")
+        ws.AddCell(FsCell.createWithAdress(FsAddress.fromString("b1")) "my column 1") |> ignore
+        ws.AddCell(FsCell.createWithAdress(FsAddress.fromString("c1")) "my column 2") |> ignore
+        ws.AddTable(FsTable("my_new_table", FsRangeAddress.fromString("B1:C1"))) |> ignore
+        Expect.throws (fun () -> JsWorkbook.writeFromFsWorkbook fsWB |> ignore) "no body in table"
 ]
 
 open Fable.Core

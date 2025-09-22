@@ -482,6 +482,13 @@ type FsTable (name : string, rangeAddress : FsRangeAddress, ?showTotalsRow : boo
     static member copy (table : FsTable) =
         table.Copy()
 
+    /// <summary>
+    /// Validates that the FsTable contains at least one body row.
+    /// </summary>
+    static member validateForWrite (table : FsTable) (cellsCollection : FsCellsCollection) =
+        if table.GetBodyRows(cellsCollection) |> Seq.length = 0 then
+            raise (System.ArgumentException(sprintf "The table '%s' must contain at least one body row." table.Name, "table"))
+
 
     /// Updates the TableFields according to the range of the table and the underlying cellcollection.
     ///

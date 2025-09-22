@@ -64,6 +64,23 @@ let writeAndReadBytes =
             Expect.workSheetEqual (wb.GetWorksheetByName(TestObjects.sheet1Name)) (wb2.GetWorksheetByName(TestObjects.sheet1Name)) "First Worksheet did not match"
             Expect.workSheetEqual (wb.GetWorksheetByName(TestObjects.sheet2Name)) (wb2.GetWorksheetByName(TestObjects.sheet2Name)) "Second Worksheet did not match"
         )
+        testCase "worksOnFilledTable (issue #100)" <| fun _ ->
+            let fsWB = new FsWorkbook()
+            let ws = fsWB.InitWorksheet("my awesome worksheet")
+            ws.AddCell(FsCell.createWithAdress(FsAddress.fromString("b1")) "my column 1") |> ignore
+            ws.AddCell(FsCell.createWithAdress(FsAddress.fromString("c1")) "my column 2") |> ignore
+            ws.AddCell(FsCell.createWithAdress(FsAddress.fromString("b2")) 2) |> ignore
+            ws.AddCell(FsCell.createWithAdress(FsAddress.fromString("c2")) "row2") |> ignore
+            ws.AddTable(FsTable("my_new_table", FsRangeAddress.fromString("b1:c2"))) |> ignore
+            fsWB.ToXlsxBytes() |> ignore
+
+        testCase "failsOnEmptyTable (issue #100)" <| fun _ ->
+            let fsWB = new FsWorkbook()
+            let ws = fsWB.InitWorksheet("my awesome worksheet")
+            ws.AddCell(FsCell.createWithAdress(FsAddress.fromString("b1")) "my column 1") |> ignore
+            ws.AddCell(FsCell.createWithAdress(FsAddress.fromString("c1")) "my column 2") |> ignore
+            ws.AddTable(FsTable("my_new_table", FsRangeAddress.fromString("b1:c1"))) |> ignore
+            Expect.throws (fun () -> fsWB.ToXlsxBytes() |> ignore) "no body in table"
     ]
 
 let performance =

@@ -8,6 +8,7 @@ module PyWorkbook =
     open Fable.Core.PyInterop
 
     let fromFsWorkbook (fsWB: FsWorkbook) : Workbook =
+        FsWorkbook.validateForWrite fsWB
         if fsWB.GetWorksheets().Count = 0 then 
            failwith "Workbook must contain at least one worksheet"
         let pyWB = Workbook.create()

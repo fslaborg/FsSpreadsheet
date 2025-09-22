@@ -159,11 +159,15 @@ module FsExtensions =
             let topLeftBoundary, bottomRightBoundary = Table.getArea table |> Table.Area.toBoundaries
             let ra = FsRangeAddress(FsAddress.fromString(topLeftBoundary), FsAddress.fromString(bottomRightBoundary))
             let totalsRowShown = if table.TotalsRowShown = null then false else table.TotalsRowShown.Value
-            let showHeaderRow = if table.HeaderRowCount.HasValue && table.HeaderRowCount.Value = 0u then false else true
+            let showHeaderRow = if table.HeaderRowCount <> null && table.HeaderRowCount.HasValue && table.HeaderRowCount.Value = 0u then false else true
             let fieldNames = 
-                table.TableColumns
-                |> Seq.map (fun c -> (c :?> TableColumn).Id.InnerText)
-            FsTable(table.DisplayName, ra, showTotalsRow = totalsRowShown, showHeaderRow = showHeaderRow, fieldNames = fieldNames)
+                if table.TableColumns |> Seq.length = 0 then
+                    None
+                else
+                    table.TableColumns
+                    |> Seq.map (fun c -> (c :?> TableColumn).Id.InnerText)
+                    |> Some 
+            FsTable(table.DisplayName, ra, showTotalsRow = totalsRowShown, showHeaderRow = showHeaderRow, ?fieldNames = fieldNames)
 
         /// <summary>
         /// Returns the FsWorksheet associated with the FsTable in a given FsWorkbook.
@@ -382,6 +386,8 @@ module FsExtensions =
 
         member self.ToEmptySpreadsheet(doc : Packaging.SpreadsheetDocument) =
             
+            FsWorkbook.validateForWrite self
+
             let workbookPart = Spreadsheet.initWorkbookPart doc
 
             for worksheet in self.GetWorksheets() do

@@ -50,7 +50,7 @@ module RunTests =
             ]
         for path in testProjectsPy do
             //transpile py files from fsharp code
-            run dotnet $"fable {path} -o {path}/py --lang python" ""
+            run dotnet $"fable {path} -o {path}/py --lang python --nocache" ""
             // run pyxpecto in target path to execute tests in python
             run python $"{path}/py/main.py" ""
     }

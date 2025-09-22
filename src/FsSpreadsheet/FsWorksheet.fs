@@ -636,7 +636,15 @@ type FsWorksheet (name, ?fsRows, ?fsTables, ?fsCellsCollection) =
     static member addCells (cell:seq<FsCell>) (sheet :FsWorksheet) =
         sheet.AddCells cell 
         
-
+    /// <summary>
+    /// Validate the FsWorksheet for writign to xlsx file.
+    /// </summary>
+    static member validateForWrite (ws : FsWorksheet) =
+        try
+            ws.Tables
+            |> Seq.iter (fun t -> FsTable.validateForWrite t ws.CellCollection)
+        with
+        | ex -> failwithf "FsWorksheet %s could not be validated for writing to xlsx file. %s" ws.Name ex.Message
 
     // TO DO (later)
     //static member tryRemoveValueAt 
