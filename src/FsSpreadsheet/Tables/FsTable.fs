@@ -8,7 +8,7 @@ open Fable.Core
 /// Creates an FsTable from the given name and FsRangeAddres, with totals row shown and header row shown or not, accordingly.
 /// </summary>
 [<AttachMembers>]
-type FsTable (name : string, rangeAddress : FsRangeAddress, ?showTotalsRow : bool, ?showHeaderRow : bool) = 
+type FsTable (name : string, rangeAddress : FsRangeAddress, ?showTotalsRow : bool, ?showHeaderRow : bool, ?fieldNames : string seq) = 
 
     inherit FsRangeBase(rangeAddress)
 
@@ -18,7 +18,24 @@ type FsTable (name : string, rangeAddress : FsRangeAddress, ?showTotalsRow : boo
     let mutable _showTotalsRow : bool = Option.defaultValue false showTotalsRow
     let mutable _showHeaderRow : bool = Option.defaultValue true showHeaderRow
 
-    let mutable _fieldNames : Dictionary<string,FsTableField> = Dictionary()
+    let mutable _fieldNames : Dictionary<string,FsTableField> = 
+        match fieldNames with
+        | Some fns -> 
+            if Seq.length fns <> base.ColumnCount() then
+                raise (System.ArgumentException(sprintf "The number of field names (%i) must match the number of columns (%i) in the range." (Seq.length fns) (base.ColumnCount()), "fieldNames"))
+            let dict = Dictionary<string,FsTableField>()
+            fns
+            |> Seq.iteri (fun i fn -> 
+                let colI = rangeAddress.FirstAddress.ColumnNumber + i
+                let colRange = FsRangeAddress(
+                    FsAddress(rangeAddress.FirstAddress.RowNumber,colI),
+                    FsAddress(rangeAddress.LastAddress.RowNumber,colI)
+                )
+                dict.Add(fn, FsTableField(fn, i, FsRangeColumn(colRange)))
+            )
+            dict
+        | None ->
+            Dictionary()
     let _uniqueNames : HashSet<string> = HashSet()
 
 
