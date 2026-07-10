@@ -14,6 +14,7 @@ documentation = "https://fslab.org/FsSpreadsheet/"
 python = ">= 3.11, < 4.0"
 openpyxl = ">=3.1.2"
 et-xmlfile = ">=1.1.0"
+fable-library = ">=5.6.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
