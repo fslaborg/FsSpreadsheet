@@ -1,6 +1,7 @@
 ﻿module TestingUtils
 
 open FsSpreadsheet
+open FsSpreadsheet.CrossAsync
 open Fable.Core
 
 open Fable.Pyxpecto
@@ -227,10 +228,17 @@ module Test =
     let testCase = testCase
     let ptestCase = ptestCase
     let ftestCase = ftestCase
-    let testCaseAsync = testCaseAsync
-    let ptestCaseAsync = ptestCaseAsync
-    let ftestCaseAsync = ftestCaseAsync
 
+    let testCaseCrossAsync (text : string) (ca : CrossAsync<unit>) =
+        ca
+        |> catchWith (fun exn -> failwithf "%s" exn.Message)
+        |> asAsync
+        |> testCaseAsync text
+        
+    let ptestCaseCrossAsync (text : string) (ca : CrossAsync<unit>) = 
+        ptestCaseAsync text (asAsync ca)
+    let ftestCaseCrossAsync (text : string) (ca : CrossAsync<unit>) =
+        ftestCaseAsync text (asAsync ca)
 
     let testList = testList
 

@@ -30,12 +30,14 @@
     <EmbeddedResource Include="TestFiles\BigFile.xlsx" >
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <Compile Include="CrossAsync.fs" />
     <Compile Include="DefaultTestObjects.fs" />
     <Compile Include="TestingUtils.fs" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Fable.Pyxpecto" Version="2.0.0" />
+    <PackageReference Include="Fable.Promise" Version="3.2.0" />
   </ItemGroup>
 
   <ItemGroup>

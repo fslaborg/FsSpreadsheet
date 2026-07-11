@@ -2,51 +2,54 @@
 
 open TestingUtils
 open FsSpreadsheet
+open FsSpreadsheet.CrossAsync
 open FsSpreadsheet.Js
+
 open Fable.Core
 
 
-let private readFromTestFile (testFile: DefaultTestObject.TestFiles) =
+let private readFromTestFile (testFile: DefaultTestObject.TestFiles) =      
     FsWorkbook.fromXlsxFile(testFile.asRelativePathNode)
+    |> CrossAsync.fromPromise
 
 let private tests_Read = testList "Read" [
 
-    testCaseAsync "Excel" <| async {
-        let! wb = readFromTestFile DefaultTestObject.TestFiles.Excel |> Async.AwaitPromise
+    testCaseCrossAsync "Excel" <| crossAsync {
+        let! wb = readFromTestFile DefaultTestObject.TestFiles.Excel
         Expect.isDefaultTestObject wb
     }
-    testCaseAsync "Libre" <| async {
-        let! wb = readFromTestFile DefaultTestObject.TestFiles.Libre |> Async.AwaitPromise
+    testCaseCrossAsync "Libre" <| crossAsync {
+        let! wb = readFromTestFile DefaultTestObject.TestFiles.Libre
         Expect.isDefaultTestObject wb
     }
-    testCaseAsync "Pandas" <| async {
-        let! wb = readFromTestFile DefaultTestObject.TestFiles.Pandas |> Async.AwaitPromise
+    testCaseCrossAsync "Pandas" <| crossAsync {
+        let! wb = readFromTestFile DefaultTestObject.TestFiles.Pandas
         Expect.isDefaultTestObject wb
     }
-    testCaseAsync "FableExceljs" <| async {
-        let! wb = readFromTestFile DefaultTestObject.TestFiles.FableExceljs |> Async.AwaitPromise
+    testCaseCrossAsync "FableExceljs" <| crossAsync {
+        let! wb = readFromTestFile DefaultTestObject.TestFiles.FableExceljs
         Expect.isDefaultTestObject wb
     }
-    testCaseAsync "ClosedXML" <| async {
-        let! wb = readFromTestFile DefaultTestObject.TestFiles.ClosedXML |> Async.AwaitPromise
+    testCaseCrossAsync "ClosedXML" <| crossAsync {
+        let! wb = readFromTestFile DefaultTestObject.TestFiles.ClosedXML
         Expect.isDefaultTestObject wb
     }
-    testCaseAsync "FsSpreadsheetNET" <| async {
-        let! wb = readFromTestFile DefaultTestObject.TestFiles.FsSpreadsheetNET |> Async.AwaitPromise
+    testCaseCrossAsync "FsSpreadsheetNET" <| crossAsync {
+        let! wb = readFromTestFile DefaultTestObject.TestFiles.FsSpreadsheetNET
         Expect.isDefaultTestObject wb
     }
-    testCaseAsync "FsSpreadsheetJS" <| async {
-        let! wb = readFromTestFile DefaultTestObject.TestFiles.FsSpreadsheetJS |> Async.AwaitPromise
+    testCaseCrossAsync "FsSpreadsheetJS" <| crossAsync {
+        let! wb = readFromTestFile DefaultTestObject.TestFiles.FsSpreadsheetJS
         Expect.isDefaultTestObject wb
     }
 ]
 
 let private tests_Write = testList "Write" [
-    testCaseAsync "default" (Async.AwaitPromise <|  promise {
+    testCaseCrossAsync "default" (crossAsync {
         let wb = DefaultTestObject.defaultTestObject()
         let p = DefaultTestObject.WriteTestFiles.FsSpreadsheetJS.asRelativePathNode
-        do! FsWorkbook.toXlsxFile p wb
-        let! wb_read = FsWorkbook.fromXlsxFile p
+        do! CrossAsync.fromPromise(FsWorkbook.toXlsxFile p wb)
+        let! wb_read = CrossAsync.fromPromise(FsWorkbook.fromXlsxFile p)
         Expect.isDefaultTestObject wb_read
     })
 ]
