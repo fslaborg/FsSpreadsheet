@@ -24,12 +24,17 @@ module PyCell =
         dt.ToUniversalTime()?timestamp()
         |> DateTime.fromTimeStamp
 
+    let pyFloat (f: float) : obj = 
+        emitPyExpr f "float($0)"
+
     let fromFsCell (fsCell: FsCell) = 
         match fsCell.DataType with
         | Boolean   -> 
             fsCell.ValueAsBool() |> box |> Some
         | Number    -> 
-            fsCell.ValueAsFloat() |> box |> Some
+            fsCell.ValueAsFloat()
+            |> pyFloat
+            |> Some
         | Date      -> 
             /// Here it will actually show the correct DateTime. But when writing, exceljs will apply local offset. 
             //let dt = fsCell.ValueAsDateTime() |> System.DateTimeOffset 
@@ -54,6 +59,8 @@ module PyCell =
                 Boolean,box true
             elif v = "=FALSE()" || v = "=False()" then
                 Boolean,box false
+            elif pyCell.cellType = "int" || pyCell.cellType = "float" then
+                Number,pyCell.value
             else
                 dt,v
         FsCell(v,dt,address = fsadress)

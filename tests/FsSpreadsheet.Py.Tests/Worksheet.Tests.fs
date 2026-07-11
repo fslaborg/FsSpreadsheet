@@ -24,10 +24,11 @@ let fromFsWorksheet = testList "fromFsWorksheet" [
         fsWS.AddCell(cell) |> ignore
         let pyWS = PyWorksheet.fromFsWorksheet wb fsWS
 
-        let expectedCells = [| [| box "Hello" |] |]
-
         Expect.equal pyWS.title wsName "Name did not match"
-        Expect.equal pyWS.values expectedCells "Values did not match"
+        Expect.hasLength pyWS.values 1 "Values did not match"
+        Expect.hasLength pyWS.values.[0] 1 "Values did not match"
+
+        Expect.equal pyWS.values.[0].[0] "Hello" "Values did not match"
 ]
 
 
