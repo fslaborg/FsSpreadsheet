@@ -37,8 +37,8 @@ type FsRow (rangeAddress : FsRangeAddress, cells : FsCellsCollection) =
             | _ ->
                 (
                     cells.GetCellsInRow index 
-                    |> f (fun c -> c.Address.ColumnNumber)
-                ).Address.ColumnNumber
+                    |> f (fun c -> c.ColumnNumber)
+                ).ColumnNumber
         let minColIndex = getIndexBy Seq.minBy
         let maxColIndex = getIndexBy Seq.maxBy
         FsRow (FsRangeAddress(FsAddress(index, minColIndex), FsAddress(index, maxColIndex)), cells)

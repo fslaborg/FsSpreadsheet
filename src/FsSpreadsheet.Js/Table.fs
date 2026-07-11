@@ -26,7 +26,7 @@ module JsTable =
                     if fsTable.ShowHeaderRow then col.Cells |> Seq.tail else col.Cells 
                 yield! cells |> Seq.map (fun c -> 
                     let rowValue = JsCell.writeFromFsCell c |> Option.get
-                    c.Address.RowNumber, (c.Address.ColumnNumber, rowValue)
+                    c.RowNumber, (c.ColumnNumber, rowValue)
                 ) 
             |]
             |> Array.groupBy fst
