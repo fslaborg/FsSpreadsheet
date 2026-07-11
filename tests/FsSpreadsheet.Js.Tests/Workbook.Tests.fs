@@ -3,6 +3,7 @@ module Workbook.Tests
 open TestingUtils
 open Fable.ExcelJs
 open FsSpreadsheet.Js
+open FsSpreadsheet.CrossAsync
 open FsSpreadsheet
 
 open Fable.Core
@@ -300,8 +301,8 @@ open Fable.Core
 
 let tests_xlsx = testList "xlsx" [
     testList "read" [
-        testCaseAsync "isa.assay.xlsx" <| async {
-            let! fswb = Xlsx.fromXlsxFile("./tests/JS/TestFiles/isa.assay.xlsx") |> Async.AwaitPromise
+        testCaseCrossAsync "isa.assay.xlsx" <| crossAsync {
+            let! fswb = CrossAsync.fromPromise(Xlsx.fromXlsxFile("./tests/JS/TestFiles/isa.assay.xlsx"))
             Expect.equal (fswb.GetWorksheets().Count) 5 "Count"
         }
     ]
@@ -309,11 +310,11 @@ let tests_xlsx = testList "xlsx" [
 
 let performance =
     testList "Performace" [
-        testCaseAsync "ReadBigFile" <| async {
+        testCaseCrossAsync "ReadBigFile" <| crossAsync {
             let sw = Stopwatch()        
             let p = DefaultTestObject.BigFile.asRelativePathNode
             sw.Start()
-            let! wb = FsWorkbook.fromXlsxFile(p) |> Async.AwaitPromise
+            let! wb = CrossAsync.fromPromise(FsWorkbook.fromXlsxFile(p))
             sw.Stop()
             let ms = sw.Elapsed.Milliseconds
             Expect.isTrue (ms < 2000)  $"Elapsed time should be less than 2000ms but was {ms}ms"

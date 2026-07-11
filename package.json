@@ -10,7 +10,7 @@
     "pretestexceljs": "dotnet fable tests/FsSpreadsheet.Js.Tests --noCache -o tests/FsSpreadsheet.Js.Tests/js",
     "testexceljs": "node tests/FsSpreadsheet.Js.Tests/js/Main.js",
     "pretestjs": "dotnet fable src/FsSpreadsheet.Js --noCache -o tests/JS/FsSpreadsheet.Js",
-    "testjs": "mocha tests/JS",
+    "testjs": "mocha run tests/JS",
     "prebundle": "mkdir dist/js & dotnet fable clean --extension .js --yes -o dist/js",
     "bundle": "dotnet fable src/FsSpreadsheet.Js -o dist/js"
   },

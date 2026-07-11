@@ -2,24 +2,122 @@
 
 [[package]]
 name = "et-xmlfile"
-version = "1.1.0"
+version = "2.0.0"
 description = "An implementation of lxml.xmlfile for the standard library"
 optional = false
-python-versions = ">=3.6"
+python-versions = ">=3.8"
 files = [
-    {file = "et_xmlfile-1.1.0-py3-none-any.whl", hash = "sha256:a2ba85d1d6a74ef63837eed693bcb89c3f752169b0e3e7ae5b16ca5e1b3deada"},
-    {file = "et_xmlfile-1.1.0.tar.gz", hash = "sha256:8eb9e2bc2f8c97e37a2dc85a09ecdcdec9d8a396530a6d5a33b30b9a92da0c5c"},
+    {file = "et_xmlfile-2.0.0-py3-none-any.whl", hash = "sha256:7a91720bc756843502c3b7504c77b8fe44217c85c537d85037f0f536151b2caa"},
+    {file = "et_xmlfile-2.0.0.tar.gz", hash = "sha256:dab3f4764309081ce75662649be815c4c9081e88f0837825f90fd28317d4da54"},
+]
+
+[[package]]
+name = "fable-library"
+version = "5.7.0"
+description = "Fable library for Python"
+optional = false
+python-versions = "<4.0,>=3.10"
+files = [
+    {file = "fable_library-5.7.0-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:f03fcbfac1f147a80587a1b1b121d9fd8af58047986651122dbfb2ba18f3f8de"},
+    {file = "fable_library-5.7.0-cp310-cp310-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:f5ea236c30d3a0e6621f12895438071d06fcf7eaa07b639463caa7642d31542f"},
+    {file = "fable_library-5.7.0-cp310-cp310-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:1cd975e7cd714ddbb7ced019ad1b09ad2ccc6d8f26c86be301f697d9c1789885"},
+    {file = "fable_library-5.7.0-cp310-cp310-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:9f614922578f97a7c83bb47c7c319f386d97267a97a0fe7103cc7e2cd1ae03aa"},
+    {file = "fable_library-5.7.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:5204ba7b72ece5269cf6c132dac7b52bd36d9d41de4dba5ff84648ef16adfd77"},
+    {file = "fable_library-5.7.0-cp310-cp310-manylinux_2_5_i686.manylinux1_i686.whl", hash = "sha256:1fd580de4b0e4fa2ec64fdedd1d7f2fa91e7c2c5eb62efaa694e0b329320af46"},
+    {file = "fable_library-5.7.0-cp310-cp310-musllinux_1_2_aarch64.whl", hash = "sha256:9e131cc2a38061529d3152551f3e37f0066b2afcc0385b316339be33641be69d"},
+    {file = "fable_library-5.7.0-cp310-cp310-musllinux_1_2_armv7l.whl", hash = "sha256:b2ea4106cdedadb3b895c905107d6691c247248c40e506d2046d0eb0ed4e1091"},
+    {file = "fable_library-5.7.0-cp310-cp310-musllinux_1_2_i686.whl", hash = "sha256:7581cfa0a7547787c3d090b7e839b32f0d7bedc73a2a5d47a48465e75568ef2a"},
+    {file = "fable_library-5.7.0-cp310-cp310-musllinux_1_2_x86_64.whl", hash = "sha256:e20804eaad46c5ad24440d4bbd1058c4f81cbb1d20796938df3a62d647d92d20"},
+    {file = "fable_library-5.7.0-cp310-cp310-win_amd64.whl", hash = "sha256:c5aa9ac61f22906b21e38343cbf0a1feece62d5d779ae15f3a1622e441f96650"},
+    {file = "fable_library-5.7.0-cp311-cp311-macosx_10_12_x86_64.whl", hash = "sha256:352b0ade8b7ae6e2ccb4f46a32e29f310538c90191521171d699dc9ca8c802da"},
+    {file = "fable_library-5.7.0-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:4d962a6d0afdf8b7150534baaa5114648cd36a6863c0540bd016eaaa0657f8cc"},
+    {file = "fable_library-5.7.0-cp311-cp311-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:bccbeb9fbeb69d3eed899a3b43b86fbb69162a5f1b2af23cd5e869efd0ace027"},
+    {file = "fable_library-5.7.0-cp311-cp311-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:a886c7a58d31e47d63502f9715066eeac3e6fe1188fecc1df5ea052d594c82c6"},
+    {file = "fable_library-5.7.0-cp311-cp311-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:b4788024dcc4dfa5e0d955f0744b2007beb0e2256f4808f28ad04888b4cce9bf"},
+    {file = "fable_library-5.7.0-cp311-cp311-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:0571cc422de6282ead385e390830cb1b70f9d3d5d6f222de4456683b0a477221"},
+    {file = "fable_library-5.7.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:a96cb2274035313d0919b33d97856f718706c012368773e45c24449b2029b190"},
+    {file = "fable_library-5.7.0-cp311-cp311-manylinux_2_5_i686.manylinux1_i686.whl", hash = "sha256:8ca519dc3b626be5c7579fd6720d56dc62b9b3733da1ae4f660e894fe665bfb6"},
+    {file = "fable_library-5.7.0-cp311-cp311-musllinux_1_2_aarch64.whl", hash = "sha256:5fab3844b370e0ddf17c2b3741c3aebcfdf62f3d97c2cbd3e246d359996b0a17"},
+    {file = "fable_library-5.7.0-cp311-cp311-musllinux_1_2_armv7l.whl", hash = "sha256:8b71a1e2d6d495f4c91874ed21900f45eb4fddf9bd8b6ae65e11b66b54a6fd8a"},
+    {file = "fable_library-5.7.0-cp311-cp311-musllinux_1_2_i686.whl", hash = "sha256:b5fea740df438114bb88bf6858bcfa018ede165bc3b685f572aea9965a279b69"},
+    {file = "fable_library-5.7.0-cp311-cp311-musllinux_1_2_x86_64.whl", hash = "sha256:61ab0436ce538017e9556d59a28cb8a61b2742fa5063fb26ab092564008b4c45"},
+    {file = "fable_library-5.7.0-cp311-cp311-win_amd64.whl", hash = "sha256:2b0bdddc136930a612232a2919a8a95f31058e56e36bdb831a940f90bad41934"},
+    {file = "fable_library-5.7.0-cp312-cp312-macosx_10_12_x86_64.whl", hash = "sha256:3209d2c9d493c846154e8494d3eb04e85144ba80fb3d661644ae564ce19b0033"},
+    {file = "fable_library-5.7.0-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:e73230d5ba1e46283b71172fea5581c6e499df66ff39cc1e24aa8b9280e251db"},
+    {file = "fable_library-5.7.0-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:097f4733be856a47a99b880f2b2b8e2142684eaaf55a1b9263e11f0da35dbd1d"},
+    {file = "fable_library-5.7.0-cp312-cp312-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:787b0a4ac31ab355bed744ee3e4b2c716334a4f3cd4225448c3dba81a9382af0"},
+    {file = "fable_library-5.7.0-cp312-cp312-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:dd2e2d058261f1f072e99a4a1ccc4e1a28ffa2501d7edb10f7d62d75aa0644d7"},
+    {file = "fable_library-5.7.0-cp312-cp312-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:64402cb8033ccea08f9ae42dd42eb41bf4d04eaa97f9b565e6576133d752bc82"},
+    {file = "fable_library-5.7.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:2db7dec665136e3a76afb7fcf7d351539f6f13f0066413284e88a1d40cb55fa5"},
+    {file = "fable_library-5.7.0-cp312-cp312-manylinux_2_5_i686.manylinux1_i686.whl", hash = "sha256:8de4bff86f1e1acc07f1609b10aa4fa860b9257b7643f805c0b37a7a31e57bdf"},
+    {file = "fable_library-5.7.0-cp312-cp312-musllinux_1_2_aarch64.whl", hash = "sha256:13fce510ed4ade9763323f787fa3b34d76fd3d1b8497b30045a44fcb6fb54f39"},
+    {file = "fable_library-5.7.0-cp312-cp312-musllinux_1_2_armv7l.whl", hash = "sha256:a42e6235275463014ed0a8ec840bd9d7e280e8226bac959ee0243346c6538424"},
+    {file = "fable_library-5.7.0-cp312-cp312-musllinux_1_2_i686.whl", hash = "sha256:c9f3e0a4ae0e35800edc51c9de093ce64fb8e1160a4ca17b32043b55b21a8033"},
+    {file = "fable_library-5.7.0-cp312-cp312-musllinux_1_2_x86_64.whl", hash = "sha256:f490f714d168a451fefc571245dac25504a7dfc35ef804cb9e54f306af33c64d"},
+    {file = "fable_library-5.7.0-cp312-cp312-win_amd64.whl", hash = "sha256:2f5c8612d45c4d215b41b816aa32fa8cc6523f16668044e63ccbf7c4c93716e4"},
+    {file = "fable_library-5.7.0-cp313-cp313-macosx_10_12_x86_64.whl", hash = "sha256:734b5c7ab63406fcf0379a0727e2de6c7733ae58bb288ff093470f256d2cb09e"},
+    {file = "fable_library-5.7.0-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:54b37720a5c3b2d0dae51d9aa2758926abe9f1036d7ba50ac48bf205e52732f6"},
+    {file = "fable_library-5.7.0-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:3b54bb98bca24133542077824cc43a8e6af5a7b7f4aeb8b3f84633ec14e780f2"},
+    {file = "fable_library-5.7.0-cp313-cp313-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:aae66a50909e071deb1f6c4f8b054a6e4fd8f70019e497acfe622ff3571c7517"},
+    {file = "fable_library-5.7.0-cp313-cp313-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:dc434516f4fa0b9679f4eb6ff2d41d48494730aa40ea0dafc829aab41e8f64d6"},
+    {file = "fable_library-5.7.0-cp313-cp313-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:39a0ae5576b2c84b5f9cfb47a139f2d4657cdcfb8840adbd32413a13d653b94e"},
+    {file = "fable_library-5.7.0-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:43925ce0b4ea81bf2b2f0ea56b512c4bd6446f7e508012bdd038dee4d9c3bf69"},
+    {file = "fable_library-5.7.0-cp313-cp313-manylinux_2_5_i686.manylinux1_i686.whl", hash = "sha256:c69719fd59cc203e52d10149da5459dc3522f625c620945d789e0a50962aa4c9"},
+    {file = "fable_library-5.7.0-cp313-cp313-musllinux_1_2_aarch64.whl", hash = "sha256:83549abbfc3c29e9f5d20345696b101988b56348f217a044ed9fab14560ab4ce"},
+    {file = "fable_library-5.7.0-cp313-cp313-musllinux_1_2_armv7l.whl", hash = "sha256:3f4d409d786b0c82b47222eb57c321937078072c2f4d143364a4561db15258f9"},
+    {file = "fable_library-5.7.0-cp313-cp313-musllinux_1_2_i686.whl", hash = "sha256:4f0f12d51c591e35e385f7dfa1a12acb5cd36acf3c497a92e6426148009def0a"},
+    {file = "fable_library-5.7.0-cp313-cp313-musllinux_1_2_x86_64.whl", hash = "sha256:ac51b1cdf82678b492b381b50882862dc8ed414865a277dda76a5caa8e3dbd70"},
+    {file = "fable_library-5.7.0-cp313-cp313-win_amd64.whl", hash = "sha256:db60c8d8573326db961dd4e960470e8677c2ab6dd7d905dc02abb6c03f44e734"},
+    {file = "fable_library-5.7.0-cp314-cp314-macosx_10_12_x86_64.whl", hash = "sha256:37c13e6f0929b3da7ccdd5b4037b72449f64a66ec0aabca86c1dd429337dd595"},
+    {file = "fable_library-5.7.0-cp314-cp314-macosx_11_0_arm64.whl", hash = "sha256:65a734fb45fd52da33b2d35abdce8bdda236e6b67cf239ed6aadf74cfc248151"},
+    {file = "fable_library-5.7.0-cp314-cp314-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:d402a4ccd84714522e5aba6df701257ddaac18aeb86ffed02612a2085cd0f1ff"},
+    {file = "fable_library-5.7.0-cp314-cp314-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:9e893a385dbb59ee884957ec738a219cf011d51b0d29bb5aa8309a2aa28b02ca"},
+    {file = "fable_library-5.7.0-cp314-cp314-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:f1593ab9fc50f6fc5ab3644a62cc651d2f3e8beb52a1a93c640c6aef19eb9cbb"},
+    {file = "fable_library-5.7.0-cp314-cp314-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:e906a4059f3ca8b4772c76c02e7a8f7f4f41fdfdee97a290cc5987b3e8019d3f"},
+    {file = "fable_library-5.7.0-cp314-cp314-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:94328f91e345ba0c3ddee8f7d1ede9c0ece6baf94145d01c22f4e68ac29f5e6c"},
+    {file = "fable_library-5.7.0-cp314-cp314-manylinux_2_5_i686.manylinux1_i686.whl", hash = "sha256:8f1ca0139074c5b53ef6311fe5c7c38a4bfe623219cc770e5b7bedbad5fe0912"},
+    {file = "fable_library-5.7.0-cp314-cp314-musllinux_1_2_aarch64.whl", hash = "sha256:a0fa49e879401b977fd601f704c888b43e6a030d4f68e59189fd1e7019d7dff6"},
+    {file = "fable_library-5.7.0-cp314-cp314-musllinux_1_2_armv7l.whl", hash = "sha256:1e4538cc4016499f23c32d9dc939c7d79258b1af96e592a0589d4186a7e0d803"},
+    {file = "fable_library-5.7.0-cp314-cp314-musllinux_1_2_i686.whl", hash = "sha256:269511a1323403bc94c95949daa8bcae71461d5d06cb467b516bad80c8851692"},
+    {file = "fable_library-5.7.0-cp314-cp314-musllinux_1_2_x86_64.whl", hash = "sha256:26cf1e90dc4339c66260dd107463ea9f8b571a9c3d6853b03bac433386dbc5b0"},
+    {file = "fable_library-5.7.0-cp314-cp314-win32.whl", hash = "sha256:96cf32ac03b04909cf08345bb37855928aa30aa0aea9bf681edccc28c5d4405f"},
+    {file = "fable_library-5.7.0-cp314-cp314-win_amd64.whl", hash = "sha256:e463ad9472adbabc0be2149aded0feaed7bcc53a87076a2b70fd664a8c567258"},
+    {file = "fable_library-5.7.0-cp314-cp314t-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:eb605fa192f581b1fdd7f01b78d84290f630a21184679ed7c9874011f535cb18"},
+    {file = "fable_library-5.7.0-cp314-cp314t-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:fc625aab465946ec3e4e9089d73dc461b42e706c7d1861cbd313c4ca38423c2e"},
+    {file = "fable_library-5.7.0-cp314-cp314t-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:19a86fba9f4d190cb4d22af6eac79ff82c7f56fe09820925cec191befc00f116"},
+    {file = "fable_library-5.7.0-cp314-cp314t-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:cd3c8e866b1bcafb78b36430311b172a6baa31ee64824480e080c09ceb384522"},
+    {file = "fable_library-5.7.0-cp314-cp314t-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:d4e758ef051cc201913398338dbf93f8e18a1b1287b551253b81b80f8ee22d28"},
+    {file = "fable_library-5.7.0-cp314-cp314t-manylinux_2_5_i686.manylinux1_i686.whl", hash = "sha256:665387a402ba0268a3d5b6a194a167796b5bb1968d81d572b7668505bf8ebfa9"},
+    {file = "fable_library-5.7.0-cp314-cp314t-musllinux_1_2_aarch64.whl", hash = "sha256:576e9f19337b4fdc25698fe2c32bc5c88b5ff26c71401c44fa35a8d5913718e7"},
+    {file = "fable_library-5.7.0-cp314-cp314t-musllinux_1_2_armv7l.whl", hash = "sha256:41eacc267e9534b3a95cba8d6be5f4a08903c62c597216a4722dcadd8fd37ede"},
+    {file = "fable_library-5.7.0-cp314-cp314t-musllinux_1_2_i686.whl", hash = "sha256:7019f7e425783817d656c25e2b211cfbc537b2aac02c1ec0cb20392bdf8ea9c4"},
+    {file = "fable_library-5.7.0-cp314-cp314t-musllinux_1_2_x86_64.whl", hash = "sha256:954f52a30c43e8c796a43da1f21ef5d158d807a1ee7d6637de0ee9ed14aeb047"},
+    {file = "fable_library-5.7.0-cp315-cp315-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:8d78496370a0481c6ef0b9655e6ba85bd70e215c5121f91024a65792fc4f3de0"},
+    {file = "fable_library-5.7.0-cp315-cp315-manylinux_2_5_i686.manylinux1_i686.whl", hash = "sha256:54a61cc0df659968b77556b9fe78a5e5d6e3adf80afbb1ed44924d331b2b81a1"},
+    {file = "fable_library-5.7.0-cp315-cp315t-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:8eb01cc8200c01fdaaed8adfabfd56eff6baa1ea4e4948d3f8f3b21a6319830f"},
+    {file = "fable_library-5.7.0-cp315-cp315t-manylinux_2_5_i686.manylinux1_i686.whl", hash = "sha256:f884cbd5de4bfe5b661eb6f15e4fcbfe5834304cb0e4c3948ddfb5e569f916c6"},
+    {file = "fable_library-5.7.0-pp311-pypy311_pp73-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:92525ea6d08a5efee00747a89bcdf41ec17f4586bdbb2d928c1c845aa26c47f4"},
+    {file = "fable_library-5.7.0-pp311-pypy311_pp73-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:a02b0288aab3c34f5c480c2063457e6f5cb8f180dbdf5b13b9ad80eabca78390"},
+    {file = "fable_library-5.7.0-pp311-pypy311_pp73-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:39ecda3f71119c05e6c3ab40a35a107a390d07ac397a39268b52464a0be476b1"},
+    {file = "fable_library-5.7.0-pp311-pypy311_pp73-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:cbfa58f58817c9f313da57404036332895e56a465dc2b88c761f3d16493b1804"},
+    {file = "fable_library-5.7.0-pp311-pypy311_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:5f82af4c6f1e4ae1cd094177c1407cf52b9015cd315c1bd0df5ce17671d2dbbd"},
+    {file = "fable_library-5.7.0-pp311-pypy311_pp73-manylinux_2_5_i686.manylinux1_i686.whl", hash = "sha256:5ea59561c0a7f1ce18d92534ebe0d3f2db2527aac243568bf285688de300602b"},
+    {file = "fable_library-5.7.0-pp311-pypy311_pp73-musllinux_1_2_aarch64.whl", hash = "sha256:4258d6ea5fe7487ac598b28ee98b26fe6597c1463b3139520026527f77c96f37"},
+    {file = "fable_library-5.7.0-pp311-pypy311_pp73-musllinux_1_2_armv7l.whl", hash = "sha256:16613a8fbc1da48c9ab5231056d0ad7e2df5ec242ee8b1c56d3016cb538ddee0"},
+    {file = "fable_library-5.7.0-pp311-pypy311_pp73-musllinux_1_2_i686.whl", hash = "sha256:b5d0e720605fba0cc97198ccc05eb55831375d533c690ec8c51047892e8fd836"},
+    {file = "fable_library-5.7.0-pp311-pypy311_pp73-musllinux_1_2_x86_64.whl", hash = "sha256:8f0afdff8b5e63abbf2b7ab8fb24e95d76066701d7f97d543ec46e7f0fb59922"},
+    {file = "fable_library-5.7.0.tar.gz", hash = "sha256:94f9fabb30e4975b019eb4d82d5517e06189edfad2ee3082578f85cf5fc5c5dc"},
 ]
 
 [[package]]
 name = "openpyxl"
-version = "3.1.2"
+version = "3.1.5"
 description = "A Python library to read/write Excel 2010 xlsx/xlsm files"
 optional = false
-python-versions = ">=3.6"
+python-versions = ">=3.8"
 files = [
-    {file = "openpyxl-3.1.2-py2.py3-none-any.whl", hash = "sha256:f91456ead12ab3c6c2e9491cf33ba6d08357d802192379bb482f1033ade496f5"},
-    {file = "openpyxl-3.1.2.tar.gz", hash = "sha256:a6f5977418eff3b2d5500d54d9db50c8277a368436f4e4f8ddb1be3422870184"},
+    {file = "openpyxl-3.1.5-py2.py3-none-any.whl", hash = "sha256:5282c12b107bffeef825f4617dc029afaf41d0ea60823bbb665ef3079dc79de2"},
+    {file = "openpyxl-3.1.5.tar.gz", hash = "sha256:cf0e3cf56142039133628b5acffe8ef0c12bc902d2aadd3e0fe5878dc08d1050"},
 ]
 
 [package.dependencies]
@@ -28,4 +126,4 @@ et-xmlfile = "*"
 [metadata]
 lock-version = "2.0"
 python-versions = ">= 3.11, < 4.0"
-content-hash = "b2fb39bf113af5a101171454ce20dcaa9b067b057d2022003de30db63a810d5f"
+content-hash = "2a7b399c7d0eed6ae5659539e3c4ab57cdf1c1cf6bde8d5ab93ef2d968812445"

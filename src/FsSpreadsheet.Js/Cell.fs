@@ -11,6 +11,9 @@ module JsCell =
     [<Emit("console.log($0)")>]
     let private log (obj:obj) = jsNative
 
+    [<Emit("(function (v) { const d = new Date(v); return new Date(d.getTime() + d.getTimezoneOffset() * 60000); })($0)")>]
+    let private normalizeJsDate (value: obj) : System.DateTime = jsNative
+
     let writeFromFsCell (fsCell: FsCell) = 
         match fsCell.DataType with
         | Boolean   -> 
@@ -18,9 +21,7 @@ module JsCell =
         | Number    -> 
             fsCell.ValueAsFloat() |> box |> Some
         | Date      -> 
-            /// Here it will actually show the correct DateTime. But when writing, exceljs will apply local offset. 
-            let dt = fsCell.ValueAsDateTime() |> System.DateTimeOffset 
-            /// Therefore we add offset and it should work.
+            let dt = fsCell.ValueAsDateTime() |> System.DateTimeOffset
             let dt = dt + dt.Offset |> box |> Some
             dt
         | String    -> 
@@ -47,16 +48,7 @@ module JsCell =
                 createFscell DataType.Boolean b
             | ValueType.Number -> float vTemp |> createFscell DataType.Number
             | ValueType.Date -> 
-                let dt = System.DateTime.Parse(vTemp).ToUniversalTime()
-                /// Without this step universal time get changed to local time? Exceljs tests will hit this.
-                ///
-                /// Expected item (from test object): C2 : Sat Oct 14 2023 00:00:00 GMT+0200 (Mitteleuropäische Sommerzeit) | Date
-                ///
-                /// Actual item (created here): C2 : Sat Oct 14 2023 02:00:00 GMT+0200 (Mitteleuropäische Sommerzeit) | Date
-                ///
-                /// But logging hour minute showed that the values were given correctly and needed to be reinitialized.
-                let dt = System.DateTime(dt.Year,dt.Month,dt.Day,dt.Hour,dt.Minute, dt.Second)
-                dt |> createFscell DataType.Date
+                normalizeJsDate jsCell.value.Value |> createFscell DataType.Date
             | ValueType.String -> vTemp |> createFscell DataType.String
             | ValueType.Formula -> 
                 match jsCell.formula with

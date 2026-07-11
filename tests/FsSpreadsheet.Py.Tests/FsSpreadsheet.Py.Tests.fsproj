@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <GenerateProgramFile>false</GenerateProgramFile>
   </PropertyGroup>
 
@@ -18,6 +18,5 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\..\src\FsSpreadsheet.Py\FsSpreadsheet.Py.fsproj" />
 	  <ProjectReference Include="..\TestUtils\TestUtils.fsproj" />
-	  <PackageReference Include="Fable.Pyxpecto" Version="1.0.1" />
 	</ItemGroup>
 </Project>

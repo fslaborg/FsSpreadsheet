@@ -56,7 +56,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Thoth.Json.Core" Version="0.7.0" />
+    <PackageReference Include="Fable.Core" Version="5.2.0" />
+    <PackageReference Include="Thoth.Json.Core" Version="0.9.1" />
   </ItemGroup>
 
   <ItemGroup>
