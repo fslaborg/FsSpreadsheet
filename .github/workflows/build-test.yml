@@ -23,7 +23,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 8.x.x
+        dotnet-version: 10.x.x
     - name: Restore fable
       run: dotnet tool restore
 
@@ -31,7 +31,7 @@ jobs:
     - name: Setup Node.js environment
       uses: actions/setup-node@v3
       with:
-          node-version: 20
+          node-version: 24
     - name: install node modules
       working-directory: ./
       run: npm install --ignore-scripts
@@ -40,7 +40,7 @@ jobs:
     - name: Setup Python
       uses: actions/setup-python@v5
       with:
-        python-version: '3.11'
+        python-version: '3.12'
     - name: Setup Virtual Environment
       run: python -m venv .venv
     - name: Setup Poetry Windows
