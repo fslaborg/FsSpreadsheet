@@ -56,6 +56,20 @@ let fromPromise (v:JS.Promise<'T>) =
     Async.AwaitPromise v
     #endif
 
+// Promise rejections in JS are often plain objects and not proper Exceptions.
+// Normalize them early so test failures show actionable messages.
+[<Emit("(function (e) { if (e == null) return 'Promise rejected with null/undefined'; if (typeof e === 'string') return e; if (e.stack) return e.stack; if (e.message) return e.message; try { return JSON.stringify(e); } catch (_) { return String(e); } })($0)")>]
+let private jsErrorToString (e: obj) : string = jsNative
+
+let errorToString (e: obj) : string =
+    #if FABLE_COMPILER_JAVASCRIPT || FABLE_COMPILER_TYPESCRIPT
+    jsErrorToString e
+    #else
+    match e with
+    | :? exn as ex -> ex.ToString()
+    | _ -> string e
+    #endif
+
 let catchWith (f : exn -> 'T) (p : CrossAsync<'T>) : CrossAsync<'T> =
     #if FABLE_COMPILER_JAVASCRIPT || FABLE_COMPILER_TYPESCRIPT
     Promise.catch f p
@@ -72,7 +86,7 @@ let catchAsResult (p : CrossAsync<'T>) : CrossAsync<Result<'T,string>>=
     #if FABLE_COMPILER_JAVASCRIPT || FABLE_COMPILER_TYPESCRIPT
     p
     |> Promise.map (fun x -> Ok x)
-    |> Promise.catch (fun e -> Error (e.ToString()))
+    |> Promise.catch (fun e -> Error (errorToString e))
     #else
     async {
         let! r = Async.Catch p

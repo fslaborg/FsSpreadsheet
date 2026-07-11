@@ -229,16 +229,24 @@ module Test =
     let ptestCase = ptestCase
     let ftestCase = ftestCase
 
+    let private asTestFailure (label: string) (ca : CrossAsync<unit>) =
+        ca
+        |> catchAsResult
+        |> FsSpreadsheet.CrossAsync.map (function
+            | Ok () -> ()
+            | Error err -> failwithf "[%s] Promise rejected:%s%s" label System.Environment.NewLine err)
+
     let testCaseCrossAsync (text : string) (ca : CrossAsync<unit>) =
         ca
-        |> catchWith (fun exn -> failwithf "%s" exn.Message)
+        |> asTestFailure text
         |> asAsync
         |> testCaseAsync text
         
     let ptestCaseCrossAsync (text : string) (ca : CrossAsync<unit>) = 
-        ptestCaseAsync text (asAsync ca)
+        ptestCaseAsync text (asAsync (asTestFailure text ca))
+
     let ftestCaseCrossAsync (text : string) (ca : CrossAsync<unit>) =
-        ftestCaseAsync text (asAsync ca)
+        ftestCaseAsync text (asAsync (asTestFailure text ca))
 
     let testList = testList
 
