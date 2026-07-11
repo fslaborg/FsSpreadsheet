@@ -37,7 +37,8 @@
 
   <ItemGroup>
     <PackageReference Include="Fable.Pyxpecto" Version="2.0.0" />
-    <PackageReference Include="Fable.Promise" Version="3.2.0" />
+    <PackageReference Condition="'$(FABLE_COMPILER_JAVASCRIPT)' == 'true'" Include="Fable.Promise" Version="3.2.0" />
+    <PackageReference Condition="'$(FABLE_COMPILER_TYPESCRIPT)' == 'true'" Include="Fable.Promise" Version="3.2.0" />
   </ItemGroup>
 
   <ItemGroup>

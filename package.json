@@ -10,7 +10,7 @@
     "pretestexceljs": "dotnet fable tests/FsSpreadsheet.Js.Tests --noCache -o tests/FsSpreadsheet.Js.Tests/js",
     "testexceljs": "node tests/FsSpreadsheet.Js.Tests/js/Main.js",
     "pretestjs": "dotnet fable src/FsSpreadsheet.Js --noCache -o tests/JS/FsSpreadsheet.Js",
-    "testjs": "vitest run tests/JS",
+    "testjs": "mocha run tests/JS",
     "prebundle": "mkdir dist/js & dotnet fable clean --extension .js --yes -o dist/js",
     "bundle": "dotnet fable src/FsSpreadsheet.Js -o dist/js"
   },
@@ -31,7 +31,7 @@
   },
   "homepage": "https://github.com/CSBiology/FsSpreadsheet#readme",
   "devDependencies": {
-    "vitest": "^3.1.1"
+    "mocha": "^10.2.0"
   },
   "dependencies": {
     "@nfdi4plants/exceljs": "^0.4.0"

@@ -49,12 +49,14 @@ let asAsync (v:CrossAsync<'T>) =
     v
     #endif
 
+#if !FABLE_COMPILER_PYTHON
 let fromPromise (v:JS.Promise<'T>) =
     #if FABLE_COMPILER_JAVASCRIPT || FABLE_COMPILER_TYPESCRIPT
     v
     #else
     Async.AwaitPromise v
     #endif
+#endif
 
 // Promise rejections in JS are often plain objects and not proper Exceptions.
 // Normalize them early so test failures show actionable messages.

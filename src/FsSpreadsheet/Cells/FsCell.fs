@@ -1,6 +1,7 @@
 ﻿namespace FsSpreadsheet
 
 open System
+open System.Text.RegularExpressions
 
 open Fable.Core
 
@@ -359,7 +360,14 @@ type FsCell (value : obj, ?dataType : DataType, ?address : FsAddress) =
     /// Gets the value as DateTime
     /// </summary>
     member self.ValueAsDateTime() =
-        DateTime.Parse (string self.Value)
+        let raw = string self.Value
+        try
+            DateTime.Parse raw
+        with
+        | _ ->
+            // Some JS engines append localized timezone names in parentheses.
+            let sanitized = Regex.Replace(raw, "\\s*\\([^)]*\\)$", "")
+            DateTime.Parse sanitized
 
     /// <summary>
     /// Gets the value as DateTime
