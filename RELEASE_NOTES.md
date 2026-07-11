@@ -1,4 +1,14 @@
-### 7.0.0+2838fbd (Released 2025-9-22)
+### 7.0.0+a2d4b05 (Released 2026-7-11)
+* Additions:
+    * [[#d112942](https://github.com/CSBiology/FsSpreadsheet/commit/d112942c347b9bfefe6267b1302cd10c5b16c49f)] start reworking towards fable 5
+    * [[#64c3454](https://github.com/CSBiology/FsSpreadsheet/commit/64c3454755ff2f15f586f3b52b04b115ba1e227c)] partly introduce crossasync in tests
+    * [[#d9259bd](https://github.com/CSBiology/FsSpreadsheet/commit/d9259bd215c27de40704d6b1ecb96386e2cdfb36)] update python, dotnet and node version in ci worklows
+* Bugfixes:
+    * [[#7cc5d57](https://github.com/CSBiology/FsSpreadsheet/commit/7cc5d573895b1ae24038b23228fc4cbcc6c41f09)] fix promise exception handling in js io tests
+    * [[#c860e33](https://github.com/CSBiology/FsSpreadsheet/commit/c860e339749a74459ee4f2cdd7e8a14d188c5356)] fix datetime parsing in js
+    * [[#85f67ea](https://github.com/CSBiology/FsSpreadsheet/commit/85f67ead12f3aed5e7d494339c0f3577c9d2af7e)] last fixes against python
+
+### 7.0.0-alpha.1+2838fbd (Released 2025-9-22)
 * Additions:
     * [[#34fbafb](https://github.com/CSBiology/FsSpreadsheet/commit/34fbafb23e5f5268a849b46211d7a4a55a922fc8)] added python testfile edited with pandas
     * [[#feb2572](https://github.com/CSBiology/FsSpreadsheet/commit/feb25721b8a60ee38f060c8041131555159971ff)] renamed test file
