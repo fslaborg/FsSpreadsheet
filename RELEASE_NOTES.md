@@ -1,3 +1,7 @@
+### 7.0.1+3591490 (Released 2026-7-28)
+* Additions:
+    * [[#3591490](https://github.com/CSBiology/FsSpreadsheet/commit/3591490b57503d258416d8b5cb0e6d806c6e8100)] small change to py datetime handling
+
 ### 7.0.0+a2d4b05 (Released 2026-7-11)
 * Additions:
     * [[#d112942](https://github.com/CSBiology/FsSpreadsheet/commit/d112942c347b9bfefe6267b1302cd10c5b16c49f)] start reworking towards fable 5
