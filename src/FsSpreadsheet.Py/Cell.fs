@@ -10,11 +10,10 @@ module PyCell =
     // Currently in Fable, a created datetime object will contain a timezone. This is not allowed in python xlsx, so we need to remove it.
     // Unfortunately, the timezone object in python is read-only, so we need to create a new datetime object without timezone.
     // For this, we use the fromtimestamp method of the datetime module and convert the timestamp to a new datetime object without timezone.
-    type datetime =
-        abstract member decoy: unit -> unit
+
     type DateTimeStatic =
         [<Emit("$0.fromtimestamp(timestamp=$1)")>]
-        abstract member fromTimeStamp: timestamp:float -> datetime
+        abstract member fromTimeStamp: timestamp:float -> System.DateTime
     [<Import("datetime", "datetime")>]
     let DateTime : DateTimeStatic = nativeOnly
 
